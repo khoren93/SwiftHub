@@ -17,7 +17,6 @@
 		A09499761E1D1CB700EFDE29 /* SwiftHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09499751E1D1CB700EFDE29 /* SwiftHubUITests.swift */; };
 		C762C6151E1D363500C09EBD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C762C6141E1D363500C09EBD /* .gitignore */; };
 		C762C6171E1D364800C09EBD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = C762C6161E1D364800C09EBD /* Cartfile */; };
-		C762C6191E1D366B00C09EBD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C762C6181E1D366B00C09EBD /* README.md */; };
 		C762C61D1E1D36AF00C09EBD /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */; };
 		C762C61E1E1D36AF00C09EBD /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */; };
 		C762C61F1E1D36AF00C09EBD /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = C762C61C1E1D36AF00C09EBD /* Gemfile */; };
@@ -85,7 +84,6 @@
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C762C6141E1D363500C09EBD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		C762C6161E1D364800C09EBD /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
-		C762C6181E1D366B00C09EBD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = SOURCE_ROOT; };
 		C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		C762C61C1E1D36AF00C09EBD /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = SOURCE_ROOT; };
@@ -263,7 +261,6 @@
 				C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */,
 				C762C6161E1D364800C09EBD /* Cartfile */,
 				C762C61C1E1D36AF00C09EBD /* Gemfile */,
-				C762C6181E1D366B00C09EBD /* README.md */,
 			);
 			name = Configs;
 			sourceTree = "<group>";
@@ -628,7 +625,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C762C6191E1D366B00C09EBD /* README.md in Sources */,
 				A09499581E1D1CB600EFDE29 /* ViewController.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
