@@ -1,0 +1,31 @@
+# Networking
+github "Moya/Moya" ~> 8.0 # https://github.com/Moya/Moya
+
+# JSON parsing
+github "hkellaway/Gloss" ~> 1.0  # https://github.com/hkellaway/Gloss
+
+# Reactive Programming
+github "ReactiveX/RxSwift" ~> 3.0  # https://github.com/ReactiveX/RxSwift
+github "RxSwiftCommunity/RxDataSources" ~> 1.0  # https://github.com/RxSwiftCommunity/RxDataSources
+github "RxSwiftCommunity/NSObject-Rx" ~> 2.0  # https://github.com/RxSwiftCommunity/NSObject-Rx
+
+# Image
+github "onevcat/Kingfisher" ~> 3.0  # https://github.com/onevcat/Kingfisher
+
+# UI
+github "andreamazz/AMScrollingNavbar" ~> 3.0  # https://github.com/andreamazz/AMScrollingNavbar
+
+# Keyboard
+github "hackiftekhar/IQKeyboardManager" ~> 4.0  # https://github.com/hackiftekhar/IQKeyboardManager
+
+# Color
+github "ViccAlexander/Chameleon" ~> 2.2  # https://github.com/ViccAlexander/Chameleon
+
+# Auto Layout
+github "SnapKit/SnapKit" ~> 3.0  # https://github.com/SnapKit/SnapKit
+
+# Code Quality
+github "Flipboard/FLEX"  # https://github.com/Flipboard/FLEX
+
+# Logging
+github "CocoaLumberjack/CocoaLumberjack"  # https://github.com/CocoaLumberjack/CocoaLumberjack
