@@ -15,6 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let libsManager = LibsManager.sharedInstance
+        libsManager.setupChameleon()
+        libsManager.setupFLEX()
+        libsManager.setupKeyboardManager()
+        //libsManager.setupAnalytics()
+
+        Analytics.event("Session Started")
+
         return true
     }
 

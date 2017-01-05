@@ -13,6 +13,11 @@ target 'SwiftHub' do
   # Tools
   pod 'R.swift', '~> 3.0'  # https://github.com/mac-cain13/R.swift
 
+  # Analytics
+  pod 'ARAnalytics', :subspecs => ["Mixpanel"]
+  pod 'Fabric'
+  pod 'Crashlytics'
+
   target 'SwiftHubTests' do
     inherit! :search_paths
     # Pods for testing
