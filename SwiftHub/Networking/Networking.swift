@@ -41,18 +41,18 @@ class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 }
 
 protocol NetworkingType {
-    associatedtype T: TargetType, GitHubAPIType
+    associatedtype T: TargetType, GithubAPIType
     var provider: OnlineProvider<T> { get }
 }
 
 struct Networking: NetworkingType {
-    typealias T = GitHubAPI
-    let provider: OnlineProvider<GitHubAPI>
+    typealias T = GithubAPI
+    let provider: OnlineProvider<GithubAPI>
 }
 
 struct AuthorizedNetworking: NetworkingType {
-    typealias T = GitHubAuthenticatedAPI
-    let provider: OnlineProvider<GitHubAuthenticatedAPI>
+    typealias T = GithubAuthenticatedAPI
+    let provider: OnlineProvider<GithubAuthenticatedAPI>
 }
 
 private extension Networking {
@@ -71,7 +71,7 @@ private extension Networking {
             return Observable.just(appToken.token)
         }
 
-        let newTokenRequest = self.provider.request(GitHubAPI.xApp)
+        let newTokenRequest = self.provider.request(GithubAPI.xApp)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .map { element -> (token: String?, expiry: String?) in
@@ -105,7 +105,7 @@ extension Networking {
     /// - parameter defaults:
     ///
     /// - returns:
-    func request(_ token: GitHubAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
+    func request(_ token: GithubAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
 
         let actualRequest = self.provider.request(token)
         return self.XAppTokenRequest(defaults).flatMap { _ in actualRequest }
@@ -113,7 +113,7 @@ extension Networking {
 }
 
 extension AuthorizedNetworking {
-    func request(_ token: GitHubAuthenticatedAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
+    func request(_ token: GithubAuthenticatedAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
         return self.provider.request(token)
     }
 }
@@ -137,7 +137,7 @@ extension NetworkingType {
         return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 
-    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: GitHubAPIType {
+    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: GithubAPIType {
         return { target in
             var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
@@ -162,7 +162,7 @@ extension NetworkingType {
     static var plugins: [PluginType] {
         return [
             NetworkLogger(blacklist: { target -> Bool in
-                guard let target = target as? GitHubAPI else { return false }
+                guard let target = target as? GithubAPI else { return false }
 
                 switch target {
                 case .ping: return true
@@ -174,7 +174,7 @@ extension NetworkingType {
 
     static var authenticatedPlugins: [PluginType] {
         return [NetworkLogger(whitelist: { target -> Bool in
-            guard let target = target as? GitHubAuthenticatedAPI else { return false }
+            guard let target = target as? GithubAuthenticatedAPI else { return false }
 
             switch target {
             default: return false
@@ -193,7 +193,7 @@ extension NetworkingType {
     }
 }
 
-private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: TargetType, T: GitHubAPIType {
+private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: TargetType, T: GithubAPIType {
     return OnlineProvider(endpointClosure: Networking.endpointsClosure(xAccessToken),
                           requestClosure: Networking.endpointResolver(),
                           stubClosure: Networking.APIKeysBasedStubBehaviour,

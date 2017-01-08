@@ -11,23 +11,24 @@ import RxSwift
 import Moya
 import Alamofire
 
-protocol GitHubAPIType {
+protocol GithubAPIType {
     var addXAuth: Bool { get }
 }
 
-enum GitHubAPI {
+enum GithubAPI {
     case xApp
     case xAuth(email: String, password: String)
-
     case systemTime
     case ping
+    
+    case userRepositories(username: String)
 }
 
-enum GitHubAuthenticatedAPI {
+enum GithubAuthenticatedAPI {
     case me
 }
 
-extension GitHubAPI : TargetType, GitHubAPIType {
+extension GithubAPI : TargetType, GithubAPIType {
 
     var baseURL: URL {
         return URL(string: Configs.Network.BaseURL)!
@@ -39,11 +40,13 @@ extension GitHubAPI : TargetType, GitHubAPIType {
             return "/xapp_token"
         case .xAuth:
             return "/oauth2/access_token"
-
         case .systemTime:
             return "/system/time"
         case .ping:
             return "/system/ping"
+            
+        case .userRepositories(let username):
+            return "/users/\(username)/repos"
         }
     }
 
@@ -74,11 +77,13 @@ extension GitHubAPI : TargetType, GitHubAPIType {
             return stubbedResponse("XApp")
         case .xAuth:
             return stubbedResponse("XAuth")
-
         case .systemTime:
             return stubbedResponse("SystemTime")
         case .ping:
             return stubbedResponse("Ping")
+
+        case .userRepositories:
+            return stubbedResponse("UserRepositories")
         }
     }
 
@@ -95,7 +100,7 @@ extension GitHubAPI : TargetType, GitHubAPIType {
     }
 }
 
-extension GitHubAuthenticatedAPI: TargetType, GitHubAPIType {
+extension GithubAuthenticatedAPI: TargetType, GithubAPIType {
 
     var baseURL: URL {
         return URL(string: Configs.Network.BaseURL)!

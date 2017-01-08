@@ -14,6 +14,11 @@
 		A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */; };
 		A094996B1E1D1CB700EFDE29 /* SwiftHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094996A1E1D1CB700EFDE29 /* SwiftHubTests.swift */; };
 		A09499761E1D1CB700EFDE29 /* SwiftHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09499751E1D1CB700EFDE29 /* SwiftHubUITests.swift */; };
+		C74C62FF1E1FCB23003BDE28 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */; };
+		C74C63041E1FD953003BDE28 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C63001E1FD953003BDE28 /* Organization.swift */; };
+		C74C63061E1FD953003BDE28 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C63021E1FD953003BDE28 /* Permission.swift */; };
+		C74C63071E1FD953003BDE28 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C63031E1FD953003BDE28 /* Repository.swift */; };
+		C74C63091E1FDFE6003BDE28 /* UserRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = C74C63081E1FDFE6003BDE28 /* UserRepositories.json */; };
 		C762C6151E1D363500C09EBD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C762C6141E1D363500C09EBD /* .gitignore */; };
 		C762C6171E1D364800C09EBD /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = C762C6161E1D364800C09EBD /* Cartfile */; };
 		C762C61D1E1D36AF00C09EBD /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */; };
@@ -118,6 +123,11 @@
 		A09499751E1D1CB700EFDE29 /* SwiftHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHubUITests.swift; sourceTree = "<group>"; };
 		A09499771E1D1CB700EFDE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
+		C74C63001E1FD953003BDE28 /* Organization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Organization.swift; path = Models/Organization.swift; sourceTree = "<group>"; };
+		C74C63021E1FD953003BDE28 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
+		C74C63031E1FD953003BDE28 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repository.swift; path = Models/Repository.swift; sourceTree = "<group>"; };
+		C74C63081E1FDFE6003BDE28 /* UserRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = UserRepositories.json; path = "Stubbed Responses/UserRepositories.json"; sourceTree = "<group>"; };
 		C762C6141E1D363500C09EBD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		C762C6161E1D364800C09EBD /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = SOURCE_ROOT; };
@@ -472,6 +482,7 @@
 				C762C69E1E1E68E800C09EBD /* SystemTime.json */,
 				C762C69F1E1E68E800C09EBD /* XApp.json */,
 				C762C6A01E1E68E800C09EBD /* XAuth.json */,
+				C74C63081E1FDFE6003BDE28 /* UserRepositories.json */,
 			);
 			name = "Stubbed Responses";
 			sourceTree = "<group>";
@@ -497,6 +508,7 @@
 		C762C6A71E1E7D9300C09EBD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -518,6 +530,9 @@
 		C762C6AA1E1E7DD300C09EBD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C74C63001E1FD953003BDE28 /* Organization.swift */,
+				C74C63021E1FD953003BDE28 /* Permission.swift */,
+				C74C63031E1FD953003BDE28 /* Repository.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -642,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C762C61F1E1D36AF00C09EBD /* Gemfile in Resources */,
+				C74C63091E1FDFE6003BDE28 /* UserRepositories.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				C762C6A31E1E68E800C09EBD /* XApp.json in Resources */,
 				C762C6A41E1E68E800C09EBD /* XAuth.json in Resources */,
@@ -890,8 +906,10 @@
 				C762C66C1E1D559000C09EBD /* View.swift in Sources */,
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				C762C6691E1D559000C09EBD /* TableViewCell.swift in Sources */,
+				C74C63041E1FD953003BDE28 /* Organization.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
+				C74C62FF1E1FCB23003BDE28 /* MainViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
 				C762C6901E1D5D6E00C09EBD /* APIKeys.swift in Sources */,
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
@@ -902,10 +920,12 @@
 				C762C69B1E1D647100C09EBD /* AnalyticsManager.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
+				C74C63071E1FD953003BDE28 /* Repository.swift in Sources */,
 				C762C65F1E1D559000C09EBD /* BarButtonItem.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
+				C74C63061E1FD953003BDE28 /* Permission.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
 				C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */,
@@ -1063,6 +1083,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B5E2602E2BB58EBC51F39D8 /* Pods-SwiftHub.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1081,6 +1102,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DCE0F2B67EC0E2BD4A13391 /* Pods-SwiftHub.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
