@@ -52,7 +52,7 @@ extension UIColor {
              flatMaroon(), flatCoffee(), flatPowderBlue(), flatBlue()]
     }
 
-    static func ColorDarkColors() -> [UIColor] {
+    static func darkColors() -> [UIColor] {
         return
             [flatRedColorDark(), flatOrangeColorDark(), flatYellowColorDark(), flatSandColorDark(),
              flatNavyBlueColorDark(), flatBlackColorDark(), flatMagentaColorDark(), flatTealColorDark(),

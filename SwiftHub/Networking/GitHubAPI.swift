@@ -11,6 +11,8 @@ import RxSwift
 import Moya
 import Alamofire
 
+let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
 protocol GithubAPIType {
     var addXAuth: Bool { get }
 }
@@ -20,12 +22,12 @@ enum GithubAPI {
     case xAuth(email: String, password: String)
     case systemTime
     case ping
-    
+
     case userRepositories(username: String)
 }
 
 enum GithubAuthenticatedAPI {
-    case me
+    case getMe
 }
 
 extension GithubAPI : TargetType, GithubAPIType {
@@ -44,7 +46,7 @@ extension GithubAPI : TargetType, GithubAPIType {
             return "/system/time"
         case .ping:
             return "/system/ping"
-            
+
         case .userRepositories(let username):
             return "/users/\(username)/repos"
         }
@@ -108,7 +110,7 @@ extension GithubAuthenticatedAPI: TargetType, GithubAPIType {
 
     var path: String {
         switch self {
-        case .me:
+        case .getMe:
             return "/me"
         }
     }
@@ -136,7 +138,7 @@ extension GithubAuthenticatedAPI: TargetType, GithubAPIType {
 
     var sampleData: Data {
         switch self {
-        case .me:
+        case .getMe:
             return stubbedResponse("Me")
         }
     }

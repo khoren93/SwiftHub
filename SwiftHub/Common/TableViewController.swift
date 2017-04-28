@@ -15,24 +15,34 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         let view = TableView(frame: CGRect(), style: .grouped)
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.topLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
         }
         return view
     }()
 
+    var clearsSelectionOnViewWillAppear = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        _ = tableView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if clearsSelectionOnViewWillAppear == true {
+            deselectSelectedRow()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Enable the navbar scrolling
-        if let navigationController = self.navigationController as? ScrollingNavigationController {
-            navigationController.followScrollView(tableView, delay: 50.0)
-        }
+        //        if let navigationController = self.navigationController as? ScrollingNavigationController {
+        //            navigationController.followScrollView(tableView, delay: 50.0)
+        //        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,6 +54,8 @@ class TableViewController: ViewController, UIScrollViewDelegate {
 
     override func makeUI() {
         super.makeUI()
+
+        _ = tableView
     }
 
     override func updateUI() {
@@ -56,9 +68,15 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         }
         return true
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension TableViewController {
+
+    func deselectSelectedRow() {
+        if let selectedIndexPaths = tableView.indexPathsForSelectedRows {
+            selectedIndexPaths.forEach({ (indexPath) in
+                tableView.deselectRow(at: indexPath, animated: false)
+            })
+        }
     }
 }

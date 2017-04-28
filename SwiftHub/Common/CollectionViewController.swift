@@ -15,25 +15,34 @@ class CollectionViewController: ViewController, UIScrollViewDelegate {
         let view = CollectionView()
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.topLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
         }
         return view
     }()
 
+    var clearsSelectionOnViewWillAppear = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        // Do any additional setup after loading the view.
-        _ = collectionView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if clearsSelectionOnViewWillAppear == true {
+            deselectSelectedItems()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Enable the navbar scrolling
-        if let navigationController = self.navigationController as? ScrollingNavigationController {
-            navigationController.followScrollView(collectionView, delay: 50.0)
-        }
+        //        if let navigationController = self.navigationController as? ScrollingNavigationController {
+        //            navigationController.followScrollView(collectionView, delay: 50.0)
+        //        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,23 +52,24 @@ class CollectionViewController: ViewController, UIScrollViewDelegate {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func makeUI() {
         super.makeUI()
+
+        _ = collectionView
     }
 
     override func updateUI() {
         super.updateUI()
     }
+}
 
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.showNavbar(animated: true)
+extension CollectionViewController {
+
+    func deselectSelectedItems() {
+        if let selectedIndexPaths = collectionView.indexPathsForSelectedItems {
+            selectedIndexPaths.forEach({ (indexPath) in
+                collectionView.deselectItem(at: indexPath, animated: false)
+            })
         }
-        return true
     }
 }

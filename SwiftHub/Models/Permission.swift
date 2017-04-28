@@ -11,9 +11,9 @@ import Gloss
 // MARK: - Permission
 public struct Permission: Glossy {
 
-	public let admin : Bool!
-	public let pull : Bool!
-	public let push : Bool!
+	public let admin: Bool!
+	public let pull: Bool!
+	public let push: Bool!
 
 	// MARK: Decodable
 	public init?(json: JSON) {

@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import SnapKit
+import Kingfisher
 
 public class View: UIView {
 
     let inset = Configs.BaseDimensions.Inset
-    let cornerRadius = Configs.BaseDimensions.CornerRadius
+
+    let kf = KingfisherManager.shared
 
     override init(frame: CGRect) {
         super.init(frame: frame)

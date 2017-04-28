@@ -23,9 +23,4 @@ class NavigationController: ScrollingNavigationController {
         navigationBar.backIndicatorImage = R.image.icon_navigation_back()?.withRenderingMode(.alwaysOriginal)
         navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()?.withRenderingMode(.alwaysOriginal)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

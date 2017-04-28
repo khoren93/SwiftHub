@@ -1,9 +1,9 @@
 //
 //  Observable+Operators.swift
-//  SwiftHub
+//  Cake Builder
 //
-//  Created by Khoren Markosyan on 1/4/17.
-//  Copyright © 2017 Khoren Markosyan. All rights reserved.
+//  Created by Khoren Markosyan on 10/19/16.
+//  Copyright © 2016 Khoren Markosyan. All rights reserved.
 //
 
 import Foundation
@@ -11,8 +11,8 @@ import RxSwift
 
 extension Observable where Element: Equatable {
     func ignore(value: Element) -> Observable<Element> {
-        return filter { (e) -> Bool in
-            return value != e
+        return filter { (selfE) -> Bool in
+            return value != selfE
         }
     }
 }
@@ -30,8 +30,8 @@ extension Observable {
     // Still not sure if this is a good idea.
 
     func flatMapTo<R>(_ selector: @escaping (Element) -> () -> Observable<R>) -> Observable<R> {
-        return self.map { (s) -> Observable<R> in
-            return selector(s)()
+        return self.map { (selfE) -> Observable<R> in
+            return selector(selfE)()
             }.switchLatest()
     }
 }
@@ -106,12 +106,6 @@ extension ObservableType {
         return self
             .ignoreElements()
             .concat(next)
-    }
-}
-
-extension Observable {
-    func mapToOptional() -> Observable<Optional<Element>> {
-        return map { Optional($0) }
     }
 }
 

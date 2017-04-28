@@ -8,23 +8,29 @@
 
 import UIKit
 
+enum Keys {
+    case mixpanel, intercom
+
+    var apiKey: String {
+        switch self {
+        case .mixpanel: return ""
+        case .intercom: return ""
+        }
+    }
+
+    var appId: String {
+        switch self {
+        case .mixpanel: return ""
+        case .intercom: return ""
+        }
+    }
+}
+
 struct Configs {
 
     struct App {
         static let IsTesting = true
         static let NavigationTitleFont = UIFont.navigationTitleFont()
-    }
-
-    struct Keys {
-        /// GitHub
-        static let GitHubAPIClientSecret = ""
-        static let GitHubAPIClientKey = ""
-
-        /// Mixpanel
-        static private let MixpanelProductionAPIClientKey = ""
-        static var MixpanelAPIClientKey: String {
-            return MixpanelProductionAPIClientKey
-        }
     }
 
     struct Network {

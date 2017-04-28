@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjackSwift
 import Gloss
 
 class MainViewController: ViewController {
@@ -15,24 +16,23 @@ class MainViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
         provider.request(.userRepositories(username: "khoren93"))
             .subscribe(onNext: { (response) in
                 do {
                     let itemsJSON = try response.mapJSON() as? [JSON]
                     guard let items = [Repository].from(jsonArray: itemsJSON!) else {
-                        print("Decoding Failure :(")
+                        DDLogError("Decoding Failure :(")
                         return
                     }
-                    print(items)
+                    DDLogDebug("\(items)")
                 } catch {
-                    print(error)
+                    DDLogError("\(error)")
                 }
             }, onError: { (error) in
-                print(error)
+                DDLogError("\(error)")
             }, onCompleted: {
             }, onDisposed: { })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx_disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

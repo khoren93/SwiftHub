@@ -17,8 +17,8 @@ private extension Date {
 
 struct XAppToken {
     enum DefaultsKeys: String {
-        case TokenKey = "XAppTokenKey"
-        case TokenExpiry = "XAppTokenExpiry"
+        case tokenKey = "XAppTokenKey"
+        case tokenExpiry = "XAppTokenExpiry"
     }
 
     // MARK: - Initializers
@@ -37,20 +37,20 @@ struct XAppToken {
 
     var token: String? {
         get {
-            let key = defaults.string(forKey: DefaultsKeys.TokenKey.rawValue)
+            let key = defaults.string(forKey: DefaultsKeys.tokenKey.rawValue)
             return key
         }
         set(newToken) {
-            defaults.set(newToken, forKey: DefaultsKeys.TokenKey.rawValue)
+            defaults.set(newToken, forKey: DefaultsKeys.tokenKey.rawValue)
         }
     }
 
     var expiry: Date? {
         get {
-            return defaults.object(forKey: DefaultsKeys.TokenExpiry.rawValue) as? Date
+            return defaults.object(forKey: DefaultsKeys.tokenExpiry.rawValue) as? Date
         }
         set(newExpiry) {
-            defaults.set(newExpiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
+            defaults.set(newExpiry, forKey: DefaultsKeys.tokenExpiry.rawValue)
         }
     }
 

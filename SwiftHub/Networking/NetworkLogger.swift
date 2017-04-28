@@ -29,7 +29,7 @@ class NetworkLogger: PluginType {
         logger.log("Sending request: \(request.request?.url?.absoluteString ?? String())")
     }
 
-    func didReceiveResponse(_ result: Result<Moya.Response, Moya.Error>, target: TargetType) {
+    func didReceiveResponse(_ result: Result<Moya.Response, Moya.MoyaError>, target: TargetType) {
         // If the target is in the blacklist, don't log it.
         guard blacklist(target) == false else { return }
 

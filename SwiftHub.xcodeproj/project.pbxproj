@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6D5D7DF286987ECF4F8FDD /* Pods_SwiftHub.framework */; };
 		1D3572E0196209E2CFA64077 /* Pods_SwiftHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07CE050051D40C945D4093C /* Pods_SwiftHubTests.framework */; };
+		A017B3D71E92958B00E4FCED /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A017B3D61E92958B00E4FCED /* NVActivityIndicatorView.framework */; };
+		A017B3D91E92959400E4FCED /* SwifterSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A017B3D81E92959400E4FCED /* SwifterSwift.framework */; };
+		A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017B3DA1E92995300E4FCED /* SplitViewController.swift */; };
+		A017B3DD1E92A16A00E4FCED /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A017B3DC1E92A16A00E4FCED /* Intercom.framework */; };
+		A06BE1151EB3A487003E815B /* IntercomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BE1141EB3A487003E815B /* IntercomManager.swift */; };
 		A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09499551E1D1CB600EFDE29 /* AppDelegate.swift */; };
 		A094995B1E1D1CB600EFDE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09499591E1D1CB600EFDE29 /* Main.storyboard */; };
 		A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */; };
@@ -111,6 +116,11 @@
 		79F049DC97D19D14F28BF40A /* Pods-SwiftHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		7B5E2602E2BB58EBC51F39D8 /* Pods-SwiftHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub.debug.xcconfig"; sourceTree = "<group>"; };
 		7DCE0F2B67EC0E2BD4A13391 /* Pods-SwiftHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub.release.xcconfig"; sourceTree = "<group>"; };
+		A017B3D61E92958B00E4FCED /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
+		A017B3D81E92959400E4FCED /* SwifterSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwifterSwift.framework; path = Carthage/Build/iOS/SwifterSwift.framework; sourceTree = "<group>"; };
+		A017B3DA1E92995300E4FCED /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		A017B3DC1E92A16A00E4FCED /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intercom.framework; path = Carthage/Build/iOS/Intercom.framework; sourceTree = "<group>"; };
+		A06BE1141EB3A487003E815B /* IntercomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntercomManager.swift; path = Managers/IntercomManager.swift; sourceTree = "<group>"; };
 		A09499521E1D1CB600EFDE29 /* SwiftHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09499551E1D1CB600EFDE29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A094995A1E1D1CB600EFDE29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -220,6 +230,9 @@
 				C762C64B1E1D435200C09EBD /* RxMoya.framework in Frameworks */,
 				C762C64C1E1D435200C09EBD /* RxSwift.framework in Frameworks */,
 				C762C64D1E1D435200C09EBD /* SnapKit.framework in Frameworks */,
+				A017B3D71E92958B00E4FCED /* NVActivityIndicatorView.framework in Frameworks */,
+				A017B3D91E92959400E4FCED /* SwifterSwift.framework in Frameworks */,
+				A017B3DD1E92A16A00E4FCED /* Intercom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +258,9 @@
 		79C12BEBBA00E394217F8296 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A017B3DC1E92A16A00E4FCED /* Intercom.framework */,
+				A017B3D81E92959400E4FCED /* SwifterSwift.framework */,
+				A017B3D61E92958B00E4FCED /* NVActivityIndicatorView.framework */,
 				C762C6281E1D435200C09EBD /* Alamofire.framework */,
 				C762C6291E1D435200C09EBD /* AMScrollingNavbar.framework */,
 				C762C62A1E1D435200C09EBD /* Chameleon.framework */,
@@ -372,6 +388,7 @@
 			children = (
 				C762C69A1E1D647100C09EBD /* AnalyticsManager.swift */,
 				C762C6961E1D640700C09EBD /* LibsManager.swift */,
+				A06BE1141EB3A487003E815B /* IntercomManager.swift */,
 				C762C6971E1D640700C09EBD /* LogManager.swift */,
 			);
 			name = Managers;
@@ -389,6 +406,7 @@
 				C762C6561E1D559000C09EBD /* Label.swift */,
 				C762C6571E1D559000C09EBD /* NavigationController.swift */,
 				C762C6581E1D559000C09EBD /* ScrollView.swift */,
+				A017B3DA1E92995300E4FCED /* SplitViewController.swift */,
 				C762C6591E1D559000C09EBD /* TableView.swift */,
 				C762C65A1E1D559000C09EBD /* TableViewCell.swift */,
 				C762C65B1E1D559000C09EBD /* TableViewController.swift */,
@@ -791,7 +809,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
 		};
 		C762C6271E1D427100C09EBD /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -818,6 +836,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxMoya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwifterSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Intercom.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -853,7 +874,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DB933434F95D904BFAF8E8A5 /* [CP] Check Pods Manifest.lock */ = {
@@ -868,7 +889,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EF957971E960BA0F59905F8B /* [CP] Check Pods Manifest.lock */ = {
@@ -883,7 +904,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -908,6 +929,7 @@
 				C762C6691E1D559000C09EBD /* TableViewCell.swift in Sources */,
 				C74C63041E1FD953003BDE28 /* Organization.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
+				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
 				C74C62FF1E1FCB23003BDE28 /* MainViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
@@ -926,6 +948,7 @@
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				C74C63061E1FD953003BDE28 /* Permission.swift in Sources */,
+				A06BE1151EB3A487003E815B /* IntercomManager.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
 				C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */,

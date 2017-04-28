@@ -37,11 +37,19 @@ class CollectionView: UICollectionView {
         setNeedsDisplay()
     }
 
-    func itemWidth(for itemsPerRow: CGFloat) -> CGFloat {
-        let collectionWidth: CGFloat = frame.size.width
+    func itemWidth(forItemsPerRow itemsPerRow: Int, withInset inset: CGFloat = 0) -> CGFloat {
+        let collectionWidth = Int(frame.size.width)
         if collectionWidth == 0 {
             return 0
         }
-        return CGFloat(Int((collectionWidth - (itemsPerRow + 1) * inset) / itemsPerRow))
+        return CGFloat(Int((collectionWidth - (itemsPerRow + 1) * Int(inset)) / itemsPerRow))
+    }
+
+    func setItemSize(_ size: CGSize) {
+        if size.width == 0 || size.height == 0 {
+            return
+        }
+        let layout = (self.collectionViewLayout as? UICollectionViewFlowLayout)!
+        layout.itemSize = size
     }
 }

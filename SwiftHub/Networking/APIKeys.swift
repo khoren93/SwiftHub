@@ -35,8 +35,8 @@ struct APIKeys {
     // MARK: Initializers
 
     init() {
-        self.init(key: Configs.Keys.GitHubAPIClientKey,
-                secret: Configs.Keys.GitHubAPIClientSecret)
+        self.init(key: "",
+                secret: "")
     }
 
     init(key: String, secret: String) {
