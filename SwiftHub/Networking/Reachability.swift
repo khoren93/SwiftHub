@@ -8,39 +8,34 @@
 
 import Foundation
 import RxSwift
-import ReachabilitySwift
-
-private let reachabilityManager = ReachabilityManager()
+import Reachability
 
 // An observable that completes when the app gets online (possibly completes immediately).
-func connectedToInternetOrStubbing() -> Observable<Bool> {
-    let online = reachabilityManager.reach
-//    let stubbing = Observable.just(true /*APIKeys.sharedKeys.stubResponses*/)
-
-    return online //.combineLatestOr()
+func connectedToInternet() -> Observable<Bool> {
+    return ReachabilityManager.shared.reach
 }
 
 private class ReachabilityManager: NSObject {
+
+    static let shared = ReachabilityManager()
+
+    fileprivate let reachability = Reachability.init()
+
     let _reach = ReplaySubject<Bool>.create(bufferSize: 1)
     var reach: Observable<Bool> {
         return _reach.asObservable()
     }
 
-    fileprivate let reachability = Reachability.init() // Reachability.forInternetConnection()
-
     override init() {
         super.init()
 
         reachability?.whenReachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
             DispatchQueue.main.async {
                 self._reach.onNext(true)
             }
         }
+
         reachability?.whenUnreachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
             DispatchQueue.main.async {
                 self._reach.onNext(false)
             }
@@ -48,11 +43,9 @@ private class ReachabilityManager: NSObject {
 
         do {
             try reachability?.startNotifier()
-            _reach.onNext(reachability?.isReachable ?? false)
-
+            _reach.onNext(reachability?.connection != .none)
         } catch {
             print("Unable to start notifier")
         }
-
     }
 }

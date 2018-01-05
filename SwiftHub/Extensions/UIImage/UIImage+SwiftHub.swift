@@ -11,15 +11,4 @@ import Foundation
 
 extension UIImage {
 
-    func merge(image: UIImage) -> UIImage {
-        let size = self.size
-        let areaFrame = CGRect(origin: CGPoint(), size: size)
-        UIGraphicsBeginImageContext(size)
-        self.draw(in: areaFrame)
-        image.draw(in: areaFrame)
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        return newImage
-    }
 }

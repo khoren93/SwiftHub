@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import AMScrollingNavbar
 
-class TableViewController: ViewController, UIScrollViewDelegate {
+class TableViewController: ViewController {
 
     lazy var tableView: TableView = {
         let view = TableView(frame: CGRect(), style: .grouped)
@@ -38,18 +37,10 @@ class TableViewController: ViewController, UIScrollViewDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // Enable the navbar scrolling
-        //        if let navigationController = self.navigationController as? ScrollingNavigationController {
-        //            navigationController.followScrollView(tableView, delay: 50.0)
-        //        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.showNavbar(animated: true)
-        }
     }
 
     override func makeUI() {
@@ -60,13 +51,6 @@ class TableViewController: ViewController, UIScrollViewDelegate {
 
     override func updateUI() {
         super.updateUI()
-    }
-
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.showNavbar(animated: true)
-        }
-        return true
     }
 }
 

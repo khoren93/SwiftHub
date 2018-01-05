@@ -9,13 +9,12 @@
 import Foundation
 import SnapKit
 import IQKeyboardManagerSwift
-import CocoaLumberjackSwift
-import Chameleon
+import CocoaLumberjack
+import ChameleonFramework
 import Kingfisher
 import FLEX
 import Fabric
 import Crashlytics
-import Intercom
 import NVActivityIndicatorView
 import NSObject_Rx
 import SwifterSwift
@@ -34,7 +33,6 @@ class LibsManager {
         libsManager.setupChameleon()
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
-        libsManager.setupIntercom()
         libsManager.setupActivityView()
     }
 
@@ -83,12 +81,8 @@ class LibsManager {
         //Fabric.sharedSDK().debug = false
     }
 
-    func setupIntercom() {
-        IntercomManager.setup()
-    }
-
     func setupAnalytics() {
-        Analytics.setup()
+        //Analytics.setup()
     }
 }
 

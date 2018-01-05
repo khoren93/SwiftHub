@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum LabelStyle {
-    case title
-    case description
-}
-
 class Label: UILabel {
 
     let inset = Configs.BaseDimensions.Inset
@@ -27,22 +22,6 @@ class Label: UILabel {
         makeUI()
     }
 
-    init(type: LabelStyle) {
-        super.init(frame: CGRect())
-        makeUI()
-
-        switch type {
-        case .title:
-            textColor = .textBlackColor()
-            font = .titleFont()
-            break
-        case .description:
-            textColor = .textGrayColor()
-            font = .descriptionFont()
-            break
-        }
-    }
-
     func makeUI() {
         layer.masksToBounds = true
         layer.cornerRadius = Configs.BaseDimensions.CornerRadius
@@ -52,6 +31,5 @@ class Label: UILabel {
     }
 
     func updateUI() {
-        setNeedsDisplay()
     }
 }

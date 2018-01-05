@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Chameleon
+import ChameleonFramework
 
-// MARK: SwiftHub Colors
+// MARK: Colors
 
 extension UIColor {
 
@@ -18,11 +18,11 @@ extension UIColor {
     }
 
     static func secondaryColor() -> UIColor {
-        return flatWatermelon()
+        return flatWatermelon
     }
 
     static func separatorColor() -> UIColor {
-        return flatWhite()
+        return flatWhite
     }
 
     static func textWhiteColor() -> UIColor {
@@ -30,38 +30,12 @@ extension UIColor {
     }
 
     static func textBlackColor() -> UIColor {
-        return flatBlack()
+        return flatBlack
     }
 
     static func textGrayColor() -> UIColor {
-        return flatWhiteColorDark()
+        return flatWhiteDark
     }
-}
-
-// MARK: All Colors
-
-extension UIColor {
-
-    static func lightColors() -> [UIColor] {
-        return
-            [flatRed(), flatOrange(), flatYellow(), flatSand(),
-             flatNavyBlue(), flatBlack(), flatMagenta(), flatTeal(),
-             flatSkyBlue(), flatGreen(), flatMint(), flatWhite(),
-             flatGray(), flatForestGreen(), flatPurple(), flatBrown(),
-             flatPlum(), flatWatermelon(), flatLime(), flatPink(),
-             flatMaroon(), flatCoffee(), flatPowderBlue(), flatBlue()]
-    }
-
-    static func darkColors() -> [UIColor] {
-        return
-            [flatRedColorDark(), flatOrangeColorDark(), flatYellowColorDark(), flatSandColorDark(),
-             flatNavyBlueColorDark(), flatBlackColorDark(), flatMagentaColorDark(), flatTealColorDark(),
-             flatSkyBlueColorDark(), flatGreenColorDark(), flatMintColorDark(), flatWhiteColorDark(),
-             flatGrayColorDark(), flatForestGreenColorDark(), flatPurpleColorDark(), flatBrownColorDark(),
-             flatPlumColorDark(), flatWatermelonColorDark(), flatLimeColorDark(), flatPinkColorDark(),
-             flatMaroonColorDark(), flatCoffeeColorDark(), flatPowderBlueColorDark(), flatBlueColorDark()]
-    }
-
 }
 
 // MARK: Averaging a Color
@@ -78,6 +52,6 @@ extension UIColor {
 extension UIColor {
 
     static func randomColor() -> UIColor {
-        return randomFlat()
+        return randomFlat
     }
 }

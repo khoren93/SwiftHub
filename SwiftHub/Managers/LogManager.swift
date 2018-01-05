@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CocoaLumberjackSwift
+//import CocoaLumberjackSwift
 
 let logger = Logger(destination: logPath())
 

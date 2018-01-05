@@ -6,9 +6,9 @@
 //  Copyright © 2017 Khoren Markosyan. All rights reserved.
 //
 
-import AMScrollingNavbar
+import UIKit
 
-class NavigationController: ScrollingNavigationController {
+class NavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +16,8 @@ class NavigationController: ScrollingNavigationController {
         // Do any additional setup after loading the view.
         navigationBar.isTranslucent = false
         navigationBar.barStyle = .blackTranslucent
-        let titleTextAttributes = [NSFontAttributeName: Configs.App.NavigationTitleFont,
-                                   NSForegroundColorAttributeName: UIColor.white]
+        let titleTextAttributes = [NSAttributedStringKey.font: Configs.App.NavigationTitleFont,
+                                   NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationBar.titleTextAttributes = titleTextAttributes
 
         navigationBar.backIndicatorImage = R.image.icon_navigation_back()?.withRenderingMode(.alwaysOriginal)

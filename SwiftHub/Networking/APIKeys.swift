@@ -10,7 +10,7 @@ import Foundation
 
 private let minimumKeyLength = 2
 
-// Mark: - API Keys
+// MARK: - API Keys
 
 struct APIKeys {
     let key: String
@@ -47,7 +47,6 @@ struct APIKeys {
     // MARK: Methods
 
     var stubResponses: Bool {
-        return key.characters.count < minimumKeyLength || secret.characters.count < minimumKeyLength
+        return key.count < minimumKeyLength || secret.count < minimumKeyLength
     }
-
 }

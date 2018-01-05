@@ -20,17 +20,11 @@ protocol GithubAPIType {
 enum GithubAPI {
     case xApp
     case xAuth(email: String, password: String)
-    case systemTime
-    case ping
 
     case userRepositories(username: String)
 }
 
-enum GithubAuthenticatedAPI {
-    case getMe
-}
-
-extension GithubAPI : TargetType, GithubAPIType {
+extension GithubAPI: TargetType, GithubAPIType {
 
     var baseURL: URL {
         return URL(string: Configs.Network.BaseURL)!
@@ -42,10 +36,6 @@ extension GithubAPI : TargetType, GithubAPIType {
             return "/xapp_token"
         case .xAuth:
             return "/oauth2/access_token"
-        case .systemTime:
-            return "/system/time"
-        case .ping:
-            return "/system/ping"
 
         case .userRepositories(let username):
             return "/users/\(username)/repos"
@@ -59,6 +49,10 @@ extension GithubAPI : TargetType, GithubAPIType {
         }
     }
 
+    var headers: [String: String]? {
+        return nil
+    }
+
     var parameters: [String: Any]? {
         switch self {
         default:
@@ -67,10 +61,7 @@ extension GithubAPI : TargetType, GithubAPIType {
     }
 
     public var parameterEncoding: ParameterEncoding {
-        switch self {
-        default:
-            return (Moya.ParameterEncoding as? ParameterEncoding)!
-        }
+        return URLEncoding.default
     }
 
     var sampleData: Data {
@@ -79,10 +70,6 @@ extension GithubAPI : TargetType, GithubAPIType {
             return stubbedResponse("XApp")
         case .xAuth:
             return stubbedResponse("XAuth")
-        case .systemTime:
-            return stubbedResponse("SystemTime")
-        case .ping:
-            return stubbedResponse("Ping")
 
         case .userRepositories:
             return stubbedResponse("UserRepositories")
@@ -90,65 +77,19 @@ extension GithubAPI : TargetType, GithubAPIType {
     }
 
     public var task: Task {
-        return .request
+        if let parameters = parameters {
+            return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+        }
+        return .requestPlain
     }
 
     var addXAuth: Bool {
         switch self {
-        case .xApp: return false
-        case .xAuth: return false
-        default: return true
-        }
-    }
-}
-
-extension GithubAuthenticatedAPI: TargetType, GithubAPIType {
-
-    var baseURL: URL {
-        return URL(string: Configs.Network.BaseURL)!
-    }
-
-    var path: String {
-        switch self {
-        case .getMe:
-            return "/me"
-        }
-    }
-
-    var parameters: [String: Any]? {
-        switch self {
+        case .xApp, .xAuth:
+            return false
         default:
-            return nil
+            return true
         }
-    }
-
-    var method: Moya.Method {
-        switch self {
-        default:
-            return .get
-        }
-    }
-
-    public var parameterEncoding: ParameterEncoding {
-        switch self {
-        default:
-            return (Moya.ParameterEncoding as? ParameterEncoding)!
-        }
-    }
-
-    var sampleData: Data {
-        switch self {
-        case .getMe:
-            return stubbedResponse("Me")
-        }
-    }
-
-    public var task: Task {
-        return .request
-    }
-
-    var addXAuth: Bool {
-        return true
     }
 }
 

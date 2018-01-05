@@ -8,18 +8,16 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-import RxDataSources
-import NSObject_Rx
-import CocoaLumberjackSwift
-import NVActivityIndicatorView
+//import RxCocoa
+//import RxDataSources
+//import NSObject_Rx
+//import CocoaLumberjackSwift
+//import NVActivityIndicatorView
 import Kingfisher
 
 public class ViewController: UIViewController {
 
     let inset = Configs.BaseDimensions.Inset
-
-    fileprivate(set) var provider = Networking.newDefaultNetworking()
 
     let kf = KingfisherManager.shared
 
@@ -46,12 +44,12 @@ public class ViewController: UIViewController {
         makeUI()
 
         // Observe device orientation change
-        NotificationCenter.default
+        /*NotificationCenter.default
             .rx.notification(NSNotification.Name.UIDeviceOrientationDidChange)
             .subscribe { [weak self] (event) in
                 self?.orientationChanged()
             }
-            .disposed(by: rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // Observe application did become active notification
         NotificationCenter.default
@@ -59,8 +57,8 @@ public class ViewController: UIViewController {
             .subscribe { [weak self] (event) in
                 self?.didBecomeActive()
             }
-            .disposed(by: rx_disposeBag)
-
+            .disposed(by: rx.disposeBag)
+*/
         // Two finger swipe gesture for opening Flex
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerQuadrupleSwipe(swipeRecognizer:)))
         swipeGesture.numberOfTouchesRequired = 2
@@ -78,7 +76,7 @@ public class ViewController: UIViewController {
     }
 
     deinit {
-        DDLogInfo("\(type(of: self)) deinit")
+        //DDLogInfo("\(type(of: self)) deinit")
     }
 
     func makeUI() {
@@ -105,14 +103,14 @@ public class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func closeAction(sender: AnyObject) {
+    @objc func closeAction(sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension ViewController {
 
-    func handleTwoFingerQuadrupleSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
+    @objc func handleTwoFingerQuadrupleSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
         }

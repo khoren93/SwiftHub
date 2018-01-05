@@ -8,10 +8,10 @@
 
 import Foundation
 import Moya
-import RxMoya
+//import RxMoya
 import RxSwift
 import Alamofire
-
+/*
 class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 
     fileprivate let online: Observable<Bool>
@@ -199,3 +199,4 @@ private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil
                           stubClosure: Networking.APIKeysBasedStubBehaviour,
                           plugins: plugins)
 }
+*/

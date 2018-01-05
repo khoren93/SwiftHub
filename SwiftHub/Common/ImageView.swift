@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class ImageView: UIImageView {
 

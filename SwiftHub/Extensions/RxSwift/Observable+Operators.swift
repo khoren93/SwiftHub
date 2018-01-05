@@ -8,33 +8,7 @@
 
 import Foundation
 import RxSwift
-
-extension Observable where Element: Equatable {
-    func ignore(value: Element) -> Observable<Element> {
-        return filter { (selfE) -> Bool in
-            return value != selfE
-        }
-    }
-}
-
-extension Observable {
-    // OK, so the idea is that I have a Variable that exposes an Observable and I want
-    // to switch to the latest without mapping.
-    //
-    // viewModel.flatMap { saleArtworkViewModel in return saleArtworkViewModel.lotNumber }
-    //
-    // Becomes...
-    //
-    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
-    //
-    // Still not sure if this is a good idea.
-
-    func flatMapTo<R>(_ selector: @escaping (Element) -> () -> Observable<R>) -> Observable<R> {
-        return self.map { (selfE) -> Observable<R> in
-            return selector(selfE)()
-            }.switchLatest()
-    }
-}
+import RxCocoa
 
 protocol OptionalType {
     associatedtype Wrapped
@@ -92,25 +66,57 @@ extension Observable where Element: BooleanType {
     }
 }
 
-extension ObservableType {
-
-    func then(_ closure: @escaping () -> Observable<E>?) -> Observable<E> {
-        return then(closure() ?? .empty())
-    }
-
-    func then( _ closure: @autoclosure @escaping () -> Observable<E>) -> Observable<E> {
-        let next = Observable.deferred {
-            return closure()
+extension Observable where Element: Equatable {
+    func ignore(value: Element) -> Observable<Element> {
+        return filter { (selfE) -> Bool in
+            return value != selfE
         }
-
-        return self
-            .ignoreElements()
-            .concat(next)
     }
 }
 
-func sendDispatchCompleted<T>(to observer: AnyObserver<T>) {
-    DispatchQueue.main.async {
-        observer.onCompleted()
+extension ObservableType where E == Bool {
+    /// Boolean not operator
+    public func not() -> Observable<Bool> {
+        return self.map(!)
+    }
+}
+
+extension SharedSequenceConvertibleType {
+    func mapToVoid() -> SharedSequence<SharingStrategy, Void> {
+        return map { _ in }
+    }
+}
+
+extension ObservableType {
+
+    func catchErrorJustComplete() -> Observable<E> {
+        return catchError { _ in
+            return Observable.empty()
+        }
+    }
+
+    func asDriverOnErrorJustComplete() -> Driver<E> {
+        return asDriver { error in
+            assertionFailure("Error \(error)")
+            return Driver.empty()
+        }
+    }
+
+    func mapToVoid() -> Observable<Void> {
+        return map { _ in }
+    }
+}
+
+//https://gist.github.com/brocoo/aaabf12c6c2b13d292f43c971ab91dfa
+extension Reactive where Base: UIScrollView {
+    public var reachedBottom: Observable<Void> {
+        let scrollView = self.base as UIScrollView
+        return self.contentOffset.flatMap { [weak scrollView] (contentOffset) -> Observable<Void> in
+            guard let scrollView = scrollView else { return Observable.empty() }
+            let visibleHeight = scrollView.frame.height - self.base.contentInset.top - scrollView.contentInset.bottom
+            let y = contentOffset.y + scrollView.contentInset.top
+            let threshold = max(0.0, scrollView.contentSize.height - visibleHeight)
+            return (y > threshold) ? Observable.just(()) : Observable.empty()
+        }
     }
 }

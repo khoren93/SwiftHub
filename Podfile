@@ -4,21 +4,66 @@ platform :ios, '9.0'
 target 'SwiftHub' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  inhibit_all_warnings!
 
   # Pods for SwiftHub
 
   # Networking
-  pod 'ReachabilitySwift', '~> 3'  # https://github.com/ashleymills/Reachability.swift
+  pod 'Moya/RxSwift', '~> 10.0'  # https://github.com/Moya/Moya
+  pod 'ReachabilitySwift', '~> 4' # https://github.com/ashleymills/Reachability.swift
+
+  # Rx Extensions
+  pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
+  pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+  pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
+
+  # JSON Mapping
+  pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
+  pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git'  # https://github.com/ivanbruel/Moya-ObjectMapper
+
+  # Image
+  pod 'Kingfisher', '~> 4.0'  # https://github.com/onevcat/Kingfisher
+
+  # Date
+  pod 'SwiftDate', '~> 4.0'  # https://github.com/malcommac/SwiftDate
+
+  # Phone
+  #pod 'PhoneNumberKit', '~> 2.1'  # https://github.com/marmelroy/PhoneNumberKit
 
   # Tools
-  pod 'R.swift', '~> 3.0'  # https://github.com/mac-cain13/R.swift
-  pod 'SwiftLint', '~> 0.18.1'  # https://github.com/realm/SwiftLint
+  pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
+  pod 'SwiftLint', '0.24.0'  # https://github.com/realm/SwiftLint
 
-  # Analytics
-  pod 'Mixpanel-swift'
+  # Keychain
+  pod 'KeychainAccess'  # https://github.com/kishikawakatsumi/KeychainAccess
+
+  # Fabric
   pod 'Fabric'
   pod 'Crashlytics'
-  #pod 'Digits'
+
+  # UI
+  pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
+  pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
+
+  # Keyboard
+  pod 'IQKeyboardManagerSwift', '~> 5.0'  # https://github.com/hackiftekhar/IQKeyboardManager
+
+  # Color
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'  # https://github.com/ViccAlexander/Chameleon
+
+  # Auto Layout
+  pod 'SnapKit', '~> 4.0'  # https://github.com/SnapKit/SnapKit
+
+  # Code Quality
+  pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
+  pod 'SwifterSwift', '~> 4.0'  # https://github.com/SwifterSwift/SwifterSwift
+
+  # Logging
+  pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
+
+  # Analytics
+  pod 'Umbrella/Mixpanel'
+  #pod 'Mixpanel-swift'  # https://github.com/mixpanel/mixpanel-swift
 
   target 'SwiftHubTests' do
     inherit! :search_paths
@@ -32,7 +77,7 @@ target 'SwiftHub' do
 
 end
 
-# Cocoapods optimization
+# Cocoapods optimization, always clean project after pod updating
 post_install do |installer|
   Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
     flag_name = File.basename(script, ".sh") + "-Installation-Flag"

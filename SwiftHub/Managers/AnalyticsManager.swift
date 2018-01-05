@@ -7,6 +7,7 @@
 //
 
 import Foundation
+/*
 import Mixpanel
 import Fabric
 import Crashlytics
@@ -143,3 +144,4 @@ extension Analytics {
         Intercom.reset()
     }
 }
+*/
