@@ -10,8 +10,6 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    let inset = Configs.BaseDimensions.Inset
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         makeUI()

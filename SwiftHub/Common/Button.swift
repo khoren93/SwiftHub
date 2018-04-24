@@ -10,8 +10,6 @@ import UIKit
 
 public class Button: UIButton {
 
-    let inset = Configs.BaseDimensions.Inset
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()
@@ -24,7 +22,7 @@ public class Button: UIButton {
 
     func makeUI() {
         self.layer.masksToBounds = true
-        self.layer.cornerRadius = Configs.BaseDimensions.CornerRadius
+        self.layer.cornerRadius = Configs.BaseDimensions.cornerRadius
         updateUI()
     }
 

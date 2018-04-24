@@ -24,6 +24,18 @@ force_try:
 # implicitly
 line_length: 300
 
+function_body_length:
+  - 150 # warning
+  - 300 # error
+
+function_parameter_count:
+  - 10 # warning
+  - 15 # error
+
+large_tuple:
+  - 6 # warning
+  - 12 # error
+
 # they can set both implicitly with an array
 type_body_length:
   - 300 # warning
@@ -31,8 +43,12 @@ type_body_length:
 
 # or they can set both explicitly
 file_length:
-  warning: 600
-  error: 1200
+  warning: 1000
+  error: 2000
+
+cyclomatic_complexity:
+  - 15 # warning
+  - 30 # error
 
 # naming rules can set warnings/errors for min_length and max_length
 # additionally they can set excluded names
@@ -43,10 +59,14 @@ type_name:
     error: 50
   excluded: # excluded via string
     - T
+    - E
 
 identifier_name:
   min_length: # only min_length
     error: 3 # only error
   excluded: # excluded via string array
+    - vc
     - id
     - kf
+    - x
+    - y

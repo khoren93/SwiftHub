@@ -8,24 +8,21 @@
 
 import UIKit
 import RxSwift
-//import RxCocoa
-//import RxDataSources
-//import NSObject_Rx
-//import CocoaLumberjackSwift
-//import NVActivityIndicatorView
+import RxCocoa
 import Kingfisher
+import DZNEmptyDataSet
 
-public class ViewController: UIViewController {
+class ViewController: UIViewController, Navigatable {
 
-    let inset = Configs.BaseDimensions.Inset
+    var navigator: Navigator!
 
-    let kf = KingfisherManager.shared
+    let isLoading = BehaviorRelay(value: false)
 
     var backButtonImage = R.image.icon_navigation_back()
     lazy var backBarButton: BarButtonItem = {
         let view = BarButtonItem()
         view.title = ""
-        view.tintColor = .secondaryColor()
+        view.tintColor = .secondary()
         return view
     }()
 
@@ -33,7 +30,7 @@ public class ViewController: UIViewController {
         let view = BarButtonItem(image: R.image.icon_navigation_close(),
                                  style: .plain,
                                  target: self,
-                                 action: #selector(closeAction(sender:)))
+                                 action: nil)
         return view
     }()
 
@@ -44,21 +41,19 @@ public class ViewController: UIViewController {
         makeUI()
 
         // Observe device orientation change
-        /*NotificationCenter.default
+        NotificationCenter.default
             .rx.notification(NSNotification.Name.UIDeviceOrientationDidChange)
             .subscribe { [weak self] (event) in
                 self?.orientationChanged()
-            }
-            .disposed(by: rx.disposeBag)
+            }.disposed(by: rx.disposeBag)
 
         // Observe application did become active notification
         NotificationCenter.default
             .rx.notification(NSNotification.Name.UIApplicationDidBecomeActive)
             .subscribe { [weak self] (event) in
                 self?.didBecomeActive()
-            }
-            .disposed(by: rx.disposeBag)
-*/
+            }.disposed(by: rx.disposeBag)
+
         // Two finger swipe gesture for opening Flex
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerQuadrupleSwipe(swipeRecognizer:)))
         swipeGesture.numberOfTouchesRequired = 2
@@ -103,16 +98,64 @@ public class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @objc func closeAction(sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
+    // MARK: Adjusting Navigation Item
+
+    func adjustLeftBarButtonItem() {
+        if self.navigationController?.viewControllers.count ?? 0 > 1 { // pushed
+            self.navigationItem.leftBarButtonItem = nil
+        } else if self.presentingViewController != nil { // presented
+            self.navigationItem.leftBarButtonItem = closeBarButton
+        }
     }
 }
 
 extension ViewController {
 
+    var inset: CGFloat {
+        return Configs.BaseDimensions.inset
+    }
+
+    func emptyView(withHeight height: CGFloat) -> View {
+        let view = View()
+        view.snp.makeConstraints { (make) in
+            make.height.equalTo(height)
+        }
+        return view
+    }
+
     @objc func handleTwoFingerQuadrupleSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
         }
+    }
+}
+
+extension ViewController: DZNEmptyDataSetSource {
+
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Data")
+    }
+
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return nil
+    }
+
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return .white
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 20
+    }
+}
+
+extension ViewController: DZNEmptyDataSetDelegate {
+
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return !isLoading.value
+    }
+
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }

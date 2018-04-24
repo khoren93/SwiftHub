@@ -13,28 +13,24 @@ import ChameleonFramework
 
 extension UIColor {
 
-    static func primaryColor() -> UIColor {
-        return .black
+    static func primary() -> UIColor {
+        return flatNavyBlue
     }
 
-    static func secondaryColor() -> UIColor {
-        return flatWatermelon
+    static func primaryDark() -> UIColor {
+        return flatNavyBlueDark
     }
 
-    static func separatorColor() -> UIColor {
+    static func secondary() -> UIColor {
+        return flatSkyBlue
+    }
+
+    static func secondaryDark() -> UIColor {
+        return flatSkyBlueDark
+    }
+
+    static func separator() -> UIColor {
         return flatWhite
-    }
-
-    static func textWhiteColor() -> UIColor {
-        return .white
-    }
-
-    static func textBlackColor() -> UIColor {
-        return flatBlack
-    }
-
-    static func textGrayColor() -> UIColor {
-        return flatWhiteDark
     }
 }
 

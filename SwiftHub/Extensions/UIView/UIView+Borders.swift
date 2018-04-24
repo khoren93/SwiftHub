@@ -17,7 +17,7 @@ extension UIView {
     }
 
     func defaultColor() -> UIColor {
-        return .separatorColor()
+        return .separator()
     }
 
     // MARK: - Top Border

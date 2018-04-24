@@ -28,7 +28,7 @@ class TableView: UITableView {
         rowHeight = UITableViewAutomaticDimension
         estimatedRowHeight = 50
         backgroundColor = .white
-        separatorColor = .separatorColor()
+        separatorColor = .separator()
 
         updateUI()
     }

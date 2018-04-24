@@ -9,14 +9,15 @@ target 'SwiftHub' do
   # Pods for SwiftHub
 
   # Networking
-  pod 'Moya/RxSwift', '~> 10.0'  # https://github.com/Moya/Moya
+  pod 'Moya/RxSwift', '~> 11.0'  # https://github.com/Moya/Moya
   pod 'ReachabilitySwift', '~> 4' # https://github.com/ashleymills/Reachability.swift
 
   # Rx Extensions
   pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
   pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
   pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
-
+  pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
+  
   # JSON Mapping
   pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
   pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git'  # https://github.com/ivanbruel/Moya-ObjectMapper
@@ -32,7 +33,7 @@ target 'SwiftHub' do
 
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
-  pod 'SwiftLint', '0.24.0'  # https://github.com/realm/SwiftLint
+  pod 'SwiftLint', '0.25.1'  # https://github.com/realm/SwiftLint
 
   # Keychain
   pod 'KeychainAccess'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -44,9 +45,11 @@ target 'SwiftHub' do
   # UI
   pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
-
+  pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
+  pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
+  
   # Keyboard
-  pod 'IQKeyboardManagerSwift', '~> 5.0'  # https://github.com/hackiftekhar/IQKeyboardManager
+  pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 
   # Color
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'  # https://github.com/ViccAlexander/Chameleon

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336D1FFFCB8B00D53888 /* Application.swift */; };
+		07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336F1FFFCBF600D53888 /* Navigator.swift */; };
+		07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */; };
+		07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC337A1FFFE4E300D53888 /* AnalyticsManager.swift */; };
+		07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC337B1FFFE4E300D53888 /* LibsManager.swift */; };
+		07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC337C1FFFE4E300D53888 /* LogManager.swift */; };
+		07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 07FC33801FFFE52A00D53888 /* .swiftlint.yml */; };
+		07FC33831FFFE53800D53888 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 07FC33821FFFE53800D53888 /* .gitignore */; };
+		07FC33851FFFE54800D53888 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07FC33841FFFE54800D53888 /* README.md */; };
+		07FC33871FFFE68800D53888 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33861FFFE68800D53888 /* Api.swift */; };
 		10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6D5D7DF286987ECF4F8FDD /* Pods_SwiftHub.framework */; };
 		1D3572E0196209E2CFA64077 /* Pods_SwiftHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07CE050051D40C945D4093C /* Pods_SwiftHubTests.framework */; };
 		A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017B3DA1E92995300E4FCED /* SplitViewController.swift */; };
@@ -15,12 +25,7 @@
 		A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */; };
 		A094996B1E1D1CB700EFDE29 /* SwiftHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094996A1E1D1CB700EFDE29 /* SwiftHubTests.swift */; };
 		A09499761E1D1CB700EFDE29 /* SwiftHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09499751E1D1CB700EFDE29 /* SwiftHubUITests.swift */; };
-		C74C62FF1E1FCB23003BDE28 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */; };
 		C74C63091E1FDFE6003BDE28 /* UserRepositories.json in Resources */ = {isa = PBXBuildFile; fileRef = C74C63081E1FDFE6003BDE28 /* UserRepositories.json */; };
-		C762C6151E1D363500C09EBD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C762C6141E1D363500C09EBD /* .gitignore */; };
-		C762C61D1E1D36AF00C09EBD /* .jazzy.yaml in Resources */ = {isa = PBXBuildFile; fileRef = C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */; };
-		C762C61E1E1D36AF00C09EBD /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */; };
-		C762C61F1E1D36AF00C09EBD /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = C762C61C1E1D36AF00C09EBD /* Gemfile */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
 		C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C762C6241E1D417C00C09EBD /* Assets.xcassets */; };
 		C762C65F1E1D559000C09EBD /* BarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6501E1D559000C09EBD /* BarButtonItem.swift */; };
@@ -48,15 +53,9 @@
 		C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C67D1E1D5A7300C09EBD /* UIView+Borders.swift */; };
 		C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C67E1E1D5A7300C09EBD /* UIView+SwiftHub.swift */; };
 		C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C762C6871E1D5C3A00C09EBD /* Icons.xcassets */; };
-		C762C6901E1D5D6E00C09EBD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68A1E1D5D6E00C09EBD /* APIKeys.swift */; };
 		C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */; };
 		C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68C1E1D5D6E00C09EBD /* Networking.swift */; };
-		C762C6931E1D5D6E00C09EBD /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68D1E1D5D6E00C09EBD /* NetworkLogger.swift */; };
 		C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68E1E1D5D6E00C09EBD /* Reachability.swift */; };
-		C762C6951E1D5D6E00C09EBD /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C68F1E1D5D6E00C09EBD /* XAppToken.swift */; };
-		C762C6981E1D640700C09EBD /* LibsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6961E1D640700C09EBD /* LibsManager.swift */; };
-		C762C6991E1D640700C09EBD /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6971E1D640700C09EBD /* LogManager.swift */; };
-		C762C69B1E1D647100C09EBD /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C69A1E1D647100C09EBD /* AnalyticsManager.swift */; };
 		C762C6A11E1E68E800C09EBD /* Ping.json in Resources */ = {isa = PBXBuildFile; fileRef = C762C69D1E1E68E800C09EBD /* Ping.json */; };
 		C762C6A21E1E68E800C09EBD /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = C762C69E1E1E68E800C09EBD /* SystemTime.json */; };
 		C762C6A31E1E68E800C09EBD /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = C762C69F1E1E68E800C09EBD /* XApp.json */; };
@@ -82,6 +81,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07FC336D1FFFCB8B00D53888 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		07FC336F1FFFCBF600D53888 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		07FC337A1FFFE4E300D53888 /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		07FC337B1FFFE4E300D53888 /* LibsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibsManager.swift; sourceTree = "<group>"; };
+		07FC337C1FFFE4E300D53888 /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		07FC33801FFFE52A00D53888 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		07FC33821FFFE53800D53888 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		07FC33841FFFE54800D53888 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		07FC33861FFFE68800D53888 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		25EF6EE9433966B345CAF3D7 /* Pods_SwiftHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3796635402BD18001EDA5A16 /* Pods-SwiftHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3843260FF1EFDD3029A69CCB /* Pods-SwiftHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,12 +111,7 @@
 		A09499751E1D1CB700EFDE29 /* SwiftHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHubUITests.swift; sourceTree = "<group>"; };
 		A09499771E1D1CB700EFDE29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		C74C63081E1FDFE6003BDE28 /* UserRepositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = UserRepositories.json; path = "Stubbed Responses/UserRepositories.json"; sourceTree = "<group>"; };
-		C762C6141E1D363500C09EBD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = SOURCE_ROOT; };
-		C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
-		C762C61C1E1D36AF00C09EBD /* Gemfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gemfile; sourceTree = SOURCE_ROOT; };
 		C762C6221E1D414B00C09EBD /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C762C6241E1D417C00C09EBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C762C6501E1D559000C09EBD /* BarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItem.swift; sourceTree = "<group>"; };
@@ -125,7 +129,7 @@
 		C762C65C1E1D559000C09EBD /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		C762C65D1E1D559000C09EBD /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		C762C65E1E1D559000C09EBD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C762C66E1E1D58B200C09EBD /* Configs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configs.swift; path = Resources/Configs.swift; sourceTree = "<group>"; };
+		C762C66E1E1D58B200C09EBD /* Configs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		C762C6721E1D5A7300C09EBD /* Observable+Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Logging.swift"; sourceTree = "<group>"; };
 		C762C6731E1D5A7300C09EBD /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		C762C6751E1D5A7300C09EBD /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
@@ -135,15 +139,9 @@
 		C762C67D1E1D5A7300C09EBD /* UIView+Borders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
 		C762C67E1E1D5A7300C09EBD /* UIView+SwiftHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftHub.swift"; sourceTree = "<group>"; };
 		C762C6871E1D5C3A00C09EBD /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
-		C762C68A1E1D5D6E00C09EBD /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		C762C68C1E1D5D6E00C09EBD /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		C762C68D1E1D5D6E00C09EBD /* NetworkLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		C762C68E1E1D5D6E00C09EBD /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		C762C68F1E1D5D6E00C09EBD /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
-		C762C6961E1D640700C09EBD /* LibsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibsManager.swift; path = Managers/LibsManager.swift; sourceTree = "<group>"; };
-		C762C6971E1D640700C09EBD /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogManager.swift; path = Managers/LogManager.swift; sourceTree = "<group>"; };
-		C762C69A1E1D647100C09EBD /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyticsManager.swift; path = Managers/AnalyticsManager.swift; sourceTree = "<group>"; };
 		C762C69D1E1E68E800C09EBD /* Ping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ping.json; path = "Stubbed Responses/Ping.json"; sourceTree = "<group>"; };
 		C762C69E1E1E68E800C09EBD /* SystemTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SystemTime.json; path = "Stubbed Responses/SystemTime.json"; sourceTree = "<group>"; };
 		C762C69F1E1E68E800C09EBD /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XApp.json; path = "Stubbed Responses/XApp.json"; sourceTree = "<group>"; };
@@ -179,6 +177,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07FC336C1FFFCB5400D53888 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A09499551E1D1CB600EFDE29 /* AppDelegate.swift */,
+				07FC336D1FFFCB8B00D53888 /* Application.swift */,
+				07FC336F1FFFCBF600D53888 /* Navigator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		07FC33711FFFCCF700D53888 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		07FC33741FFFD46D00D53888 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				07FC33751FFFD47600D53888 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		07FC33751FFFD47600D53888 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */,
+				A09499591E1D1CB600EFDE29 /* Main.storyboard */,
+				A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		07FC33781FFFE2BD00D53888 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				C762C66E1E1D58B200C09EBD /* Configs.swift */,
+				07FC33801FFFE52A00D53888 /* .swiftlint.yml */,
+				07FC33821FFFE53800D53888 /* .gitignore */,
+				07FC33841FFFE54800D53888 /* README.md */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		07FC33791FFFE4E300D53888 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				07FC337A1FFFE4E300D53888 /* AnalyticsManager.swift */,
+				07FC337B1FFFE4E300D53888 /* LibsManager.swift */,
+				07FC337C1FFFE4E300D53888 /* LogManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		79C12BEBBA00E394217F8296 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,14 +268,13 @@
 		A09499541E1D1CB600EFDE29 /* SwiftHub */ = {
 			isa = PBXGroup;
 			children = (
-				A09499551E1D1CB600EFDE29 /* AppDelegate.swift */,
+				07FC336C1FFFCB5400D53888 /* Application */,
 				C762C64F1E1D559000C09EBD /* Common */,
-				C762C6131E1D361900C09EBD /* Configs */,
+				07FC33781FFFE2BD00D53888 /* Configs */,
 				C762C6701E1D5A7300C09EBD /* Extensions */,
-				A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */,
-				A09499591E1D1CB600EFDE29 /* Main.storyboard */,
-				C762C64E1E1D494800C09EBD /* Managers */,
-				C762C6A51E1E7D7400C09EBD /* Modules */,
+				07FC33791FFFE4E300D53888 /* Managers */,
+				07FC33711FFFCCF700D53888 /* Models */,
+				07FC33741FFFD46D00D53888 /* Modules */,
 				C762C6891E1D5D6E00C09EBD /* Networking */,
 				C762C6211E1D414B00C09EBD /* Resources */,
 			);
@@ -259,18 +312,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C762C6131E1D361900C09EBD /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				C762C6141E1D363500C09EBD /* .gitignore */,
-				C762C61A1E1D36AF00C09EBD /* .jazzy.yaml */,
-				C762C61B1E1D36AF00C09EBD /* .swiftlint.yml */,
-				C762C61C1E1D36AF00C09EBD /* Gemfile */,
-				C762C66E1E1D58B200C09EBD /* Configs.swift */,
-			);
-			name = Configs;
-			sourceTree = "<group>";
-		};
 		C762C6211E1D414B00C09EBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,16 +322,6 @@
 				C762C69C1E1E688A00C09EBD /* Stubbed Responses */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		C762C64E1E1D494800C09EBD /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				C762C69A1E1D647100C09EBD /* AnalyticsManager.swift */,
-				C762C6961E1D640700C09EBD /* LibsManager.swift */,
-				C762C6971E1D640700C09EBD /* LogManager.swift */,
-			);
-			name = Managers;
 			sourceTree = "<group>";
 		};
 		C762C64F1E1D559000C09EBD /* Common */ = {
@@ -382,12 +413,10 @@
 		C762C6891E1D5D6E00C09EBD /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				C762C68A1E1D5D6E00C09EBD /* APIKeys.swift */,
+				07FC33861FFFE68800D53888 /* Api.swift */,
 				C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */,
 				C762C68C1E1D5D6E00C09EBD /* Networking.swift */,
-				C762C68D1E1D5D6E00C09EBD /* NetworkLogger.swift */,
 				C762C68E1E1D5D6E00C09EBD /* Reachability.swift */,
-				C762C68F1E1D5D6E00C09EBD /* XAppToken.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -404,46 +433,6 @@
 			name = "Stubbed Responses";
 			sourceTree = "<group>";
 		};
-		C762C6A51E1E7D7400C09EBD /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				C762C6A61E1E7D8800C09EBD /* Main */,
-			);
-			name = Modules;
-			sourceTree = "<group>";
-		};
-		C762C6A61E1E7D8800C09EBD /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				C762C6A71E1E7D9300C09EBD /* Controllers */,
-				C762C6A91E1E7DAB00C09EBD /* ViewModels */,
-				C762C6A81E1E7D9F00C09EBD /* Views */,
-			);
-			name = Main;
-			sourceTree = "<group>";
-		};
-		C762C6A71E1E7D9300C09EBD /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C74C62FE1E1FCB23003BDE28 /* MainViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		C762C6A81E1E7D9F00C09EBD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		C762C6A91E1E7DAB00C09EBD /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ViewModels;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -458,7 +447,6 @@
 				A094994F1E1D1CB600EFDE29 /* Frameworks */,
 				A09499501E1D1CB600EFDE29 /* Resources */,
 				3FF22C3403C6B8870D286DEA /* [CP] Embed Pods Frameworks */,
-				ACFAA8765C4CC8AB31218B43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -477,8 +465,6 @@
 				A09499621E1D1CB700EFDE29 /* Sources */,
 				A09499631E1D1CB700EFDE29 /* Frameworks */,
 				A09499641E1D1CB700EFDE29 /* Resources */,
-				A0E0E0376027DDB0C3DE3795 /* [CP] Embed Pods Frameworks */,
-				7384F30DEC48EE1B9BB75CE2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -498,8 +484,6 @@
 				A094996D1E1D1CB700EFDE29 /* Sources */,
 				A094996E1E1D1CB700EFDE29 /* Frameworks */,
 				A094996F1E1D1CB700EFDE29 /* Resources */,
-				D4EB937C6EAF522C4478C133 /* [CP] Embed Pods Frameworks */,
-				A83E1EFE1AC272EA0C41A00E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -565,14 +549,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C762C61F1E1D36AF00C09EBD /* Gemfile in Resources */,
+				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
 				C74C63091E1FDFE6003BDE28 /* UserRepositories.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				C762C6A31E1E68E800C09EBD /* XApp.json in Resources */,
+				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				C762C6A41E1E68E800C09EBD /* XAuth.json in Resources */,
-				C762C6151E1D363500C09EBD /* .gitignore in Resources */,
-				C762C61D1E1D36AF00C09EBD /* .jazzy.yaml in Resources */,
-				C762C61E1E1D36AF00C09EBD /* .swiftlint.yml in Resources */,
+				07FC33851FFFE54800D53888 /* README.md in Resources */,
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
 				C762C6A21E1E68E800C09EBD /* SystemTime.json in Resources */,
 				C762C6A11E1E68E800C09EBD /* Ping.json in Resources */,
@@ -611,9 +594,11 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
@@ -625,6 +610,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
+				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
@@ -639,9 +625,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
@@ -653,6 +641,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
@@ -662,66 +651,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7384F30DEC48EE1B9BB75CE2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0E0E0376027DDB0C3DE3795 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A83E1EFE1AC272EA0C41A00E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ACFAA8765C4CC8AB31218B43 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C762C6201E1D40D500C09EBD /* R.swift */ = {
@@ -751,21 +680,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
-		};
-		D4EB937C6EAF522C4478C133 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D85BBAA4424C91B196B1EF29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -828,34 +742,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C762C6991E1D640700C09EBD /* LogManager.swift in Sources */,
-				C762C6931E1D5D6E00C09EBD /* NetworkLogger.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
 				C762C6611E1D559000C09EBD /* CollectionView.swift in Sources */,
-				C762C6951E1D5D6E00C09EBD /* XAppToken.swift in Sources */,
+				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
+				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
+				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,
 				C762C66B1E1D559000C09EBD /* TextField.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
 				C762C66C1E1D559000C09EBD /* View.swift in Sources */,
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				C762C6691E1D559000C09EBD /* TableViewCell.swift in Sources */,
+				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
-				C74C62FF1E1FCB23003BDE28 /* MainViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
-				C762C6901E1D5D6E00C09EBD /* APIKeys.swift in Sources */,
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
 				C762C6681E1D559000C09EBD /* TableView.swift in Sources */,
+				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
+				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
 				C762C67F1E1D5A7300C09EBD /* Observable+Logging.swift in Sources */,
-				C762C69B1E1D647100C09EBD /* AnalyticsManager.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				C762C65F1E1D559000C09EBD /* BarButtonItem.swift in Sources */,
+				07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
@@ -863,7 +778,6 @@
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
 				C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */,
 				C762C66F1E1D58B200C09EBD /* Configs.swift in Sources */,
-				C762C6981E1D640700C09EBD /* LibsManager.swift in Sources */,
 				C762C6811E1D5A7300C09EBD /* SwiftExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,10 +13,6 @@ import Alamofire
 
 let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
-protocol GithubAPIType {
-    var addXAuth: Bool { get }
-}
-
 enum GithubAPI {
     case xApp
     case xAuth(email: String, password: String)
@@ -24,10 +20,10 @@ enum GithubAPI {
     case userRepositories(username: String)
 }
 
-extension GithubAPI: TargetType, GithubAPIType {
+extension GithubAPI: TargetType, ProductAPIType {
 
     var baseURL: URL {
-        return URL(string: Configs.Network.BaseURL)!
+        return Configs.Network.baseURL.url!
     }
 
     var path: String {
@@ -91,24 +87,4 @@ extension GithubAPI: TargetType, GithubAPIType {
             return true
         }
     }
-}
-
-// MARK: - Provider support
-
-func stubbedResponse(_ filename: String) -> Data! {
-    @objc class TestClass: NSObject { }
-
-    let bundle = Bundle(for: TestClass.self)
-    let path = bundle.path(forResource: filename, ofType: "json")
-    return (try? Data(contentsOf: URL(fileURLWithPath: path!)))
-}
-
-private extension String {
-    var URLEscapedString: String {
-        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
-    }
-}
-
-func url(_ route: TargetType) -> String {
-    return route.baseURL.appendingPathComponent(route.path).absoluteString
 }

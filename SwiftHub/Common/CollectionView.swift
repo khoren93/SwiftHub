@@ -10,8 +10,6 @@ import UIKit
 
 class CollectionView: UICollectionView {
 
-    let inset = Configs.BaseDimensions.Inset
-
     init() {
         super.init(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
         makeUI()

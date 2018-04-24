@@ -34,21 +34,24 @@ struct Configs {
     }
 
     struct Network {
-        static var BaseDomain: String {
-            return "https://api.github.com"
+        static let useStaging = false
+        static var baseDomain: String {
+            return useStaging ? "" : "https://api.github.com"
         }
-        static var BaseURL: String {
-            return BaseDomain
+        static var baseURL: String {
+            return baseDomain + "/api/v1"
         }
-        static let TimeoutTimeInterval: TimeInterval = 5
     }
 
     struct BaseDimensions {
-        static let ToolBarHeight: CGFloat = 66
-        static let NavBarWithStatusBarHeight: CGFloat = 64
-        static let Inset: CGFloat = 10
-        static let CornerRadius: CGFloat = 3
-        static let ButtonHeight: CGFloat = 50
+        static let inset: CGFloat = 10
+        static let tabBarHeight: CGFloat = 58
+        static let toolBarHeight: CGFloat = 66
+        static let navBarWithStatusBarHeight: CGFloat = 64
+        static let cornerRadius: CGFloat = 25
+        static let borderWidth: CGFloat = 1
+        static let buttonHeight: CGFloat = 50
+        static let tableRowHeight: CGFloat = 60
     }
 
     struct Path {

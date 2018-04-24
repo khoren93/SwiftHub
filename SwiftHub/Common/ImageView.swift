@@ -10,8 +10,6 @@ import UIKit
 
 class ImageView: UIImageView {
 
-    let inset = Configs.BaseDimensions.Inset
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()

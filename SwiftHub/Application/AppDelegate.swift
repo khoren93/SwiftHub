@@ -11,6 +11,10 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static var shared: AppDelegate? {
+        return UIApplication.shared.delegate as? AppDelegate
+    }
+
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -18,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let libsManager = LibsManager.shared
         libsManager.setupLibs(with: window)
+
+        // Show initial screen
+        Application.shared.presentInitialScreen(in: window!)
 
         return true
     }

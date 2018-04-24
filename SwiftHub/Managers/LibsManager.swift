@@ -18,6 +18,7 @@ import Crashlytics
 import NVActivityIndicatorView
 import NSObject_Rx
 import SwifterSwift
+import SwiftDate
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager {
@@ -38,17 +39,17 @@ class LibsManager {
 
     func setupChameleon() {
         UIApplication.shared.statusBarStyle = .lightContent
-        Chameleon.setGlobalThemeUsingPrimaryColor(.primaryColor(), withSecondaryColor: .secondaryColor(), andContentStyle: .contrast)
+        Chameleon.setGlobalThemeUsingPrimaryColor(.primary(), withSecondaryColor: .secondary(), andContentStyle: .contrast)
         UIButton.appearance(whenContainedInInstancesOf: [UITableView.self]).backgroundColor = UIColor.clear
     }
 
     func setupActivityView() {
         NVActivityIndicatorView.DEFAULT_TYPE = .ballPulseSync
-        NVActivityIndicatorView.DEFAULT_COLOR = .secondaryColor()
+        NVActivityIndicatorView.DEFAULT_COLOR = .secondary()
     }
 
     func setupKeyboardManager() {
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
     }
 
     func setupKingfisher() {

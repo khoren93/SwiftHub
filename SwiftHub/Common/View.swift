@@ -7,13 +7,8 @@
 //
 
 import UIKit
-import Kingfisher
 
 public class View: UIView {
-
-    let inset = Configs.BaseDimensions.Inset
-
-    let kf = KingfisherManager.shared
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,5 +31,17 @@ public class View: UIView {
 
     func getCenter() -> CGPoint {
         return convert(center, from: superview)
+    }
+}
+
+extension UIView {
+
+    var inset: CGFloat {
+        return Configs.BaseDimensions.inset
+    }
+
+    open func setPriority(_ priority: UILayoutPriority, for axis: UILayoutConstraintAxis) {
+        self.setContentHuggingPriority(priority, for: axis)
+        self.setContentCompressionResistancePriority(priority, for: axis)
     }
 }

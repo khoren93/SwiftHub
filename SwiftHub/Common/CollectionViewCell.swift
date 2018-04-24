@@ -10,8 +10,6 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
 
-    let inset = Configs.BaseDimensions.Inset
-
     func makeUI() {
         self.layer.masksToBounds = true
         updateUI()

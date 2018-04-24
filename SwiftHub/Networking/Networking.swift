@@ -8,92 +8,47 @@
 
 import Foundation
 import Moya
-//import RxMoya
 import RxSwift
 import Alamofire
-/*
-class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 
+protocol ProductAPIType {
+    var addXAuth: Bool { get }
+}
+
+class OnlineProvider<Target> where Target: Moya.TargetType {
     fileprivate let online: Observable<Bool>
+    fileprivate let provider: MoyaProvider<Target>
 
-    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
-         requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,
-         stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
-         manager: Manager = RxMoyaProvider<Target>.defaultAlamofireManager(),
+    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
+         requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
+         stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider<Target>.neverStub,
+         manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
          plugins: [PluginType] = [],
          trackInflights: Bool = false,
-         online: Observable<Bool> = connectedToInternetOrStubbing()) {
-
+         online: Observable<Bool> = connectedToInternet()) {
         self.online = online
-        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
+        self.provider = MoyaProvider(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
 
-    override func request(_ token: Target) -> Observable<Moya.Response> {
-        let actualRequest = super.request(token)
+    func request(_ token: Target) -> Observable<Moya.Response> {
+        let actualRequest = provider.rx.request(token)
         return online
             .ignore(value: false)  // Wait until we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
             .flatMap { _ in // Turn the online state into a network request
                 return actualRequest
         }
-
     }
 }
 
 protocol NetworkingType {
-    associatedtype T: TargetType, GithubAPIType
+    associatedtype T: TargetType, ProductAPIType
     var provider: OnlineProvider<T> { get }
 }
 
 struct Networking: NetworkingType {
     typealias T = GithubAPI
     let provider: OnlineProvider<GithubAPI>
-}
-
-struct AuthorizedNetworking: NetworkingType {
-    typealias T = GithubAuthenticatedAPI
-    let provider: OnlineProvider<GithubAuthenticatedAPI>
-}
-
-private extension Networking {
-
-    /// Request to fetch and store new XApp token if the current token is missing or expired.
-    ///
-    /// - parameter defaults:
-    ///
-    /// - returns:
-    func XAppTokenRequest(_ defaults: UserDefaults) -> Observable<String?> {
-
-        var appToken = XAppToken(defaults: defaults)
-
-        // If we have a valid token, return it and forgo a request for a fresh one.
-        if appToken.isValid {
-            return Observable.just(appToken.token)
-        }
-
-        let newTokenRequest = self.provider.request(GithubAPI.xApp)
-            .filterSuccessfulStatusCodes()
-            .mapJSON()
-            .map { element -> (token: String?, expiry: String?) in
-                guard let dictionary = element as? NSDictionary else { return (token: nil, expiry: nil) }
-
-                return (token: dictionary["xapp_token"] as? String, expiry: dictionary["expires_in"] as? String)
-            }
-            .do(onNext: { (element) in
-                    appToken.token = element.0
-//                    appToken.expiry = KioskDateFormatter.fromString(element.1 ?? "")
-                },
-                onError: nil,
-                onCompleted: nil,
-                onSubscribe: nil,
-                onDispose: nil)
-            .map { (token, expiry) -> String? in
-                return token
-            }
-            .logError()
-
-        return newTokenRequest
-    }
 }
 
 // MARK: - "Public" interfaces
@@ -105,98 +60,79 @@ extension Networking {
     /// - parameter defaults:
     ///
     /// - returns:
-    func request(_ token: GithubAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
-
+    func request(_ token: GithubAPI) -> Observable<Moya.Response> {
         let actualRequest = self.provider.request(token)
-        return self.XAppTokenRequest(defaults).flatMap { _ in actualRequest }
+        return actualRequest
     }
 }
 
-extension AuthorizedNetworking {
-    func request(_ token: GithubAuthenticatedAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
-        return self.provider.request(token)
-    }
-}
-
-// MARK: - Static methods
+// Static methods
 extension NetworkingType {
 
     static func newDefaultNetworking() -> Networking {
         return Networking(provider: newProvider(plugins))
     }
 
-    static func newAuthorizedNetworking(_ xAccessToken: String) -> AuthorizedNetworking {
-        return AuthorizedNetworking(provider: newProvider(authenticatedPlugins, xAccessToken: xAccessToken))
-    }
-
     static func newStubbingNetworking() -> Networking {
-        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
+        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.delayedStub(0.5), online: .just(true)))
     }
 
-    static func newAuthorizedStubbingNetworking() -> AuthorizedNetworking {
-        return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
-    }
-
-    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: GithubAPIType {
+    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint where T: TargetType, T: ProductAPIType {
         return { target in
-            var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
-
-            // If we were given an xAccessToken, add it
-            if let xAccessToken = xAccessToken {
-                endpoint = endpoint.adding(newHTTPHeaderFields: ["X-Access-Token": xAccessToken])
-            }
+            let endpoint = MoyaProvider.defaultEndpointMapping(for: target)
 
             // Sign all non-XApp, non-XAuth token requests
-            if target.addXAuth {
-                return endpoint.adding(newHTTPHeaderFields: ["X-Xapp-Token": XAppToken().token ?? ""])
-            } else {
-                return endpoint
-            }
+            return endpoint
         }
     }
 
     static func APIKeysBasedStubBehaviour<T>(_: T) -> Moya.StubBehavior {
-        return APIKeys.sharedKeys.stubResponses ? .immediate : .never
+        return .never
     }
 
     static var plugins: [PluginType] {
         return [
-            NetworkLogger(blacklist: { target -> Bool in
-                guard let target = target as? GithubAPI else { return false }
-
-                switch target {
-                case .ping: return true
-                default: return false
-                }
-            })
-        ]
-    }
-
-    static var authenticatedPlugins: [PluginType] {
-        return [NetworkLogger(whitelist: { target -> Bool in
-            guard let target = target as? GithubAuthenticatedAPI else { return false }
-
-            switch target {
-            default: return false
-            }
-        })
+            NetworkLoggerPlugin(verbose: true)
         ]
     }
 
     // (Endpoint<Target>, NSURLRequest -> Void) -> Void
-    static func endpointResolver<T>() -> MoyaProvider<T>.RequestClosure where T: TargetType {
+    static func endpointResolver() -> MoyaProvider<T>.RequestClosure {
         return { (endpoint, closure) in
-            var request = endpoint.urlRequest!
-            request.httpShouldHandleCookies = false
-            closure(.success(request))
+            do {
+                var request = try endpoint.urlRequest() // endpoint.urlRequest
+                request.httpShouldHandleCookies = false
+                closure(.success(request))
+            } catch {
+                logError(error.localizedDescription)
+            }
         }
     }
 }
 
-private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: TargetType, T: GithubAPIType {
+private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: ProductAPIType {
     return OnlineProvider(endpointClosure: Networking.endpointsClosure(xAccessToken),
                           requestClosure: Networking.endpointResolver(),
                           stubClosure: Networking.APIKeysBasedStubBehaviour,
                           plugins: plugins)
 }
-*/
+
+// MARK: - Provider support
+
+func stubbedResponse(_ filename: String) -> Data! {
+    @objc class TestClass: NSObject { }
+
+    let bundle = Bundle(for: TestClass.self)
+    let path = bundle.path(forResource: filename, ofType: "json")
+    return (try? Data(contentsOf: URL(fileURLWithPath: path!)))
+}
+
+private extension String {
+    var URLEscapedString: String {
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
+    }
+}
+
+func url(_ route: TargetType) -> String {
+    return route.baseURL.appendingPathComponent(route.path).absoluteString
+}

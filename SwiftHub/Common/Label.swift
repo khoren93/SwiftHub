@@ -10,8 +10,6 @@ import UIKit
 
 class Label: UILabel {
 
-    let inset = Configs.BaseDimensions.Inset
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()
@@ -24,7 +22,7 @@ class Label: UILabel {
 
     func makeUI() {
         layer.masksToBounds = true
-        layer.cornerRadius = Configs.BaseDimensions.CornerRadius
+        layer.cornerRadius = Configs.BaseDimensions.cornerRadius
         numberOfLines = 0
 
         updateUI()
