@@ -8,23 +8,23 @@
 
 import UIKit
 
-//let provider = Application.shared.provider
+let provider = Api.shared
 
 enum HomeTabBarItem: Int {
-    case repositories, notifications, events, profile, settings
+    case repositories, events, profile, notifications, settings
 
     var controller: UINavigationController {
         switch self {
         case .repositories:
             let controller = ViewController()
             return NavigationController(rootViewController: controller)
-        case .notifications:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
         case .events:
             let controller = ViewController()
             return NavigationController(rootViewController: controller)
         case .profile:
+            let controller = ViewController()
+            return NavigationController(rootViewController: controller)
+        case .notifications:
             let controller = ViewController()
             return NavigationController(rootViewController: controller)
         case .settings:
@@ -36,9 +36,9 @@ enum HomeTabBarItem: Int {
     var image: UIImage? {
         switch self {
         case .repositories: return R.image.icon_favorite()
-        case .notifications: return R.image.icon_favorite()
         case .events: return R.image.icon_favorite()
         case .profile: return R.image.icon_favorite()
+        case .notifications: return R.image.icon_favorite()
         case .settings: return R.image.icon_favorite()
         }
     }
@@ -51,9 +51,9 @@ enum HomeTabBarItem: Int {
     var title: String {
         switch self {
         case .repositories: return "Repositories"
-        case .notifications: return "Notifications"
         case .events: return "Events"
         case .profile: return "Profile"
+        case .notifications: return "Notifications"
         case .settings: return "Settings"
         }
     }
@@ -74,29 +74,31 @@ class HomeTabBarController: UITabBarController {
         super.init(coder: aDecoder)
         // Set tab bar controllers
         let viewControllers: [UIViewController] = [HomeTabBarItem.repositories.getController(),
-                                                   HomeTabBarItem.notifications.getController(),
                                                    HomeTabBarItem.events.getController(),
                                                    HomeTabBarItem.profile.getController(),
+                                                   HomeTabBarItem.notifications.getController(),
                                                    HomeTabBarItem.settings.getController()]
         setViewControllers(viewControllers, animated: true)
+        makeUI()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        makeUI()
     }
 
     func makeUI() {
         // Configure tab bar
-        //tabBar.isTranslucent = true
-        tabBar.barTintColor = UIColor.primaryDark()
-        tabBar.tintColor = UIColor.primary()
+        hero.isEnabled = true
+        tabBar.hero.id = "TabBarID"
+        tabBar.isTranslucent = false
+        tabBar.barTintColor = UIColor.primary()
+        tabBar.tintColor = UIColor.secondary()
 //        tabBar.layer.masksToBounds = true
 
         if #available(iOS 10.0, *) {
-            tabBar.unselectedItemTintColor = UIColor.lightGray
+            tabBar.unselectedItemTintColor = UIColor.flatWhite
         } else {
             // Fallback on earlier versions
         }

@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
-import SafariServices
+import RxSwift
 import RxCocoa
+import SafariServices
+import Hero
 
 protocol Navigatable {
     var navigator: Navigator! { get set }
@@ -36,15 +38,17 @@ class Navigator {
 
     enum Transition {
         case root(in: UIWindow)
-        case navigation, modal
-        case maps
+        case navigation(type: HeroDefaultAnimationType)
+        case customModal(type: HeroDefaultAnimationType)
+        case modal
+        case custom
     }
 
     // MARK: - get a single VC
     func get(segue: Scene) -> UIViewController {
         switch segue {
         case .tabs:
-            let vc = R.storyboard.main.instantiateInitialViewController()!
+            let vc = R.storyboard.main.homeTabBarController()!
             return vc
 
         case .webPage(let url):
@@ -54,8 +58,12 @@ class Navigator {
         }
     }
 
-    func pop(sender: UIViewController?) {
-        sender?.navigationController?.popViewController()
+    func pop(sender: UIViewController?, toRoot: Bool = false) {
+        if toRoot {
+            sender?.navigationController?.popToRootViewController(animated: true)
+        } else {
+            sender?.navigationController?.popViewController()
+        }
     }
 
     func dismiss(sender: UIViewController?) {
@@ -63,8 +71,9 @@ class Navigator {
     }
 
     // MARK: - invoke a single segue
-    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation) {
+    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .slide(direction: .left))) {
         let target = get(segue: segue)
+
         show(target: target, sender: sender, transition: transition)
     }
 
@@ -77,8 +86,7 @@ class Navigator {
                 window.rootViewController = target
             }, completion: nil)
             return
-        case .maps:
-            return
+        case .custom: return
         default: break
         }
 
@@ -93,14 +101,25 @@ class Navigator {
         }
 
         switch transition {
-        case .navigation:
+        case .navigation(let type):
             if let nav = sender.navigationController {
                 //add controller to navigation stack
+                nav.hero.navigationAnimationType = .autoReverse(presenting: type)
                 nav.pushViewController(target, animated: true)
+            }
+        case .customModal(let type):
+            //present modally with custom animation
+            DispatchQueue.main.async {
+                let nav = NavigationController(rootViewController: target)
+                nav.hero.modalAnimationType = .autoReverse(presenting: type)
+                sender.present(nav, animated: true, completion: nil)
             }
         case .modal:
             //present modally
-            sender.present(NavigationController(rootViewController: target), animated: true, completion: nil)
+            DispatchQueue.main.async {
+                let nav = NavigationController(rootViewController: target)
+                sender.present(nav, animated: true, completion: nil)
+            }
         default: break
         }
     }
@@ -113,11 +132,9 @@ class Navigator {
         }
 
         // tabs
-        if let target = target as? UITabBarController {
-            if let children = target.viewControllers {
-                for vc in children {
-                    injectNavigator(in: vc)
-                }
+        if let target = target as? UITabBarController, let children = target.viewControllers {
+            for vc in children {
+                injectNavigator(in: vc)
             }
         }
 

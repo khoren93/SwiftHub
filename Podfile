@@ -19,13 +19,14 @@ target 'SwiftHub' do
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
   
   # JSON Mapping
-  pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
-  pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git'  # https://github.com/ivanbruel/Moya-ObjectMapper
+  #pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
+  pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
   # Image
   pod 'Kingfisher', '~> 4.0'  # https://github.com/onevcat/Kingfisher
 
   # Date
+  pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
   pod 'SwiftDate', '~> 4.0'  # https://github.com/malcommac/SwiftDate
 
   # Phone
@@ -33,10 +34,10 @@ target 'SwiftHub' do
 
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
-  pod 'SwiftLint', '0.25.1'  # https://github.com/realm/SwiftLint
+  pod 'SwiftLint', '0.26.0'  # https://github.com/realm/SwiftLint
 
   # Keychain
-  pod 'KeychainAccess'  # https://github.com/kishikawakatsumi/KeychainAccess
+  pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
 
   # Fabric
   pod 'Fabric'
@@ -44,10 +45,11 @@ target 'SwiftHub' do
 
   # UI
   pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
+  pod 'ImageSlideshow/Kingfisher', '~> 1.0'  # https://github.com/zvonicek/ImageSlideshow
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
-  
+
   # Keyboard
   pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 

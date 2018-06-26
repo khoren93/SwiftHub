@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 import DZNEmptyDataSet
+import Hero
 
 class ViewController: UIViewController, Navigatable {
 
@@ -18,7 +19,22 @@ class ViewController: UIViewController, Navigatable {
 
     let isLoading = BehaviorRelay(value: false)
 
-    var backButtonImage = R.image.icon_navigation_back()
+    var automaticallyAdjustsLeftBarButtonItem = true
+
+    var navigationTitle = "" {
+        didSet {
+            navigationItem.title = navigationTitle
+        }
+    }
+
+    var emptyDataSetTitle = "No Data"
+    var emptyDataSetImage = UIImage(color: .clear, size: CGSize(width: 20, height: 20))
+
+    lazy var refreshControl: UIRefreshControl = {
+        let view = UIRefreshControl()
+        return view
+    }()
+
     lazy var backBarButton: BarButtonItem = {
         let view = BarButtonItem()
         view.title = ""
@@ -34,11 +50,40 @@ class ViewController: UIViewController, Navigatable {
         return view
     }()
 
+    lazy var contentView: View = {
+        let view = View()
+        //        view.hero.id = "CententView"
+        self.view.addSubview(view)
+        view.snp.makeConstraints { (make) in
+            if #available(iOS 11.0, *) {
+                make.edges.equalTo(self.view.safeAreaLayoutGuide)
+            } else {
+                make.left.right.equalToSuperview()
+                make.top.equalTo(self.topLayoutGuide.snp.bottom)
+                make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+            }
+        }
+        return view
+    }()
+
+    lazy var stackView: StackView = {
+        let subviews: [UIView] = []
+        let view = StackView(arrangedSubviews: subviews)
+        self.contentView.addSubview(view)
+        view.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
+        return view
+    }()
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         makeUI()
+        bindViewModel()
+
+        isLoading.asObservable().bind(to: refreshControl.rx.isRefreshing).disposed(by: rx.disposeBag)
 
         // Observe device orientation change
         NotificationCenter.default
@@ -55,13 +100,22 @@ class ViewController: UIViewController, Navigatable {
             }.disposed(by: rx.disposeBag)
 
         // Two finger swipe gesture for opening Flex
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerQuadrupleSwipe(swipeRecognizer:)))
-        swipeGesture.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(swipeGesture)
+        let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
+        twoSwipeGesture.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(twoSwipeGesture)
+
+        // Three finger swipe gesture for opening Flex and Hero debug
+        let threeSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleThreeFingerSwipe(swipeRecognizer:)))
+        threeSwipeGesture.numberOfTouchesRequired = 3
+        self.view.addGestureRecognizer(threeSwipeGesture)
     }
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        if automaticallyAdjustsLeftBarButtonItem {
+            adjustLeftBarButtonItem()
+        }
         updateUI()
     }
 
@@ -71,12 +125,24 @@ class ViewController: UIViewController, Navigatable {
     }
 
     deinit {
-        //DDLogInfo("\(type(of: self)) deinit")
+        logDebug("\(type(of: self)): Deinited")
+    }
+
+    override public func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        logDebug("\(type(of: self)): Received Memory Warning")
     }
 
     func makeUI() {
-        updateUI()
+        hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
+        view.backgroundColor = .white
+        updateUI()
+    }
+
+    func bindViewModel() {
+
     }
 
     func updateUI() {
@@ -93,19 +159,18 @@ class ViewController: UIViewController, Navigatable {
         self.updateUI()
     }
 
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: Adjusting Navigation Item
 
     func adjustLeftBarButtonItem() {
-        if self.navigationController?.viewControllers.count ?? 0 > 1 { // pushed
+        if self.navigationController?.viewControllers.count ?? 0 > 1 { // Pushed
             self.navigationItem.leftBarButtonItem = nil
         } else if self.presentingViewController != nil { // presented
             self.navigationItem.leftBarButtonItem = closeBarButton
         }
+    }
+
+    @objc func closeAction(sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -123,9 +188,16 @@ extension ViewController {
         return view
     }
 
-    @objc func handleTwoFingerQuadrupleSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
+    @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
+        }
+    }
+
+    @objc func handleThreeFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
+        if swipeRecognizer.state == .recognized {
+            LibsManager.shared.showFlex()
+            HeroDebugPlugin.isEnabled.toggle()
         }
     }
 }
@@ -133,11 +205,11 @@ extension ViewController {
 extension ViewController: DZNEmptyDataSetSource {
 
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "No Data")
+        return NSAttributedString(string: emptyDataSetTitle)
     }
 
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return nil
+        return emptyDataSetImage
     }
 
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

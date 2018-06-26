@@ -39,8 +39,7 @@ class LibsManager {
 
     func setupChameleon() {
         UIApplication.shared.statusBarStyle = .lightContent
-        Chameleon.setGlobalThemeUsingPrimaryColor(.primary(), withSecondaryColor: .secondary(), andContentStyle: .contrast)
-        UIButton.appearance(whenContainedInInstancesOf: [UITableView.self]).backgroundColor = UIColor.clear
+        UITextField.appearance().keyboardAppearance = .dark
     }
 
     func setupActivityView() {
