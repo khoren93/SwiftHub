@@ -31,6 +31,8 @@ class TableView: UITableView {
         separatorColor = .separator()
         cellLayoutMarginsFollowReadableWidth = false
         keyboardDismissMode = .onDrag
+        separatorInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
+        tableFooterView = UIView()
         updateUI()
     }
 

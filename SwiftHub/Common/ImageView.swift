@@ -32,7 +32,7 @@ class ImageView: UIImageView {
 
     func makeUI() {
         layer.masksToBounds = true
-        contentMode = .scaleAspectFill
+        contentMode = .center
 
         // Kingfisher
         kf.indicatorType = .activity

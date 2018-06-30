@@ -85,7 +85,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                         return SearchSectionItem.repositoriesItem(cellViewModel: cellViewModel)
                     })
                     if repositories.isNotEmpty {
-                        elements.append(SearchSection.repositories(title: "Repositories", items: repositories))
+                        elements.append(SearchSection.repositories(title: "", items: repositories))
                     }
                 case .users:
                     let users = users.map({ (user) -> SearchSectionItem in
@@ -93,7 +93,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                         return SearchSectionItem.usersItem(cellViewModel: cellViewModel)
                     })
                     if users.isNotEmpty {
-                        elements.append(SearchSection.repositories(title: "Users", items: users))
+                        elements.append(SearchSection.repositories(title: "", items: users))
                     }
                 }
                 return elements
