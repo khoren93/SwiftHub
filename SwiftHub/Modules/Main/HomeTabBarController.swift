@@ -11,31 +11,32 @@ import UIKit
 let provider = Api.shared
 
 enum HomeTabBarItem: Int {
-    case repositories, events, profile, notifications, settings
+    case search, events, profile, notifications, settings
 
     var controller: UINavigationController {
         switch self {
-        case .repositories:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
+        case .search:
+            let vc = R.storyboard.search.searchViewController()!
+            vc.viewModel = SearchViewModel(provider: provider)
+            return NavigationController(rootViewController: vc)
         case .events:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
+            let vc = ViewController()
+            return NavigationController(rootViewController: vc)
         case .profile:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
+            let vc = ViewController()
+            return NavigationController(rootViewController: vc)
         case .notifications:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
+            let vc = ViewController()
+            return NavigationController(rootViewController: vc)
         case .settings:
-            let controller = ViewController()
-            return NavigationController(rootViewController: controller)
+            let vc = ViewController()
+            return NavigationController(rootViewController: vc)
         }
     }
 
     var image: UIImage? {
         switch self {
-        case .repositories: return R.image.icon_favorite()
+        case .search: return R.image.icon_favorite()
         case .events: return R.image.icon_favorite()
         case .profile: return R.image.icon_favorite()
         case .notifications: return R.image.icon_favorite()
@@ -50,7 +51,7 @@ enum HomeTabBarItem: Int {
 
     var title: String {
         switch self {
-        case .repositories: return "Repositories"
+        case .search: return "Search"
         case .events: return "Events"
         case .profile: return "Profile"
         case .notifications: return "Notifications"
@@ -73,7 +74,7 @@ class HomeTabBarController: UITabBarController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         // Set tab bar controllers
-        let viewControllers: [UIViewController] = [HomeTabBarItem.repositories.getController(),
+        let viewControllers: [UIViewController] = [HomeTabBarItem.search.getController(),
                                                    HomeTabBarItem.events.getController(),
                                                    HomeTabBarItem.profile.getController(),
                                                    HomeTabBarItem.notifications.getController(),

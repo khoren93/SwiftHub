@@ -39,7 +39,7 @@ struct Configs {
             return useStaging ? "" : "https://api.github.com"
         }
         static var baseURL: String {
-            return baseDomain + "/api/v1"
+            return baseDomain //+ "/api/v1"
         }
     }
 
@@ -52,6 +52,7 @@ struct Configs {
         static let borderWidth: CGFloat = 1
         static let buttonHeight: CGFloat = 50
         static let tableRowHeight: CGFloat = 60
+        static let segmentedControlHeight: CGFloat = 30
     }
 
     struct Path {

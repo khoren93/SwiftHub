@@ -35,6 +35,11 @@ class ViewController: UIViewController, Navigatable {
         return view
     }()
 
+    lazy var searchBar: SearchBar = {
+        let view = SearchBar()
+        return view
+    }()
+
     lazy var backBarButton: BarButtonItem = {
         let view = BarButtonItem()
         view.title = ""

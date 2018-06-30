@@ -32,6 +32,18 @@ extension UIColor {
     static func separator() -> UIColor {
         return flatWhite
     }
+
+    static func textBlack() -> UIColor {
+        return flatBlackDark
+    }
+
+    static func textWhite() -> UIColor {
+        return white
+    }
+
+    static func textGray() -> UIColor {
+        return .gray
+    }
 }
 
 // MARK: Averaging a Color

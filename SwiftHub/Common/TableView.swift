@@ -29,7 +29,8 @@ class TableView: UITableView {
         estimatedRowHeight = 50
         backgroundColor = .white
         separatorColor = .separator()
-
+        cellLayoutMarginsFollowReadableWidth = false
+        keyboardDismissMode = .onDrag
         updateUI()
     }
 

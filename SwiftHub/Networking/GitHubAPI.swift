@@ -14,9 +14,8 @@ import Alamofire
 let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
 enum GithubAPI {
-    case xApp
-    case xAuth(email: String, password: String)
-
+    case searchRepositories(query: String)
+    case searchUsers(query: String)
     case userRepositories(username: String)
 }
 
@@ -28,13 +27,9 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var path: String {
         switch self {
-        case .xApp:
-            return "/xapp_token"
-        case .xAuth:
-            return "/oauth2/access_token"
-
-        case .userRepositories(let username):
-            return "/users/\(username)/repos"
+        case .searchRepositories: return "/search/repositories"
+        case .searchUsers: return "/search/users"
+        case .userRepositories(let username): return "/users/\(username)/repos"
         }
     }
 
@@ -51,6 +46,14 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .searchRepositories(let query):
+            var params: [String: Any] = [:]
+            params["q"] = query
+            return params
+        case .searchUsers(let query):
+            var params: [String: Any] = [:]
+            params["q"] = query
+            return params
         default:
             return nil
         }
@@ -62,13 +65,9 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var sampleData: Data {
         switch self {
-        case .xApp:
-            return stubbedResponse("XApp")
-        case .xAuth:
-            return stubbedResponse("XAuth")
-
-        case .userRepositories:
-            return stubbedResponse("UserRepositories")
+        case .searchRepositories: return stubbedResponse("RepositoriesSearch")
+        case .searchUsers: return stubbedResponse("UsersSearch")
+        case .userRepositories: return stubbedResponse("UserRepositories")
         }
     }
 
@@ -81,10 +80,9 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var addXAuth: Bool {
         switch self {
-        case .xApp, .xAuth:
+        case .searchRepositories, .searchUsers, .userRepositories:
             return false
-        default:
-            return true
+//        default: return true
         }
     }
 }

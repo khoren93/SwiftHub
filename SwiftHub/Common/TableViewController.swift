@@ -8,16 +8,13 @@
 
 import UIKit
 
-class TableViewController: ViewController {
+class TableViewController: ViewController, UIScrollViewDelegate {
 
     lazy var tableView: TableView = {
         let view = TableView(frame: CGRect(), style: .grouped)
-        self.view.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.topLayoutGuide.snp.bottom)
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-        }
+        view.emptyDataSetSource = self
+        view.emptyDataSetDelegate = self
+        view.rx.setDelegate(self).disposed(by: rx.disposeBag)
         return view
     }()
 
@@ -46,7 +43,7 @@ class TableViewController: ViewController {
     override func makeUI() {
         super.makeUI()
 
-        _ = tableView
+        stackView.addArrangedSubview(tableView)
     }
 
     override func updateUI() {
@@ -61,6 +58,16 @@ extension TableViewController {
             selectedIndexPaths.forEach({ (indexPath) in
                 tableView.deselectRow(at: indexPath, animated: false)
             })
+        }
+    }
+}
+
+extension TableViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let view = view as? UITableViewHeaderFooterView {
+            view.textLabel?.font = UIFont(name: ".SFUIText-Bold", size: 15.0)!
+            view.textLabel?.textColor = UIColor.textBlack()
         }
     }
 }
