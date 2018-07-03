@@ -43,6 +43,7 @@ class TableViewController: ViewController, UIScrollViewDelegate {
     override func makeUI() {
         super.makeUI()
 
+        stackView.spacing = 0
         stackView.addArrangedSubview(tableView)
     }
 

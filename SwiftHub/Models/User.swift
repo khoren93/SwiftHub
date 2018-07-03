@@ -106,6 +106,12 @@ struct User: Mappable {
     }
 }
 
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 struct UserSearch: Mappable {
 
     var items: [User] = []

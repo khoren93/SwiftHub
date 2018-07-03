@@ -47,7 +47,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 .trackError(errorTracker)
         }.bind(to: repository).disposed(by: rx.disposeBag)
 
-        let name = repository.map { $0.name ?? "" }.asDriverOnErrorJustComplete()
+        let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
         let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = repository.map { $0.owner?.avatarUrl?.url }.asDriverOnErrorJustComplete()
 

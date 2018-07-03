@@ -25,3 +25,9 @@ class RepositoryCellViewModel {
         imageUrl = Driver.just(repository.owner?.avatarUrl?.url)
     }
 }
+
+extension RepositoryCellViewModel: Equatable {
+    static func == (lhs: RepositoryCellViewModel, rhs: RepositoryCellViewModel) -> Bool {
+        return lhs.repository == rhs.repository
+    }
+}

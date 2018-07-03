@@ -10,6 +10,20 @@ import UIKit
 
 public class View: UIView {
 
+    convenience init(width: CGFloat) {
+        self.init(frame: CGRect(x: 0, y: 0, width: width, height: 0))
+        snp.makeConstraints { (make) in
+            make.width.equalTo(width)
+        }
+    }
+
+    convenience init(height: CGFloat) {
+        self.init(frame: CGRect(x: 0, y: 0, width: 0, height: height))
+        snp.makeConstraints { (make) in
+            make.height.equalTo(height)
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()

@@ -52,6 +52,7 @@
 		A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */; };
 		A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */; };
 		A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */; };
+		A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
 		C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C762C6241E1D417C00C09EBD /* Assets.xcassets */; };
 		C762C65F1E1D559000C09EBD /* BarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6501E1D559000C09EBD /* BarButtonItem.swift */; };
@@ -159,6 +160,7 @@
 		A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
+		A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideImageView.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C762C6221E1D414B00C09EBD /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C762C6241E1D417C00C09EBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				C762C6581E1D559000C09EBD /* ScrollView.swift */,
 				A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */,
 				A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */,
+				A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */,
 				A017B3DA1E92995300E4FCED /* SplitViewController.swift */,
 				A00C54C820E25B5A00DA5F98 /* StackView.swift */,
 				A09DE8CA20E7BE9B00F6F2BF /* Table View Cells */,
@@ -898,6 +901,7 @@
 				C762C6611E1D559000C09EBD /* CollectionView.swift in Sources */,
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
+				A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */,
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,

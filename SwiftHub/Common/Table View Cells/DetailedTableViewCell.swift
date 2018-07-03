@@ -12,7 +12,7 @@ class DetailedTableViewCell: TableViewCell {
 
     lazy var leftImageView: ImageView = {
         let view = ImageView(frame: CGRect())
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
         view.snp.makeConstraints({ (make) in
             make.size.equalTo(50)
         })

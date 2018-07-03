@@ -25,3 +25,9 @@ class UserCellViewModel {
         imageUrl = Driver.just(user.avatarUrl?.url)
     }
 }
+
+extension UserCellViewModel: Equatable {
+    static func == (lhs: UserCellViewModel, rhs: UserCellViewModel) -> Bool {
+        return lhs.user == rhs.user
+    }
+}

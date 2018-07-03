@@ -170,6 +170,12 @@ struct Repository: Mappable {
     }
 }
 
+extension Repository: Equatable {
+    static func == (lhs: Repository, rhs: Repository) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 struct RepositorySearch: Mappable {
 
     var items: [Repository] = []
