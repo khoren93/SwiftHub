@@ -34,10 +34,10 @@ struct Configs {
     }
 
     struct Network {
-        static let useStaging = false
+        static let useStaging = true
         static let loggingEnabled = false
         static var baseDomain: String {
-            return useStaging ? "" : "https://api.github.com"
+            return "https://api.github.com"
         }
         static var baseURL: String {
             return baseDomain //+ "/api/v1"

@@ -67,8 +67,8 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var sampleData: Data {
         switch self {
-        case .searchRepositories: return stubbedResponse("RepositoriesSearch")
-        case .searchUsers: return stubbedResponse("UsersSearch")
+        case .searchRepositories: return stubbedResponse("RepositorySearch")
+        case .searchUsers: return stubbedResponse("UserSearch")
         case .userRepositories: return stubbedResponse("UserRepositories")
         case .repository: return stubbedResponse("Repository")
         }
