@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "4b779957-9f7a-4208-52c0-ba4438a7e8bc",
+		"name": "Github",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Repositories",
+			"description": null,
+			"item": [
+				{
+					"name": "List your repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/user/repos?page=1&visibility=all&affiliation=owner,collaborator,organization_member&sort=full_name&direction=asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "visibility",
+									"value": "all"
+								},
+								{
+									"key": "affiliation",
+									"value": "owner,collaborator,organization_member"
+								},
+								{
+									"key": "sort",
+									"value": "full_name"
+								},
+								{
+									"key": "direction",
+									"value": "asc"
+								}
+							]
+						},
+						"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+					},
+					"response": []
+				},
+				{
+					"name": "List user repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{username}}/repos?page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{username}}",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "List public repositories for the specified user."
+					},
+					"response": []
+				},
+				{
+					"name": "List organization repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/orgs/{{org}}/repos?type=all&page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orgs",
+								"{{org}}",
+								"repos"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "all"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "List repositories for the specified org."
+					},
+					"response": []
+				},
+				{
+					"name": "List all public repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repositories?since=364",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repositories"
+							],
+							"query": [
+								{
+									"key": "since",
+									"value": "364"
+								}
+							]
+						},
+						"description": "This provides a dump of every public repository, in the order that they were created.\n\nNote: Pagination is powered exclusively by the since parameter. Use the Link header to get the URL for the next page of repositories."
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}"
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"name": "List contributors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contributors?page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"contributors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "List contributors to the specified repository, sorted by the number of commits per contributor in descending order."
+					},
+					"response": []
+				},
+				{
+					"name": "List languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/languages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"languages"
+							]
+						},
+						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+					},
+					"response": []
+				},
+				{
+					"name": "List Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/teams",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/tags?page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"tags"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organizations",
+			"description": "",
+			"item": [
+				{
+					"name": "Get an organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/orgs/{{owner}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orgs",
+								"{{owner}}"
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Get a single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{owner}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{owner}}"
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"description": "The Search API is optimized to help you find the specific item you're looking for (e.g., a specific user, a specific file in a repository, etc.). Think of it the way you think of performing a search on Google. It's designed to help you find the one result you're looking for (or maybe the few results you're looking for). Just like searching on Google, you sometimes want to see a few pages of search results so that you can find the item that best meets your needs. To satisfy that need, the GitHub Search API provides up to 1,000 results for each search.",
+			"item": [
+				{
+					"name": "Search Repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/search/repositories?q=swift",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"search",
+								"repositories"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "swift"
+								}
+							]
+						},
+						"description": "Find repositories via various criteria. This method returns up to 100 results per page."
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/search/users?q={{username}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"search",
+								"users"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "{{username}}"
+								}
+							]
+						},
+						"description": "Find repositories via various criteria. This method returns up to 100 results per page."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
