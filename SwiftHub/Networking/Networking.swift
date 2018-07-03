@@ -91,9 +91,11 @@ extension NetworkingType {
     }
 
     static var plugins: [PluginType] {
-        return [
-            NetworkLoggerPlugin(verbose: true)
-        ]
+        var plugins: [PluginType] = []
+        if Configs.Network.loggingEnabled == true {
+            plugins.append(NetworkLoggerPlugin(verbose: true))
+        }
+        return plugins
     }
 
     // (Endpoint<Target>, NSURLRequest -> Void) -> Void

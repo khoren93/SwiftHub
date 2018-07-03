@@ -26,18 +26,48 @@
             <point key="canvasLocation" x="-650" y="117"/>
         </scene>
         <!--Home Tab Bar Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="gFY-Hx-Vlt">
             <objects>
-                <viewController storyboardIdentifier="HomeTabBarController" id="BYZ-38-t0r" customClass="HomeTabBarController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tabBarController storyboardIdentifier="HomeTabBarController" id="VWi-4U-aGj" customClass="HomeTabBarController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zKu-M1-dTI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nmp-Qc-MqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="116"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="BbK-5z-Hye">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="1mT-PS-PpL" customClass="SearchViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DMj-y2-471">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="voe-V2-V0w"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="E5Y-8V-buv"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kFZ-hZ-gDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="911" y="117"/>
+        </scene>
+        <!--Repository View Controller-->
+        <scene sceneID="mcc-Q1-7ew">
+            <objects>
+                <viewController storyboardIdentifier="RepositoryViewController" id="aRv-RS-g50" customClass="RepositoryViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aUb-Fr-3cf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uEP-FT-bA6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bvj-o8-Z3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="117"/>
         </scene>
     </scenes>
 </document>

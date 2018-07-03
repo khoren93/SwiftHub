@@ -28,7 +28,7 @@ class ViewController: UIViewController, Navigatable {
     }
 
     var emptyDataSetTitle = "No Data"
-    var emptyDataSetImage = UIImage(color: .clear, size: CGSize(width: 20, height: 20))
+    var emptyDataSetImage = UIImage(color: .clear, size: CGSize(width: 0, height: 0))
 
     lazy var refreshControl: UIRefreshControl = {
         let view = UIRefreshControl()
@@ -219,10 +219,6 @@ extension ViewController: DZNEmptyDataSetSource {
 
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return .white
-    }
-
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return 20
     }
 }
 

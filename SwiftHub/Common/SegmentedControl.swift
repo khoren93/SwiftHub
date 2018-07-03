@@ -28,7 +28,7 @@ class SegmentedControl: UISegmentedControl {
     func makeUI() {
         layer.masksToBounds = true
         cornerRadius = 0
-        tintColor = UIColor.primary()
+        tintColor = .white
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.segmentedControlHeight)
         }

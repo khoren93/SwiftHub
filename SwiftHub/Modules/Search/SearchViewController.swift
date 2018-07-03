@@ -32,10 +32,7 @@ class SearchViewController: TableViewController {
     lazy var segmentedControl: SegmentedControl = {
         let items = [SearchSegments.repositories.title, SearchSegments.users.title]
         let view = SegmentedControl(items: items)
-        view.tintColor = .white
         view.selectedSegmentIndex = 0
-        view.cornerRadius = 0
-        view.layer.masksToBounds = false
         return view
     }()
 
@@ -74,7 +71,7 @@ class SearchViewController: TableViewController {
                                           selection: tableView.rx.modelSelected(SearchSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        output.fetching.asObservable().bind(to: refreshControl.rx.isRefreshing).disposed(by: rx.disposeBag)
+        output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
@@ -96,7 +93,12 @@ class SearchViewController: TableViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { (error) in
+        output.repositorySelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+        }).disposed(by: rx.disposeBag)
+
+        output.error.drive(onNext: { [weak self] (error) in
+            self?.showAlert(title: "Error", message: error.localizedDescription)
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }

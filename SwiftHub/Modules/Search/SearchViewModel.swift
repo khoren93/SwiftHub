@@ -24,15 +24,9 @@ class SearchViewModel: ViewModel, ViewModelType {
         let fetching: Driver<Bool>
         let items: BehaviorRelay<[SearchSection]>
         let textDidBeginEditing: Driver<Void>
-        let repositorySelected: Driver<Void>
+        let repositorySelected: Driver<RepositoryViewModel>
         let userSelected: Driver<Void>
         let error: Driver<Error>
-    }
-
-    private let provider: SwiftHubAPI
-
-    init(provider: SwiftHubAPI) {
-        self.provider = provider
     }
 
     func transform(input: Input) -> Output {
@@ -101,7 +95,11 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let textDidBeginEditing = input.textDidBeginEditing
 
-        let repositoryDetails = repositorySelected.mapToVoid().asDriverOnErrorJustComplete()
+        let repositoryDetails = repositorySelected.map({ (repository) -> RepositoryViewModel in
+            let viewModel = RepositoryViewModel(repository: repository, provider: self.provider)
+            return viewModel
+        }).asDriverOnErrorJustComplete()
+
         let userDetails = userSelected.mapToVoid().asDriverOnErrorJustComplete()
 
         return Output(fetching: fetching,

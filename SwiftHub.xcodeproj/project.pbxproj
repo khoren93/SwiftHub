@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07DFF6D320E90502004DAA68 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D220E90502004DAA68 /* Repository.json */; };
+		07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D420E90574004DAA68 /* UserSearch.json */; };
+		07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D620E90584004DAA68 /* RepositorySearch.json */; };
+		07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */; };
+		07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */; };
 		07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336D1FFFCB8B00D53888 /* Application.swift */; };
 		07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336F1FFFCBF600D53888 /* Navigator.swift */; };
 		07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */; };
@@ -44,7 +49,6 @@
 		A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8CF20E7C05C00F6F2BF /* Kingfisher+Rx.swift */; };
 		A09DE8D620E7C2C400F6F2BF /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8D320E7C2C400F6F2BF /* ErrorTracker.swift */; };
 		A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8D520E7C2C400F6F2BF /* ActivityIndicator.swift */; };
-		A09DE8D920E7C5CB00F6F2BF /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09DE8D820E7C5CB00F6F2BF /* Search.storyboard */; };
 		A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */; };
 		A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */; };
 		A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */; };
@@ -99,6 +103,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07DFF6D220E90502004DAA68 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
+		07DFF6D420E90574004DAA68 /* UserSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSearch.json; sourceTree = "<group>"; };
+		07DFF6D620E90584004DAA68 /* RepositorySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositorySearch.json; sourceTree = "<group>"; };
+		07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
+		07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
 		07FC336D1FFFCB8B00D53888 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		07FC336F1FFFCBF600D53888 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
@@ -147,7 +156,6 @@
 		A09DE8CF20E7C05C00F6F2BF /* Kingfisher+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kingfisher+Rx.swift"; sourceTree = "<group>"; };
 		A09DE8D320E7C2C400F6F2BF /* ErrorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		A09DE8D520E7C2C400F6F2BF /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		A09DE8D820E7C5CB00F6F2BF /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
@@ -213,6 +221,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07DFF6D820E90860004DAA68 /* Repository Details */ = {
+			isa = PBXGroup;
+			children = (
+				07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */,
+				07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */,
+			);
+			path = "Repository Details";
+			sourceTree = "<group>";
+		};
 		07FC336C1FFFCB5400D53888 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,10 +253,11 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
-				A09DE8B820E7B7C600F6F2BF /* Users */,
-				A09DE8B320E7AD0300F6F2BF /* Search */,
 				07FC33751FFFD47600D53888 /* Main */,
+				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
+				07DFF6D820E90860004DAA68 /* Repository Details */,
+				A09DE8B320E7AD0300F6F2BF /* Search */,
+				A09DE8B820E7B7C600F6F2BF /* Users */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -345,7 +363,10 @@
 		A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				07DFF6D220E90502004DAA68 /* Repository.json */,
+				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
 				A09DE8AA20E7A98F00F6F2BF /* UserRepositories.json */,
+				07DFF6D420E90574004DAA68 /* UserSearch.json */,
 			);
 			path = "Stubbed Responses";
 			sourceTree = "<group>";
@@ -353,7 +374,6 @@
 		A09DE8B320E7AD0300F6F2BF /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				A09DE8D820E7C5CB00F6F2BF /* Search.storyboard */,
 				A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */,
 				A09DE8B420E7B56B00F6F2BF /* SearchViewController.swift */,
 				A09DE8B620E7B57A00F6F2BF /* SearchViewModel.swift */,
@@ -676,13 +696,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
+				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
+				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
-				A09DE8D920E7C5CB00F6F2BF /* Search.storyboard in Resources */,
+				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
 				C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */,
 				A094995B1E1D1CB600EFDE29 /* Main.storyboard in Resources */,
@@ -890,6 +912,7 @@
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
+				07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
 				A09DE8A520E7A15A00F6F2BF /* User.swift in Sources */,
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
@@ -920,6 +943,7 @@
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
+				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
 				A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */,
 				A09DE8C120E7B82F00F6F2BF /* RepositoryCellViewModel.swift in Sources */,
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
@@ -1093,7 +1117,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.public.SwiftHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1108,7 +1132,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.public.SwiftHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -17,6 +17,7 @@ enum GithubAPI {
     case searchRepositories(query: String)
     case searchUsers(query: String)
     case userRepositories(username: String)
+    case repository(owner: String, repo: String)
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -30,6 +31,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return "/search/repositories"
         case .searchUsers: return "/search/users"
         case .userRepositories(let username): return "/users/\(username)/repos"
+        case .repository(let owner, let repo): return "/repos/\(owner)/\(repo)"
         }
     }
 
@@ -68,6 +70,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return stubbedResponse("RepositoriesSearch")
         case .searchUsers: return stubbedResponse("UsersSearch")
         case .userRepositories: return stubbedResponse("UserRepositories")
+        case .repository: return stubbedResponse("Repository")
         }
     }
 
@@ -80,9 +83,7 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var addXAuth: Bool {
         switch self {
-        case .searchRepositories, .searchUsers, .userRepositories:
-            return false
-//        default: return true
+        default: return false
         }
     }
 }

@@ -18,6 +18,7 @@ enum ApiError: Error {
 protocol SwiftHubAPI {
     func searchRepositories(query: String) -> Observable<RepositorySearch>
     func searchUsers(query: String) -> Observable<UserSearch>
+    func repository(owner: String, repo: String) -> Observable<Repository>
 }
 
 class Api: SwiftHubAPI {
@@ -30,17 +31,17 @@ extension Api {
         return provider.request(.searchRepositories(query: query))
             .mapObject(RepositorySearch.self)
             .observeOn(MainScheduler.instance)
-            .flatMapLatest({ (response) -> Observable<RepositorySearch> in
-                return Observable.just(response)
-            })
     }
 
     func searchUsers(query: String) -> Observable<UserSearch> {
         return provider.request(.searchUsers(query: query))
             .mapObject(UserSearch.self)
             .observeOn(MainScheduler.instance)
-            .flatMapLatest({ (response) -> Observable<UserSearch> in
-                return Observable.just(response)
-            })
+    }
+
+    func repository(owner: String, repo: String) -> Observable<Repository> {
+        return provider.request(.repository(owner: owner, repo: repo))
+            .mapObject(Repository.self)
+            .observeOn(MainScheduler.instance)
     }
 }

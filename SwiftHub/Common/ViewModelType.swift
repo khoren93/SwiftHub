@@ -17,7 +17,13 @@ protocol ViewModelType {
 
 class ViewModel: NSObject {
 
+    let provider: SwiftHubAPI
+
+    init(provider: SwiftHubAPI) {
+        self.provider = provider
+    }
+
     deinit {
-        logDebug("\(type(of: self)) view model deinit")
+        logDebug("\(type(of: self)): Deinited")
     }
 }

@@ -26,11 +26,17 @@ class Navigator {
         // Home Tab Bar
         case tabs
 
+        // Search
+        case search(viewModel: SearchViewModel)
+
         // Notifications
 
         // Profile
 
         // Settings
+
+        // Repositories
+        case repositoryDetails(viewModel: RepositoryViewModel)
 
         // Open URL
         case webPage(URL)
@@ -49,6 +55,16 @@ class Navigator {
         switch segue {
         case .tabs:
             let vc = R.storyboard.main.homeTabBarController()!
+            return vc
+
+        case .search(let viewModel):
+            let vc = R.storyboard.main.searchViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .repositoryDetails(let viewModel):
+            let vc = R.storyboard.main.repositoryViewController()!
+            vc.viewModel = viewModel
             return vc
 
         case .webPage(let url):

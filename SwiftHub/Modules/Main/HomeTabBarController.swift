@@ -16,7 +16,7 @@ enum HomeTabBarItem: Int {
     var controller: UINavigationController {
         switch self {
         case .search:
-            let vc = R.storyboard.search.searchViewController()!
+            let vc = R.storyboard.main.searchViewController()!
             vc.viewModel = SearchViewModel(provider: provider)
             return NavigationController(rootViewController: vc)
         case .events:
@@ -96,7 +96,6 @@ class HomeTabBarController: UITabBarController {
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor.primary()
         tabBar.tintColor = UIColor.secondary()
-//        tabBar.layer.masksToBounds = true
 
         if #available(iOS 10.0, *) {
             tabBar.unselectedItemTintColor = UIColor.flatWhite
