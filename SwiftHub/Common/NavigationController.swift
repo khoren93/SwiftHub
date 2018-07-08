@@ -20,6 +20,7 @@ class NavigationController: UINavigationController {
 
         navigationBar.isTranslucent = false
         navigationBar.barStyle = .blackTranslucent
+        navigationBar.tintColor = .secondary()
         let titleTextAttributes = [NSAttributedStringKey.font: Configs.App.NavigationTitleFont,
                                    NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationBar.titleTextAttributes = titleTextAttributes

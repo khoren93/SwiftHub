@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import SafariServices
 import Hero
+import AcknowList
 
 protocol Navigatable {
     var navigator: Navigator! { get set }
@@ -26,6 +27,7 @@ class Navigator {
         case search(viewModel: SearchViewModel)
         case userDetails(viewModel: UserViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
+        case acknowledgements
         case webPage(URL)
         case alert(title: String, description: String, image: UIImage?, imageID: String?, actions: [AlertAction])
     }
@@ -61,9 +63,13 @@ class Navigator {
             vc.viewModel = viewModel
             return vc
 
+        case .acknowledgements:
+            let vc = AcknowListViewController()
+            return vc
+
         case .webPage(let url):
             let vc = SFSafariViewController(url: url)
-            vc.hidesBottomBarWhenPushed = true
+//            vc.hidesBottomBarWhenPushed = true
             return vc
 
         case .alert(let title, let description, let image, let imageID, let actions):

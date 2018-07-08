@@ -52,21 +52,20 @@ class SettingsViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (viewModel) in
                 self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
                 switch viewModel.type {
-                case .acknowledgements: break
-//                    if let viewModel = viewModel.destinationViewModel as? ContactsViewModel {
-//                        self?.navigator.show(segue: .contacts(viewModel: viewModel), sender: self)
-//                    }
-                case .removeCache: self?.clearCacheAction()
+                case .acknowledgements:
+                    self?.navigator.show(segue: .acknowledgements, sender: self, transition: .customModal(type: .zoom))
+                case .removeCache:
+                    self?.clearCacheAction()
                 }
         }).disposed(by: rx.disposeBag)
     }
 
     func clearCacheAction() {
-        LibsManager.shared.removeKingfisherCache {
+        LibsManager.shared.removeKingfisherCache { [weak self] in
             let alertController = UIAlertController(title: "Cache Successfully Cleared", message: nil, preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "Ok", style: .default) { (result: UIAlertAction) in }
             alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            self?.present(alertController, animated: true, completion: nil)
         }
     }
 }

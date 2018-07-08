@@ -18,6 +18,7 @@
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
+		075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */; };
 		07DFF6D320E90502004DAA68 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D220E90502004DAA68 /* Repository.json */; };
 		07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D420E90574004DAA68 /* UserSearch.json */; };
 		07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D620E90584004DAA68 /* RepositorySearch.json */; };
@@ -126,6 +127,7 @@
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SwiftHub-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		07DFF6D220E90502004DAA68 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		07DFF6D420E90574004DAA68 /* UserSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSearch.json; sourceTree = "<group>"; };
 		07DFF6D620E90584004DAA68 /* RepositorySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositorySearch.json; sourceTree = "<group>"; };
@@ -324,9 +326,10 @@
 		07FC33781FFFE2BD00D53888 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				C762C66E1E1D58B200C09EBD /* Configs.swift */,
-				07FC33801FFFE52A00D53888 /* .swiftlint.yml */,
 				07FC33821FFFE53800D53888 /* .gitignore */,
+				07FC33801FFFE52A00D53888 /* .swiftlint.yml */,
+				C762C66E1E1D58B200C09EBD /* Configs.swift */,
+				075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */,
 				07FC33841FFFE54800D53888 /* README.md */,
 			);
 			path = Configs;
@@ -747,6 +750,7 @@
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
+				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
@@ -782,6 +786,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AcknowList/AcknowList.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
@@ -817,6 +822,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AcknowList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",

@@ -51,6 +51,7 @@ target 'SwiftHub' do
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
   pod 'RAMAnimatedTabBarController', '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
+  pod 'AcknowList'
 
   # Keyboard
   pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
