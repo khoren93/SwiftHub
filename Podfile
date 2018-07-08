@@ -69,7 +69,7 @@ target 'SwiftHub' do
   pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
 
   # Analytics
-  pod 'Umbrella/Mixpanel'
+  pod 'Umbrella/Mixpanel', '~> 0.7'  # https://github.com/devxoul/Umbrella
   #pod 'Mixpanel-swift'  # https://github.com/mixpanel/mixpanel-swift
 
   target 'SwiftHubTests' do

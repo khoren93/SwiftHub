@@ -30,7 +30,8 @@ enum HomeTabBarItem: Int {
             let vc = ViewController()
             return NavigationController(rootViewController: vc)
         case .settings:
-            let vc = ViewController()
+            let vc = R.storyboard.main.settingsViewController()!
+            vc.viewModel = SettingsViewModel(provider: provider)
             return NavigationController(rootViewController: vc)
         }
     }

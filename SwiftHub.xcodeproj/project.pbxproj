@@ -11,6 +11,13 @@
 		070FF83E20F221AB0070F5E8 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF83D20F221AB0070F5E8 /* UserViewModel.swift */; };
 		070FF84020F2250F0070F5E8 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 070FF83F20F2250F0070F5E8 /* User.json */; };
 		070FF84220F225200070F5E8 /* Organization.json in Resources */ = {isa = PBXBuildFile; fileRef = 070FF84120F225200070F5E8 /* Organization.json */; };
+		070FF84520F284D40070F5E8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84420F284D40070F5E8 /* SettingsViewController.swift */; };
+		070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84620F284F00070F5E8 /* SettingsViewModel.swift */; };
+		070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84820F285180070F5E8 /* SettingCell.swift */; };
+		070FF84B20F285180070F5E8 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070FF84920F285180070F5E8 /* SettingCell.xib */; };
+		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
+		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
+		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
 		07DFF6D320E90502004DAA68 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D220E90502004DAA68 /* Repository.json */; };
 		07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D420E90574004DAA68 /* UserSearch.json */; };
 		07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D620E90584004DAA68 /* RepositorySearch.json */; };
@@ -112,6 +119,13 @@
 		070FF83D20F221AB0070F5E8 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		070FF83F20F2250F0070F5E8 /* User.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		070FF84120F225200070F5E8 /* Organization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Organization.json; sourceTree = "<group>"; };
+		070FF84420F284D40070F5E8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		070FF84620F284F00070F5E8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		070FF84820F285180070F5E8 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		070FF84920F285180070F5E8 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
+		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		07DFF6D220E90502004DAA68 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		07DFF6D420E90574004DAA68 /* UserSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSearch.json; sourceTree = "<group>"; };
 		07DFF6D620E90584004DAA68 /* RepositorySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositorySearch.json; sourceTree = "<group>"; };
@@ -240,6 +254,19 @@
 			path = "User Details";
 			sourceTree = "<group>";
 		};
+		070FF84320F2846F0070F5E8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				070FF84820F285180070F5E8 /* SettingCell.swift */,
+				070FF84920F285180070F5E8 /* SettingCell.xib */,
+				070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */,
+				070FF84E20F285560070F5E8 /* SettingModel.swift */,
+				070FF84420F284D40070F5E8 /* SettingsViewController.swift */,
+				070FF84620F284F00070F5E8 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		07DFF6D820E90860004DAA68 /* Repository Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +292,7 @@
 				A09DE8A220E7A0C500F6F2BF /* License.swift */,
 				A09DE8A020E79EEC00F6F2BF /* Repository.swift */,
 				A09DE8A420E7A15A00F6F2BF /* User.swift */,
+				070FF85020F290100070F5E8 /* SectionType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -276,6 +304,7 @@
 				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
 				07DFF6D820E90860004DAA68 /* Repository Details */,
 				A09DE8B320E7AD0300F6F2BF /* Search */,
+				070FF84320F2846F0070F5E8 /* Settings */,
 				070FF83A20F2204A0070F5E8 /* User Details */,
 				A09DE8B820E7B7C600F6F2BF /* Users */,
 			);
@@ -724,6 +753,7 @@
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
 				C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */,
 				A094995B1E1D1CB600EFDE29 /* Main.storyboard in Resources */,
+				070FF84B20F285180070F5E8 /* SettingCell.xib in Resources */,
 				070FF84220F225200070F5E8 /* Organization.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -934,6 +964,7 @@
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
+				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
 				07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
@@ -942,8 +973,10 @@
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
 				C762C6681E1D559000C09EBD /* TableView.swift in Sources */,
+				070FF84520F284D40070F5E8 /* SettingsViewController.swift in Sources */,
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				A09DE8C320E7B83F00F6F2BF /* UserCellViewModel.swift in Sources */,
+				070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
 				A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */,
@@ -958,13 +991,16 @@
 				A09DE8B720E7B57A00F6F2BF /* SearchViewModel.swift in Sources */,
 				A09DE8A120E79EEC00F6F2BF /* Repository.swift in Sources */,
 				07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */,
+				070FF85120F290100070F5E8 /* SectionType.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
+				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
+				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
