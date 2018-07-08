@@ -28,7 +28,7 @@ class ViewController: UIViewController, Navigatable {
     }
 
     var emptyDataSetTitle = "No Data"
-    var emptyDataSetImage = UIImage(color: .clear, size: CGSize(width: 0, height: 0))
+    var emptyDataSetImage = UIImage()
 
     lazy var refreshControl: UIRefreshControl = {
         let view = UIRefreshControl()
@@ -106,12 +106,12 @@ class ViewController: UIViewController, Navigatable {
 
         // Two finger swipe gesture for opening Flex
         let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
-        twoSwipeGesture.numberOfTouchesRequired = 2
+        twoSwipeGesture.numberOfTouchesRequired = 1
         self.view.addGestureRecognizer(twoSwipeGesture)
 
         // Three finger swipe gesture for opening Flex and Hero debug
         let threeSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleThreeFingerSwipe(swipeRecognizer:)))
-        threeSwipeGesture.numberOfTouchesRequired = 3
+        threeSwipeGesture.numberOfTouchesRequired = 2
         self.view.addGestureRecognizer(threeSwipeGesture)
     }
 

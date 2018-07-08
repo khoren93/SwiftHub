@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RAMAnimatedTabBarController
 
 let provider = Api.shared
 
@@ -36,40 +37,43 @@ enum HomeTabBarItem: Int {
 
     var image: UIImage? {
         switch self {
-        case .search: return R.image.icon_favorite()
+        case .search: return R.image.icon_tabbar_search()
         case .events: return R.image.icon_favorite()
         case .profile: return R.image.icon_favorite()
         case .notifications: return R.image.icon_favorite()
-        case .settings: return R.image.icon_favorite()
+        case .settings: return R.image.icon_tabbar_settings()
         }
-    }
-
-    var imageInsets: UIEdgeInsets {
-        let inset: CGFloat = 0
-        return UIEdgeInsets(top: inset, left: 0, bottom: -inset, right: 0)
     }
 
     var title: String {
         switch self {
         case .search: return "Search"
-        case .events: return "Events"
+        case .events: return "News"
         case .profile: return "Profile"
-        case .notifications: return "Notifications"
+        case .notifications: return "Activities"
         case .settings: return "Settings"
         }
     }
 
+    var animation: RAMItemAnimation {
+        let animation = RAMBounceAnimation()
+        animation.iconSelectedColor = .secondary()
+        return animation
+    }
+
     func getController() -> UINavigationController {
         let vc = self.controller
-        vc.tabBarItem = UITabBarItem(title: self.title,
-                                     image: self.image,
-                                     tag: self.rawValue)
-        vc.tabBarItem.imageInsets = self.imageInsets
+        let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
+        item.animation = animation
+        item.iconColor = .white
+        item.textColor = .white
+        item.yOffSet = -5
+        vc.tabBarItem = item
         return vc
     }
 }
 
-class HomeTabBarController: UITabBarController {
+class HomeTabBarController: RAMAnimatedTabBarController {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -95,12 +99,5 @@ class HomeTabBarController: UITabBarController {
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor.primary()
-        tabBar.tintColor = UIColor.secondary()
-
-        if #available(iOS 10.0, *) {
-            tabBar.unselectedItemTintColor = UIColor.flatWhite
-        } else {
-            // Fallback on earlier versions
-        }
     }
 }

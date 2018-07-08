@@ -27,7 +27,7 @@ target 'SwiftHub' do
 
   # Date
   pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-  pod 'SwiftDate', '~> 4.0'  # https://github.com/malcommac/SwiftDate
+  pod 'SwiftDate', '~> 5.0'  # https://github.com/malcommac/SwiftDate
 
   # Phone
   #pod 'PhoneNumberKit', '~> 2.1'  # https://github.com/marmelroy/PhoneNumberKit
@@ -45,10 +45,12 @@ target 'SwiftHub' do
 
   # UI
   pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
+  pod 'PMAlertController', '~> 3.0'  # https://github.com/pmusolino/PMAlertController
   pod 'ImageSlideshow/Kingfisher', '~> 1.0'  # https://github.com/zvonicek/ImageSlideshow
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
+  pod 'RAMAnimatedTabBarController', '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
 
   # Keyboard
   pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager

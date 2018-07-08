@@ -1,8 +1,8 @@
 //
-//  RepositoryViewModel.swift
+//  UserViewModel.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 7/1/18.
+//  Created by Sygnoos9 on 7/8/18.
 //  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class RepositoryViewModel: ViewModel, ViewModelType {
+class UserViewModel: ViewModel, ViewModelType {
 
     struct Input {
         let detailsTrigger: Observable<Void>
@@ -27,10 +27,10 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let imageSelected: Driver<Void>
     }
 
-    let repository: BehaviorRelay<Repository>
+    let user: BehaviorRelay<User>
 
-    init(repository: Repository, provider: SwiftHubAPI) {
-        self.repository = BehaviorRelay(value: repository)
+    init(user: User, provider: SwiftHubAPI) {
+        self.user = BehaviorRelay(value: user)
         super.init(provider: provider)
     }
 
@@ -41,17 +41,22 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let fetching = activityIndicator.asDriver()
         let errors = errorTracker.asDriver()
 
-        input.detailsTrigger.flatMapLatest { () -> Observable<Repository> in
-            let owner = self.repository.value.owner?.login ?? ""
-            let repo = self.repository.value.name ?? ""
-            return self.provider.repository(owner: owner, repo: repo)
+        input.detailsTrigger.flatMapLatest { () -> Observable<User> in
+            let user = self.user.value
+            let owner = user.login ?? ""
+            let request: Observable<User>
+            switch user.type {
+            case .user: request = self.provider.user(owner: owner)
+            case .organization: request = self.provider.organization(owner: owner)
+            }
+            return request
                 .trackActivity(activityIndicator)
                 .trackError(errorTracker)
-        }.bind(to: repository).disposed(by: rx.disposeBag)
+        }.bind(to: user).disposed(by: rx.disposeBag)
 
-        let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
-        let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
-        let imageUrl = repository.map { $0.owner?.avatarUrl?.url }.asDriverOnErrorJustComplete()
+        let name = user.map { $0.login ?? "" }.asDriverOnErrorJustComplete()
+        let description = user.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
+        let imageUrl = user.map { $0.avatarUrl?.url }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
 
         return Output(fetching: fetching,

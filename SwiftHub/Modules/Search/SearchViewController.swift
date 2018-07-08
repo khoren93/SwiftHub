@@ -49,6 +49,8 @@ class SearchViewController: TableViewController {
 
         stackView.insertArrangedSubview(searchBar, at: 0)
 
+        searchBar.hero.id = "TopHeaderId"
+
         searchBar.rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in
             self?.searchBar.showsScopeBar = true
         }).disposed(by: rx.disposeBag)
@@ -95,6 +97,10 @@ class SearchViewController: TableViewController {
 
         output.repositorySelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+        }).disposed(by: rx.disposeBag)
+
+        output.userSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { [weak self] (error) in

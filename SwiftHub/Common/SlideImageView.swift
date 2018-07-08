@@ -28,6 +28,7 @@ class SlideImageView: ImageSlideshow {
         borderWidth = 2
         borderColor = .white
         slideshowInterval = 3
+        hero.modifiers = [.arc]
         activityIndicator = DefaultActivityIndicator(style: .white, color: UIColor.secondary())
     }
 

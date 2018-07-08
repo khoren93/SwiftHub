@@ -25,7 +25,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let items: BehaviorRelay<[SearchSection]>
         let textDidBeginEditing: Driver<Void>
         let repositorySelected: Driver<RepositoryViewModel>
-        let userSelected: Driver<Void>
+        let userSelected: Driver<UserViewModel>
         let error: Driver<Error>
     }
 
@@ -44,7 +44,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
 
-        let refresh = Observable.of(input.keywordTrigger.throttle(0.5).distinctUntilChanged().asObservable()).merge()
+        let refresh = Observable.of(input.keywordTrigger.throttle(1.5).distinctUntilChanged().asObservable()).merge()
 
         refresh.flatMapLatest({ (keyword) -> Observable<[Repository]> in
             return self.provider.searchRepositories(query: keyword)
@@ -100,7 +100,10 @@ class SearchViewModel: ViewModel, ViewModelType {
             return viewModel
         }).asDriverOnErrorJustComplete()
 
-        let userDetails = userSelected.mapToVoid().asDriverOnErrorJustComplete()
+        let userDetails = userSelected.map({ (user) -> UserViewModel in
+            let viewModel = UserViewModel(user: user, provider: self.provider)
+            return viewModel
+        }).asDriverOnErrorJustComplete()
 
         return Output(fetching: fetching,
                       items: elements,

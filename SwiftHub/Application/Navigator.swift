@@ -22,24 +22,12 @@ class Navigator {
 
     // MARK: - segues list, all app scenes
     enum Scene {
-
-        // Home Tab Bar
         case tabs
-
-        // Search
         case search(viewModel: SearchViewModel)
-
-        // Notifications
-
-        // Profile
-
-        // Settings
-
-        // Repositories
+        case userDetails(viewModel: UserViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
-
-        // Open URL
         case webPage(URL)
+        case alert(title: String, description: String, image: UIImage?, imageID: String?, actions: [AlertAction])
     }
 
     enum Transition {
@@ -47,6 +35,7 @@ class Navigator {
         case navigation(type: HeroDefaultAnimationType)
         case customModal(type: HeroDefaultAnimationType)
         case modal
+        case alert
         case custom
     }
 
@@ -62,6 +51,11 @@ class Navigator {
             vc.viewModel = viewModel
             return vc
 
+        case .userDetails(let viewModel):
+            let vc = R.storyboard.main.userViewController()!
+            vc.viewModel = viewModel
+            return vc
+
         case .repositoryDetails(let viewModel):
             let vc = R.storyboard.main.repositoryViewController()!
             vc.viewModel = viewModel
@@ -71,6 +65,17 @@ class Navigator {
             let vc = SFSafariViewController(url: url)
             vc.hidesBottomBarWhenPushed = true
             return vc
+
+        case .alert(let title, let description, let image, let imageID, let actions):
+            let alert = AlertController(title: title, description: description, image: image, style: AlertControllerStyle.alert)
+            alert.hero.isEnabled = true
+            alert.alertImage.hero.id = imageID
+            alert.alertImage.hero.modifiers = [.arc]
+            alert.alertImage.contentMode = .scaleAspectFill
+            actions.forEach { (action) in
+                alert.addAction(action)
+            }
+            return alert
         }
     }
 
@@ -135,6 +140,10 @@ class Navigator {
             DispatchQueue.main.async {
                 let nav = NavigationController(rootViewController: target)
                 sender.present(nav, animated: true, completion: nil)
+            }
+        case .alert:
+            DispatchQueue.main.async {
+                sender.present(target, animated: true, completion: nil)
             }
         default: break
         }

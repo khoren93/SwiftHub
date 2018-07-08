@@ -35,7 +35,7 @@ struct User: Mappable {
     var publicGists: Int?
     var publicRepos: Int?
     var reposUrl: String?
-    var type: UserType?
+    var type = UserType.user
     var updatedAt: String?
     var url: String?
 

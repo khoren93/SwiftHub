@@ -19,6 +19,8 @@ protocol SwiftHubAPI {
     func searchRepositories(query: String) -> Observable<RepositorySearch>
     func searchUsers(query: String) -> Observable<UserSearch>
     func repository(owner: String, repo: String) -> Observable<Repository>
+    func user(owner: String) -> Observable<User>
+    func organization(owner: String) -> Observable<User>
 }
 
 class Api: SwiftHubAPI {
@@ -42,6 +44,18 @@ extension Api {
     func repository(owner: String, repo: String) -> Observable<Repository> {
         return provider.request(.repository(owner: owner, repo: repo))
             .mapObject(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func user(owner: String) -> Observable<User> {
+        return provider.request(.user(owner: owner))
+            .mapObject(User.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func organization(owner: String) -> Observable<User> {
+        return provider.request(.organization(owner: owner))
+            .mapObject(User.self)
             .observeOn(MainScheduler.instance)
     }
 }

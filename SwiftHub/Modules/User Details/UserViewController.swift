@@ -1,8 +1,8 @@
 //
-//  RepositoryViewController.swift
+//  UserViewController.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 7/1/18.
+//  Created by Sygnoos9 on 7/8/18.
 //  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
@@ -11,9 +11,9 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class RepositoryViewController: TableViewController {
+class UserViewController: TableViewController {
 
-    var viewModel: RepositoryViewModel!
+    var viewModel: UserViewModel!
 
     lazy var repoTitleLabel: Label = {
         let view = Label(style: .style123)
@@ -71,8 +71,8 @@ class RepositoryViewController: TableViewController {
 
         let pullToRefresh = Observable.of(Observable.just(()),
                                           refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
-        let input = RepositoryViewModel.Input(detailsTrigger: pullToRefresh,
-                                              imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid())
+        let input = UserViewModel.Input(detailsTrigger: pullToRefresh,
+                                        imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)

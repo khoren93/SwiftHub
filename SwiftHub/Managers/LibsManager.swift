@@ -17,8 +17,16 @@ import Fabric
 import Crashlytics
 import NVActivityIndicatorView
 import NSObject_Rx
+import RxOptional
+import RxGesture
 import SwifterSwift
 import SwiftDate
+import Hero
+import PMAlertController
+
+typealias AlertController = PMAlertController
+typealias AlertAction = PMAlertAction
+typealias AlertControllerStyle = PMAlertControllerStyle
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager {
