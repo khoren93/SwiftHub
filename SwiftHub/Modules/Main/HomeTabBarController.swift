@@ -39,9 +39,9 @@ enum HomeTabBarItem: Int {
     var image: UIImage? {
         switch self {
         case .search: return R.image.icon_tabbar_search()
-        case .events: return R.image.icon_favorite()
-        case .profile: return R.image.icon_favorite()
-        case .notifications: return R.image.icon_favorite()
+        case .events: return R.image.icon_tabbar_news()
+        case .profile: return R.image.icon_tabbar_profile()
+        case .notifications: return R.image.icon_tabbar_activity()
         case .settings: return R.image.icon_tabbar_settings()
         }
     }
