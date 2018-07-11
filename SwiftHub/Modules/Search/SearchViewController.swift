@@ -51,14 +51,6 @@ class SearchViewController: TableViewController {
 
         searchBar.hero.id = "TopHeaderId"
 
-        searchBar.rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in
-            self?.searchBar.showsScopeBar = true
-        }).disposed(by: rx.disposeBag)
-
-        searchBar.rx.textDidEndEditing.asObservable().subscribe(onNext: { [weak self] () in
-            self?.searchBar.showsScopeBar = false
-        }).disposed(by: rx.disposeBag)
-
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
     }

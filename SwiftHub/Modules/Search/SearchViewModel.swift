@@ -44,7 +44,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
 
-        let refresh = Observable.of(input.keywordTrigger.throttle(1.5).distinctUntilChanged().asObservable()).merge()
+        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(1.5).distinctUntilChanged().asObservable()).merge()
 
         refresh.flatMapLatest({ (keyword) -> Observable<[Repository]> in
             return self.provider.searchRepositories(query: keyword)

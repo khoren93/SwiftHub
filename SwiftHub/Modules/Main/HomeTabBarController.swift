@@ -12,13 +12,13 @@ import RAMAnimatedTabBarController
 let provider = Api.shared
 
 enum HomeTabBarItem: Int {
-    case search, events, profile, notifications, settings
+    case search, events, profile, notifications, settings, login
 
-    var controller: UINavigationController {
+    func controller(with viewModel: ViewModel) -> UINavigationController {
         switch self {
         case .search:
             let vc = R.storyboard.main.searchViewController()!
-            vc.viewModel = SearchViewModel(provider: provider)
+            vc.viewModel = (viewModel as? SearchViewModel)!
             return NavigationController(rootViewController: vc)
         case .events:
             let vc = ViewController()
@@ -31,7 +31,10 @@ enum HomeTabBarItem: Int {
             return NavigationController(rootViewController: vc)
         case .settings:
             let vc = R.storyboard.main.settingsViewController()!
-            vc.viewModel = SettingsViewModel(provider: provider)
+            vc.viewModel = (viewModel as? SettingsViewModel)!
+            return NavigationController(rootViewController: vc)
+        case .login:
+            let vc = ViewController()
             return NavigationController(rootViewController: vc)
         }
     }
@@ -43,6 +46,7 @@ enum HomeTabBarItem: Int {
         case .profile: return R.image.icon_tabbar_profile()
         case .notifications: return R.image.icon_tabbar_activity()
         case .settings: return R.image.icon_tabbar_settings()
+        case .login: return R.image.icon_tabbar_login()
         }
     }
 
@@ -53,6 +57,7 @@ enum HomeTabBarItem: Int {
         case .profile: return "Profile"
         case .notifications: return "Activities"
         case .settings: return "Settings"
+        case .login: return "Login"
         }
     }
 
@@ -62,8 +67,8 @@ enum HomeTabBarItem: Int {
         return animation
     }
 
-    func getController() -> UINavigationController {
-        let vc = self.controller
+    func getController(with viewModel: ViewModel) -> UINavigationController {
+        let vc = controller(with: viewModel)
         let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
         item.animation = animation
         item.iconColor = .white
@@ -76,22 +81,15 @@ enum HomeTabBarItem: Int {
 
 class HomeTabBarController: RAMAnimatedTabBarController {
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        // Set tab bar controllers
-        let viewControllers: [UIViewController] = [HomeTabBarItem.search.getController(),
-                                                   HomeTabBarItem.events.getController(),
-                                                   HomeTabBarItem.profile.getController(),
-                                                   HomeTabBarItem.notifications.getController(),
-                                                   HomeTabBarItem.settings.getController()]
-        setViewControllers(viewControllers, animated: true)
-        makeUI()
-    }
+    var viewModel: HomeTabBarViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        bindViewModel()
+        makeUI()
     }
 
     func makeUI() {
@@ -100,5 +98,17 @@ class HomeTabBarController: RAMAnimatedTabBarController {
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
         tabBar.barTintColor = UIColor.primary()
+    }
+
+    func bindViewModel() {
+        let input = HomeTabBarViewModel.Input()
+        let output = viewModel.transform(input: input)
+
+        output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
+            if let strongSelf = self {
+                let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
+                strongSelf.setViewControllers(controllers, animated: true)
+            }
+        }).disposed(by: rx.disposeBag)
     }
 }

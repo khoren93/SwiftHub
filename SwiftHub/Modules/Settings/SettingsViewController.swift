@@ -16,7 +16,7 @@ private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
 class SettingsViewController: TableViewController {
 
     var viewModel: SettingsViewModel!
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

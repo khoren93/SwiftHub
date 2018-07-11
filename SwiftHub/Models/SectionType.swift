@@ -16,7 +16,7 @@ struct SectionType<T> {
 
 extension SectionType: SectionModelType {
     typealias Item = T
-    
+
     init(original: SectionType, items: [T]) {
         self = original
         self.items = items

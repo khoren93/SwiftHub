@@ -24,6 +24,7 @@ final class Application: NSObject {
     }
 
     func presentHome(in window: UIWindow) {
-        navigator.show(segue: .tabs, sender: nil, transition: .root(in: window))
+        let viewModel = HomeTabBarViewModel(provider: provider)
+        navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }
 }

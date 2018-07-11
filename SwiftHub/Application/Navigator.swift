@@ -23,7 +23,7 @@ class Navigator {
 
     // MARK: - segues list, all app scenes
     enum Scene {
-        case tabs
+        case tabs(viewModel: HomeTabBarViewModel)
         case search(viewModel: SearchViewModel)
         case userDetails(viewModel: UserViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
@@ -44,8 +44,9 @@ class Navigator {
     // MARK: - get a single VC
     func get(segue: Scene) -> UIViewController {
         switch segue {
-        case .tabs:
+        case .tabs(let viewModel):
             let vc = R.storyboard.main.homeTabBarController()!
+            vc.viewModel = viewModel
             return vc
 
         case .search(let viewModel):

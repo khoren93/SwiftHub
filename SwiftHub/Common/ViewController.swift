@@ -27,8 +27,8 @@ class ViewController: UIViewController, Navigatable {
         }
     }
 
-    var emptyDataSetTitle = "No Data"
-    var emptyDataSetImage = UIImage()
+    var emptyDataSetTitle = "No Results"
+    var emptyDataSetImage = R.image.image_no_result()
 
     lazy var refreshControl: UIRefreshControl = {
         let view = UIRefreshControl()
