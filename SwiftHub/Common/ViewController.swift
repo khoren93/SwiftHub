@@ -11,9 +11,10 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 import DZNEmptyDataSet
+import NVActivityIndicatorView
 import Hero
 
-class ViewController: UIViewController, Navigatable {
+class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable {
 
     var navigator: Navigator!
 

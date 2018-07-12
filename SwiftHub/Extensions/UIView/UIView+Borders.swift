@@ -12,183 +12,106 @@ import Foundation
 // MARK: - Create your borders and assign them to a property on a view when you can via the create methods when possible. Otherwise you might end up with multiple borders being created.
 extension UIView {
 
-    func defaultSize() -> CGFloat {
-        return 1.0
+    enum BorderSide {
+        case left, top, right, bottom
     }
 
-    func defaultColor() -> UIColor {
+    func defaultBorderColor() -> UIColor {
         return .separator()
     }
 
-    // MARK: - Top Border
-
-    /// Add Top Border with default params
-    ///
-    /// - returns: Border view
-    func addTopBorder() -> UIView {
-        return addTopBorder(height: defaultSize(), color: defaultColor(), left: 0.0, top: 0.0, right: 0.0)
+    func defaultBorderDepth() -> CGFloat {
+        return Configs.BaseDimensions.borderWidth
     }
 
-    /// Add Top Border with height and color
+    /// Add Border for side with default params
     ///
-    /// - parameter height: Border Height
-    /// - parameter color:  Border Color
-    ///
-    /// - returns: Border view
-    func addTopBorder(height: CGFloat, color: UIColor) -> UIView {
-        return addTopBorder(height: height, color: color, left: 0.0, top: 0.0, right: 0.0)
+    /// - Parameter side: Border Side
+    /// - Returns: Border view
+    @discardableResult
+    func addBorder(for side: BorderSide) -> UIView {
+        return addBorder(for: side, color: defaultBorderColor(), depth: defaultBorderDepth())
     }
-
-    /// Add Top Border with height, color and offsets
-    ///
-    /// - parameter height: Border Height
-    /// - parameter color:  Border Color
-    /// - parameter left:   Left Offset
-    /// - parameter top:    Top Offset
-    /// - parameter right:  Right Offset
-    ///
-    /// - returns: Border view
-    func addTopBorder(height: CGFloat, color: UIColor, left: CGFloat, top: CGFloat, right: CGFloat) -> UIView {
-        let border = UIView()
-        border.backgroundColor = color
-        self.addSubview(border)
-
-        border.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(left)
-            make.top.equalToSuperview().inset(top)
-            make.right.equalToSuperview().inset(right)
-            make.height.equalTo(height)
-        }
-
-        return border
-    }
-
-    // MARK: - Bottom Border
 
     /// Add Bottom Border with default params
     ///
-    /// - returns: Border view
-    func addBottomBorder() -> UIView {
-        return addBottomBorder(height: defaultSize(), color: defaultColor(), left: 0.0, bottom: 0.0, right: 0.0)
-    }
-
-    /// Add Bottom Border with height and color
-    ///
-    /// - parameter height: Border Height
-    /// - parameter color:  Border Color
-    ///
-    /// - returns: Border view
-    func addBottomBorder(height: CGFloat, color: UIColor) -> UIView {
-        return addBottomBorder(height: height, color: color, left: 0.0, bottom: 0.0, right: 0.0)
-    }
-
-    /// Add Bottom Border with height, color and offsets
-    ///
-    /// - parameter height: Border Height
-    /// - parameter color:  Border Color
-    /// - parameter left:   Left Offset
-    /// - parameter bottom: Bottom Offset
-    /// - parameter right:  Right Offset
-    ///
-    /// - returns: Border view
-    func addBottomBorder(height: CGFloat, color: UIColor, left: CGFloat, bottom: CGFloat, right: CGFloat) -> UIView {
+    /// - Parameters:
+    ///   - leftInset: left inset
+    ///   - rightInset: right inset
+    /// - Returns: Border view
+    @discardableResult
+    func addBottomBorder(leftInset: CGFloat = 10, rightInset: CGFloat = 0) -> UIView {
         let border = UIView()
-        border.backgroundColor = color
+        border.backgroundColor = defaultBorderColor()
         self.addSubview(border)
-
         border.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(left)
-            make.bottom.equalToSuperview().inset(bottom)
-            make.right.equalToSuperview().inset(right)
-            make.height.equalTo(height)
+            make.left.equalToSuperview().inset(leftInset)
+            make.right.equalToSuperview().inset(rightInset)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(self.defaultBorderDepth())
         }
-
         return border
     }
 
-    // MARK: - Left Border
-
-    /// Add Left Border with default params
+    /// Add Top Border for side with color, depth, length and offsets
     ///
-    /// - returns: Border view
-    func addLeftBorder() -> UIView {
-        return addLeftBorder(width: defaultSize(), color: defaultColor(), left: 0.0, top: 0.0, bottom: 0.0)
-    }
-
-    /// Add Left Border with height and color
-    ///
-    /// - parameter width: Border Width
-    /// - parameter color: Border Color
-    ///
-    /// - returns: Border view
-    func addLeftBorder(width: CGFloat, color: UIColor) -> UIView {
-        return addLeftBorder(width: width, color: color, left: 0.0, top: 0.0, bottom: 0.0)
-    }
-
-    /// Add Left Border with height, color and offsets
-    ///
-    /// - parameter width:  Border Width
-    /// - parameter color:  Border Color
-    /// - parameter left:   Left Offset
-    /// - parameter top:    Top Offset
-    /// - parameter bottom: Bottom Offset
-    ///
-    /// - returns: Border view
-    func addLeftBorder(width: CGFloat, color: UIColor, left: CGFloat, top: CGFloat, bottom: CGFloat) -> UIView {
+    /// - Parameters:
+    ///   - side: Border Side
+    ///   - color: Border Color
+    ///   - depth: Border Depth
+    ///   - length: Border Length
+    ///   - inset: Border Inset
+    ///   - cornersInset: Border Corners Inset
+    /// - Returns: Border view
+    @discardableResult
+    func addBorder(for side: BorderSide, color: UIColor, depth: CGFloat, length: CGFloat = 0.0, inset: CGFloat = 0.0, cornersInset: CGFloat = 0.0) -> UIView {
         let border = UIView()
         border.backgroundColor = color
         self.addSubview(border)
-
         border.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(left)
-            make.top.equalToSuperview().inset(top)
-            make.bottom.equalToSuperview().inset(bottom)
-            make.width.equalTo(width)
+            switch side {
+            case .left:
+                if length != 0.0 {
+                    make.height.equalTo(length)
+                    make.centerY.equalToSuperview()
+                } else {
+                    make.top.equalToSuperview().inset(cornersInset)
+                    make.bottom.equalToSuperview().inset(cornersInset)
+                }
+                make.left.equalToSuperview().inset(inset)
+                make.width.equalTo(depth)
+            case .top:
+                if length != 0.0 {
+                    make.width.equalTo(length)
+                    make.centerX.equalToSuperview()
+                } else {
+                    make.left.equalToSuperview().inset(cornersInset)
+                    make.right.equalToSuperview().inset(cornersInset)
+                }
+                make.top.equalToSuperview().inset(inset)
+                make.height.equalTo(depth)
+            case .right:
+                if length != 0.0 {
+                    make.height.equalTo(length)
+                    make.centerY.equalToSuperview()
+                } else {
+                    make.top.equalToSuperview().inset(cornersInset)
+                    make.bottom.equalToSuperview().inset(cornersInset)
+                }
+                make.right.equalToSuperview().inset(inset)
+                make.width.equalTo(depth)
+            case .bottom:
+                if length != 0.0 {
+                    make.width.equalTo(length)
+                    make.centerX.equalToSuperview()
+                } else {
+                    make.left.equalToSuperview().inset(cornersInset)
+                    make.right.equalToSuperview().inset(cornersInset)
+                }
+                make.bottom.equalToSuperview().inset(inset)
+                make.height.equalTo(depth)
+            }
         }
-
-        return border
-    }
-
-    // MARK: - Right Border
-
-    /// Add Left Border with default params
-    ///
-    /// - returns: Border view
-    func addRightBorder() -> UIView {
-        return addRightBorder(width: defaultSize(), color: defaultColor(), right: 0.0, top: 0.0, bottom: 0.0)
-    }
-
-    /// Add Left Border with height and color
-    ///
-    /// - parameter width: Border Width
-    /// - parameter color: Border Color
-    ///
-    /// - returns: Border view
-    func addRightBorder(width: CGFloat, color: UIColor) -> UIView {
-        return addRightBorder(width: width, color: color, right: 0.0, top: 0.0, bottom: 0.0)
-    }
-
-    /// Add Left Border with height, color and offsets
-    ///
-    /// - parameter width:  Border Width
-    /// - parameter color:  Border Color
-    /// - parameter right:  Right Offset
-    /// - parameter top:    Top Offset
-    /// - parameter bottom: Bottom Offset
-    ///
-    /// - returns: Border view
-    func addRightBorder(width: CGFloat, color: UIColor, right: CGFloat, top: CGFloat, bottom: CGFloat) -> UIView {
-        let border = UIView()
-        border.backgroundColor = color
-        self.addSubview(border)
-
-        border.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().inset(right)
-            make.top.equalToSuperview().inset(top)
-            make.bottom.equalToSuperview().inset(bottom)
-            make.width.equalTo(width)
-        }
-
         return border
     }
 }

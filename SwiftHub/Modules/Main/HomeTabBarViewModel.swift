@@ -9,7 +9,6 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import RxDataSources
 
 class HomeTabBarViewModel: ViewModel, ViewModelType {
 
@@ -19,18 +18,17 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
         let tabBarItems: Driver<[HomeTabBarItem]>
     }
 
+    let loggedIn = BehaviorRelay<Bool>(value: false)
+
     func transform(input: Input) -> Output {
 
-        let triger = Driver.just(())
-
-        let tabBarItems = triger.map { () -> [HomeTabBarItem] in
-            let loggedIn = false
+        let tabBarItems = loggedIn.map { (loggedIn) -> [HomeTabBarItem] in
             if loggedIn {
-                return [.search, .events, .profile, .notifications, .settings]
+                return [.search, .news, .profile, .notifications, .settings]
             } else {
                 return [.search, .login, .settings]
             }
-        }
+        }.asDriver(onErrorJustReturn: [])
 
         return Output(tabBarItems: tabBarItems)
     }
@@ -40,7 +38,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
         case .search:
             let viewModel = SearchViewModel(provider: provider)
             return viewModel
-        case .events:
+        case .news:
             let viewModel = ViewModel(provider: provider)
             return viewModel
         case .profile:
@@ -53,7 +51,8 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let viewModel = SettingsViewModel(provider: provider)
             return viewModel
         case .login:
-            let viewModel = ViewModel(provider: provider)
+            let viewModel = LoginViewModel(provider: provider)
+            viewModel.loginEvent.bind(to: loggedIn).disposed(by: rx.disposeBag)
             return viewModel
         }
     }

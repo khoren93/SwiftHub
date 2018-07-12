@@ -99,5 +99,20 @@
             </objects>
             <point key="canvasLocation" x="3254" y="116"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="Al6-X2-yNX">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="yXx-Mg-HVZ" customClass="LoginViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2np-wk-hvJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ILc-fM-KVb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HwB-Sn-fvj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4020" y="116"/>
+        </scene>
     </scenes>
 </document>

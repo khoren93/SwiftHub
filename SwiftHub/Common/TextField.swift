@@ -10,4 +10,28 @@ import UIKit
 
 class TextField: UITextField {
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        makeUI()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        makeUI()
+    }
+
+    func makeUI() {
+        layer.masksToBounds = true
+        cornerRadius = Configs.BaseDimensions.cornerRadius
+//        font = font?.withSize(14)
+
+        snp.makeConstraints { (make) in
+            make.height.equalTo(Configs.BaseDimensions.textFieldHeight)
+        }
+        updateUI()
+    }
+
+    func updateUI() {
+        setNeedsDisplay()
+    }
 }

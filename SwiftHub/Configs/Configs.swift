@@ -52,6 +52,7 @@ struct Configs {
         static let cornerRadius: CGFloat = 25
         static let borderWidth: CGFloat = 1
         static let buttonHeight: CGFloat = 50
+        static let textFieldHeight: CGFloat = 40
         static let tableRowHeight: CGFloat = 50
         static let segmentedControlHeight: CGFloat = 30
     }

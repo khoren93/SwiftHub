@@ -12,7 +12,7 @@ import RAMAnimatedTabBarController
 let provider = Api.shared
 
 enum HomeTabBarItem: Int {
-    case search, events, profile, notifications, settings, login
+    case search, news, profile, notifications, settings, login
 
     func controller(with viewModel: ViewModel) -> UINavigationController {
         switch self {
@@ -20,7 +20,7 @@ enum HomeTabBarItem: Int {
             let vc = R.storyboard.main.searchViewController()!
             vc.viewModel = (viewModel as? SearchViewModel)!
             return NavigationController(rootViewController: vc)
-        case .events:
+        case .news:
             let vc = ViewController()
             return NavigationController(rootViewController: vc)
         case .profile:
@@ -34,7 +34,8 @@ enum HomeTabBarItem: Int {
             vc.viewModel = (viewModel as? SettingsViewModel)!
             return NavigationController(rootViewController: vc)
         case .login:
-            let vc = ViewController()
+            let vc = R.storyboard.main.loginViewController()!
+            vc.viewModel = (viewModel as? LoginViewModel)!
             return NavigationController(rootViewController: vc)
         }
     }
@@ -42,7 +43,7 @@ enum HomeTabBarItem: Int {
     var image: UIImage? {
         switch self {
         case .search: return R.image.icon_tabbar_search()
-        case .events: return R.image.icon_tabbar_news()
+        case .news: return R.image.icon_tabbar_news()
         case .profile: return R.image.icon_tabbar_profile()
         case .notifications: return R.image.icon_tabbar_activity()
         case .settings: return R.image.icon_tabbar_settings()
@@ -53,7 +54,7 @@ enum HomeTabBarItem: Int {
     var title: String {
         switch self {
         case .search: return "Search"
-        case .events: return "News"
+        case .news: return "News"
         case .profile: return "Profile"
         case .notifications: return "Activities"
         case .settings: return "Settings"
@@ -62,7 +63,15 @@ enum HomeTabBarItem: Int {
     }
 
     var animation: RAMItemAnimation {
-        let animation = RAMBounceAnimation()
+        var animation: RAMItemAnimation
+        switch self {
+        case .search: animation = RAMFlipLeftTransitionItemAnimations()
+        case .news: animation = RAMBounceAnimation()
+        case .profile: animation = RAMBounceAnimation()
+        case .notifications: animation = RAMBounceAnimation()
+        case .settings: animation = RAMRightRotationAnimation()
+        case .login: animation = RAMBounceAnimation()
+        }
         animation.iconSelectedColor = .secondary()
         return animation
     }
@@ -107,6 +116,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
         output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
             if let strongSelf = self {
+                strongSelf.hero.isEnabled = false
                 let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
                 strongSelf.setViewControllers(controllers, animated: true)
                 strongSelf.navigator.injectTabBarControllers(in: strongSelf)

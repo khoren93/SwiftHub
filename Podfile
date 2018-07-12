@@ -50,7 +50,7 @@ target 'SwiftHub' do
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
-  pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
+  pod 'RAMAnimatedTabBarController', '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
   pod 'AcknowList'
 
   # Keyboard
