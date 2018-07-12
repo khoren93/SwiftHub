@@ -79,9 +79,10 @@ enum HomeTabBarItem: Int {
     }
 }
 
-class HomeTabBarController: RAMAnimatedTabBarController {
+class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
     var viewModel: HomeTabBarViewModel!
+    var navigator: Navigator!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +109,7 @@ class HomeTabBarController: RAMAnimatedTabBarController {
             if let strongSelf = self {
                 let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
                 strongSelf.setViewControllers(controllers, animated: true)
+                strongSelf.navigator.injectTabBarControllers(in: strongSelf)
             }
         }).disposed(by: rx.disposeBag)
     }

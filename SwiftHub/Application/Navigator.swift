@@ -98,6 +98,14 @@ class Navigator {
         sender?.navigationController?.dismiss(animated: true, completion: nil)
     }
 
+    func injectTabBarControllers(in target: UITabBarController) {
+        if let children = target.viewControllers {
+            for vc in children {
+                injectNavigator(in: vc)
+            }
+        }
+    }
+
     // MARK: - invoke a single segue
     func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .slide(direction: .left))) {
         let target = get(segue: segue)
@@ -161,13 +169,6 @@ class Navigator {
         if var target = target as? Navigatable {
             target.navigator = self
             return
-        }
-
-        // tabs
-        if let target = target as? UITabBarController, let children = target.viewControllers {
-            for vc in children {
-                injectNavigator(in: vc)
-            }
         }
 
         // navigation controller
