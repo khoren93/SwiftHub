@@ -221,6 +221,10 @@ extension ViewController: DZNEmptyDataSetSource {
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return .white
     }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -60
+    }
 }
 
 extension ViewController: DZNEmptyDataSetDelegate {
@@ -230,6 +234,10 @@ extension ViewController: DZNEmptyDataSetDelegate {
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+
+    func emptyDataSetShouldAnimateImageView(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 }

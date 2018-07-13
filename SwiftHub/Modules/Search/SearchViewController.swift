@@ -95,6 +95,10 @@ class SearchViewController: TableViewController {
             self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
+        output.dismissKeyboard.drive(onNext: { [weak self] () in
+            self?.searchBar.resignFirstResponder()
+        }).disposed(by: rx.disposeBag)
+
         output.error.drive(onNext: { [weak self] (error) in
             self?.showAlert(title: "Error", message: error.localizedDescription)
             logError("\(error)")

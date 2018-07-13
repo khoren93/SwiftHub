@@ -24,6 +24,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let fetching: Driver<Bool>
         let items: BehaviorRelay<[SearchSection]>
         let textDidBeginEditing: Driver<Void>
+        let dismissKeyboard: Driver<Void>
         let repositorySelected: Driver<RepositoryViewModel>
         let userSelected: Driver<UserViewModel>
         let error: Driver<Error>
@@ -43,6 +44,8 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
+
+        let dismissKeyboard = input.selection.mapToVoid()
 
         let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(1.5).distinctUntilChanged().asObservable()).merge()
 
@@ -108,6 +111,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         return Output(fetching: fetching,
                       items: elements,
                       textDidBeginEditing: textDidBeginEditing,
+                      dismissKeyboard: dismissKeyboard,
                       repositorySelected: repositoryDetails,
                       userSelected: userDetails,
                       error: errors)
