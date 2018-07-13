@@ -24,7 +24,8 @@ enum HomeTabBarItem: Int {
             let vc = ViewController()
             return NavigationController(rootViewController: vc)
         case .profile:
-            let vc = ViewController()
+            let vc = R.storyboard.main.userViewController()!
+            vc.viewModel = (viewModel as? UserViewModel)!
             return NavigationController(rootViewController: vc)
         case .notifications:
             let vc = ViewController()

@@ -42,7 +42,8 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let viewModel = ViewModel(provider: provider)
             return viewModel
         case .profile:
-            let viewModel = ViewModel(provider: provider)
+            let currentUser = User.currentUser() ?? User()
+            let viewModel = UserViewModel(user: currentUser, provider: provider)
             return viewModel
         case .notifications:
             let viewModel = ViewModel(provider: provider)

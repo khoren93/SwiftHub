@@ -12,6 +12,8 @@ import ObjectMapper
 
 struct User: Mappable {
 
+    fileprivate static let userKey = "CurrentUserKey"
+
     enum UserType: String {
         case user = "User"
         case organization = "Organization"
@@ -103,6 +105,25 @@ struct User: Mappable {
         siteAdmin <- map["site_admin"]
         starredUrl <- map["starred_url"]
         subscriptionsUrl <- map["subscriptions_url"]
+    }
+}
+
+extension User {
+
+    func save() {
+        if let userJson = self.toJSONString() {
+            UserDefaults.standard.set(userJson, forKey: User.userKey)
+        } else {
+            logError("User is nil")
+        }
+    }
+
+    static func currentUser() -> User? {
+        if let userJson = UserDefaults.standard.value(forKey: User.userKey) as? String {
+            return User(JSONString: userJson)
+        } else {
+            return nil
+        }
     }
 }
 
