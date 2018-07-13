@@ -116,9 +116,8 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
         output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
             if let strongSelf = self {
-                strongSelf.hero.isEnabled = false
                 let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
-                strongSelf.setViewControllers(controllers, animated: true)
+                strongSelf.setViewControllers(controllers, animated: false)
                 strongSelf.navigator.injectTabBarControllers(in: strongSelf)
             }
         }).disposed(by: rx.disposeBag)
