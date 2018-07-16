@@ -27,9 +27,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         let items = input.trigger
             .flatMapLatest { (_) -> SharedSequence<DriverSharingStrategy, [SectionType<SettingCellViewModel>]> in
-                let removeCacheCellViewModel = SettingModel(type: .removeCache, leftImage: R.image.icon_favorite.name, title: "Remove Cache", detail: "", showDisclosure: false)
+                let removeCacheCellViewModel = SettingModel(type: .removeCache, leftImage: R.image.icon_cell_remove.name, title: "Remove Cache", detail: "", showDisclosure: false)
 
-                let acknowledgementsCellViewModel = SettingModel(type: .acknowledgements, leftImage: R.image.icon_favorite.name, title: "Acknowledgements", detail: "", showDisclosure: true)
+                let acknowledgementsCellViewModel = SettingModel(type: .acknowledgements, leftImage: R.image.icon_cell_acknowledgements.name, title: "Acknowledgements", detail: "", showDisclosure: true)
 
                 return Observable.of([
                     SectionType<SettingCellViewModel>(header: "Preferences", items: [

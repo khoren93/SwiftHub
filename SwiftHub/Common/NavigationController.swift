@@ -25,7 +25,7 @@ class NavigationController: UINavigationController {
                                    NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationBar.titleTextAttributes = titleTextAttributes
 
-        navigationBar.backIndicatorImage = R.image.icon_navigation_back()?.withRenderingMode(.alwaysOriginal)
-        navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()?.withRenderingMode(.alwaysOriginal)
+        navigationBar.backIndicatorImage = R.image.icon_navigation_back()//?.withRenderingMode(.alwaysOriginal)
+        navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()//?.withRenderingMode(.alwaysOriginal)
     }
 }

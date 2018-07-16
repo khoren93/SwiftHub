@@ -91,6 +91,10 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
         isLoading.asObservable().bind(to: refreshControl.rx.isRefreshing).disposed(by: rx.disposeBag)
 
+        closeBarButton.rx.tap.asObservable().subscribe(onNext: { [weak self] () in
+            self?.navigator.dismiss(sender: self)
+        }).disposed(by: rx.disposeBag)
+
         // Observe device orientation change
         NotificationCenter.default
             .rx.notification(NSNotification.Name.UIDeviceOrientationDidChange)

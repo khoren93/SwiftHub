@@ -107,7 +107,7 @@ class Navigator {
     }
 
     // MARK: - invoke a single segue
-    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .slide(direction: .left))) {
+    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .cover(direction: .left))) {
         let target = get(segue: segue)
 
         show(target: target, sender: sender, transition: transition)

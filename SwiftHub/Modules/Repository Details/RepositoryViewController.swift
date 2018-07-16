@@ -88,7 +88,8 @@ class RepositoryViewController: TableViewController {
 
         output.imageSelected.drive(onNext: { [weak self] () in
             if let strongSelf = self {
-                strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
+                let vc = strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
+                vc.closeButton.imageForNormal = strongSelf.closeBarButton.image
             }
         }).disposed(by: rx.disposeBag)
 

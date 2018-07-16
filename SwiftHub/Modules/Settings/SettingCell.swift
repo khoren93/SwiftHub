@@ -12,18 +12,19 @@ class SettingCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.isHidden = true
+//        leftImageView.isHidden = true
+        leftImageView.tintColor = .primary()
     }
 
     func bind(to viewModel: SettingCellViewModel) {
         viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
 
-        viewModel.showDisclosure.drive(onNext: { (isHidden) in
-            self.rightImageView.isHidden = !isHidden
+        viewModel.showDisclosure.drive(onNext: { [weak self] (isHidden) in
+            self?.rightImageView.isHidden = !isHidden
         }).disposed(by: rx.disposeBag)
 
-        viewModel.imageName.drive(onNext: { (imageName) in
-            self.leftImageView.image = UIImage(named: imageName)
+        viewModel.imageName.drive(onNext: { [weak self] (imageName) in
+            self?.leftImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
         }).disposed(by: rx.disposeBag)
     }
 }

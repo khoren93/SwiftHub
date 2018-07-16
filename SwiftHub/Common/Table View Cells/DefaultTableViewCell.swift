@@ -26,7 +26,7 @@ class DefaultTableViewCell: TableViewCell {
 
     lazy var rightImageView: ImageView = {
         let view = ImageView(frame: CGRect())
-        view.image = R.image.icon_button_disclosure()?.withRenderingMode(.alwaysTemplate)
+        view.image = R.image.icon_cell_disclosure()?.withRenderingMode(.alwaysTemplate)
         view.tintColor = .secondary()
         view.snp.makeConstraints({ (make) in
             make.width.equalTo(20)

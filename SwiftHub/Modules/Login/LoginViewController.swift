@@ -33,7 +33,9 @@ class LoginViewController: ViewController {
     lazy var loginButton: Button = {
         let view = Button()
 //        view.hero.id = "SaveButton"
-        view.setTitle("Login", for: .normal)
+        view.titleForNormal = "Login"
+        view.imageForNormal = R.image.icon_button_github()
+        view.centerTextAndImage(spacing: inset)
         return view
     }()
 
