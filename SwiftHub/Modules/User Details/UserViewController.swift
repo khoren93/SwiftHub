@@ -15,15 +15,26 @@ class UserViewController: TableViewController {
 
     var viewModel: UserViewModel!
 
-    lazy var repoTitleLabel: Label = {
-        let view = Label(style: .style123)
-        view.textAlignment = .center
+    lazy var rightBarButton: BarButtonItem = {
+        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
         return view
     }()
 
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
         view.cornerRadius = 40
+        return view
+    }()
+
+    lazy var usernameLabel: Label = {
+        let view = Label(style: .style213)
+        view.textAlignment = .center
+        return view
+    }()
+
+    lazy var fullnameLabel: Label = {
+        let view = Label(style: .style123)
+        view.textAlignment = .center
         return view
     }()
 
@@ -34,15 +45,15 @@ class UserViewController: TableViewController {
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
         })
-        let subviews: [UIView] = [imageView, self.repoTitleLabel]
+        let subviews: [UIView] = [imageView, self.usernameLabel, self.fullnameLabel]
         let view = StackView(arrangedSubviews: subviews)
-        view.distribution = .equalCentering
-        view.spacing = self.inset
+//        view.distribution = .equalCentering
+//        view.spacing = self.inset
         return view
     }()
 
     lazy var headerView: View = {
-        let view = View(frame: CGRect(x: 0, y: 0, width: 0, height: 120))
+        let view = View(frame: CGRect(x: 0, y: 0, width: 0, height: 160))
         view.backgroundColor = .primary()
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView]
@@ -62,8 +73,14 @@ class UserViewController: TableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.tableHeaderView = headerView
         tableView.addSubview(refreshControl)
+    }
+
+    override func makeUI() {
+        super.makeUI()
+
+        navigationItem.rightBarButtonItem = rightBarButton
+        tableView.tableHeaderView = headerView
     }
 
     override func bindViewModel() {
@@ -72,12 +89,19 @@ class UserViewController: TableViewController {
         let pullToRefresh = Observable.of(Observable.just(()),
                                           refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
         let input = UserViewModel.Input(detailsTrigger: pullToRefresh,
-                                        imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid())
+                                        imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
+                                        openInWebSelection: rightBarButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
 
-        output.name.drive(repoTitleLabel.rx.text).disposed(by: rx.disposeBag)
+        isLoading.subscribe(onNext: { [weak self] (isLoading) in
+            isLoading ? self?.startAnimating() : self?.stopAnimating()
+        }).disposed(by: rx.disposeBag)
+
+        output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
+        output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
+        output.fullname.map { $0.isEmpty }.drive(fullnameLabel.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
@@ -89,6 +113,12 @@ class UserViewController: TableViewController {
         output.imageSelected.drive(onNext: { [weak self] () in
             if let strongSelf = self {
                 strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
+            }
+        }).disposed(by: rx.disposeBag)
+
+        output.openInWebSelected.drive(onNext: { [weak self] (url) in
+            if let url = url {
+                self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
             }
         }).disposed(by: rx.disposeBag)
 

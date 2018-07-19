@@ -51,7 +51,7 @@ class LibsManager {
     }
 
     func setupActivityView() {
-        NVActivityIndicatorView.DEFAULT_TYPE = .ballPulseSync
+        NVActivityIndicatorView.DEFAULT_TYPE = .ballRotateChase
         NVActivityIndicatorView.DEFAULT_COLOR = .secondary()
     }
 

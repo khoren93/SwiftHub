@@ -15,16 +15,19 @@ class UserViewModel: ViewModel, ViewModelType {
     struct Input {
         let detailsTrigger: Observable<Void>
         let imageSelection: Observable<Void>
+        let openInWebSelection: Observable<Void>
     }
 
     struct Output {
         let fetching: Driver<Bool>
         let error: Driver<Error>
 
-        let name: Driver<String>
+        let username: Driver<String>
+        let fullname: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
         let imageSelected: Driver<Void>
+        let openInWebSelected: Driver<URL?>
     }
 
     let user: BehaviorRelay<User>
@@ -54,16 +57,22 @@ class UserViewModel: ViewModel, ViewModelType {
                 .trackError(errorTracker)
         }.bind(to: user).disposed(by: rx.disposeBag)
 
-        let name = user.map { $0.login ?? "" }.asDriverOnErrorJustComplete()
+        let username = user.map { $0.login ?? "" }.asDriverOnErrorJustComplete()
+        let fullname = user.map { $0.name ?? "" }.asDriverOnErrorJustComplete()
         let description = user.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = user.map { $0.avatarUrl?.url }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
+        let openInWebSelected = input.openInWebSelection.map { () -> URL? in
+            self.user.value.htmlUrl?.url
+        }.asDriver(onErrorJustReturn: nil)
 
         return Output(fetching: fetching,
                       error: errors,
-                      name: name,
+                      username: username,
+                      fullname: fullname,
                       description: description,
                       imageUrl: imageUrl,
-                      imageSelected: imageSelected)
+                      imageSelected: imageSelected,
+                      openInWebSelected: openInWebSelected)
     }
 }

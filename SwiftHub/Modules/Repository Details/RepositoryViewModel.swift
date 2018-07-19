@@ -15,6 +15,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     struct Input {
         let detailsTrigger: Observable<Void>
         let imageSelection: Observable<Void>
+        let openInWebSelection: Observable<Void>
     }
 
     struct Output {
@@ -25,6 +26,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let description: Driver<String>
         let imageUrl: Driver<URL?>
         let imageSelected: Driver<Void>
+        let openInWebSelected: Driver<URL?>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -53,12 +55,16 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = repository.map { $0.owner?.avatarUrl?.url }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
+        let openInWebSelected = input.openInWebSelection.map { () -> URL? in
+            self.repository.value.htmlUrl?.url
+        }.asDriver(onErrorJustReturn: nil)
 
         return Output(fetching: fetching,
                       error: errors,
                       name: name,
                       description: description,
                       imageUrl: imageUrl,
-                      imageSelected: imageSelected)
+                      imageSelected: imageSelected,
+                      openInWebSelected: openInWebSelected)
     }
 }

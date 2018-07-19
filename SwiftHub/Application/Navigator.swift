@@ -28,7 +28,9 @@ class Navigator {
         case userDetails(viewModel: UserViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
         case acknowledgements
-        case webPage(URL)
+        case safari(URL)
+        case safariController(URL)
+        case webController(URL)
         case alert(title: String, description: String, image: UIImage?, imageID: String?, actions: [AlertAction])
     }
 
@@ -68,9 +70,17 @@ class Navigator {
             let vc = AcknowListViewController()
             return vc
 
-        case .webPage(let url):
+        case .safari(let url):
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            return ViewController()
+
+        case .safariController(let url):
             let vc = SFSafariViewController(url: url)
-//            vc.hidesBottomBarWhenPushed = true
+            return vc
+
+        case .webController(let url):
+            let vc = WebViewController()
+            vc.load(url: url)
             return vc
 
         case .alert(let title, let description, let image, let imageID, let actions):

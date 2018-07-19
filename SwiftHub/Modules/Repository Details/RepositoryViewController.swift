@@ -15,6 +15,11 @@ class RepositoryViewController: TableViewController {
 
     var viewModel: RepositoryViewModel!
 
+    lazy var rightBarButton: BarButtonItem = {
+        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
+        return view
+    }()
+
     lazy var repoTitleLabel: Label = {
         let view = Label(style: .style123)
         view.textAlignment = .center
@@ -62,8 +67,14 @@ class RepositoryViewController: TableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.tableHeaderView = headerView
         tableView.addSubview(refreshControl)
+    }
+
+    override func makeUI() {
+        super.makeUI()
+
+        navigationItem.rightBarButtonItem = rightBarButton
+        tableView.tableHeaderView = headerView
     }
 
     override func bindViewModel() {
@@ -72,7 +83,8 @@ class RepositoryViewController: TableViewController {
         let pullToRefresh = Observable.of(Observable.just(()),
                                           refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
         let input = RepositoryViewModel.Input(detailsTrigger: pullToRefresh,
-                                              imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid())
+                                              imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
+                                              openInWebSelection: rightBarButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -90,6 +102,12 @@ class RepositoryViewController: TableViewController {
             if let strongSelf = self {
                 let vc = strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
                 vc.closeButton.imageForNormal = strongSelf.closeBarButton.image
+            }
+        }).disposed(by: rx.disposeBag)
+
+        output.openInWebSelected.drive(onNext: { [weak self] (url) in
+            if let url = url {
+                self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
             }
         }).disposed(by: rx.disposeBag)
 
