@@ -49,7 +49,7 @@ struct Configs {
         static let tabBarHeight: CGFloat = 58
         static let toolBarHeight: CGFloat = 66
         static let navBarWithStatusBarHeight: CGFloat = 64
-        static let cornerRadius: CGFloat = 25
+        static let cornerRadius: CGFloat = 5
         static let borderWidth: CGFloat = 1
         static let buttonHeight: CGFloat = 50
         static let textFieldHeight: CGFloat = 40

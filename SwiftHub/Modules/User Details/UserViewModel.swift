@@ -26,6 +26,9 @@ class UserViewModel: ViewModel, ViewModelType {
         let fullname: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
+        let repositoriesCount: Driver<Int>
+        let followersCount: Driver<Int>
+        let followingCount: Driver<Int>
         let imageSelected: Driver<Void>
         let openInWebSelected: Driver<URL?>
     }
@@ -61,6 +64,9 @@ class UserViewModel: ViewModel, ViewModelType {
         let fullname = user.map { $0.name ?? "" }.asDriverOnErrorJustComplete()
         let description = user.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = user.map { $0.avatarUrl?.url }.asDriverOnErrorJustComplete()
+        let repositoriesCount = user.map { $0.publicRepos ?? 0 }.asDriverOnErrorJustComplete()
+        let followersCount = user.map { $0.followers ?? 0 }.asDriverOnErrorJustComplete()
+        let followingCount = user.map { $0.following ?? 0 }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
         let openInWebSelected = input.openInWebSelection.map { () -> URL? in
             self.user.value.htmlUrl?.url
@@ -72,6 +78,9 @@ class UserViewModel: ViewModel, ViewModelType {
                       fullname: fullname,
                       description: description,
                       imageUrl: imageUrl,
+                      repositoriesCount: repositoriesCount,
+                      followersCount: followersCount,
+                      followingCount: followingCount,
                       imageSelected: imageSelected,
                       openInWebSelected: openInWebSelected)
     }

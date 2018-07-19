@@ -65,6 +65,7 @@ target 'SwiftHub' do
   # Code Quality
   pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
   pod 'SwifterSwift', '~> 4.0'  # https://github.com/SwifterSwift/SwifterSwift
+  pod 'AttributedLib', '~> 2.0'  # https://github.com/Nirma/Attributed
 
   # Logging
   pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
