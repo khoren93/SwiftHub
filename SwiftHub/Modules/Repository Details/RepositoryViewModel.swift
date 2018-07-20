@@ -25,7 +25,10 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let name: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
-        let imageSelected: Driver<Void>
+        let watchersCount: Driver<Int>
+        let starsCount: Driver<Int>
+        let forksCount: Driver<Int>
+        let imageSelected: Driver<UserViewModel>
         let openInWebSelected: Driver<URL?>
     }
 
@@ -53,8 +56,18 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
         let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
+        let watchersCount = repository.map { $0.subscribersCount ?? 0 }.asDriverOnErrorJustComplete()
+        let starsCount = repository.map { $0.stargazersCount ?? 0 }.asDriverOnErrorJustComplete()
+        let forksCount = repository.map { $0.forks ?? 0 }.asDriverOnErrorJustComplete()
         let imageUrl = repository.map { $0.owner?.avatarUrl?.url }.asDriverOnErrorJustComplete()
-        let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
+
+        let imageSelected = input.imageSelection.asDriver(onErrorJustReturn: ())
+            .map { () -> UserViewModel in
+                let user = self.repository.value.owner ?? User()
+                let viewModel = UserViewModel(user: user, provider: self.provider)
+                return viewModel
+        }
+
         let openInWebSelected = input.openInWebSelection.map { () -> URL? in
             self.repository.value.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
@@ -64,6 +77,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       name: name,
                       description: description,
                       imageUrl: imageUrl,
+                      watchersCount: watchersCount,
+                      starsCount: starsCount,
+                      forksCount: forksCount,
                       imageSelected: imageSelected,
                       openInWebSelected: openInWebSelected)
     }

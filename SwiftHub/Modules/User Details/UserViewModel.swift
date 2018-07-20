@@ -34,7 +34,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let followingCount: Driver<Int>
         let imageSelected: Driver<Void>
         let openInWebSelected: Driver<URL?>
-        let repositoriesSelected: Driver<Void>
+        let repositoriesSelected: Driver<RepositoriesViewModel>
         let usersSelected: Driver<UsersViewModel>
     }
 
@@ -78,6 +78,11 @@ class UserViewModel: ViewModel, ViewModelType {
         }.asDriver(onErrorJustReturn: nil)
 
         let repositoriesSelected = input.repositoriesSelection.asDriver(onErrorJustReturn: ())
+            .map { () -> RepositoriesViewModel in
+                let mode = RepositoriesMode.userRepositories(user: self.user.value)
+                let viewModel = RepositoriesViewModel(mode: mode, provider: self.provider)
+                return viewModel
+        }
 
         let followersSelected = input.followersSelection.map { UsersMode.followers(user: self.user.value) }
         let followingSelected = input.followingSelection.map { UsersMode.following(user: self.user.value) }

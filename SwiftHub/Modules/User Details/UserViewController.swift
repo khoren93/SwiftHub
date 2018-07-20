@@ -113,6 +113,7 @@ class UserViewController: TableViewController {
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton
+//        stackView.insertArrangedSubview(searchBar, at: 0)
         stackView.insertArrangedSubview(headerView, at: 0)
     }
 
@@ -170,8 +171,8 @@ class UserViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.repositoriesSelected.drive(onNext: { [weak self] () in
-
+        output.repositoriesSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in

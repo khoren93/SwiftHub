@@ -21,7 +21,7 @@ class UserCellViewModel {
     init(with user: User) {
         self.user = user
         title = Driver.just("\(user.login ?? "")")
-        detail = Driver.just("\(user.bio ?? "")")
+        detail = Driver.just("\(user.name ?? "")")
         imageUrl = Driver.just(user.avatarUrl?.url)
     }
 }

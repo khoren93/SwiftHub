@@ -73,6 +73,8 @@
 		A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0792101FCE4000DA282 /* UserFollowers.json */; };
 		A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B07B2101FCF4000DA282 /* UserFollowing.json */; };
 		A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */; };
+		A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */; };
+		A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -202,6 +204,8 @@
 		A0E2B0792101FCE4000DA282 /* UserFollowers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserFollowers.json; sourceTree = "<group>"; };
 		A0E2B07B2101FCF4000DA282 /* UserFollowing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserFollowing.json; sourceTree = "<group>"; };
 		A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserRepositoriesStarred.json; sourceTree = "<group>"; };
+		A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
+		A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -482,6 +486,8 @@
 		A09DE8BA20E7B7DE00F6F2BF /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */,
+				A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */,
 				A09DE8BB20E7B7E800F6F2BF /* Repository Cells */,
 			);
 			path = Repositories;
@@ -1009,6 +1015,7 @@
 				A034A8AE20F61A6500E2B678 /* HomeTabBarViewModel.swift in Sources */,
 				C762C6691E1D559000C09EBD /* TableViewCell.swift in Sources */,
 				A09DE8CC20E7BEBD00F6F2BF /* DefaultTableViewCell.swift in Sources */,
+				A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */,
 				A09DE8C620E7B84D00F6F2BF /* UserCell.swift in Sources */,
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
@@ -1034,6 +1041,7 @@
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */,
+				A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */,
 				A09DE8D620E7C2C400F6F2BF /* ErrorTracker.swift in Sources */,
 				A09DE8A320E7A0C500F6F2BF /* License.swift in Sources */,
 				A00C54C920E25B5A00DA5F98 /* StackView.swift in Sources */,

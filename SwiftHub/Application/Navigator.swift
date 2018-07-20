@@ -27,6 +27,7 @@ class Navigator {
         case search(viewModel: SearchViewModel)
         case users(viewModel: UsersViewModel)
         case userDetails(viewModel: UserViewModel)
+        case repositories(viewModel: RepositoriesViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
         case acknowledgements
         case safari(URL)
@@ -64,6 +65,11 @@ class Navigator {
 
         case .userDetails(let viewModel):
             let vc = R.storyboard.main.userViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .repositories(let viewModel):
+            let vc = R.storyboard.main.repositoriesViewController()!
             vc.viewModel = viewModel
             return vc
 

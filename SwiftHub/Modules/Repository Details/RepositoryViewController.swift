@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import AttributedLib
 
 class RepositoryViewController: TableViewController {
 
@@ -17,12 +18,6 @@ class RepositoryViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
-        return view
-    }()
-
-    lazy var repoTitleLabel: Label = {
-        let view = Label(style: .style123)
-        view.textAlignment = .center
         return view
     }()
 
@@ -39,27 +34,51 @@ class RepositoryViewController: TableViewController {
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
         })
-        let subviews: [UIView] = [imageView, self.repoTitleLabel]
+        let subviews: [UIView] = [imageView]
         let view = StackView(arrangedSubviews: subviews)
-        view.distribution = .equalCentering
-        view.spacing = self.inset
         return view
     }()
 
     lazy var headerView: View = {
-        let view = View(frame: CGRect(x: 0, y: 0, width: 0, height: 120))
+        let view = View()
         view.backgroundColor = .primary()
         view.hero.id = "TopHeaderId"
-        let subviews: [UIView] = [self.headerStackView]
+        let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .horizontal
-        stackView.alignment = .bottom
-        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
-            make.left.equalToSuperview().inset(self.inset)
-            make.centerX.centerY.equalToSuperview()
+            make.edges.equalToSuperview().inset(self.inset)
         })
+        return view
+    }()
+
+    lazy var repositoriesButton: Button = {
+        let view = Button()
+        view.titleLabel?.lineBreakMode = .byWordWrapping
+        view.snp.removeConstraints()
+        return view
+    }()
+
+    lazy var followersButton: Button = {
+        let view = Button()
+        view.titleLabel?.lineBreakMode = .byWordWrapping
+        view.snp.removeConstraints()
+        return view
+    }()
+
+    lazy var followingButton: Button = {
+        let view = Button()
+        view.titleLabel?.lineBreakMode = .byWordWrapping
+        view.snp.removeConstraints()
+        return view
+    }()
+
+    lazy var actionButtonsStackView: StackView = {
+        let subviews: [UIView] = [self.repositoriesButton, self.followersButton, self.followingButton]
+        let view = StackView(arrangedSubviews: subviews)
+        view.axis = .horizontal
+        view.distribution = .fillEqually
         return view
     }()
 
@@ -74,7 +93,7 @@ class RepositoryViewController: TableViewController {
         super.makeUI()
 
         navigationItem.rightBarButtonItem = rightBarButton
-        tableView.tableHeaderView = headerView
+        stackView.insertArrangedSubview(headerView, at: 0)
     }
 
     override func bindViewModel() {
@@ -89,7 +108,9 @@ class RepositoryViewController: TableViewController {
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
 
-        output.name.drive(repoTitleLabel.rx.text).disposed(by: rx.disposeBag)
+        output.name.drive(onNext: { [weak self] (title) in
+            self?.navigationTitle = title
+        }).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
@@ -98,11 +119,20 @@ class RepositoryViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.imageSelected.drive(onNext: { [weak self] () in
-            if let strongSelf = self {
-                let vc = strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
-                vc.closeButton.imageForNormal = strongSelf.closeBarButton.image
-            }
+        output.watchersCount.drive(onNext: { [weak self] (count) in
+            self?.repositoriesButton.setAttributedTitle(self?.attributetText(title: "Watchers", value: count), for: .normal)
+        }).disposed(by: rx.disposeBag)
+
+        output.starsCount.drive(onNext: { [weak self] (count) in
+            self?.followersButton.setAttributedTitle(self?.attributetText(title: "Stars", value: count), for: .normal)
+        }).disposed(by: rx.disposeBag)
+
+        output.forksCount.drive(onNext: { [weak self] (count) in
+            self?.followingButton.setAttributedTitle(self?.attributetText(title: "Forks", value: count), for: .normal)
+        }).disposed(by: rx.disposeBag)
+
+        output.imageSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.openInWebSelected.drive(onNext: { [weak self] (url) in
@@ -114,5 +144,24 @@ class RepositoryViewController: TableViewController {
         output.error.drive(onNext: { (error) in
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
+    }
+
+    func attributetText(title: String, value: Int) -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+
+        let valueAttributes = Attributes {
+            return $0.foreground(color: .textWhite())
+                .font(.boldSystemFont(ofSize: 22))
+                .paragraphStyle(paragraph)
+        }
+
+        let titleAttributes = Attributes {
+            return $0.foreground(color: .textWhite())
+                .font(.boldSystemFont(ofSize: 14))
+                .paragraphStyle(paragraph)
+        }
+
+        return "\(value)\n".at.attributed(with: valueAttributes) + title.at.attributed(with: titleAttributes)
     }
 }
