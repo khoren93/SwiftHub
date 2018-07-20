@@ -15,6 +15,7 @@ class LoginViewController: ViewController {
     lazy var emailTextField: TextField = {
         let view = TextField()
         view.placeholder = "email"
+        view.setPlaceHolderTextColor(.white)
         view.textAlignment = .center
         view.keyboardType = .emailAddress
         view.addBottomBorder(leftInset: 0)
@@ -24,6 +25,7 @@ class LoginViewController: ViewController {
     lazy var passwordTextField: TextField = {
         let view = TextField()
         view.placeholder = "password"
+        view.setPlaceHolderTextColor(.white)
         view.textAlignment = .center
         view.isSecureTextEntry = true
         view.addBottomBorder(leftInset: 0)

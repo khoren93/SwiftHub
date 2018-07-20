@@ -21,7 +21,7 @@ public class Button: UIButton {
     }
 
     func makeUI() {
-        setColor(color: .primary())
+        setColor(color: .primaryDark())
         self.layer.masksToBounds = true
         self.cornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)

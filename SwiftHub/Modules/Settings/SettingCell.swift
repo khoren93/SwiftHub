@@ -13,7 +13,7 @@ class SettingCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
 //        leftImageView.isHidden = true
-        leftImageView.tintColor = .primary()
+        leftImageView.tintColor = .secondary()
     }
 
     func bind(to viewModel: SettingCellViewModel) {

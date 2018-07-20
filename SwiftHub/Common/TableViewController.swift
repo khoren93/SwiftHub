@@ -68,7 +68,7 @@ extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
             view.textLabel?.font = UIFont(name: ".SFUIText-Bold", size: 15.0)!
-            view.textLabel?.textColor = UIColor.textBlack()
+            view.textLabel?.textColor = UIColor.textWhite()
         }
     }
 }

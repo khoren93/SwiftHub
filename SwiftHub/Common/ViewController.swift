@@ -223,7 +223,7 @@ extension ViewController: DZNEmptyDataSetSource {
     }
 
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return .white
+        return .clear
     }
 
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {

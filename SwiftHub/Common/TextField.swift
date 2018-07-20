@@ -22,6 +22,10 @@ class TextField: UITextField {
 
     func makeUI() {
         layer.masksToBounds = true
+        tintColor = .secondary()
+        textColor = .textWhite()
+        borderColor = .white
+        borderWidth = Configs.BaseDimensions.borderWidth
         cornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)
 
