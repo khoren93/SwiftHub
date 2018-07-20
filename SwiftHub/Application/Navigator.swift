@@ -25,6 +25,7 @@ class Navigator {
     enum Scene {
         case tabs(viewModel: HomeTabBarViewModel)
         case search(viewModel: SearchViewModel)
+        case users(viewModel: UsersViewModel)
         case userDetails(viewModel: UserViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
         case acknowledgements
@@ -53,6 +54,11 @@ class Navigator {
 
         case .search(let viewModel):
             let vc = R.storyboard.main.searchViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .users(let viewModel):
+            let vc = R.storyboard.main.usersViewController()!
             vc.viewModel = viewModel
             return vc
 

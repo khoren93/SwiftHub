@@ -18,9 +18,11 @@ class NavigationController: UINavigationController {
         hero.modalAnimationType = .autoReverse(presenting: .fade)
         hero.navigationAnimationType = .autoReverse(presenting: .slide(direction: .left))
 
-        navigationBar.isTranslucent = false
-        navigationBar.barStyle = .blackTranslucent
         navigationBar.tintColor = .secondary()
+        navigationBar.barTintColor = .primary()
+        navigationBar.isTranslucent = false
+        navigationBar.barStyle = .black
+
         let titleTextAttributes = [NSAttributedStringKey.font: Configs.App.NavigationTitleFont,
                                    NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationBar.titleTextAttributes = titleTextAttributes

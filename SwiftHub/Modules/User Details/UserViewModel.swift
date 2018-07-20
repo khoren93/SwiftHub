@@ -16,6 +16,9 @@ class UserViewModel: ViewModel, ViewModelType {
         let detailsTrigger: Observable<Void>
         let imageSelection: Observable<Void>
         let openInWebSelection: Observable<Void>
+        let repositoriesSelection: Observable<Void>
+        let followersSelection: Observable<Void>
+        let followingSelection: Observable<Void>
     }
 
     struct Output {
@@ -31,6 +34,8 @@ class UserViewModel: ViewModel, ViewModelType {
         let followingCount: Driver<Int>
         let imageSelected: Driver<Void>
         let openInWebSelected: Driver<URL?>
+        let repositoriesSelected: Driver<Void>
+        let usersSelected: Driver<UsersViewModel>
     }
 
     let user: BehaviorRelay<User>
@@ -72,6 +77,18 @@ class UserViewModel: ViewModel, ViewModelType {
             self.user.value.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
 
+        let repositoriesSelected = input.repositoriesSelection.asDriver(onErrorJustReturn: ())
+
+        let followersSelected = input.followersSelection.map { UsersMode.followers(user: self.user.value) }
+        let followingSelected = input.followingSelection.map { UsersMode.following(user: self.user.value) }
+
+        let usersSelected = Observable.of(followersSelected, followingSelected).merge()
+            .asDriver(onErrorJustReturn: .followers(user: User()))
+            .map { (mode) -> UsersViewModel in
+                let viewModel = UsersViewModel(mode: mode, provider: self.provider)
+                return viewModel
+        }
+
         return Output(fetching: fetching,
                       error: errors,
                       username: username,
@@ -82,6 +99,8 @@ class UserViewModel: ViewModel, ViewModelType {
                       followersCount: followersCount,
                       followingCount: followingCount,
                       imageSelected: imageSelected,
-                      openInWebSelected: openInWebSelected)
+                      openInWebSelected: openInWebSelected,
+                      repositoriesSelected: repositoriesSelected,
+                      usersSelected: usersSelected)
     }
 }

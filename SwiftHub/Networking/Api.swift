@@ -18,9 +18,13 @@ enum ApiError: Error {
 protocol SwiftHubAPI {
     func searchRepositories(query: String) -> Observable<RepositorySearch>
     func searchUsers(query: String) -> Observable<UserSearch>
+    func userRepositories(username: String) -> Observable<[Repository]>
+    func userStarredRepositories(username: String) -> Observable<[Repository]>
     func repository(owner: String, repo: String) -> Observable<Repository>
     func user(owner: String) -> Observable<User>
     func organization(owner: String) -> Observable<User>
+    func userFollowers(username: String) -> Observable<[User]>
+    func userFollowing(username: String) -> Observable<[User]>
 }
 
 class Api: SwiftHubAPI {
@@ -41,6 +45,18 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
+    func userRepositories(username: String) -> Observable<[Repository]> {
+        return provider.request(.userRepositories(username: username))
+            .mapArray(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userStarredRepositories(username: String) -> Observable<[Repository]> {
+        return provider.request(.userStarredRepositories(username: username))
+            .mapArray(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
     func repository(owner: String, repo: String) -> Observable<Repository> {
         return provider.request(.repository(owner: owner, repo: repo))
             .mapObject(Repository.self)
@@ -56,6 +72,18 @@ extension Api {
     func organization(owner: String) -> Observable<User> {
         return provider.request(.organization(owner: owner))
             .mapObject(User.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userFollowers(username: String) -> Observable<[User]> {
+        return provider.request(.userFollowers(username: username))
+            .mapArray(User.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userFollowing(username: String) -> Observable<[User]> {
+        return provider.request(.userFollowing(username: username))
+            .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 }

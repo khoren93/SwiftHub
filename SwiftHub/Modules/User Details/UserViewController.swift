@@ -21,15 +21,28 @@ class UserViewController: TableViewController {
         return view
     }()
 
-    lazy var ownerImageView: SlideImageView = {
-        let view = SlideImageView()
-        view.cornerRadius = 40
+    lazy var usernameLabel: Label = {
+        let view = Label(style: .style223)
+        view.textAlignment = .center
         return view
     }()
 
     lazy var fullnameLabel: Label = {
-        let view = Label(style: .style123)
+        let view = Label(style: .style133)
         view.textAlignment = .center
+        return view
+    }()
+
+    lazy var navigationHeaderView: StackView = {
+        let subviews: [UIView] = [self.usernameLabel, self.fullnameLabel]
+        let view = StackView(arrangedSubviews: subviews)
+        view.spacing = 1
+        return view
+    }()
+
+    lazy var ownerImageView: SlideImageView = {
+        let view = SlideImageView()
+        view.cornerRadius = 40
         return view
     }()
 
@@ -40,7 +53,7 @@ class UserViewController: TableViewController {
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
         })
-        let subviews: [UIView] = [imageView, self.fullnameLabel]
+        let subviews: [UIView] = [imageView]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -98,6 +111,7 @@ class UserViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
+        navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton
         stackView.insertArrangedSubview(headerView, at: 0)
     }
@@ -109,7 +123,10 @@ class UserViewController: TableViewController {
                                           refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
         let input = UserViewModel.Input(detailsTrigger: pullToRefresh,
                                         imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
-                                        openInWebSelection: rightBarButton.rx.tap.asObservable())
+                                        openInWebSelection: rightBarButton.rx.tap.asObservable(),
+                                        repositoriesSelection: repositoriesButton.rx.tap.asObservable(),
+                                        followersSelection: followersButton.rx.tap.asObservable(),
+                                        followingSelection: followingButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -118,10 +135,7 @@ class UserViewController: TableViewController {
             isLoading ? self?.startAnimating() : self?.stopAnimating()
         }).disposed(by: rx.disposeBag)
 
-        output.username.drive(onNext: { [weak self] (username) in
-            self?.navigationTitle = username
-        }).disposed(by: rx.disposeBag)
-
+        output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.map { $0.isEmpty }.drive(fullnameLabel.rx.isHidden).disposed(by: rx.disposeBag)
 
@@ -154,6 +168,14 @@ class UserViewController: TableViewController {
             if let url = url {
                 self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
             }
+        }).disposed(by: rx.disposeBag)
+
+        output.repositoriesSelected.drive(onNext: { [weak self] () in
+
+        }).disposed(by: rx.disposeBag)
+
+        output.usersSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { (error) in

@@ -53,7 +53,7 @@ class SettingsViewController: TableViewController {
                 self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
                 switch viewModel.type {
                 case .acknowledgements:
-                    self?.navigator.show(segue: .acknowledgements, sender: self, transition: .customModal(type: .zoom))
+                    self?.navigator.show(segue: .acknowledgements, sender: self)
                 case .removeCache:
                     self?.clearCacheAction()
                 }

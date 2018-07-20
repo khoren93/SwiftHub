@@ -17,9 +17,12 @@ enum GithubAPI {
     case searchRepositories(query: String)
     case searchUsers(query: String)
     case userRepositories(username: String)
+    case userStarredRepositories(username: String)
     case repository(owner: String, repo: String)
     case user(owner: String)
     case organization(owner: String)
+    case userFollowers(username: String)
+    case userFollowing(username: String)
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -33,9 +36,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return "/search/repositories"
         case .searchUsers: return "/search/users"
         case .userRepositories(let username): return "/users/\(username)/repos"
+        case .userStarredRepositories(let username): return "/users/\(username)/starred"
         case .repository(let owner, let repo): return "/repos/\(owner)/\(repo)"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
+        case .userFollowers(let username): return "/users/\(username)/followers"
+        case .userFollowing(let username): return "/users/\(username)/following"
         }
     }
 
@@ -74,9 +80,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return stubbedResponse("RepositorySearch")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .userRepositories: return stubbedResponse("UserRepositories")
+        case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .repository: return stubbedResponse("Repository")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")
+        case .userFollowers: return stubbedResponse("UserFollowers")
+        case .userFollowing: return stubbedResponse("UserFollowing")
         }
     }
 

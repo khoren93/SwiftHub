@@ -68,6 +68,11 @@
 		A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */; };
 		A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */; };
 		A09DE8E320EBB75700F6F2BF /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */; };
+		A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0752101F77C000DA282 /* UsersViewController.swift */; };
+		A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0772101F789000DA282 /* UsersViewModel.swift */; };
+		A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0792101FCE4000DA282 /* UserFollowers.json */; };
+		A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B07B2101FCF4000DA282 /* UserFollowing.json */; };
+		A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -192,6 +197,11 @@
 		A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideImageView.swift; sourceTree = "<group>"; };
 		A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		A0E2B0752101F77C000DA282 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		A0E2B0772101F789000DA282 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
+		A0E2B0792101FCE4000DA282 /* UserFollowers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserFollowers.json; sourceTree = "<group>"; };
+		A0E2B07B2101FCF4000DA282 /* UserFollowing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserFollowing.json; sourceTree = "<group>"; };
+		A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserRepositoriesStarred.json; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -426,12 +436,15 @@
 		A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				070FF84120F225200070F5E8 /* Organization.json */,
 				07DFF6D220E90502004DAA68 /* Repository.json */,
 				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
-				A09DE8AA20E7A98F00F6F2BF /* UserRepositories.json */,
-				07DFF6D420E90574004DAA68 /* UserSearch.json */,
 				070FF83F20F2250F0070F5E8 /* User.json */,
-				070FF84120F225200070F5E8 /* Organization.json */,
+				A0E2B0792101FCE4000DA282 /* UserFollowers.json */,
+				A0E2B07B2101FCF4000DA282 /* UserFollowing.json */,
+				A09DE8AA20E7A98F00F6F2BF /* UserRepositories.json */,
+				A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */,
+				07DFF6D420E90574004DAA68 /* UserSearch.json */,
 			);
 			path = "Stubbed Responses";
 			sourceTree = "<group>";
@@ -450,6 +463,8 @@
 			isa = PBXGroup;
 			children = (
 				A09DE8B920E7B7D200F6F2BF /* User Cells */,
+				A0E2B0752101F77C000DA282 /* UsersViewController.swift */,
+				A0E2B0772101F789000DA282 /* UsersViewModel.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -763,6 +778,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */,
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
@@ -771,8 +787,10 @@
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
+				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
+				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
@@ -1008,6 +1026,7 @@
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				A09DE8C320E7B83F00F6F2BF /* UserCellViewModel.swift in Sources */,
 				070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */,
+				A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
 				A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */,
@@ -1033,6 +1052,7 @@
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
+				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
 				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
