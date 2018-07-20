@@ -26,9 +26,12 @@ class SegmentedControl: UISegmentedControl {
     }
 
     func makeUI() {
+        themeService.bind([
+            ({ $0.secondary }, [rx.tintColor])
+        ]).disposed(by: rx.disposeBag)
+
         layer.masksToBounds = true
         cornerRadius = 0
-        tintColor = .white
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.segmentedControlHeight)
         }

@@ -18,16 +18,18 @@ class NavigationController: UINavigationController {
         hero.modalAnimationType = .autoReverse(presenting: .fade)
         hero.navigationAnimationType = .autoReverse(presenting: .slide(direction: .left))
 
-        navigationBar.tintColor = .secondary()
-        navigationBar.barTintColor = .primary()
         navigationBar.isTranslucent = false
-        navigationBar.barStyle = .black
 
-        let titleTextAttributes = [NSAttributedStringKey.font: Configs.App.NavigationTitleFont,
-                                   NSAttributedStringKey.foregroundColor: UIColor.white]
-        navigationBar.titleTextAttributes = titleTextAttributes
+        navigationBar.backIndicatorImage = R.image.icon_navigation_back()
+        navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()
 
-        navigationBar.backIndicatorImage = R.image.icon_navigation_back()//?.withRenderingMode(.alwaysOriginal)
-        navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()//?.withRenderingMode(.alwaysOriginal)
+        themeService.bind([
+            ({ $0.secondary }, [navigationBar.rx.tintColor]),
+            ({ $0.primary }, [navigationBar.rx.barTintColor])
+        ]).disposed(by: rx.disposeBag)
+
+        themeService.bind([
+            ({ [NSAttributedStringKey.foregroundColor: $0.text] }, [navigationBar.rx.titleTextAttributes])
+        ]).disposed(by: rx.disposeBag)
     }
 }

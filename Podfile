@@ -14,10 +14,12 @@ target 'SwiftHub' do
 
   # Rx Extensions
   pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
+  pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
   pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
   pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
-  
+  pod 'RxTheme', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxTheme
+
   # JSON Mapping
   #pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
   pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper

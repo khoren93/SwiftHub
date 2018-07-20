@@ -25,7 +25,6 @@ class UsersViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.backgroundColor = .primary()
         view.hero.id = "TopHeaderId"
         view.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
@@ -44,6 +43,10 @@ class UsersViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
+
+        themeService.bind([
+            ({ $0.primary }, [headerView.rx.backgroundColor])
+        ]).disposed(by: rx.disposeBag)
 
         stackView.insertArrangedSubview(headerView, at: 0)
 

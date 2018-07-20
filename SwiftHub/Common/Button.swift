@@ -21,7 +21,13 @@ public class Button: UIButton {
     }
 
     func makeUI() {
-        setColor(color: .primaryDark())
+        themeService.bind([
+            ({ UIImage(color: $0.primaryDark, size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .normal)]),
+            ({ UIImage(color: $0.primaryDark.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .selected)]),
+            ({ UIImage(color: $0.primaryDark.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .disabled)])
+        ]).disposed(by: rx.disposeBag)
+
+//        setColor(color: .primaryDark())
         self.layer.masksToBounds = true
         self.cornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)

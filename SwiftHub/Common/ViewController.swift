@@ -147,7 +147,11 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     func makeUI() {
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
-        view.backgroundColor = .primary()
+
+        themeService.bind([
+            ({ $0.primary }, [view.rx.backgroundColor])
+        ]).disposed(by: rx.disposeBag)
+
         updateUI()
     }
 

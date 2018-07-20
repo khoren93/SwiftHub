@@ -21,6 +21,11 @@ class TextField: UITextField {
     }
 
     func makeUI() {
+        themeService.bind([
+            ({ $0.text }, [rx.textColor]),
+            ({ $0.secondary }, [rx.tintColor])
+        ]).disposed(by: rx.disposeBag)
+
         layer.masksToBounds = true
         tintColor = .secondary()
         textColor = .textWhite()

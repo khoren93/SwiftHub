@@ -60,7 +60,6 @@ class UserViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.backgroundColor = .primary()
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
@@ -110,6 +109,12 @@ class UserViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
+
+        themeService.bind([
+            ({ $0.primary }, [headerView.rx.backgroundColor]),
+            ({ $0.text }, [usernameLabel.rx.textColor]),
+            ({ $0.textGray }, [fullnameLabel.rx.textColor])
+        ]).disposed(by: rx.disposeBag)
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton

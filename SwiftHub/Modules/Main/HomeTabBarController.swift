@@ -108,7 +108,10 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         hero.isEnabled = true
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
-        tabBar.barTintColor = UIColor.primary()
+
+        themeService.bind([
+            ({ $0.primary }, [tabBar.rx.barTintColor])
+        ]).disposed(by: rx.disposeBag)
     }
 
     func bindViewModel() {

@@ -63,6 +63,15 @@ class DetailedTableViewCell: TableViewCell {
 
     override func makeUI() {
         super.makeUI()
+
+        themeService.bind([
+            ({ $0.text }, [titleLabel.rx.textColor])
+        ]).disposed(by: rx.disposeBag)
+
+        themeService.bind([
+            ({ $0.textGray }, [detailLabel.rx.textColor])
+        ]).disposed(by: rx.disposeBag)
+
         stackView.spacing = self.inset
         stackView.addArrangedSubview(leftImageView)
         stackView.addArrangedSubview(textsStackView)

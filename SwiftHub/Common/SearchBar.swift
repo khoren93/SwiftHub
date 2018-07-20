@@ -22,8 +22,15 @@ class SearchBar: UISearchBar {
 
     func makeUI() {
         placeholder = "Search"
-        tintColor = .white
-        barStyle = .black
+
+        themeService.bind([
+            ({ $0.primary }, [rx.tintColor])
+        ]).disposed(by: rx.disposeBag)
+
+        themeService.bind([
+            ({ $0.barStyle }, [rx.barStyle])
+        ]).disposed(by: rx.disposeBag)
+
         isTranslucent = false
 
         self.rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in

@@ -41,7 +41,6 @@ class RepositoryViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.backgroundColor = .primary()
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
@@ -91,6 +90,10 @@ class RepositoryViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
+
+        themeService.bind([
+            ({ $0.primary }, [headerView.rx.backgroundColor])
+        ]).disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
         stackView.insertArrangedSubview(headerView, at: 0)

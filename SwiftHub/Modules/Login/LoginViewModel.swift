@@ -40,7 +40,10 @@ class LoginViewModel: ViewModel, ViewModelType {
             return $0.0.isNotEmpty && $0.1.isNotEmpty && !$1
         }.asDriver(onErrorJustReturn: false)
 
-        input.loginTrigger.map { true }.asObservable().bind(to: loginEvent).disposed(by: rx.disposeBag)
+//        input.loginTrigger.map { true }.asObservable().bind(to: loginEvent).disposed(by: rx.disposeBag)
+        input.loginTrigger.drive(onNext: { () in
+            themeService.set(index: themeService.index == 0 ? 1 : 0)
+        }).disposed(by: rx.disposeBag)
 
         return Output(fetching: fetching,
                       error: errors,

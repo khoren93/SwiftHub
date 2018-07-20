@@ -29,7 +29,7 @@ typealias AlertAction = PMAlertAction
 typealias AlertControllerStyle = PMAlertControllerStyle
 
 /// The manager class for configuring all libraries used in app.
-class LibsManager {
+class LibsManager: NSObject {
 
     /// The default singleton instance.
     static let shared = LibsManager()
@@ -39,15 +39,22 @@ class LibsManager {
         libsManager.setupCocoaLumberjack()
         libsManager.setupFabric()
         libsManager.setupAnalytics()
-        libsManager.setupChameleon()
+        libsManager.setupTheme()
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
         libsManager.setupActivityView()
     }
 
-    func setupChameleon() {
-        UIApplication.shared.statusBarStyle = .lightContent
-        UITextField.appearance().keyboardAppearance = .dark
+    func setupTheme() {
+        themeService.set(index: 1)
+
+        themeService.bind([
+            ({ $0.statusBarStyle }, [UIApplication.shared.rx.statusBarStyle])
+        ]).disposed(by: rx.disposeBag)
+
+        themeService.bind([
+            ({ $0.keyboardAppearance }, [UITextField.appearance().rx.keyboardAppearance])
+        ]).disposed(by: rx.disposeBag)
     }
 
     func setupActivityView() {
