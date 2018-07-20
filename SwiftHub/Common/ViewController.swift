@@ -147,7 +147,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     func makeUI() {
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
-        view.backgroundColor = .white
+        view.backgroundColor = .primary()
         updateUI()
     }
 

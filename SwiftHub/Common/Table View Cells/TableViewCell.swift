@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell {
 
     lazy var containerView: View = {
         let view = View()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .clear
         self.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
@@ -46,6 +46,7 @@ class TableViewCell: UITableViewCell {
     func makeUI() {
         self.layer.masksToBounds = true
         self.selectionStyle = .none
+        backgroundColor = .clear
         updateUI()
     }
 

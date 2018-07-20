@@ -27,7 +27,7 @@ class TableView: UITableView {
     func makeUI() {
         rowHeight = UITableViewAutomaticDimension
         estimatedRowHeight = 50
-        backgroundColor = .white
+        backgroundColor = .primary()
         separatorColor = .separator()
         cellLayoutMarginsFollowReadableWidth = false
         keyboardDismissMode = .onDrag

@@ -20,7 +20,7 @@ class DefaultTableViewCell: TableViewCell {
     }()
 
     lazy var titleLabel: Label = {
-        let view = Label(style: .style121)
+        let view = Label(style: .style123)
         return view
     }()
 

@@ -30,7 +30,7 @@ extension UIColor {
     }
 
     static func separator() -> UIColor {
-        return flatWhite
+        return flatBlackDark
     }
 
     static func textBlack() -> UIColor {
