@@ -23,13 +23,12 @@ class TextField: UITextField {
     func makeUI() {
         themeService.bind([
             ({ $0.text }, [rx.textColor]),
-            ({ $0.secondary }, [rx.tintColor])
+            ({ $0.secondary }, [rx.tintColor]),
+            ({ $0.textGray }, [rx.placeholderColor]),
+            ({ $0.text }, [rx.borderColor])
         ]).disposed(by: rx.disposeBag)
 
         layer.masksToBounds = true
-        tintColor = .secondary()
-        textColor = .textWhite()
-        borderColor = .white
         borderWidth = Configs.BaseDimensions.borderWidth
         cornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)

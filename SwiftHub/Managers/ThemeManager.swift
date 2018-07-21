@@ -6,8 +6,13 @@
 //  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+import RxCocoa
 import RxTheme
+import RAMAnimatedTabBarController
+
+let themeService = ThemeService<Theme>(themes: [LightTheme(), DarkTheme()])
 
 protocol Theme {
     var primary: UIColor { get }
@@ -17,6 +22,7 @@ protocol Theme {
     var separator: UIColor { get }
     var text: UIColor { get }
     var textGray: UIColor { get }
+    var background: UIColor { get }
     var statusBarStyle: UIStatusBarStyle { get }
     var barStyle: UIBarStyle { get }
     var keyboardAppearance: UIKeyboardAppearance { get }
@@ -28,8 +34,8 @@ struct LightTheme: Theme {
     let secondary = UIColor.flatRed
     let secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatWhite
-    let text = UIColor.flatBlackDark
-    let textGray = UIColor.flatBlack
+    let text = UIColor.flatBlack
+    let textGray = UIColor.flatBlackDark
     let background = UIColor.white
     let statusBarStyle = UIStatusBarStyle.default
     let barStyle = UIBarStyle.default
@@ -42,12 +48,75 @@ struct DarkTheme: Theme {
     let secondary = UIColor.flatRed
     let secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatBlackDark
-    let text = UIColor.flatWhiteDark
-    let textGray = UIColor.flatWhite
+    let text = UIColor.flatWhite
+    let textGray = UIColor.flatWhiteDark
     let background = UIColor.flatBlack
     let statusBarStyle = UIStatusBarStyle.lightContent
     let barStyle = UIBarStyle.black
     let keyboardAppearance = UIKeyboardAppearance.dark
 }
 
-let themeService = ThemeService<Theme>(themes: [LightTheme(), DarkTheme()])
+public extension Reactive where Base: UIView {
+
+    /// Bindable sink for `backgroundColor` property
+    public var backgroundColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.backgroundColor = attr
+        }
+    }
+}
+
+public extension Reactive where Base: UITextField {
+
+    /// Bindable sink for `borderColor` property
+    public var borderColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.borderColor = attr
+        }
+    }
+
+    /// Bindable sink for `placeholderColor` property
+    public var placeholderColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            if let color = attr {
+                view.setPlaceHolderTextColor(color)
+            }
+        }
+    }
+}
+
+public extension Reactive where Base: RAMAnimatedTabBarItem {
+
+    /// Bindable sink for `iconColor` property
+    public var iconColor: Binder<UIColor> {
+        return Binder(self.base) { view, attr in
+            view.iconColor = attr
+            view.deselectAnimation()
+        }
+    }
+
+    /// Bindable sink for `textColor` property
+    public var textColor: Binder<UIColor> {
+        return Binder(self.base) { view, attr in
+            view.textColor = attr
+            view.deselectAnimation()
+        }
+    }
+}
+
+public extension Reactive where Base: RAMItemAnimation {
+
+    /// Bindable sink for `iconSelectedColor` property
+    public var iconSelectedColor: Binder<UIColor> {
+        return Binder(self.base) { view, attr in
+            view.iconSelectedColor = attr
+        }
+    }
+
+    /// Bindable sink for `textSelectedColor` property
+    public var textSelectedColor: Binder<UIColor> {
+        return Binder(self.base) { view, attr in
+            view.textSelectedColor = attr
+        }
+    }
+}

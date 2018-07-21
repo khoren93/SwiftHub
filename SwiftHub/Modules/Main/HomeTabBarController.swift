@@ -73,7 +73,10 @@ enum HomeTabBarItem: Int {
         case .settings: animation = RAMRightRotationAnimation()
         case .login: animation = RAMBounceAnimation()
         }
-        animation.iconSelectedColor = .secondary()
+        _ = themeService.bind([
+            ({ $0.secondary }, [animation.rx.iconSelectedColor]),
+            ({ $0.secondary }, [animation.rx.textSelectedColor])
+        ])
         return animation
     }
 
@@ -81,8 +84,10 @@ enum HomeTabBarItem: Int {
         let vc = controller(with: viewModel)
         let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
         item.animation = animation
-        item.iconColor = .white
-        item.textColor = .white
+        _ = themeService.bind([
+            ({ $0.text }, [item.rx.iconColor]),
+            ({ $0.text }, [item.rx.textColor])
+        ])
         item.yOffSet = -5
         vc.tabBarItem = item
         return vc

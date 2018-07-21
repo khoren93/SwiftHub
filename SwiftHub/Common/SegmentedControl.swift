@@ -27,7 +27,7 @@ class SegmentedControl: UISegmentedControl {
 
     func makeUI() {
         themeService.bind([
-            ({ $0.secondary }, [rx.tintColor])
+            ({ $0.text }, [rx.tintColor])
         ]).disposed(by: rx.disposeBag)
 
         layer.masksToBounds = true

@@ -244,8 +244,4 @@ extension ViewController: DZNEmptyDataSetDelegate {
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
-
-    func emptyDataSetShouldAnimateImageView(_ scrollView: UIScrollView!) -> Bool {
-        return true
-    }
 }

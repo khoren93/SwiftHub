@@ -54,22 +54,16 @@ class RepositoryViewController: TableViewController {
 
     lazy var repositoriesButton: Button = {
         let view = Button()
-        view.titleLabel?.lineBreakMode = .byWordWrapping
-        view.snp.removeConstraints()
         return view
     }()
 
     lazy var followersButton: Button = {
         let view = Button()
-        view.titleLabel?.lineBreakMode = .byWordWrapping
-        view.snp.removeConstraints()
         return view
     }()
 
     lazy var followingButton: Button = {
         let view = Button()
-        view.titleLabel?.lineBreakMode = .byWordWrapping
-        view.snp.removeConstraints()
         return view
     }()
 

@@ -22,17 +22,17 @@ public class Button: UIButton {
 
     func makeUI() {
         themeService.bind([
-            ({ UIImage(color: $0.primaryDark, size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .normal)]),
-            ({ UIImage(color: $0.primaryDark.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .selected)]),
-            ({ UIImage(color: $0.primaryDark.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .disabled)])
+            ({ UIImage(color: $0.secondary, size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .normal)]),
+            ({ UIImage(color: $0.secondary.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .selected)]),
+            ({ UIImage(color: $0.secondary.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .disabled)])
         ]).disposed(by: rx.disposeBag)
 
-//        setColor(color: .primaryDark())
-        self.layer.masksToBounds = true
-        self.cornerRadius = Configs.BaseDimensions.cornerRadius
+        layer.masksToBounds = true
+        titleLabel?.lineBreakMode = .byWordWrapping
+        cornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)
 
-        self.snp.makeConstraints { (make) in
+        snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.buttonHeight)
         }
 
@@ -41,11 +41,5 @@ public class Button: UIButton {
 
     func updateUI() {
         setNeedsDisplay()
-    }
-
-    func setColor(color: UIColor) {
-        setBackgroundImage(UIImage(color: color, size: CGSize(width: 1, height: 1)), for: .normal)
-        setBackgroundImage(UIImage(color: color.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)), for: .selected)
-        setBackgroundImage(UIImage(color: color.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)), for: .disabled)
     }
 }

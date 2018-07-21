@@ -21,7 +21,7 @@ class StackView: UIStackView {
     }
 
     func makeUI() {
-        spacing = inset / 2
+        spacing = inset
         axis = .vertical
         // self.distribution = .fill
 
