@@ -9,8 +9,10 @@
 import Foundation
 
 enum SettingType {
-    case acknowledgements
+    case nightMode
     case removeCache
+
+    case acknowledgements
 }
 
 public struct SettingModel {

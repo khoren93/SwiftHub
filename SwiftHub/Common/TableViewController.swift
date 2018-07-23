@@ -68,9 +68,9 @@ extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
             view.textLabel?.font = UIFont(name: ".SFUIText-Bold", size: 15.0)!
-            themeService.bind([
-                ({ $0.text }, [view.textLabel!.rx.textColor])
-            ]).disposed(by: rx.disposeBag)
+            themeService.rx
+                .bind({ $0.text }, to: view.textLabel!.rx.textColor)
+                .disposed(by: rx.disposeBag)
         }
     }
 }

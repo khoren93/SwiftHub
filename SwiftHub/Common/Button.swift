@@ -21,11 +21,11 @@ public class Button: UIButton {
     }
 
     func makeUI() {
-        themeService.bind([
-            ({ UIImage(color: $0.secondary, size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .normal)]),
-            ({ UIImage(color: $0.secondary.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .selected)]),
-            ({ UIImage(color: $0.secondary.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, [rx.backgroundImage(for: .disabled)])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ UIImage(color: $0.secondary, size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .normal))
+            .bind({ UIImage(color: $0.secondary.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .selected))
+            .bind({ UIImage(color: $0.secondary.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .disabled))
+            .disposed(by: rx.disposeBag)
 
         layer.masksToBounds = true
         titleLabel?.lineBreakMode = .byWordWrapping

@@ -21,12 +21,12 @@ class TextField: UITextField {
     }
 
     func makeUI() {
-        themeService.bind([
-            ({ $0.text }, [rx.textColor]),
-            ({ $0.secondary }, [rx.tintColor]),
-            ({ $0.textGray }, [rx.placeholderColor]),
-            ({ $0.text }, [rx.borderColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.text }, to: rx.textColor)
+            .bind({ $0.secondary }, to: rx.tintColor)
+            .bind({ $0.textGray }, to: rx.placeholderColor)
+            .bind({ $0.text }, to: rx.borderColor)
+            .disposed(by: rx.disposeBag)
 
         layer.masksToBounds = true
         borderWidth = Configs.BaseDimensions.borderWidth

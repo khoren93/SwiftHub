@@ -148,9 +148,9 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
 
-        themeService.bind([
-            ({ $0.primary }, [view.rx.backgroundColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: view.rx.backgroundColor)
+            .disposed(by: rx.disposeBag)
 
         updateUI()
     }

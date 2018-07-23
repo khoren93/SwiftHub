@@ -14,6 +14,15 @@ class InitialSplitViewController: TableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    override func makeUI() {
+        super.makeUI()
+
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
+
         emptyDataSetTitle = "Welcome to SwiftHub!"
     }
 }

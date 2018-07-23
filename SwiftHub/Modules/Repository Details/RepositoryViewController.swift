@@ -85,9 +85,9 @@ class RepositoryViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        themeService.bind([
-            ({ $0.primary }, [headerView.rx.backgroundColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
         stackView.insertArrangedSubview(headerView, at: 0)

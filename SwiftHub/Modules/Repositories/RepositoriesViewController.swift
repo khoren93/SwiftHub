@@ -44,9 +44,9 @@ class RepositoriesViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        themeService.bind([
-            ({ $0.primary }, [headerView.rx.backgroundColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .disposed(by: rx.disposeBag)
 
 //        stackView.insertArrangedSubview(searchBar, at: 0)
         stackView.insertArrangedSubview(headerView, at: 0)

@@ -46,15 +46,11 @@ class LibsManager: NSObject {
     }
 
     func setupTheme() {
-        themeService.set(index: 1)
 
-        themeService.bind([
-            ({ $0.statusBarStyle }, [UIApplication.shared.rx.statusBarStyle])
-        ]).disposed(by: rx.disposeBag)
-
-        themeService.bind([
-            ({ $0.keyboardAppearance }, [UITextField.appearance().rx.keyboardAppearance])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+//            .bind({ $0.statusBarStyle }, to: UIApplication.shared.rx.statusBarStyle)
+            .bind({ $0.keyboardAppearance }, to: UITextField.appearance().rx.keyboardAppearance)
+            .disposed(by: rx.disposeBag)
     }
 
     func setupActivityView() {

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+private let themeReuseIdentifier = R.reuseIdentifier.settingThemeCell.identifier
 private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
 
 class SettingsViewController: TableViewController {
@@ -28,35 +29,49 @@ class SettingsViewController: TableViewController {
 
         navigationTitle = "Settings"
         tableView.register(R.nib.settingCell)
+        tableView.register(R.nib.settingThemeCell)
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
-        let input = SettingsViewModel.Input(trigger: Driver.just(()),
-                                            selection: tableView.rx.modelSelected(SettingCellViewModel.self).asDriver())
+        let input = SettingsViewModel.Input(trigger: Observable.just(()),
+                                            selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionType<SettingCellViewModel>>(configureCell: { dataSource, tableView, indexPath, viewModel in
-            let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
-            cell.bind(to: viewModel)
-            return cell
+        let dataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: { dataSource, tableView, indexPath, item in
+            switch item {
+            case .settingThemeItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: themeReuseIdentifier, for: indexPath) as? SettingThemeCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .settingItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
+                cell.bind(to: viewModel)
+                return cell
+            }
         }, titleForHeaderInSection: { dataSource, index in
-            return dataSource.sectionModels[index].header
+            let section = dataSource[index]
+            return section.title
         })
 
         output.items.asObservable()
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        output.selectedEvent.drive(onNext: { [weak self] (viewModel) in
-                self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
+        output.selectedEvent.drive(onNext: { [weak self] (item) in
+            self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
+            switch item {
+            case .settingItem(let viewModel):
                 switch viewModel.type {
                 case .acknowledgements:
                     self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 case .removeCache:
                     self?.clearCacheAction()
+                default: break
                 }
+            default: break
+            }
         }).disposed(by: rx.disposeBag)
     }
 

@@ -77,6 +77,11 @@
 		A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */; };
 		A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */; };
 		A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */; };
+		A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B085210625C0000DA282 /* SettingThemeCell.swift */; };
+		A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B086210625C0000DA282 /* SettingThemeCell.xib */; };
+		A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */; };
+		A0E2B08D2106293A000DA282 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08C2106293A000DA282 /* Switch.swift */; };
+		A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08E21062B9B000DA282 /* SettingsSection.swift */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -210,6 +215,11 @@
 		A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
 		A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSplitViewController.swift; sourceTree = "<group>"; };
+		A0E2B085210625C0000DA282 /* SettingThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeCell.swift; sourceTree = "<group>"; };
+		A0E2B086210625C0000DA282 /* SettingThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingThemeCell.xib; sourceTree = "<group>"; };
+		A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeCellViewModel.swift; sourceTree = "<group>"; };
+		A0E2B08C2106293A000DA282 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		A0E2B08E21062B9B000DA282 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -285,10 +295,9 @@
 		070FF84320F2846F0070F5E8 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				070FF84820F285180070F5E8 /* SettingCell.swift */,
-				070FF84920F285180070F5E8 /* SettingCell.xib */,
-				070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */,
+				A0E2B08B210625E6000DA282 /* Cells */,
 				070FF84E20F285560070F5E8 /* SettingModel.swift */,
+				A0E2B08E21062B9B000DA282 /* SettingsSection.swift */,
 				070FF84420F284D40070F5E8 /* SettingsViewController.swift */,
 				070FF84620F284F00070F5E8 /* SettingsViewModel.swift */,
 			);
@@ -544,6 +553,19 @@
 			path = RxActivityIndicator;
 			sourceTree = "<group>";
 		};
+		A0E2B08B210625E6000DA282 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				070FF84820F285180070F5E8 /* SettingCell.swift */,
+				070FF84920F285180070F5E8 /* SettingCell.xib */,
+				070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */,
+				A0E2B085210625C0000DA282 /* SettingThemeCell.swift */,
+				A0E2B086210625C0000DA282 /* SettingThemeCell.xib */,
+				A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		A0ED264620F76A45004E8137 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +616,7 @@
 				A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */,
 				A017B3DA1E92995300E4FCED /* SplitViewController.swift */,
 				A00C54C820E25B5A00DA5F98 /* StackView.swift */,
+				A0E2B08C2106293A000DA282 /* Switch.swift */,
 				A09DE8CA20E7BE9B00F6F2BF /* Table View Cells */,
 				C762C6591E1D559000C09EBD /* TableView.swift */,
 				C762C65B1E1D559000C09EBD /* TableViewController.swift */,
@@ -802,6 +825,7 @@
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
+				A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */,
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
@@ -1007,6 +1031,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
 				070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
@@ -1044,6 +1069,7 @@
 				070FF84520F284D40070F5E8 /* SettingsViewController.swift in Sources */,
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				A09DE8C320E7B83F00F6F2BF /* UserCellViewModel.swift in Sources */,
+				A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */,
 				070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */,
 				A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
@@ -1051,6 +1077,7 @@
 				A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */,
 				C762C67F1E1D5A7300C09EBD /* Observable+Logging.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
+				A0E2B08D2106293A000DA282 /* Switch.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */,
 				A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */,
@@ -1067,6 +1094,7 @@
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,
 				A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */,
+				A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
 				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,

@@ -104,11 +104,11 @@ class UserViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        themeService.bind([
-            ({ $0.primary }, [headerView.rx.backgroundColor]),
-            ({ $0.text }, [usernameLabel.rx.textColor]),
-            ({ $0.textGray }, [fullnameLabel.rx.textColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .bind({ $0.text }, to: usernameLabel.rx.textColor)
+            .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
+            .disposed(by: rx.disposeBag)
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton

@@ -25,23 +25,20 @@ class NavigationController: UINavigationController {
 
         if #available(iOS 11.0, *) {
             navigationBar.prefersLargeTitles = true
-            themeService.bind([({
-                let color = $0
-                return Attributes {
-                    return $0.foreground(color: color.text)
-                        .font(.boldSystemFont(ofSize: 28))
-                    }.dictionary
-                }, [navigationBar.rx.largeTitleTextAttributes])
-            ]).disposed(by: rx.disposeBag)
+            themeService.rx
+                .bind({ let color = $0
+                    return Attributes {
+                        return $0.foreground(color: color.text)
+                            .font(.boldSystemFont(ofSize: 28))
+                        }.dictionary
+                }, to: navigationBar.rx.largeTitleTextAttributes)
+                .disposed(by: rx.disposeBag)
         }
 
-        themeService.bind([
-            ({ $0.secondary }, [navigationBar.rx.tintColor]),
-            ({ $0.primary }, [navigationBar.rx.barTintColor])
-        ]).disposed(by: rx.disposeBag)
-
-        themeService.bind([
-            ({ [NSAttributedStringKey.foregroundColor: $0.text] }, [navigationBar.rx.titleTextAttributes])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.secondary }, to: navigationBar.rx.tintColor)
+            .bind({ $0.primary }, to: navigationBar.rx.barTintColor)
+            .bind({ [NSAttributedStringKey.foregroundColor: $0.text] }, to: navigationBar.rx.titleTextAttributes)
+            .disposed(by: rx.disposeBag)
     }
 }

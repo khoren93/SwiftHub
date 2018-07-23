@@ -12,8 +12,6 @@ import RxCocoa
 import RxTheme
 import RAMAnimatedTabBarController
 
-let themeService = ThemeService<Theme>(themes: [LightTheme(), DarkTheme()])
-
 protocol Theme {
     var primary: UIColor { get }
     var primaryDark: UIColor { get }
@@ -55,6 +53,35 @@ struct DarkTheme: Theme {
     let barStyle = UIBarStyle.black
     let keyboardAppearance = UIKeyboardAppearance.dark
 }
+
+enum ThemeType: Int, ThemeProvider {
+    case light, dark
+
+    var associatedObject: Theme {
+        switch self {
+        case .light: return LightTheme()
+        case .dark: return DarkTheme()
+        }
+    }
+}
+
+extension ThemeType {
+    static func currentTheme() -> ThemeType {
+        if let theme = ThemeType(rawValue: UserDefaults.standard.integer(forKey: "ThemeKey")) {
+            return theme
+        }
+
+        let defaultTheme = ThemeType.light
+        defaultTheme.save()
+        return defaultTheme
+    }
+
+    func save() {
+        UserDefaults.standard.set(self.rawValue, forKey: "ThemeKey")
+    }
+}
+
+let themeService = ThemeType.service(initial: ThemeType.currentTheme())
 
 public extension Reactive where Base: UIView {
 

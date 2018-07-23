@@ -23,13 +23,10 @@ class SearchBar: UISearchBar {
     func makeUI() {
         placeholder = "Search"
 
-        themeService.bind([
-            ({ $0.primary }, [rx.tintColor])
-        ]).disposed(by: rx.disposeBag)
-
-        themeService.bind([
-            ({ $0.barStyle }, [rx.barStyle])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: rx.tintColor)
+            .bind({ $0.barStyle }, to: rx.barStyle)
+            .disposed(by: rx.disposeBag)
 
         isTranslucent = false
 

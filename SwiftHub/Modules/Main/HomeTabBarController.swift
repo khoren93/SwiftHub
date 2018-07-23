@@ -73,10 +73,9 @@ enum HomeTabBarItem: Int {
         case .settings: animation = RAMRightRotationAnimation()
         case .login: animation = RAMBounceAnimation()
         }
-        _ = themeService.bind([
-            ({ $0.secondary }, [animation.rx.iconSelectedColor]),
-            ({ $0.secondary }, [animation.rx.textSelectedColor])
-        ])
+        _ = themeService.rx
+            .bind({ $0.secondary }, to: animation.rx.iconSelectedColor)
+            .bind({ $0.secondary }, to: animation.rx.textSelectedColor)
         return animation
     }
 
@@ -84,10 +83,10 @@ enum HomeTabBarItem: Int {
         let vc = controller(with: viewModel)
         let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
         item.animation = animation
-        _ = themeService.bind([
-            ({ $0.text }, [item.rx.iconColor]),
-            ({ $0.text }, [item.rx.textColor])
-        ])
+        _ = themeService.rx
+            .bind({ $0.text }, to: item.rx.iconColor)
+            .bind({ $0.text }, to: item.rx.textColor)
+
         item.yOffSet = -5
         vc.tabBarItem = item
         return vc
@@ -113,9 +112,9 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
 
-        themeService.bind([
-            ({ $0.primary }, [tabBar.rx.barTintColor])
-        ]).disposed(by: rx.disposeBag)
+        themeService.rx
+            .bind({ $0.primary }, to: tabBar.rx.barTintColor)
+            .disposed(by: rx.disposeBag)
     }
 
     func bindViewModel() {

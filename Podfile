@@ -18,7 +18,7 @@ target 'SwiftHub' do
   pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
   pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
-  pod 'RxTheme', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxTheme
+  pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
 
   # JSON Mapping
   #pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper
