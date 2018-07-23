@@ -112,6 +112,9 @@ class UserViewController: TableViewController {
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
 //        stackView.insertArrangedSubview(searchBar, at: 0)
         stackView.insertArrangedSubview(headerView, at: 0)
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AttributedLib
 
 class NavigationController: UINavigationController {
 
@@ -19,9 +20,20 @@ class NavigationController: UINavigationController {
         hero.navigationAnimationType = .autoReverse(presenting: .slide(direction: .left))
 
         navigationBar.isTranslucent = false
-
         navigationBar.backIndicatorImage = R.image.icon_navigation_back()
         navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()
+
+        if #available(iOS 11.0, *) {
+            navigationBar.prefersLargeTitles = true
+            themeService.bind([({
+                let color = $0
+                return Attributes {
+                    return $0.foreground(color: color.text)
+                        .font(.boldSystemFont(ofSize: 28))
+                    }.dictionary
+                }, [navigationBar.rx.largeTitleTextAttributes])
+            ]).disposed(by: rx.disposeBag)
+        }
 
         themeService.bind([
             ({ $0.secondary }, [navigationBar.rx.tintColor]),

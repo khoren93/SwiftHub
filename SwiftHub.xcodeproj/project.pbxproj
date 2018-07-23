@@ -76,6 +76,7 @@
 		A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */; };
 		A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */; };
 		A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */; };
+		A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -208,6 +209,7 @@
 		A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserRepositoriesStarred.json; sourceTree = "<group>"; };
 		A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
+		A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSplitViewController.swift; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			children = (
 				07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */,
 				A034A8AD20F61A6500E2B678 /* HomeTabBarViewModel.swift */,
+				A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */,
 				A094995E1E1D1CB700EFDE29 /* LaunchScreen.storyboard */,
 				A09499591E1D1CB600EFDE29 /* Main.storyboard */,
 			);
@@ -1028,6 +1031,7 @@
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
+				A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
 				07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,

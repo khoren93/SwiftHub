@@ -14,7 +14,7 @@ let provider = Api.shared
 enum HomeTabBarItem: Int {
     case search, news, profile, notifications, settings, login
 
-    func controller(with viewModel: ViewModel) -> UINavigationController {
+    func controller(with viewModel: ViewModel) -> UIViewController {
         switch self {
         case .search:
             let vc = R.storyboard.main.searchViewController()!
@@ -80,7 +80,7 @@ enum HomeTabBarItem: Int {
         return animation
     }
 
-    func getController(with viewModel: ViewModel) -> UINavigationController {
+    func getController(with viewModel: ViewModel) -> UIViewController {
         let vc = controller(with: viewModel)
         let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
         item.animation = animation
@@ -103,7 +103,6 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
         bindViewModel()
         makeUI()
     }

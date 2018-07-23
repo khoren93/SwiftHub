@@ -14,11 +14,14 @@ class SplitViewController: UISplitViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        delegate = self
+        preferredDisplayMode = .allVisible
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension SplitViewController: UISplitViewControllerDelegate {
+
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
     }
-
 }

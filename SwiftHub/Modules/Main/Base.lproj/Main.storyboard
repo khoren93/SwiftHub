@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Initial Split View Controller-->
         <scene sceneID="X2f-6Q-meQ">
             <objects>
-                <viewController id="48q-o1-bAf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialSplitViewController" id="48q-o1-bAf" customClass="InitialSplitViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2gm-ot-tve">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -41,6 +41,7 @@ class Navigator {
         case navigation(type: HeroDefaultAnimationType)
         case customModal(type: HeroDefaultAnimationType)
         case modal
+        case detail
         case alert
         case custom
     }
@@ -49,9 +50,15 @@ class Navigator {
     func get(segue: Scene) -> UIViewController {
         switch segue {
         case .tabs(let viewModel):
-            let vc = R.storyboard.main.homeTabBarController()!
-            vc.viewModel = viewModel
-            return vc
+            let rootVC = R.storyboard.main.homeTabBarController()!
+            rootVC.navigator = self
+            rootVC.viewModel = viewModel
+//            let rootNavVC = NavigationController(rootViewController: rootVC)
+            let detailVC = R.storyboard.main.initialSplitViewController()!
+            let detailNavVC = NavigationController(rootViewController: detailVC)
+            let splitVC = SplitViewController()
+            splitVC.viewControllers = [rootVC, detailNavVC]
+            return splitVC
 
         case .search(let viewModel):
             let vc = R.storyboard.main.searchViewController()!
@@ -178,6 +185,9 @@ class Navigator {
                 let nav = NavigationController(rootViewController: target)
                 sender.present(nav, animated: true, completion: nil)
             }
+        case .detail:
+            let nav = NavigationController(rootViewController: target)
+            sender.showDetailViewController(nav, sender: nil)
         case .alert:
             DispatchQueue.main.async {
                 sender.present(target, animated: true, completion: nil)
@@ -195,6 +205,11 @@ class Navigator {
 
         // navigation controller
         if let target = target as? UINavigationController, let root = target.viewControllers.first {
+            injectNavigator(in: root)
+        }
+
+        // split controller
+        if let target = target as? UISplitViewController, let root = target.viewControllers.first {
             injectNavigator(in: root)
         }
     }

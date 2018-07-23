@@ -46,6 +46,9 @@ class SearchViewController: TableViewController {
         super.makeUI()
 
         navigationItem.titleView = segmentedControl
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
 
         stackView.insertArrangedSubview(searchBar, at: 0)
 
@@ -88,11 +91,11 @@ class SearchViewController: TableViewController {
             .disposed(by: rx.disposeBag)
 
         output.repositorySelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
         output.dismissKeyboard.drive(onNext: { [weak self] () in

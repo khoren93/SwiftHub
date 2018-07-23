@@ -120,3 +120,14 @@ public extension Reactive where Base: RAMItemAnimation {
         }
     }
 }
+
+public extension Reactive where Base: UINavigationBar {
+
+    /// Bindable sink for `titleTextAttributes` property
+    @available(iOS 11.0, *)
+    public var largeTitleTextAttributes: Binder<[NSAttributedStringKey: Any]?> {
+        return Binder(self.base) { view, attr in
+            view.largeTitleTextAttributes = attr
+        }
+    }
+}
