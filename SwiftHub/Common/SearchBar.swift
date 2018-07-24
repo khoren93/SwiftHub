@@ -22,23 +22,27 @@ class SearchBar: UISearchBar {
 
     func makeUI() {
         placeholder = "Search"
-
-        themeService.rx
-            .bind({ $0.primary }, to: rx.tintColor)
-            .bind({ $0.barStyle }, to: rx.barStyle)
-            .disposed(by: rx.disposeBag)
-
         isTranslucent = false
 
-        self.rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in
+        themeService.rx
+            .bind({ $0.secondary }, to: rx.tintColor)
+            .bind({ $0.primaryDark }, to: rx.barTintColor)
+            .bind({ $0.keyboardAppearance }, to: UITextField.appearanceWhenContained(within: [UISearchBar.self]).rx.keyboardAppearance)
+            .disposed(by: rx.disposeBag)
+
+        rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in
             self?.setShowsCancelButton(true, animated: true)
         }).disposed(by: rx.disposeBag)
 
-        self.rx.textDidEndEditing.asObservable().subscribe(onNext: { [weak self] () in
+        rx.textDidEndEditing.asObservable().subscribe(onNext: { [weak self] () in
             self?.setShowsCancelButton(false, animated: true)
         }).disposed(by: rx.disposeBag)
 
-        self.rx.cancelButtonClicked.asObservable().subscribe(onNext: { [weak self] () in
+        rx.cancelButtonClicked.asObservable().subscribe(onNext: { [weak self] () in
+            self?.resignFirstResponder()
+        }).disposed(by: rx.disposeBag)
+
+        rx.searchButtonClicked.asObservable().subscribe(onNext: { [weak self] () in
             self?.resignFirstResponder()
         }).disposed(by: rx.disposeBag)
 

@@ -98,7 +98,6 @@ class UserViewController: TableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.addSubview(refreshControl)
     }
 
     override func makeUI() {
@@ -117,14 +116,14 @@ class UserViewController: TableViewController {
         }
 //        stackView.insertArrangedSubview(searchBar, at: 0)
         stackView.insertArrangedSubview(headerView, at: 0)
+        tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
-        let pullToRefresh = Observable.of(Observable.just(()),
-                                          refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
-        let input = UserViewModel.Input(detailsTrigger: pullToRefresh,
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let input = UserViewModel.Input(headerRefresh: refresh,
                                         imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
                                         openInWebSelection: rightBarButton.rx.tap.asObservable(),
                                         repositoriesSelection: repositoriesButton.rx.tap.asObservable(),
@@ -133,10 +132,7 @@ class UserViewController: TableViewController {
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-
-        isLoading.subscribe(onNext: { [weak self] (isLoading) in
-            isLoading ? self?.startAnimating() : self?.stopAnimating()
-        }).disposed(by: rx.disposeBag)
+        output.fetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
 
         output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)

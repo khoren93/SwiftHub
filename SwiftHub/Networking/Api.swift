@@ -17,14 +17,18 @@ enum ApiError: Error {
 
 protocol SwiftHubAPI {
     func searchRepositories(query: String) -> Observable<RepositorySearch>
-    func searchUsers(query: String) -> Observable<UserSearch>
-    func userRepositories(username: String) -> Observable<[Repository]>
-    func userStarredRepositories(username: String) -> Observable<[Repository]>
     func repository(owner: String, repo: String) -> Observable<Repository>
+    func watchers(repo: String, page: Int) -> Observable<[User]>
+    func stars(repo: String, page: Int) -> Observable<[User]>
+    func forks(repo: String, page: Int) -> Observable<[User]>
+
+    func searchUsers(query: String) -> Observable<UserSearch>
     func user(owner: String) -> Observable<User>
     func organization(owner: String) -> Observable<User>
-    func userFollowers(username: String) -> Observable<[User]>
-    func userFollowing(username: String) -> Observable<[User]>
+    func userRepositories(username: String, page: Int) -> Observable<[Repository]>
+    func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]>
+    func userFollowers(username: String, page: Int) -> Observable<[User]>
+    func userFollowing(username: String, page: Int) -> Observable<[User]>
 }
 
 class Api: SwiftHubAPI {
@@ -39,27 +43,33 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
-    func searchUsers(query: String) -> Observable<UserSearch> {
-        return provider.request(.searchUsers(query: query))
-            .mapObject(UserSearch.self)
+    func watchers(repo: String, page: Int) -> Observable<[User]> {
+        return provider.request(.watchers(repo: repo, page: page))
+            .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
-    func userRepositories(username: String) -> Observable<[Repository]> {
-        return provider.request(.userRepositories(username: username))
-            .mapArray(Repository.self)
+    func stars(repo: String, page: Int) -> Observable<[User]> {
+        return provider.request(.stars(repo: repo, page: page))
+            .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
-    func userStarredRepositories(username: String) -> Observable<[Repository]> {
-        return provider.request(.userStarredRepositories(username: username))
-            .mapArray(Repository.self)
+    func forks(repo: String, page: Int) -> Observable<[User]> {
+        return provider.request(.forks(repo: repo, page: page))
+            .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
     func repository(owner: String, repo: String) -> Observable<Repository> {
         return provider.request(.repository(owner: owner, repo: repo))
             .mapObject(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func searchUsers(query: String) -> Observable<UserSearch> {
+        return provider.request(.searchUsers(query: query))
+            .mapObject(UserSearch.self)
             .observeOn(MainScheduler.instance)
     }
 
@@ -75,14 +85,26 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
-    func userFollowers(username: String) -> Observable<[User]> {
-        return provider.request(.userFollowers(username: username))
+    func userRepositories(username: String, page: Int) -> Observable<[Repository]> {
+        return provider.request(.userRepositories(username: username, page: page))
+            .mapArray(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]> {
+        return provider.request(.userStarredRepositories(username: username, page: page))
+            .mapArray(Repository.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userFollowers(username: String, page: Int) -> Observable<[User]> {
+        return provider.request(.userFollowers(username: username, page: page))
             .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
-    func userFollowing(username: String) -> Observable<[User]> {
-        return provider.request(.userFollowing(username: username))
+    func userFollowing(username: String, page: Int) -> Observable<[User]> {
+        return provider.request(.userFollowing(username: username, page: page))
             .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }

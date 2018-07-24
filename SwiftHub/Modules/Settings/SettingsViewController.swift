@@ -30,6 +30,8 @@ class SettingsViewController: TableViewController {
         navigationTitle = "Settings"
         tableView.register(R.nib.settingCell)
         tableView.register(R.nib.settingThemeCell)
+        tableView.headRefreshControl = nil
+        tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {

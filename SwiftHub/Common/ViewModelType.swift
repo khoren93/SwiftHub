@@ -19,7 +19,7 @@ class ViewModel: NSObject {
 
     let provider: SwiftHubAPI
 
-    var page = 0
+    var page = 1
 
     init(provider: SwiftHubAPI) {
         self.provider = provider

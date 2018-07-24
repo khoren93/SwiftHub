@@ -52,23 +52,23 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
-    lazy var repositoriesButton: Button = {
+    lazy var watchersButton: Button = {
         let view = Button()
         return view
     }()
 
-    lazy var followersButton: Button = {
+    lazy var starsButton: Button = {
         let view = Button()
         return view
     }()
 
-    lazy var followingButton: Button = {
+    lazy var forksButton: Button = {
         let view = Button()
         return view
     }()
 
     lazy var actionButtonsStackView: StackView = {
-        let subviews: [UIView] = [self.repositoriesButton, self.followersButton, self.followingButton]
+        let subviews: [UIView] = [self.watchersButton, self.starsButton, self.forksButton]
         let view = StackView(arrangedSubviews: subviews)
         view.axis = .horizontal
         view.distribution = .fillEqually
@@ -79,7 +79,6 @@ class RepositoryViewController: TableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.addSubview(refreshControl)
     }
 
     override func makeUI() {
@@ -91,19 +90,23 @@ class RepositoryViewController: TableViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
         stackView.insertArrangedSubview(headerView, at: 0)
+        tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
-        let pullToRefresh = Observable.of(Observable.just(()),
-                                          refreshControl.rx.controlEvent(.valueChanged).asObservable()).merge()
-        let input = RepositoryViewModel.Input(detailsTrigger: pullToRefresh,
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let input = RepositoryViewModel.Input(headerRefresh: refresh,
                                               imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
-                                              openInWebSelection: rightBarButton.rx.tap.asObservable())
+                                              openInWebSelection: rightBarButton.rx.tap.asObservable(),
+                                              watchersSelection: watchersButton.rx.tap.asObservable(),
+                                              starsSelection: starsButton.rx.tap.asObservable(),
+                                              forksSelection: forksButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        output.fetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
 
         output.name.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
@@ -117,15 +120,15 @@ class RepositoryViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
-            self?.repositoriesButton.setAttributedTitle(self?.attributetText(title: "Watchers", value: count), for: .normal)
+            self?.watchersButton.setAttributedTitle(self?.attributetText(title: "Watchers", value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.starsCount.drive(onNext: { [weak self] (count) in
-            self?.followersButton.setAttributedTitle(self?.attributetText(title: "Stars", value: count), for: .normal)
+            self?.starsButton.setAttributedTitle(self?.attributetText(title: "Stars", value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.forksCount.drive(onNext: { [weak self] (count) in
-            self?.followingButton.setAttributedTitle(self?.attributetText(title: "Forks", value: count), for: .normal)
+            self?.forksButton.setAttributedTitle(self?.attributetText(title: "Forks", value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.imageSelected.drive(onNext: { [weak self] (viewModel) in
@@ -136,6 +139,10 @@ class RepositoryViewController: TableViewController {
             if let url = url {
                 self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
             }
+        }).disposed(by: rx.disposeBag)
+
+        output.usersSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { (error) in

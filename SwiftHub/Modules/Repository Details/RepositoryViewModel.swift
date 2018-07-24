@@ -13,9 +13,12 @@ import RxSwift
 class RepositoryViewModel: ViewModel, ViewModelType {
 
     struct Input {
-        let detailsTrigger: Observable<Void>
+        let headerRefresh: Observable<Void>
         let imageSelection: Observable<Void>
         let openInWebSelection: Observable<Void>
+        let watchersSelection: Observable<Void>
+        let starsSelection: Observable<Void>
+        let forksSelection: Observable<Void>
     }
 
     struct Output {
@@ -30,6 +33,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let forksCount: Driver<Int>
         let imageSelected: Driver<UserViewModel>
         let openInWebSelected: Driver<URL?>
+        let usersSelected: Driver<UsersViewModel>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -46,7 +50,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let fetching = activityIndicator.asDriver()
         let errors = errorTracker.asDriver()
 
-        input.detailsTrigger.flatMapLatest { () -> Observable<Repository> in
+        input.headerRefresh.flatMapLatest { () -> Observable<Repository> in
             let owner = self.repository.value.owner?.login ?? ""
             let repo = self.repository.value.name ?? ""
             return self.provider.repository(owner: owner, repo: repo)
@@ -72,6 +76,17 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             self.repository.value.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
 
+        let watchersSelected = input.watchersSelection.map { UsersMode.watchers(repository: self.repository.value) }
+        let starsSelected = input.starsSelection.map { UsersMode.stars(repository: self.repository.value) }
+        let forksSelected = input.forksSelection.map { UsersMode.forks(repository: self.repository.value) }
+
+        let usersSelected = Observable.of(watchersSelected, starsSelected, forksSelected).merge()
+            .asDriver(onErrorJustReturn: .followers(user: User()))
+            .map { (mode) -> UsersViewModel in
+                let viewModel = UsersViewModel(mode: mode, provider: self.provider)
+                return viewModel
+        }
+
         return Output(fetching: fetching,
                       error: errors,
                       name: name,
@@ -81,6 +96,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       starsCount: starsCount,
                       forksCount: forksCount,
                       imageSelected: imageSelected,
-                      openInWebSelected: openInWebSelected)
+                      openInWebSelected: openInWebSelected,
+                      usersSelected: usersSelected)
     }
 }

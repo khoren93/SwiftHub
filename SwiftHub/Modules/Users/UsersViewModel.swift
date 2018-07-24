@@ -14,12 +14,17 @@ import RxDataSources
 enum UsersMode {
     case followers(user: User)
     case following(user: User)
+
+    case watchers(repository: Repository)
+    case stars(repository: Repository)
+    case forks(repository: Repository)
 }
 
 class UsersViewModel: ViewModel, ViewModelType {
 
     struct Input {
-        let trigger: Driver<Void>
+        let headerRefresh: Observable<Void>
+        let footerRefresh: Observable<Void>
         let keywordTrigger: Driver<String>
         let textDidBeginEditing: Driver<Void>
         let selection: Driver<UserCellViewModel>
@@ -27,6 +32,8 @@ class UsersViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let fetching: Driver<Bool>
+        let headerFetching: Driver<Bool>
+        let footerFetching: Driver<Bool>
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[UserCellViewModel]>
         let imageUrl: Driver<URL?>
@@ -45,27 +52,30 @@ class UsersViewModel: ViewModel, ViewModelType {
 
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
+        let headerActivityIndicator = ActivityIndicator()
+        let footerActivityIndicator = ActivityIndicator()
         let errorTracker = ErrorTracker()
-
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
 
         let elements = BehaviorRelay<[UserCellViewModel]>(value: [])
         let dismissKeyboard = input.selection.mapToVoid()
 
-        let refresh = Observable.of(input.trigger.map { "" }.asObservable(), input.keywordTrigger.skip(1).throttle(1.5).distinctUntilChanged().asObservable()).merge()
-
-        refresh.flatMapLatest({ (keyword) -> Observable<[UserCellViewModel]> in
-            var request: Observable<[User]>
-            switch self.mode.value {
-            case .followers(let user): request = self.provider.userFollowers(username: user.login ?? "")
-            case .following(let user): request = self.provider.userFollowing(username: user.login ?? "")
-            }
-            return request
+        input.headerRefresh.flatMapLatest({ () -> Observable<[UserCellViewModel]> in
+            self.page = 1
+            return self.request()
                 .trackActivity(activityIndicator)
+                .trackActivity(headerActivityIndicator)
                 .trackError(errorTracker)
                 .map { $0.map { UserCellViewModel(with: $0) } }
         }).bind(to: elements).disposed(by: rx.disposeBag)
+
+        input.footerRefresh.flatMapLatest({ () -> Observable<[UserCellViewModel]> in
+            self.page += 1
+            return self.request()
+                .trackActivity(activityIndicator)
+                .trackActivity(footerActivityIndicator)
+                .trackError(errorTracker)
+                .map { $0.map { UserCellViewModel(with: $0) } }
+        }).map { elements.value + $0 }.bind(to: elements).disposed(by: rx.disposeBag)
 
         let textDidBeginEditing = input.textDidBeginEditing
 
@@ -79,6 +89,9 @@ class UsersViewModel: ViewModel, ViewModelType {
             switch mode {
             case .followers: return "Followers"
             case .following: return "Following"
+            case .watchers: return "Following"
+            case .stars: return "Following"
+            case .forks: return "Following"
             }
         }).asDriver(onErrorJustReturn: "")
 
@@ -86,16 +99,38 @@ class UsersViewModel: ViewModel, ViewModelType {
             switch mode {
             case .followers(let user): return user.avatarUrl?.url
             case .following(let user): return user.avatarUrl?.url
+            case .watchers(let repository): return repository.owner?.avatarUrl?.url
+            case .stars(let repository): return repository.owner?.avatarUrl?.url
+            case .forks(let repository): return repository.owner?.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
 
-        return Output(fetching: fetching,
+        return Output(fetching: activityIndicator.asDriver(),
+                      headerFetching: headerActivityIndicator.asDriver(),
+                      footerFetching: footerActivityIndicator.asDriver(),
                       navigationTitle: navigationTitle,
                       items: elements,
                       imageUrl: imageUrl,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
                       userSelected: userDetails,
-                      error: errors)
+                      error: errorTracker.asDriver())
+    }
+
+    func request() -> Observable<[User]> {
+        var request: Observable<[User]>
+        switch self.mode.value {
+        case .followers(let user):
+            request = self.provider.userFollowers(username: user.login ?? "", page: self.page)
+        case .following(let user):
+            request = self.provider.userFollowing(username: user.login ?? "", page: self.page)
+        case .watchers(let repository):
+            request = self.provider.watchers(repo: repository.name ?? "", page: self.page)
+        case .stars(let repository):
+            request = self.provider.stars(repo: repository.name ?? "", page: self.page)
+        case .forks(let repository):
+            request = self.provider.forks(repo: repository.name ?? "", page: self.page)
+        }
+        return request
     }
 }

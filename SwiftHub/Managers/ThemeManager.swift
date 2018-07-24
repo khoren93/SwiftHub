@@ -158,3 +158,13 @@ public extension Reactive where Base: UINavigationBar {
         }
     }
 }
+
+public extension Reactive where Base: UIApplication {
+
+    /// Bindable sink for `statusBarStyle` property
+    public var statusBarStyle: Binder<UIStatusBarStyle> {
+        return Binder(self.base) { view, attr in
+            view.statusBarStyle = attr
+        }
+    }
+}

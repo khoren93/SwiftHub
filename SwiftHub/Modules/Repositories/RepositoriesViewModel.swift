@@ -19,7 +19,8 @@ enum RepositoriesMode {
 class RepositoriesViewModel: ViewModel, ViewModelType {
 
     struct Input {
-        let trigger: Driver<Void>
+        let headerRefresh: Observable<Void>
+        let footerRefresh: Observable<Void>
         let keywordTrigger: Driver<String>
         let textDidBeginEditing: Driver<Void>
         let selection: Driver<RepositoryCellViewModel>
@@ -27,6 +28,8 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let fetching: Driver<Bool>
+        let headerFetching: Driver<Bool>
+        let footerFetching: Driver<Bool>
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[RepositoryCellViewModel]>
         let imageUrl: Driver<URL?>
@@ -45,27 +48,28 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
 
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
+        let headerActivityIndicator = ActivityIndicator()
+        let footerActivityIndicator = ActivityIndicator()
         let errorTracker = ErrorTracker()
-
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
 
         let elements = BehaviorRelay<[RepositoryCellViewModel]>(value: [])
         let dismissKeyboard = input.selection.mapToVoid()
 
-        let refresh = Observable.of(input.trigger.map { "" }.asObservable(), input.keywordTrigger.skip(1).throttle(1.5).distinctUntilChanged().asObservable()).merge()
-
-        refresh.flatMapLatest({ (keyword) -> Observable<[RepositoryCellViewModel]> in
-            var request: Observable<[Repository]>
-            switch self.mode.value {
-            case .userRepositories(let user): request = self.provider.userRepositories(username: user.login ?? "")
-            case .userStarredRepositories(let user): request = self.provider.userStarredRepositories(username: user.login ?? "")
-            }
-            return request
+        input.headerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
+            self.page = 1
+            return self.request()
                 .trackActivity(activityIndicator)
+                .trackActivity(headerActivityIndicator)
                 .trackError(errorTracker)
-                .map { $0.map { RepositoryCellViewModel(with: $0) } }
         }).bind(to: elements).disposed(by: rx.disposeBag)
+
+        input.footerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
+            self.page += 1
+            return self.request()
+                .trackActivity(activityIndicator)
+                .trackActivity(footerActivityIndicator)
+                .trackError(errorTracker)
+        }).map { elements.value + $0 }.bind(to: elements).disposed(by: rx.disposeBag)
 
         let textDidBeginEditing = input.textDidBeginEditing
 
@@ -89,13 +93,26 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             }
         }).asDriver(onErrorJustReturn: nil)
 
-        return Output(fetching: fetching,
+        return Output(fetching: activityIndicator.asDriver(),
+                      headerFetching: headerActivityIndicator.asDriver(),
+                      footerFetching: footerActivityIndicator.asDriver(),
                       navigationTitle: navigationTitle,
                       items: elements,
                       imageUrl: imageUrl,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
                       repositorySelected: repositoryDetails,
-                      error: errors)
+                      error: errorTracker.asDriver())
+    }
+
+    func request() -> Observable<[RepositoryCellViewModel]> {
+        var request: Observable<[Repository]>
+        switch self.mode.value {
+        case .userRepositories(let user):
+            request = self.provider.userRepositories(username: user.login ?? "", page: self.page)
+        case .userStarredRepositories(let user):
+            request = self.provider.userStarredRepositories(username: user.login ?? "", page: self.page)
+        }
+        return request.map { $0.map { RepositoryCellViewModel(with: $0) } }
     }
 }

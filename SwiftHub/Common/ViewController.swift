@@ -31,11 +31,6 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     var emptyDataSetTitle = "No Results"
     var emptyDataSetImage = R.image.image_no_result()
 
-    lazy var refreshControl: UIRefreshControl = {
-        let view = UIRefreshControl()
-        return view
-    }()
-
     lazy var searchBar: SearchBar = {
         let view = SearchBar()
         return view
@@ -88,8 +83,6 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         // Do any additional setup after loading the view.
         makeUI()
         bindViewModel()
-
-        isLoading.asObservable().bind(to: refreshControl.rx.isRefreshing).disposed(by: rx.disposeBag)
 
         closeBarButton.rx.tap.asObservable().subscribe(onNext: { [weak self] () in
             self?.navigator.dismiss(sender: self)

@@ -24,5 +24,7 @@ class InitialSplitViewController: TableViewController {
         }
 
         emptyDataSetTitle = "Welcome to SwiftHub!"
+        tableView.headRefreshControl = nil
+        tableView.footRefreshControl = nil
     }
 }

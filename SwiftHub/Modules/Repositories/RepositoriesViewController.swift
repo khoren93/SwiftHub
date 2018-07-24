@@ -57,13 +57,17 @@ class RepositoriesViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let input = RepositoriesViewModel.Input(trigger: Driver.just(()),
-                                         keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
-                                         textDidBeginEditing: searchBar.rx.textDidBeginEditing.asDriver(),
-                                         selection: tableView.rx.modelSelected(RepositoryCellViewModel.self).asDriver())
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let input = RepositoriesViewModel.Input(headerRefresh: refresh,
+                                                footerRefresh: footerRefreshTrigger,
+                                                keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
+                                                textDidBeginEditing: searchBar.rx.textDidBeginEditing.asDriver(),
+                                                selection: tableView.rx.modelSelected(RepositoryCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        output.headerFetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        output.footerFetching.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
 
         output.navigationTitle.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title

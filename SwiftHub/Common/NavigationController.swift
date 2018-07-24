@@ -32,6 +32,7 @@ class NavigationController: UINavigationController {
                             .font(.boldSystemFont(ofSize: 28))
                         }.dictionary
                 }, to: navigationBar.rx.largeTitleTextAttributes)
+                .bind({ $0.primary }, to: navigationBar.rx.backgroundColor)
                 .disposed(by: rx.disposeBag)
         }
 

@@ -56,6 +56,8 @@ class SearchViewController: TableViewController {
 
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
+        tableView.headRefreshControl = nil
+        tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {

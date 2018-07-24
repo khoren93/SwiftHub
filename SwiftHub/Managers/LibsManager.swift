@@ -23,6 +23,7 @@ import SwifterSwift
 import SwiftDate
 import Hero
 import PMAlertController
+import KafkaRefresh
 
 typealias AlertController = PMAlertController
 typealias AlertAction = PMAlertAction
@@ -40,17 +41,24 @@ class LibsManager: NSObject {
         libsManager.setupFabric()
         libsManager.setupAnalytics()
         libsManager.setupTheme()
+        libsManager.setupKafkaRefresh()
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
         libsManager.setupActivityView()
     }
 
     func setupTheme() {
-
         themeService.rx
-//            .bind({ $0.statusBarStyle }, to: UIApplication.shared.rx.statusBarStyle)
-            .bind({ $0.keyboardAppearance }, to: UITextField.appearance().rx.keyboardAppearance)
+            .bind({ $0.statusBarStyle }, to: UIApplication.shared.rx.statusBarStyle)
             .disposed(by: rx.disposeBag)
+    }
+
+    func setupKafkaRefresh() {
+        if let defaults = KafkaRefreshDefaults.standard() {
+            defaults.headDefaultStyle = .replicatorAllen
+            defaults.footDefaultStyle = .replicatorDot
+            defaults.themeColor = .secondary()
+        }
     }
 
     func setupActivityView() {

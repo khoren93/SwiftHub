@@ -15,14 +15,18 @@ let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbo
 
 enum GithubAPI {
     case searchRepositories(query: String)
-    case searchUsers(query: String)
-    case userRepositories(username: String)
-    case userStarredRepositories(username: String)
     case repository(owner: String, repo: String)
+    case watchers(repo: String, page: Int)
+    case stars(repo: String, page: Int)
+    case forks(repo: String, page: Int)
+
+    case searchUsers(query: String)
     case user(owner: String)
     case organization(owner: String)
-    case userFollowers(username: String)
-    case userFollowing(username: String)
+    case userRepositories(username: String, page: Int)
+    case userStarredRepositories(username: String, page: Int)
+    case userFollowers(username: String, page: Int)
+    case userFollowing(username: String, page: Int)
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -34,14 +38,18 @@ extension GithubAPI: TargetType, ProductAPIType {
     var path: String {
         switch self {
         case .searchRepositories: return "/search/repositories"
-        case .searchUsers: return "/search/users"
-        case .userRepositories(let username): return "/users/\(username)/repos"
-        case .userStarredRepositories(let username): return "/users/\(username)/starred"
         case .repository(let owner, let repo): return "/repos/\(owner)/\(repo)"
+        case .watchers: return "/watchers"
+        case .stars: return "/stars"
+        case .forks: return "/forks"
+
+        case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
-        case .userFollowers(let username): return "/users/\(username)/followers"
-        case .userFollowing(let username): return "/users/\(username)/following"
+        case .userRepositories(let username, _): return "/users/\(username)/repos"
+        case .userStarredRepositories(let username, _): return "/users/\(username)/starred"
+        case .userFollowers(let username, _): return "/users/\(username)/followers"
+        case .userFollowing(let username, _): return "/users/\(username)/following"
         }
     }
 
@@ -62,9 +70,37 @@ extension GithubAPI: TargetType, ProductAPIType {
             var params: [String: Any] = [:]
             params["q"] = query
             return params
+        case .watchers(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
+        case .stars(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
+        case .forks(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
         case .searchUsers(let query):
             var params: [String: Any] = [:]
             params["q"] = query
+            return params
+        case .userRepositories(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
+        case .userStarredRepositories(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
+        case .userFollowers(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
+            return params
+        case .userFollowing(_, let page):
+            var params: [String: Any] = [:]
+            params["page"] = page
             return params
         default:
             return nil
@@ -78,12 +114,15 @@ extension GithubAPI: TargetType, ProductAPIType {
     var sampleData: Data {
         switch self {
         case .searchRepositories: return stubbedResponse("RepositorySearch")
-        case .searchUsers: return stubbedResponse("UserSearch")
-        case .userRepositories: return stubbedResponse("UserRepositories")
-        case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .repository: return stubbedResponse("Repository")
+        case .watchers: return stubbedResponse("Watchers")
+        case .stars: return stubbedResponse("Stars")
+        case .forks: return stubbedResponse("Forks")
+        case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")
+        case .userRepositories: return stubbedResponse("UserRepositories")
+        case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .userFollowers: return stubbedResponse("UserFollowers")
         case .userFollowing: return stubbedResponse("UserFollowing")
         }

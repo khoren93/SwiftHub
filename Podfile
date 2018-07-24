@@ -31,9 +31,6 @@ target 'SwiftHub' do
   pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
   pod 'SwiftDate', '~> 5.0'  # https://github.com/malcommac/SwiftDate
 
-  # Phone
-  #pod 'PhoneNumberKit', '~> 2.1'  # https://github.com/marmelroy/PhoneNumberKit
-
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
   pod 'SwiftLint', '0.26.0'  # https://github.com/realm/SwiftLint
@@ -53,7 +50,8 @@ target 'SwiftHub' do
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
   pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
-  pod 'AcknowList'
+  pod 'AcknowList', '~> 1.0'  # https://github.com/vtourraine/AcknowList
+  pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
 
   # Keyboard
   pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager

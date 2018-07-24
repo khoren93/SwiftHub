@@ -26,6 +26,7 @@ class TextField: UITextField {
             .bind({ $0.secondary }, to: rx.tintColor)
             .bind({ $0.textGray }, to: rx.placeholderColor)
             .bind({ $0.text }, to: rx.borderColor)
+            .bind({ $0.keyboardAppearance }, to: rx.keyboardAppearance)
             .disposed(by: rx.disposeBag)
 
         layer.masksToBounds = true

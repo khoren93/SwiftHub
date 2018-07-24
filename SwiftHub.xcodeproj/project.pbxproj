@@ -82,6 +82,7 @@
 		A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */; };
 		A0E2B08D2106293A000DA282 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08C2106293A000DA282 /* Switch.swift */; };
 		A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08E21062B9B000DA282 /* SettingsSection.swift */; };
+		A0E2B091210738C9000DA282 /* KafkaRefresh+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -220,6 +221,7 @@
 		A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeCellViewModel.swift; sourceTree = "<group>"; };
 		A0E2B08C2106293A000DA282 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		A0E2B08E21062B9B000DA282 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KafkaRefresh+Rx.swift"; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 		C762C6711E1D5A7300C09EBD /* RxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */,
 				A09DE8CF20E7C05C00F6F2BF /* Kingfisher+Rx.swift */,
 				C762C6721E1D5A7300C09EBD /* Observable+Logging.swift */,
 				C762C6731E1D5A7300C09EBD /* Observable+Operators.swift */,
@@ -873,6 +876,7 @@
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
+				"${BUILT_PRODUCTS_DIR}/KafkaRefresh/KafkaRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
@@ -912,6 +916,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KafkaRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
@@ -1070,6 +1075,7 @@
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				A09DE8C320E7B83F00F6F2BF /* UserCellViewModel.swift in Sources */,
 				A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */,
+				A0E2B091210738C9000DA282 /* KafkaRefresh+Rx.swift in Sources */,
 				070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */,
 				A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,

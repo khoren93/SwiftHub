@@ -13,7 +13,7 @@ import RxSwift
 class UserViewModel: ViewModel, ViewModelType {
 
     struct Input {
-        let detailsTrigger: Observable<Void>
+        let headerRefresh: Observable<Void>
         let imageSelection: Observable<Void>
         let openInWebSelection: Observable<Void>
         let repositoriesSelection: Observable<Void>
@@ -52,7 +52,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let fetching = activityIndicator.asDriver()
         let errors = errorTracker.asDriver()
 
-        input.detailsTrigger.flatMapLatest { () -> Observable<User> in
+        input.headerRefresh.flatMapLatest { () -> Observable<User> in
             let user = self.user.value
             let owner = user.login ?? ""
             let request: Observable<User>
