@@ -20,7 +20,7 @@ class RepositoryCellViewModel {
 
     init(with repository: Repository) {
         self.repository = repository
-        title = Driver.just("\(repository.name ?? "")")
+        title = Driver.just("\(repository.fullName ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
         imageUrl = Driver.just(repository.owner?.avatarUrl?.url)
     }

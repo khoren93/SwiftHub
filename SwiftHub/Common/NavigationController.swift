@@ -26,9 +26,9 @@ class NavigationController: UINavigationController {
         if #available(iOS 11.0, *) {
             navigationBar.prefersLargeTitles = true
             themeService.rx
-                .bind({ let color = $0
-                    return Attributes {
-                        return $0.foreground(color: color.text)
+                .bind({ color in
+                    Attributes {
+                        $0.foreground(color: color.text)
                             .font(.boldSystemFont(ofSize: 28))
                         }.dictionary
                 }, to: navigationBar.rx.largeTitleTextAttributes)

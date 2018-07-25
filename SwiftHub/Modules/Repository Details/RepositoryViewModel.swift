@@ -33,6 +33,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let forksCount: Driver<Int>
         let imageSelected: Driver<UserViewModel>
         let openInWebSelected: Driver<URL?>
+        let repositoriesSelected: Driver<RepositoriesViewModel>
         let usersSelected: Driver<UsersViewModel>
     }
 
@@ -76,11 +77,17 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             self.repository.value.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
 
+        let repositoriesSelected = input.forksSelection.asDriver(onErrorJustReturn: ())
+            .map { () -> RepositoriesViewModel in
+                let mode = RepositoriesMode.forks(repository: self.repository.value)
+                let viewModel = RepositoriesViewModel(mode: mode, provider: self.provider)
+                return viewModel
+        }
+
         let watchersSelected = input.watchersSelection.map { UsersMode.watchers(repository: self.repository.value) }
         let starsSelected = input.starsSelection.map { UsersMode.stars(repository: self.repository.value) }
-        let forksSelected = input.forksSelection.map { UsersMode.forks(repository: self.repository.value) }
 
-        let usersSelected = Observable.of(watchersSelected, starsSelected, forksSelected).merge()
+        let usersSelected = Observable.of(watchersSelected, starsSelected).merge()
             .asDriver(onErrorJustReturn: .followers(user: User()))
             .map { (mode) -> UsersViewModel in
                 let viewModel = UsersViewModel(mode: mode, provider: self.provider)
@@ -97,6 +104,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       forksCount: forksCount,
                       imageSelected: imageSelected,
                       openInWebSelected: openInWebSelected,
+                      repositoriesSelected: repositoriesSelected,
                       usersSelected: usersSelected)
     }
 }

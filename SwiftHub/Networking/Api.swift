@@ -18,9 +18,9 @@ enum ApiError: Error {
 protocol SwiftHubAPI {
     func searchRepositories(query: String) -> Observable<RepositorySearch>
     func repository(owner: String, repo: String) -> Observable<Repository>
-    func watchers(repo: String, page: Int) -> Observable<[User]>
-    func stars(repo: String, page: Int) -> Observable<[User]>
-    func forks(repo: String, page: Int) -> Observable<[User]>
+    func watchers(owner: String, repo: String, page: Int) -> Observable<[User]>
+    func stargazers(owner: String, repo: String, page: Int) -> Observable<[User]>
+    func forks(owner: String, repo: String, page: Int) -> Observable<[Repository]>
 
     func searchUsers(query: String) -> Observable<UserSearch>
     func user(owner: String) -> Observable<User>
@@ -43,21 +43,21 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
-    func watchers(repo: String, page: Int) -> Observable<[User]> {
-        return provider.request(.watchers(repo: repo, page: page))
+    func watchers(owner: String, repo: String, page: Int) -> Observable<[User]> {
+        return provider.request(.watchers(owner: owner, repo: repo, page: page))
             .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
-    func stars(repo: String, page: Int) -> Observable<[User]> {
-        return provider.request(.stars(repo: repo, page: page))
+    func stargazers(owner: String, repo: String, page: Int) -> Observable<[User]> {
+        return provider.request(.stargazers(owner: owner, repo: repo, page: page))
             .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 
-    func forks(repo: String, page: Int) -> Observable<[User]> {
-        return provider.request(.forks(repo: repo, page: page))
-            .mapArray(User.self)
+    func forks(owner: String, repo: String, page: Int) -> Observable<[Repository]> {
+        return provider.request(.forks(owner: owner, repo: repo, page: page))
+            .mapArray(Repository.self)
             .observeOn(MainScheduler.instance)
     }
 

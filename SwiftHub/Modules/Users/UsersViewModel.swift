@@ -17,7 +17,6 @@ enum UsersMode {
 
     case watchers(repository: Repository)
     case stars(repository: Repository)
-    case forks(repository: Repository)
 }
 
 class UsersViewModel: ViewModel, ViewModelType {
@@ -89,9 +88,8 @@ class UsersViewModel: ViewModel, ViewModelType {
             switch mode {
             case .followers: return "Followers"
             case .following: return "Following"
-            case .watchers: return "Following"
-            case .stars: return "Following"
-            case .forks: return "Following"
+            case .watchers: return "Watchers"
+            case .stars: return "Stargazers"
             }
         }).asDriver(onErrorJustReturn: "")
 
@@ -101,7 +99,6 @@ class UsersViewModel: ViewModel, ViewModelType {
             case .following(let user): return user.avatarUrl?.url
             case .watchers(let repository): return repository.owner?.avatarUrl?.url
             case .stars(let repository): return repository.owner?.avatarUrl?.url
-            case .forks(let repository): return repository.owner?.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
 
@@ -125,11 +122,9 @@ class UsersViewModel: ViewModel, ViewModelType {
         case .following(let user):
             request = self.provider.userFollowing(username: user.login ?? "", page: self.page)
         case .watchers(let repository):
-            request = self.provider.watchers(repo: repository.name ?? "", page: self.page)
+            request = self.provider.watchers(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
         case .stars(let repository):
-            request = self.provider.stars(repo: repository.name ?? "", page: self.page)
-        case .forks(let repository):
-            request = self.provider.forks(repo: repository.name ?? "", page: self.page)
+            request = self.provider.stargazers(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
         }
         return request
     }

@@ -14,6 +14,8 @@ import RxDataSources
 enum RepositoriesMode {
     case userRepositories(user: User)
     case userStarredRepositories(user: User)
+
+    case forks(repository: Repository)
 }
 
 class RepositoriesViewModel: ViewModel, ViewModelType {
@@ -83,6 +85,7 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             switch mode {
             case .userRepositories: return "Repositories"
             case .userStarredRepositories: return "Starred"
+            case .forks: return "Forks"
             }
         }).asDriver(onErrorJustReturn: "")
 
@@ -90,6 +93,7 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             switch mode {
             case .userRepositories(let user): return user.avatarUrl?.url
             case .userStarredRepositories(let user): return user.avatarUrl?.url
+            case .forks(let repository): return repository.owner?.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
 
@@ -112,6 +116,8 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             request = self.provider.userRepositories(username: user.login ?? "", page: self.page)
         case .userStarredRepositories(let user):
             request = self.provider.userStarredRepositories(username: user.login ?? "", page: self.page)
+        case .forks(let repository):
+            request = self.provider.forks(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
         }
         return request.map { $0.map { RepositoryCellViewModel(with: $0) } }
     }

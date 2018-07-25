@@ -16,9 +16,9 @@ let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbo
 enum GithubAPI {
     case searchRepositories(query: String)
     case repository(owner: String, repo: String)
-    case watchers(repo: String, page: Int)
-    case stars(repo: String, page: Int)
-    case forks(repo: String, page: Int)
+    case watchers(owner: String, repo: String, page: Int)
+    case stargazers(owner: String, repo: String, page: Int)
+    case forks(owner: String, repo: String, page: Int)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -39,9 +39,9 @@ extension GithubAPI: TargetType, ProductAPIType {
         switch self {
         case .searchRepositories: return "/search/repositories"
         case .repository(let owner, let repo): return "/repos/\(owner)/\(repo)"
-        case .watchers: return "/watchers"
-        case .stars: return "/stars"
-        case .forks: return "/forks"
+        case .watchers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/subscribers"
+        case .stargazers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/stargazers"
+        case .forks(let owner, let repo, _): return "/repos/\(owner)/\(repo)/forks"
 
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
@@ -70,15 +70,15 @@ extension GithubAPI: TargetType, ProductAPIType {
             var params: [String: Any] = [:]
             params["q"] = query
             return params
-        case .watchers(_, let page):
+        case .watchers(_, _, let page):
             var params: [String: Any] = [:]
             params["page"] = page
             return params
-        case .stars(_, let page):
+        case .stargazers(_, _, let page):
             var params: [String: Any] = [:]
             params["page"] = page
             return params
-        case .forks(_, let page):
+        case .forks(_, _, let page):
             var params: [String: Any] = [:]
             params["page"] = page
             return params
@@ -116,7 +116,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return stubbedResponse("RepositorySearch")
         case .repository: return stubbedResponse("Repository")
         case .watchers: return stubbedResponse("Watchers")
-        case .stars: return stubbedResponse("Stars")
+        case .stargazers: return stubbedResponse("Stars")
         case .forks: return stubbedResponse("Forks")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
