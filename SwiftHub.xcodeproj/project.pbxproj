@@ -83,6 +83,9 @@
 		A0E2B08D2106293A000DA282 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08C2106293A000DA282 /* Switch.swift */; };
 		A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08E21062B9B000DA282 /* SettingsSection.swift */; };
 		A0E2B091210738C9000DA282 /* KafkaRefresh+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */; };
+		A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0922108AFF0000DA282 /* RepositoryWatchers.json */; };
+		A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0942108B00D000DA282 /* RepositoryStargazers.json */; };
+		A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0962108B024000DA282 /* RepositoryForks.json */; };
 		A0ED264820F76A65004E8137 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264720F76A65004E8137 /* LoginViewModel.swift */; };
 		A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ED264920F76A7D004E8137 /* LoginViewController.swift */; };
 		C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C762C6221E1D414B00C09EBD /* R.generated.swift */; };
@@ -222,6 +225,9 @@
 		A0E2B08C2106293A000DA282 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		A0E2B08E21062B9B000DA282 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KafkaRefresh+Rx.swift"; sourceTree = "<group>"; };
+		A0E2B0922108AFF0000DA282 /* RepositoryWatchers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryWatchers.json; sourceTree = "<group>"; };
+		A0E2B0942108B00D000DA282 /* RepositoryStargazers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryStargazers.json; sourceTree = "<group>"; };
+		A0E2B0962108B024000DA282 /* RepositoryForks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryForks.json; sourceTree = "<group>"; };
 		A0ED264720F76A65004E8137 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A0ED264920F76A7D004E8137 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AB30C56D3A94C8B749FE468F /* Pods-SwiftHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -459,7 +465,10 @@
 			children = (
 				070FF84120F225200070F5E8 /* Organization.json */,
 				07DFF6D220E90502004DAA68 /* Repository.json */,
+				A0E2B0962108B024000DA282 /* RepositoryForks.json */,
 				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
+				A0E2B0942108B00D000DA282 /* RepositoryStargazers.json */,
+				A0E2B0922108AFF0000DA282 /* RepositoryWatchers.json */,
 				070FF83F20F2250F0070F5E8 /* User.json */,
 				A0E2B0792101FCE4000DA282 /* UserFollowers.json */,
 				A0E2B07B2101FCF4000DA282 /* UserFollowing.json */,
@@ -820,10 +829,12 @@
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
+				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
+				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
@@ -831,6 +842,7 @@
 				A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */,
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
+				A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
 				C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */,

@@ -115,9 +115,9 @@ extension GithubAPI: TargetType, ProductAPIType {
         switch self {
         case .searchRepositories: return stubbedResponse("RepositorySearch")
         case .repository: return stubbedResponse("Repository")
-        case .watchers: return stubbedResponse("Watchers")
-        case .stargazers: return stubbedResponse("Stars")
-        case .forks: return stubbedResponse("Forks")
+        case .watchers: return stubbedResponse("RepositoryWatchers")
+        case .stargazers: return stubbedResponse("RepositoryStargers")
+        case .forks: return stubbedResponse("RepositoryForks")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")
