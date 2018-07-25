@@ -1,6 +1,11 @@
 # SwiftHub iOS
 Unofficial Github iOS client written in RxSwift and MVVM architecture.
 
+## Screenshots
+
+<img alt="01_search_repository_screen_light" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen_light.png?raw=true" width="320">&nbsp;
+<img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen_dark.png?raw=true" width="320">&nbsp;
+
 ## Building and Running
 
 You'll need a few things before we get started. Make sure you have Xcode installed from the App Store. Then run the following two commands to install Xcode's command line tools and `bundler`, if you don't have that yet.
