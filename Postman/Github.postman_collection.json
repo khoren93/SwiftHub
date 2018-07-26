@@ -6,17 +6,44 @@
 	},
 	"item": [
 		{
-			"name": "Repositories",
-			"description": null,
+			"_postman_id": "2cb6825f-86f9-4721-9b4c-acbca7600de7",
+			"name": "OAuth Authorizations",
 			"item": [
 				{
+					"_postman_id": "6cfaeaff-6aa9-462b-b832-16d9870689a4",
+					"name": "Create a new authorization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/authorizations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"authorizations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "You can use this API to manage the access OAuth applications have to your account. You can only access this API via Basic Authentication using your username and password, not tokens.\n\nMake sure you understand how to work with two-factor authentication if you or your users have two-factor authentication enabled."
+		},
+		{
+			"_postman_id": "ffeb3425-2c22-4d7f-bca7-6a1b4e6b2c0e",
+			"name": "Repositories",
+			"item": [
+				{
+					"_postman_id": "8c4ae7af-a246-452c-83b8-7876e98be0d3",
 					"name": "List your repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/user/repos?page=1&visibility=all&affiliation=owner,collaborator,organization_member&sort=full_name&direction=asc",
+							"raw": "{{base_url}}/user/repos?page=1&visibility=all&affiliation=owner,collaborator,organization_member&sort=full_name&direction=asc&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -44,6 +71,10 @@
 								{
 									"key": "direction",
 									"value": "asc"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -52,13 +83,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "6c6dbfcd-14e5-49e5-a2bf-f4c84b979a8f",
 					"name": "List user repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/users/{{username}}/repos?page=1",
+							"raw": "{{base_url}}/users/{{username}}/repos?page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -71,6 +103,10 @@
 								{
 									"key": "page",
 									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -79,13 +115,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "268c2027-33ee-4929-a11c-ae107f897415",
 					"name": "List organization repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/orgs/{{org}}/repos?type=all&page=1",
+							"raw": "{{base_url}}/orgs/{{org}}/repos?type=all&page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -102,6 +139,10 @@
 								{
 									"key": "page",
 									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -110,13 +151,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "35df1714-c878-4a4d-a4ab-2bbb8935225c",
 					"name": "List all public repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/repositories?since=364",
+							"raw": "{{base_url}}/repositories?since=364&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -127,6 +169,10 @@
 								{
 									"key": "since",
 									"value": "364"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -135,6 +181,36 @@
 					"response": []
 				},
 				{
+					"_postman_id": "86d09c05-7d31-4541-8fde-46feb5544e54",
+					"name": "List Forks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/forks?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"forks"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "fd94f338-6bec-46a9-892d-313f9040cb4a",
 					"name": "Get",
 					"request": {
 						"method": "GET",
@@ -156,13 +232,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "a411929b-cff5-47a5-9e7c-9b02625dc2bb",
 					"name": "List contributors",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contributors?page=1",
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contributors?page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -176,6 +253,10 @@
 								{
 									"key": "page",
 									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -184,6 +265,7 @@
 					"response": []
 				},
 				{
+					"_postman_id": "9df626c7-d8ea-4dcb-8527-066f75ee91ca",
 					"name": "List languages",
 					"request": {
 						"method": "GET",
@@ -206,6 +288,7 @@
 					"response": []
 				},
 				{
+					"_postman_id": "c4962484-c50b-482e-9922-c011afee0003",
 					"name": "List Teams",
 					"request": {
 						"method": "GET",
@@ -227,13 +310,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "e931f0ee-6777-407b-880a-4a0792a1a659",
 					"name": "List Tags",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/tags?page=1",
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/tags?page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -247,6 +331,10 @@
 								{
 									"key": "page",
 									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						}
@@ -256,23 +344,24 @@
 			]
 		},
 		{
+			"_postman_id": "8b646807-5422-4359-8326-20a7f3203549",
 			"name": "Organizations",
-			"description": "",
 			"item": [
 				{
+					"_postman_id": "3b992a24-f875-4d6a-86c3-d4ee7b7e1cbc",
 					"name": "Get an organization",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/orgs/{{owner}}",
+							"raw": "{{base_url}}/orgs/{{org}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"orgs",
-								"{{owner}}"
+								"{{org}}"
 							]
 						},
 						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
@@ -282,10 +371,11 @@
 			]
 		},
 		{
+			"_postman_id": "30a6646f-0871-418c-a20f-947700fa0a21",
 			"name": "Users",
-			"description": "",
 			"item": [
 				{
+					"_postman_id": "d87e2309-9f5d-49a4-bcce-845836d915a1",
 					"name": "Get a single user",
 					"request": {
 						"method": "GET",
@@ -304,21 +394,81 @@
 						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
 					},
 					"response": []
+				},
+				{
+					"_postman_id": "2d28f2df-ec06-47a9-992b-c3ffd8decacb",
+					"name": "List followers of a user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{username}}/followers?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{username}}",
+								"followers"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "9a3ac906-1e14-4a74-9f64-e74fee326005",
+					"name": "List users followed by another user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{username}}/following?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{username}}",
+								"following"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
 				}
 			]
 		},
 		{
+			"_postman_id": "95c5eeaa-859f-4a59-a067-c6a82bb4a858",
 			"name": "Search",
-			"description": "The Search API is optimized to help you find the specific item you're looking for (e.g., a specific user, a specific file in a repository, etc.). Think of it the way you think of performing a search on Google. It's designed to help you find the one result you're looking for (or maybe the few results you're looking for). Just like searching on Google, you sometimes want to see a few pages of search results so that you can find the item that best meets your needs. To satisfy that need, the GitHub Search API provides up to 1,000 results for each search.",
 			"item": [
 				{
+					"_postman_id": "47a0e3e2-9d0e-40e5-bd1a-05bf04e5e4b4",
 					"name": "Search Repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/search/repositories?q=swift",
+							"raw": "{{base_url}}/search/repositories?q=swift&page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -330,6 +480,14 @@
 								{
 									"key": "q",
 									"value": "swift"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
@@ -338,13 +496,14 @@
 					"response": []
 				},
 				{
+					"_postman_id": "b637d221-b5cb-4bc4-9a6a-67e17de3a7f9",
 					"name": "Search Users",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_url}}/search/users?q={{username}}",
+							"raw": "{{base_url}}/search/users?q=realm&page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -355,11 +514,140 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "{{username}}"
+									"value": "realm"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
 								}
 							]
 						},
 						"description": "Find repositories via various criteria. This method returns up to 100 results per page."
+					},
+					"response": []
+				}
+			],
+			"description": "The Search API is optimized to help you find the specific item you're looking for (e.g., a specific user, a specific file in a repository, etc.). Think of it the way you think of performing a search on Google. It's designed to help you find the one result you're looking for (or maybe the few results you're looking for). Just like searching on Google, you sometimes want to see a few pages of search results so that you can find the item that best meets your needs. To satisfy that need, the GitHub Search API provides up to 1,000 results for each search."
+		},
+		{
+			"_postman_id": "4c904c39-09ed-4cbc-b5b7-491a5c15ad3e",
+			"name": "Activity",
+			"item": [
+				{
+					"_postman_id": "287bec66-abc9-4c3f-be9e-def09d852563",
+					"name": "List Stargazers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/stargazers?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"stargazers"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "b13981e6-e345-4b44-89b8-847192c3b10b",
+					"name": "List repositories being starred",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{username}}/starred?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{username}}",
+								"starred"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "54aae6ef-8a42-41f3-8ff1-7d2f5e5237e4",
+					"name": "List watchers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/subscribers?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"subscribers"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "b42615d7-78d3-47b0-83a5-0077ce508fd2",
+					"name": "List repositories being watched",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/users/{{username}}/subscriptions?per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{username}}",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								}
+							]
+						},
+						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
 					},
 					"response": []
 				}
