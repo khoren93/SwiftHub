@@ -37,7 +37,8 @@ class SettingsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let input = SettingsViewModel.Input(trigger: Observable.just(()),
+        let refresh = Observable.of(Observable.just(()), motionShakeEvent, rx.viewWillAppear.mapToVoid()).merge()
+        let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 

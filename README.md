@@ -1,5 +1,5 @@
 # SwiftHub iOS
-Unofficial Github iOS client written in RxSwift and MVVM architecture.
+Open source Github iOS client written in RxSwift and MVVM architecture.
 
 ## Screenshots
 

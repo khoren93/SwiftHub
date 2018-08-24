@@ -12,30 +12,32 @@ class LoginViewController: ViewController {
 
     var viewModel: LoginViewModel!
 
-    lazy var emailTextField: TextField = {
-        let view = TextField()
-        view.placeholder = "email"
-//        view.setPlaceHolderTextColor(.white)
-        view.textAlignment = .center
-        view.keyboardType = .emailAddress
-        view.addBottomBorder(leftInset: 0)
+    lazy var logoImageView: ImageView = {
+        let view = ImageView(image: R.image.image_no_result()?.withRenderingMode(.alwaysTemplate))
         return view
     }()
 
-    lazy var passwordTextField: TextField = {
-        let view = TextField()
-        view.placeholder = "password"
-//        view.setPlaceHolderTextColor(.white)
+    lazy var titleLabel: Label = {
+        let view = Label(style: .style211)
+        view.font = view.font.withSize(22)
+        view.text = "Welcome to SwiftHub"
         view.textAlignment = .center
-        view.isSecureTextEntry = true
-        view.addBottomBorder(leftInset: 0)
+        return view
+    }()
+
+    lazy var detailLabel: Label = {
+        let view = Label(style: .style122)
+        view.font = view.font.withSize(17)
+        view.numberOfLines = 0
+        view.text = "Open source Github iOS client written in RxSwift and MVVM architecture."
+        view.textAlignment = .center
         return view
     }()
 
     lazy var loginButton: Button = {
         let view = Button()
 //        view.hero.id = "SaveButton"
-        view.titleForNormal = "Login"
+        view.titleForNormal = "Sign in with Github"
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
         return view
@@ -69,10 +71,19 @@ class LoginViewController: ViewController {
             make.width.equalTo(300)
         })
 
+        themeService.rx
+            .bind({ $0.text }, to: titleLabel.rx.textColor)
+            .bind({ $0.textGray }, to: detailLabel.rx.textColor)
+            .bind({ $0.text }, to: logoImageView.rx.tintColor)
+            .disposed(by: rx.disposeBag)
+
         stackView.spacing = self.inset
 
-        stackView.addArrangedSubview(emailTextField)
-        stackView.addArrangedSubview(passwordTextField)
+        stackView.addArrangedSubview(View(height: self.inset*4))
+        stackView.addArrangedSubview(logoImageView)
+        stackView.addArrangedSubview(View(height: self.inset*2))
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(detailLabel)
         stackView.addArrangedSubview(View(height: self.inset*2))
         stackView.addArrangedSubview(loginButton)
     }
@@ -90,9 +101,6 @@ class LoginViewController: ViewController {
 //        output.updated.drive().disposed(by: rx.disposeBag)
 
 //        output.loginButtonEnabled.drive(loginButton.rx.isEnabled).disposed(by: rx.disposeBag)
-
-        _ = emailTextField.rx.textInput <-> viewModel.email
-        _ = passwordTextField.rx.textInput <-> viewModel.password
 
         output.error.drive(onNext: { (error) in
             logError("\(error)")

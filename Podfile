@@ -16,6 +16,7 @@ target 'SwiftHub' do
   pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
   pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
   pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+  pod 'RxViewController', '~> 0.3'  # https://github.com/devxoul/RxViewController
   pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
   pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
@@ -33,7 +34,7 @@ target 'SwiftHub' do
 
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
-  pod 'SwiftLint', '0.26.0'  # https://github.com/realm/SwiftLint
+  pod 'SwiftLint', '0.27.0'  # https://github.com/realm/SwiftLint
 
   # Keychain
   pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess

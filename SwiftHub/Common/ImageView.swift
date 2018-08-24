@@ -31,6 +31,7 @@ class ImageView: UIImageView {
     }
 
     func makeUI() {
+        tintColor = .primary()
         layer.masksToBounds = true
         contentMode = .center
 

@@ -59,6 +59,11 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         isFooterLoading.bind(to: tableView.footRefreshControl.rx.isAnimating).disposed(by: rx.disposeBag)
 
         tableView.footRefreshControl.autoRefreshOnFoot = true
+
+        let updateEmptyDataSet = Observable.of(isLoading.mapToVoid().asObservable(), emptyDataSetImageTintColor.mapToVoid()).merge()
+        updateEmptyDataSet.subscribe(onNext: { [weak self] () in
+            self?.tableView.reloadEmptyDataSet()
+        }).disposed(by: rx.disposeBag)
     }
 
     override func updateUI() {

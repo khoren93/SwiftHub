@@ -30,6 +30,9 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
     var emptyDataSetTitle = "No Results"
     var emptyDataSetImage = R.image.image_no_result()
+    var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
+
+    let motionShakeEvent = PublishSubject<Void>()
 
     lazy var searchBar: SearchBar = {
         let view = SearchBar()
@@ -102,6 +105,12 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
                 self?.didBecomeActive()
             }.disposed(by: rx.disposeBag)
 
+        NotificationCenter.default
+            .rx.notification(NSNotification.Name.UIAccessibilityReduceMotionStatusDidChange)
+            .subscribe(onNext: { (event) in
+            logDebug("Motion Status changed")
+        }).disposed(by: rx.disposeBag)
+
         // Two finger swipe gesture for opening Flex
         let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
         twoSwipeGesture.numberOfTouchesRequired = 1
@@ -141,8 +150,15 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
 
+        motionShakeEvent.subscribe(onNext: { () in
+            let theme = themeService.theme == .dark ? ThemeType.light : ThemeType.dark
+            theme.save()
+            themeService.set(theme)
+        }).disposed(by: rx.disposeBag)
+
         themeService.rx
             .bind({ $0.primary }, to: view.rx.backgroundColor)
+            .bind({ $0.text }, to: self.rx.emptyDataSetImageTintColorBinder)
             .disposed(by: rx.disposeBag)
 
         updateUI()
@@ -154,6 +170,12 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
     func updateUI() {
 
+    }
+
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            motionShakeEvent.onNext(())
+        }
     }
 
     func orientationChanged() {
@@ -209,6 +231,16 @@ extension ViewController {
     }
 }
 
+extension Reactive where Base: ViewController {
+
+    /// Bindable sink for `backgroundColor` property
+    var emptyDataSetImageTintColorBinder: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.emptyDataSetImageTintColor.accept(attr)
+        }
+    }
+}
+
 extension ViewController: DZNEmptyDataSetSource {
 
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
@@ -217,6 +249,10 @@ extension ViewController: DZNEmptyDataSetSource {
 
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return emptyDataSetImage
+    }
+
+    func imageTintColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return emptyDataSetImageTintColor.value
     }
 
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

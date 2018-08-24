@@ -17,6 +17,7 @@ import Fabric
 import Crashlytics
 import NVActivityIndicatorView
 import NSObject_Rx
+import RxViewController
 import RxOptional
 import RxGesture
 import SwifterSwift
