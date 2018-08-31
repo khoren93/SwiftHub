@@ -38,7 +38,7 @@ class NavigationController: UINavigationController {
 
         themeService.rx
             .bind({ $0.secondary }, to: navigationBar.rx.tintColor)
-            .bind({ $0.primary }, to: navigationBar.rx.barTintColor)
+            .bind({ $0.primaryDark }, to: navigationBar.rx.barTintColor)
             .bind({ [NSAttributedStringKey.foregroundColor: $0.text] }, to: navigationBar.rx.titleTextAttributes)
             .disposed(by: rx.disposeBag)
     }

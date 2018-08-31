@@ -10,7 +10,7 @@ target 'SwiftHub' do
 
   # Networking
   pod 'Moya/RxSwift', '~> 11.0'  # https://github.com/Moya/Moya
-  pod 'ReachabilitySwift', '~> 4' # https://github.com/ashleymills/Reachability.swift
+  pod 'ReachabilitySwift', '~> 4.0' # https://github.com/ashleymills/Reachability.swift
 
   # Rx Extensions
   pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -20,6 +20,7 @@ target 'SwiftHub' do
   pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
   pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
+  #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
 
   # JSON Mapping
   #pod 'ObjectMapper', '~> 3.0'  # https://github.com/Hearst-DD/ObjectMapper

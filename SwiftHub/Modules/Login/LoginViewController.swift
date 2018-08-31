@@ -7,12 +7,74 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import SafariServices
+
+enum LoginSegments: Int {
+    case basic, oAuth
+
+    var title: String {
+        switch self {
+        case .basic: return "Basic"
+        case .oAuth: return "oAuth"
+        }
+    }
+}
 
 class LoginViewController: ViewController {
 
     var viewModel: LoginViewModel!
 
-    lazy var logoImageView: ImageView = {
+    lazy var segmentedControl: SegmentedControl = {
+        let items = [LoginSegments.basic.title, LoginSegments.oAuth.title]
+        let view = SegmentedControl(items: items)
+        view.selectedSegmentIndex = 0
+        return view
+    }()
+
+    lazy var basicLoginStackView: StackView = {
+        let subviews: [UIView] = [self.basicLogoImageView, self.loginTextField, self.passwordTextField, self.basicLoginButton, View()]
+        let view = StackView(arrangedSubviews: subviews)
+        return view
+    }()
+
+    lazy var oAuthLoginStackView: StackView = {
+        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthloginButton, View()]
+        let view = StackView(arrangedSubviews: subviews)
+        return view
+    }()
+
+    lazy var basicLogoImageView: ImageView = {
+        let view = ImageView(image: R.image.image_no_result()?.withRenderingMode(.alwaysTemplate))
+        return view
+    }()
+
+    lazy var loginTextField: TextField = {
+        let view = TextField()
+        view.placeholder = "login"
+        view.textAlignment = .center
+        view.keyboardType = .emailAddress
+        return view
+    }()
+
+    lazy var passwordTextField: TextField = {
+        let view = TextField()
+        view.placeholder = "password"
+        view.textAlignment = .center
+        view.isSecureTextEntry = true
+        return view
+    }()
+
+    lazy var basicLoginButton: Button = {
+        let view = Button()
+        view.titleForNormal = "Login"
+        view.imageForNormal = R.image.icon_button_github()
+        view.centerTextAndImage(spacing: inset)
+        return view
+    }()
+
+    lazy var oAuthLogoImageView: ImageView = {
         let view = ImageView(image: R.image.image_no_result()?.withRenderingMode(.alwaysTemplate))
         return view
     }()
@@ -34,7 +96,7 @@ class LoginViewController: ViewController {
         return view
     }()
 
-    lazy var loginButton: Button = {
+    lazy var oAuthloginButton: Button = {
         let view = Button()
 //        view.hero.id = "SaveButton"
         view.titleForNormal = "Sign in with Github"
@@ -61,8 +123,11 @@ class LoginViewController: ViewController {
     override func makeUI() {
         super.makeUI()
 
-        navigationTitle = "Login"
-        automaticallyAdjustsLeftBarButtonItem = false
+        navigationItem.titleView = segmentedControl
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
+
         stackView.removeFromSuperview()
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
@@ -74,33 +139,34 @@ class LoginViewController: ViewController {
         themeService.rx
             .bind({ $0.text }, to: titleLabel.rx.textColor)
             .bind({ $0.textGray }, to: detailLabel.rx.textColor)
-            .bind({ $0.text }, to: logoImageView.rx.tintColor)
+            .bind({ $0.text }, to: basicLogoImageView.rx.tintColor)
+            .bind({ $0.text }, to: oAuthLogoImageView.rx.tintColor)
             .disposed(by: rx.disposeBag)
 
-        stackView.spacing = self.inset
-
-        stackView.addArrangedSubview(View(height: self.inset*4))
-        stackView.addArrangedSubview(logoImageView)
-        stackView.addArrangedSubview(View(height: self.inset*2))
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(detailLabel)
-        stackView.addArrangedSubview(View(height: self.inset*2))
-        stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(basicLoginStackView)
+        stackView.addArrangedSubview(oAuthLoginStackView)
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
-        let input = LoginViewModel.Input(loginTrigger: loginButton.rx.tap.asDriver())
+        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { LoginSegments(rawValue: $0)! }).merge()
+        let input = LoginViewModel.Input(segmentSelection: segmentSelected.asDriverOnErrorJustComplete(),
+                                         basicLoginTrigger: basicLoginButton.rx.tap.asDriver(),
+                                         oAuthLoginTrigger: oAuthloginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
 
         output.fetching.drive(onNext: { [weak self] (isLoading) in
             isLoading ? self?.startAnimating() : self?.stopAnimating()
         }).disposed(by: rx.disposeBag)
 
-//        output.updated.drive().disposed(by: rx.disposeBag)
+        output.basicLoginButtonEnabled.drive(basicLoginButton.rx.isEnabled).disposed(by: rx.disposeBag)
 
-//        output.loginButtonEnabled.drive(loginButton.rx.isEnabled).disposed(by: rx.disposeBag)
+        _ = loginTextField.rx.textInput <-> viewModel.login
+        _ = passwordTextField.rx.textInput <-> viewModel.password
+
+        output.hidesBasicLoginView.drive(basicLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
+        output.hidesOAuthLoginView.drive(oAuthLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { (error) in
             logError("\(error)")

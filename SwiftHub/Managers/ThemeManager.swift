@@ -28,12 +28,12 @@ protocol Theme {
 
 struct LightTheme: Theme {
     let primary = UIColor.white
-    let primaryDark = UIColor.flatWhiteDark
+    let primaryDark = UIColor.flatWhite
     let secondary = UIColor.flatRed
     let secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatWhite
     let text = UIColor.flatBlack
-    let textGray = UIColor.flatBlackDark
+    let textGray = UIColor.flatGray
     let background = UIColor.white
     let statusBarStyle = UIStatusBarStyle.default
     let barStyle = UIBarStyle.default
@@ -47,7 +47,7 @@ struct DarkTheme: Theme {
     let secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatBlackDark
     let text = UIColor.flatWhite
-    let textGray = UIColor.flatWhiteDark
+    let textGray = UIColor.flatGray
     let background = UIColor.flatBlack
     let statusBarStyle = UIStatusBarStyle.lightContent
     let barStyle = UIBarStyle.black

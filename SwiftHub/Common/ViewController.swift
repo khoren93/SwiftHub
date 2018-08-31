@@ -226,7 +226,7 @@ extension ViewController {
     @objc func handleThreeFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
-            HeroDebugPlugin.isEnabled.toggle()
+            HeroDebugPlugin.isEnabled = !HeroDebugPlugin.isEnabled
         }
     }
 }

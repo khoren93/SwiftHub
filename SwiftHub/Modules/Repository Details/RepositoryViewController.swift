@@ -85,10 +85,12 @@ class RepositoryViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
+        emptyDataSetTitle = ""
+        emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
     }

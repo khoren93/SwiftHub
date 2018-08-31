@@ -11,10 +11,6 @@ import Moya
 import RxSwift
 import Alamofire
 
-protocol ProductAPIType {
-    var addXAuth: Bool { get }
-}
-
 class OnlineProvider<Target> where Target: Moya.TargetType {
     fileprivate let online: Observable<Bool>
     fileprivate let provider: MoyaProvider<Target>

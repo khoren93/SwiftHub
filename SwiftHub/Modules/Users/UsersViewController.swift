@@ -45,7 +45,7 @@ class UsersViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
 
         stackView.insertArrangedSubview(headerView, at: 0)

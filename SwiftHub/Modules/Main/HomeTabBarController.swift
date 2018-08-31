@@ -81,13 +81,13 @@ enum HomeTabBarItem: Int {
 
     func getController(with viewModel: ViewModel) -> UIViewController {
         let vc = controller(with: viewModel)
-        let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
+        let item = RAMAnimatedTabBarItem(title: title, image: image, tag: rawValue)
         item.animation = animation
         _ = themeService.rx
             .bind({ $0.text }, to: item.rx.iconColor)
             .bind({ $0.text }, to: item.rx.textColor)
 
-        item.yOffSet = -5
+        item.yOffSet = -1
         vc.tabBarItem = item
         return vc
     }
@@ -102,8 +102,8 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        bindViewModel()
         makeUI()
+        bindViewModel()
     }
 
     func makeUI() {
@@ -113,7 +113,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         tabBar.isTranslucent = false
 
         themeService.rx
-            .bind({ $0.primary }, to: tabBar.rx.barTintColor)
+            .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)
     }
 

@@ -20,6 +20,12 @@ class TextField: UITextField {
         makeUI()
     }
 
+    override var placeholder: String? {
+        didSet {
+            themeService.set(themeService.theme)
+        }
+    }
+
     func makeUI() {
         themeService.rx
             .bind({ $0.text }, to: rx.textColor)
@@ -32,15 +38,9 @@ class TextField: UITextField {
         layer.masksToBounds = true
         borderWidth = Configs.BaseDimensions.borderWidth
         cornerRadius = Configs.BaseDimensions.cornerRadius
-//        font = font?.withSize(14)
 
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.textFieldHeight)
         }
-        updateUI()
-    }
-
-    func updateUI() {
-        setNeedsDisplay()
     }
 }

@@ -67,6 +67,7 @@ identifier_name:
   excluded: # excluded via string array
     - vc
     - id
+    - in
     - kf
     - x
     - y

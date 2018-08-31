@@ -104,7 +104,7 @@ class UserViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.primary }, to: headerView.rx.backgroundColor)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .bind({ $0.text }, to: usernameLabel.rx.textColor)
             .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
@@ -114,7 +114,9 @@ class UserViewController: TableViewController {
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
-//        stackView.insertArrangedSubview(searchBar, at: 0)
+
+        emptyDataSetTitle = ""
+        emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
     }

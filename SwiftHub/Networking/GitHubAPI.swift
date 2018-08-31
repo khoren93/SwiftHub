@@ -11,7 +11,9 @@ import RxSwift
 import Moya
 import Alamofire
 
-let gitHubProvider = MoyaProvider<GithubAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
+protocol ProductAPIType {
+    var addXAuth: Bool { get }
+}
 
 enum GithubAPI {
     case searchRepositories(query: String)
@@ -62,6 +64,8 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var headers: [String: String]? {
         return nil
+//        let loginString = "\("login"):\("password")"
+//        return ["Authorization": "Basic \(loginString.base64Encoded ?? "")"]
     }
 
     var parameters: [String: Any]? {

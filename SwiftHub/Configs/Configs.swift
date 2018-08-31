@@ -9,10 +9,11 @@
 import UIKit
 
 enum Keys {
-    case mixpanel, intercom
+    case github, mixpanel, intercom
 
     var apiKey: String {
         switch self {
+        case .github: return ""
         case .mixpanel: return ""
         case .intercom: return ""
         }
@@ -20,6 +21,7 @@ enum Keys {
 
     var appId: String {
         switch self {
+        case .github: return ""
         case .mixpanel: return ""
         case .intercom: return ""
         }
