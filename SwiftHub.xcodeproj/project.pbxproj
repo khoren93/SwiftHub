@@ -19,6 +19,9 @@
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
 		075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */; };
+		07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F3213AD4CA00FE7AC0 /* Token.swift */; };
+		07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */; };
+		07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B2C1F8213AF74B00FE7AC0 /* Profile.json */; };
 		07CE0F8021027DEC00E1F6BD /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */; };
 		07DFF6D320E90502004DAA68 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D220E90502004DAA68 /* Repository.json */; };
 		07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D420E90574004DAA68 /* UserSearch.json */; };
@@ -150,6 +153,9 @@
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SwiftHub-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		07B2C1F3213AD4CA00FE7AC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		07B2C1F8213AF74B00FE7AC0 /* Profile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
 		07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		07DFF6D220E90502004DAA68 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		07DFF6D420E90574004DAA68 /* UserSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSearch.json; sourceTree = "<group>"; };
@@ -336,8 +342,9 @@
 			children = (
 				A09DE8A220E7A0C500F6F2BF /* License.swift */,
 				A09DE8A020E79EEC00F6F2BF /* Repository.swift */,
-				A09DE8A420E7A15A00F6F2BF /* User.swift */,
 				070FF85020F290100070F5E8 /* SectionType.swift */,
+				07B2C1F3213AD4CA00FE7AC0 /* Token.swift */,
+				A09DE8A420E7A15A00F6F2BF /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				07FC337A1FFFE4E300D53888 /* AnalyticsManager.swift */,
+				07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */,
 				07FC337B1FFFE4E300D53888 /* LibsManager.swift */,
 				07FC337C1FFFE4E300D53888 /* LogManager.swift */,
 				07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */,
@@ -464,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				070FF84120F225200070F5E8 /* Organization.json */,
+				07B2C1F8213AF74B00FE7AC0 /* Profile.json */,
 				07DFF6D220E90502004DAA68 /* Repository.json */,
 				A0E2B0962108B024000DA282 /* RepositoryForks.json */,
 				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
@@ -834,6 +843,7 @@
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
+				07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */,
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
@@ -1061,6 +1071,7 @@
 				A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */,
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
+				07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,
 				C762C66B1E1D559000C09EBD /* TextField.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
@@ -1071,6 +1082,7 @@
 				A09DE8CC20E7BEBD00F6F2BF /* DefaultTableViewCell.swift in Sources */,
 				A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */,
 				A09DE8C620E7B84D00F6F2BF /* UserCell.swift in Sources */,
+				07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */,
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,

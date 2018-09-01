@@ -31,6 +31,7 @@ enum Keys {
 struct Configs {
 
     struct App {
+        static let bundleIdentifier = "com.public.SwiftHub"
         static let IsTesting = true
         static let NavigationTitleFont = UIFont.navigationTitleFont()
     }

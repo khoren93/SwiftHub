@@ -11,20 +11,30 @@ import UIKit
 final class Application: NSObject {
     static let shared = Application()
 
+    var window: UIWindow?
+
     let provider: SwiftHubAPI
+    let authManager: AuthManager
     let navigator: Navigator
 
     private override init() {
-        self.provider = Api.shared
-        self.navigator = Navigator.default
+        provider = Api.shared
+        authManager = AuthManager.shared
+        navigator = Navigator.default
+        super.init()
+
+        authManager.tokenChanged.subscribe(onNext: { [weak self] () in
+            if let window = self?.window {
+                self?.presentInitialScreen(in: window)
+            }
+        }).disposed(by: rx.disposeBag)
     }
 
     func presentInitialScreen(in window: UIWindow) {
-        presentHome(in: window)
-    }
+        self.window = window
 
-    func presentHome(in window: UIWindow) {
-        let viewModel = HomeTabBarViewModel(provider: provider)
+        let loggedIn = authManager.hasToken
+        let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
         navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }
 }

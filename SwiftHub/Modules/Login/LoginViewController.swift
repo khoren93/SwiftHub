@@ -34,13 +34,13 @@ class LoginViewController: ViewController {
     }()
 
     lazy var basicLoginStackView: StackView = {
-        let subviews: [UIView] = [self.basicLogoImageView, self.loginTextField, self.passwordTextField, self.basicLoginButton, View()]
+        let subviews: [UIView] = [self.basicLogoImageView, self.loginTextField, self.passwordTextField, self.basicLoginButton]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
 
     lazy var oAuthLoginStackView: StackView = {
-        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthloginButton, View()]
+        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthloginButton]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -98,15 +98,14 @@ class LoginViewController: ViewController {
 
     lazy var oAuthloginButton: Button = {
         let view = Button()
-//        view.hero.id = "SaveButton"
         view.titleForNormal = "Sign in with Github"
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
         return view
     }()
 
-    private lazy var scrollView: UIScrollView = {
-        let view = UIScrollView()
+    private lazy var scrollView: ScrollView = {
+        let view = ScrollView()
         self.contentView.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
@@ -131,7 +130,7 @@ class LoginViewController: ViewController {
         stackView.removeFromSuperview()
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().inset(self.inset*2)
+            make.top.bottom.equalToSuperview().inset(self.inset*2)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
         })

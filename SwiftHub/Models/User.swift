@@ -9,10 +9,12 @@
 
 import Foundation
 import ObjectMapper
+import KeychainAccess
 
 struct User: Mappable {
 
-    fileprivate static let userKey = "CurrentUserKey"
+    fileprivate static let userIdKey = "CurrentUserIdKey"
+    fileprivate static let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
     enum UserType: String {
         case user = "User"
@@ -110,20 +112,20 @@ struct User: Mappable {
 
 extension User {
 
-    func save() {
-        if let userJson = self.toJSONString() {
-            UserDefaults.standard.set(userJson, forKey: User.userKey)
+    func isMine() -> Bool {
+        return id == User.currentUserId()
+    }
+
+    static func save(userId id: Int?) {
+        if let id = id?.string {
+            keychain[userIdKey] = id
         } else {
-            logError("User is nil")
+            logError("User ID is nil")
         }
     }
 
-    static func currentUser() -> User? {
-        if let userJson = UserDefaults.standard.value(forKey: User.userKey) as? String {
-            return User(JSONString: userJson)
-        } else {
-            return nil
-        }
+    static func currentUserId() -> Int? {
+        return keychain[userIdKey]?.int
     }
 }
 

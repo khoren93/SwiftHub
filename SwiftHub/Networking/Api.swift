@@ -16,6 +16,8 @@ enum ApiError: Error {
 }
 
 protocol SwiftHubAPI {
+    // MARK: - Unauthenticated requests
+
     func searchRepositories(query: String) -> Observable<RepositorySearch>
     func repository(owner: String, repo: String) -> Observable<Repository>
     func watchers(owner: String, repo: String, page: Int) -> Observable<[User]>
@@ -29,6 +31,10 @@ protocol SwiftHubAPI {
     func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]>
     func userFollowers(username: String, page: Int) -> Observable<[User]>
     func userFollowing(username: String, page: Int) -> Observable<[User]>
+
+    // MARK: - Authenticated requests
+
+    func profile() -> Observable<User>
 }
 
 class Api: SwiftHubAPI {
@@ -37,6 +43,8 @@ class Api: SwiftHubAPI {
 }
 
 extension Api {
+    // MARK: - Unauthenticated requests
+
     func searchRepositories(query: String) -> Observable<RepositorySearch> {
         return provider.request(.searchRepositories(query: query))
             .mapObject(RepositorySearch.self)
@@ -106,6 +114,16 @@ extension Api {
     func userFollowing(username: String, page: Int) -> Observable<[User]> {
         return provider.request(.userFollowing(username: username, page: page))
             .mapArray(User.self)
+            .observeOn(MainScheduler.instance)
+    }
+}
+
+extension Api {
+    // MARK: - Unauthenticated requests
+
+    func profile() -> Observable<User> {
+        return provider.request(.profile)
+            .mapObject(User.self)
             .observeOn(MainScheduler.instance)
     }
 }

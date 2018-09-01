@@ -18,7 +18,12 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
         let tabBarItems: Driver<[HomeTabBarItem]>
     }
 
-    let loggedIn = BehaviorRelay<Bool>(value: false)
+    let loggedIn: BehaviorRelay<Bool>
+
+    init(loggedIn: Bool, provider: SwiftHubAPI) {
+        self.loggedIn = BehaviorRelay(value: loggedIn)
+        super.init(provider: provider)
+    }
 
     func transform(input: Input) -> Output {
 
@@ -42,8 +47,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let viewModel = ViewModel(provider: provider)
             return viewModel
         case .profile:
-            let currentUser = User.currentUser() ?? User()
-            let viewModel = UserViewModel(user: currentUser, provider: provider)
+            let viewModel = UserViewModel(user: nil, provider: provider)
             return viewModel
         case .notifications:
             let viewModel = ViewModel(provider: provider)

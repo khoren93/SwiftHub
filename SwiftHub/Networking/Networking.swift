@@ -33,6 +33,20 @@ class OnlineProvider<Target> where Target: Moya.TargetType {
             .take(1)        // Take 1 to make sure we only invoke the API once.
             .flatMap { _ in // Turn the online state into a network request
                 return actualRequest
+                    .filterSuccessfulStatusCodes()
+                    .do(onSuccess: { (response) in
+                    }, onError: { (error) in
+                        if let error = error as? MoyaError {
+                            switch error {
+                            case .statusCode(let response):
+                                if response.statusCode == 401 {
+                                    // Unauthorized
+                                    AuthManager.removeToken()
+                                }
+                            default: break
+                            }
+                        }
+                    })
         }
     }
 }

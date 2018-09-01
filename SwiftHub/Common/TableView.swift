@@ -28,16 +28,14 @@ class TableView: UITableView {
         rowHeight = UITableViewAutomaticDimension
         estimatedRowHeight = 50
         backgroundColor = .clear
-        separatorColor = .separator()
         cellLayoutMarginsFollowReadableWidth = false
         keyboardDismissMode = .onDrag
         separatorInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
         tableHeaderView = View(height: 1)
         tableFooterView = UIView()
-        updateUI()
-    }
 
-    func updateUI() {
-        setNeedsDisplay()
+        themeService.rx
+            .bind({ $0.separator }, to: rx.separatorColor)
+            .disposed(by: rx.disposeBag)
     }
 }

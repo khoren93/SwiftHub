@@ -16,6 +16,8 @@ protocol ProductAPIType {
 }
 
 enum GithubAPI {
+    // MARK: - Unauthenticated requests
+
     case searchRepositories(query: String)
     case repository(owner: String, repo: String)
     case watchers(owner: String, repo: String, page: Int)
@@ -29,6 +31,10 @@ enum GithubAPI {
     case userStarredRepositories(username: String, page: Int)
     case userFollowers(username: String, page: Int)
     case userFollowing(username: String, page: Int)
+
+    // MARK: - Authenticated requests
+
+    case profile
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -44,7 +50,6 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .watchers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/subscribers"
         case .stargazers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/stargazers"
         case .forks(let owner, let repo, _): return "/repos/\(owner)/\(repo)/forks"
-
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -52,6 +57,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userStarredRepositories(let username, _): return "/users/\(username)/starred"
         case .userFollowers(let username, _): return "/users/\(username)/followers"
         case .userFollowing(let username, _): return "/users/\(username)/following"
+
+        case .profile: return "/user"
         }
     }
 
@@ -63,9 +70,10 @@ extension GithubAPI: TargetType, ProductAPIType {
     }
 
     var headers: [String: String]? {
+        if addXAuth, let basicToken = AuthManager.shared.token?.basicToken {
+            return ["Authorization": basicToken]
+        }
         return nil
-//        let loginString = "\("login"):\("password")"
-//        return ["Authorization": "Basic \(loginString.base64Encoded ?? "")"]
     }
 
     var parameters: [String: Any]? {
@@ -129,6 +137,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .userFollowers: return stubbedResponse("UserFollowers")
         case .userFollowing: return stubbedResponse("UserFollowing")
+
+        case .profile: return stubbedResponse("Profile")
         }
     }
 
@@ -141,6 +151,7 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var addXAuth: Bool {
         switch self {
+        case .profile: return true
         default: return false
         }
     }

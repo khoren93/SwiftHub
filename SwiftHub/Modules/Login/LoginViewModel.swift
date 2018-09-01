@@ -35,18 +35,6 @@ class LoginViewModel: ViewModel, ViewModelType {
     let login = BehaviorRelay(value: "")
     let password = BehaviorRelay(value: "")
 
-    private var _authSession: Any?
-
-    @available(iOS 11.0, *)
-    private var authSession: SFAuthenticationSession? {
-        get {
-            return _authSession as? SFAuthenticationSession
-        }
-        set {
-            _authSession = newValue
-        }
-    }
-
     let loginEvent = PublishSubject<Bool>()
 
     func transform(input: Input) -> Output {
@@ -59,18 +47,16 @@ class LoginViewModel: ViewModel, ViewModelType {
         let basicLoginTriggered = input.basicLoginTrigger
         let oAuthLoginTriggered = input.oAuthLoginTrigger
 
-        oAuthLoginTriggered.drive(onNext: { [weak self] () in
-            if #available(iOS 11.0, *) {
-                self?.authSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: callbackURLScheme, completionHandler: { (callbackUrl, error) in
-                    if let error = error {
-                        print(error)
-                    }
-                    if let callbackUrl = callbackUrl {
-                        print(callbackUrl)
-                    }
-                })
-                self?.authSession?.start()
+        basicLoginTriggered.drive(onNext: { [weak self] () in
+            if let login = self?.login.value,
+                let password = self?.password.value,
+                let authHash = "\(login):\(password)".base64Encoded {
+                AuthManager.shared.token = Token(basicToken: "Basic \(authHash)")
             }
+        }).disposed(by: rx.disposeBag)
+
+        oAuthLoginTriggered.drive(onNext: { () in
+            logDebug("oAuth login coming soon.")
         }).disposed(by: rx.disposeBag)
 
         let inputs = BehaviorRelay.combineLatest(login, password)
