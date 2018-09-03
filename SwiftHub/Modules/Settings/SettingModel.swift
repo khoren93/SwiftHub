@@ -13,6 +13,8 @@ enum SettingType {
     case removeCache
 
     case acknowledgements
+
+    case logout
 }
 
 public struct SettingModel {

@@ -24,7 +24,6 @@ class UserViewModel: ViewModel, ViewModelType {
     struct Output {
         let fetching: Driver<Bool>
         let error: Driver<Error>
-
         let username: Driver<String>
         let fullname: Driver<String>
         let description: Driver<String>

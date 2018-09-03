@@ -53,7 +53,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let viewModel = ViewModel(provider: provider)
             return viewModel
         case .settings:
-            let viewModel = SettingsViewModel(provider: provider)
+            let viewModel = SettingsViewModel(loggedIn: loggedIn, provider: provider)
             return viewModel
         case .login:
             let viewModel = LoginViewModel(provider: provider)

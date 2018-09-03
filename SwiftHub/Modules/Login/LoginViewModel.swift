@@ -51,7 +51,7 @@ class LoginViewModel: ViewModel, ViewModelType {
             if let login = self?.login.value,
                 let password = self?.password.value,
                 let authHash = "\(login):\(password)".base64Encoded {
-                AuthManager.shared.token = Token(basicToken: "Basic \(authHash)")
+                AuthManager.setToken(token: Token(basicToken: "Basic \(authHash)"))
             }
         }).disposed(by: rx.disposeBag)
 

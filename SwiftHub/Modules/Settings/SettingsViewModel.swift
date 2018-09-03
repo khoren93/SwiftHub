@@ -25,6 +25,13 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     let nightModeEnabled = PublishSubject<Bool>()
 
+    let loggedIn: BehaviorRelay<Bool>
+
+    init(loggedIn: BehaviorRelay<Bool>, provider: SwiftHubAPI) {
+        self.loggedIn = loggedIn
+        super.init(provider: provider)
+    }
+
     func transform(input: Input) -> Output {
 
         let elements = BehaviorRelay<[SettingsSection]>(value: [])
@@ -40,7 +47,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let acknowledgementsModel = SettingModel(type: .acknowledgements, leftImage: R.image.icon_cell_acknowledgements.name, title: "Acknowledgements", detail: "", showDisclosure: true)
             let acknowledgementsCellViewModel = SettingCellViewModel(with: acknowledgementsModel, destinationViewModel: nil)
 
-            let items = [
+            var items = [
                 SettingsSection.setting(title: "Preferences", items: [
                         SettingsSectionItem.settingThemeItem(viewModel: themeCellViewModel),
                         SettingsSectionItem.settingItem(viewModel: removeCacheCellViewModel)
@@ -49,6 +56,15 @@ class SettingsViewModel: ViewModel, ViewModelType {
                     SettingsSectionItem.settingItem(viewModel: acknowledgementsCellViewModel)
                     ])
             ]
+
+            if self.loggedIn.value {
+                let logoutModel = SettingModel(type: .logout, leftImage: R.image.icon_cell_logout.name, title: "Logout", detail: "", showDisclosure: false)
+                let logoutCellViewModel = SettingCellViewModel(with: logoutModel, destinationViewModel: nil)
+                items.append(SettingsSection.setting(title: "", items: [
+                    SettingsSectionItem.settingItem(viewModel: logoutCellViewModel)
+                    ]))
+            }
+
             return items
         }.bind(to: elements).disposed(by: rx.disposeBag)
 

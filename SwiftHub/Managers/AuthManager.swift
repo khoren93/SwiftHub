@@ -44,6 +44,10 @@ class AuthManager {
         return false
     }
 
+    class func setToken(token: Token) {
+        AuthManager.shared.token = token
+    }
+
     class func removeToken() {
         AuthManager.shared.token = nil
     }

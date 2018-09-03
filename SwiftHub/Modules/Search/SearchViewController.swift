@@ -104,8 +104,7 @@ class SearchViewController: TableViewController {
             self?.searchBar.resignFirstResponder()
         }).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: "Error", message: error.localizedDescription)
+        output.error.drive(onNext: { (error) in
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }

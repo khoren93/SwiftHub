@@ -151,8 +151,7 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var addXAuth: Bool {
         switch self {
-        case .profile: return true
-        default: return false
+        default: return true
         }
     }
 }

@@ -71,6 +71,8 @@ class SettingsViewController: TableViewController {
                     self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 case .removeCache:
                     self?.clearCacheAction()
+                case .logout:
+                    self?.logout()
                 default: break
                 }
             default: break
@@ -85,5 +87,9 @@ class SettingsViewController: TableViewController {
             alertController.addAction(okAction)
             self?.present(alertController, animated: true, completion: nil)
         }
+    }
+
+    func logout() {
+        AuthManager.removeToken()
     }
 }

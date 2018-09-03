@@ -47,21 +47,31 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let dismissKeyboard = input.selection.mapToVoid()
 
-        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(1.5).distinctUntilChanged().asObservable()).merge()
+        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(1.0).distinctUntilChanged().asObservable()).merge()
 
         refresh.flatMapLatest({ (keyword) -> Observable<[Repository]> in
+            guard keyword.isNotEmpty else {
+                return Observable.just([])
+            }
             return self.provider.searchRepositories(query: keyword)
                 .trackActivity(activityIndicator)
                 .trackError(errorTracker)
                 .map { $0.items }
-        }).bind(to: repositoryElements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            repositoryElements.accept(items)
+        }).disposed(by: rx.disposeBag)
 
         refresh.flatMapLatest({ (keyword) -> Observable<[User]> in
+            guard keyword.isNotEmpty else {
+                return Observable.just([])
+            }
             return self.provider.searchUsers(query: keyword)
                 .trackActivity(activityIndicator)
                 .trackError(errorTracker)
                 .map { $0.items }
-        }).bind(to: userElements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            userElements.accept(items)
+        }).disposed(by: rx.disposeBag)
 
         input.selection.drive(onNext: { (item) in
             switch item {
