@@ -24,7 +24,7 @@ struct Repository: Mappable {
     var compareUrl: String?
     var contentsUrl: String?
     var contributorsUrl: String?
-    var createdAt: String?
+    var createdAt: Date?
     var defaultBranch: String?
     var deploymentsUrl: String?
     var descriptionField: String?
@@ -104,7 +104,7 @@ struct Repository: Mappable {
         compareUrl <- map["compare_url"]
         contentsUrl <- map["contents_url"]
         contributorsUrl <- map["contributors_url"]
-        createdAt <- map["created_at"]
+        createdAt <- (map["created_at"], ISO8601DateTransform())
         defaultBranch <- map["default_branch"]
         deploymentsUrl <- map["deployments_url"]
         descriptionField <- map["description"]

@@ -20,7 +20,7 @@ class AuthManager {
     fileprivate let tokenKey = "TokenKey"
     fileprivate let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
-    let tokenChanged = PublishSubject<Void>()
+    let tokenChanged = PublishSubject<Token?>()
 
     var token: Token? {
         get {
@@ -28,18 +28,18 @@ class AuthManager {
             return Mapper<Token>().map(JSONString: jsonString)
         }
         set {
-            if let accessToken = newValue, let jsonString = accessToken.toJSONString() {
+            if let token = newValue, let jsonString = token.toJSONString() {
                 keychain[tokenKey] = jsonString
             } else {
                 keychain[tokenKey] = nil
             }
-            tokenChanged.onNext(())
+            tokenChanged.onNext(newValue)
         }
     }
 
     var hasToken: Bool {
-        if let token = token?.basicToken {
-            return !token.isEmpty
+        if let basicToken = token?.basicToken, token?.isValid == true {
+            return !basicToken.isEmpty
         }
         return false
     }
@@ -50,5 +50,9 @@ class AuthManager {
 
     class func removeToken() {
         AuthManager.shared.token = nil
+    }
+
+    class func tokenValidated() {
+        AuthManager.shared.token?.isValid = true
     }
 }

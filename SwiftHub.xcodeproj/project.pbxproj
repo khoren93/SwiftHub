@@ -18,6 +18,17 @@
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
+		07320453214128ED00C1E39F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07320452214128ED00C1E39F /* Event.swift */; };
+		073204552141377D00C1E39F /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204542141377D00C1E39F /* Events.json */; };
+		073204572141379500C1E39F /* EventsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204562141379500C1E39F /* EventsRepository.json */; };
+		07320459214137A800C1E39F /* EventsUserReceived.json in Resources */ = {isa = PBXBuildFile; fileRef = 07320458214137A800C1E39F /* EventsUserReceived.json */; };
+		0732045B214137B800C1E39F /* EventsUserPerformed.json in Resources */ = {isa = PBXBuildFile; fileRef = 0732045A214137B800C1E39F /* EventsUserPerformed.json */; };
+		0732045E2141398400C1E39F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732045D2141398400C1E39F /* EventsViewController.swift */; };
+		073204602141399400C1E39F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732045F2141399400C1E39F /* EventsViewModel.swift */; };
+		0732046421413B5200C1E39F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046221413B5200C1E39F /* EventCell.swift */; };
+		0732046521413B5200C1E39F /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0732046321413B5200C1E39F /* EventCell.xib */; };
+		0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046621413B6400C1E39F /* EventCellViewModel.swift */; };
+		0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046921419DB200C1E39F /* ISO8601DateTransform.swift */; };
 		075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */; };
 		07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F3213AD4CA00FE7AC0 /* Token.swift */; };
 		07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */; };
@@ -152,6 +163,17 @@
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		07320452214128ED00C1E39F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		073204542141377D00C1E39F /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
+		073204562141379500C1E39F /* EventsRepository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsRepository.json; sourceTree = "<group>"; };
+		07320458214137A800C1E39F /* EventsUserReceived.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsUserReceived.json; sourceTree = "<group>"; };
+		0732045A214137B800C1E39F /* EventsUserPerformed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsUserPerformed.json; sourceTree = "<group>"; };
+		0732045D2141398400C1E39F /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		0732045F2141399400C1E39F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
+		0732046221413B5200C1E39F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		0732046321413B5200C1E39F /* EventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		0732046621413B6400C1E39F /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
+		0732046921419DB200C1E39F /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateTransform.swift; sourceTree = "<group>"; };
 		075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SwiftHub-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		07B2C1F3213AD4CA00FE7AC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -318,6 +340,26 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		0732045C2141395200C1E39F /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				0732046121413B2E00C1E39F /* Cells */,
+				0732045D2141398400C1E39F /* EventsViewController.swift */,
+				0732045F2141399400C1E39F /* EventsViewModel.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		0732046121413B2E00C1E39F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0732046221413B5200C1E39F /* EventCell.swift */,
+				0732046321413B5200C1E39F /* EventCell.xib */,
+				0732046621413B6400C1E39F /* EventCellViewModel.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		07DFF6D820E90860004DAA68 /* Repository Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +382,8 @@
 		07FC33711FFFCCF700D53888 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07320452214128ED00C1E39F /* Event.swift */,
+				0732046921419DB200C1E39F /* ISO8601DateTransform.swift */,
 				A09DE8A220E7A0C500F6F2BF /* License.swift */,
 				A09DE8A020E79EEC00F6F2BF /* Repository.swift */,
 				070FF85020F290100070F5E8 /* SectionType.swift */,
@@ -352,6 +396,7 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0732045C2141395200C1E39F /* Events */,
 				A0ED264620F76A45004E8137 /* Login */,
 				07FC33751FFFD47600D53888 /* Main */,
 				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
@@ -471,6 +516,10 @@
 		A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				073204542141377D00C1E39F /* Events.json */,
+				073204562141379500C1E39F /* EventsRepository.json */,
+				0732045A214137B800C1E39F /* EventsUserPerformed.json */,
+				07320458214137A800C1E39F /* EventsUserReceived.json */,
 				070FF84120F225200070F5E8 /* Organization.json */,
 				07B2C1F8213AF74B00FE7AC0 /* Profile.json */,
 				07DFF6D220E90502004DAA68 /* Repository.json */,
@@ -840,9 +889,11 @@
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
+				073204552141377D00C1E39F /* Events.json in Resources */,
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
+				0732045B214137B800C1E39F /* EventsUserPerformed.json in Resources */,
 				07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */,
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
@@ -858,6 +909,9 @@
 				C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */,
 				A094995B1E1D1CB600EFDE29 /* Main.storyboard in Resources */,
 				070FF84B20F285180070F5E8 /* SettingCell.xib in Resources */,
+				073204572141379500C1E39F /* EventsRepository.json in Resources */,
+				07320459214137A800C1E39F /* EventsUserReceived.json in Resources */,
+				0732046521413B5200C1E39F /* EventCell.xib in Resources */,
 				070FF84220F225200070F5E8 /* Organization.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1069,6 +1123,7 @@
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
 				A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */,
+				0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */,
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
 				07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */,
@@ -1100,9 +1155,11 @@
 				070FF84520F284D40070F5E8 /* SettingsViewController.swift in Sources */,
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				A09DE8C320E7B83F00F6F2BF /* UserCellViewModel.swift in Sources */,
+				07320453214128ED00C1E39F /* Event.swift in Sources */,
 				A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */,
 				A0E2B091210738C9000DA282 /* KafkaRefresh+Rx.swift in Sources */,
 				070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */,
+				0732045E2141398400C1E39F /* EventsViewController.swift in Sources */,
 				A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
@@ -1110,6 +1167,7 @@
 				C762C67F1E1D5A7300C09EBD /* Observable+Logging.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				A0E2B08D2106293A000DA282 /* Switch.swift in Sources */,
+				0732046421413B5200C1E39F /* EventCell.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */,
 				A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */,
@@ -1123,6 +1181,7 @@
 				07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */,
 				070FF85120F290100070F5E8 /* SectionType.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
+				073204602141399400C1E39F /* EventsViewModel.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,
 				A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */,
@@ -1135,6 +1194,7 @@
 				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
 				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
+				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
 				A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */,

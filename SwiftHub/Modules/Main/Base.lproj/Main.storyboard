@@ -144,5 +144,20 @@
             </objects>
             <point key="canvasLocation" x="5537" y="116"/>
         </scene>
+        <!--Events View Controller-->
+        <scene sceneID="BnF-uM-C7F">
+            <objects>
+                <viewController storyboardIdentifier="EventsViewController" id="LoO-hL-y3c" customClass="EventsViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IuF-uY-ZBI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="O25-bI-l7H"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1OI-3t-ZZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6346" y="116"/>
+        </scene>
     </scenes>
 </document>

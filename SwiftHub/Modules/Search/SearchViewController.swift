@@ -52,7 +52,7 @@ class SearchViewController: TableViewController {
 
         stackView.insertArrangedSubview(searchBar, at: 0)
 
-        searchBar.hero.id = "TopHeaderId"
+//        searchBar.hero.id = "TopHeaderId"
 
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)

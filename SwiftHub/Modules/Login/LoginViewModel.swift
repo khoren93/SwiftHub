@@ -35,7 +35,7 @@ class LoginViewModel: ViewModel, ViewModelType {
     let login = BehaviorRelay(value: "")
     let password = BehaviorRelay(value: "")
 
-    let loginEvent = PublishSubject<Bool>()
+    var tokenSaved = PublishSubject<Void>()
 
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
@@ -52,12 +52,24 @@ class LoginViewModel: ViewModel, ViewModelType {
                 let password = self?.password.value,
                 let authHash = "\(login):\(password)".base64Encoded {
                 AuthManager.setToken(token: Token(basicToken: "Basic \(authHash)"))
+                self?.tokenSaved.onNext(())
             }
         }).disposed(by: rx.disposeBag)
 
         oAuthLoginTriggered.drive(onNext: { () in
             logDebug("oAuth login coming soon.")
         }).disposed(by: rx.disposeBag)
+
+        tokenSaved.flatMapLatest { () -> Observable<User> in
+            return self.provider.profile()
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+            }.subscribe(onNext: { (user) in
+                user.save()
+                AuthManager.tokenValidated()
+            }, onError: { (error) in
+                AuthManager.removeToken()
+            }).disposed(by: rx.disposeBag)
 
         let inputs = BehaviorRelay.combineLatest(login, password)
 

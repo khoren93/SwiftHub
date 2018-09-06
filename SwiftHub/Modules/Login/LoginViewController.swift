@@ -167,8 +167,9 @@ class LoginViewController: ViewController {
         output.hidesBasicLoginView.drive(basicLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesOAuthLoginView.drive(oAuthLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { (error) in
-            logError("\(error)")
+        output.error.drive(onNext: { [weak self] (error) in
+            self?.showAlert(title: "Authentication Error", message: "Please check your login or password")
+            logError("\(error.localizedDescription)")
         }).disposed(by: rx.disposeBag)
     }
 }

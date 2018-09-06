@@ -11,10 +11,10 @@ import Foundation
 import ObjectMapper
 import KeychainAccess
 
-struct User: Mappable {
+private let userKey = "CurrentUserKey"
+private let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
-    fileprivate static let userIdKey = "CurrentUserIdKey"
-    fileprivate static let keychain = Keychain(service: Configs.App.bundleIdentifier)
+struct User: Mappable {
 
     enum UserType: String {
         case user = "User"
@@ -25,7 +25,7 @@ struct User: Mappable {
     var avatarUrl: String?
     var blog: String?
     var company: String?
-    var createdAt: String?
+    var createdAt: Date?
     var email: String?
     var eventsUrl: String?
     var followers: Int?
@@ -40,7 +40,7 @@ struct User: Mappable {
     var publicRepos: Int?
     var reposUrl: String?
     var type = UserType.user
-    var updatedAt: String?
+    var updatedAt: Date?
     var url: String?
 
     // Only for Organization type
@@ -72,7 +72,7 @@ struct User: Mappable {
         avatarUrl <- map["avatar_url"]
         blog <- map["blog"]
         company <- map["company"]
-        createdAt <- map["created_at"]
+        createdAt <- (map["created_at"], ISO8601DateTransform())
         descriptionField <- map["description"]
         email <- map["email"]
         eventsUrl <- map["events_url"]
@@ -94,7 +94,7 @@ struct User: Mappable {
         publicRepos <- map["public_repos"]
         reposUrl <- map["repos_url"]
         type <- map["type"]
-        updatedAt <- map["updated_at"]
+        updatedAt <- (map["updated_at"], ISO8601DateTransform())
         url <- map["url"]
         bio <- map["bio"]
         followersUrl <- map["followers_url"]
@@ -113,19 +113,22 @@ struct User: Mappable {
 extension User {
 
     func isMine() -> Bool {
-        return id == User.currentUserId()
+        return self == User.currentUser()
     }
 
-    static func save(userId id: Int?) {
-        if let id = id?.string {
-            keychain[userIdKey] = id
+    func save() {
+        if let json = self.toJSONString() {
+            keychain[userKey] = json
         } else {
-            logError("User ID is nil")
+            logError("User can't be saved")
         }
     }
 
-    static func currentUserId() -> Int? {
-        return keychain[userIdKey]?.int
+    static func currentUser() -> User? {
+        if let json = keychain[userKey], let user = User(JSONString: json) {
+            return user
+        }
+        return nil
     }
 }
 

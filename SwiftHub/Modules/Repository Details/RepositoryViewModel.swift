@@ -52,12 +52,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let errors = errorTracker.asDriver()
 
         input.headerRefresh.flatMapLatest { () -> Observable<Repository> in
-            let owner = self.repository.value.owner?.login ?? ""
-            let repo = self.repository.value.name ?? ""
-            return self.provider.repository(owner: owner, repo: repo)
+            let fullName = self.repository.value.fullName ?? ""
+            return self.provider.repository(fullName: fullName)
                 .trackActivity(activityIndicator)
                 .trackError(errorTracker)
-        }.bind(to: repository).disposed(by: rx.disposeBag)
+            }.subscribe(onNext: { (repository) in
+                self.repository.accept(repository)
+            }).disposed(by: rx.disposeBag)
 
         let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
         let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()

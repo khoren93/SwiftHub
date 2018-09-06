@@ -19,7 +19,7 @@ protocol SwiftHubAPI {
     // MARK: - Unauthenticated requests
 
     func searchRepositories(query: String) -> Observable<RepositorySearch>
-    func repository(owner: String, repo: String) -> Observable<Repository>
+    func repository(fullName: String) -> Observable<Repository>
     func watchers(owner: String, repo: String, page: Int) -> Observable<[User]>
     func stargazers(owner: String, repo: String, page: Int) -> Observable<[User]>
     func forks(owner: String, repo: String, page: Int) -> Observable<[Repository]>
@@ -31,6 +31,11 @@ protocol SwiftHubAPI {
     func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]>
     func userFollowers(username: String, page: Int) -> Observable<[User]>
     func userFollowing(username: String, page: Int) -> Observable<[User]>
+
+    func events(page: Int) -> Observable<[Event]>
+    func repositoryEvents(owner: String, repo: String, page: Int) -> Observable<[Event]>
+    func userReceivedEvents(username: String, page: Int) -> Observable<[Event]>
+    func userPerformedEvents(username: String, page: Int) -> Observable<[Event]>
 
     // MARK: - Authenticated requests
 
@@ -69,8 +74,8 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
-    func repository(owner: String, repo: String) -> Observable<Repository> {
-        return provider.request(.repository(owner: owner, repo: repo))
+    func repository(fullName: String) -> Observable<Repository> {
+        return provider.request(.repository(fullName: fullName))
             .mapObject(Repository.self)
             .observeOn(MainScheduler.instance)
     }
@@ -114,6 +119,30 @@ extension Api {
     func userFollowing(username: String, page: Int) -> Observable<[User]> {
         return provider.request(.userFollowing(username: username, page: page))
             .mapArray(User.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func events(page: Int) -> Observable<[Event]> {
+        return provider.request(.events(page: page))
+            .mapArray(Event.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func repositoryEvents(owner: String, repo: String, page: Int) -> Observable<[Event]> {
+        return provider.request(.repositoryEvents(owner: owner, repo: repo, page: page))
+            .mapArray(Event.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userReceivedEvents(username: String, page: Int) -> Observable<[Event]> {
+        return provider.request(.userReceivedEvents(username: username, page: page))
+            .mapArray(Event.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func userPerformedEvents(username: String, page: Int) -> Observable<[Event]> {
+        return provider.request(.userPerformedEvents(username: username, page: page))
+            .mapArray(Event.self)
             .observeOn(MainScheduler.instance)
     }
 }

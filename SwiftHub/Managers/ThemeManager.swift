@@ -112,6 +112,16 @@ public extension Reactive where Base: UITextField {
     }
 }
 
+public extension Reactive where Base: UITableView {
+
+    /// Bindable sink for `separatorColor` property
+    public var separatorColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.separatorColor = attr
+        }
+    }
+}
+
 public extension Reactive where Base: RAMAnimatedTabBarItem {
 
     /// Bindable sink for `iconColor` property

@@ -23,8 +23,8 @@ final class Application: NSObject {
         navigator = Navigator.default
         super.init()
 
-        authManager.tokenChanged.subscribe(onNext: { [weak self] () in
-            if let window = self?.window {
+        authManager.tokenChanged.subscribe(onNext: { [weak self] (token) in
+            if let window = self?.window, token == nil || token?.isValid == true {
                 self?.presentInitialScreen(in: window)
             }
         }).disposed(by: rx.disposeBag)

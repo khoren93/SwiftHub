@@ -19,7 +19,7 @@ enum GithubAPI {
     // MARK: - Unauthenticated requests
 
     case searchRepositories(query: String)
-    case repository(owner: String, repo: String)
+    case repository(fullName: String)
     case watchers(owner: String, repo: String, page: Int)
     case stargazers(owner: String, repo: String, page: Int)
     case forks(owner: String, repo: String, page: Int)
@@ -31,6 +31,11 @@ enum GithubAPI {
     case userStarredRepositories(username: String, page: Int)
     case userFollowers(username: String, page: Int)
     case userFollowing(username: String, page: Int)
+
+    case events(page: Int)
+    case repositoryEvents(owner: String, repo: String, page: Int)
+    case userReceivedEvents(username: String, page: Int)
+    case userPerformedEvents(username: String, page: Int)
 
     // MARK: - Authenticated requests
 
@@ -46,7 +51,7 @@ extension GithubAPI: TargetType, ProductAPIType {
     var path: String {
         switch self {
         case .searchRepositories: return "/search/repositories"
-        case .repository(let owner, let repo): return "/repos/\(owner)/\(repo)"
+        case .repository(let fullName): return "/repos/\(fullName)"
         case .watchers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/subscribers"
         case .stargazers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/stargazers"
         case .forks(let owner, let repo, _): return "/repos/\(owner)/\(repo)/forks"
@@ -57,6 +62,10 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userStarredRepositories(let username, _): return "/users/\(username)/starred"
         case .userFollowers(let username, _): return "/users/\(username)/followers"
         case .userFollowing(let username, _): return "/users/\(username)/following"
+        case .events: return "/events"
+        case .repositoryEvents(let owner, let repo, _): return "/repos/\(owner)/\(repo)/events"
+        case .userReceivedEvents(let username, _): return "/users/\(username)/received_events"
+        case .userPerformedEvents(let username, _): return "/users/\(username)/events"
 
         case .profile: return "/user"
         }
@@ -83,37 +92,53 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["q"] = query
             return params
         case .watchers(_, _, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .stargazers(_, _, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .forks(_, _, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .searchUsers(let query):
             var params: [String: Any] = [:]
             params["q"] = query
             return params
         case .userRepositories(_, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .userStarredRepositories(_, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .userFollowers(_, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
         case .userFollowing(_, let page):
-            var params: [String: Any] = [:]
-            params["page"] = page
-            return params
+            return [
+                "page": page
+            ]
+        case .events(let page):
+            return [
+                "page": page
+            ]
+        case .repositoryEvents(_, _, let page):
+            return [
+                "page": page
+            ]
+        case .userReceivedEvents(_, let page):
+            return [
+                "page": page
+            ]
+        case .userPerformedEvents(_, let page):
+            return [
+                "page": page
+            ]
         default:
             return nil
         }
@@ -137,6 +162,10 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .userFollowers: return stubbedResponse("UserFollowers")
         case .userFollowing: return stubbedResponse("UserFollowing")
+        case .events: return stubbedResponse("Events")
+        case .repositoryEvents: return stubbedResponse("EventsRepository")
+        case .userReceivedEvents: return stubbedResponse("EventsUserReceived")
+        case .userPerformedEvents: return stubbedResponse("EventsUserPerformed")
 
         case .profile: return stubbedResponse("Profile")
         }

@@ -12,6 +12,7 @@ import ObjectMapper
 struct Token: Mappable {
 
     var basicToken: String?
+    var isValid = false
 
     init?(map: Map) {}
     init() {}
@@ -22,5 +23,6 @@ struct Token: Mappable {
 
     mutating func mapping(map: Map) {
         basicToken <- map["basic_token"]
+        isValid <- map["valid"]
     }
 }
