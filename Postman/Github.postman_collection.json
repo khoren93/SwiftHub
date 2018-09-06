@@ -605,114 +605,289 @@
 			"name": "Activity",
 			"item": [
 				{
-					"name": "List Stargazers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/stargazers?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"repos",
-								"{{owner}}",
-								"{{repo}}",
-								"stargazers"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
+					"name": "Events",
+					"item": [
+						{
+							"name": "List public events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+							},
+							"response": []
 						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
+						{
+							"name": "List repository events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List repository issue events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"issues",
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List events that a user has received",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/received_events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"received_events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events."
+							},
+							"response": []
+						},
+						{
+							"name": "List events performed by a user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/events?per_page={{per_page}}&page=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"events"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								},
+								"description": "If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events."
+							},
+							"response": []
+						}
+					],
+					"description": "This is a read-only API to the GitHub events. These events power the various activity streams on the site.",
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "List repositories being starred",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{base_url}}/users/{{username}}/starred?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users",
-								"{{username}}",
-								"starred"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
+					"name": "Starring",
+					"item": [
+						{
+							"name": "List Stargazers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/stargazers?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"stargazers"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
 						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
+						{
+							"name": "List repositories being starred",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/starred?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"starred"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						}
+					],
+					"description": "Repository Starring is a feature that lets users bookmark repositories. Stars are shown next to repositories to show an approximate level of interest. Stars have no effect on notifications or the activity feed. For that, see Repository Watching.",
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "List watchers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/subscribers?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"repos",
-								"{{owner}}",
-								"{{repo}}",
-								"subscribers"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
+					"name": "Watching",
+					"item": [
+						{
+							"name": "List watchers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/subscribers?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"subscribers"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
 						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
-				},
-				{
-					"name": "List repositories being watched",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{base_url}}/users/{{username}}/subscriptions?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users",
-								"{{username}}",
-								"subscriptions"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
+						{
+							"name": "List repositories being watched",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/subscriptions?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"subscriptions"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						}
+					],
+					"description": "Watching a Repository registers the user to receive notifications on new discussions, as well as events in the user's activity feed. See Repository Starring for simple repository bookmarks.",
+					"_postman_isSubFolder": true
 				}
 			]
 		}
