@@ -49,6 +49,10 @@ There are also included debugging [Hero](https://github.com/HeroTransitions/Hero
 
 [fastlane](https://fastlane.tools) automates common development tasks - for example bumping version numbers, running tests on multiple configurations, or submitting to the App Store. You can list the available lanes (our project-specific scripts) using `bundle exec fastlane lanes`. You can list available actions (all actions available to be scripted via lanes) using `bundle exec fastlane actions`. The fastlane configuration and scripts are in the `fastlane` folder.
 
+## Design
+All icons used in the application are taken from the [Feather](https://github.com/feathericons/feather).
+Thanks to them for the beautiful open source icons.
+
 ## References
 * [RxSwift](https://github.com/ReactiveX/RxSwift)
 * [Clean Architecture with RxSwift](https://github.com/sergdort/CleanArchitectureRxSwift)
