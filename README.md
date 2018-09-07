@@ -7,7 +7,6 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 <img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen_dark.png?raw=true" width="290">&nbsp;
 <img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_events_screen_dark.png?raw=true" width="290">&nbsp;
 
-
 ## Features
 * Basic authentication
 * Clean architecture using [RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM
@@ -41,6 +40,10 @@ bundle exec fastlane setup
 ```
 
 Alrighty! We're ready to go!
+
+## Debugging
+[Flex](https://github.com/Flipboard/FLEX) debugging tool has been integrated in this application. To enable it, just swipe right anywhere in the application.
+There are also included debugging [Hero](https://github.com/HeroTransitions/Hero) animations. To use it, swipe right with two fingers. Repeat this to disable.
 
 ## Fastlane
 
