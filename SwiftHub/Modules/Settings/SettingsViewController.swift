@@ -67,6 +67,10 @@ class SettingsViewController: TableViewController {
             switch item {
             case .settingItem(let viewModel):
                 switch viewModel.type {
+                case .theme:
+                    if let destinationViewModel = viewModel.destinationViewModel as? ThemeViewModel {
+                        self?.navigator.show(segue: .theme(viewModel: destinationViewModel), sender: self, transition: .detail)
+                    }
                 case .acknowledgements:
                     self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 case .removeCache:

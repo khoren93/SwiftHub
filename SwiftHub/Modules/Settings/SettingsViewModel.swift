@@ -36,10 +36,14 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         let elements = BehaviorRelay<[SettingsSection]>(value: [])
         input.trigger.map { () -> [SettingsSection] in
-            let isNightMode = ThemeType.currentTheme() == ThemeType.dark
-            let themeModel = SettingModel(type: .nightMode, leftImage: R.image.icon_cell_night_mode.name, title: "Night Mode", detail: "", showDisclosure: false)
-            let themeCellViewModel = SettingThemeCellViewModel(with: themeModel, isEnabled: isNightMode, destinationViewModel: nil)
-            themeCellViewModel.nightModeEnabled.bind(to: self.nightModeEnabled).disposed(by: self.rx.disposeBag)
+            let isNightMode = ThemeType.currentTheme().isDark
+            let nightModeModel = SettingModel(type: .nightMode, leftImage: R.image.icon_cell_night_mode.name, title: "Night Mode", detail: "", showDisclosure: false)
+            let nightModeCellViewModel = SettingThemeCellViewModel(with: nightModeModel, isEnabled: isNightMode, destinationViewModel: nil)
+            nightModeCellViewModel.nightModeEnabled.bind(to: self.nightModeEnabled).disposed(by: self.rx.disposeBag)
+
+            let themeModel = SettingModel(type: .theme, leftImage: R.image.icon_cell_theme.name, title: "Theme", detail: "", showDisclosure: true)
+            let themeViewModel = ThemeViewModel(provider: self.provider)
+            let themeCellViewModel = SettingCellViewModel(with: themeModel, destinationViewModel: themeViewModel)
 
             let removeCacheModel = SettingModel(type: .removeCache, leftImage: R.image.icon_cell_remove.name, title: "Remove Cache", detail: "", showDisclosure: false)
             let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel, destinationViewModel: nil)
@@ -49,7 +53,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
             var items = [
                 SettingsSection.setting(title: "Preferences", items: [
-                        SettingsSectionItem.settingThemeItem(viewModel: themeCellViewModel),
+                        SettingsSectionItem.settingThemeItem(viewModel: nightModeCellViewModel),
+                        SettingsSectionItem.settingItem(viewModel: themeCellViewModel),
                         SettingsSectionItem.settingItem(viewModel: removeCacheCellViewModel)
                     ]),
                 SettingsSection.setting(title: "Support", items: [
@@ -71,8 +76,10 @@ class SettingsViewModel: ViewModel, ViewModelType {
         let selectedEvent = input.selection
 
         nightModeEnabled.subscribe(onNext: { (isEnabled) in
-            let theme = isEnabled ? ThemeType.dark : ThemeType.light
-            theme.save()
+            var theme = ThemeType.currentTheme()
+            if theme.isDark != isEnabled {
+                theme = theme.toggled()
+            }
             themeService.set(theme)
         }).disposed(by: rx.disposeBag)
 

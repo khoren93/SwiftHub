@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxTheme
 import RAMAnimatedTabBarController
+import KafkaRefresh
 
 protocol Theme {
     var primary: UIColor { get }
@@ -24,13 +25,15 @@ protocol Theme {
     var statusBarStyle: UIStatusBarStyle { get }
     var barStyle: UIBarStyle { get }
     var keyboardAppearance: UIKeyboardAppearance { get }
+
+    init(colorTheme: ColorTheme)
 }
 
 struct LightTheme: Theme {
     let primary = UIColor.white
     let primaryDark = UIColor.flatWhite
-    let secondary = UIColor.flatRed
-    let secondaryDark = UIColor.flatRedDark
+    var secondary = UIColor.flatRed
+    var secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatWhite
     let text = UIColor.flatBlack
     let textGray = UIColor.flatGray
@@ -38,13 +41,18 @@ struct LightTheme: Theme {
     let statusBarStyle = UIStatusBarStyle.default
     let barStyle = UIBarStyle.default
     let keyboardAppearance = UIKeyboardAppearance.light
+
+    init(colorTheme: ColorTheme) {
+        secondary = colorTheme.color
+        secondaryDark = colorTheme.colorDark
+    }
 }
 
 struct DarkTheme: Theme {
     let primary = UIColor.flatBlack
     let primaryDark = UIColor.flatBlackDark
-    let secondary = UIColor.flatRed
-    let secondaryDark = UIColor.flatRedDark
+    var secondary = UIColor.flatRed
+    var secondaryDark = UIColor.flatRedDark
     let separator = UIColor.flatBlackDark
     let text = UIColor.flatWhite
     let textGray = UIColor.flatGray
@@ -52,58 +60,143 @@ struct DarkTheme: Theme {
     let statusBarStyle = UIStatusBarStyle.lightContent
     let barStyle = UIBarStyle.black
     let keyboardAppearance = UIKeyboardAppearance.dark
+
+    init(colorTheme: ColorTheme) {
+        secondary = colorTheme.color
+        secondaryDark = colorTheme.colorDark
+    }
 }
 
-enum ThemeType: Int, ThemeProvider {
-    case light, dark
+enum ColorTheme: Int {
+    case red, green, blue, skyBlue, magenta, purple, watermelon, lime, pink
+
+    static let allValues = [red, green, blue, skyBlue, magenta, purple, watermelon, lime, pink]
+
+    var color: UIColor {
+        switch self {
+        case .red: return UIColor.flatRed
+        case .green: return UIColor.flatGreen
+        case .blue: return UIColor.flatBlue
+        case .skyBlue: return UIColor.flatSkyBlue
+        case .magenta: return UIColor.flatMagenta
+        case .purple: return UIColor.flatPurple
+        case .watermelon: return UIColor.flatWatermelon
+        case .lime: return UIColor.flatLime
+        case .pink: return UIColor.flatPink
+        }
+    }
+
+    var colorDark: UIColor {
+        switch self {
+        case .red: return UIColor.flatRedDark
+        case .green: return UIColor.flatGreenDark
+        case .blue: return UIColor.flatBlueDark
+        case .skyBlue: return UIColor.flatSkyBlueDark
+        case .magenta: return UIColor.flatMagentaDark
+        case .purple: return UIColor.flatPurpleDark
+        case .watermelon: return UIColor.flatWatermelonDark
+        case .lime: return UIColor.flatLimeDark
+        case .pink: return UIColor.flatPinkDark
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .red: return "Red"
+        case .green: return "Green"
+        case .blue: return "Blue"
+        case .skyBlue: return "Sky Blue"
+        case .magenta: return "Magenta"
+        case .purple: return "Purple"
+        case .watermelon: return "Watermelon"
+        case .lime: return "Lime"
+        case .pink: return "Pink"
+        }
+    }
+}
+
+enum ThemeType: ThemeProvider {
+    case light(color: ColorTheme)
+    case dark(color: ColorTheme)
 
     var associatedObject: Theme {
         switch self {
-        case .light: return LightTheme()
-        case .dark: return DarkTheme()
+        case .light(let color): return LightTheme(colorTheme: color)
+        case .dark(let color): return DarkTheme(colorTheme: color)
         }
+    }
+
+    var isDark: Bool {
+        switch self {
+        case .dark: return true
+        default: return false
+        }
+    }
+
+    func toggled() -> ThemeType {
+        var theme: ThemeType
+        switch self {
+        case .light(let color): theme = ThemeType.dark(color: color)
+        case .dark(let color): theme = ThemeType.light(color: color)
+        }
+        theme.save()
+        return theme
+    }
+
+    func withColor(color: ColorTheme) -> ThemeType {
+        var theme: ThemeType
+        switch self {
+        case .light: theme = ThemeType.light(color: color)
+        case .dark: theme = ThemeType.dark(color: color)
+        }
+        theme.save()
+        return theme
     }
 }
 
 extension ThemeType {
     static func currentTheme() -> ThemeType {
-        if let theme = ThemeType(rawValue: UserDefaults.standard.integer(forKey: "ThemeKey")) {
-            return theme
-        }
-
-        let defaultTheme = ThemeType.light
-        defaultTheme.save()
-        return defaultTheme
+        let defaults = UserDefaults.standard
+        let isDark = defaults.bool(forKey: "IsDarkKey")
+        let colorTheme = ColorTheme(rawValue: defaults.integer(forKey: "ThemeKey")) ?? ColorTheme.red
+        let theme = isDark ? ThemeType.dark(color: colorTheme) : ThemeType.light(color: colorTheme)
+        theme.save()
+        return theme
     }
 
     func save() {
-        UserDefaults.standard.set(self.rawValue, forKey: "ThemeKey")
+        let defaults = UserDefaults.standard
+        defaults.set(self.isDark, forKey: "IsDarkKey")
+        switch self {
+        case .light(let color): defaults.set(color.rawValue, forKey: "ThemeKey")
+        case .dark(let color): defaults.set(color.rawValue, forKey: "ThemeKey")
+        }
     }
 }
 
 let themeService = ThemeType.service(initial: ThemeType.currentTheme())
 
-public extension Reactive where Base: UIView {
+extension Reactive where Base: UIView {
 
     /// Bindable sink for `backgroundColor` property
-    public var backgroundColor: Binder<UIColor?> {
+    var backgroundColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.backgroundColor = attr
         }
     }
 }
 
-public extension Reactive where Base: UITextField {
+extension Reactive where Base: UITextField {
 
     /// Bindable sink for `borderColor` property
-    public var borderColor: Binder<UIColor?> {
+    var borderColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.borderColor = attr
         }
     }
 
     /// Bindable sink for `placeholderColor` property
-    public var placeholderColor: Binder<UIColor?> {
+    var placeholderColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             if let color = attr {
                 view.setPlaceHolderTextColor(color)
@@ -112,20 +205,20 @@ public extension Reactive where Base: UITextField {
     }
 }
 
-public extension Reactive where Base: UITableView {
+extension Reactive where Base: UITableView {
 
     /// Bindable sink for `separatorColor` property
-    public var separatorColor: Binder<UIColor?> {
+    var separatorColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.separatorColor = attr
         }
     }
 }
 
-public extension Reactive where Base: RAMAnimatedTabBarItem {
+extension Reactive where Base: RAMAnimatedTabBarItem {
 
     /// Bindable sink for `iconColor` property
-    public var iconColor: Binder<UIColor> {
+    var iconColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.iconColor = attr
             view.deselectAnimation()
@@ -133,7 +226,7 @@ public extension Reactive where Base: RAMAnimatedTabBarItem {
     }
 
     /// Bindable sink for `textColor` property
-    public var textColor: Binder<UIColor> {
+    var textColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.textColor = attr
             view.deselectAnimation()
@@ -141,40 +234,50 @@ public extension Reactive where Base: RAMAnimatedTabBarItem {
     }
 }
 
-public extension Reactive where Base: RAMItemAnimation {
+extension Reactive where Base: RAMItemAnimation {
 
     /// Bindable sink for `iconSelectedColor` property
-    public var iconSelectedColor: Binder<UIColor> {
+    var iconSelectedColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.iconSelectedColor = attr
         }
     }
 
     /// Bindable sink for `textSelectedColor` property
-    public var textSelectedColor: Binder<UIColor> {
+    var textSelectedColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.textSelectedColor = attr
         }
     }
 }
 
-public extension Reactive where Base: UINavigationBar {
+extension Reactive where Base: UINavigationBar {
 
     /// Bindable sink for `titleTextAttributes` property
     @available(iOS 11.0, *)
-    public var largeTitleTextAttributes: Binder<[NSAttributedStringKey: Any]?> {
+    var largeTitleTextAttributes: Binder<[NSAttributedStringKey: Any]?> {
         return Binder(self.base) { view, attr in
             view.largeTitleTextAttributes = attr
         }
     }
 }
 
-public extension Reactive where Base: UIApplication {
+extension Reactive where Base: UIApplication {
 
     /// Bindable sink for `statusBarStyle` property
-    public var statusBarStyle: Binder<UIStatusBarStyle> {
+    var statusBarStyle: Binder<UIStatusBarStyle> {
         return Binder(self.base) { view, attr in
             view.statusBarStyle = attr
+        }
+    }
+}
+
+extension Reactive where Base: KafkaRefreshDefaults {
+
+    /// Bindable sink for `themeColor` property
+    var themeColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.themeColor = attr
         }
     }
 }

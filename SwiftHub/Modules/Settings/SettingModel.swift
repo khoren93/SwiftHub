@@ -10,6 +10,7 @@ import Foundation
 
 enum SettingType {
     case nightMode
+    case theme
     case removeCache
 
     case acknowledgements

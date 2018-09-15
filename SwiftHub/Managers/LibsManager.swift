@@ -58,7 +58,9 @@ class LibsManager: NSObject {
         if let defaults = KafkaRefreshDefaults.standard() {
             defaults.headDefaultStyle = .replicatorAllen
             defaults.footDefaultStyle = .replicatorDot
-            defaults.themeColor = .secondary()
+            themeService.rx
+                .bind({ $0.secondary }, to: defaults.rx.themeColor)
+                .disposed(by: rx.disposeBag)
         }
     }
 

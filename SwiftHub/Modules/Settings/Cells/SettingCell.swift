@@ -12,7 +12,9 @@ class SettingCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.tintColor = .secondary()
+        themeService.rx
+            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
+            .disposed(by: rx.disposeBag)
     }
 
     func bind(to viewModel: SettingCellViewModel) {

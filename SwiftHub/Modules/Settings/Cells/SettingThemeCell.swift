@@ -17,8 +17,10 @@ class SettingThemeCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.tintColor = .secondary()
         stackView.insertArrangedSubview(switchView, at: 2)
+        themeService.rx
+            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
+            .disposed(by: rx.disposeBag)
     }
 
     func bind(to viewModel: SettingThemeCellViewModel) {

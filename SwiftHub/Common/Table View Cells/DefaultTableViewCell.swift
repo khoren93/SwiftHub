@@ -27,7 +27,6 @@ class DefaultTableViewCell: TableViewCell {
     lazy var rightImageView: ImageView = {
         let view = ImageView(frame: CGRect())
         view.image = R.image.icon_cell_disclosure()?.withRenderingMode(.alwaysTemplate)
-        view.tintColor = .secondary()
         view.snp.makeConstraints({ (make) in
             make.width.equalTo(20)
         })
@@ -48,6 +47,7 @@ class DefaultTableViewCell: TableViewCell {
 
         themeService.rx
             .bind({ $0.text }, to: titleLabel.rx.textColor)
+            .bind({ $0.secondary }, to: rightImageView.rx.tintColor)
             .disposed(by: rx.disposeBag)
 
         stackView.spacing = self.inset

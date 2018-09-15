@@ -151,8 +151,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         navigationItem.backBarButtonItem = backBarButton
 
         motionShakeEvent.subscribe(onNext: { () in
-            let theme = themeService.theme == .dark ? ThemeType.light : ThemeType.dark
-            theme.save()
+            let theme = themeService.theme.toggled()
             themeService.set(theme)
         }).disposed(by: rx.disposeBag)
 
