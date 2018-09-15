@@ -83,11 +83,11 @@ class EventsViewController: TableViewController {
             }.disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
         output.repositorySelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { [weak self] (error) in
