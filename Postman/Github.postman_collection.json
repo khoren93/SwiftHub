@@ -608,18 +608,20 @@
 					"name": "Events",
 					"item": [
 						{
-							"name": "List public events",
+							"name": "List events that a user has received",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"body": {},
 								"url": {
-									"raw": "{{base_url}}/events?page=1&per_page={{per_page}}",
+									"raw": "{{base_url}}/users/{{username}}/received_events?page=1&per_page={{per_page}}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
-										"events"
+										"users",
+										"{{username}}",
+										"received_events"
 									],
 									"query": [
 										{
@@ -632,7 +634,7 @@
 										}
 									]
 								},
-								"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+								"description": "These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events."
 							},
 							"response": []
 						},
@@ -668,6 +670,66 @@
 							"response": []
 						},
 						{
+							"name": "List public events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+							},
+							"response": []
+						},
+						{
+							"name": "List events performed by a user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events."
+							},
+							"response": []
+						},
+						{
 							"name": "List repository issue events",
 							"request": {
 								"method": "GET",
@@ -696,68 +758,6 @@
 										}
 									]
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "List events that a user has received",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "{{base_url}}/users/{{username}}/received_events?page=1&per_page={{per_page}}",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"users",
-										"{{username}}",
-										"received_events"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
-										},
-										{
-											"key": "per_page",
-											"value": "{{per_page}}"
-										}
-									]
-								},
-								"description": "These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events."
-							},
-							"response": []
-						},
-						{
-							"name": "List events performed by a user",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {},
-								"url": {
-									"raw": "{{base_url}}/users/{{username}}/events?per_page={{per_page}}&page=1",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"users",
-										"{{username}}",
-										"events"
-									],
-									"query": [
-										{
-											"key": "per_page",
-											"value": "{{per_page}}"
-										},
-										{
-											"key": "page",
-											"value": "1"
-										}
-									]
-								},
-								"description": "If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events."
 							},
 							"response": []
 						}
@@ -887,6 +887,90 @@
 						}
 					],
 					"description": "Watching a Repository registers the user to receive notifications on new discussions, as well as events in the user's activity feed. See Repository Starring for simple repository bookmarks.",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "List your notifications",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"notifications"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										},
+										{
+											"key": "all",
+											"value": "true"
+										},
+										{
+											"key": "participating",
+											"value": "false"
+										}
+									]
+								},
+								"description": "List all notifications for the current user, sorted by most recently updated."
+							},
+							"response": []
+						},
+						{
+							"name": "List your notifications in a repository",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"notifications"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										},
+										{
+											"key": "all",
+											"value": "true"
+										},
+										{
+											"key": "participating",
+											"value": "false"
+										}
+									]
+								},
+								"description": "List all notifications for the current user."
+							},
+							"response": []
+						}
+					],
+					"description": "Users receive notifications for conversations in repositories they watch",
 					"_postman_isSubFolder": true
 				}
 			]
