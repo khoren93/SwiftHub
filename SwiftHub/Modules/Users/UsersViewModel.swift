@@ -122,9 +122,9 @@ class UsersViewModel: ViewModel, ViewModelType {
         case .following(let user):
             request = self.provider.userFollowing(username: user.login ?? "", page: self.page)
         case .watchers(let repository):
-            request = self.provider.watchers(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
+            request = self.provider.watchers(fullName: repository.fullName ?? "", page: self.page)
         case .stars(let repository):
-            request = self.provider.stargazers(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
+            request = self.provider.stargazers(fullName: repository.fullName ?? "", page: self.page)
         }
         return request
     }

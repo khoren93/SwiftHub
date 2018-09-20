@@ -46,9 +46,9 @@ class SearchViewController: TableViewController {
         super.makeUI()
 
         navigationItem.titleView = segmentedControl
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
-        }
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = false
+//        }
 
         stackView.insertArrangedSubview(searchBar, at: 0)
 

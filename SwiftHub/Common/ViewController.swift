@@ -42,7 +42,6 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     lazy var backBarButton: BarButtonItem = {
         let view = BarButtonItem()
         view.title = ""
-        view.tintColor = .secondary()
         return view
     }()
 
@@ -157,6 +156,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
         themeService.rx
             .bind({ $0.primary }, to: view.rx.backgroundColor)
+            .bind({ $0.secondary }, to: [backBarButton.rx.tintColor, closeBarButton.rx.tintColor])
             .bind({ $0.text }, to: self.rx.emptyDataSetImageTintColorBinder)
             .disposed(by: rx.disposeBag)
 

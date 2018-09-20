@@ -22,20 +22,7 @@ class NavigationController: UINavigationController {
         navigationBar.isTranslucent = false
         navigationBar.backIndicatorImage = R.image.icon_navigation_back()
         navigationBar.backIndicatorTransitionMaskImage = R.image.icon_navigation_back()
-/*
-        if #available(iOS 11.0, *) {
-            navigationBar.prefersLargeTitles = true
-            themeService.rx
-                .bind({ color in
-                    Attributes {
-                        $0.foreground(color: color.text)
-                            .font(.boldSystemFont(ofSize: 28))
-                        }.dictionary
-                }, to: navigationBar.rx.largeTitleTextAttributes)
-                .bind({ $0.primary }, to: navigationBar.rx.backgroundColor)
-                .disposed(by: rx.disposeBag)
-        }
-*/
+
         themeService.rx
             .bind({ $0.secondary }, to: navigationBar.rx.tintColor)
             .bind({ $0.primaryDark }, to: navigationBar.rx.barTintColor)

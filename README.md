@@ -11,7 +11,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 * Basic authentication
 * Clean architecture using [RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM
 * Flow coordinators
-* Light and Dark themes
+* Color themes in Light and Dark modes using [RxTheme](https://github.com/RxSwiftCommunity/RxTheme)
 * Programmatically UI using [SnapKit](https://github.com/SnapKit/SnapKit)
 
 ## Planned Features

@@ -16,13 +16,13 @@ protocol ProductAPIType {
 }
 
 enum GithubAPI {
-    // MARK: - Unauthenticated requests
+    // MARK: - Authentication is optional
 
     case searchRepositories(query: String)
     case repository(fullName: String)
-    case watchers(owner: String, repo: String, page: Int)
-    case stargazers(owner: String, repo: String, page: Int)
-    case forks(owner: String, repo: String, page: Int)
+    case watchers(fullName: String, page: Int)
+    case stargazers(fullName: String, page: Int)
+    case forks(fullName: String, page: Int)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -37,9 +37,12 @@ enum GithubAPI {
     case userReceivedEvents(username: String, page: Int)
     case userPerformedEvents(username: String, page: Int)
 
-    // MARK: - Authenticated requests
+    // MARK: - Authentication is required
 
     case profile
+
+    case notifications(all: Bool, participating: Bool, page: Int)
+    case repositoryNotifications(fullName: String, all: Bool, participating: Bool, page: Int)
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -52,9 +55,9 @@ extension GithubAPI: TargetType, ProductAPIType {
         switch self {
         case .searchRepositories: return "/search/repositories"
         case .repository(let fullName): return "/repos/\(fullName)"
-        case .watchers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/subscribers"
-        case .stargazers(let owner, let repo, _): return "/repos/\(owner)/\(repo)/stargazers"
-        case .forks(let owner, let repo, _): return "/repos/\(owner)/\(repo)/forks"
+        case .watchers(let fullName, _): return "/repos/\(fullName)/subscribers"
+        case .stargazers(let fullName, _): return "/repos/\(fullName)/stargazers"
+        case .forks(let fullName, _): return "/repos/\(fullName)/forks"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -68,6 +71,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userPerformedEvents(let username, _): return "/users/\(username)/events"
 
         case .profile: return "/user"
+        case .notifications: return "/notifications"
+        case .repositoryNotifications(let fullName, _, _, _): return "/repos/\(fullName)/notifications"
         }
     }
 
@@ -91,15 +96,15 @@ extension GithubAPI: TargetType, ProductAPIType {
             var params: [String: Any] = [:]
             params["q"] = query
             return params
-        case .watchers(_, _, let page):
+        case .watchers(_, let page):
             return [
                 "page": page
             ]
-        case .stargazers(_, _, let page):
+        case .stargazers(_, let page):
             return [
                 "page": page
             ]
-        case .forks(_, _, let page):
+        case .forks(_, let page):
             return [
                 "page": page
             ]
@@ -139,6 +144,18 @@ extension GithubAPI: TargetType, ProductAPIType {
             return [
                 "page": page
             ]
+        case .notifications(let all, let participating, let page):
+            return [
+                "all": all,
+                "participating": participating,
+                "page": page
+            ]
+        case .repositoryNotifications(_, let all, let participating, let page):
+            return [
+                "all": all,
+                "participating": participating,
+                "page": page
+            ]
         default:
             return nil
         }
@@ -168,6 +185,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userPerformedEvents: return stubbedResponse("EventsUserPerformed")
 
         case .profile: return stubbedResponse("Profile")
+        case .notifications: return stubbedResponse("Notifications")
+        case .repositoryNotifications: return stubbedResponse("NotificationsRepository")
         }
     }
 

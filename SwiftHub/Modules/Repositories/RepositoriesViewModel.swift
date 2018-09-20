@@ -117,7 +117,7 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
         case .userStarredRepositories(let user):
             request = self.provider.userStarredRepositories(username: user.login ?? "", page: self.page)
         case .forks(let repository):
-            request = self.provider.forks(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
+            request = self.provider.forks(fullName: repository.fullName ?? "", page: self.page)
         }
         return request.map { $0.map { RepositoryCellViewModel(with: $0) } }
     }
