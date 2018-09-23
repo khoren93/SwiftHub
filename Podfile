@@ -51,7 +51,7 @@ target 'SwiftHub' do
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
-  pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
+  pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git', :commit => '1c6044710811c0acbeb41b351fbc600d95b26495' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
   pod 'AcknowList', '~> 1.6.0'  # https://github.com/vtourraine/AcknowList
   pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
 
@@ -66,7 +66,7 @@ target 'SwiftHub' do
 
   # Code Quality
   pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
-  pod 'SwifterSwift', '~> 4.0'  # https://github.com/SwifterSwift/SwifterSwift
+  pod 'SwifterSwift', '~> 4.4.0'  # https://github.com/SwifterSwift/SwifterSwift
   pod 'AttributedLib', '~> 2.0'  # https://github.com/Nirma/Attributed
 
   # Logging

@@ -86,7 +86,7 @@ class LibsManager: NSObject {
 
     func setupCocoaLumberjack() {
         DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
-        DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
+//        DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
 
         let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
