@@ -31,7 +31,7 @@ target 'SwiftHub' do
 
   # Date
   pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-  pod 'SwiftDate', '~> 5.0'  # https://github.com/malcommac/SwiftDate
+  pod 'SwiftDate', '5.0.7'  # https://github.com/malcommac/SwiftDate
 
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
@@ -46,7 +46,7 @@ target 'SwiftHub' do
 
   # UI
   pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
-  pod 'PMAlertController', '~> 3.0'  # https://github.com/pmusolino/PMAlertController
+  pod 'PMAlertController', '~> 3.4.0'  # https://github.com/pmusolino/PMAlertController
   pod 'ImageSlideshow/Kingfisher', '~> 1.0'  # https://github.com/zvonicek/ImageSlideshow
   pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
