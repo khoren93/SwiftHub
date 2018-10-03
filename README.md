@@ -8,19 +8,18 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 <img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_events_screen_dark.png?raw=true" width="290">&nbsp;
 
 ## Features
-* Basic authentication
-* Clean architecture using [RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM
-* Flow coordinators
-* Color themes in Light and Dark modes using [RxTheme](https://github.com/RxSwiftCommunity/RxTheme)
-* Programmatically UI using [SnapKit](https://github.com/SnapKit/SnapKit)
-
-## Planned Features
-* OAuth2 authentication
-* Dependency injection using [Swinject](https://github.com/Swinject/Swinject)
-* In-app language switching
-* Add analytics events
-* More screens
-* Add tests
+- [x] Basic authentication
+- [x] Clean architecture using [RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM
+- [x] Flow coordinators
+- [x] Color themes in Light and Dark modes using [RxTheme](https://github.com/RxSwiftCommunity/RxTheme)
+- [x] Programmatically UI using [SnapKit](https://github.com/SnapKit/SnapKit)
+- [x] Support iPhone and iPad
+- [ ] OAuth2 authentication
+- [ ] Dependency injection using [Swinject](https://github.com/Swinject/Swinject)
+- [ ] In-app language switching
+- [ ] Add analytics events
+- [ ] More screens
+- [ ] Add tests
 
 ## Building and Running
 
