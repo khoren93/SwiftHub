@@ -17,7 +17,7 @@ target 'SwiftHub' do
   pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
   pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
   pod 'RxViewController', '~> 0.3'  # https://github.com/devxoul/RxViewController
-  pod 'RxGesture', '~> 1.0'  # https://github.com/RxSwiftCommunity/RxGesture
+  pod 'RxGesture', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxGesture
   pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
   pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
   #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
@@ -31,7 +31,7 @@ target 'SwiftHub' do
 
   # Date
   pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-  pod 'SwiftDate', '5.0.7'  # https://github.com/malcommac/SwiftDate
+  pod 'SwiftDate', '5.0.9'  # https://github.com/malcommac/SwiftDate
 
   # Tools
   pod 'R.swift', '~> 4.0'  # https://github.com/mac-cain13/R.swift
@@ -52,7 +52,7 @@ target 'SwiftHub' do
   pod 'Hero', '~> 1.0'  # https://github.com/lkzhao/Hero
   pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
   pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git', :commit => '1c6044710811c0acbeb41b351fbc600d95b26495' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
-  pod 'AcknowList', '~> 1.6.0'  # https://github.com/vtourraine/AcknowList
+  pod 'AcknowList', '~> 1.7.0'  # https://github.com/vtourraine/AcknowList
   pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
 
   # Keyboard
@@ -66,7 +66,7 @@ target 'SwiftHub' do
 
   # Code Quality
   pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
-  pod 'SwifterSwift', '~> 4.4.0'  # https://github.com/SwifterSwift/SwifterSwift
+  pod 'SwifterSwift', '~> 4.6.0'  # https://github.com/SwifterSwift/SwifterSwift
   pod 'AttributedLib', '~> 2.0'  # https://github.com/Nirma/Attributed
 
   # Logging

@@ -30,6 +30,7 @@ class Navigator {
         case repositories(viewModel: RepositoriesViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
         case theme(viewModel: ThemeViewModel)
+        case language(viewModel: LanguageViewModel)
         case acknowledgements
         case safari(URL)
         case safariController(URL)
@@ -88,6 +89,11 @@ class Navigator {
 
         case .theme(let viewModel):
             let vc = R.storyboard.main.themeViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .language(let viewModel):
+            let vc = R.storyboard.main.languageViewController()!
             vc.viewModel = viewModel
             return vc
 

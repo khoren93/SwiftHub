@@ -13,6 +13,7 @@ import Kingfisher
 import DZNEmptyDataSet
 import NVActivityIndicatorView
 import Hero
+import Localize_Swift
 
 class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable {
 
@@ -31,6 +32,8 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     var emptyDataSetTitle = "No Results"
     var emptyDataSetImage = R.image.image_no_result()
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
+
+    let languageChanged = BehaviorRelay<Void>(value: ())
 
     let motionShakeEvent = PublishSubject<Void>()
 
@@ -107,8 +110,15 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         NotificationCenter.default
             .rx.notification(NSNotification.Name.UIAccessibilityReduceMotionStatusDidChange)
             .subscribe(onNext: { (event) in
-            logDebug("Motion Status changed")
-        }).disposed(by: rx.disposeBag)
+                logDebug("Motion Status changed")
+            }).disposed(by: rx.disposeBag)
+
+        // Observe application did change language notification
+        NotificationCenter.default
+            .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
+            .subscribe { [weak self] (event) in
+                self?.languageChanged.accept(())
+            }.disposed(by: rx.disposeBag)
 
         // Two finger swipe gesture for opening Flex
         let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))

@@ -29,6 +29,11 @@
 		0732046521413B5200C1E39F /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0732046321413B5200C1E39F /* EventCell.xib */; };
 		0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046621413B6400C1E39F /* EventCellViewModel.swift */; };
 		0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046921419DB200C1E39F /* ISO8601DateTransform.swift */; };
+		0757B53221669DAC00C04163 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B52D21669DAC00C04163 /* LanguageViewModel.swift */; };
+		0757B53321669DAC00C04163 /* LanguageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B52E21669DAC00C04163 /* LanguageCellViewModel.swift */; };
+		0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0757B52F21669DAC00C04163 /* LanguageCell.xib */; };
+		0757B53521669DAC00C04163 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B53021669DAC00C04163 /* LanguageCell.swift */; };
+		0757B53621669DAC00C04163 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B53121669DAC00C04163 /* LanguageViewController.swift */; };
 		075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */; };
 		07919465214D4EB500A7067E /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919464214D4EB500A7067E /* ThemeViewController.swift */; };
 		07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919466214D4ED400A7067E /* ThemeViewModel.swift */; };
@@ -187,6 +192,11 @@
 		0732046321413B5200C1E39F /* EventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		0732046621413B6400C1E39F /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		0732046921419DB200C1E39F /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateTransform.swift; sourceTree = "<group>"; };
+		0757B52D21669DAC00C04163 /* LanguageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
+		0757B52E21669DAC00C04163 /* LanguageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCellViewModel.swift; sourceTree = "<group>"; };
+		0757B52F21669DAC00C04163 /* LanguageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguageCell.xib; sourceTree = "<group>"; };
+		0757B53021669DAC00C04163 /* LanguageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
+		0757B53121669DAC00C04163 /* LanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SwiftHub-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		07919464214D4EB500A7067E /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		07919466214D4ED400A7067E /* ThemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModel.swift; sourceTree = "<group>"; };
@@ -386,6 +396,18 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0757B52C21669DAC00C04163 /* Settings Language */ = {
+			isa = PBXGroup;
+			children = (
+				0757B53021669DAC00C04163 /* LanguageCell.swift */,
+				0757B52F21669DAC00C04163 /* LanguageCell.xib */,
+				0757B52E21669DAC00C04163 /* LanguageCellViewModel.swift */,
+				0757B53121669DAC00C04163 /* LanguageViewController.swift */,
+				0757B52D21669DAC00C04163 /* LanguageViewModel.swift */,
+			);
+			path = "Settings Language";
+			sourceTree = "<group>";
+		};
 		07919463214D4D4700A7067E /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +465,7 @@
 				07DFF6D820E90860004DAA68 /* Repository Details */,
 				A09DE8B320E7AD0300F6F2BF /* Search */,
 				070FF84320F2846F0070F5E8 /* Settings */,
+				0757B52C21669DAC00C04163 /* Settings Language */,
 				07919463214D4D4700A7067E /* Theme */,
 				070FF83A20F2204A0070F5E8 /* User Details */,
 				A09DE8B820E7B7C600F6F2BF /* Users */,
@@ -948,6 +971,7 @@
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
+				0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */,
 				0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */,
 				0732045B214137B800C1E39F /* EventsUserPerformed.json in Resources */,
 				A034AF79215280EF004C310B /* NotificationCell.xib in Resources */,
@@ -1192,6 +1216,8 @@
 				C762C66C1E1D559000C09EBD /* View.swift in Sources */,
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */,
+				0757B53521669DAC00C04163 /* LanguageCell.swift in Sources */,
+				0757B53621669DAC00C04163 /* LanguageViewController.swift in Sources */,
 				A034A8AE20F61A6500E2B678 /* HomeTabBarViewModel.swift in Sources */,
 				C762C6691E1D559000C09EBD /* TableViewCell.swift in Sources */,
 				A034AF78215280EF004C310B /* NotificationCell.swift in Sources */,
@@ -1231,6 +1257,7 @@
 				A034AF7021527EF8004C310B /* Notification.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				A0E2B08D2106293A000DA282 /* Switch.swift in Sources */,
+				0757B53221669DAC00C04163 /* LanguageViewModel.swift in Sources */,
 				0732046421413B5200C1E39F /* EventCell.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */,
@@ -1266,6 +1293,7 @@
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
 				A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */,
+				0757B53321669DAC00C04163 /* LanguageCellViewModel.swift in Sources */,
 				A09DE8C120E7B82F00F6F2BF /* RepositoryCellViewModel.swift in Sources */,
 				C762C6231E1D414B00C09EBD /* R.generated.swift in Sources */,
 				A09DE8C920E7B8F400F6F2BF /* ViewModelType.swift in Sources */,

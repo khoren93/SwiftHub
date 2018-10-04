@@ -68,8 +68,12 @@ class SettingsViewController: TableViewController {
             case .settingItem(let viewModel):
                 switch viewModel.type {
                 case .theme:
-                    if let destinationViewModel = viewModel.destinationViewModel as? ThemeViewModel {
-                        self?.navigator.show(segue: .theme(viewModel: destinationViewModel), sender: self, transition: .detail)
+                    if let viewModel = viewModel.destinationViewModel as? ThemeViewModel {
+                        self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
+                    }
+                case .language:
+                    if let viewModel = viewModel.destinationViewModel as? LanguageViewModel {
+                        self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
                     }
                 case .acknowledgements:
                     self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)

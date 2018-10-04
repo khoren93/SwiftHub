@@ -45,6 +45,10 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let themeViewModel = ThemeViewModel(provider: self.provider)
             let themeCellViewModel = SettingCellViewModel(with: themeModel, destinationViewModel: themeViewModel)
 
+            let languageModel = SettingModel(type: .language, leftImage: R.image.icon_cell_language.name, title: "Language", detail: "", showDisclosure: true)
+            let languageViewModel = LanguageViewModel(provider: self.provider)
+            let languageCellViewModel = SettingCellViewModel(with: languageModel, destinationViewModel: languageViewModel)
+
             let removeCacheModel = SettingModel(type: .removeCache, leftImage: R.image.icon_cell_remove.name, title: "Remove Cache", detail: "", showDisclosure: false)
             let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel, destinationViewModel: nil)
 
@@ -55,6 +59,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
                 SettingsSection.setting(title: "Preferences", items: [
                         SettingsSectionItem.settingThemeItem(viewModel: nightModeCellViewModel),
                         SettingsSectionItem.settingItem(viewModel: themeCellViewModel),
+                        SettingsSectionItem.settingItem(viewModel: languageCellViewModel),
                         SettingsSectionItem.settingItem(viewModel: removeCacheCellViewModel)
                     ]),
                 SettingsSection.setting(title: "Support", items: [
