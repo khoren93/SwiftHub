@@ -3,7 +3,7 @@
 //  SwiftHub
 //
 //  Created by Sygnoos9 on 3/25/18.
-//  Copyright © 2018 Sygnoos. All rights reserved.
+//  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
 import Foundation

@@ -27,7 +27,10 @@ class SettingsViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        navigationTitle = "Settings"
+        languageChanged.subscribe(onNext: { [weak self] () in
+            self?.navigationTitle = R.string.localizable.settingsNavigationTitle.key.localized()
+        }).disposed(by: rx.disposeBag)
+
         tableView.register(R.nib.settingCell)
         tableView.register(R.nib.settingThemeCell)
         tableView.headRefreshControl = nil
@@ -37,7 +40,8 @@ class SettingsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(rx.viewWillAppear.mapToVoid()).merge()
+        let refresh = Observable.of(rx.viewWillAppear.mapToVoid(),
+                                    languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
@@ -90,8 +94,9 @@ class SettingsViewController: TableViewController {
 
     func clearCacheAction() {
         LibsManager.shared.removeKingfisherCache { [weak self] in
-            let alertController = UIAlertController(title: "Cache Successfully Cleared", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default) { (result: UIAlertAction) in }
+            let alertController = UIAlertController(title: R.string.localizable.settingsRemoveCacheAlertSuccessMessage.key.localized(),
+                                                    message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: R.string.localizable.commonOK.key.localized(), style: .default) { (result: UIAlertAction) in }
             alertController.addAction(okAction)
             self?.present(alertController, animated: true, completion: nil)
         }

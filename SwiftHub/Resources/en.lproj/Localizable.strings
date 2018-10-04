@@ -1,0 +1,85 @@
+/* Localizable.strings
+  SwiftHub
+
+  Created by Sygnoos9 on 10/4/18.
+  Copyright © 2018 Khoren Markosyan. All rights reserved. */
+
+/* Common */
+"Common.Yes" = "Yes";
+"Common.No" = "No";
+"Common.OK" = "OK";
+"Common.Cancel" = "Cancel";
+"Common.Done" = "Done";
+"Common.Back" = "Back";
+"Common.Close" = "Close";
+"Common.Edit" = "Edit";
+"Common.Next" = "Next";
+"Common.Skip" = "Skip";
+"Common.Reset" = "Reset";
+"Common.Save" = "Save";
+"Common.Delete" = "Delete";
+"Common.Search" = "Search";
+"Common.Error" = "Error";
+/* Home TabBar */
+"Home.TabBar.Events.Title" = "Events";
+"Home.TabBar.Search.Title" = "Search";
+"Home.TabBar.Profile.Title" = "Profile";
+"Home.TabBar.Login.Title" = "Login";
+"Home.TabBar.Notifications.Title" = "Activities";
+"Home.TabBar.Settings.Title" = "Settings";
+/* Events */
+"Events.Navigation.Title" = "Events";
+/* Login */
+//"Login.Navigation.Title" = "Login";
+"Login.BasicSegment.Title" = "Basic";
+"Login.oAuthSegment.Title" = "oAuth";
+"Login.LoginTextField.Placeholder" = "login";
+"Login.PasswordTextField.Placeholder" = "password";
+"Login.BasicLoginButton.Title" = "Login";
+"Login.TitleLabel.Text" = "Welcome to SwiftHub";
+"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
+"Login.oAuthloginButton.Title" = "Sign in with Github";
+"Login.LoginFailed.Description" = "Please check your login or password";
+/* Notifications */
+"Notifications.Navigation.Title" = "Notifications";
+/* Repositories */
+"Repositories.RepositoriesNavigation.Title" = "Repositories";
+"Repositories.StarredNavigation.Title" = "Starred";
+"Repositories.ForksNavigation.Title" = "Forks";
+/* Repository Details */
+//"Repository.Navigation.Title" = "Repository";
+"Repository.WatchersButton.Title" = "Watchers";
+"Repository.StarsButton.Title" = "Stars";
+"Repository.ForksButton.Title" = "Forks";
+/* Search */
+//"Search.Navigation.Title" = "Search";
+"Search.RepositoriesSegment.Title" = "Repositories";
+"Search.UsersSegment.Title" = "Users";
+/* Settings */
+"Settings.Navigation.Title" = "Settings";
+"Settings.PreferencesSection.Title" = "Preferences";
+"Settings.NightMode.Title" = "Night Mode";
+"Settings.Theme.Title" = "Color theme";
+"Settings.Language.Title" = "Language";
+"Settings.RemoveCache.Title" = "Remove Cache";
+"Settings.RemoveCache.Alert.SuccessMessage" = "Cache Successfully Cleared";
+"Settings.SupportSection.Title" = "Support";
+"Settings.Acknowledgements.Title" = "Acknowledgements";
+"Settings.LogOut.Title" = "Log Out";
+"Settings.Logout.Alert.Message" = "Are you sure want to log out from WishApp?";
+"Settings.Logout.Alert.ConfirmButton.Title" = "Logout";
+/* Language */
+"Language.Navigation.Title" = "Language";
+/* Theme */
+"Theme.Navigation.Title" = "Color theme";
+/* User Details */
+//"User.Navigation.Title" = "User";
+"User.RepositoriesButton.Title" = "Repositories";
+"User.FollowersButton.Title" = "Followers";
+"User.FollowingButton.Title" = "Following";
+/* Users */
+//"Users.Navigation.Title" = "Users";
+"Users.FollowersNavigation.Title" = "Followers";
+"Users.FollowingNavigation.Title" = "Following";
+"Users.WatchersNavigation.Title" = "Watchers";
+"Users.StargazersNavigation.Title" = "Stargazers";

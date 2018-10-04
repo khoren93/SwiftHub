@@ -96,7 +96,7 @@ class EventsViewModel: ViewModel, ViewModelType {
             })
 
         let navigationTitle = mode.map({ (mode) -> String in
-            return "Events"
+            return R.string.localizable.eventsNavigationTitle.key.localized()
         }).asDriver(onErrorJustReturn: "")
 
         let imageUrl = mode.map({ (mode) -> URL? in

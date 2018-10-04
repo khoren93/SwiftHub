@@ -16,8 +16,8 @@ enum LoginSegments: Int {
 
     var title: String {
         switch self {
-        case .basic: return "Basic"
-        case .oAuth: return "oAuth"
+        case .basic: return R.string.localizable.loginBasicSegmentTitle.key.localized()
+        case .oAuth: return R.string.localizable.loginOAuthSegmentTitle.key.localized()
         }
     }
 }
@@ -52,7 +52,6 @@ class LoginViewController: ViewController {
 
     lazy var loginTextField: TextField = {
         let view = TextField()
-        view.placeholder = "login"
         view.textAlignment = .center
         view.keyboardType = .emailAddress
         return view
@@ -60,7 +59,6 @@ class LoginViewController: ViewController {
 
     lazy var passwordTextField: TextField = {
         let view = TextField()
-        view.placeholder = "password"
         view.textAlignment = .center
         view.isSecureTextEntry = true
         return view
@@ -68,7 +66,6 @@ class LoginViewController: ViewController {
 
     lazy var basicLoginButton: Button = {
         let view = Button()
-        view.titleForNormal = "Login"
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
         return view
@@ -82,7 +79,6 @@ class LoginViewController: ViewController {
     lazy var titleLabel: Label = {
         let view = Label(style: .style211)
         view.font = view.font.withSize(22)
-        view.text = "Welcome to SwiftHub"
         view.textAlignment = .center
         return view
     }()
@@ -91,14 +87,12 @@ class LoginViewController: ViewController {
         let view = Label(style: .style122)
         view.font = view.font.withSize(17)
         view.numberOfLines = 0
-        view.text = "Open source Github iOS client written in RxSwift and MVVM architecture."
         view.textAlignment = .center
         return view
     }()
 
     lazy var oAuthloginButton: Button = {
         let view = Button()
-        view.titleForNormal = "Sign in with Github"
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
         return view
@@ -122,10 +116,17 @@ class LoginViewController: ViewController {
     override func makeUI() {
         super.makeUI()
 
-        navigationItem.titleView = segmentedControl
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
-        }
+        languageChanged.subscribe(onNext: { [weak self] () in
+            self?.loginTextField.placeholder = R.string.localizable.loginLoginTextFieldPlaceholder.key.localized()
+            self?.passwordTextField.placeholder = R.string.localizable.loginPasswordTextFieldPlaceholder.key.localized()
+            self?.basicLoginButton.titleForNormal = R.string.localizable.loginBasicLoginButtonTitle.key.localized()
+            self?.titleLabel.text = R.string.localizable.loginTitleLabelText.key.localized()
+            self?.detailLabel.text = R.string.localizable.loginDetailLabelText.key.localized()
+            self?.oAuthloginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
+            self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 0)
+            self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 1)
+            self?.navigationItem.titleView = self?.segmentedControl
+        }).disposed(by: rx.disposeBag)
 
         stackView.removeFromSuperview()
         scrollView.addSubview(stackView)
@@ -168,7 +169,8 @@ class LoginViewController: ViewController {
         output.hidesOAuthLoginView.drive(oAuthLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: "Authentication Error", message: "Please check your login or password")
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(),
+                            message: R.string.localizable.loginLoginFailedDescription.key.localized())
             logError("\(error.localizedDescription)")
         }).disposed(by: rx.disposeBag)
     }

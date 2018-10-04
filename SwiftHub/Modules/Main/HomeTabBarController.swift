@@ -8,8 +8,7 @@
 
 import UIKit
 import RAMAnimatedTabBarController
-
-let provider = Api.shared
+import Localize_Swift
 
 enum HomeTabBarItem: Int {
     case search, news, profile, notifications, settings, login
@@ -56,12 +55,12 @@ enum HomeTabBarItem: Int {
 
     var title: String {
         switch self {
-        case .search: return "Search"
-        case .news: return "News"
-        case .profile: return "Profile"
-        case .notifications: return "Activities"
-        case .settings: return "Settings"
-        case .login: return "Login"
+        case .search: return R.string.localizable.homeTabBarSearchTitle.key.localized()
+        case .news: return R.string.localizable.homeTabBarEventsTitle.key.localized()
+        case .profile: return R.string.localizable.homeTabBarProfileTitle.key.localized()
+        case .notifications: return R.string.localizable.homeTabBarNotificationsTitle.key.localized()
+        case .settings: return R.string.localizable.homeTabBarSettingsTitle.key.localized()
+        case .login: return R.string.localizable.homeTabBarLoginTitle.key.localized()
         }
     }
 

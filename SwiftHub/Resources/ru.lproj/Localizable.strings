@@ -1,0 +1,85 @@
+/* Localizable.strings
+  SwiftHub
+
+  Created by Sygnoos9 on 10/4/18.
+  Copyright © 2018 Khoren Markosyan. All rights reserved. */
+
+/* Common */
+"Common.Yes" = "Да";
+"Common.No" = "Нет";
+"Common.OK" = "ОК";
+"Common.Cancel" = "Отмена";
+"Common.Done" = "Готово";
+"Common.Back" = "Назад";
+"Common.Close" = "Закрыть";
+"Common.Edit" = "Редактировать";
+"Common.Next" = "Следующий";
+"Common.Skip" = "Пропускать";
+"Common.Reset" = "Сброс";
+"Common.Save" = "Сохранить";
+"Common.Delete" = "Удалить";
+"Common.Search" = "Поиск";
+"Common.Error" = "Ошибка";
+/* Home TabBar */
+"Home.TabBar.Events.Title" = "События";
+"Home.TabBar.Search.Title" = "Поиск";
+"Home.TabBar.Profile.Title" = "Профиль";
+"Home.TabBar.Login.Title" = "Вход";
+"Home.TabBar.Notifications.Title" = "Уведомления";
+"Home.TabBar.Settings.Title" = "Настройки";
+/* Events */
+"Events.Navigation.Title" = "События";
+/* Login */
+//"Login.Navigation.Title" = "Вход";
+"Login.BasicSegment.Title" = "Базовое";
+"Login.oAuthSegment.Title" = "oAuth";
+"Login.LoginTextField.Placeholder" = "логин";
+"Login.PasswordTextField.Placeholder" = "пароль";
+"Login.BasicLoginButton.Title" = "Вход";
+"Login.TitleLabel.Text" = "Добро пожаловать в SwiftHub";
+"Login.DetailLabel.Text" = "Github iOS клиент с открытым исходным кодом, написанный на архитектуре RxSwift и MVVM.";
+"Login.oAuthloginButton.Title" = "Войти с Github";
+"Login.LoginFailed.Description" = "Пожалуйста, проверьте свой логин или пароль";
+/* Notifications */
+"Notifications.Navigation.Title" = "Уведомления";
+/* Repositories */
+"Repositories.RepositoriesNavigation.Title" = "Репозитории";
+"Repositories.StarredNavigation.Title" = "Избранные";
+"Repositories.ForksNavigation.Title" = "Forks";
+/* Repository Details */
+//"Repository.Navigation.Title" = "Repository";
+"Repository.WatchersButton.Title" = "Watchers";
+"Repository.StarsButton.Title" = "Stars";
+"Repository.ForksButton.Title" = "Forks";
+/* Search */
+//"Search.Navigation.Title" = "Search";
+"Search.RepositoriesSegment.Title" = "Репозитории";
+"Search.UsersSegment.Title" = "Пользователей";
+/* Settings */
+"Settings.Navigation.Title" = "Настройки";
+"Settings.PreferencesSection.Title" = "Параметры";
+"Settings.NightMode.Title" = "Ночной режим";
+"Settings.Theme.Title" = "Цветовая тема";
+"Settings.Language.Title" = "Язык";
+"Settings.RemoveCache.Title" = "Удалить кеш";
+"Settings.RemoveCache.Alert.SuccessMessage" = "Кэш успешно очищен";
+"Settings.SupportSection.Title" = "Поддержка";
+"Settings.Acknowledgements.Title" = "Признательность";
+"Settings.LogOut.Title" = "Выйти";
+"Settings.Logout.Alert.Message" = "Вы действительно хотите выйти из SwiftHub?";
+"Settings.Logout.Alert.ConfirmButton.Title" = "Выйти";
+/* Language */
+"Language.Navigation.Title" = "Язык";
+/* Theme */
+"Theme.Navigation.Title" = "Цветовая тема";
+/* User Details */
+//"User.Navigation.Title" = "User";
+"User.RepositoriesButton.Title" = "Repositories";
+"User.FollowersButton.Title" = "Followers";
+"User.FollowingButton.Title" = "Following";
+/* Users */
+//"Users.Navigation.Title" = "Users";
+"Users.FollowersNavigation.Title" = "Followers";
+"Users.FollowingNavigation.Title" = "Following";
+"Users.WatchersNavigation.Title" = "Watchers";
+"Users.StargazersNavigation.Title" = "Stargazers";

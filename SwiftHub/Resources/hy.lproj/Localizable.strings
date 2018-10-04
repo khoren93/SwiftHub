@@ -1,0 +1,85 @@
+/* Localizable.strings
+  SwiftHub
+
+  Created by Sygnoos9 on 10/4/18.
+  Copyright © 2018 Khoren Markosyan. All rights reserved. */
+
+/* Common */
+"Common.Yes" = "Այո";
+"Common.No" = "Ոչ";
+"Common.OK" = "Լավ";
+"Common.Cancel" = "Չեղարկել";
+"Common.Done" = "Կատարել";
+"Common.Back" = "Վերադառնալ";
+"Common.Close" = "Փակել";
+"Common.Edit" = "Խմբագրել";
+"Common.Next" = "Հաջորդը";
+"Common.Skip" = "Բաց թողնել";
+"Common.Reset" = "Վերականգնել";
+"Common.Save" = "Պահել";
+"Common.Delete" = "Հեռացնել";
+"Common.Search" = "Որոնում";
+"Common.Error" = "Սխալ";
+/* Home TabBar */
+"Home.TabBar.Events.Title" = "Միջոցառումներ";
+"Home.TabBar.Search.Title" = "Որոնում";
+"Home.TabBar.Profile.Title" = "Իմ էջը";
+"Home.TabBar.Login.Title" = "Մուտք";
+"Home.TabBar.Notifications.Title" = "Ծանուցումներ";
+"Home.TabBar.Settings.Title" = "Կարգավորումներ";
+/* Events */
+"Events.Navigation.Title" = "Միջոցառումներ";
+/* Login */
+//"Login.Navigation.Title" = "Մուտք";
+"Login.BasicSegment.Title" = "Հիմնական";
+"Login.oAuthSegment.Title" = "oAuth";
+"Login.LoginTextField.Placeholder" = "մուտքանուն";
+"Login.PasswordTextField.Placeholder" = "գաղտնաբառ";
+"Login.BasicLoginButton.Title" = "Մուտք";
+"Login.TitleLabel.Text" = "Բարի գալուստ SwiftHub";
+"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
+"Login.oAuthloginButton.Title" = "Մուտք Github-ով";
+"Login.LoginFailed.Description" = "Խնդրում ենք ստուգել ձեր մուտքանունը կամ գաղտնաբառը";
+/* Notifications */
+"Notifications.Navigation.Title" = "Ծանուցումներ";
+/* Repositories */
+"Repositories.RepositoriesNavigation.Title" = "Repositories";
+"Repositories.StarredNavigation.Title" = "Starred";
+"Repositories.ForksNavigation.Title" = "Forks";
+/* Repository Details */
+//"Repository.Navigation.Title" = "Repository";
+"Repository.WatchersButton.Title" = "Watchers";
+"Repository.StarsButton.Title" = "Stars";
+"Repository.ForksButton.Title" = "Forks";
+/* Search */
+//"Search.Navigation.Title" = "Search";
+"Search.RepositoriesSegment.Title" = "Repositories";
+"Search.UsersSegment.Title" = "Users";
+/* Settings */
+"Settings.Navigation.Title" = "Կարգավորումներ";
+"Settings.PreferencesSection.Title" = "Պարամետրեր";
+"Settings.NightMode.Title" = "Գիշերային ռեժիմ";
+"Settings.Theme.Title" = "Գունային թեման";
+"Settings.Language.Title" = "Լեզու";
+"Settings.RemoveCache.Title" = "Հեռացնել Cache-ը";
+"Settings.RemoveCache.Alert.SuccessMessage" = "Cache-ը հաջողությամբ մաքրվել է";
+"Settings.SupportSection.Title" = "Աջակցություն";
+"Settings.Acknowledgements.Title" = "Երախտագիտություն";
+"Settings.LogOut.Title" = "Դուրս գալ";
+"Settings.Logout.Alert.Message" = "Ցանկանում ե՞ք դուրս գալ SwiftHub-ից:";
+"Settings.Logout.Alert.ConfirmButton.Title" = "Ելք";
+/* Language */
+"Language.Navigation.Title" = "Լեզու";
+/* Theme */
+"Theme.Navigation.Title" = "Գունային թեման";
+/* User Details */
+//"User.Navigation.Title" = "User";
+"User.RepositoriesButton.Title" = "Repositories";
+"User.FollowersButton.Title" = "Followers";
+"User.FollowingButton.Title" = "Following";
+/* Users */
+//"Users.Navigation.Title" = "Users";
+"Users.FollowersNavigation.Title" = "Followers";
+"Users.FollowingNavigation.Title" = "Following";
+"Users.WatchersNavigation.Title" = "Watchers";
+"Users.StargazersNavigation.Title" = "Stargazers";

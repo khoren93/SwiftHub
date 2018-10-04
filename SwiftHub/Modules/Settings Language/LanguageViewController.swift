@@ -3,7 +3,7 @@
 //  SwiftHub
 //
 //  Created by Sygnoos9 on 3/25/18.
-//  Copyright © 2018 Sygnoos. All rights reserved.
+//  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
 import UIKit
@@ -33,8 +33,8 @@ class LanguageViewController: TableViewController {
         super.makeUI()
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.navigationTitle = "Language"
-            self?.saveButtonItem.title = "Save"
+            self?.navigationTitle = R.string.localizable.languageNavigationTitle.key.localized()
+            self?.saveButtonItem.title = R.string.localizable.commonSave.key.localized()
         }).disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = saveButtonItem

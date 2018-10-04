@@ -91,7 +91,7 @@ class EventsViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: "Error", message: error.localizedDescription)
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }
