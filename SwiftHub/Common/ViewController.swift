@@ -95,20 +95,20 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
         // Observe device orientation change
         NotificationCenter.default
-            .rx.notification(NSNotification.Name.UIDeviceOrientationDidChange)
+            .rx.notification(UIDevice.orientationDidChangeNotification)
             .subscribe { [weak self] (event) in
                 self?.orientationChanged()
             }.disposed(by: rx.disposeBag)
 
         // Observe application did become active notification
         NotificationCenter.default
-            .rx.notification(NSNotification.Name.UIApplicationDidBecomeActive)
+            .rx.notification(UIApplication.didBecomeActiveNotification)
             .subscribe { [weak self] (event) in
                 self?.didBecomeActive()
             }.disposed(by: rx.disposeBag)
 
         NotificationCenter.default
-            .rx.notification(NSNotification.Name.UIAccessibilityReduceMotionStatusDidChange)
+            .rx.notification(UIAccessibility.reduceMotionStatusDidChangeNotification)
             .subscribe(onNext: { (event) in
                 logDebug("Motion Status changed")
             }).disposed(by: rx.disposeBag)
@@ -181,7 +181,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
     }
 
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             motionShakeEvent.onNext(())
         }

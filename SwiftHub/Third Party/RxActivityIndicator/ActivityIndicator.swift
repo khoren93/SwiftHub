@@ -53,9 +53,9 @@ public class ActivityIndicator: SharedSequenceConvertibleType {
         return Observable.using({ () -> ActivityToken<O.E> in
             self.increment()
             return ActivityToken(source: source.asObservable(), disposeAction: self.decrement)
-        }) { value in
+        }, observableFactory: { value in
             return value.asObservable()
-        }
+        })
     }
 
     private func increment() {
