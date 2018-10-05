@@ -95,7 +95,7 @@ class SettingsViewController: TableViewController {
     func clearCacheAction() {
         LibsManager.shared.removeKingfisherCache { [weak self] in
             let alertController = UIAlertController(title: R.string.localizable.settingsRemoveCacheAlertSuccessMessage.key.localized(),
-                                                    message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                                                    message: nil, preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: R.string.localizable.commonOK.key.localized(), style: .default) { (result: UIAlertAction) in }
             alertController.addAction(okAction)
             self?.present(alertController, animated: true, completion: nil)

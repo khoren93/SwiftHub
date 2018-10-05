@@ -35,7 +35,7 @@ class DetailedTableViewCell: TableViewCell {
 
     lazy var detailLabel: Label = {
         let view = Label(style: .style132)
-        view.setPriority(UILayoutPriority.defaultLow, for: UILayoutConstraintAxis.vertical)
+        view.setPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.vertical)
         return view
     }()
 
