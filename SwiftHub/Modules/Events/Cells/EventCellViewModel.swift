@@ -36,7 +36,7 @@ class EventCellViewModel {
         let repoName = event.repository?.fullName ?? ""
 
         title = Driver.just([actorName, actionText, repoName].joined(separator: " "))
-        detail = Driver.just("\(event.createdAt?.toRelative() ?? "")")
+        detail = Driver.just("\(event.createdAt?.dateString() ?? "")")
         imageUrl = Driver.just(event.actor?.avatarUrl?.url)
     }
 }

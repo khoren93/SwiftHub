@@ -923,7 +923,7 @@
 				TargetAttributes = {
 					A09499511E1D1CB600EFDE29 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = D54Y88Y9CY;
+						DevelopmentTeam = T7PRF59H28;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
@@ -1066,7 +1066,6 @@
 				"${BUILT_PRODUCTS_DIR}/RxTheme/RxTheme.framework",
 				"${BUILT_PRODUCTS_DIR}/RxViewController/RxViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Umbrella/Umbrella.framework",
 			);
@@ -1107,7 +1106,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTheme.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Umbrella.framework",
 			);
@@ -1490,7 +1488,7 @@
 			baseConfigurationReference = 7B5E2602E2BB58EBC51F39D8 /* Pods-SwiftHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D54Y88Y9CY;
+				DEVELOPMENT_TEAM = T7PRF59H28;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1506,7 +1504,7 @@
 			baseConfigurationReference = 7DCE0F2B67EC0E2BD4A13391 /* Pods-SwiftHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D54Y88Y9CY;
+				DEVELOPMENT_TEAM = T7PRF59H28;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
