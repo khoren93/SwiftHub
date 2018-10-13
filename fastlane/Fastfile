@@ -36,4 +36,29 @@ platform :ios do
     build_app(scheme: "SwiftHub")
   end
 
+  lane :increment_build do
+    increment_build_number
+    commit_version_bump
+  end
+
+  lane :increment_version_patch do
+    increment_version_number(
+      bump_type: "patch"
+    )
+    commit_version_bump
+  end
+
+  lane :increment_version_minor do
+    increment_version_number(
+      bump_type: "minor"
+    )
+    commit_version_bump
+  end
+
+  lane :increment_version_major do
+    increment_version_number(
+      bump_type: "major"
+    )
+    commit_version_bump
+  end
 end
