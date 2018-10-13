@@ -18,8 +18,8 @@ enum EventSegments: Int {
 
     var title: String {
         switch self {
-        case .received: return "Received"
-        case .performed: return "Performed"
+        case .received: return R.string.localizable.eventsReceivedSegmentTitle.key.localized()
+        case .performed: return R.string.localizable.eventsPerformedSegmentTitle.key.localized()
         }
     }
 }
@@ -64,6 +64,11 @@ class EventsViewController: TableViewController {
         super.makeUI()
 
         navigationItem.titleView = segmentedControl
+
+        languageChanged.subscribe(onNext: { [weak self] () in
+            self?.segmentedControl.setTitle(EventSegments.received.title, forSegmentAt: 0)
+            self?.segmentedControl.setTitle(EventSegments.performed.title, forSegmentAt: 1)
+        }).disposed(by: rx.disposeBag)
 
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)

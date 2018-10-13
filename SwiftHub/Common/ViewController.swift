@@ -29,7 +29,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         }
     }
 
-    var emptyDataSetTitle = "No Results"
+    var emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
     var emptyDataSetImage = R.image.image_no_result()
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
 
@@ -158,6 +158,10 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     func makeUI() {
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
+
+        languageChanged.subscribe(onNext: { [weak self] () in
+            self?.emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
+        }).disposed(by: rx.disposeBag)
 
         motionShakeEvent.subscribe(onNext: { () in
             let theme = themeService.theme.toggled()

@@ -104,7 +104,8 @@ class UserViewModel: ViewModel, ViewModelType {
         let items = user.filterNil().map { (user) -> [UserSection] in
             // Events
             let eventsViewModel = EventsViewModel(mode: EventsMode.user(user: user), provider: self.provider)
-            let eventsCellViewModel = UserDetailCellViewModel(with: "Events", image: R.image.icon_cell_events(), destinationViewModel: eventsViewModel)
+            let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
+                                                              image: R.image.icon_cell_events(), destinationViewModel: eventsViewModel)
 
             let items = [
                 UserSection.user(title: "", items: [

@@ -122,15 +122,18 @@ class RepositoryViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
-            self?.watchersButton.setAttributedTitle(self?.attributetText(title: "Watchers", value: count), for: .normal)
+            let text = R.string.localizable.repositoryWatchersButtonTitle.key.localized()
+            self?.watchersButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.starsCount.drive(onNext: { [weak self] (count) in
-            self?.starsButton.setAttributedTitle(self?.attributetText(title: "Stars", value: count), for: .normal)
+            let text = R.string.localizable.repositoryStarsButtonTitle.key.localized()
+            self?.starsButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.forksCount.drive(onNext: { [weak self] (count) in
-            self?.forksButton.setAttributedTitle(self?.attributetText(title: "Forks", value: count), for: .normal)
+            let text = R.string.localizable.repositoryForksButtonTitle.key.localized()
+            self?.forksButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.imageSelected.drive(onNext: { [weak self] (viewModel) in

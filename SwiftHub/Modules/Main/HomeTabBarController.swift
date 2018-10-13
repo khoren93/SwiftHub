@@ -113,6 +113,17 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
 
+        NotificationCenter.default
+            .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
+            .subscribe { [weak self] (event) in
+                self?.animatedItems.forEach({ (item) in
+                    item.title = HomeTabBarItem(rawValue: item.tag)?.title
+                })
+                let selectedIndex = self?.selectedIndex ?? 0
+                self?.viewControllers = self?.viewControllers
+                self?.selectedIndex = selectedIndex
+            }.disposed(by: rx.disposeBag)
+
         themeService.rx
             .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)

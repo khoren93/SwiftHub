@@ -14,9 +14,9 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Color themes in Light and Dark modes using [RxTheme](https://github.com/RxSwiftCommunity/RxTheme)
 - [x] Programmatically UI using [SnapKit](https://github.com/SnapKit/SnapKit)
 - [x] Support iPhone and iPad
+- [x] In-app language switching
 - [ ] OAuth2 authentication
 - [ ] Dependency injection using [Swinject](https://github.com/Swinject/Swinject)
-- [ ] In-app language switching
 - [ ] Add analytics events
 - [ ] More screens
 - [ ] Add tests

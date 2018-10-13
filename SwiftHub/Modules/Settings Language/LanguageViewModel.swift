@@ -23,6 +23,7 @@ class LanguageViewModel: ViewModel, ViewModelType {
         let fetching: Driver<Bool>
         let items: Driver<[LanguageCellViewModel]>
         let saved: Driver<Void>
+        let dismiss: Driver<Void>
         let error: Driver<Error>
     }
 
@@ -58,9 +59,12 @@ class LanguageViewModel: ViewModel, ViewModelType {
             self.currentLanguage.accept(language)
         }).disposed(by: rx.disposeBag)
 
+        let dismiss = Observable.of(saved).merge().asDriver(onErrorJustReturn: ())
+
         return Output(fetching: fetching,
                       items: elements.asDriver(),
                       saved: saved.asDriver(onErrorJustReturn: ()),
+                      dismiss: dismiss,
                       error: errors)
     }
 }

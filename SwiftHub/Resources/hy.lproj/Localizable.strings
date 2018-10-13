@@ -20,6 +20,7 @@
 "Common.Delete" = "Հեռացնել";
 "Common.Search" = "Որոնում";
 "Common.Error" = "Սխալ";
+"Common.NoResults" = "Ոչ մի արդյունք";
 /* Home TabBar */
 "Home.TabBar.Events.Title" = "Միջոցառումներ";
 "Home.TabBar.Search.Title" = "Որոնում";
@@ -29,6 +30,8 @@
 "Home.TabBar.Settings.Title" = "Կարգավորումներ";
 /* Events */
 "Events.Navigation.Title" = "Միջոցառումներ";
+"Events.ReceivedSegment.Title" = "Ստացված";
+"Events.PerformedSegment.Title" = "Կատարված";
 /* Login */
 //"Login.Navigation.Title" = "Մուտք";
 "Login.BasicSegment.Title" = "Հիմնական";
@@ -42,19 +45,22 @@
 "Login.LoginFailed.Description" = "Խնդրում ենք ստուգել ձեր մուտքանունը կամ գաղտնաբառը";
 /* Notifications */
 "Notifications.Navigation.Title" = "Ծանուցումներ";
+"Notifications.UnreadSegment.Title" = "Չընթերցված";
+"Notifications.ParticipatingSegment.Title" = "Մասնակից";
+"Notifications.AllSegment.Title" = "Բոլորը";
 /* Repositories */
-"Repositories.RepositoriesNavigation.Title" = "Repositories";
-"Repositories.StarredNavigation.Title" = "Starred";
-"Repositories.ForksNavigation.Title" = "Forks";
+"Repositories.RepositoriesNavigation.Title" = "Ռեպոզիտորիաներ";
+"Repositories.StarredNavigation.Title" = "Աստղանշված";
+"Repositories.ForksNavigation.Title" = "Ճյուղեր";
 /* Repository Details */
 //"Repository.Navigation.Title" = "Repository";
-"Repository.WatchersButton.Title" = "Watchers";
-"Repository.StarsButton.Title" = "Stars";
-"Repository.ForksButton.Title" = "Forks";
+"Repository.WatchersButton.Title" = "Դիտորդներ";
+"Repository.StarsButton.Title" = "Աստղեր";
+"Repository.ForksButton.Title" = "Ճյուղեր";
 /* Search */
 //"Search.Navigation.Title" = "Search";
-"Search.RepositoriesSegment.Title" = "Repositories";
-"Search.UsersSegment.Title" = "Users";
+"Search.RepositoriesSegment.Title" = "Ռեպոզիտորիաներ";
+"Search.UsersSegment.Title" = "Օգտատերեր";
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";
@@ -74,12 +80,13 @@
 "Theme.Navigation.Title" = "Գունային թեման";
 /* User Details */
 //"User.Navigation.Title" = "User";
-"User.RepositoriesButton.Title" = "Repositories";
-"User.FollowersButton.Title" = "Followers";
-"User.FollowingButton.Title" = "Following";
+"User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";
+"User.FollowersButton.Title" = "Հետեւորդներ";
+"User.FollowingButton.Title" = "Համախոհներ";
+"User.EventsCell.Title" = "Միջոցառումներ";
 /* Users */
 //"Users.Navigation.Title" = "Users";
-"Users.FollowersNavigation.Title" = "Followers";
-"Users.FollowingNavigation.Title" = "Following";
-"Users.WatchersNavigation.Title" = "Watchers";
-"Users.StargazersNavigation.Title" = "Stargazers";
+"Users.FollowersNavigation.Title" = "Հետեւորդներ";
+"Users.FollowingNavigation.Title" = "Համախոհներ";
+"Users.WatchersNavigation.Title" = "Դիտորդներ";
+"Users.StargazersNavigation.Title" = "Աստղանշողներ";

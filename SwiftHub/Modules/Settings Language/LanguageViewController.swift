@@ -63,6 +63,10 @@ class LanguageViewController: TableViewController {
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
 
+        output.dismiss.drive(onNext: { [weak self] () in
+            self?.navigator.dismiss(sender: self)
+        }).disposed(by: rx.disposeBag)
+
         output.error.drive(onNext: { (error) in
             logError("\(error)")
         }).disposed(by: rx.disposeBag)

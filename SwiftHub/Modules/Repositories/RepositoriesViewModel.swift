@@ -83,9 +83,9 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
 
         let navigationTitle = mode.map({ (mode) -> String in
             switch mode {
-            case .userRepositories: return "Repositories"
-            case .userStarredRepositories: return "Starred"
-            case .forks: return "Forks"
+            case .userRepositories: return R.string.localizable.repositoriesRepositoriesNavigationTitle.key.localized()
+            case .userStarredRepositories: return R.string.localizable.repositoriesStarredNavigationTitle.key.localized()
+            case .forks: return R.string.localizable.repositoriesForksNavigationTitle.key.localized()
             }
         }).asDriver(onErrorJustReturn: "")
 

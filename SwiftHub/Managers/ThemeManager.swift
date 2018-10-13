@@ -270,3 +270,18 @@ extension Reactive where Base: KafkaRefreshDefaults {
         }
     }
 }
+
+public extension Reactive where Base: UISwitch {
+
+    public var onTintColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.onTintColor = attr
+        }
+    }
+
+    public var thumbTintColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.thumbTintColor = attr
+        }
+    }
+}

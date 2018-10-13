@@ -20,6 +20,7 @@
 "Common.Delete" = "Удалить";
 "Common.Search" = "Поиск";
 "Common.Error" = "Ошибка";
+"Common.NoResults" = "Нет результатов";
 /* Home TabBar */
 "Home.TabBar.Events.Title" = "События";
 "Home.TabBar.Search.Title" = "Поиск";
@@ -29,6 +30,8 @@
 "Home.TabBar.Settings.Title" = "Настройки";
 /* Events */
 "Events.Navigation.Title" = "События";
+"Events.ReceivedSegment.Title" = "Получено";
+"Events.PerformedSegment.Title" = "Выполнено";
 /* Login */
 //"Login.Navigation.Title" = "Вход";
 "Login.BasicSegment.Title" = "Базовое";
@@ -42,15 +45,18 @@
 "Login.LoginFailed.Description" = "Пожалуйста, проверьте свой логин или пароль";
 /* Notifications */
 "Notifications.Navigation.Title" = "Уведомления";
+"Notifications.UnreadSegment.Title" = "Новые";
+"Notifications.ParticipatingSegment.Title" = "Участвующий";
+"Notifications.AllSegment.Title" = "Все";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Репозитории";
 "Repositories.StarredNavigation.Title" = "Избранные";
-"Repositories.ForksNavigation.Title" = "Forks";
+"Repositories.ForksNavigation.Title" = "Разветвление";
 /* Repository Details */
 //"Repository.Navigation.Title" = "Repository";
-"Repository.WatchersButton.Title" = "Watchers";
-"Repository.StarsButton.Title" = "Stars";
-"Repository.ForksButton.Title" = "Forks";
+"Repository.WatchersButton.Title" = "Наблюдатели";
+"Repository.StarsButton.Title" = "Звезды";
+"Repository.ForksButton.Title" = "Разветвление";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Репозитории";
@@ -74,12 +80,13 @@
 "Theme.Navigation.Title" = "Цветовая тема";
 /* User Details */
 //"User.Navigation.Title" = "User";
-"User.RepositoriesButton.Title" = "Repositories";
-"User.FollowersButton.Title" = "Followers";
-"User.FollowingButton.Title" = "Following";
+"User.RepositoriesButton.Title" = "Репозитории";
+"User.FollowersButton.Title" = "Подписчики";
+"User.FollowingButton.Title" = "Подписки";
+"User.EventsCell.Title" = "События";
 /* Users */
 //"Users.Navigation.Title" = "Users";
-"Users.FollowersNavigation.Title" = "Followers";
-"Users.FollowingNavigation.Title" = "Following";
-"Users.WatchersNavigation.Title" = "Watchers";
-"Users.StargazersNavigation.Title" = "Stargazers";
+"Users.FollowersNavigation.Title" = "Подписчики";
+"Users.FollowingNavigation.Title" = "Подписки";
+"Users.WatchersNavigation.Title" = "Наблюдатели";
+"Users.StargazersNavigation.Title" = "Звездочеты";

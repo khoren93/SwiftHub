@@ -20,6 +20,7 @@
 "Common.Delete" = "Delete";
 "Common.Search" = "Search";
 "Common.Error" = "Error";
+"Common.NoResults" = "No Results";
 /* Home TabBar */
 "Home.TabBar.Events.Title" = "Events";
 "Home.TabBar.Search.Title" = "Search";
@@ -29,6 +30,8 @@
 "Home.TabBar.Settings.Title" = "Settings";
 /* Events */
 "Events.Navigation.Title" = "Events";
+"Events.ReceivedSegment.Title" = "Received";
+"Events.PerformedSegment.Title" = "Performed";
 /* Login */
 //"Login.Navigation.Title" = "Login";
 "Login.BasicSegment.Title" = "Basic";
@@ -42,6 +45,9 @@
 "Login.LoginFailed.Description" = "Please check your login or password";
 /* Notifications */
 "Notifications.Navigation.Title" = "Notifications";
+"Notifications.UnreadSegment.Title" = "Unread";
+"Notifications.ParticipatingSegment.Title" = "Participating";
+"Notifications.AllSegment.Title" = "All";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Repositories";
 "Repositories.StarredNavigation.Title" = "Starred";
@@ -77,6 +83,7 @@
 "User.RepositoriesButton.Title" = "Repositories";
 "User.FollowersButton.Title" = "Followers";
 "User.FollowingButton.Title" = "Following";
+"User.EventsCell.Title" = "Events";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Followers";

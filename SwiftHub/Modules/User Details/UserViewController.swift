@@ -125,7 +125,7 @@ class UserViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, languageChanged.asObservable()).merge()
         let input = UserViewModel.Input(headerRefresh: refresh,
                                         imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
                                         openInWebSelection: rightBarButton.rx.tap.asObservable(),
@@ -166,15 +166,18 @@ class UserViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.repositoriesCount.drive(onNext: { [weak self] (count) in
-            self?.repositoriesButton.setAttributedTitle(self?.attributetText(title: "Repositories", value: count), for: .normal)
+            let text = R.string.localizable.userRepositoriesButtonTitle.key.localized()
+            self?.repositoriesButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followersCount.drive(onNext: { [weak self] (count) in
-            self?.followersButton.setAttributedTitle(self?.attributetText(title: "Followers", value: count), for: .normal)
+            let text = R.string.localizable.userFollowersButtonTitle.key.localized()
+            self?.followersButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followingCount.drive(onNext: { [weak self] (count) in
-            self?.followingButton.setAttributedTitle(self?.attributetText(title: "Following", value: count), for: .normal)
+            let text = R.string.localizable.userFollowingButtonTitle.key.localized()
+            self?.followingButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.imageSelected.drive(onNext: { [weak self] () in

@@ -18,9 +18,9 @@ enum NotificationSegments: Int {
 
     var title: String {
         switch self {
-        case .unread: return "Unread"
-        case .participating: return "Participating"
-        case .all: return "All"
+        case .unread: return R.string.localizable.notificationsUnreadSegmentTitle.key.localized()
+        case .participating: return R.string.localizable.notificationsParticipatingSegmentTitle.key.localized()
+        case .all: return R.string.localizable.notificationsAllSegmentTitle.key.localized()
         }
     }
 }
@@ -49,7 +49,11 @@ class NotificationsViewController: TableViewController {
 
         navigationItem.titleView = segmentedControl
 
-        emptyDataSetTitle = "No new Notifications"
+        languageChanged.subscribe(onNext: { [weak self] () in
+            self?.segmentedControl.setTitle(NotificationSegments.unread.title, forSegmentAt: 0)
+            self?.segmentedControl.setTitle(NotificationSegments.participating.title, forSegmentAt: 1)
+            self?.segmentedControl.setTitle(NotificationSegments.all.title, forSegmentAt: 2)
+        }).disposed(by: rx.disposeBag)
 
         tableView.register(R.nib.notificationCell)
         tableView.headRefreshControl = nil

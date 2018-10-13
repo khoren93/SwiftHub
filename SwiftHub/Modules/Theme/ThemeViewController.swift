@@ -25,7 +25,7 @@ class ThemeViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        navigationTitle = "Theme"
+        navigationTitle = R.string.localizable.themeNavigationTitle.key.localized()
         tableView.register(R.nib.themeCell)
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
