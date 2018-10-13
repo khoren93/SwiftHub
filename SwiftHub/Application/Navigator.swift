@@ -29,6 +29,7 @@ class Navigator {
         case userDetails(viewModel: UserViewModel)
         case repositories(viewModel: RepositoriesViewModel)
         case repositoryDetails(viewModel: RepositoryViewModel)
+        case events(viewModel: EventsViewModel)
         case theme(viewModel: ThemeViewModel)
         case language(viewModel: LanguageViewModel)
         case acknowledgements
@@ -84,6 +85,11 @@ class Navigator {
 
         case .repositoryDetails(let viewModel):
             let vc = R.storyboard.main.repositoryViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .events(let viewModel):
+            let vc = R.storyboard.main.eventsViewController()!
             vc.viewModel = viewModel
             return vc
 

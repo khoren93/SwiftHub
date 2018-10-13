@@ -12,6 +12,8 @@ import RxCocoa
 import RxDataSources
 import AttributedLib
 
+private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
+
 class UserViewController: TableViewController {
 
     var viewModel: UserViewModel!
@@ -116,6 +118,8 @@ class UserViewController: TableViewController {
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
+
+        tableView.register(R.nib.userDetailCell)
     }
 
     override func bindViewModel() {
@@ -127,11 +131,28 @@ class UserViewController: TableViewController {
                                         openInWebSelection: rightBarButton.rx.tap.asObservable(),
                                         repositoriesSelection: repositoriesButton.rx.tap.asObservable(),
                                         followersSelection: followersButton.rx.tap.asObservable(),
-                                        followingSelection: followingButton.rx.tap.asObservable())
+                                        followingSelection: followingButton.rx.tap.asObservable(),
+                                        selection: tableView.rx.modelSelected(UserSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
         output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
         output.fetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+
+        let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
+            switch item {
+            case .eventsItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? UserDetailCell)!
+                cell.bind(to: viewModel)
+                return cell
+            }
+        }, titleForHeaderInSection: { dataSource, index in
+            let section = dataSource[index]
+            return section.title
+        })
+
+        output.items
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
 
         output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
@@ -174,6 +195,16 @@ class UserViewController: TableViewController {
 
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .users(viewModel: viewModel), sender: self, transition: .detail)
+        }).disposed(by: rx.disposeBag)
+
+        output.selectedEvent.drive(onNext: { [weak self] (item) in
+            self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
+            switch item {
+            case .eventsItem(let viewModel):
+                if let viewModel = viewModel.destinationViewModel as? EventsViewModel {
+                    self?.navigator.show(segue: .events(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            }
         }).disposed(by: rx.disposeBag)
 
         output.error.drive(onNext: { (error) in

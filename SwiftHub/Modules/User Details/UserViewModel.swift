@@ -19,11 +19,13 @@ class UserViewModel: ViewModel, ViewModelType {
         let repositoriesSelection: Observable<Void>
         let followersSelection: Observable<Void>
         let followingSelection: Observable<Void>
+        let selection: Driver<UserSectionItem>
     }
 
     struct Output {
         let fetching: Driver<Bool>
         let error: Driver<Error>
+        let items: Observable<[UserSection]>
         let username: Driver<String>
         let fullname: Driver<String>
         let description: Driver<String>
@@ -35,6 +37,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let openInWebSelected: Driver<URL?>
         let repositoriesSelected: Driver<RepositoriesViewModel>
         let usersSelected: Driver<UsersViewModel>
+        let selectedEvent: Driver<UserSectionItem>
     }
 
     let user: BehaviorRelay<User?>
@@ -98,8 +101,25 @@ class UserViewModel: ViewModel, ViewModelType {
                 return viewModel
         }
 
+        let items = user.filterNil().map { (user) -> [UserSection] in
+            // Events
+            let eventsViewModel = EventsViewModel(mode: EventsMode.user(user: user), provider: self.provider)
+            let eventsCellViewModel = UserDetailCellViewModel(with: "Events", image: R.image.icon_cell_events(), destinationViewModel: eventsViewModel)
+
+            let items = [
+                UserSection.user(title: "", items: [
+                    UserSectionItem.eventsItem(viewModel: eventsCellViewModel)
+                    ])
+            ]
+
+            return items
+        }
+
+        let selectedEvent = input.selection
+
         return Output(fetching: fetching,
                       error: errors,
+                      items: items,
                       username: username,
                       fullname: fullname,
                       description: description,
@@ -110,6 +130,7 @@ class UserViewModel: ViewModel, ViewModelType {
                       imageSelected: imageSelected,
                       openInWebSelected: openInWebSelected,
                       repositoriesSelected: repositoriesSelected,
-                      usersSelected: usersSelected)
+                      usersSelected: usersSelected,
+                      selectedEvent: selectedEvent)
     }
 }

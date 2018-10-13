@@ -41,6 +41,10 @@
 		07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */; };
 		0791946C214D4F0700A7067E /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791946A214D4F0700A7067E /* ThemeCell.swift */; };
 		0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791946B214D4F0700A7067E /* ThemeCell.xib */; };
+		07B1837F2172257D007CC23B /* UserSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1837E2172257D007CC23B /* UserSection.swift */; };
+		07B183832172268C007CC23B /* UserDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B183812172268C007CC23B /* UserDetailCell.swift */; };
+		07B183842172268C007CC23B /* UserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B183822172268C007CC23B /* UserDetailCell.xib */; };
+		07B183862172269C007CC23B /* UserDetailCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B183852172269C007CC23B /* UserDetailCellViewModel.swift */; };
 		07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F3213AD4CA00FE7AC0 /* Token.swift */; };
 		07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */; };
 		07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B2C1F8213AF74B00FE7AC0 /* Profile.json */; };
@@ -207,6 +211,10 @@
 		07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellViewModel.swift; sourceTree = "<group>"; };
 		0791946A214D4F0700A7067E /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		0791946B214D4F0700A7067E /* ThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
+		07B1837E2172257D007CC23B /* UserSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSection.swift; sourceTree = "<group>"; };
+		07B183812172268C007CC23B /* UserDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailCell.swift; sourceTree = "<group>"; };
+		07B183822172268C007CC23B /* UserDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailCell.xib; sourceTree = "<group>"; };
+		07B183852172269C007CC23B /* UserDetailCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailCellViewModel.swift; sourceTree = "<group>"; };
 		07B2C1F3213AD4CA00FE7AC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		07B2C1F8213AF74B00FE7AC0 /* Profile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
@@ -362,6 +370,8 @@
 		070FF83A20F2204A0070F5E8 /* User Details */ = {
 			isa = PBXGroup;
 			children = (
+				07B183802172265C007CC23B /* Cells */,
+				07B1837E2172257D007CC23B /* UserSection.swift */,
 				070FF83B20F221970070F5E8 /* UserViewController.swift */,
 				070FF83D20F221AB0070F5E8 /* UserViewModel.swift */,
 			);
@@ -422,6 +432,16 @@
 				07919466214D4ED400A7067E /* ThemeViewModel.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		07B183802172265C007CC23B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				07B183812172268C007CC23B /* UserDetailCell.swift */,
+				07B183822172268C007CC23B /* UserDetailCell.xib */,
+				07B183852172269C007CC23B /* UserDetailCellViewModel.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		07DFF6D820E90860004DAA68 /* Repository Details */ = {
@@ -991,6 +1011,7 @@
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
 				A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */,
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
+				07B183842172268C007CC23B /* UserDetailCell.xib in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
 				A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
@@ -1206,6 +1227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
+				07B183832172268C007CC23B /* UserDetailCell.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
 				070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
@@ -1233,6 +1255,7 @@
 				A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */,
 				A09DE8C620E7B84D00F6F2BF /* UserCell.swift in Sources */,
 				07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */,
+				07B1837F2172257D007CC23B /* UserSection.swift in Sources */,
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
@@ -1265,6 +1288,7 @@
 				A034AF7021527EF8004C310B /* Notification.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
 				A0E2B08D2106293A000DA282 /* Switch.swift in Sources */,
+				07B183862172269C007CC23B /* UserDetailCellViewModel.swift in Sources */,
 				0757B53221669DAC00C04163 /* LanguageViewModel.swift in Sources */,
 				0732046421413B5200C1E39F /* EventCell.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
