@@ -13,9 +13,28 @@ import RxDataSources
 
 private let reuseIdentifier = R.reuseIdentifier.eventCell.identifier
 
+enum EventSegments: Int {
+    case received, performed
+
+    var title: String {
+        switch self {
+        case .received: return "Received"
+        case .performed: return "Performed"
+        }
+    }
+}
+
 class EventsViewController: TableViewController {
 
     var viewModel: EventsViewModel!
+
+    lazy var segmentedControl: SegmentedControl = {
+        let items = [EventSegments.received.title,
+                     EventSegments.performed.title]
+        let view = SegmentedControl(items: items)
+        view.selectedSegmentIndex = 0
+        return view
+    }()
 
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
@@ -44,6 +63,8 @@ class EventsViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
+        navigationItem.titleView = segmentedControl
+
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
@@ -56,9 +77,11 @@ class EventsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { EventSegments(rawValue: $0)! }).merge()
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid()).merge()
         let input = EventsViewModel.Input(headerRefresh: refresh,
                                          footerRefresh: footerRefreshTrigger,
+                                         segmentSelection: segmentSelected,
                                          selection: tableView.rx.modelSelected(EventCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 

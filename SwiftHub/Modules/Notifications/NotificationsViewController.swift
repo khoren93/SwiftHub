@@ -59,7 +59,8 @@ class NotificationsViewController: TableViewController {
         super.bindViewModel()
 
         let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { NotificationSegments(rawValue: $0)! }).merge()
-        let input = NotificationsViewModel.Input(headerRefresh: Observable.just(()),
+        let refresh = Observable.of(Observable.just(()), segmentSelected.mapToVoid()).merge()
+        let input = NotificationsViewModel.Input(headerRefresh: refresh,
                                                  footerRefresh: footerRefreshTrigger,
                                                  segmentSelection: segmentSelected,
                                                  selection: tableView.rx.modelSelected(NotificationCellViewModel.self).asDriver())

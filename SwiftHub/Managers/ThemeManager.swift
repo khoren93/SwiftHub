@@ -178,7 +178,6 @@ let themeService = ThemeType.service(initial: ThemeType.currentTheme())
 
 extension Reactive where Base: UIView {
 
-    /// Bindable sink for `backgroundColor` property
     var backgroundColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.backgroundColor = attr
@@ -188,14 +187,12 @@ extension Reactive where Base: UIView {
 
 extension Reactive where Base: UITextField {
 
-    /// Bindable sink for `borderColor` property
     var borderColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.borderColor = attr
         }
     }
 
-    /// Bindable sink for `placeholderColor` property
     var placeholderColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             if let color = attr {
@@ -207,7 +204,6 @@ extension Reactive where Base: UITextField {
 
 extension Reactive where Base: UITableView {
 
-    /// Bindable sink for `separatorColor` property
     var separatorColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.separatorColor = attr
@@ -217,7 +213,6 @@ extension Reactive where Base: UITableView {
 
 extension Reactive where Base: RAMAnimatedTabBarItem {
 
-    /// Bindable sink for `iconColor` property
     var iconColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.iconColor = attr
@@ -225,7 +220,6 @@ extension Reactive where Base: RAMAnimatedTabBarItem {
         }
     }
 
-    /// Bindable sink for `textColor` property
     var textColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.textColor = attr
@@ -236,14 +230,12 @@ extension Reactive where Base: RAMAnimatedTabBarItem {
 
 extension Reactive where Base: RAMItemAnimation {
 
-    /// Bindable sink for `iconSelectedColor` property
     var iconSelectedColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.iconSelectedColor = attr
         }
     }
 
-    /// Bindable sink for `textSelectedColor` property
     var textSelectedColor: Binder<UIColor> {
         return Binder(self.base) { view, attr in
             view.textSelectedColor = attr
@@ -253,7 +245,6 @@ extension Reactive where Base: RAMItemAnimation {
 
 extension Reactive where Base: UINavigationBar {
 
-    /// Bindable sink for `titleTextAttributes` property
     @available(iOS 11.0, *)
     var largeTitleTextAttributes: Binder<[NSAttributedString.Key: Any]?> {
         return Binder(self.base) { view, attr in
@@ -264,7 +255,6 @@ extension Reactive where Base: UINavigationBar {
 
 extension Reactive where Base: UIApplication {
 
-    /// Bindable sink for `statusBarStyle` property
     var statusBarStyle: Binder<UIStatusBarStyle> {
         return Binder(self.base) { view, attr in
             view.statusBarStyle = attr
@@ -274,7 +264,6 @@ extension Reactive where Base: UIApplication {
 
 extension Reactive where Base: KafkaRefreshDefaults {
 
-    /// Bindable sink for `themeColor` property
     var themeColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.themeColor = attr

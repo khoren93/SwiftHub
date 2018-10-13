@@ -13,8 +13,7 @@ import RxDataSources
 
 enum EventsMode {
     case repository(repository: Repository)
-    case userReceived(user: User)
-    case userPerformed(user: User)
+    case user(user: User)
 }
 
 class EventsViewModel: ViewModel, ViewModelType {
@@ -22,6 +21,7 @@ class EventsViewModel: ViewModel, ViewModelType {
     struct Input {
         let headerRefresh: Observable<Void>
         let footerRefresh: Observable<Void>
+        let segmentSelection: Observable<EventSegments>
         let selection: Driver<EventCellViewModel>
     }
 
@@ -38,6 +38,7 @@ class EventsViewModel: ViewModel, ViewModelType {
     }
 
     let mode: BehaviorRelay<EventsMode>
+    let segment = BehaviorRelay<EventSegments>(value: .received)
 
     init(mode: EventsMode, provider: SwiftHubAPI) {
         self.mode = BehaviorRelay(value: mode)
@@ -102,10 +103,11 @@ class EventsViewModel: ViewModel, ViewModelType {
         let imageUrl = mode.map({ (mode) -> URL? in
             switch mode {
             case .repository(let repository): return repository.owner?.avatarUrl?.url
-            case .userReceived(let user): return user.avatarUrl?.url
-            case .userPerformed(let user): return user.avatarUrl?.url
+            case .user(let user): return user.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
+
+        input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
         return Output(fetching: activityIndicator.asDriver(),
                       headerFetching: headerActivityIndicator.asDriver(),
@@ -123,10 +125,13 @@ class EventsViewModel: ViewModel, ViewModelType {
         switch self.mode.value {
         case .repository(let repository):
             request = self.provider.repositoryEvents(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
-        case .userReceived(let user):
-            request = self.provider.userReceivedEvents(username: user.login ?? "", page: self.page)
-        case .userPerformed(let user):
-            request = self.provider.userPerformedEvents(username: user.login ?? "", page: self.page)
+        case .user(let user):
+            switch self.segment.value {
+            case .performed:
+                request = self.provider.userPerformedEvents(username: user.login ?? "", page: self.page)
+            case .received:
+                request = self.provider.userReceivedEvents(username: user.login ?? "", page: self.page)
+            }
         }
         return request
     }

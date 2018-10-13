@@ -45,7 +45,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             return viewModel
         case .news:
             let user = User.currentUser()!
-            let viewModel = EventsViewModel(mode: .userReceived(user: user), provider: provider)
+            let viewModel = EventsViewModel(mode: .user(user: user), provider: provider)
             return viewModel
         case .profile:
             let viewModel = UserViewModel(user: nil, provider: provider)

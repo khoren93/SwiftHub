@@ -31,10 +31,10 @@ target 'SwiftHub' do
 
     # Date
     pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-    #  pod 'SwiftDate', '5.0.9'  # https://github.com/malcommac/SwiftDate
+    pod 'SwiftDate', '5.0.10'  # https://github.com/malcommac/SwiftDate
 
     # Tools
-    pod 'R.swift', '5.0.0.alpha.1' #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
+    pod 'R.swift', '5.0.0.alpha.2' #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
     pod 'SwiftLint', '0.27.0'  # https://github.com/realm/SwiftLint
 
     # Keychain

@@ -111,9 +111,6 @@ class UserViewController: TableViewController {
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
-        }
 
         emptyDataSetTitle = ""
         emptyDataSetImage = nil

@@ -27,7 +27,7 @@ class NotificationCellViewModel {
         let repoName = notification.repository?.fullName ?? ""
 
         title = Driver.just([repoName, actionText].joined(separator: "\n"))
-        detail = Driver.just("\(notification.updatedAt?.dateString() ?? "")")
+        detail = Driver.just("\(notification.updatedAt?.toRelative() ?? "")")
         imageUrl = Driver.just(notification.repository?.owner?.avatarUrl?.url)
     }
 }
