@@ -9,15 +9,17 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 
 ## Features
 - [x] Basic authentication
-- [x] Clean architecture using [RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM
+- [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators
-- [x] Color themes in Light and Dark modes using [RxTheme](https://github.com/RxSwiftCommunity/RxTheme)
-- [x] Programmatically UI using [SnapKit](https://github.com/SnapKit/SnapKit)
-- [x] Support iPhone and iPad
-- [x] In-app language switching
+- [x] Networking ([Moya](https://github.com/Moya/Moya))
+- [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
+- [x] Color themes in Light and Dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
+- [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
+- [x] In-app language switching ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
+- [x] Support iPhone and iPad (Split View)
 - [ ] OAuth2 authentication
-- [ ] Dependency injection using [Swinject](https://github.com/Swinject/Swinject)
-- [ ] Add analytics events
+- [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
+- [ ] Add analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [ ] More screens
 - [ ] Add tests
 
