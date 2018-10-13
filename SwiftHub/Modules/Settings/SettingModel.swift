@@ -8,19 +8,7 @@
 
 import Foundation
 
-enum SettingType {
-    case nightMode
-    case theme
-    case language
-    case removeCache
-
-    case acknowledgements
-
-    case logout
-}
-
 public struct SettingModel {
-    var type: SettingType
     var leftImage: String?
     var title: String?
     var detail: String?

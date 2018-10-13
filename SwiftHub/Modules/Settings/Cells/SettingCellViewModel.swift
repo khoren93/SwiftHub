@@ -12,7 +12,6 @@ import RxCocoa
 
 class SettingCellViewModel {
 
-    let type: SettingType
     let title: Driver<String>
     let imageName: Driver<String>
     let showDisclosure: Driver<Bool>
@@ -23,7 +22,6 @@ class SettingCellViewModel {
     init(with settingModel: SettingModel, destinationViewModel: Any?) {
         self.destinationViewModel = destinationViewModel
         self.settingModel = settingModel
-        type = settingModel.type
         title = Driver.just("\(settingModel.title ?? "")")
         imageName = Driver.just("\(settingModel.leftImage ?? "")")
         showDisclosure = Driver.just(settingModel.showDisclosure)

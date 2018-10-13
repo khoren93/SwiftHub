@@ -48,11 +48,15 @@ class SettingsViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .settingThemeItem(let viewModel):
+            case .nightModeItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: themeReuseIdentifier, for: indexPath) as? SettingThemeCell)!
                 cell.bind(to: viewModel)
                 return cell
-            case .settingItem(let viewModel):
+            case .themeItem(let viewModel),
+                 .languageItem(let viewModel),
+                 .removeCacheItem(let viewModel),
+                 .acknowledgementsItem(let viewModel),
+                 .logoutItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -69,25 +73,21 @@ class SettingsViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
             switch item {
-            case .settingItem(let viewModel):
-                switch viewModel.type {
-                case .theme:
-                    if let viewModel = viewModel.destinationViewModel as? ThemeViewModel {
-                        self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
-                    }
-                case .language:
-                    if let viewModel = viewModel.destinationViewModel as? LanguageViewModel {
-                        self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
-                    }
-                case .acknowledgements:
-                    self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
-                case .removeCache:
-                    self?.clearCacheAction()
-                case .logout:
-                    self?.logout()
-                default: break
+            case .nightModeItem: break
+            case .themeItem(let viewModel):
+                if let viewModel = viewModel.destinationViewModel as? ThemeViewModel {
+                    self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
                 }
-            default: break
+            case .languageItem(let viewModel):
+                if let viewModel = viewModel.destinationViewModel as? LanguageViewModel {
+                    self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .removeCacheItem:
+                self?.clearCacheAction()
+            case .acknowledgementsItem:
+                self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
+            case .logoutItem:
+                self?.logout()
             }
         }).disposed(by: rx.disposeBag)
     }

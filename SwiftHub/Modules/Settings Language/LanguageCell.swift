@@ -19,7 +19,7 @@ class LanguageCell: DefaultTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        rightImageView.image = selected ? R.image.icon_cell_check() : nil
+        rightImageView.image = selected ? R.image.icon_cell_check()?.template : nil
     }
 
     func bind(to viewModel: LanguageCellViewModel) {
