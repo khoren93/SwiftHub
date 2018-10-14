@@ -29,16 +29,12 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
-        let headerFetching: Driver<Bool>
-        let footerFetching: Driver<Bool>
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[RepositoryCellViewModel]>
         let imageUrl: Driver<URL?>
         let textDidBeginEditing: Driver<Void>
         let dismissKeyboard: Driver<Void>
         let repositorySelected: Driver<RepositoryViewModel>
-        let error: Driver<Error>
     }
 
     let mode: BehaviorRelay<RepositoriesMode>
@@ -49,28 +45,23 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let headerActivityIndicator = ActivityIndicator()
-        let footerActivityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
         let elements = BehaviorRelay<[RepositoryCellViewModel]>(value: [])
         let dismissKeyboard = input.selection.mapToVoid()
 
         input.headerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
             self.page = 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(headerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
+                .trackError(self.error)
         }).bind(to: elements).disposed(by: rx.disposeBag)
 
         input.footerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
             self.page += 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(footerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.footerLoading)
+                .trackError(self.error)
         }).map { elements.value + $0 }.bind(to: elements).disposed(by: rx.disposeBag)
 
         let textDidBeginEditing = input.textDidBeginEditing
@@ -97,16 +88,12 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             }
         }).asDriver(onErrorJustReturn: nil)
 
-        return Output(fetching: activityIndicator.asDriver(),
-                      headerFetching: headerActivityIndicator.asDriver(),
-                      footerFetching: footerActivityIndicator.asDriver(),
-                      navigationTitle: navigationTitle,
+        return Output(navigationTitle: navigationTitle,
                       items: elements,
                       imageUrl: imageUrl,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
-                      repositorySelected: repositoryDetails,
-                      error: errorTracker.asDriver())
+                      repositorySelected: repositoryDetails)
     }
 
     func request() -> Observable<[RepositoryCellViewModel]> {

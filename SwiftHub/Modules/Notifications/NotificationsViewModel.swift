@@ -26,15 +26,11 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
-        let headerFetching: Driver<Bool>
-        let footerFetching: Driver<Bool>
         let navigationTitle: Driver<String>
         let imageUrl: Driver<URL?>
         let items: BehaviorRelay<[NotificationCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
-        let error: Driver<Error>
     }
 
     let mode: BehaviorRelay<NotificationsMode>
@@ -47,11 +43,6 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let headerActivityIndicator = ActivityIndicator()
-        let footerActivityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
         let userSelected = PublishSubject<User>()
 
         input.segmentSelection.map { $0 == .all }.bind(to: all).disposed(by: rx.disposeBag)
@@ -63,9 +54,9 @@ class NotificationsViewModel: ViewModel, ViewModelType {
         refresh.flatMapLatest({ () -> Observable<[NotificationCellViewModel]> in
             self.page = 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(headerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
+                .trackError(self.error)
                 .map { $0.map({ (event) -> NotificationCellViewModel in
                     let viewModel = NotificationCellViewModel(with: event)
                     viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
@@ -79,9 +70,9 @@ class NotificationsViewModel: ViewModel, ViewModelType {
         input.footerRefresh.flatMapLatest({ () -> Observable<[NotificationCellViewModel]> in
             self.page += 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(footerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.footerLoading)
+                .trackError(self.error)
                 .map { $0.map { NotificationCellViewModel(with: $0) } }
         })
             .map { elements.value + $0 }
@@ -112,15 +103,11 @@ class NotificationsViewModel: ViewModel, ViewModelType {
             }
         }).asDriver(onErrorJustReturn: nil)
 
-        return Output(fetching: activityIndicator.asDriver(),
-                      headerFetching: headerActivityIndicator.asDriver(),
-                      footerFetching: footerActivityIndicator.asDriver(),
-                      navigationTitle: navigationTitle,
+        return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
                       items: elements,
                       userSelected: userDetails,
-                      repositorySelected: repositoryDetails,
-                      error: errorTracker.asDriver())
+                      repositorySelected: repositoryDetails)
     }
 
     func request() -> Observable<[Notification]> {

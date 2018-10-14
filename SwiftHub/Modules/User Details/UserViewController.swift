@@ -135,8 +135,8 @@ class UserViewController: TableViewController {
                                         selection: tableView.rx.modelSelected(UserSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        output.fetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
@@ -210,7 +210,7 @@ class UserViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { (error) in
+        viewModel.error.asDriver().drive(onNext: { (error) in
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }

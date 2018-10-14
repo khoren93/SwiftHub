@@ -21,21 +21,14 @@ class SearchViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
         let items: BehaviorRelay<[SearchSection]>
         let textDidBeginEditing: Driver<Void>
         let dismissKeyboard: Driver<Void>
         let repositorySelected: Driver<RepositoryViewModel>
         let userSelected: Driver<UserViewModel>
-        let error: Driver<Error>
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
 
         let elements = BehaviorRelay<[SearchSection]>(value: [])
 
@@ -47,15 +40,15 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let dismissKeyboard = input.selection.mapToVoid()
 
-        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(1.0).distinctUntilChanged().asObservable()).merge()
+        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged().asObservable()).merge()
 
         refresh.flatMapLatest({ (keyword) -> Observable<[Repository]> in
             guard keyword.isNotEmpty else {
                 return Observable.just([])
             }
             return self.provider.searchRepositories(query: keyword)
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackError(self.error)
                 .map { $0.items }
         }).subscribe(onNext: { (items) in
             repositoryElements.accept(items)
@@ -66,8 +59,8 @@ class SearchViewModel: ViewModel, ViewModelType {
                 return Observable.just([])
             }
             return self.provider.searchUsers(query: keyword)
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackError(self.error)
                 .map { $0.items }
         }).subscribe(onNext: { (items) in
             userElements.accept(items)
@@ -118,12 +111,10 @@ class SearchViewModel: ViewModel, ViewModelType {
             return viewModel
         }).asDriverOnErrorJustComplete()
 
-        return Output(fetching: fetching,
-                      items: elements,
+        return Output(items: elements,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
                       repositorySelected: repositoryDetails,
-                      userSelected: userDetails,
-                      error: errors)
+                      userSelected: userDetails)
     }
 }

@@ -20,11 +20,9 @@ class LanguageViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
         let items: Driver<[LanguageCellViewModel]>
         let saved: Driver<Void>
         let dismiss: Driver<Void>
-        let error: Driver<Error>
     }
 
     private var currentLanguage: BehaviorRelay<String>
@@ -35,11 +33,6 @@ class LanguageViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
-
         let elements = BehaviorRelay<[LanguageCellViewModel]>(value: [])
 
         input.trigger.map({ () -> [LanguageCellViewModel] in
@@ -61,10 +54,8 @@ class LanguageViewModel: ViewModel, ViewModelType {
 
         let dismiss = Observable.of(saved).merge().asDriver(onErrorJustReturn: ())
 
-        return Output(fetching: fetching,
-                      items: elements.asDriver(),
+        return Output(items: elements.asDriver(),
                       saved: saved.asDriver(onErrorJustReturn: ()),
-                      dismiss: dismiss,
-                      error: errors)
+                      dismiss: dismiss)
     }
 }

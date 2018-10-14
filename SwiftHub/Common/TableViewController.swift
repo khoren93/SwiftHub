@@ -20,7 +20,7 @@ class TableViewController: ViewController, UIScrollViewDelegate {
     let isFooterLoading = BehaviorRelay(value: false)
 
     lazy var tableView: TableView = {
-        let view = TableView(frame: CGRect(), style: .grouped)
+        let view = TableView(frame: CGRect(), style: .plain)
         view.emptyDataSetSource = self
         view.emptyDataSetDelegate = self
         view.rx.setDelegate(self).disposed(by: rx.disposeBag)
@@ -89,6 +89,7 @@ extension TableViewController: UITableViewDelegate {
             view.textLabel?.font = UIFont(name: ".SFUIText-Bold", size: 15.0)!
             themeService.rx
                 .bind({ $0.text }, to: view.textLabel!.rx.textColor)
+                .bind({ $0.primaryDark }, to: view.contentView.rx.backgroundColor)
                 .disposed(by: rx.disposeBag)
         }
     }

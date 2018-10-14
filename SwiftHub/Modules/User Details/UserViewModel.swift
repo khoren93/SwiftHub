@@ -23,8 +23,6 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
-        let error: Driver<Error>
         let items: Observable<[UserSection]>
         let username: Driver<String>
         let fullname: Driver<String>
@@ -48,12 +46,6 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
-
         input.headerRefresh.flatMapLatest { () -> Observable<User> in
             let request: Observable<User>
             if let user = self.user.value, !user.isMine() {
@@ -66,8 +58,9 @@ class UserViewModel: ViewModel, ViewModelType {
                 request = self.provider.profile()
             }
             return request
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
+                .trackError(self.error)
             }.subscribe(onNext: { (user) in
                 self.user.accept(user)
             }).disposed(by: rx.disposeBag)
@@ -118,9 +111,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
         let selectedEvent = input.selection
 
-        return Output(fetching: fetching,
-                      error: errors,
-                      items: items,
+        return Output(items: items,
                       username: username,
                       fullname: fullname,
                       description: description,

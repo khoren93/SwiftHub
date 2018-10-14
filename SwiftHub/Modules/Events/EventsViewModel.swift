@@ -26,15 +26,11 @@ class EventsViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
-        let headerFetching: Driver<Bool>
-        let footerFetching: Driver<Bool>
         let navigationTitle: Driver<String>
         let imageUrl: Driver<URL?>
         let items: BehaviorRelay<[EventCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
-        let error: Driver<Error>
     }
 
     let mode: BehaviorRelay<EventsMode>
@@ -46,21 +42,15 @@ class EventsViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let headerActivityIndicator = ActivityIndicator()
-        let footerActivityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
         let userSelected = PublishSubject<User>()
-
         let elements = BehaviorRelay<[EventCellViewModel]>(value: [])
 
         input.headerRefresh.flatMapLatest({ () -> Observable<[EventCellViewModel]> in
             self.page = 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(headerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
+                .trackError(self.error)
                 .map { $0.map({ (event) -> EventCellViewModel in
                     let viewModel = EventCellViewModel(with: event)
                     viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
@@ -74,9 +64,9 @@ class EventsViewModel: ViewModel, ViewModelType {
         input.footerRefresh.flatMapLatest({ () -> Observable<[EventCellViewModel]> in
             self.page += 1
             return self.request()
-                .trackActivity(activityIndicator)
-                .trackActivity(footerActivityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.footerLoading)
+                .trackError(self.error)
                 .map { $0.map { EventCellViewModel(with: $0) } }
         })
             .map { elements.value + $0 }
@@ -109,15 +99,11 @@ class EventsViewModel: ViewModel, ViewModelType {
 
         input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
-        return Output(fetching: activityIndicator.asDriver(),
-                      headerFetching: headerActivityIndicator.asDriver(),
-                      footerFetching: footerActivityIndicator.asDriver(),
-                      navigationTitle: navigationTitle,
+        return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
                       items: elements,
                       userSelected: userDetails,
-                      repositorySelected: repositoryDetails,
-                      error: errorTracker.asDriver())
+                      repositorySelected: repositoryDetails)
     }
 
     func request() -> Observable<[Event]> {

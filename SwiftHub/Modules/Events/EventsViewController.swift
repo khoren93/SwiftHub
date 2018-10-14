@@ -90,9 +90,9 @@ class EventsViewController: TableViewController {
                                          selection: tableView.rx.modelSelected(EventCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        output.headerFetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
-        output.footerFetching.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
 
         output.navigationTitle.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
@@ -118,7 +118,7 @@ class EventsViewController: TableViewController {
             self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { [weak self] (error) in
+        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
             logError("\(error)")
         }).disposed(by: rx.disposeBag)

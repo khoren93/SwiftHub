@@ -22,9 +22,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     }
 
     struct Output {
-        let fetching: Driver<Bool>
-        let error: Driver<Error>
-
         let name: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
@@ -45,17 +42,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-
-        let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
 
         input.headerRefresh.flatMapLatest { () -> Observable<Repository> in
             let fullName = self.repository.value.fullName ?? ""
             return self.provider.repository(fullName: fullName)
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
+                .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
+                .trackError(self.error)
             }.subscribe(onNext: { (repository) in
                 self.repository.accept(repository)
             }).disposed(by: rx.disposeBag)
@@ -95,9 +88,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 return viewModel
         }
 
-        return Output(fetching: fetching,
-                      error: errors,
-                      name: name,
+        return Output(name: name,
                       description: description,
                       imageUrl: imageUrl,
                       watchersCount: watchersCount,

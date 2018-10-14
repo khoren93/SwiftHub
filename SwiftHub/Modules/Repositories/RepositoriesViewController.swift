@@ -65,9 +65,9 @@ class RepositoriesViewController: TableViewController {
                                                 selection: tableView.rx.modelSelected(RepositoryCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        output.headerFetching.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
-        output.footerFetching.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
 
         output.navigationTitle.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
@@ -93,7 +93,7 @@ class RepositoriesViewController: TableViewController {
             self?.searchBar.resignFirstResponder()
         }).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { [weak self] (error) in
+        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: "Error", message: error.localizedDescription)
             logError("\(error)")
         }).disposed(by: rx.disposeBag)

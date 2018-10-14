@@ -70,7 +70,7 @@ class SearchViewController: TableViewController {
                                           selection: tableView.rx.modelSelected(SearchSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        output.fetching.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
@@ -104,7 +104,7 @@ class SearchViewController: TableViewController {
             self?.searchBar.resignFirstResponder()
         }).disposed(by: rx.disposeBag)
 
-        output.error.drive(onNext: { (error) in
+        viewModel.error.asDriver().drive(onNext: { (error) in
             logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }
