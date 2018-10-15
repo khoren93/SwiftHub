@@ -22,7 +22,6 @@ class LanguageViewModel: ViewModel, ViewModelType {
     struct Output {
         let items: Driver<[LanguageCellViewModel]>
         let saved: Driver<Void>
-        let dismiss: Driver<Void>
     }
 
     private var currentLanguage: BehaviorRelay<String>
@@ -52,10 +51,7 @@ class LanguageViewModel: ViewModel, ViewModelType {
             self.currentLanguage.accept(language)
         }).disposed(by: rx.disposeBag)
 
-        let dismiss = Observable.of(saved).merge().asDriver(onErrorJustReturn: ())
-
         return Output(items: elements.asDriver(),
-                      saved: saved.asDriver(onErrorJustReturn: ()),
-                      dismiss: dismiss)
+                      saved: saved.asDriver(onErrorJustReturn: ()))
     }
 }

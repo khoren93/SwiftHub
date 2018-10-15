@@ -221,7 +221,7 @@ class UserViewController: TableViewController {
 
         let valueAttributes = Attributes {
             return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 22))
+                .font(.boldSystemFont(ofSize: 20))
                 .paragraphStyle(paragraph)
         }
 

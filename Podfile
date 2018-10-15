@@ -23,7 +23,7 @@ target 'SwiftHub' do
     #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
 
     # JSON Mapping
-    pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
+    #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
     pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
@@ -49,9 +49,9 @@ target 'SwiftHub' do
     pod 'PMAlertController', '~> 3.5.0'  # https://github.com/pmusolino/PMAlertController
     pod 'ImageSlideshow/Kingfisher', '~> 1.0'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
-    pod 'Hero', :git => 'https://github.com/HeroTransitions/Hero.git', :branch => 'swift-4.2' #, '~> 1.0'  # https://github.com/lkzhao/Hero
+    pod 'Hero', '~> 1.4.0'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
-    pod 'RAMAnimatedTabBarController', :git => 'https://github.com/khoren93/animated-tab-bar.git' #, '~> 3.0'  # https://github.com/Ramotion/animated-tab-bar
+    pod 'RAMAnimatedTabBarController', '~> 4.0.1'  # https://github.com/Ramotion/animated-tab-bar
     pod 'AcknowList', '~> 1.7.0'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
 

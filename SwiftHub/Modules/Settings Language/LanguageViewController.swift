@@ -57,11 +57,7 @@ class LanguageViewController: TableViewController {
                 cell.bind(to: viewModel)
             }.disposed(by: rx.disposeBag)
 
-        output.saved.drive(onNext: { () in
-            logDebug("Language changed")
-        }).disposed(by: rx.disposeBag)
-
-        output.dismiss.drive(onNext: { [weak self] () in
+        output.saved.drive(onNext: { [weak self] () in
             self?.navigator.dismiss(sender: self)
         }).disposed(by: rx.disposeBag)
     }
