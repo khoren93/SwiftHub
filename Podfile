@@ -62,7 +62,7 @@ target 'SwiftHub' do
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'  # https://github.com/ViccAlexander/Chameleon
 
     # Auto Layout
-    pod 'SnapKit', :git => 'https://github.com/khoren93/SnapKit.git'  # https://github.com/SnapKit/SnapKit
+    pod 'SnapKit', '~> 4.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
     pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
