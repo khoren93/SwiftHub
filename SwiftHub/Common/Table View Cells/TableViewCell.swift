@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class TableViewCell: UITableViewCell {
 
     var isSelection = false
+    var selectionColor: UIColor? {
+        didSet {
+            setSelected(isSelected, animated: true)
+        }
+    }
 
     lazy var containerView: View = {
         let view = View()
@@ -38,19 +45,35 @@ class TableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
         makeUI()
     }
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        backgroundColor = selected ? selectionColor : .clear
     }
 
     func makeUI() {
-        self.layer.masksToBounds = true
-        self.selectionStyle = .none
+        layer.masksToBounds = true
+        selectionStyle = .none
         backgroundColor = .clear
+
+        themeService.rx
+            .bind({ $0.primaryDark }, to: rx.selectionColor)
+            .disposed(by: rx.disposeBag)
+
         updateUI()
     }
 
     func updateUI() {
         setNeedsDisplay()
+    }
+}
+
+extension Reactive where Base: TableViewCell {
+
+    var selectionColor: Binder<UIColor?> {
+        return Binder(self.base) { view, attr in
+            view.selectionColor = attr
+        }
     }
 }

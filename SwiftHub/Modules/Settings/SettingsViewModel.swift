@@ -38,22 +38,20 @@ class SettingsViewModel: ViewModel, ViewModelType {
         input.trigger.map { () -> [SettingsSection] in
             let isNightMode = ThemeType.currentTheme().isDark
             let nightModeModel = SettingModel(leftImage: R.image.icon_cell_night_mode.name, title: R.string.localizable.settingsNightModeTitle.key.localized(), detail: "", showDisclosure: false)
-            let nightModeCellViewModel = SettingThemeCellViewModel(with: nightModeModel, isEnabled: isNightMode, destinationViewModel: nil)
+            let nightModeCellViewModel = SettingThemeCellViewModel(with: nightModeModel, isEnabled: isNightMode)
             nightModeCellViewModel.nightModeEnabled.bind(to: self.nightModeEnabled).disposed(by: self.rx.disposeBag)
 
             let themeModel = SettingModel(leftImage: R.image.icon_cell_theme.name, title: R.string.localizable.settingsThemeTitle.key.localized(), detail: "", showDisclosure: true)
-            let themeViewModel = ThemeViewModel(provider: self.provider)
-            let themeCellViewModel = SettingCellViewModel(with: themeModel, destinationViewModel: themeViewModel)
+            let themeCellViewModel = SettingCellViewModel(with: themeModel)
 
             let languageModel = SettingModel(leftImage: R.image.icon_cell_language.name, title: R.string.localizable.settingsLanguageTitle.key.localized(), detail: "", showDisclosure: true)
-            let languageViewModel = LanguageViewModel(provider: self.provider)
-            let languageCellViewModel = SettingCellViewModel(with: languageModel, destinationViewModel: languageViewModel)
+            let languageCellViewModel = SettingCellViewModel(with: languageModel)
 
             let removeCacheModel = SettingModel(leftImage: R.image.icon_cell_remove.name, title: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: "", showDisclosure: false)
-            let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel, destinationViewModel: nil)
+            let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel)
 
             let acknowledgementsModel = SettingModel(leftImage: R.image.icon_cell_acknowledgements.name, title: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: "", showDisclosure: true)
-            let acknowledgementsCellViewModel = SettingCellViewModel(with: acknowledgementsModel, destinationViewModel: nil)
+            let acknowledgementsCellViewModel = SettingCellViewModel(with: acknowledgementsModel)
 
             var items = [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
@@ -69,7 +67,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
             if self.loggedIn.value {
                 let logoutModel = SettingModel(leftImage: R.image.icon_cell_logout.name, title: R.string.localizable.settingsLogOutTitle.key.localized(), detail: "", showDisclosure: false)
-                let logoutCellViewModel = SettingCellViewModel(with: logoutModel, destinationViewModel: nil)
+                let logoutCellViewModel = SettingCellViewModel(with: logoutModel)
                 items.append(SettingsSection.setting(title: "", items: [
                     SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel)
                     ]))
@@ -90,5 +88,18 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         return Output(items: elements,
                       selectedEvent: selectedEvent)
+    }
+
+    func viewModel(for item: SettingsSectionItem) -> ViewModel? {
+        switch item {
+        case .themeItem:
+            let viewModel = ThemeViewModel(provider: self.provider)
+            return viewModel
+        case .languageItem:
+            let viewModel = LanguageViewModel(provider: self.provider)
+            return viewModel
+        default:
+            return nil
+        }
     }
 }

@@ -40,7 +40,7 @@ class SettingsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(rx.viewWillAppear.mapToVoid(),
+        let refresh = Observable.of(rx.viewDidLoad.mapToVoid(),
                                     languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
@@ -71,22 +71,24 @@ class SettingsViewController: TableViewController {
             .disposed(by: rx.disposeBag)
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
-            self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
             switch item {
-            case .nightModeItem: break
-            case .themeItem(let viewModel):
-                if let viewModel = viewModel.destinationViewModel as? ThemeViewModel {
+            case .nightModeItem:
+                self?.deselectSelectedRow()
+            case .themeItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? ThemeViewModel {
                     self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
                 }
-            case .languageItem(let viewModel):
-                if let viewModel = viewModel.destinationViewModel as? LanguageViewModel {
+            case .languageItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? LanguageViewModel {
                     self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .removeCacheItem:
+                self?.deselectSelectedRow()
                 self?.clearCacheAction()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
             case .logoutItem:
+                self?.deselectSelectedRow()
                 self?.logout()
             }
         }).disposed(by: rx.disposeBag)

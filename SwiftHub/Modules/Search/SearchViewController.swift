@@ -103,9 +103,5 @@ class SearchViewController: TableViewController {
         output.dismissKeyboard.drive(onNext: { [weak self] () in
             self?.searchBar.resignFirstResponder()
         }).disposed(by: rx.disposeBag)
-
-        viewModel.error.asDriver().drive(onNext: { (error) in
-            logError("\(error)")
-        }).disposed(by: rx.disposeBag)
     }
 }

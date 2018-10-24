@@ -153,10 +153,6 @@ class RepositoryViewController: TableViewController {
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
-
-        viewModel.error.asDriver().drive(onNext: { (error) in
-            logError("\(error)")
-        }).disposed(by: rx.disposeBag)
     }
 
     func attributetText(title: String, value: Int) -> NSAttributedString {

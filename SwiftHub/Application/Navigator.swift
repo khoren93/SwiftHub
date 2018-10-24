@@ -204,8 +204,10 @@ class Navigator {
                 sender.present(nav, animated: true, completion: nil)
             }
         case .detail:
-            let nav = NavigationController(rootViewController: target)
-            sender.showDetailViewController(nav, sender: nil)
+            DispatchQueue.main.async {
+                let nav = NavigationController(rootViewController: target)
+                sender.showDetailViewController(nav, sender: nil)
+            }
         case .alert:
             DispatchQueue.main.async {
                 sender.present(target, animated: true, completion: nil)

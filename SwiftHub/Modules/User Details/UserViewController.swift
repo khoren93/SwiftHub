@@ -201,17 +201,12 @@ class UserViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
-            self?.tableView.deselectRow(at: (self?.tableView.indexPathForSelectedRow)!, animated: true)
             switch item {
             case .eventsItem(let viewModel):
                 if let viewModel = viewModel.destinationViewModel as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self, transition: .detail)
                 }
             }
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.error.asDriver().drive(onNext: { (error) in
-            logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }
 

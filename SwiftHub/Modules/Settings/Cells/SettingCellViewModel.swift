@@ -16,14 +16,12 @@ class SettingCellViewModel {
     let imageName: Driver<String>
     let showDisclosure: Driver<Bool>
 
-    let settingModel: SettingModel
-    let destinationViewModel: Any?
+    let model: SettingModel
 
-    init(with settingModel: SettingModel, destinationViewModel: Any?) {
-        self.destinationViewModel = destinationViewModel
-        self.settingModel = settingModel
-        title = Driver.just("\(settingModel.title ?? "")")
-        imageName = Driver.just("\(settingModel.leftImage ?? "")")
-        showDisclosure = Driver.just(settingModel.showDisclosure)
+    init(with model: SettingModel) {
+        self.model = model
+        title = Driver.just("\(model.title ?? "")")
+        imageName = Driver.just("\(model.leftImage ?? "")")
+        showDisclosure = Driver.just(model.showDisclosure)
     }
 }

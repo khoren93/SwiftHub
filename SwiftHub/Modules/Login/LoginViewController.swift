@@ -171,7 +171,6 @@ class LoginViewController: ViewController {
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(),
                             message: R.string.localizable.loginLoginFailedDescription.key.localized())
-            logError("\(error.localizedDescription)")
         }).disposed(by: rx.disposeBag)
     }
 }

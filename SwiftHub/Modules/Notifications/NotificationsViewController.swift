@@ -91,8 +91,7 @@ class NotificationsViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: "Error", message: error.localizedDescription)
-            logError("\(error)")
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
     }
 }

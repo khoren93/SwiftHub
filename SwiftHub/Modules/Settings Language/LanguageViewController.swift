@@ -40,6 +40,7 @@ class LanguageViewController: TableViewController {
         navigationItem.rightBarButtonItem = saveButtonItem
         tableView.register(R.nib.languageCell)
         tableView.headRefreshControl = nil
+        tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {

@@ -32,6 +32,10 @@ class ViewModel: NSObject {
     init(provider: SwiftHubAPI) {
         self.provider = provider
         super.init()
+
+        error.asDriver().drive(onNext: { (error) in
+            logError("\(error)")
+        }).disposed(by: rx.disposeBag)
     }
 
     deinit {

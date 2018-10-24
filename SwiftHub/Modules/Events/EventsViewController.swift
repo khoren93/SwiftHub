@@ -120,7 +120,6 @@ class EventsViewController: TableViewController {
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
-            logError("\(error)")
         }).disposed(by: rx.disposeBag)
     }
 }
