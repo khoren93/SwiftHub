@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Kingfisher
 import DZNEmptyDataSet
 import NVActivityIndicatorView
 import Hero

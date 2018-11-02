@@ -36,4 +36,22 @@ extension UIView {
         }
         return image
     }
+
+    func blur(style: UIBlurEffect.Style) {
+        unBlur()
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        insertSubview(blurEffectView, at: 0)
+        blurEffectView.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
+    }
+
+    func unBlur() {
+        subviews.filter { (view) -> Bool in
+            view as? UIVisualEffectView != nil
+        }.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
 }

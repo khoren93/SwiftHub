@@ -45,7 +45,7 @@ class RepositoriesViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
+            .bind({ $0.blurStyle }, to: headerView.rx.blurStyle)
             .disposed(by: rx.disposeBag)
 
 //        stackView.insertArrangedSubview(searchBar, at: 0)
@@ -79,6 +79,8 @@ class RepositoriesViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
+
+        output.imageUrl.drive(headerView.rx.imageURL).disposed(by: rx.disposeBag)
 
         output.items.asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: RepositoryCell.self)) { tableView, viewModel, cell in

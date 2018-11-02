@@ -25,6 +25,7 @@ protocol Theme {
     var statusBarStyle: UIStatusBarStyle { get }
     var barStyle: UIBarStyle { get }
     var keyboardAppearance: UIKeyboardAppearance { get }
+    var blurStyle: UIBlurEffect.Style { get }
 
     init(colorTheme: ColorTheme)
 }
@@ -41,6 +42,7 @@ struct LightTheme: Theme {
     let statusBarStyle = UIStatusBarStyle.default
     let barStyle = UIBarStyle.default
     let keyboardAppearance = UIKeyboardAppearance.light
+    let blurStyle = UIBlurEffect.Style.extraLight
 
     init(colorTheme: ColorTheme) {
         secondary = colorTheme.color
@@ -60,6 +62,7 @@ struct DarkTheme: Theme {
     let statusBarStyle = UIStatusBarStyle.lightContent
     let barStyle = UIBarStyle.black
     let keyboardAppearance = UIKeyboardAppearance.dark
+    let blurStyle = UIBlurEffect.Style.dark
 
     init(colorTheme: ColorTheme) {
         secondary = colorTheme.color
@@ -181,6 +184,12 @@ extension Reactive where Base: UIView {
     var backgroundColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.backgroundColor = attr
+        }
+    }
+
+    var blurStyle: Binder<UIBlurEffect.Style> {
+        return Binder(self.base) { view, attr in
+            view.blur(style: attr)
         }
     }
 }

@@ -50,7 +50,10 @@ extension UIColor {
 
 extension UIColor {
 
-    static func averageColor(fromImage image: UIImage) -> UIColor {
+    static func averageColor(fromImage image: UIImage?) -> UIColor? {
+        guard let image = image else {
+            return nil
+        }
         return AverageColorFromImage(image)
     }
 }
