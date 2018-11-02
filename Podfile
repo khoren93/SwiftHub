@@ -31,7 +31,7 @@ target 'SwiftHub' do
 
     # Date
     pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-    pod 'SwiftDate', '5.0.10'  # https://github.com/malcommac/SwiftDate
+    pod 'SwiftDate', '~> 5.0'  # https://github.com/malcommac/SwiftDate
 
     # Tools
     pod 'R.swift', '5.0.0.alpha.2' #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
