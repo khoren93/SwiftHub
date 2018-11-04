@@ -73,8 +73,8 @@ target 'SwiftHub' do
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
 
     # Analytics
-    pod 'Umbrella/Mixpanel', '~> 0.7'  # https://github.com/devxoul/Umbrella
-    #pod 'Mixpanel-swift'  # https://github.com/mixpanel/mixpanel-swift
+    pod 'Umbrella/Mixpanel', '~> 0.8'  # https://github.com/devxoul/Umbrella
+    pod 'Mixpanel', '~> 3.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     target 'SwiftHubTests' do
         inherit! :search_paths

@@ -59,6 +59,9 @@ class LoginViewModel: ViewModel, ViewModelType {
             }.subscribe(onNext: { (user) in
                 user.save()
                 AuthManager.tokenValidated()
+                if let username = user.login {
+                    analytics.log(SwifthubEvent.login(username: username))
+                }
             }, onError: { (error) in
                 AuthManager.removeToken()
             }).disposed(by: rx.disposeBag)

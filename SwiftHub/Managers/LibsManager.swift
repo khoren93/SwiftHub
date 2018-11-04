@@ -25,6 +25,8 @@ import SwiftDate
 import Hero
 import PMAlertController
 import KafkaRefresh
+import Umbrella
+import Mixpanel
 
 typealias AlertController = PMAlertController
 typealias AlertAction = PMAlertAction
@@ -104,7 +106,8 @@ class LibsManager: NSObject {
     }
 
     func setupAnalytics() {
-        //Analytics.setup()
+        Mixpanel.sharedInstance(withToken: Keys.mixpanel.apiKey)
+        analytics.register(provider: MixpanelProvider())
     }
 }
 

@@ -33,6 +33,11 @@ final class Application: NSObject {
     func presentInitialScreen(in window: UIWindow) {
         self.window = window
 
+        if let user = User.currentUser(), let userId = user.id?.string {
+            analytics.identify(userId: userId)
+            analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
+        }
+
         let loggedIn = authManager.hasToken
         let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
         navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))

@@ -83,7 +83,7 @@ class EventsViewController: TableViewController {
         super.bindViewModel()
 
         let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { EventSegments(rawValue: $0)! }).merge()
-        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid()).merge()
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()
         let input = EventsViewModel.Input(headerRefresh: refresh,
                                          footerRefresh: footerRefreshTrigger,
                                          segmentSelection: segmentSelected,

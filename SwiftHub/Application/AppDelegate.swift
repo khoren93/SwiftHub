@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 
+        analytics.log(.appLaunch)
+
         return true
     }
 
