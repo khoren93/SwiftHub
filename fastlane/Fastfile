@@ -45,20 +45,20 @@ platform :ios do
     increment_version_number(
       bump_type: "patch"
     )
-    commit_version_bump
+    increment_build
   end
 
   lane :increment_version_minor do
     increment_version_number(
       bump_type: "minor"
     )
-    commit_version_bump
+    increment_build
   end
 
   lane :increment_version_major do
     increment_version_number(
       bump_type: "major"
     )
-    commit_version_bump
+    increment_build
   end
 end
