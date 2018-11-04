@@ -17,9 +17,9 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] In-app language switching ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
 - [x] Support iPhone and iPad (Split View)
+- [x] Add analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
-- [ ] Add analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [ ] More screens
 - [ ] Add tests
 
