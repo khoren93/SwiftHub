@@ -21,7 +21,7 @@ class DetailedTableViewCell: TableViewCell {
 
     lazy var rightImageView: ImageView = {
         let view = ImageView(frame: CGRect())
-        view.image = R.image.icon_cell_disclosure()?.withRenderingMode(.alwaysTemplate)
+        view.image = R.image.icon_cell_disclosure()?.template
         view.snp.makeConstraints({ (make) in
             make.width.equalTo(20)
         })

@@ -19,9 +19,11 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let watchersSelection: Observable<Void>
         let starsSelection: Observable<Void>
         let forksSelection: Observable<Void>
+        let selection: Driver<RepositorySectionItem>
     }
 
     struct Output {
+        let items: Observable<[RepositorySection]>
         let name: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
@@ -32,6 +34,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let openInWebSelected: Driver<URL?>
         let repositoriesSelected: Driver<RepositoriesViewModel>
         let usersSelected: Driver<UsersViewModel>
+        let selectedEvent: Driver<RepositorySectionItem>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -88,7 +91,99 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 return viewModel
         }
 
-        return Output(name: name,
+        let items = repository.map { (repository) -> [RepositorySection] in
+            var items: [RepositorySectionItem] = []
+
+            // Language
+            if let language = repository.language {
+                let languageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryLanguageCellTitle.key.localized(),
+                                                                          detail: language,
+                                                                          image: R.image.icon_cell_git_language(),
+                                                                          hidesDisclosure: true)
+                items.append(RepositorySectionItem.languageItem(viewModel: languageCellViewModel))
+            }
+
+            // Size
+            if let size = repository.size {
+                let sizeInKb = ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
+                let sizeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySizeCellTitle.key.localized(),
+                                                                      detail: sizeInKb,
+                                                                      image: R.image.icon_cell_size(),
+                                                                      hidesDisclosure: true)
+                items.append(RepositorySectionItem.sizeItem(viewModel: sizeCellViewModel))
+            }
+
+            // Created
+            if let created = repository.createdAt {
+                let createdCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
+                                                                         detail: created.toRelative(),
+                                                                         image: R.image.icon_cell_created(),
+                                                                         hidesDisclosure: true)
+                items.append(RepositorySectionItem.createdItem(viewModel: createdCellViewModel))
+            }
+
+            // Updated
+            if let updated = repository.updatedAt {
+                let updatedCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
+                                                                         detail: updated.toRelative(),
+                                                                         image: R.image.icon_cell_updated(),
+                                                                         hidesDisclosure: true)
+                items.append(RepositorySectionItem.updatedItem(viewModel: updatedCellViewModel))
+            }
+
+            // Issues
+            if let issues = repository.openIssuesCount?.string {
+                let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
+                                                                        detail: issues,
+                                                                        image: R.image.icon_cell_issues(),
+                                                                        hidesDisclosure: false)
+                items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
+            }
+
+            // Commits
+            let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
+                                                                          detail: "",
+                                                                          image: R.image.icon_cell_git_commit(),
+                                                                          hidesDisclosure: false)
+            items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
+
+            // Pull Requests
+            let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
+                                                                          detail: "",
+                                                                          image: R.image.icon_cell_git_pull_request(),
+                                                                          hidesDisclosure: false)
+            items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
+
+            // Events
+            let eventsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryEventsCellTitle.key.localized(),
+                                                                    detail: "",
+                                                                    image: R.image.icon_cell_events(),
+                                                                    hidesDisclosure: false)
+            items.append(RepositorySectionItem.eventsItem(viewModel: eventsCellViewModel))
+
+            // Readme
+            let readmeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReadmeCellTitle.key.localized(),
+                                                                    detail: "",
+                                                                    image: R.image.icon_cell_readme(),
+                                                                    hidesDisclosure: false)
+            items.append(RepositorySectionItem.readmeItem(viewModel: readmeCellViewModel))
+
+            // Readme
+            let sourceCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySourceCellTitle.key.localized(),
+                                                                    detail: "",
+                                                                    image: R.image.icon_cell_source(),
+                                                                    hidesDisclosure: false)
+            items.append(RepositorySectionItem.sourceItem(viewModel: sourceCellViewModel))
+
+            return [
+                RepositorySection.repository(title: "", items: items)
+            ]
+        }
+
+        let selectedEvent = input.selection
+
+        return Output(items: items,
+                      name: name,
                       description: description,
                       imageUrl: imageUrl,
                       watchersCount: watchersCount,
@@ -97,6 +192,22 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       imageSelected: imageSelected,
                       openInWebSelected: openInWebSelected,
                       repositoriesSelected: repositoriesSelected,
-                      usersSelected: usersSelected)
+                      usersSelected: usersSelected,
+                      selectedEvent: selectedEvent)
+    }
+
+    func viewModel(for item: RepositorySectionItem) -> ViewModel? {
+        switch item {
+        case .issuesItem: return nil
+        case .commitsItem: return nil
+        case .pullRequestsItem: return nil
+        case .eventsItem:
+            let mode = EventsMode.repository(repository: repository.value)
+            let viewModel = EventsViewModel(mode: mode, provider: self.provider)
+            return viewModel
+        case .readmeItem: return nil
+        case .sourceItem: return nil
+        default: return nil
+        }
     }
 }

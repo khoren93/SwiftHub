@@ -46,7 +46,7 @@ class LoginViewController: ViewController {
     }()
 
     lazy var basicLogoImageView: ImageView = {
-        let view = ImageView(image: R.image.image_no_result()?.withRenderingMode(.alwaysTemplate))
+        let view = ImageView(image: R.image.image_no_result()?.template)
         return view
     }()
 
@@ -54,6 +54,7 @@ class LoginViewController: ViewController {
         let view = TextField()
         view.textAlignment = .center
         view.keyboardType = .emailAddress
+        view.autocapitalizationType = .none
         return view
     }()
 
@@ -72,7 +73,7 @@ class LoginViewController: ViewController {
     }()
 
     lazy var oAuthLogoImageView: ImageView = {
-        let view = ImageView(image: R.image.image_no_result()?.withRenderingMode(.alwaysTemplate))
+        let view = ImageView(image: R.image.image_no_result()?.template)
         return view
     }()
 

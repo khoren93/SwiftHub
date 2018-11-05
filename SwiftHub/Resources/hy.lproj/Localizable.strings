@@ -57,6 +57,16 @@
 "Repository.WatchersButton.Title" = "Դիտորդներ";
 "Repository.StarsButton.Title" = "Աստղեր";
 "Repository.ForksButton.Title" = "Ճյուղեր";
+"Repository.LanguageCell.Title" = "Լեզուն";
+"Repository.SizeCell.Title" = "Չափը";
+"Repository.CreatedCell.Title" = "Ստեղծվել է";
+"Repository.UpdatedCell.Title" = "Թարմացվել է";
+"Repository.IssuesCell.Title" = "Խնդիրներ";
+"Repository.CommitsCell.Title" = "Commits";
+"Repository.PullRequestsCell.Title" = "հարցումներ";
+"Repository.EventsCell.Title" = "Իրադարձություններ";
+"Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
+"Repository.SourceCell.Title" = "Աղբյուրի կոդը";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Ռեպոզիտորիաներ";

@@ -118,7 +118,6 @@ class UserViewController: TableViewController {
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
-
         tableView.register(R.nib.userDetailCell)
     }
 
@@ -155,6 +154,23 @@ class UserViewController: TableViewController {
         output.items
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
+
+        output.selectedEvent.drive(onNext: { [weak self] (item) in
+            switch item {
+            case .eventsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                    self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
+                }
+            case .companyItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
+                }
+            case .blogItem:
+                if let url = self?.viewModel.user.value?.blog?.url {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
+            }
+        }).disposed(by: rx.disposeBag)
 
         output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
@@ -197,28 +213,15 @@ class UserViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.repositoriesSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self, transition: .detail)
+            self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .users(viewModel: viewModel), sender: self, transition: .detail)
+            self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
-        output.selectedEvent.drive(onNext: { [weak self] (item) in
-            switch item {
-            case .eventsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
-                    self?.navigator.show(segue: .events(viewModel: viewModel), sender: self, transition: .detail)
-                }
-            case .companyItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
-                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
-                }
-            case .blogItem:
-                if let url = self?.viewModel.user.value?.blog?.url {
-                    self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
-                }
-            }
+        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
     }
 

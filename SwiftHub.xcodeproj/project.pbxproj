@@ -48,6 +48,10 @@
 		07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F3213AD4CA00FE7AC0 /* Token.swift */; };
 		07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */; };
 		07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B2C1F8213AF74B00FE7AC0 /* Profile.json */; };
+		07B4AB602190C403001E9337 /* RepositorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4AB5F2190C403001E9337 /* RepositorySection.swift */; };
+		07B4AB642190C56E001E9337 /* RepositoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4AB622190C56E001E9337 /* RepositoryDetailCell.swift */; };
+		07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B4AB632190C56E001E9337 /* RepositoryDetailCell.xib */; };
+		07B4AB672190C57F001E9337 /* RepositoryDetailCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4AB662190C57F001E9337 /* RepositoryDetailCellViewModel.swift */; };
 		07CE0F8021027DEC00E1F6BD /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */; };
 		07DFF6D320E90502004DAA68 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D220E90502004DAA68 /* Repository.json */; };
 		07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D420E90574004DAA68 /* UserSearch.json */; };
@@ -218,6 +222,10 @@
 		07B2C1F3213AD4CA00FE7AC0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		07B2C1F8213AF74B00FE7AC0 /* Profile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
+		07B4AB5F2190C403001E9337 /* RepositorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySection.swift; sourceTree = "<group>"; };
+		07B4AB622190C56E001E9337 /* RepositoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailCell.swift; sourceTree = "<group>"; };
+		07B4AB632190C56E001E9337 /* RepositoryDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryDetailCell.xib; sourceTree = "<group>"; };
+		07B4AB662190C57F001E9337 /* RepositoryDetailCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailCellViewModel.swift; sourceTree = "<group>"; };
 		07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		07DFF6D220E90502004DAA68 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		07DFF6D420E90574004DAA68 /* UserSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserSearch.json; sourceTree = "<group>"; };
@@ -444,9 +452,21 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		07B4AB612190C54C001E9337 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				07B4AB622190C56E001E9337 /* RepositoryDetailCell.swift */,
+				07B4AB632190C56E001E9337 /* RepositoryDetailCell.xib */,
+				07B4AB662190C57F001E9337 /* RepositoryDetailCellViewModel.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		07DFF6D820E90860004DAA68 /* Repository Details */ = {
 			isa = PBXGroup;
 			children = (
+				07B4AB612190C54C001E9337 /* Cells */,
+				07B4AB5F2190C403001E9337 /* RepositorySection.swift */,
 				07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */,
 				07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */,
 			);
@@ -992,6 +1012,7 @@
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
+				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
 				073204552141377D00C1E39F /* Events.json in Resources */,
@@ -1265,6 +1286,7 @@
 				A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
 				07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */,
+				07B4AB672190C57F001E9337 /* RepositoryDetailCellViewModel.swift in Sources */,
 				C762C6671E1D559000C09EBD /* ScrollView.swift in Sources */,
 				070FF83E20F221AB0070F5E8 /* UserViewModel.swift in Sources */,
 				A09DE8A520E7A15A00F6F2BF /* User.swift in Sources */,
@@ -1320,9 +1342,11 @@
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
+				07B4AB642190C56E001E9337 /* RepositoryDetailCell.swift in Sources */,
 				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
 				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
+				07B4AB602190C403001E9337 /* RepositorySection.swift in Sources */,
 				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,

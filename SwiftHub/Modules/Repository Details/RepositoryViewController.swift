@@ -12,6 +12,8 @@ import RxCocoa
 import RxDataSources
 import AttributedLib
 
+private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
+
 class RepositoryViewController: TableViewController {
 
     var viewModel: RepositoryViewModel!
@@ -93,6 +95,7 @@ class RepositoryViewController: TableViewController {
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
+        tableView.register(R.nib.repositoryDetailCell)
     }
 
     override func bindViewModel() {
@@ -104,11 +107,48 @@ class RepositoryViewController: TableViewController {
                                               openInWebSelection: rightBarButton.rx.tap.asObservable(),
                                               watchersSelection: watchersButton.rx.tap.asObservable(),
                                               starsSelection: starsButton.rx.tap.asObservable(),
-                                              forksSelection: forksButton.rx.tap.asObservable())
+                                              forksSelection: forksButton.rx.tap.asObservable(),
+                                              selection: tableView.rx.modelSelected(RepositorySectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
         viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+
+        let dataSource = RxTableViewSectionedReloadDataSource<RepositorySection>(configureCell: { dataSource, tableView, indexPath, item in
+            switch item {
+            case .languageItem(let viewModel),
+                 .sizeItem(let viewModel),
+                 .createdItem(let viewModel),
+                 .updatedItem(let viewModel),
+                 .issuesItem(let viewModel),
+                 .commitsItem(let viewModel),
+                 .pullRequestsItem(let viewModel),
+                 .eventsItem(let viewModel),
+                 .readmeItem(let viewModel),
+                 .sourceItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
+                cell.bind(to: viewModel)
+                return cell
+            }
+        }, titleForHeaderInSection: { dataSource, index in
+            let section = dataSource[index]
+            return section.title
+        })
+
+        output.items
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
+
+        output.selectedEvent.drive(onNext: { [weak self] (item) in
+            switch item {
+            case .eventsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                    self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
+                }
+            default:
+                self?.deselectSelectedRow()
+            }
+        }).disposed(by: rx.disposeBag)
 
         output.name.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title

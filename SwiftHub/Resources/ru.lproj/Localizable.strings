@@ -57,6 +57,16 @@
 "Repository.WatchersButton.Title" = "Наблюдатели";
 "Repository.StarsButton.Title" = "Звезды";
 "Repository.ForksButton.Title" = "Разветвление";
+"Repository.LanguageCell.Title" = "Язык";
+"Repository.SizeCell.Title" = "Размер";
+"Repository.CreatedCell.Title" = "Создана";
+"Repository.UpdatedCell.Title" = "Обновлено";
+"Repository.IssuesCell.Title" = "Проблемы";
+"Repository.CommitsCell.Title" = "Commits";
+"Repository.PullRequestsCell.Title" = "Запросы";
+"Repository.EventsCell.Title" = "События";
+"Repository.ReadmeCell.Title" = "Прочти меня";
+"Repository.SourceCell.Title" = "Исходный код";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Репозитории";

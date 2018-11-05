@@ -32,7 +32,7 @@ class SettingThemeCell: DefaultTableViewCell {
         }).disposed(by: rx.disposeBag)
 
         viewModel.imageName.drive(onNext: { [weak self] (imageName) in
-            self?.leftImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+            self?.leftImageView.image = UIImage(named: imageName)?.template
         }).disposed(by: rx.disposeBag)
 
         switchView.rx.isOn.bind(to: viewModel.nightModeEnabled).disposed(by: rx.disposeBag)

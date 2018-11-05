@@ -1,8 +1,8 @@
 //
-//  UserDetailCellViewModel.swift
+//  RepositoryDetailCellViewModel.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 10/13/18.
+//  Created by Sygnoos9 on 11/5/18.
 //  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class UserDetailCellViewModel {
+class RepositoryDetailCellViewModel {
 
     let title: Driver<String>
     let detail: Driver<String>

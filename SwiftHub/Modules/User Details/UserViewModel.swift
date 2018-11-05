@@ -100,20 +100,23 @@ class UserViewModel: ViewModel, ViewModelType {
             // Events
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
                                                               detail: "",
-                                                              image: R.image.icon_cell_events())
+                                                              image: R.image.icon_cell_events(),
+                                                              hidesDisclosure: false)
             items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
             if let company = user?.company {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
                                                                    detail: company,
-                                                                   image: R.image.icon_cell_company())
+                                                                   image: R.image.icon_cell_company(),
+                                                                   hidesDisclosure: false)
                 items.append(UserSectionItem.companyItem(viewModel: companyCellViewModel))
             }
 
             if let blog = user?.blog, blog.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
                                                                    detail: blog,
-                                                                   image: R.image.icon_cell_link())
+                                                                   image: R.image.icon_cell_link(),
+                                                                   hidesDisclosure: false)
                 items.append(UserSectionItem.blogItem(viewModel: companyCellViewModel))
             }
 

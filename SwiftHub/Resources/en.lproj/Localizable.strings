@@ -57,6 +57,16 @@
 "Repository.WatchersButton.Title" = "Watchers";
 "Repository.StarsButton.Title" = "Stars";
 "Repository.ForksButton.Title" = "Forks";
+"Repository.LanguageCell.Title" = "Language";
+"Repository.SizeCell.Title" = "Size";
+"Repository.CreatedCell.Title" = "Created";
+"Repository.UpdatedCell.Title" = "Updated";
+"Repository.IssuesCell.Title" = "Issues";
+"Repository.CommitsCell.Title" = "Commits";
+"Repository.PullRequestsCell.Title" = "Pull Requests";
+"Repository.EventsCell.Title" = "Events";
+"Repository.ReadmeCell.Title" = "Readme";
+"Repository.SourceCell.Title" = "Source Code";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Repositories";

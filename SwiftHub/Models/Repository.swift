@@ -83,7 +83,7 @@ struct Repository: Mappable {
     var tagsUrl: String?
     var teamsUrl: String?
     var treesUrl: String?
-    var updatedAt: String?
+    var updatedAt: Date?
     var url: String?
     var watchers: Int?
     var watchersCount: Int?
@@ -163,7 +163,7 @@ struct Repository: Mappable {
         tagsUrl <- map["tags_url"]
         teamsUrl <- map["teams_url"]
         treesUrl <- map["trees_url"]
-        updatedAt <- map["updated_at"]
+        updatedAt <- (map["updated_at"], ISO8601DateTransform())
         url <- map["url"]
         watchers <- map["watchers"]
         watchersCount <- map["watchers_count"]
