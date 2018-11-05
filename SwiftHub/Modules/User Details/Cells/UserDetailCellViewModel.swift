@@ -13,15 +13,13 @@ import RxCocoa
 class UserDetailCellViewModel {
 
     let title: Driver<String>
+    let detail: Driver<String>
     let image: Driver<UIImage?>
     let showDisclosure: Driver<Bool>
 
-    let destinationViewModel: Any?
-
-    init(with title: String, image: UIImage?, destinationViewModel: Any?) {
-        self.destinationViewModel = destinationViewModel
-
+    init(with title: String, detail: String, image: UIImage?) {
         self.title = Driver.just(title)
+        self.detail = Driver.just(detail)
         self.image = Driver.just(image)
         showDisclosure = Driver.just(true)
     }

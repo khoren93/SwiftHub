@@ -84,6 +84,8 @@
 "User.FollowersButton.Title" = "Հետեւորդներ";
 "User.FollowingButton.Title" = "Համախոհներ";
 "User.EventsCell.Title" = "Միջոցառումներ";
+"User.CompanyCell.Title" = "Ընկերություն";
+"User.BlogCell.Title" = "Կայք";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Հետեւորդներ";

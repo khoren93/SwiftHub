@@ -84,6 +84,8 @@
 "User.FollowersButton.Title" = "Followers";
 "User.FollowingButton.Title" = "Following";
 "User.EventsCell.Title" = "Events";
+"User.CompanyCell.Title" = "Company";
+"User.BlogCell.Title" = "Blog";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Followers";

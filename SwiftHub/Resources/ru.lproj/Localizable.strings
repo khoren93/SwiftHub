@@ -84,6 +84,8 @@
 "User.FollowersButton.Title" = "Подписчики";
 "User.FollowingButton.Title" = "Подписки";
 "User.EventsCell.Title" = "События";
+"User.CompanyCell.Title" = "Компания";
+"User.BlogCell.Title" = "Блог";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Подписчики";

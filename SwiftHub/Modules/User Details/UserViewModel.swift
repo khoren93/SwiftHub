@@ -94,19 +94,32 @@ class UserViewModel: ViewModel, ViewModelType {
                 return viewModel
         }
 
-        let items = user.filterNil().map { (user) -> [UserSection] in
+        let items = user.map { (user) -> [UserSection] in
+            var items: [UserSectionItem] = []
+
             // Events
-            let eventsViewModel = EventsViewModel(mode: EventsMode.user(user: user), provider: self.provider)
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
-                                                              image: R.image.icon_cell_events(), destinationViewModel: eventsViewModel)
+                                                              detail: "",
+                                                              image: R.image.icon_cell_events())
+            items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
-            let items = [
-                UserSection.user(title: "", items: [
-                    UserSectionItem.eventsItem(viewModel: eventsCellViewModel)
-                    ])
+            if let company = user?.company {
+                let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
+                                                                   detail: company,
+                                                                   image: R.image.icon_cell_company())
+                items.append(UserSectionItem.companyItem(viewModel: companyCellViewModel))
+            }
+
+            if let blog = user?.blog, blog.isNotEmpty {
+                let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
+                                                                   detail: blog,
+                                                                   image: R.image.icon_cell_link())
+                items.append(UserSectionItem.blogItem(viewModel: companyCellViewModel))
+            }
+
+            return [
+                UserSection.user(title: "", items: items)
             ]
-
-            return items
         }
 
         let selectedEvent = input.selection
@@ -124,5 +137,24 @@ class UserViewModel: ViewModel, ViewModelType {
                       repositoriesSelected: repositoriesSelected,
                       usersSelected: usersSelected,
                       selectedEvent: selectedEvent)
+    }
+
+    func viewModel(for item: UserSectionItem) -> ViewModel? {
+        switch item {
+        case .eventsItem:
+            if let user = self.user.value {
+                let viewModel = EventsViewModel(mode: EventsMode.user(user: user), provider: self.provider)
+                return viewModel
+            }
+        case .companyItem:
+            if let companyName = self.user.value?.company?.removingPrefix("@") {
+                var user = User()
+                user.login = companyName
+                let viewModel = UserViewModel(user: user, provider: self.provider)
+                return viewModel
+            }
+        case .blogItem: return nil
+        }
+        return nil
     }
 }

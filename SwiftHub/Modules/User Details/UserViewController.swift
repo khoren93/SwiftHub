@@ -140,7 +140,9 @@ class UserViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .eventsItem(let viewModel):
+            case .eventsItem(let viewModel),
+                 .companyItem(let viewModel),
+                 .blogItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? UserDetailCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -204,9 +206,17 @@ class UserViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
-            case .eventsItem(let viewModel):
-                if let viewModel = viewModel.destinationViewModel as? EventsViewModel {
+            case .eventsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .companyItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .blogItem:
+                if let url = self?.viewModel.user.value?.blog?.url {
+                    self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
                 }
             }
         }).disposed(by: rx.disposeBag)
