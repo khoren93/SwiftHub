@@ -38,6 +38,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     }
 
     let repository: BehaviorRelay<Repository>
+    let readme = BehaviorRelay<Content?>(value: nil)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -54,6 +55,15 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 .trackError(self.error)
             }.subscribe(onNext: { (repository) in
                 self.repository.accept(repository)
+            }).disposed(by: rx.disposeBag)
+
+        input.headerRefresh.flatMapLatest { () -> Observable<Content> in
+            let fullName = self.repository.value.fullName ?? ""
+            return self.provider.readme(fullName: fullName, ref: nil)
+                .trackActivity(self.loading)
+                .trackError(self.error)
+            }.subscribe(onNext: { (content) in
+                self.readme.accept(content)
             }).disposed(by: rx.disposeBag)
 
         let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
@@ -105,9 +115,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Size
             if let size = repository.size {
-                let sizeInKb = ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
                 let sizeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySizeCellTitle.key.localized(),
-                                                                      detail: sizeInKb,
+                                                                      detail: size.size(),
                                                                       image: R.image.icon_cell_size(),
                                                                       hidesDisclosure: true)
                 items.append(RepositorySectionItem.sizeItem(viewModel: sizeCellViewModel))
@@ -136,7 +145,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
                                                                         detail: issues,
                                                                         image: R.image.icon_cell_issues(),
-                                                                        hidesDisclosure: false)
+                                                                        hidesDisclosure: true)
                 items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
             }
 
@@ -144,14 +153,14 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
                                                                           detail: "",
                                                                           image: R.image.icon_cell_git_commit(),
-                                                                          hidesDisclosure: false)
+                                                                          hidesDisclosure: true)
             items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
 
             // Pull Requests
             let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
                                                                           detail: "",
                                                                           image: R.image.icon_cell_git_pull_request(),
-                                                                          hidesDisclosure: false)
+                                                                          hidesDisclosure: true)
             items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
 
             // Events
@@ -206,7 +215,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let viewModel = EventsViewModel(mode: mode, provider: self.provider)
             return viewModel
         case .readmeItem: return nil
-        case .sourceItem: return nil
+        case .sourceItem:
+            let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: nil, provider: self.provider)
+            return viewModel
         default: return nil
         }
     }

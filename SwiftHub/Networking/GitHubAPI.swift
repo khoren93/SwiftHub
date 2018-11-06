@@ -23,6 +23,8 @@ enum GithubAPI {
     case watchers(fullName: String, page: Int)
     case stargazers(fullName: String, page: Int)
     case forks(fullName: String, page: Int)
+    case readme(fullName: String, ref: String?)
+    case contents(fullName: String, path: String, ref: String?)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -58,6 +60,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .watchers(let fullName, _): return "/repos/\(fullName)/subscribers"
         case .stargazers(let fullName, _): return "/repos/\(fullName)/stargazers"
         case .forks(let fullName, _): return "/repos/\(fullName)/forks"
+        case .readme(let fullName, _): return "/repos/\(fullName)/readme"
+        case .contents(let fullName, let path, _): return "/repos/\(fullName)/contents/\(path)"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -91,74 +95,46 @@ extension GithubAPI: TargetType, ProductAPIType {
     }
 
     var parameters: [String: Any]? {
+        var params: [String: Any] = [:]
         switch self {
         case .searchRepositories(let query):
-            var params: [String: Any] = [:]
             params["q"] = query
-            return params
         case .watchers(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .stargazers(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .forks(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
+        case .readme(_, let ref):
+            params["ref"] = ref
+        case .contents(_, _, let ref):
+            params["ref"] = ref
         case .searchUsers(let query):
-            var params: [String: Any] = [:]
             params["q"] = query
-            return params
         case .userRepositories(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .userStarredRepositories(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .userFollowers(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .userFollowing(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .events(let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .repositoryEvents(_, _, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .userReceivedEvents(_, let page):
-            return [
-                "page": page
-            ]
+            params["page"] = page
         case .userPerformedEvents(_, let page):
-            return [
-                "page": page
-            ]
-        case .notifications(let all, let participating, let page):
-            return [
-                "all": all,
-                "participating": participating,
-                "page": page
-            ]
-        case .repositoryNotifications(_, let all, let participating, let page):
-            return [
-                "all": all,
-                "participating": participating,
-                "page": page
-            ]
-        default:
-            return nil
+            params["page"] = page
+        case .notifications(let all, let participating, let page),
+             .repositoryNotifications(_, let all, let participating, let page):
+            params["all"] = all
+            params["participating"] = participating
+            params["page"] = page
+        default: break
         }
+        return params
     }
 
     public var parameterEncoding: ParameterEncoding {
@@ -172,6 +148,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .watchers: return stubbedResponse("RepositoryWatchers")
         case .stargazers: return stubbedResponse("RepositoryStargers")
         case .forks: return stubbedResponse("RepositoryForks")
+        case .readme: return stubbedResponse("RepositoryReadme")
+        case .contents: return stubbedResponse("RepositoryContents")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")

@@ -145,6 +145,14 @@ class RepositoryViewController: TableViewController {
                 if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
                 }
+            case .readmeItem:
+                if let url = self?.viewModel.readme.value?.htmlUrl?.url {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
+            case .sourceItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
+                    self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
+                }
             default:
                 self?.deselectSelectedRow()
             }

@@ -66,14 +66,14 @@ extension WebViewController: UIWebViewDelegate {
     }
 
     func webViewDidStartLoad(_ webView: UIWebView) {
-        startAnimating()
+//        startAnimating()
     }
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        stopAnimating()
+//        stopAnimating()
     }
 
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        stopAnimating()
+//        stopAnimating()
     }
 }
