@@ -43,6 +43,9 @@ class UserViewModel: ViewModel, ViewModelType {
     init(user: User?, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
         super.init(provider: provider)
+        if let login = user?.login {
+            analytics.log(.user(login: login))
+        }
     }
 
     func transform(input: Input) -> Output {

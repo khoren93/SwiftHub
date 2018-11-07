@@ -39,10 +39,9 @@ class SearchViewModel: ViewModel, ViewModelType {
         let userSelected = PublishSubject<User>()
 
         let dismissKeyboard = input.selection.mapToVoid()
+        let keyword = input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged()
 
-        let refresh = Observable.of(input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged().asObservable()).merge()
-
-        refresh.flatMapLatest({ (keyword) -> Observable<[Repository]> in
+        keyword.asObservable().flatMapLatest({ (keyword) -> Observable<[Repository]> in
             guard keyword.isNotEmpty else {
                 return Observable.just([])
             }
@@ -54,7 +53,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             repositoryElements.accept(items)
         }).disposed(by: rx.disposeBag)
 
-        refresh.flatMapLatest({ (keyword) -> Observable<[User]> in
+        keyword.asObservable().flatMapLatest({ (keyword) -> Observable<[User]> in
             guard keyword.isNotEmpty else {
                 return Observable.just([])
             }
@@ -64,6 +63,12 @@ class SearchViewModel: ViewModel, ViewModelType {
                 .map { $0.items }
         }).subscribe(onNext: { (items) in
             userElements.accept(items)
+        }).disposed(by: rx.disposeBag)
+
+        keyword.throttle(3.0).drive(onNext: { (keyword) in
+            if keyword.isNotEmpty {
+                analytics.log(.search(keyword: keyword))
+            }
         }).disposed(by: rx.disposeBag)
 
         input.selection.drive(onNext: { (item) in

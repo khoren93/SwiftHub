@@ -36,6 +36,7 @@ class ThemeViewModel: ViewModel, ViewModelType {
             let color = cellViewModel.theme
             let theme = ThemeType.currentTheme().withColor(color: color)
             themeService.set(theme)
+            analytics.log(.appTheme(color: color.title))
         }).disposed(by: rx.disposeBag)
 
         return Output(items: elements,

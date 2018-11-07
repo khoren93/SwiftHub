@@ -43,7 +43,9 @@ class LanguageViewModel: ViewModel, ViewModelType {
         }).bind(to: elements).disposed(by: rx.disposeBag)
 
         let saved = input.saveTrigger.map { () -> Void in
-            Localize.setCurrentLanguage(self.currentLanguage.value)
+            let language = self.currentLanguage.value
+            Localize.setCurrentLanguage(language)
+            analytics.log(.appLanguage(language: language))
         }
 
         input.selection.drive(onNext: { (cellViewModel) in
