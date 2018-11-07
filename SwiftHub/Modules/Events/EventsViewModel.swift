@@ -31,6 +31,7 @@ class EventsViewModel: ViewModel, ViewModelType {
         let items: BehaviorRelay<[EventCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
+        let hidesSegment: Driver<Bool>
     }
 
     let mode: BehaviorRelay<EventsMode>
@@ -99,11 +100,19 @@ class EventsViewModel: ViewModel, ViewModelType {
 
         input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
+        let hidesSegment = mode.map { (mode) -> Bool in
+            switch mode {
+            case .repository: return true
+            case .user: return false
+            }
+        }.asDriver(onErrorJustReturn: false)
+
         return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
                       items: elements,
                       userSelected: userDetails,
-                      repositorySelected: repositoryDetails)
+                      repositorySelected: repositoryDetails,
+                      hidesSegment: hidesSegment)
     }
 
     func request() -> Observable<[Event]> {

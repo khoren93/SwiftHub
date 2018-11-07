@@ -98,6 +98,10 @@ class EventsViewController: TableViewController {
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)
 
+        output.hidesSegment.drive(onNext: { [weak self] (hides) in
+            self?.navigationItem.titleView = hides ? nil : self?.segmentedControl
+        }).disposed(by: rx.disposeBag)
+
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
