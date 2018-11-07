@@ -69,4 +69,8 @@ extension Analytics {
         Mixpanel.sharedInstance()?.people.set("$name", to: name)
         Mixpanel.sharedInstance()?.people.set("$email", to: email)
     }
+
+    func logout() {
+        Mixpanel.sharedInstance()?.reset()
+    }
 }

@@ -130,6 +130,10 @@ extension User {
         }
         return nil
     }
+
+    static func removeCurrentUser() {
+        keychain[userKey] = nil
+    }
 }
 
 extension User: Equatable {

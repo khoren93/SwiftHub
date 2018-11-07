@@ -105,7 +105,10 @@ class SettingsViewController: TableViewController {
     }
 
     func logout() {
+        User.removeCurrentUser()
         AuthManager.removeToken()
+
         analytics.log(.logout)
+        analytics.logout()
     }
 }
