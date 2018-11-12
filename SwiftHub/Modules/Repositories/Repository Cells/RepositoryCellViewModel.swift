@@ -14,6 +14,7 @@ class RepositoryCellViewModel {
 
     let title: Driver<String>
     let detail: Driver<String>
+    let secondDetail: Driver<String>
     let imageUrl: Driver<URL?>
 
     let repository: Repository
@@ -22,6 +23,7 @@ class RepositoryCellViewModel {
         self.repository = repository
         title = Driver.just("\(repository.fullName ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
+        secondDetail = Driver.just("★ \(repository.stargazersCount ?? 0)")
         imageUrl = Driver.just(repository.owner?.avatarUrl?.url)
     }
 }
