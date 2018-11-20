@@ -5,6 +5,7 @@
 //  Created by Sygnoos9 on 9/6/18.
 //  Copyright © 2018 Khoren Markosyan. All rights reserved.
 //
+//  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
 import ObjectMapper

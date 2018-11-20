@@ -67,6 +67,12 @@
 		07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07DFF6D620E90584004DAA68 /* RepositorySearch.json */; };
 		07DFF6DA20E908F3004DAA68 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */; };
 		07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */; };
+		07E1B2F321A4349500F6EAE3 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2F221A4349500F6EAE3 /* Issue.swift */; };
+		07E1B2F521A4356600F6EAE3 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2F421A4356600F6EAE3 /* PullRequest.swift */; };
+		07E1B2F721A4366200F6EAE3 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2F621A4366200F6EAE3 /* Milestone.swift */; };
+		07E1B2F921A43E8C00F6EAE3 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2F821A43E8C00F6EAE3 /* State.swift */; };
+		07E1B2FB21A4400900F6EAE3 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2FA21A4400900F6EAE3 /* Commit.swift */; };
+		07E1B2FD21A44B7600F6EAE3 /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B2FC21A44B7600F6EAE3 /* Branch.swift */; };
 		07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336D1FFFCB8B00D53888 /* Application.swift */; };
 		07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC336F1FFFCBF600D53888 /* Navigator.swift */; };
 		07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */; };
@@ -250,6 +256,12 @@
 		07DFF6D620E90584004DAA68 /* RepositorySearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositorySearch.json; sourceTree = "<group>"; };
 		07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		07E1B2F221A4349500F6EAE3 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		07E1B2F421A4356600F6EAE3 /* PullRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
+		07E1B2F621A4366200F6EAE3 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		07E1B2F821A43E8C00F6EAE3 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		07E1B2FA21A4400900F6EAE3 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
+		07E1B2FC21A44B7600F6EAE3 /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		07FC336D1FFFCB8B00D53888 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		07FC336F1FFFCBF600D53888 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
@@ -524,13 +536,19 @@
 		07FC33711FFFCCF700D53888 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07E1B2FC21A44B7600F6EAE3 /* Branch.swift */,
+				07E1B2FA21A4400900F6EAE3 /* Commit.swift */,
 				07D46E5221920029008E5369 /* Content.swift */,
 				07320452214128ED00C1E39F /* Event.swift */,
 				0732046921419DB200C1E39F /* ISO8601DateTransform.swift */,
+				07E1B2F221A4349500F6EAE3 /* Issue.swift */,
 				A09DE8A220E7A0C500F6F2BF /* License.swift */,
+				07E1B2F621A4366200F6EAE3 /* Milestone.swift */,
 				A034AF6F21527EF8004C310B /* Notification.swift */,
+				07E1B2F421A4356600F6EAE3 /* PullRequest.swift */,
 				A09DE8A020E79EEC00F6F2BF /* Repository.swift */,
 				070FF85020F290100070F5E8 /* SectionType.swift */,
+				07E1B2F821A43E8C00F6EAE3 /* State.swift */,
 				07B2C1F3213AD4CA00FE7AC0 /* Token.swift */,
 				A09DE8A420E7A15A00F6F2BF /* User.swift */,
 			);
@@ -1299,6 +1317,7 @@
 			files = (
 				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
 				07B183832172268C007CC23B /* UserDetailCell.swift in Sources */,
+				07E1B2FB21A4400900F6EAE3 /* Commit.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
 				070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
@@ -1311,6 +1330,7 @@
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
 				07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */,
+				07E1B2F521A4356600F6EAE3 /* PullRequest.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,
 				C762C66B1E1D559000C09EBD /* TextField.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
@@ -1332,6 +1352,7 @@
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
+				07E1B2FD21A44B7600F6EAE3 /* Branch.swift in Sources */,
 				07D46E5A21921C28008E5369 /* ContentsViewController.swift in Sources */,
 				A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
@@ -1357,6 +1378,7 @@
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				A034AF7B21528108004C310B /* NotificationCellViewModel.swift in Sources */,
 				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
+				07E1B2F921A43E8C00F6EAE3 /* State.swift in Sources */,
 				A09DE8DB20E7C73900F6F2BF /* SegmentedControl.swift in Sources */,
 				C762C67F1E1D5A7300C09EBD /* Observable+Logging.swift in Sources */,
 				A034AF7021527EF8004C310B /* Notification.swift in Sources */,
@@ -1397,12 +1419,14 @@
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
 				07B4AB642190C56E001E9337 /* RepositoryDetailCell.swift in Sources */,
 				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
+				07E1B2F321A4349500F6EAE3 /* Issue.swift in Sources */,
 				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
 				07B4AB602190C403001E9337 /* RepositorySection.swift in Sources */,
 				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
+				07E1B2F721A4366200F6EAE3 /* Milestone.swift in Sources */,
 				A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */,
 				0757B53321669DAC00C04163 /* LanguageCellViewModel.swift in Sources */,
 				A09DE8C120E7B82F00F6F2BF /* RepositoryCellViewModel.swift in Sources */,

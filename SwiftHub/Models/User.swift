@@ -14,12 +14,12 @@ import KeychainAccess
 private let userKey = "CurrentUserKey"
 private let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
-struct User: Mappable {
+enum UserType: String {
+    case user = "User"
+    case organization = "Organization"
+}
 
-    enum UserType: String {
-        case user = "User"
-        case organization = "Organization"
-    }
+struct User: Mappable {
 
     // Common
     var avatarUrl: String?
@@ -39,7 +39,7 @@ struct User: Mappable {
     var publicGists: Int?
     var publicRepos: Int?
     var reposUrl: String?
-    var type = UserType.user
+    var type: UserType = .user
     var updatedAt: Date?
     var url: String?
 
