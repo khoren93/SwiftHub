@@ -40,6 +40,16 @@ class EventsViewModel: ViewModel, ViewModelType {
     init(mode: EventsMode, provider: SwiftHubAPI) {
         self.mode = BehaviorRelay(value: mode)
         super.init(provider: provider)
+        switch mode {
+        case .repository(let repository):
+            if let fullname = repository.fullName {
+                analytics.log(.repositoryEvents(fullname: fullname))
+            }
+        case .user(let user):
+            if let login = user.login {
+                analytics.log(.userEvents(login: login))
+            }
+        }
     }
 
     func transform(input: Input) -> Output {

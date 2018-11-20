@@ -152,10 +152,16 @@ class RepositoryViewController: TableViewController {
             case .readmeItem:
                 if let url = self?.viewModel.readme.value?.htmlUrl?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
+                    if let fullname = self?.viewModel.repository.value.fullName {
+                        analytics.log(.readme(fullname: fullname))
+                    }
                 }
             case .sourceItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
                     self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
+                    if let fullname = viewModel.repository.value.fullName {
+                        analytics.log(.source(fullname: fullname))
+                    }
                 }
             default:
                 self?.deselectSelectedRow()

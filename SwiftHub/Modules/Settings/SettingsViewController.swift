@@ -87,6 +87,7 @@ class SettingsViewController: TableViewController {
                 self?.clearCacheAction()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
+                analytics.log(.acknowledgements)
             case .logoutItem:
                 self?.deselectSelectedRow()
                 self?.logout()
@@ -101,6 +102,7 @@ class SettingsViewController: TableViewController {
             let okAction = UIAlertAction(title: R.string.localizable.commonOK.key.localized(), style: .default) { (result: UIAlertAction) in }
             alertController.addAction(okAction)
             self?.present(alertController, animated: true, completion: nil)
+            analytics.log(.appCacheRemoved)
         }
     }
 
@@ -109,6 +111,6 @@ class SettingsViewController: TableViewController {
         AuthManager.removeToken()
 
         analytics.log(.logout)
-        analytics.logout()
+        analytics.reset()
     }
 }

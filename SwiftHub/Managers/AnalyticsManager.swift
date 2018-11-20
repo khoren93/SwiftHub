@@ -15,12 +15,19 @@ let analytics = Analytics<SwifthubEvent>()
 enum SwifthubEvent {
     case appTheme(color: String)
     case appLanguage(language: String)
+    case appCacheRemoved
+    case acknowledgements
 
     case login(login: String)
     case logout
     case search(keyword: String)
     case repository(fullname: String)
     case user(login: String)
+    case userEvents(login: String)
+    case repositoryEvents(fullname: String)
+    case issues(fullname: String)
+    case source(fullname: String)
+    case readme(fullname: String)
 }
 
 extension SwifthubEvent: Umbrella.EventType {
@@ -29,11 +36,18 @@ extension SwifthubEvent: Umbrella.EventType {
         switch self {
         case .appTheme: return "Theme"
         case .appLanguage: return "Language"
+        case .appCacheRemoved: return "Cache Removed"
+        case .acknowledgements: return "Acknowledgements"
         case .login: return "Login"
         case .logout: return "Logout"
         case .search: return "Search"
         case .repository: return "Repository"
         case .user: return "User"
+        case .userEvents: return "User Events"
+        case .repositoryEvents: return "Repository Events"
+        case .issues: return "Issues"
+        case .source: return "Source"
+        case .readme: return "Readme"
         }
     }
 
@@ -51,6 +65,16 @@ extension SwifthubEvent: Umbrella.EventType {
             return ["Fullname": fullname]
         case .user(let login):
             return ["Login": login]
+        case .userEvents(let login):
+            return ["Login": login]
+        case .repositoryEvents(let fullname):
+            return ["Fullname": fullname]
+        case .issues(let fullname):
+            return ["Fullname": fullname]
+        case .source(let fullname):
+            return ["Fullname": fullname]
+        case .readme(let fullname):
+            return ["Fullname": fullname]
         default:
             return nil
         }
@@ -68,7 +92,7 @@ extension Analytics {
         Mixpanel.sharedInstance()?.people.set("$email", to: email)
     }
 
-    func logout() {
+    func reset() {
         Mixpanel.sharedInstance()?.reset()
     }
 }

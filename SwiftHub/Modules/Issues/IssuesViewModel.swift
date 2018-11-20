@@ -34,6 +34,9 @@ class IssuesViewModel: ViewModel, ViewModelType {
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
         super.init(provider: provider)
+        if let fullName = repository.fullName {
+            analytics.log(.issues(fullname: fullName))
+        }
     }
 
     func transform(input: Input) -> Output {
