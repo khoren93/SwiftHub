@@ -25,6 +25,7 @@ protocol SwiftHubAPI {
     func forks(fullName: String, page: Int) -> Observable<[Repository]>
     func readme(fullName: String, ref: String?) -> Observable<Content>
     func contents(fullName: String, path: String, ref: String?) -> Observable<[Content]>
+    func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]>
 
     func searchUsers(query: String) -> Observable<UserSearch>
     func user(owner: String) -> Observable<User>
@@ -88,6 +89,12 @@ extension Api {
     func contents(fullName: String, path: String, ref: String?) -> Observable<[Content]> {
         return provider.request(.contents(fullName: fullName, path: path, ref: ref))
             .mapArray(Content.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]> {
+        return provider.request(.repositoryIssues(fullName: fullName, state: state, page: page))
+            .mapArray(Issue.self)
             .observeOn(MainScheduler.instance)
     }
 

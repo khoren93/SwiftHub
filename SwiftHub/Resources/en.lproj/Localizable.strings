@@ -67,6 +67,10 @@
 "Repository.EventsCell.Title" = "Events";
 "Repository.ReadmeCell.Title" = "Readme";
 "Repository.SourceCell.Title" = "Source Code";
+/* Issues */
+"Issues.Navigation.Title" = "Issues";
+"Issues.OpenSegment.Title" = "Open";
+"Issues.ClosedSegment.Title" = "Closed";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Repositories";

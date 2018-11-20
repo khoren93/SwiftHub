@@ -12,6 +12,8 @@ import RxCocoa
 
 class TableViewCell: UITableViewCell {
 
+    var cellDisposeBag = DisposeBag()
+
     var isSelection = false
     var selectionColor: UIColor? {
         didSet {

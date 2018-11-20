@@ -11,8 +11,6 @@ import RxSwift
 
 class EventCell: DetailedTableViewCell {
 
-    var cellDisposeBag = DisposeBag()
-
     override func makeUI() {
         super.makeUI()
         titleLabel.numberOfLines = 2

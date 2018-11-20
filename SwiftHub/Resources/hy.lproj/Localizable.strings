@@ -67,6 +67,10 @@
 "Repository.EventsCell.Title" = "Իրադարձություններ";
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";
+/* Issues */
+"Issues.Navigation.Title" = "Խնդիրներ";
+"Issues.OpenSegment.Title" = "Բաց";
+"Issues.ClosedSegment.Title" = "Փակ";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Ռեպոզիտորիաներ";

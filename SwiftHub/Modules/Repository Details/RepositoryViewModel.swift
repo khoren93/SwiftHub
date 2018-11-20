@@ -148,7 +148,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
                                                                         detail: issues,
                                                                         image: R.image.icon_cell_issues(),
-                                                                        hidesDisclosure: true)
+                                                                        hidesDisclosure: false)
                 items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
             }
 
@@ -209,18 +209,26 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     }
 
     func viewModel(for item: RepositorySectionItem) -> ViewModel? {
+        let repository = self.repository.value
         switch item {
-        case .issuesItem: return nil
+        case .issuesItem:
+            let viewModel = IssuesViewModel(repository: repository, provider: provider)
+            return viewModel
+
         case .commitsItem: return nil
         case .pullRequestsItem: return nil
+
         case .eventsItem:
-            let mode = EventsMode.repository(repository: repository.value)
-            let viewModel = EventsViewModel(mode: mode, provider: self.provider)
+            let mode = EventsMode.repository(repository: repository)
+            let viewModel = EventsViewModel(mode: mode, provider: provider)
             return viewModel
+
         case .readmeItem: return nil
+
         case .sourceItem:
-            let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: nil, provider: self.provider)
+            let viewModel = ContentsViewModel(repository: repository, content: nil, ref: nil, provider: provider)
             return viewModel
+
         default: return nil
         }
     }

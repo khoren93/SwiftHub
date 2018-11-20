@@ -68,7 +68,11 @@ class EventsViewModel: ViewModel, ViewModelType {
                 .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
                 .trackError(self.error)
-                .map { $0.map { EventCellViewModel(with: $0) } }
+                .map { $0.map({ (event) -> EventCellViewModel in
+                    let viewModel = EventCellViewModel(with: event)
+                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
+                    return viewModel
+                })}
         })
             .map { elements.value + $0 }
             .subscribe(onNext: { (items) in

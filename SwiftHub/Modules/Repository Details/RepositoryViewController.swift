@@ -141,6 +141,10 @@ class RepositoryViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .issuesItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? IssuesViewModel {
+                    self?.navigator.show(segue: .issues(viewModel: viewModel), sender: self)
+                }
             case .eventsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)

@@ -204,6 +204,21 @@
             </objects>
             <point key="canvasLocation" x="9380" y="116"/>
         </scene>
+        <!--Issues View Controller-->
+        <scene sceneID="udw-cv-Ji7">
+            <objects>
+                <viewController storyboardIdentifier="IssuesViewController" id="dmB-yL-e6d" customClass="IssuesViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4qx-Wy-WjQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="lwd-6p-6Js"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eZS-fX-XGp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10102" y="116"/>
+        </scene>
         <!--Notifications View Controller-->
         <scene sceneID="4AO-bn-F1V">
             <objects>

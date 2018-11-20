@@ -67,6 +67,10 @@
 "Repository.EventsCell.Title" = "События";
 "Repository.ReadmeCell.Title" = "Прочти меня";
 "Repository.SourceCell.Title" = "Исходный код";
+/* Issues */
+"Issues.Navigation.Title" = "Проблемы";
+"Issues.OpenSegment.Title" = "Открыто";
+"Issues.ClosedSegment.Title" = "Закрыто";
 /* Search */
 //"Search.Navigation.Title" = "Search";
 "Search.RepositoriesSegment.Title" = "Репозитории";
