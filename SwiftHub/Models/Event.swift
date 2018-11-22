@@ -31,6 +31,8 @@ enum EventType: String {
     case member = "MemberEvent"
     case organizationBlock = "OrgBlockEvent"
     case `public` = "PublicEvent"
+    case pullRequest = "PullRequestEvent"
+    case push = "PushEvent"
     case release = "ReleaseEvent"
     case star = "WatchEvent"
     case unknown = ""
@@ -92,6 +94,11 @@ class Payload: StaticMappable {
         switch type {
         case .fork: return ForkPayload()
         case .create: return CreatePayload()
+        case .issueComment: return IssueCommentPayload()
+        case .issues: return IssuesPayload()
+        case .member: return MemberPayload()
+        case .pullRequest: return PullRequestPayload()
+        case .push: return PushPayload()
         case .star: return StarPayload()
         default: return Payload()
         }
@@ -125,6 +132,79 @@ class CreatePayload: Payload {
         masterBranch <- map["payload.master_branch"]
         description <- map["payload.description"]
         pusherType <- map["payload.pusher_type"]
+    }
+}
+
+class IssueCommentPayload: Payload {
+
+    var action: String?
+    var issue: Issue?
+    var comment: Comment?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        issue <- map["payload.issue"]
+        comment <- map["payload.comment"]
+    }
+}
+
+class IssuesPayload: Payload {
+
+    var action: String?
+    var issue: Issue?
+    var repository: Repository?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        issue <- map["payload.issue"]
+        repository <- map["payload.forkee"]
+    }
+}
+
+class MemberPayload: Payload {
+
+    var action: String?
+    var member: User?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        member <- map["payload.member"]
+    }
+}
+
+class PullRequestPayload: Payload {
+
+    var action: String?
+    var number: Int?
+    var pullRequest: PullRequest?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        number <- map["payload.number"]
+        pullRequest <- map["payload.pull_request"]
+    }
+}
+
+class PushPayload: Payload {
+
+    var ref: String?
+    var size: Int?
+    var commits: [Commit] = []
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        ref <- map["payload.ref"]
+        size <- map["payload.size"]
+        commits <- map["payload.commits"]
     }
 }
 

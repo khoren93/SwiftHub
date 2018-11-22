@@ -91,6 +91,7 @@
 		07FC33871FFFE68800D53888 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33861FFFE68800D53888 /* Api.swift */; };
 		10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6D5D7DF286987ECF4F8FDD /* Pods_SwiftHub.framework */; };
 		1D3572E0196209E2CFA64077 /* Pods_SwiftHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07CE050051D40C945D4093C /* Pods_SwiftHubTests.framework */; };
+		A00871CF21A6E2BD006E5A2B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00871CE21A6E2BD006E5A2B /* Comment.swift */; };
 		A00C54C920E25B5A00DA5F98 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00C54C820E25B5A00DA5F98 /* StackView.swift */; };
 		A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017B3DA1E92995300E4FCED /* SplitViewController.swift */; };
 		A034A8AE20F61A6500E2B678 /* HomeTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034A8AD20F61A6500E2B678 /* HomeTabBarViewModel.swift */; };
@@ -291,6 +292,7 @@
 		79F049DC97D19D14F28BF40A /* Pods-SwiftHubTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests.release.xcconfig"; sourceTree = "<group>"; };
 		7B5E2602E2BB58EBC51F39D8 /* Pods-SwiftHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub.debug.xcconfig"; sourceTree = "<group>"; };
 		7DCE0F2B67EC0E2BD4A13391 /* Pods-SwiftHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub.release.xcconfig"; sourceTree = "<group>"; };
+		A00871CE21A6E2BD006E5A2B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A00C54C820E25B5A00DA5F98 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		A017B3DA1E92995300E4FCED /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		A034A8AD20F61A6500E2B678 /* HomeTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewModel.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				07E1B2FC21A44B7600F6EAE3 /* Branch.swift */,
+				A00871CE21A6E2BD006E5A2B /* Comment.swift */,
 				07E1B2FA21A4400900F6EAE3 /* Commit.swift */,
 				07D46E5221920029008E5369 /* Content.swift */,
 				07320452214128ED00C1E39F /* Event.swift */,
@@ -1378,6 +1381,7 @@
 				07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */,
 				07B1837F2172257D007CC23B /* UserSection.swift in Sources */,
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
+				A00871CF21A6E2BD006E5A2B /* Comment.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
 				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
