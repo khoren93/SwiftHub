@@ -15,8 +15,8 @@ class IssueCellViewModel {
     let title: Driver<String>
     let detail: Driver<String>
     let imageUrl: Driver<URL?>
-    let icon: Driver<UIImage?>
-    let iconColor: Driver<UIColor>
+    let badge: Driver<UIImage?>
+    let badgeColor: Driver<UIColor>
 
     let issue: Issue
 
@@ -27,8 +27,8 @@ class IssueCellViewModel {
         title = Driver.just("\(issue.title ?? "")")
         detail = Driver.just(issue.detail())
         imageUrl = Driver.just(issue.user?.avatarUrl?.url)
-        icon = Driver.just(R.image.icon_cell_issue_badge()?.template)
-        iconColor = Driver.just(issue.state == .open ? UIColor.flatGreenDark : UIColor.flatRedDark)
+        badge = Driver.just(R.image.icon_cell_badge_issue()?.template)
+        badgeColor = Driver.just(issue.state == .open ? UIColor.flatGreenDark : UIColor.flatRedDark)
     }
 }
 

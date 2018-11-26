@@ -19,6 +19,18 @@ class DetailedTableViewCell: TableViewCell {
         return view
     }()
 
+    lazy var badgeImageView: ImageView = {
+        let view = ImageView(frame: CGRect())
+        view.backgroundColor = .white
+        view.cornerRadius = 10
+        containerView.addSubview(view)
+        view.snp.makeConstraints({ (make) in
+            make.bottom.right.equalTo(self.leftImageView)
+            make.size.equalTo(20)
+        })
+        return view
+    }()
+
     lazy var rightImageView: ImageView = {
         let view = ImageView(frame: CGRect())
         view.image = R.image.icon_cell_disclosure()?.template

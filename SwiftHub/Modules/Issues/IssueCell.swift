@@ -11,18 +11,6 @@ import RxSwift
 
 class IssueCell: DetailedTableViewCell {
 
-    lazy var iconImageView: ImageView = {
-        let view = ImageView(frame: CGRect())
-        view.backgroundColor = .white
-        view.cornerRadius = 10
-        containerView.addSubview(view)
-        view.snp.makeConstraints({ (make) in
-            make.bottom.right.equalTo(self.leftImageView)
-            make.size.equalTo(20)
-        })
-        return view
-    }()
-
     override func makeUI() {
         super.makeUI()
         titleLabel.numberOfLines = 2
@@ -38,8 +26,8 @@ class IssueCell: DetailedTableViewCell {
         viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.imageUrl.drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
-        viewModel.icon.drive(iconImageView.rx.image).disposed(by: rx.disposeBag)
-        viewModel.iconColor.drive(iconImageView.rx.tintColor).disposed(by: rx.disposeBag)
+        viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
+        viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
 
         leftImageView.rx.tapGesture().when(.recognized).map { _ in viewModel.issue.user }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)

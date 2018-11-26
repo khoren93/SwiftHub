@@ -25,5 +25,7 @@ class RepositoryCell: DetailedTableViewCell {
                 self?.leftImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
+        viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
+        viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
     }
 }

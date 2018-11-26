@@ -32,6 +32,7 @@ enum EventType: String {
     case organizationBlock = "OrgBlockEvent"
     case `public` = "PublicEvent"
     case pullRequest = "PullRequestEvent"
+    case pullRequestReviewComment = "PullRequestReviewCommentEvent"
     case push = "PushEvent"
     case release = "ReleaseEvent"
     case star = "WatchEvent"
@@ -98,7 +99,9 @@ class Payload: StaticMappable {
         case .issues: return IssuesPayload()
         case .member: return MemberPayload()
         case .pullRequest: return PullRequestPayload()
+        case .pullRequestReviewComment: return PullRequestReviewCommentPayload()
         case .push: return PushPayload()
+        case .release: return ReleasePayload()
         case .star: return StarPayload()
         default: return Payload()
         }
@@ -116,10 +119,16 @@ class ForkPayload: Payload {
     }
 }
 
+enum CreateEventType: String {
+    case repository
+    case branch
+    case tag
+}
+
 class CreatePayload: Payload {
 
     var ref: String?
-    var refType: String?
+    var refType: CreateEventType = .repository
     var masterBranch: String?
     var description: String?
     var pusherType: String?
@@ -193,6 +202,21 @@ class PullRequestPayload: Payload {
     }
 }
 
+class PullRequestReviewCommentPayload: Payload {
+
+    var action: String?
+    var comment: Comment?
+    var pullRequest: PullRequest?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        comment <- map["payload.comment"]
+        pullRequest <- map["payload.pull_request"]
+    }
+}
+
 class PushPayload: Payload {
 
     var ref: String?
@@ -205,6 +229,19 @@ class PushPayload: Payload {
         ref <- map["payload.ref"]
         size <- map["payload.size"]
         commits <- map["payload.commits"]
+    }
+}
+
+class ReleasePayload: Payload {
+
+    var action: String?
+    var release: Release?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        action <- map["payload.action"]
+        release <- map["payload.release"]
     }
 }
 
