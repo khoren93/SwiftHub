@@ -61,29 +61,8 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "scopes",
-									"value": "public_repo",
-									"type": "text"
-								},
-								{
-									"key": "note",
-									"value": "Create the new authorization for SwiftHub",
-									"type": "text"
-								},
-								{
-									"key": "client_id",
-									"value": "00cbdbffb01ec72e280a",
-									"type": "text"
-								},
-								{
-									"key": "client_secret",
-									"value": "5a39979251c0452a9476bd45c82a14d8e98c3fb3",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{base_url}}/authorizations",
@@ -104,11 +83,90 @@
 			"name": "Repositories",
 			"item": [
 				{
+					"name": "Contents",
+					"item": [
+						{
+							"name": "Get the README",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/readme?ref=master",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"readme"
+									],
+									"query": [
+										{
+											"key": "ref",
+											"value": "master"
+										}
+									]
+								},
+								"description": "This method returns the preferred README for a repository."
+							},
+							"response": []
+						},
+						{
+							"name": "Get contents",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contents/:path?",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"contents",
+										":path"
+									],
+									"query": [
+										{
+											"key": "ref",
+											"value": "master",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "This method returns the preferred README for a repository."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "List your repositories",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/user/repos?page=1&visibility=all&affiliation=owner,collaborator,organization_member&sort=full_name&direction=asc&per_page={{per_page}}",
 							"host": [
@@ -154,7 +212,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/users/{{username}}/repos?page=1&per_page={{per_page}}",
 							"host": [
@@ -185,7 +246,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/orgs/{{org}}/repos?type=all&page=1&per_page={{per_page}}",
 							"host": [
@@ -220,7 +284,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repositories?since=364&per_page={{per_page}}",
 							"host": [
@@ -249,7 +316,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/forks?per_page={{per_page}}",
 							"host": [
@@ -277,7 +347,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}",
 							"host": [
@@ -298,7 +371,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contributors?page=1&per_page={{per_page}}",
 							"host": [
@@ -330,7 +406,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/languages",
 							"host": [
@@ -352,7 +431,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/teams",
 							"host": [
@@ -373,7 +455,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/tags?page=1&per_page={{per_page}}",
 							"host": [
@@ -409,7 +494,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/orgs/{{org}}",
 							"host": [
@@ -434,7 +522,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/user",
 							"host": [
@@ -453,7 +544,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/users/{{owner}}",
 							"host": [
@@ -473,7 +567,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/users/{{username}}/followers?per_page={{per_page}}",
 							"host": [
@@ -503,7 +600,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/users/{{username}}/following?per_page={{per_page}}",
 							"host": [
@@ -535,7 +635,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/search/repositories?q=swift&page=1&per_page={{per_page}}",
 							"host": [
@@ -569,7 +672,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{base_url}}/search/users?q=realm&page=1&per_page={{per_page}}",
 							"host": [
@@ -612,7 +718,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/received_events?page=1&per_page={{per_page}}",
 									"host": [
@@ -643,7 +752,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -674,7 +786,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -703,7 +818,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -734,7 +852,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -773,7 +894,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/stargazers?per_page={{per_page}}",
 									"host": [
@@ -801,7 +925,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/starred?per_page={{per_page}}",
 									"host": [
@@ -835,7 +962,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/subscribers?per_page={{per_page}}",
 									"host": [
@@ -863,7 +993,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/subscriptions?per_page={{per_page}}",
 									"host": [
@@ -897,7 +1030,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
 									"host": [
@@ -934,7 +1070,10 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
 									"host": [
@@ -972,6 +1111,162 @@
 					],
 					"description": "Users receive notifications for conversations in repositories they watch",
 					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "List issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/issues?page=1&per_page={{per_page}}&state=all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"issues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								},
+								{
+									"key": "state",
+									"value": "all"
+								}
+							]
+						},
+						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+					},
+					"response": []
+				},
+				{
+					"name": "List user issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/user/issues?page=1&per_page={{per_page}}&state=all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"issues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								},
+								{
+									"key": "state",
+									"value": "all"
+								}
+							]
+						},
+						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+					},
+					"response": []
+				},
+				{
+					"name": "List issues for a repository",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues?page=1&per_page={{per_page}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"issues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								},
+								{
+									"key": "state",
+									"value": "closed",
+									"disabled": true
+								}
+							]
+						},
+						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a single issue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/6009?",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"issues",
+								"6009"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+					},
+					"response": []
 				}
 			]
 		}
