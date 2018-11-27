@@ -87,7 +87,7 @@ class RepositoryViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.blurStyle }, to: headerView.rx.blurStyle)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
@@ -178,8 +178,6 @@ class RepositoryViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
-
-        output.imageUrl.drive(headerView.rx.imageURL).disposed(by: rx.disposeBag)
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.repositoryWatchersButtonTitle.key.localized()

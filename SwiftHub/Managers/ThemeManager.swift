@@ -186,12 +186,6 @@ extension Reactive where Base: UIView {
             view.backgroundColor = attr
         }
     }
-
-    var blurStyle: Binder<UIBlurEffect.Style> {
-        return Binder(self.base) { view, attr in
-            view.blur(style: attr)
-        }
-    }
 }
 
 extension Reactive where Base: UITextField {

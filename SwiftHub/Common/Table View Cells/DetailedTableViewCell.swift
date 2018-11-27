@@ -23,6 +23,8 @@ class DetailedTableViewCell: TableViewCell {
         let view = ImageView(frame: CGRect())
         view.backgroundColor = .white
         view.cornerRadius = 10
+        view.borderColor = .white
+        view.borderWidth = 1
         containerView.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.bottom.right.equalTo(self.leftImageView)

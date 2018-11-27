@@ -27,20 +27,3 @@ extension Reactive where Base: UIImageView {
         })
     }
 }
-
-extension Reactive where Base: UIView {
-
-    public var imageURL: Binder<URL?> {
-        return self.imageURL()
-    }
-
-    public func imageURL(withOptions options: KingfisherOptionsInfo? = []) -> Binder<URL?> {
-        return Binder(self.base, binding: { (view, url) in
-            if let url = url {
-                KingfisherManager.shared.retrieveImage(with: url, options: options, progressBlock: nil, completionHandler: { (image, error, cache, url) in
-                    view.backgroundColor = UIColor.averageColor(fromImage: image)
-                })
-            }
-        })
-    }
-}

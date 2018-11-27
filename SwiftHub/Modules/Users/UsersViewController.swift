@@ -45,7 +45,7 @@ class UsersViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.blurStyle }, to: headerView.rx.blurStyle)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
 
         stackView.insertArrangedSubview(headerView, at: 0)
@@ -78,8 +78,6 @@ class UsersViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
-
-        output.imageUrl.drive(headerView.rx.imageURL).disposed(by: rx.disposeBag)
 
         output.items.asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: UserCell.self)) { tableView, viewModel, cell in

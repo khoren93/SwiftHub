@@ -106,7 +106,7 @@ class UserViewController: TableViewController {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.blurStyle }, to: headerView.rx.blurStyle)
+            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
             .bind({ $0.text }, to: usernameLabel.rx.textColor)
             .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
@@ -182,8 +182,6 @@ class UserViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
-
-        output.imageUrl.drive(headerView.rx.imageURL).disposed(by: rx.disposeBag)
 
         output.repositoriesCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.userRepositoriesButtonTitle.key.localized()
