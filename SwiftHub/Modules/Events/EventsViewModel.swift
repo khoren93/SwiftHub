@@ -56,6 +56,8 @@ class EventsViewModel: ViewModel, ViewModelType {
         let userSelected = PublishSubject<User>()
         let elements = BehaviorRelay<[EventCellViewModel]>(value: [])
 
+        input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
+
         input.headerRefresh.flatMapLatest({ () -> Observable<[EventCellViewModel]> in
             self.page = 1
             return self.request()
@@ -111,8 +113,6 @@ class EventsViewModel: ViewModel, ViewModelType {
             case .user(let user): return user.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
-
-        input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
         let hidesSegment = mode.map { (mode) -> Bool in
             switch mode {
