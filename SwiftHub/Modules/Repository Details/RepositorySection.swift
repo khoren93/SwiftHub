@@ -19,6 +19,7 @@ enum RepositorySectionItem {
     case createdItem(viewModel: RepositoryDetailCellViewModel)
     case updatedItem(viewModel: RepositoryDetailCellViewModel)
 
+    case homepageItem(viewModel: RepositoryDetailCellViewModel)
     case issuesItem(viewModel: RepositoryDetailCellViewModel)
     case commitsItem(viewModel: RepositoryDetailCellViewModel)
     case pullRequestsItem(viewModel: RepositoryDetailCellViewModel)

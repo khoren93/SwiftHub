@@ -61,6 +61,7 @@
 "Repository.SizeCell.Title" = "Size";
 "Repository.CreatedCell.Title" = "Created";
 "Repository.UpdatedCell.Title" = "Updated";
+"Repository.HomepageCell.Title" = "Homepage";
 "Repository.IssuesCell.Title" = "Issues";
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "Pull Requests";

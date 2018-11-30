@@ -120,6 +120,7 @@ class RepositoryViewController: TableViewController {
                  .sizeItem(let viewModel),
                  .createdItem(let viewModel),
                  .updatedItem(let viewModel),
+                 .homepageItem(let viewModel),
                  .issuesItem(let viewModel),
                  .commitsItem(let viewModel),
                  .pullRequestsItem(let viewModel),
@@ -141,6 +142,10 @@ class RepositoryViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .homepageItem:
+                if let url = self?.viewModel.repository.value.homepage?.url {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
             case .issuesItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? IssuesViewModel {
                     self?.navigator.show(segue: .issues(viewModel: viewModel), sender: self)

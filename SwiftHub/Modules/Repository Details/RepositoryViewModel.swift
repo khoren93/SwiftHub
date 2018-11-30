@@ -143,6 +143,15 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 items.append(RepositorySectionItem.updatedItem(viewModel: updatedCellViewModel))
             }
 
+            // Homepage
+            if let homepage = repository.homepage, homepage.isNotEmpty {
+                let homepageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryHomepageCellTitle.key.localized(),
+                                                                         detail: homepage,
+                                                                         image: R.image.icon_cell_link(),
+                                                                         hidesDisclosure: false)
+                items.append(RepositorySectionItem.homepageItem(viewModel: homepageCellViewModel))
+            }
+
             // Issues
             if let issues = repository.openIssuesCount?.string {
                 let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),

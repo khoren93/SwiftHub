@@ -61,6 +61,7 @@
 "Repository.SizeCell.Title" = "Չափը";
 "Repository.CreatedCell.Title" = "Ստեղծվել է";
 "Repository.UpdatedCell.Title" = "Թարմացվել է";
+"Repository.HomepageCell.Title" = "Կայք";
 "Repository.IssuesCell.Title" = "Խնդիրներ";
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";

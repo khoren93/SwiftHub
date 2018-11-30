@@ -15,6 +15,8 @@ class UserCellViewModel {
     let title: Driver<String>
     let detail: Driver<String>
     let imageUrl: Driver<URL?>
+    let badge: Driver<UIImage?>
+    let badgeColor: Driver<UIColor>
 
     let user: User
 
@@ -23,6 +25,8 @@ class UserCellViewModel {
         title = Driver.just("\(user.login ?? "")")
         detail = Driver.just("\(user.name ?? "")")
         imageUrl = Driver.just(user.avatarUrl?.url)
+        badge = Driver.just(R.image.icon_cell_badge_user()?.template)
+        badgeColor = Driver.just(UIColor.flatGreenDark)
     }
 }
 
