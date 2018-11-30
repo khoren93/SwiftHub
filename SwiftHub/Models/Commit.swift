@@ -21,6 +21,8 @@ struct Commit: Mappable {
 //    var parents: [Tree]?
     var sha: String?
     var stats: Stat?
+    var author: User?
+    var committer: User?
 
     init?(map: Map) {}
 
@@ -34,14 +36,16 @@ struct Commit: Mappable {
 //        parents <- map["parents"]
         sha <- map["sha"]
         stats <- map["stats"]
+        author <- map["author"]
+        committer <- map["committer"]
     }
 }
 
 struct CommitInfo: Mappable {
 
-    var author: User?
+    var author: Committer?
     var commentCount: Int?
-    var committer: User?
+    var committer: Committer?
     var message: String?
     var url: String?
     var verification: Verification?

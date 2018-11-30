@@ -165,7 +165,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
                                                                           detail: "",
                                                                           image: R.image.icon_cell_git_commit(),
-                                                                          hidesDisclosure: true)
+                                                                          hidesDisclosure: false)
             items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
 
             // Pull Requests
@@ -189,7 +189,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.readmeItem(viewModel: readmeCellViewModel))
 
-            // Readme
+            // Source
             let sourceCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySourceCellTitle.key.localized(),
                                                                     detail: "",
                                                                     image: R.image.icon_cell_source(),
@@ -224,7 +224,10 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let viewModel = IssuesViewModel(repository: repository, provider: provider)
             return viewModel
 
-        case .commitsItem: return nil
+        case .commitsItem:
+            let viewModel = CommitsViewModel(repository: repository, provider: provider)
+            return viewModel
+
         case .pullRequestsItem: return nil
 
         case .eventsItem:
