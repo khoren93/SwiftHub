@@ -30,7 +30,7 @@ protocol SwiftHubAPI {
     func commit(fullName: String, sha: String) -> Observable<Commit>
     func branches(fullName: String, page: Int) -> Observable<[Branch]>
     func branch(fullName: String, name: String) -> Observable<Branch>
-    func pullRequests(fullName: String, page: Int) -> Observable<[PullRequest]>
+    func pullRequests(fullName: String, state: String, page: Int) -> Observable<[PullRequest]>
     func pullRequest(fullName: String, number: Int) -> Observable<PullRequest>
 
     func searchUsers(query: String) -> Observable<UserSearch>
@@ -128,8 +128,8 @@ extension Api {
             .observeOn(MainScheduler.instance)
     }
 
-    func pullRequests(fullName: String, page: Int) -> Observable<[PullRequest]> {
-        return provider.request(.pullRequests(fullName: fullName, page: page))
+    func pullRequests(fullName: String, state: String, page: Int) -> Observable<[PullRequest]> {
+        return provider.request(.pullRequests(fullName: fullName, state: state, page: page))
             .mapArray(PullRequest.self)
             .observeOn(MainScheduler.instance)
     }

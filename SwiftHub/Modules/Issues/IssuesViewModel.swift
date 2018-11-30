@@ -43,6 +43,8 @@ class IssuesViewModel: ViewModel, ViewModelType {
         let userSelected = PublishSubject<User>()
         let elements = BehaviorRelay<[IssueCellViewModel]>(value: [])
 
+        input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
+
         input.headerRefresh.flatMapLatest({ () -> Observable<[IssueCellViewModel]> in
             self.page = 1
             return self.request()
@@ -91,8 +93,6 @@ class IssuesViewModel: ViewModel, ViewModelType {
         let imageUrl = repository.map({ (repository) -> URL? in
             repository.owner?.avatarUrl?.url
         }).asDriver(onErrorJustReturn: nil)
-
-        input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
         let issueSelected = input.selection.map { (cellViewModel) -> URL? in
             cellViewModel.issue.htmlUrl?.url

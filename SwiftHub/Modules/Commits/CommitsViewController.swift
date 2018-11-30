@@ -51,6 +51,12 @@ class CommitsViewController: TableViewController {
                 cell.bind(to: viewModel)
             }.disposed(by: rx.disposeBag)
 
+        output.commitSelected.drive(onNext: { [weak self] (url) in
+            if let url  = url {
+                self?.navigator.show(segue: .webController(url), sender: self)
+            }
+        }).disposed(by: rx.disposeBag)
+
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)

@@ -31,6 +31,11 @@
 		07241D1821B1768E00F800BD /* CommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D1621B1768E00F800BD /* CommitCell.swift */; };
 		07241D1921B1768E00F800BD /* CommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07241D1721B1768E00F800BD /* CommitCell.xib */; };
 		07241D1B21B183AE00F800BD /* Committer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D1A21B183AE00F800BD /* Committer.swift */; };
+		07241D1D21B18A6000F800BD /* PullRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D1C21B18A6000F800BD /* PullRequestsViewModel.swift */; };
+		07241D2021B18A7400F800BD /* PullRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D1E21B18A7400F800BD /* PullRequestCell.swift */; };
+		07241D2121B18A7400F800BD /* PullRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07241D1F21B18A7400F800BD /* PullRequestCell.xib */; };
+		07241D2321B18A8600F800BD /* PullRequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */; };
+		07241D2521B18AA000F800BD /* PullRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2421B18AA000F800BD /* PullRequestsViewController.swift */; };
 		07320453214128ED00C1E39F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07320452214128ED00C1E39F /* Event.swift */; };
 		073204552141377D00C1E39F /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204542141377D00C1E39F /* Events.json */; };
 		073204572141379500C1E39F /* EventsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204562141379500C1E39F /* EventsRepository.json */; };
@@ -238,6 +243,11 @@
 		07241D1621B1768E00F800BD /* CommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitCell.swift; sourceTree = "<group>"; };
 		07241D1721B1768E00F800BD /* CommitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommitCell.xib; sourceTree = "<group>"; };
 		07241D1A21B183AE00F800BD /* Committer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Committer.swift; sourceTree = "<group>"; };
+		07241D1C21B18A6000F800BD /* PullRequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewModel.swift; sourceTree = "<group>"; };
+		07241D1E21B18A7400F800BD /* PullRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestCell.swift; sourceTree = "<group>"; };
+		07241D1F21B18A7400F800BD /* PullRequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PullRequestCell.xib; sourceTree = "<group>"; };
+		07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestCellViewModel.swift; sourceTree = "<group>"; };
+		07241D2421B18AA000F800BD /* PullRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewController.swift; sourceTree = "<group>"; };
 		07320452214128ED00C1E39F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		073204542141377D00C1E39F /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
 		073204562141379500C1E39F /* EventsRepository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsRepository.json; sourceTree = "<group>"; };
@@ -490,6 +500,11 @@
 		07241D0321B173C500F800BD /* Pull Requests */ = {
 			isa = PBXGroup;
 			children = (
+				07241D1E21B18A7400F800BD /* PullRequestCell.swift */,
+				07241D1F21B18A7400F800BD /* PullRequestCell.xib */,
+				07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */,
+				07241D2421B18AA000F800BD /* PullRequestsViewController.swift */,
+				07241D1C21B18A6000F800BD /* PullRequestsViewModel.swift */,
 			);
 			path = "Pull Requests";
 			sourceTree = "<group>";
@@ -1164,6 +1179,7 @@
 				A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */,
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
+				07241D2121B18A7400F800BD /* PullRequestCell.xib in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
 				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
@@ -1416,6 +1432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07241D2021B18A7400F800BD /* PullRequestCell.swift in Sources */,
 				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
 				07B183832172268C007CC23B /* UserDetailCell.swift in Sources */,
 				07E1B2FB21A4400900F6EAE3 /* Commit.swift in Sources */,
@@ -1432,6 +1449,7 @@
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,
 				07B2C1F6213ADF9000FE7AC0 /* AuthManager.swift in Sources */,
 				07E1B2F521A4356600F6EAE3 /* PullRequest.swift in Sources */,
+				07241D2321B18A8600F800BD /* PullRequestCellViewModel.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,
 				C762C66B1E1D559000C09EBD /* TextField.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
@@ -1447,6 +1465,7 @@
 				07E1B30021A44D7100F6EAE3 /* IssuesViewModel.swift in Sources */,
 				A09DE8CC20E7BEBD00F6F2BF /* DefaultTableViewCell.swift in Sources */,
 				07D46E6521922278008E5369 /* Foundation+SwiftHub.swift in Sources */,
+				07241D2521B18AA000F800BD /* PullRequestsViewController.swift in Sources */,
 				A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */,
 				A09DE8C620E7B84D00F6F2BF /* UserCell.swift in Sources */,
 				07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */,
@@ -1523,6 +1542,7 @@
 				A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
 				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
+				07241D1D21B18A6000F800BD /* PullRequestsViewModel.swift in Sources */,
 				07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,

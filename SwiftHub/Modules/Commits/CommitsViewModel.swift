@@ -21,6 +21,7 @@ class CommitsViewModel: ViewModel, ViewModelType {
     struct Output {
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[CommitCellViewModel]>
+        let commitSelected: Driver<URL?>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -70,7 +71,12 @@ class CommitsViewModel: ViewModel, ViewModelType {
             return repository.fullName ?? ""
         }).asDriver(onErrorJustReturn: "")
 
+        let commitSelected = input.selection.map { (cellViewModel) -> URL? in
+            cellViewModel.commit.htmlUrl?.url
+        }
+
         return Output(navigationTitle: navigationTitle,
-                      items: elements)
+                      items: elements,
+                      commitSelected: commitSelected)
     }
 }

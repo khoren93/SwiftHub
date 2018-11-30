@@ -31,7 +31,7 @@ enum GithubAPI {
     case commit(fullName: String, sha: String)
     case branches(fullName: String, page: Int)
     case branch(fullName: String, name: String)
-    case pullRequests(fullName: String, page: Int)
+    case pullRequests(fullName: String, state: String, page: Int)
     case pullRequest(fullName: String, number: Int)
 
     case searchUsers(query: String)
@@ -75,7 +75,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .commit(let fullName, let sha): return "/repos/\(fullName)/commits/\(sha)"
         case .branches(let fullName, _): return "/repos/\(fullName)/branches"
         case .branch(let fullName, let name): return "/repos/\(fullName)/branches/\(name)"
-        case .pullRequests(let fullName, _): return "/repos/\(fullName)/pulls"
+        case .pullRequests(let fullName, _, _): return "/repos/\(fullName)/pulls"
         case .pullRequest(let fullName, let number): return "/repos/\(fullName)/pulls/\(number)"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
@@ -131,7 +131,8 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["page"] = page
         case .branches(_, let page):
             params["page"] = page
-        case .pullRequests(_, let page):
+        case .pullRequests(_, let state, let page):
+            params["state"] = state
             params["page"] = page
         case .searchUsers(let query):
             params["q"] = query

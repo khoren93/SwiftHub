@@ -31,6 +31,7 @@ class Navigator {
         case repositoryDetails(viewModel: RepositoryViewModel)
         case contents(viewModel: ContentsViewModel)
         case commits(viewModel: CommitsViewModel)
+        case pullRequests(viewModel: PullRequestsViewModel)
         case events(viewModel: EventsViewModel)
         case issues(viewModel: IssuesViewModel)
         case theme(viewModel: ThemeViewModel)
@@ -98,6 +99,11 @@ class Navigator {
 
         case .commits(let viewModel):
             let vc = R.storyboard.main.commitsViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .pullRequests(let viewModel):
+            let vc = R.storyboard.main.pullRequestsViewController()!
             vc.viewModel = viewModel
             return vc
 

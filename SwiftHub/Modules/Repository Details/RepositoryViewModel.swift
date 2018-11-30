@@ -172,7 +172,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
                                                                           detail: "",
                                                                           image: R.image.icon_cell_git_pull_request(),
-                                                                          hidesDisclosure: true)
+                                                                          hidesDisclosure: false)
             items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
 
             // Events
@@ -218,27 +218,26 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     }
 
     func viewModel(for item: RepositorySectionItem) -> ViewModel? {
-        let repository = self.repository.value
         switch item {
         case .issuesItem:
-            let viewModel = IssuesViewModel(repository: repository, provider: provider)
+            let viewModel = IssuesViewModel(repository: repository.value, provider: provider)
             return viewModel
 
         case .commitsItem:
-            let viewModel = CommitsViewModel(repository: repository, provider: provider)
+            let viewModel = CommitsViewModel(repository: repository.value, provider: provider)
             return viewModel
 
-        case .pullRequestsItem: return nil
+        case .pullRequestsItem:
+            let viewModel = PullRequestsViewModel(repository: repository.value, provider: provider)
+            return viewModel
 
         case .eventsItem:
-            let mode = EventsMode.repository(repository: repository)
+            let mode = EventsMode.repository(repository: repository.value)
             let viewModel = EventsViewModel(mode: mode, provider: provider)
             return viewModel
 
-        case .readmeItem: return nil
-
         case .sourceItem:
-            let viewModel = ContentsViewModel(repository: repository, content: nil, ref: nil, provider: provider)
+            let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: nil, provider: provider)
             return viewModel
 
         default: return nil

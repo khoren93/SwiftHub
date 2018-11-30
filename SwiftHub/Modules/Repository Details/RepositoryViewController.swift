@@ -154,6 +154,10 @@ class RepositoryViewController: TableViewController {
                 if let viewModel = self?.viewModel.viewModel(for: item) as? CommitsViewModel {
                     self?.navigator.show(segue: .commits(viewModel: viewModel), sender: self)
                 }
+            case .pullRequestsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? PullRequestsViewModel {
+                    self?.navigator.show(segue: .pullRequests(viewModel: viewModel), sender: self)
+                }
             case .eventsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
