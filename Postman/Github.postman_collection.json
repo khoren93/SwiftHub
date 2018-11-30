@@ -159,6 +159,144 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "Commits",
+					"item": [
+						{
+							"name": "List commits on a repository",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/commits?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"commits"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+							},
+							"response": []
+						},
+						{
+							"name": "Get a single commit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/commits/:sha",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"commits",
+										":sha"
+									],
+									"variable": [
+										{
+											"key": "sha",
+											"value": "e2dba47c808cd2dc1a5fb1a26db755a1fccb3415"
+										}
+									]
+								},
+								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Branches",
+					"item": [
+						{
+							"name": "List branches",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/branches?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"branches"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+							},
+							"response": []
+						},
+						{
+							"name": "Get branch",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/branches/:branch",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"branches",
+										":branch"
+									],
+									"variable": [
+										{
+											"key": "branch",
+											"value": "3.1.2"
+										}
+									]
+								},
+								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "List your repositories",
 					"request": {
 						"method": "GET",
@@ -1265,6 +1403,72 @@
 							]
 						},
 						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pull Requests",
+			"item": [
+				{
+					"name": "List pull requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/pulls?state=all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"pulls"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a single pull request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/pulls/:number",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"repos",
+								"{{owner}}",
+								"{{repo}}",
+								"pulls",
+								":number"
+							],
+							"variable": [
+								{
+									"key": "number",
+									"value": "6021"
+								}
+							]
+						}
 					},
 					"response": []
 				}
