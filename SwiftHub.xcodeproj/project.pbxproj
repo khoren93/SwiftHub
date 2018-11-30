@@ -19,6 +19,12 @@
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
+		07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0421B1740000F800BD /* RepositoryCommits.json */; };
+		07241D0721B1741800F800BD /* RepositoryCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0621B1741800F800BD /* RepositoryCommit.json */; };
+		07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0821B1742700F800BD /* RepositoryBranches.json */; };
+		07241D0B21B1743900F800BD /* RepositoryBranch.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0A21B1743900F800BD /* RepositoryBranch.json */; };
+		07241D0D21B1744900F800BD /* RepositoryPullRequests.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0C21B1744900F800BD /* RepositoryPullRequests.json */; };
+		07241D0F21B1745D00F800BD /* RepositoryPullRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */; };
 		07320453214128ED00C1E39F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07320452214128ED00C1E39F /* Event.swift */; };
 		073204552141377D00C1E39F /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204542141377D00C1E39F /* Events.json */; };
 		073204572141379500C1E39F /* EventsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204562141379500C1E39F /* EventsRepository.json */; };
@@ -214,6 +220,12 @@
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		07241D0421B1740000F800BD /* RepositoryCommits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommits.json; sourceTree = "<group>"; };
+		07241D0621B1741800F800BD /* RepositoryCommit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommit.json; sourceTree = "<group>"; };
+		07241D0821B1742700F800BD /* RepositoryBranches.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryBranches.json; sourceTree = "<group>"; };
+		07241D0A21B1743900F800BD /* RepositoryBranch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryBranch.json; sourceTree = "<group>"; };
+		07241D0C21B1744900F800BD /* RepositoryPullRequests.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryPullRequests.json; sourceTree = "<group>"; };
+		07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryPullRequest.json; sourceTree = "<group>"; };
 		07320452214128ED00C1E39F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		073204542141377D00C1E39F /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
 		073204562141379500C1E39F /* EventsRepository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsRepository.json; sourceTree = "<group>"; };
@@ -444,6 +456,27 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		07241D0121B173A400F800BD /* Commits */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Commits;
+			sourceTree = "<group>";
+		};
+		07241D0221B173BB00F800BD /* Branches */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Branches;
+			sourceTree = "<group>";
+		};
+		07241D0321B173C500F800BD /* Pull Requests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Pull Requests";
+			sourceTree = "<group>";
+		};
 		0732045C2141395200C1E39F /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,14 +621,17 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				07241D0221B173BB00F800BD /* Branches */,
+				07241D0121B173A400F800BD /* Commits */,
 				07D46E5821921C01008E5369 /* Contents */,
 				0732045C2141395200C1E39F /* Events */,
+				07E1B2FE21A44D1700F6EAE3 /* Issues */,
 				A0ED264620F76A45004E8137 /* Login */,
 				07FC33751FFFD47600D53888 /* Main */,
 				A034AF7121528087004C310B /* Notifications */,
+				07241D0321B173C500F800BD /* Pull Requests */,
 				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
 				07DFF6D820E90860004DAA68 /* Repository Details */,
-				07E1B2FE21A44D1700F6EAE3 /* Issues */,
 				A09DE8B320E7AD0300F6F2BF /* Search */,
 				070FF84320F2846F0070F5E8 /* Settings */,
 				0757B52C21669DAC00C04163 /* Settings Language */,
@@ -734,9 +770,15 @@
 				070FF84120F225200070F5E8 /* Organization.json */,
 				07B2C1F8213AF74B00FE7AC0 /* Profile.json */,
 				07DFF6D220E90502004DAA68 /* Repository.json */,
+				07241D0A21B1743900F800BD /* RepositoryBranch.json */,
+				07241D0821B1742700F800BD /* RepositoryBranches.json */,
+				07241D0621B1741800F800BD /* RepositoryCommit.json */,
+				07241D0421B1740000F800BD /* RepositoryCommits.json */,
 				07D46E5621920EDF008E5369 /* RepositoryContents.json */,
 				A0E2B0962108B024000DA282 /* RepositoryForks.json */,
 				07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */,
+				07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */,
+				07241D0C21B1744900F800BD /* RepositoryPullRequests.json */,
 				07D46E5421920E8D008E5369 /* RepositoryReadme.json */,
 				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
 				A0E2B0942108B00D000DA282 /* RepositoryStargazers.json */,
@@ -1111,6 +1153,7 @@
 				073204552141377D00C1E39F /* Events.json in Resources */,
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
+				07241D0B21B1743900F800BD /* RepositoryBranch.json in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
 				07E1B30421A44D8D00F6EAE3 /* IssueCell.xib in Resources */,
 				0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */,
@@ -1120,6 +1163,7 @@
 				A034AF79215280EF004C310B /* NotificationCell.xib in Resources */,
 				07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */,
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
+				07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
@@ -1130,7 +1174,9 @@
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07B183842172268C007CC23B /* UserDetailCell.xib in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
+				07241D0F21B1745D00F800BD /* RepositoryPullRequest.json in Resources */,
 				A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */,
+				07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
 				A09499601E1D1CB700EFDE29 /* LaunchScreen.storyboard in Resources */,
 				C762C6251E1D417C00C09EBD /* Assets.xcassets in Resources */,
@@ -1140,7 +1186,9 @@
 				07E1B30A21A4538B00F6EAE3 /* RepositoryIssues.json in Resources */,
 				A034AF8121529194004C310B /* NotificationsRepository.json in Resources */,
 				073204572141379500C1E39F /* EventsRepository.json in Resources */,
+				07241D0721B1741800F800BD /* RepositoryCommit.json in Resources */,
 				A034AF7F215287B2004C310B /* Notifications.json in Resources */,
+				07241D0D21B1744900F800BD /* RepositoryPullRequests.json in Resources */,
 				07320459214137A800C1E39F /* EventsUserReceived.json in Resources */,
 				0732046521413B5200C1E39F /* EventCell.xib in Resources */,
 				070FF84220F225200070F5E8 /* Organization.json in Resources */,

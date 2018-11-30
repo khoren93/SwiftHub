@@ -1,0 +1,98 @@
+{
+    "sha": "e2dba47c808cd2dc1a5fb1a26db755a1fccb3415",
+    "node_id": "MDY6Q29tbWl0NDA0NDg5MTplMmRiYTQ3YzgwOGNkMmRjMWE1ZmIxYTI2ZGI3NTVhMWZjY2IzNDE1",
+    "commit": {
+        "author": {
+            "name": "Brian Munkholm",
+            "email": "bmunkholm@users.noreply.github.com",
+            "date": "2018-11-27T10:26:38Z"
+        },
+        "committer": {
+            "name": "GitHub",
+            "email": "noreply@github.com",
+            "date": "2018-11-27T10:26:38Z"
+        },
+        "message": "Update CHANGELOG.md",
+        "tree": {
+            "sha": "8a06f62fc3dc1fa4f962137572ba541b3ad070b8",
+            "url": "https://api.github.com/repos/realm/realm-cocoa/git/trees/8a06f62fc3dc1fa4f962137572ba541b3ad070b8"
+        },
+        "url": "https://api.github.com/repos/realm/realm-cocoa/git/commits/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415",
+        "comment_count": 0,
+        "verification": {
+            "verified": true,
+            "reason": "valid",
+            "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJb/RveCRBK7hj4Ov3rIwAAdHIIAIFaZkqT3JUJiQNONL5VFPF6\nL2DT9i5v0t2H1n05s8hAg6hWgrDTYSjkbD+byh1Pcx/rZtpXWsWGXt94G9BbUh0H\n0JZLW5apjqW+JNWgvZh5zw4IJ6i/h9Xkq7MwR2D3GFeVo6sTVfYmwsZFjm6PgdkA\nWMAbMBCmJQMBTWZmkQnjCK0Dgv3Vhq/54rV/L2M66qIKTPjHJlvMGoecVgZJoeKl\nnjFJRwgvOTJU5m+dp9lj+rNzQjYYAEWcaICONDhC5dwnc4rP0xDNTHXA+hgbYFwV\nJ3VgV8DDMJJI2+MTgoX0CeXBvYZaOi2QaRHCKm/DzBQedKEZtqqljUCOiT9/sVc=\n=DFMs\n-----END PGP SIGNATURE-----\n",
+            "payload": "tree 8a06f62fc3dc1fa4f962137572ba541b3ad070b8\nparent 02703535dcb8c002c8af751086df867188adfeeb\nauthor Brian Munkholm <bmunkholm@users.noreply.github.com> 1543314398 +0100\ncommitter GitHub <noreply@github.com> 1543314398 +0100\n\nUpdate CHANGELOG.md"
+        }
+    },
+    "url": "https://api.github.com/repos/realm/realm-cocoa/commits/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415",
+    "html_url": "https://github.com/realm/realm-cocoa/commit/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415",
+    "comments_url": "https://api.github.com/repos/realm/realm-cocoa/commits/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415/comments",
+    "author": {
+        "login": "bmunkholm",
+        "id": 1215687,
+        "node_id": "MDQ6VXNlcjEyMTU2ODc=",
+        "avatar_url": "https://avatars2.githubusercontent.com/u/1215687?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/bmunkholm",
+        "html_url": "https://github.com/bmunkholm",
+        "followers_url": "https://api.github.com/users/bmunkholm/followers",
+        "following_url": "https://api.github.com/users/bmunkholm/following{/other_user}",
+        "gists_url": "https://api.github.com/users/bmunkholm/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/bmunkholm/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/bmunkholm/subscriptions",
+        "organizations_url": "https://api.github.com/users/bmunkholm/orgs",
+        "repos_url": "https://api.github.com/users/bmunkholm/repos",
+        "events_url": "https://api.github.com/users/bmunkholm/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/bmunkholm/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/19864447?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/web-flow",
+        "html_url": "https://github.com/web-flow",
+        "followers_url": "https://api.github.com/users/web-flow/followers",
+        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+        "organizations_url": "https://api.github.com/users/web-flow/orgs",
+        "repos_url": "https://api.github.com/users/web-flow/repos",
+        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/web-flow/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "parents": [
+        {
+            "sha": "02703535dcb8c002c8af751086df867188adfeeb",
+            "url": "https://api.github.com/repos/realm/realm-cocoa/commits/02703535dcb8c002c8af751086df867188adfeeb",
+            "html_url": "https://github.com/realm/realm-cocoa/commit/02703535dcb8c002c8af751086df867188adfeeb"
+        }
+    ],
+    "stats": {
+        "total": 24,
+        "additions": 24,
+        "deletions": 0
+    },
+    "files": [
+        {
+            "sha": "e08784046534766a6914127085a8ce11180b2019",
+            "filename": "CHANGELOG.md",
+            "status": "modified",
+            "additions": 24,
+            "deletions": 0,
+            "changes": 24,
+            "blob_url": "https://github.com/realm/realm-cocoa/blob/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415/CHANGELOG.md",
+            "raw_url": "https://github.com/realm/realm-cocoa/raw/e2dba47c808cd2dc1a5fb1a26db755a1fccb3415/CHANGELOG.md",
+            "contents_url": "https://api.github.com/repos/realm/realm-cocoa/contents/CHANGELOG.md?ref=e2dba47c808cd2dc1a5fb1a26db755a1fccb3415",
+            "patch": "@@ -11,11 +11,20 @@\n   (PR: https://github.com/realm/realm-cocoa/pull/6007).\n * Add Xcode 10.1 binary to the prebuilt package.\n \n+### Fixed\n+\n+* None.\n+\n ### Compatibility\n \n * File format: Generates Realms with format v9 (Reads and upgrades all previous formats)\n * Realm Object Server: 3.11.0 or later.\n \n+### Internal\n+\n+* None.\n+\n+\n 3.11.2 Release notes (2018-11-15)\n =============================================================\n \n@@ -42,9 +51,18 @@\n * File format: Generates Realms with format v9 (Reads and upgrades all previous formats)\n * Realm Object Server: 3.11.0 or later.\n \n+### Internal\n+\n+* None.\n+\n+\n 3.11.1 Release notes (2018-10-19)\n =============================================================\n \n+### Enhancements\n+\n+* None.\n+\n ### Fixed\n \n * Fix `SyncUser.requestEmailConfirmation` not triggering the email confirmation\n@@ -60,6 +78,11 @@\n * File format: Generates Realms with format v9 (Reads and upgrades all previous formats)\n * Realm Object Server: 3.11.0 or later.\n \n+### Internal\n+\n+* None.\n+\n+\n 3.11.0 Release notes (2018-10-04)\n =============================================================\n \n@@ -89,6 +112,7 @@\n ### Internal\n * Update to Sync 3.12.2.\n \n+\n 3.10.0 Release notes (2018-09-19)\n =============================================================\n "
+        }
+    ]
+}

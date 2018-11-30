@@ -1,0 +1,95 @@
+{
+    "name": "3.1.2",
+    "commit": {
+        "sha": "a2ae219ad58328649b0fe0ed622d6bc6a241b9f2",
+        "node_id": "MDY6Q29tbWl0NDA0NDg5MTphMmFlMjE5YWQ1ODMyODY0OWIwZmUwZWQ2MjJkNmJjNmEyNDFiOWYy",
+        "commit": {
+            "author": {
+                "name": "Thomas Goyne",
+                "email": "tg@realm.io",
+                "date": "2018-03-26T18:00:00Z"
+            },
+            "committer": {
+                "name": "Thomas Goyne",
+                "email": "tg@realm.io",
+                "date": "2018-03-26T18:38:36Z"
+            },
+            "message": "Update to sync 2.2.15",
+            "tree": {
+                "sha": "0fbb1d109c304e0c245241c2cd54b3d2a8c917e9",
+                "url": "https://api.github.com/repos/realm/realm-cocoa/git/trees/0fbb1d109c304e0c245241c2cd54b3d2a8c917e9"
+            },
+            "url": "https://api.github.com/repos/realm/realm-cocoa/git/commits/a2ae219ad58328649b0fe0ed622d6bc6a241b9f2",
+            "comment_count": 0,
+            "verification": {
+                "verified": false,
+                "reason": "unsigned",
+                "signature": null,
+                "payload": null
+            }
+        },
+        "url": "https://api.github.com/repos/realm/realm-cocoa/commits/a2ae219ad58328649b0fe0ed622d6bc6a241b9f2",
+        "html_url": "https://github.com/realm/realm-cocoa/commit/a2ae219ad58328649b0fe0ed622d6bc6a241b9f2",
+        "comments_url": "https://api.github.com/repos/realm/realm-cocoa/commits/a2ae219ad58328649b0fe0ed622d6bc6a241b9f2/comments",
+        "author": {
+            "login": "tgoyne",
+            "id": 408944,
+            "node_id": "MDQ6VXNlcjQwODk0NA==",
+            "avatar_url": "https://avatars1.githubusercontent.com/u/408944?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/tgoyne",
+            "html_url": "https://github.com/tgoyne",
+            "followers_url": "https://api.github.com/users/tgoyne/followers",
+            "following_url": "https://api.github.com/users/tgoyne/following{/other_user}",
+            "gists_url": "https://api.github.com/users/tgoyne/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/tgoyne/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/tgoyne/subscriptions",
+            "organizations_url": "https://api.github.com/users/tgoyne/orgs",
+            "repos_url": "https://api.github.com/users/tgoyne/repos",
+            "events_url": "https://api.github.com/users/tgoyne/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/tgoyne/received_events",
+            "type": "User",
+            "site_admin": false
+        },
+        "committer": {
+            "login": "tgoyne",
+            "id": 408944,
+            "node_id": "MDQ6VXNlcjQwODk0NA==",
+            "avatar_url": "https://avatars1.githubusercontent.com/u/408944?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/tgoyne",
+            "html_url": "https://github.com/tgoyne",
+            "followers_url": "https://api.github.com/users/tgoyne/followers",
+            "following_url": "https://api.github.com/users/tgoyne/following{/other_user}",
+            "gists_url": "https://api.github.com/users/tgoyne/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/tgoyne/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/tgoyne/subscriptions",
+            "organizations_url": "https://api.github.com/users/tgoyne/orgs",
+            "repos_url": "https://api.github.com/users/tgoyne/repos",
+            "events_url": "https://api.github.com/users/tgoyne/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/tgoyne/received_events",
+            "type": "User",
+            "site_admin": false
+        },
+        "parents": [
+            {
+                "sha": "2adf3cb79db07b986c5363c9e20269b47362def9",
+                "url": "https://api.github.com/repos/realm/realm-cocoa/commits/2adf3cb79db07b986c5363c9e20269b47362def9",
+                "html_url": "https://github.com/realm/realm-cocoa/commit/2adf3cb79db07b986c5363c9e20269b47362def9"
+            }
+        ]
+    },
+    "_links": {
+        "self": "https://api.github.com/repos/realm/realm-cocoa/branches/3.1.2",
+        "html": "https://github.com/realm/realm-cocoa/tree/3.1.2"
+    },
+    "protected": false,
+    "protection": {
+        "enabled": false,
+        "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": []
+        }
+    },
+    "protection_url": "https://api.github.com/repos/realm/realm-cocoa/branches/3.1.2/protection"
+}

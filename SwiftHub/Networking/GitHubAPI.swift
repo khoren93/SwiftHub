@@ -27,6 +27,12 @@ enum GithubAPI {
     case contents(fullName: String, path: String, ref: String?)
 
     case repositoryIssues(fullName: String, state: String, page: Int)
+    case commits(fullName: String, page: Int)
+    case commit(fullName: String, sha: String)
+    case branches(fullName: String, page: Int)
+    case branch(fullName: String, name: String)
+    case pullRequests(fullName: String, page: Int)
+    case pullRequest(fullName: String, number: Int)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -65,6 +71,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .readme(let fullName, _): return "/repos/\(fullName)/readme"
         case .contents(let fullName, let path, _): return "/repos/\(fullName)/contents/\(path)"
         case .repositoryIssues(let fullName, _, _): return "/repos/\(fullName)/issues"
+        case .commits(let fullName, _): return "/repos/\(fullName)/commits"
+        case .commit(let fullName, let sha): return "/repos/\(fullName)/commits/\(sha)"
+        case .branches(let fullName, _): return "/repos/\(fullName)/branches"
+        case .branch(let fullName, let name): return "/repos/\(fullName)/branches/\(name)"
+        case .pullRequests(let fullName, _): return "/repos/\(fullName)/pulls"
+        case .pullRequest(let fullName, let number): return "/repos/\(fullName)/pulls/\(number)"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -115,6 +127,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .repositoryIssues(_, let state, let page):
             params["state"] = state
             params["page"] = page
+        case .commits(_, let page):
+            params["page"] = page
+        case .branches(_, let page):
+            params["page"] = page
+        case .pullRequests(_, let page):
+            params["page"] = page
         case .searchUsers(let query):
             params["q"] = query
         case .userRepositories(_, let page):
@@ -157,6 +175,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .readme: return stubbedResponse("RepositoryReadme")
         case .contents: return stubbedResponse("RepositoryContents")
         case .repositoryIssues: return stubbedResponse("RepositoryIssues")
+        case .commits: return stubbedResponse("RepositoryCommits")
+        case .commit: return stubbedResponse("RepositoryCommit")
+        case .branches: return stubbedResponse("RepositoryBranches")
+        case .branch: return stubbedResponse("RepositoryBranch")
+        case .pullRequests: return stubbedResponse("RepositoryPullRequests")
+        case .pullRequest: return stubbedResponse("RepositoryPullRequest")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")

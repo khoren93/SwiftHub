@@ -26,6 +26,12 @@ protocol SwiftHubAPI {
     func readme(fullName: String, ref: String?) -> Observable<Content>
     func contents(fullName: String, path: String, ref: String?) -> Observable<[Content]>
     func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]>
+    func commits(fullName: String, page: Int) -> Observable<[Commit]>
+    func commit(fullName: String, sha: String) -> Observable<Commit>
+    func branches(fullName: String, page: Int) -> Observable<[Branch]>
+    func branch(fullName: String, name: String) -> Observable<Branch>
+    func pullRequests(fullName: String, page: Int) -> Observable<[PullRequest]>
+    func pullRequest(fullName: String, number: Int) -> Observable<PullRequest>
 
     func searchUsers(query: String) -> Observable<UserSearch>
     func user(owner: String) -> Observable<User>
@@ -95,6 +101,42 @@ extension Api {
     func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]> {
         return provider.request(.repositoryIssues(fullName: fullName, state: state, page: page))
             .mapArray(Issue.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func commits(fullName: String, page: Int) -> Observable<[Commit]> {
+        return provider.request(.commits(fullName: fullName, page: page))
+            .mapArray(Commit.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func commit(fullName: String, sha: String) -> Observable<Commit> {
+        return provider.request(.commit(fullName: fullName, sha: sha))
+            .mapObject(Commit.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func branches(fullName: String, page: Int) -> Observable<[Branch]> {
+        return provider.request(.branches(fullName: fullName, page: page))
+            .mapArray(Branch.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func branch(fullName: String, name: String) -> Observable<Branch> {
+        return provider.request(.branch(fullName: fullName, name: name))
+            .mapObject(Branch.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func pullRequests(fullName: String, page: Int) -> Observable<[PullRequest]> {
+        return provider.request(.pullRequests(fullName: fullName, page: page))
+            .mapArray(PullRequest.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func pullRequest(fullName: String, number: Int) -> Observable<PullRequest> {
+        return provider.request(.pullRequest(fullName: fullName, number: number))
+            .mapObject(PullRequest.self)
             .observeOn(MainScheduler.instance)
     }
 
