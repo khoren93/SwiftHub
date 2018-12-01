@@ -86,6 +86,10 @@ class SettingsViewModel: ViewModel, ViewModelType {
             themeService.set(theme)
         }).disposed(by: rx.disposeBag)
 
+        nightModeEnabled.skip(1).subscribe(onNext: { (isEnabled) in
+            analytics.log(.appNightMode(enabled: isEnabled))
+        }).disposed(by: rx.disposeBag)
+
         return Output(items: elements,
                       selectedEvent: selectedEvent)
     }

@@ -13,10 +13,12 @@ import Mixpanel
 let analytics = Analytics<SwifthubEvent>()
 
 enum SwifthubEvent {
+    case appNightMode(enabled: Bool)
     case appTheme(color: String)
     case appLanguage(language: String)
     case appCacheRemoved
     case acknowledgements
+    case flexOpened
 
     case login(login: String)
     case logout
@@ -34,10 +36,12 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func name(for provider: ProviderType) -> String? {
         switch self {
+        case .appNightMode: return "Night Mode Changed"
         case .appTheme: return "Theme"
         case .appLanguage: return "Language"
         case .appCacheRemoved: return "Cache Removed"
         case .acknowledgements: return "Acknowledgements"
+        case .flexOpened: return "Flex Opened"
         case .login: return "Login"
         case .logout: return "Logout"
         case .search: return "Search"
@@ -53,6 +57,8 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func parameters(for provider: ProviderType) -> [String: Any]? {
         switch self {
+        case .appNightMode(let enabled):
+            return ["Enabled": enabled]
         case .appTheme(let color):
             return ["Color": color]
         case .appLanguage(let language):

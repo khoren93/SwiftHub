@@ -115,6 +115,7 @@ extension LibsManager {
 
     func showFlex() {
         FLEXManager.shared().showExplorer()
+        analytics.log(.flexOpened)
     }
 
     func removeKingfisherCache(completion handler: (() -> Void)?) {

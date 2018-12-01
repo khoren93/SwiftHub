@@ -65,7 +65,7 @@ target 'SwiftHub' do
     pod 'SnapKit', '~> 4.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', '~> 2.0'  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', :git => 'https://github.com/Flipboard/FLEX.git'  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 4.6.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'AttributedLib', :git => 'https://github.com/Nirma/Attributed.git'  # https://github.com/Nirma/Attributed
 
