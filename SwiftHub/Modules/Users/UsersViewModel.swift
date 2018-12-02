@@ -17,6 +17,7 @@ enum UsersMode {
 
     case watchers(repository: Repository)
     case stars(repository: Repository)
+    case contributors(repository: Repository)
 }
 
 class UsersViewModel: ViewModel, ViewModelType {
@@ -81,15 +82,19 @@ class UsersViewModel: ViewModel, ViewModelType {
             case .following: return R.string.localizable.usersFollowingNavigationTitle.key.localized()
             case .watchers: return R.string.localizable.usersWatchersNavigationTitle.key.localized()
             case .stars: return R.string.localizable.usersStargazersNavigationTitle.key.localized()
+            case .contributors: return R.string.localizable.usersContributorsNavigationTitle.key.localized()
             }
         }).asDriver(onErrorJustReturn: "")
 
         let imageUrl = mode.map({ (mode) -> URL? in
             switch mode {
-            case .followers(let user): return user.avatarUrl?.url
-            case .following(let user): return user.avatarUrl?.url
-            case .watchers(let repository): return repository.owner?.avatarUrl?.url
-            case .stars(let repository): return repository.owner?.avatarUrl?.url
+            case .followers(let user),
+                 .following(let user):
+                return user.avatarUrl?.url
+            case .watchers(let repository),
+                 .stars(let repository),
+                 .contributors(let repository):
+                return repository.owner?.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
 
@@ -105,17 +110,19 @@ class UsersViewModel: ViewModel, ViewModelType {
         var request: Observable<[User]>
         switch self.mode.value {
         case .followers(let user):
-            request = self.provider.userFollowers(username: user.login ?? "", page: self.page)
+            request = provider.userFollowers(username: user.login ?? "", page: page)
         case .following(let user):
-            request = self.provider.userFollowing(username: user.login ?? "", page: self.page)
+            request = provider.userFollowing(username: user.login ?? "", page: page)
         case .watchers(let repository):
-            request = self.provider.watchers(fullName: repository.fullName ?? "", page: self.page)
+            request = provider.watchers(fullName: repository.fullName ?? "", page: page)
         case .stars(let repository):
-            request = self.provider.stargazers(fullName: repository.fullName ?? "", page: self.page)
+            request = provider.stargazers(fullName: repository.fullName ?? "", page: page)
+        case .contributors(let repository):
+            request = provider.contributors(fullName: repository.fullName ?? "", page: page)
         }
         return request
-            .trackActivity(self.loading)
-            .trackError(self.error)
+            .trackActivity(loading)
+            .trackError(error)
             .map { $0.map { UserCellViewModel(with: $0) } }
     }
 }

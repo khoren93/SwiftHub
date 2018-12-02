@@ -125,6 +125,7 @@ class RepositoryViewController: TableViewController {
                  .commitsItem(let viewModel),
                  .pullRequestsItem(let viewModel),
                  .eventsItem(let viewModel),
+                 .contributorsItem(let viewModel),
                  .readmeItem(let viewModel),
                  .sourceItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
@@ -161,6 +162,10 @@ class RepositoryViewController: TableViewController {
             case .eventsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
+                }
+            case .contributorsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? UsersViewModel {
+                    self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
                 }
             case .readmeItem:
                 if let url = self?.viewModel.readme.value?.htmlUrl?.url {

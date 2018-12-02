@@ -66,6 +66,7 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";
 "Repository.EventsCell.Title" = "Իրադարձություններ";
+"Repository.ContributorsCell.Title" = "Ներդրողներ";
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";
 /* Issues */
@@ -107,3 +108,4 @@
 "Users.FollowingNavigation.Title" = "Համախոհներ";
 "Users.WatchersNavigation.Title" = "Դիտորդներ";
 "Users.StargazersNavigation.Title" = "Աստղանշողներ";
+"Users.ContributorsNavigation.Title" = "Ներդրողներ";

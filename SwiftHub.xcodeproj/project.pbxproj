@@ -36,6 +36,7 @@
 		07241D2121B18A7400F800BD /* PullRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07241D1F21B18A7400F800BD /* PullRequestCell.xib */; };
 		07241D2321B18A8600F800BD /* PullRequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */; };
 		07241D2521B18AA000F800BD /* PullRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2421B18AA000F800BD /* PullRequestsViewController.swift */; };
+		072B8EDA21B4143200B2C28C /* RepositoryContributors.json in Resources */ = {isa = PBXBuildFile; fileRef = 072B8ED921B4143200B2C28C /* RepositoryContributors.json */; };
 		07320453214128ED00C1E39F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07320452214128ED00C1E39F /* Event.swift */; };
 		073204552141377D00C1E39F /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204542141377D00C1E39F /* Events.json */; };
 		073204572141379500C1E39F /* EventsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204562141379500C1E39F /* EventsRepository.json */; };
@@ -248,6 +249,7 @@
 		07241D1F21B18A7400F800BD /* PullRequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PullRequestCell.xib; sourceTree = "<group>"; };
 		07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestCellViewModel.swift; sourceTree = "<group>"; };
 		07241D2421B18AA000F800BD /* PullRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewController.swift; sourceTree = "<group>"; };
+		072B8ED921B4143200B2C28C /* RepositoryContributors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryContributors.json; sourceTree = "<group>"; };
 		07320452214128ED00C1E39F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		073204542141377D00C1E39F /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
 		073204562141379500C1E39F /* EventsRepository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsRepository.json; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 				07241D0621B1741800F800BD /* RepositoryCommit.json */,
 				07241D0421B1740000F800BD /* RepositoryCommits.json */,
 				07D46E5621920EDF008E5369 /* RepositoryContents.json */,
+				072B8ED921B4143200B2C28C /* RepositoryContributors.json */,
 				A0E2B0962108B024000DA282 /* RepositoryForks.json */,
 				07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */,
 				07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */,
@@ -1161,6 +1164,7 @@
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07B183842172268C007CC23B /* UserDetailCell.xib in Resources */,
 				07DFF6D320E90502004DAA68 /* Repository.json in Resources */,
+				072B8EDA21B4143200B2C28C /* RepositoryContributors.json in Resources */,
 				07241D0F21B1745D00F800BD /* RepositoryPullRequest.json in Resources */,
 				A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */,
 				07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */,

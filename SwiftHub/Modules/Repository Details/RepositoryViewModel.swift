@@ -185,6 +185,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.eventsItem(viewModel: eventsCellViewModel))
 
+            // Contributors
+            let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
+                                                                    detail: "",
+                                                                    image: R.image.icon_cell_company(),
+                                                                    hidesDisclosure: false)
+            items.append(RepositorySectionItem.contributorsItem(viewModel: contributorsCellViewModel))
+
             // Readme
             let readmeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReadmeCellTitle.key.localized(),
                                                                     detail: "",
@@ -237,6 +244,11 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         case .eventsItem:
             let mode = EventsMode.repository(repository: repository.value)
             let viewModel = EventsViewModel(mode: mode, provider: provider)
+            return viewModel
+
+        case .contributorsItem:
+            let mode = UsersMode.contributors(repository: repository.value)
+            let viewModel = UsersViewModel(mode: mode, provider: provider)
             return viewModel
 
         case .sourceItem:

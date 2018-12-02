@@ -40,7 +40,7 @@ class SettingsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(rx.viewDidLoad.mapToVoid(),
+        let refresh = Observable.of(Observable.just(()),
                                     languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())

@@ -32,6 +32,7 @@ protocol SwiftHubAPI {
     func branch(fullName: String, name: String) -> Observable<Branch>
     func pullRequests(fullName: String, state: String, page: Int) -> Observable<[PullRequest]>
     func pullRequest(fullName: String, number: Int) -> Observable<PullRequest>
+    func contributors(fullName: String, page: Int) -> Observable<[User]>
 
     func searchUsers(query: String) -> Observable<UserSearch>
     func user(owner: String) -> Observable<User>
@@ -137,6 +138,12 @@ extension Api {
     func pullRequest(fullName: String, number: Int) -> Observable<PullRequest> {
         return provider.request(.pullRequest(fullName: fullName, number: number))
             .mapObject(PullRequest.self)
+            .observeOn(MainScheduler.instance)
+    }
+
+    func contributors(fullName: String, page: Int) -> Observable<[User]> {
+        return provider.request(.contributors(fullName: fullName, page: page))
+            .mapArray(User.self)
             .observeOn(MainScheduler.instance)
     }
 

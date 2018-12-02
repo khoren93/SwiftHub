@@ -25,6 +25,7 @@ struct User: Mappable {
     var avatarUrl: String?
     var blog: String?
     var company: String?
+    var contributions: Int?
     var createdAt: Date?
     var email: String?
     var eventsUrl: String?
@@ -72,6 +73,7 @@ struct User: Mappable {
         avatarUrl <- map["avatar_url"]
         blog <- map["blog"]
         company <- map["company"]
+        contributions <- map["contributions"]
         createdAt <- (map["created_at"], ISO8601DateTransform())
         descriptionField <- map["description"]
         email <- map["email"]

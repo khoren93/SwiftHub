@@ -66,6 +66,7 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "Pull Requests";
 "Repository.EventsCell.Title" = "Events";
+"Repository.ContributorsCell.Title" = "Contributors";
 "Repository.ReadmeCell.Title" = "Readme";
 "Repository.SourceCell.Title" = "Source Code";
 /* Issues */
@@ -107,3 +108,4 @@
 "Users.FollowingNavigation.Title" = "Following";
 "Users.WatchersNavigation.Title" = "Watchers";
 "Users.StargazersNavigation.Title" = "Stargazers";
+"Users.ContributorsNavigation.Title" = "Contributors";

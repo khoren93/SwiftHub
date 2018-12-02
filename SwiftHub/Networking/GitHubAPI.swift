@@ -33,6 +33,7 @@ enum GithubAPI {
     case branch(fullName: String, name: String)
     case pullRequests(fullName: String, state: String, page: Int)
     case pullRequest(fullName: String, number: Int)
+    case contributors(fullName: String, page: Int)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -77,6 +78,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .branch(let fullName, let name): return "/repos/\(fullName)/branches/\(name)"
         case .pullRequests(let fullName, _, _): return "/repos/\(fullName)/pulls"
         case .pullRequest(let fullName, let number): return "/repos/\(fullName)/pulls/\(number)"
+        case .contributors(let fullName, _): return "/repos/\(fullName)/contributors"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -134,6 +136,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .pullRequests(_, let state, let page):
             params["state"] = state
             params["page"] = page
+        case .contributors(_, let page):
+            params["page"] = page
         case .searchUsers(let query):
             params["q"] = query
         case .userRepositories(_, let page):
@@ -182,6 +186,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .branch: return stubbedResponse("RepositoryBranch")
         case .pullRequests: return stubbedResponse("RepositoryPullRequests")
         case .pullRequest: return stubbedResponse("RepositoryPullRequest")
+        case .contributors: return stubbedResponse("RepositoryContributors")
         case .searchUsers: return stubbedResponse("UserSearch")
         case .user: return stubbedResponse("User")
         case .organization: return stubbedResponse("Organization")
