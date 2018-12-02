@@ -50,23 +50,26 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     func transform(input: Input) -> Output {
 
-        input.headerRefresh.flatMapLatest { () -> Observable<Repository> in
+        input.headerRefresh.flatMapLatest { [weak self] () -> Observable<Repository> in
+            guard let self = self else { return Observable.just(Repository()) }
             let fullName = self.repository.value.fullName ?? ""
             return self.provider.repository(fullName: fullName)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
-            }.subscribe(onNext: { (repository) in
-                self.repository.accept(repository)
+            }.subscribe(onNext: { [weak self] (repository) in
+                self?.repository.accept(repository)
             }).disposed(by: rx.disposeBag)
 
-        input.headerRefresh.flatMapLatest { () -> Observable<Content> in
+        input.headerRefresh.flatMapLatest { [weak self] () -> Observable<Content> in
+            guard let self = self else { return Observable.just(Content()) }
             let fullName = self.repository.value.fullName ?? ""
             return self.provider.readme(fullName: fullName, ref: nil)
                 .trackActivity(self.loading)
+                .trackActivity(self.headerLoading)
                 .trackError(self.error)
-            }.subscribe(onNext: { (content) in
-                self.readme.accept(content)
+            }.subscribe(onNext: { [weak self] (content) in
+                self?.readme.accept(content)
             }).disposed(by: rx.disposeBag)
 
         let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
@@ -237,7 +240,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             return viewModel
 
         case .sourceItem:
-            let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: nil, provider: provider)
+            let ref = repository.value.defaultBranch
+            let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: ref, provider: provider)
             return viewModel
 
         default: return nil

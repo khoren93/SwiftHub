@@ -41,7 +41,8 @@ class SearchViewModel: ViewModel, ViewModelType {
         let dismissKeyboard = input.selection.mapToVoid()
         let keyword = input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged()
 
-        keyword.asObservable().flatMapLatest({ (keyword) -> Observable<[Repository]> in
+        keyword.asObservable().flatMapLatest({ [weak self] (keyword) -> Observable<[Repository]> in
+            guard let self = self else { return Observable.just([]) }
             guard keyword.isNotEmpty else {
                 return Observable.just([])
             }
@@ -53,7 +54,8 @@ class SearchViewModel: ViewModel, ViewModelType {
             repositoryElements.accept(items)
         }).disposed(by: rx.disposeBag)
 
-        keyword.asObservable().flatMapLatest({ (keyword) -> Observable<[User]> in
+        keyword.asObservable().flatMapLatest({ [weak self] (keyword) -> Observable<[User]> in
+            guard let self = self else { return Observable.just([]) }
             guard keyword.isNotEmpty else {
                 return Observable.just([])
             }

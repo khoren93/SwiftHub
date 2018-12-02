@@ -30,6 +30,7 @@ class IssuesViewModel: ViewModel, ViewModelType {
 
     let repository: BehaviorRelay<Repository>
     let segment = BehaviorRelay<IssueSegments>(value: .open)
+    let userSelected = PublishSubject<User>()
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -40,44 +41,28 @@ class IssuesViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let userSelected = PublishSubject<User>()
         let elements = BehaviorRelay<[IssueCellViewModel]>(value: [])
 
         input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[IssueCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[IssueCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (issue) -> IssueCellViewModel in
-                    let viewModel = IssueCellViewModel(with: issue)
-                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
-                    return viewModel
-                })
-            }
         })
             .subscribe(onNext: { (items) in
                 elements.accept(items)
             }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[IssueCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[IssueCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (issue) -> IssueCellViewModel in
-                    let viewModel = IssueCellViewModel(with: issue)
-                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
-                    return viewModel
-                })
-            }
         })
-            .map { elements.value + $0 }
             .subscribe(onNext: { (items) in
-                elements.accept(items)
+                elements.accept(elements.value + items)
             }).disposed(by: rx.disposeBag)
 
         let userDetails = userSelected.asDriver(onErrorJustReturn: User())
@@ -105,9 +90,17 @@ class IssuesViewModel: ViewModel, ViewModelType {
                       issueSelected: issueSelected)
     }
 
-    func request() -> Observable<[Issue]> {
+    func request() -> Observable<[IssueCellViewModel]> {
         let fullname = repository.value.fullName ?? ""
         let state = segment.value.state.rawValue
         return provider.repositoryIssues(fullName: fullname, state: state, page: page)
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.map({ (issue) -> IssueCellViewModel in
+                let viewModel = IssueCellViewModel(with: issue)
+                viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
+                return viewModel
+            })
+        }
     }
 }

@@ -21,6 +21,8 @@ class PullRequestCellViewModel {
 
     let pullRequest: PullRequest
 
+    let userSelected = PublishSubject<User>()
+
     init(with pullRequest: PullRequest) {
         self.pullRequest = pullRequest
         title = Driver.just("\(pullRequest.title ?? "")")

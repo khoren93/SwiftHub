@@ -103,7 +103,7 @@ class RepositoryViewController: TableViewController {
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = RepositoryViewModel.Input(headerRefresh: refresh,
-                                              imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
+                                              imageSelection: ownerImageView.rx.tap(),
                                               openInWebSelection: rightBarButton.rx.tap.asObservable(),
                                               watchersSelection: watchersButton.rx.tap.asObservable(),
                                               starsSelection: starsButton.rx.tap.asObservable(),

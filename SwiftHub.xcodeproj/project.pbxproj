@@ -458,7 +458,9 @@
 		070FF83A20F2204A0070F5E8 /* User Details */ = {
 			isa = PBXGroup;
 			children = (
-				07B183802172265C007CC23B /* Cells */,
+				07B183812172268C007CC23B /* UserDetailCell.swift */,
+				07B183822172268C007CC23B /* UserDetailCell.xib */,
+				07B183852172269C007CC23B /* UserDetailCellViewModel.swift */,
 				07B1837E2172257D007CC23B /* UserSection.swift */,
 				070FF83B20F221970070F5E8 /* UserViewController.swift */,
 				070FF83D20F221AB0070F5E8 /* UserViewModel.swift */,
@@ -490,13 +492,6 @@
 			path = Commits;
 			sourceTree = "<group>";
 		};
-		07241D0221B173BB00F800BD /* Branches */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Branches;
-			sourceTree = "<group>";
-		};
 		07241D0321B173C500F800BD /* Pull Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,21 +507,13 @@
 		0732045C2141395200C1E39F /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				0732046121413B2E00C1E39F /* Cells */,
+				0732046221413B5200C1E39F /* EventCell.swift */,
+				0732046321413B5200C1E39F /* EventCell.xib */,
+				0732046621413B6400C1E39F /* EventCellViewModel.swift */,
 				0732045D2141398400C1E39F /* EventsViewController.swift */,
 				0732045F2141399400C1E39F /* EventsViewModel.swift */,
 			);
 			path = Events;
-			sourceTree = "<group>";
-		};
-		0732046121413B2E00C1E39F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				0732046221413B5200C1E39F /* EventCell.swift */,
-				0732046321413B5200C1E39F /* EventCell.xib */,
-				0732046621413B6400C1E39F /* EventCellViewModel.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		0757B52C21669DAC00C04163 /* Settings Language */ = {
@@ -553,26 +540,6 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
-		07B183802172265C007CC23B /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				07B183812172268C007CC23B /* UserDetailCell.swift */,
-				07B183822172268C007CC23B /* UserDetailCell.xib */,
-				07B183852172269C007CC23B /* UserDetailCellViewModel.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		07B4AB612190C54C001E9337 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				07B4AB622190C56E001E9337 /* RepositoryDetailCell.swift */,
-				07B4AB632190C56E001E9337 /* RepositoryDetailCell.xib */,
-				07B4AB662190C57F001E9337 /* RepositoryDetailCellViewModel.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		07D46E5821921C01008E5369 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,7 +563,9 @@
 		07DFF6D820E90860004DAA68 /* Repository Details */ = {
 			isa = PBXGroup;
 			children = (
-				07B4AB612190C54C001E9337 /* Cells */,
+				07B4AB622190C56E001E9337 /* RepositoryDetailCell.swift */,
+				07B4AB632190C56E001E9337 /* RepositoryDetailCell.xib */,
+				07B4AB662190C57F001E9337 /* RepositoryDetailCellViewModel.swift */,
 				07B4AB5F2190C403001E9337 /* RepositorySection.swift */,
 				07DFF6D920E908F3004DAA68 /* RepositoryViewController.swift */,
 				07DFF6DB20E90A5E004DAA68 /* RepositoryViewModel.swift */,
@@ -654,7 +623,6 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				07241D0221B173BB00F800BD /* Branches */,
 				07241D0121B173A400F800BD /* Commits */,
 				07D46E5821921C01008E5369 /* Contents */,
 				0732045C2141395200C1E39F /* Events */,
@@ -839,21 +807,13 @@
 		A09DE8B820E7B7C600F6F2BF /* Users */ = {
 			isa = PBXGroup;
 			children = (
-				A09DE8B920E7B7D200F6F2BF /* User Cells */,
+				A09DE8C420E7B84D00F6F2BF /* UserCell.swift */,
+				A09DE8C520E7B84D00F6F2BF /* UserCell.xib */,
+				A09DE8C220E7B83F00F6F2BF /* UserCellViewModel.swift */,
 				A0E2B0752101F77C000DA282 /* UsersViewController.swift */,
 				A0E2B0772101F789000DA282 /* UsersViewModel.swift */,
 			);
 			path = Users;
-			sourceTree = "<group>";
-		};
-		A09DE8B920E7B7D200F6F2BF /* User Cells */ = {
-			isa = PBXGroup;
-			children = (
-				A09DE8C420E7B84D00F6F2BF /* UserCell.swift */,
-				A09DE8C520E7B84D00F6F2BF /* UserCell.xib */,
-				A09DE8C220E7B83F00F6F2BF /* UserCellViewModel.swift */,
-			);
-			path = "User Cells";
 			sourceTree = "<group>";
 		};
 		A09DE8BA20E7B7DE00F6F2BF /* Repositories */ = {
@@ -861,19 +821,11 @@
 			children = (
 				A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */,
 				A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */,
-				A09DE8BB20E7B7E800F6F2BF /* Repository Cells */,
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		A09DE8BB20E7B7E800F6F2BF /* Repository Cells */ = {
-			isa = PBXGroup;
-			children = (
 				A09DE8BC20E7B81F00F6F2BF /* RepositoryCell.swift */,
 				A09DE8BD20E7B81F00F6F2BF /* RepositoryCell.xib */,
 				A09DE8C020E7B82F00F6F2BF /* RepositoryCellViewModel.swift */,
 			);
-			path = "Repository Cells";
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		A09DE8CA20E7BE9B00F6F2BF /* Table View Cells */ = {

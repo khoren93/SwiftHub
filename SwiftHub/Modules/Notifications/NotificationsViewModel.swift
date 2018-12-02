@@ -36,6 +36,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     let mode: BehaviorRelay<NotificationsMode>
     let all = BehaviorRelay(value: false)
     let participating = BehaviorRelay(value: false)
+    let userSelected = PublishSubject<User>()
 
     init(mode: NotificationsMode, provider: SwiftHubAPI) {
         self.mode = BehaviorRelay(value: mode)
@@ -43,41 +44,30 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let userSelected = PublishSubject<User>()
-
         input.segmentSelection.map { $0 == .all }.bind(to: all).disposed(by: rx.disposeBag)
         input.segmentSelection.map { $0 == .participating }.bind(to: participating).disposed(by: rx.disposeBag)
 
         let elements = BehaviorRelay<[NotificationCellViewModel]>(value: [])
 
         let refresh = Observable.of(input.headerRefresh, input.segmentSelection.mapToVoid()).merge()
-        refresh.flatMapLatest({ () -> Observable<[NotificationCellViewModel]> in
+        refresh.flatMapLatest({ [weak self] () -> Observable<[NotificationCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (event) -> NotificationCellViewModel in
-                    let viewModel = NotificationCellViewModel(with: event)
-                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
-                    return viewModel
-                })}
         })
             .subscribe(onNext: { (items) in
                 elements.accept(items)
             }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[NotificationCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[NotificationCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-                .map { $0.map { NotificationCellViewModel(with: $0) } }
         })
-            .map { elements.value + $0 }
             .subscribe(onNext: { (items) in
-                elements.accept(items)
+                elements.accept(elements.value + items)
             }).disposed(by: rx.disposeBag)
 
         let userDetails = userSelected.asDriver(onErrorJustReturn: User())
@@ -110,14 +100,21 @@ class NotificationsViewModel: ViewModel, ViewModelType {
                       repositorySelected: repositoryDetails)
     }
 
-    func request() -> Observable<[Notification]> {
+    func request() -> Observable<[NotificationCellViewModel]> {
         var request: Observable<[Notification]>
-        switch self.mode.value {
+        switch mode.value {
         case .mine:
-            request = self.provider.notifications(all: all.value, participating: participating.value, page: self.page)
+            request = provider.notifications(all: all.value, participating: participating.value, page: page)
         case .repository(let repository):
-            request = self.provider.repositoryNotifications(fullName: repository.fullName ?? "", all: all.value, participating: participating.value, page: self.page)
+            request = provider.repositoryNotifications(fullName: repository.fullName ?? "", all: all.value, participating: participating.value, page: page)
         }
         return request
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.map({ (event) -> NotificationCellViewModel in
+                let viewModel = NotificationCellViewModel(with: event)
+                viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
+                return viewModel
+            })}
     }
 }

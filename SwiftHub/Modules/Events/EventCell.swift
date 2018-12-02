@@ -33,7 +33,7 @@ class EventCell: DetailedTableViewCell {
         viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
         viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
 
-        leftImageView.rx.tapGesture().when(.recognized).map { _ in viewModel.event.actor }.filterNil()
+        leftImageView.rx.tap().map { _ in viewModel.event.actor }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)
     }
 }

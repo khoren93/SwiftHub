@@ -27,5 +27,8 @@ class PullRequestCell: DetailedTableViewCell {
         }).disposed(by: rx.disposeBag)
         viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
         viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
+
+        leftImageView.rx.tap().map { _ in viewModel.pullRequest.user }.filterNil()
+            .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)
     }
 }

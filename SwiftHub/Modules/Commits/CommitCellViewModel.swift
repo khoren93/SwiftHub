@@ -21,6 +21,8 @@ class CommitCellViewModel {
 
     let commit: Commit
 
+    let userSelected = PublishSubject<User>()
+
     init(with commit: Commit) {
         self.commit = commit
         title = Driver.just("\(commit.commit?.message ?? "")")

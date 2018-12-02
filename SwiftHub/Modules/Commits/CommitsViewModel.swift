@@ -22,9 +22,11 @@ class CommitsViewModel: ViewModel, ViewModelType {
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[CommitCellViewModel]>
         let commitSelected: Driver<URL?>
+        let userSelected: Driver<UserViewModel>
     }
 
     let repository: BehaviorRelay<Repository>
+    let userSelected = PublishSubject<User>()
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -32,39 +34,27 @@ class CommitsViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
+
         let elements = BehaviorRelay<[CommitCellViewModel]>(value: [])
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[CommitCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[CommitCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
-            let fullName = self.repository.value.fullName ?? ""
-            return self.provider.commits(fullName: fullName, page: self.page)
-                .trackActivity(self.loading)
+            return self.request()
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (commit) -> CommitCellViewModel in
-                    let viewModel = CommitCellViewModel(with: commit)
-                    return viewModel
-                })}
         })
             .subscribe(onNext: { (items) in
                 elements.accept(items)
             }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[CommitCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[CommitCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
-            let fullName = self.repository.value.fullName ?? ""
-            return self.provider.commits(fullName: fullName, page: self.page)
-                .trackActivity(self.loading)
+            return self.request()
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (commit) -> CommitCellViewModel in
-                    let viewModel = CommitCellViewModel(with: commit)
-                    return viewModel
-                })}
         })
-            .map { elements.value + $0 }
             .subscribe(onNext: { (items) in
-                elements.accept(items)
+                elements.accept(elements.value + items)
             }).disposed(by: rx.disposeBag)
 
         let navigationTitle = repository.map({ (repository) -> String in
@@ -75,8 +65,27 @@ class CommitsViewModel: ViewModel, ViewModelType {
             cellViewModel.commit.htmlUrl?.url
         }
 
+        let userDetails = userSelected.asDriver(onErrorJustReturn: User())
+            .map({ (user) -> UserViewModel in
+                let viewModel = UserViewModel(user: user, provider: self.provider)
+                return viewModel
+            })
+
         return Output(navigationTitle: navigationTitle,
                       items: elements,
-                      commitSelected: commitSelected)
+                      commitSelected: commitSelected,
+                      userSelected: userDetails)
+    }
+
+    func request() -> Observable<[CommitCellViewModel]> {
+        let fullName = repository.value.fullName ?? ""
+        return provider.commits(fullName: fullName, page: page)
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.map({ (commit) -> CommitCellViewModel in
+                let viewModel = CommitCellViewModel(with: commit)
+                viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
+                return viewModel
+            })}
     }
 }

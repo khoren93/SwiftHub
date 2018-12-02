@@ -36,6 +36,7 @@ class EventsViewModel: ViewModel, ViewModelType {
 
     let mode: BehaviorRelay<EventsMode>
     let segment = BehaviorRelay<EventSegments>(value: .received)
+    let userSelected = PublishSubject<User>()
 
     init(mode: EventsMode, provider: SwiftHubAPI) {
         self.mode = BehaviorRelay(value: mode)
@@ -53,42 +54,28 @@ class EventsViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let userSelected = PublishSubject<User>()
         let elements = BehaviorRelay<[EventCellViewModel]>(value: [])
 
         input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[EventCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[EventCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (event) -> EventCellViewModel in
-                    let viewModel = EventCellViewModel(with: event)
-                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
-                    return viewModel
-                })}
         })
             .subscribe(onNext: { (items) in
                 elements.accept(items)
             }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[EventCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[EventCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-                .map { $0.map({ (event) -> EventCellViewModel in
-                    let viewModel = EventCellViewModel(with: event)
-                    viewModel.userSelected.bind(to: userSelected).disposed(by: self.rx.disposeBag)
-                    return viewModel
-                })}
         })
-            .map { elements.value + $0 }
             .subscribe(onNext: { (items) in
-                elements.accept(items)
+                elements.accept(elements.value + items)
             }).disposed(by: rx.disposeBag)
 
         let userDetails = userSelected.asDriver(onErrorJustReturn: User())
@@ -129,19 +116,26 @@ class EventsViewModel: ViewModel, ViewModelType {
                       hidesSegment: hidesSegment)
     }
 
-    func request() -> Observable<[Event]> {
+    func request() -> Observable<[EventCellViewModel]> {
         var request: Observable<[Event]>
-        switch self.mode.value {
+        switch mode.value {
         case .repository(let repository):
-            request = self.provider.repositoryEvents(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: self.page)
+            request = provider.repositoryEvents(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: page)
         case .user(let user):
-            switch self.segment.value {
+            switch segment.value {
             case .performed:
-                request = self.provider.userPerformedEvents(username: user.login ?? "", page: self.page)
+                request = provider.userPerformedEvents(username: user.login ?? "", page: page)
             case .received:
-                request = self.provider.userReceivedEvents(username: user.login ?? "", page: self.page)
+                request = provider.userReceivedEvents(username: user.login ?? "", page: page)
             }
         }
         return request
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.map({ (event) -> EventCellViewModel in
+                let viewModel = EventCellViewModel(with: event)
+                viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
+                return viewModel
+            })}
     }
 }

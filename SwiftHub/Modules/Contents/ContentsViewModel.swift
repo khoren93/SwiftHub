@@ -38,21 +38,10 @@ class ContentsViewModel: ViewModel, ViewModelType {
     func transform(input: Input) -> Output {
         let elements = BehaviorRelay<[ContentCellViewModel]>(value: [])
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[ContentCellViewModel]> in
-            let fullName = self.repository.value.fullName ?? ""
-            let path = self.content.value?.path ?? ""
-            let ref = self.ref.value
-            return self.provider.contents(fullName: fullName, path: path, ref: ref)
-                .trackActivity(self.loading)
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[ContentCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
+            return self.request()
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.sorted(by: { (lhs, rhs) -> Bool in
-                    if lhs.type == rhs.type {
-                        return lhs.name?.lowercased() ?? "" < rhs.name?.lowercased() ?? ""
-                    } else {
-                        return lhs.type > rhs.type
-                    }
-                }).map { ContentCellViewModel(with: $0) } }
         }).subscribe(onNext: { (items) in
             elements.accept(items)
         }).disposed(by: rx.disposeBag)
@@ -75,5 +64,21 @@ class ContentsViewModel: ViewModel, ViewModelType {
                       items: elements,
                       openContents: openContents,
                       openUrl: openUrl)
+    }
+
+    func request() -> Observable<[ContentCellViewModel]> {
+        let fullName = repository.value.fullName ?? ""
+        let path = content.value?.path ?? ""
+        let ref = self.ref.value
+        return provider.contents(fullName: fullName, path: path, ref: ref)
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.sorted(by: { (lhs, rhs) -> Bool in
+                if lhs.type == rhs.type {
+                    return lhs.name?.lowercased() ?? "" < rhs.name?.lowercased() ?? ""
+                } else {
+                    return lhs.type > rhs.type
+                }
+            }).map { ContentCellViewModel(with: $0) } }
     }
 }

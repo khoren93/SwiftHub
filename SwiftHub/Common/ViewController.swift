@@ -32,7 +32,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     var emptyDataSetImage = R.image.image_no_result()
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
 
-    let languageChanged = BehaviorRelay<Void>(value: ())
+    let languageChanged = PublishSubject<Void>()
 
     let motionShakeEvent = PublishSubject<Void>()
 
@@ -116,7 +116,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         NotificationCenter.default
             .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
             .subscribe { [weak self] (event) in
-                self?.languageChanged.accept(())
+                self?.languageChanged.onNext(())
             }.disposed(by: rx.disposeBag)
 
         // Two finger swipe gesture for opening Flex

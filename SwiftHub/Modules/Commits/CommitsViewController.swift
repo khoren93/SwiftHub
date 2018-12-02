@@ -57,6 +57,10 @@ class CommitsViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
+        output.userSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
+        }).disposed(by: rx.disposeBag)
+
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)

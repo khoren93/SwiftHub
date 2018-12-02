@@ -29,7 +29,7 @@ class IssueCell: DetailedTableViewCell {
         viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
         viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
 
-        leftImageView.rx.tapGesture().when(.recognized).map { _ in viewModel.issue.user }.filterNil()
+        leftImageView.rx.tap().map { _ in viewModel.issue.user }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)
     }
 }

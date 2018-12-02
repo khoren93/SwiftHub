@@ -49,23 +49,23 @@ class UsersViewModel: ViewModel, ViewModelType {
         let elements = BehaviorRelay<[UserCellViewModel]>(value: [])
         let dismissKeyboard = input.selection.mapToVoid()
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[UserCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[UserCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-                .map { $0.map { UserCellViewModel(with: $0) } }
-        }).bind(to: elements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            elements.accept(items)
+        }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[UserCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[UserCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-                .map { $0.map { UserCellViewModel(with: $0) } }
-        }).map { elements.value + $0 }.bind(to: elements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            elements.accept(elements.value + items)
+        }).disposed(by: rx.disposeBag)
 
         let textDidBeginEditing = input.textDidBeginEditing
 
@@ -101,7 +101,7 @@ class UsersViewModel: ViewModel, ViewModelType {
                       userSelected: userDetails)
     }
 
-    func request() -> Observable<[User]> {
+    func request() -> Observable<[UserCellViewModel]> {
         var request: Observable<[User]>
         switch self.mode.value {
         case .followers(let user):
@@ -114,5 +114,8 @@ class UsersViewModel: ViewModel, ViewModelType {
             request = self.provider.stargazers(fullName: repository.fullName ?? "", page: self.page)
         }
         return request
+            .trackActivity(self.loading)
+            .trackError(self.error)
+            .map { $0.map { UserCellViewModel(with: $0) } }
     }
 }

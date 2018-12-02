@@ -49,7 +49,9 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        input.headerRefresh.flatMapLatest { () -> Observable<User> in
+
+        input.headerRefresh.flatMapLatest { [weak self] () -> Observable<User> in
+            guard let self = self else { return Observable.just(User()) }
             let request: Observable<User>
             if let user = self.user.value, !user.isMine() {
                 let owner = user.login ?? ""
@@ -64,8 +66,8 @@ class UserViewModel: ViewModel, ViewModelType {
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
-            }.subscribe(onNext: { (user) in
-                self.user.accept(user)
+            }.subscribe(onNext: { [weak self] (user) in
+                self?.user.accept(user)
             }).disposed(by: rx.disposeBag)
 
         let username = user.map { $0?.login ?? "" }.asDriverOnErrorJustComplete()

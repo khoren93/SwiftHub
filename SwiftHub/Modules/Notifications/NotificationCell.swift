@@ -29,7 +29,7 @@ class NotificationCell: DetailedTableViewCell {
             }
         }).disposed(by: rx.disposeBag)
 
-        leftImageView.rx.tapGesture().when(.recognized).map { _ in viewModel.notification.repository?.owner }.filterNil()
+        leftImageView.rx.tap().map { _ in viewModel.notification.repository?.owner }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)
     }
 }

@@ -48,21 +48,23 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
         let elements = BehaviorRelay<[RepositoryCellViewModel]>(value: [])
         let dismissKeyboard = input.selection.mapToVoid()
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[RepositoryCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
-        }).bind(to: elements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            elements.accept(items)
+        }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[RepositoryCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[RepositoryCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
-                .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
-                .trackError(self.error)
-        }).map { elements.value + $0 }.bind(to: elements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            elements.accept(elements.value + items)
+        }).disposed(by: rx.disposeBag)
 
         let textDidBeginEditing = input.textDidBeginEditing
 
@@ -100,12 +102,15 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
         var request: Observable<[Repository]>
         switch self.mode.value {
         case .userRepositories(let user):
-            request = self.provider.userRepositories(username: user.login ?? "", page: self.page)
+            request = provider.userRepositories(username: user.login ?? "", page: page)
         case .userStarredRepositories(let user):
-            request = self.provider.userStarredRepositories(username: user.login ?? "", page: self.page)
+            request = provider.userStarredRepositories(username: user.login ?? "", page: page)
         case .forks(let repository):
-            request = self.provider.forks(fullName: repository.fullName ?? "", page: self.page)
+            request = provider.forks(fullName: repository.fullName ?? "", page: page)
         }
-        return request.map { $0.map { RepositoryCellViewModel(with: $0) } }
+        return request
+            .trackActivity(loading)
+            .trackError(error)
+            .map { $0.map { RepositoryCellViewModel(with: $0) } }
     }
 }

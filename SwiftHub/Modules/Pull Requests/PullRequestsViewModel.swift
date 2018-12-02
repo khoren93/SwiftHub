@@ -23,10 +23,12 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[PullRequestCellViewModel]>
         let pullRequestSelected: Driver<URL?>
+        let userSelected: Driver<UserViewModel>
     }
 
     let repository: BehaviorRelay<Repository>
     let segment = BehaviorRelay<PullRequestSegments>(value: .open)
+    let userSelected = PublishSubject<User>()
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -38,7 +40,8 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
 
         input.segmentSelection.bind(to: segment).disposed(by: rx.disposeBag)
 
-        input.headerRefresh.flatMapLatest({ () -> Observable<[PullRequestCellViewModel]> in
+        input.headerRefresh.flatMapLatest({ [weak self] () -> Observable<[PullRequestCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page = 1
             return self.request()
                 .trackActivity(self.headerLoading)
@@ -47,14 +50,14 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
                 elements.accept(items)
             }).disposed(by: rx.disposeBag)
 
-        input.footerRefresh.flatMapLatest({ () -> Observable<[PullRequestCellViewModel]> in
+        input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<[PullRequestCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             self.page += 1
             return self.request()
                 .trackActivity(self.footerLoading)
         })
-            .map { elements.value + $0 }
             .subscribe(onNext: { (items) in
-                elements.accept(items)
+                elements.accept(elements.value + items)
             }).disposed(by: rx.disposeBag)
 
         let navigationTitle = repository.map({ (repository) -> String in
@@ -65,19 +68,27 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
             cellViewModel.pullRequest.htmlUrl?.url
         }
 
+        let userDetails = userSelected.asDriver(onErrorJustReturn: User())
+            .map({ (user) -> UserViewModel in
+                let viewModel = UserViewModel(user: user, provider: self.provider)
+                return viewModel
+            })
+
         return Output(navigationTitle: navigationTitle,
                       items: elements,
-                      pullRequestSelected: pullRequestSelected)
+                      pullRequestSelected: pullRequestSelected,
+                      userSelected: userDetails)
     }
 
     func request() -> Observable<[PullRequestCellViewModel]> {
         let fullname = repository.value.fullName ?? ""
         let state = segment.value.state.rawValue
         return provider.pullRequests(fullName: fullname, state: state, page: page)
-            .trackActivity(self.loading)
-            .trackError(self.error)
+            .trackActivity(loading)
+            .trackError(error)
             .map { $0.map({ (pullRequest) -> PullRequestCellViewModel in
                 let viewModel = PullRequestCellViewModel(with: pullRequest)
+                viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
                 return viewModel
             })}
     }

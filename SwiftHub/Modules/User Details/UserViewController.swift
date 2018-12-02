@@ -126,7 +126,7 @@ class UserViewController: TableViewController {
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, languageChanged.asObservable()).merge()
         let input = UserViewModel.Input(headerRefresh: refresh,
-                                        imageSelection: ownerImageView.rx.tapGesture().when(.recognized).mapToVoid(),
+                                        imageSelection: ownerImageView.rx.tap(),
                                         openInWebSelection: rightBarButton.rx.tap.asObservable(),
                                         repositoriesSelection: repositoriesButton.rx.tap.asObservable(),
                                         followersSelection: followersButton.rx.tap.asObservable(),
