@@ -166,9 +166,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Commits
             let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
-                                                                          detail: "",
-                                                                          image: R.image.icon_cell_git_commit(),
-                                                                          hidesDisclosure: false)
+                                                                     detail: "",
+                                                                     image: R.image.icon_cell_git_commit(),
+                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
 
             // Pull Requests
@@ -187,9 +187,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Contributors
             let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
-                                                                    detail: "",
-                                                                    image: R.image.icon_cell_company(),
-                                                                    hidesDisclosure: false)
+                                                                          detail: "",
+                                                                          image: R.image.icon_cell_company(),
+                                                                          hidesDisclosure: false)
             items.append(RepositorySectionItem.contributorsItem(viewModel: contributorsCellViewModel))
 
             // Readme
