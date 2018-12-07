@@ -17,7 +17,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] In-app language switching ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
 - [x] Support iPhone and iPad (Split View)
-- [x] Add Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
+- [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
