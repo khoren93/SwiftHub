@@ -113,6 +113,7 @@
 		A00871CF21A6E2BD006E5A2B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00871CE21A6E2BD006E5A2B /* Comment.swift */; };
 		A00C54C920E25B5A00DA5F98 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00C54C820E25B5A00DA5F98 /* StackView.swift */; };
 		A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A017B3DA1E92995300E4FCED /* SplitViewController.swift */; };
+		A024C7C621BAB5F400FEA133 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A024C7C521BAB5F400FEA133 /* GoogleService-Info.plist */; };
 		A034A8AE20F61A6500E2B678 /* HomeTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034A8AD20F61A6500E2B678 /* HomeTabBarViewModel.swift */; };
 		A034AF7021527EF8004C310B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034AF6F21527EF8004C310B /* Notification.swift */; };
 		A034AF73215280B3004C310B /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034AF72215280B3004C310B /* NotificationsViewModel.swift */; };
@@ -333,6 +334,7 @@
 		A00871CE21A6E2BD006E5A2B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A00C54C820E25B5A00DA5F98 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		A017B3DA1E92995300E4FCED /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		A024C7C521BAB5F400FEA133 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A034A8AD20F61A6500E2B678 /* HomeTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewModel.swift; sourceTree = "<group>"; };
 		A034AF6F21527EF8004C310B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		A034AF72215280B3004C310B /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 				C762C6241E1D417C00C09EBD /* Assets.xcassets */,
 				C762C6871E1D5C3A00C09EBD /* Icons.xcassets */,
 				A09499611E1D1CB700EFDE29 /* Info.plist */,
+				A024C7C521BAB5F400FEA133 /* GoogleService-Info.plist */,
 				0757B53C2166A6A000C04163 /* Localizable.strings */,
 				C762C6221E1D414B00C09EBD /* R.generated.swift */,
 			);
@@ -1026,6 +1029,7 @@
 				A094994F1E1D1CB600EFDE29 /* Frameworks */,
 				A09499501E1D1CB600EFDE29 /* Resources */,
 				3FF22C3403C6B8870D286DEA /* [CP] Embed Pods Frameworks */,
+				A024C7C421BAA83200FEA133 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1142,6 +1146,7 @@
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
 				073204552141377D00C1E39F /* Events.json in Resources */,
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
+				A024C7C621BAB5F400FEA133 /* GoogleService-Info.plist in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				07241D0B21B1743900F800BD /* RepositoryBranch.json in Resources */,
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
@@ -1219,6 +1224,7 @@
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
@@ -1250,6 +1256,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Umbrella/Umbrella.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1262,6 +1269,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
@@ -1293,11 +1301,31 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Umbrella.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A024C7C421BAA83200FEA133 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Fabric;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 37c93eb6b84ba3eec1d049949625a131b88c50e9 e78a1123b34d3307be55fc9565c8ea1ff601801ec3cd70679b70983042f95d33\n";
 		};
 		C762C6201E1D40D500C09EBD /* R.swift */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1707,6 +1735,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T7PRF59H28;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
