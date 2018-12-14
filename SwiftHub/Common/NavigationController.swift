@@ -11,6 +11,10 @@ import AttributedLib
 
 class NavigationController: UINavigationController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return globalStatusBarStyle.value
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

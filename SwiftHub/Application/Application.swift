@@ -33,6 +33,9 @@ final class Application: NSObject {
     func presentInitialScreen(in window: UIWindow) {
         self.window = window
 
+//        presentTestScreen(in: window)
+//        return
+
         if let user = User.currentUser(), let userId = user.id?.string {
             analytics.identify(userId: userId)
             analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
@@ -41,5 +44,10 @@ final class Application: NSObject {
         let loggedIn = authManager.hasToken
         let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
         navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+    }
+
+    func presentTestScreen(in window: UIWindow) {
+        let viewModel = UserViewModel(user: nil, provider: provider)
+        navigator.show(segue: .userDetails(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }
 }

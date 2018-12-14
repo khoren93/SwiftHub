@@ -13,6 +13,10 @@ import RxTheme
 import RAMAnimatedTabBarController
 import KafkaRefresh
 
+let globalStatusBarStyle = BehaviorRelay<UIStatusBarStyle>(value: .default)
+
+let themeService = ThemeType.service(initial: ThemeType.currentTheme())
+
 protocol Theme {
     var primary: UIColor { get }
     var primaryDark: UIColor { get }
@@ -177,8 +181,6 @@ extension ThemeType {
     }
 }
 
-let themeService = ThemeType.service(initial: ThemeType.currentTheme())
-
 extension Reactive where Base: UIView {
 
     var backgroundColor: Binder<UIColor?> {
@@ -260,7 +262,7 @@ extension Reactive where Base: UIApplication {
 
     var statusBarStyle: Binder<UIStatusBarStyle> {
         return Binder(self.base) { view, attr in
-            view.statusBarStyle = attr
+            globalStatusBarStyle.accept(attr)
         }
     }
 }
