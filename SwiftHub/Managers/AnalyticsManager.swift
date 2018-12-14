@@ -9,8 +9,9 @@
 import Foundation
 import Umbrella
 import Mixpanel
+import FirebaseAnalytics
 
-let analytics = Analytics<SwifthubEvent>()
+let analytics = Umbrella.Analytics<SwifthubEvent>()
 
 enum SwifthubEvent {
     case appNightMode(enabled: Bool)
@@ -87,18 +88,22 @@ extension SwifthubEvent: Umbrella.EventType {
     }
 }
 
-extension Analytics {
+extension Umbrella.Analytics {
 
     func identify(userId: String) {
         Mixpanel.sharedInstance()?.identify(userId)
+        FirebaseAnalytics.Analytics.setUserID(userId)
     }
 
     func updateUser(name: String, email: String) {
         Mixpanel.sharedInstance()?.people.set("$name", to: name)
         Mixpanel.sharedInstance()?.people.set("$email", to: email)
+        FirebaseAnalytics.Analytics.setUserProperty(name, forName: "$name")
+        FirebaseAnalytics.Analytics.setUserProperty(email, forName: "$email")
     }
 
     func reset() {
         Mixpanel.sharedInstance()?.reset()
+        FirebaseAnalytics.Analytics.resetAnalyticsData()
     }
 }

@@ -58,7 +58,7 @@ class CommitsViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         let navigationTitle = repository.map({ (repository) -> String in
-            return repository.fullName ?? ""
+            return repository.fullname ?? ""
         }).asDriver(onErrorJustReturn: "")
 
         let commitSelected = input.selection.map { (cellViewModel) -> URL? in
@@ -78,8 +78,8 @@ class CommitsViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[CommitCellViewModel]> {
-        let fullName = repository.value.fullName ?? ""
-        return provider.commits(fullName: fullName, page: page)
+        let fullname = repository.value.fullname ?? ""
+        return provider.commits(fullname: fullname, page: page)
             .trackActivity(loading)
             .trackError(error)
             .map { $0.map({ (commit) -> CommitCellViewModel in

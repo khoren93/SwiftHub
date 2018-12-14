@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import ObjectMapper
+import Moya
 import Moya_ObjectMapper
 
 enum ApiError: Error {
@@ -18,37 +19,43 @@ enum ApiError: Error {
 
 protocol SwiftHubAPI {
     // MARK: - Authentication is optional
-    func searchRepositories(query: String) -> Observable<RepositorySearch>
-    func repository(fullName: String) -> Observable<Repository>
-    func watchers(fullName: String, page: Int) -> Observable<[User]>
-    func stargazers(fullName: String, page: Int) -> Observable<[User]>
-    func forks(fullName: String, page: Int) -> Observable<[Repository]>
-    func readme(fullName: String, ref: String?) -> Observable<Content>
-    func contents(fullName: String, path: String, ref: String?) -> Observable<[Content]>
-    func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]>
-    func commits(fullName: String, page: Int) -> Observable<[Commit]>
-    func commit(fullName: String, sha: String) -> Observable<Commit>
-    func branches(fullName: String, page: Int) -> Observable<[Branch]>
-    func branch(fullName: String, name: String) -> Observable<Branch>
-    func pullRequests(fullName: String, state: String, page: Int) -> Observable<[PullRequest]>
-    func pullRequest(fullName: String, number: Int) -> Observable<PullRequest>
-    func contributors(fullName: String, page: Int) -> Observable<[User]>
-    func searchUsers(query: String) -> Observable<UserSearch>
-    func user(owner: String) -> Observable<User>
-    func organization(owner: String) -> Observable<User>
-    func userRepositories(username: String, page: Int) -> Observable<[Repository]>
-    func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]>
-    func userFollowers(username: String, page: Int) -> Observable<[User]>
-    func userFollowing(username: String, page: Int) -> Observable<[User]>
-    func events(page: Int) -> Observable<[Event]>
-    func repositoryEvents(owner: String, repo: String, page: Int) -> Observable<[Event]>
-    func userReceivedEvents(username: String, page: Int) -> Observable<[Event]>
-    func userPerformedEvents(username: String, page: Int) -> Observable<[Event]>
+    func searchRepositories(query: String) -> Single<RepositorySearch>
+    func repository(fullname: String) -> Single<Repository>
+    func watchers(fullname: String, page: Int) -> Single<[User]>
+    func stargazers(fullname: String, page: Int) -> Single<[User]>
+    func forks(fullname: String, page: Int) -> Single<[Repository]>
+    func readme(fullname: String, ref: String?) -> Single<Content>
+    func contents(fullname: String, path: String, ref: String?) -> Single<[Content]>
+    func repositoryIssues(fullname: String, state: String, page: Int) -> Single<[Issue]>
+    func commits(fullname: String, page: Int) -> Single<[Commit]>
+    func commit(fullname: String, sha: String) -> Single<Commit>
+    func branches(fullname: String, page: Int) -> Single<[Branch]>
+    func branch(fullname: String, name: String) -> Single<Branch>
+    func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]>
+    func pullRequest(fullname: String, number: Int) -> Single<PullRequest>
+    func contributors(fullname: String, page: Int) -> Single<[User]>
+    func searchUsers(query: String) -> Single<UserSearch>
+    func user(owner: String) -> Single<User>
+    func organization(owner: String) -> Single<User>
+    func userRepositories(username: String, page: Int) -> Single<[Repository]>
+    func userStarredRepositories(username: String, page: Int) -> Single<[Repository]>
+    func userFollowers(username: String, page: Int) -> Single<[User]>
+    func userFollowing(username: String, page: Int) -> Single<[User]>
+    func events(page: Int) -> Single<[Event]>
+    func repositoryEvents(owner: String, repo: String, page: Int) -> Single<[Event]>
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]>
+    func userPerformedEvents(username: String, page: Int) -> Single<[Event]>
 
     // MARK: - Authentication is required
-    func profile() -> Observable<User>
-    func notifications(all: Bool, participating: Bool, page: Int) -> Observable<[Notification]>
-    func repositoryNotifications(fullName: String, all: Bool, participating: Bool, page: Int) -> Observable<[Notification]>
+    func profile() -> Single<User>
+    func notifications(all: Bool, participating: Bool, page: Int) -> Single<[Notification]>
+    func repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int) -> Single<[Notification]>
+    func checkStarring(fullname: String) -> Single<Void>
+    func starRepository(fullname: String) -> Single<Void>
+    func unstarRepository(fullname: String) -> Single<Void>
+    func checkFollowing(username: String) -> Single<Void>
+    func followUser(username: String) -> Single<Void>
+    func unfollowUser(username: String) -> Single<Void>
 }
 
 class Api: SwiftHubAPI {
@@ -59,135 +66,174 @@ class Api: SwiftHubAPI {
 extension Api {
     // MARK: - Authentication is optional
 
-    func searchRepositories(query: String) -> Observable<RepositorySearch> {
+    func searchRepositories(query: String) -> Single<RepositorySearch> {
         return requestObject(.searchRepositories(query: query), type: RepositorySearch.self)
     }
 
-    func watchers(fullName: String, page: Int) -> Observable<[User]> {
-        return requestArray(.watchers(fullName: fullName, page: page), type: User.self)
+    func watchers(fullname: String, page: Int) -> Single<[User]> {
+        return requestArray(.watchers(fullname: fullname, page: page), type: User.self)
     }
 
-    func stargazers(fullName: String, page: Int) -> Observable<[User]> {
-        return requestArray(.stargazers(fullName: fullName, page: page), type: User.self)
+    func stargazers(fullname: String, page: Int) -> Single<[User]> {
+        return requestArray(.stargazers(fullname: fullname, page: page), type: User.self)
     }
 
-    func forks(fullName: String, page: Int) -> Observable<[Repository]> {
-        return requestArray(.forks(fullName: fullName, page: page), type: Repository.self)
+    func forks(fullname: String, page: Int) -> Single<[Repository]> {
+        return requestArray(.forks(fullname: fullname, page: page), type: Repository.self)
     }
 
-    func readme(fullName: String, ref: String?) -> Observable<Content> {
-        return requestObject(.readme(fullName: fullName, ref: ref), type: Content.self)
+    func readme(fullname: String, ref: String?) -> Single<Content> {
+        return requestObject(.readme(fullname: fullname, ref: ref), type: Content.self)
     }
 
-    func contents(fullName: String, path: String, ref: String?) -> Observable<[Content]> {
-        return requestArray(.contents(fullName: fullName, path: path, ref: ref), type: Content.self)
+    func contents(fullname: String, path: String, ref: String?) -> Single<[Content]> {
+        return requestArray(.contents(fullname: fullname, path: path, ref: ref), type: Content.self)
     }
 
-    func repositoryIssues(fullName: String, state: String, page: Int) -> Observable<[Issue]> {
-        return requestArray(.repositoryIssues(fullName: fullName, state: state, page: page), type: Issue.self)
+    func repositoryIssues(fullname: String, state: String, page: Int) -> Single<[Issue]> {
+        return requestArray(.repositoryIssues(fullname: fullname, state: state, page: page), type: Issue.self)
     }
 
-    func commits(fullName: String, page: Int) -> Observable<[Commit]> {
-        return requestArray(.commits(fullName: fullName, page: page), type: Commit.self)
+    func commits(fullname: String, page: Int) -> Single<[Commit]> {
+        return requestArray(.commits(fullname: fullname, page: page), type: Commit.self)
     }
 
-    func commit(fullName: String, sha: String) -> Observable<Commit> {
-        return requestObject(.commit(fullName: fullName, sha: sha), type: Commit.self)
+    func commit(fullname: String, sha: String) -> Single<Commit> {
+        return requestObject(.commit(fullname: fullname, sha: sha), type: Commit.self)
     }
 
-    func branches(fullName: String, page: Int) -> Observable<[Branch]> {
-        return requestArray(.branches(fullName: fullName, page: page), type: Branch.self)
+    func branches(fullname: String, page: Int) -> Single<[Branch]> {
+        return requestArray(.branches(fullname: fullname, page: page), type: Branch.self)
     }
 
-    func branch(fullName: String, name: String) -> Observable<Branch> {
-        return requestObject(.branch(fullName: fullName, name: name), type: Branch.self)
+    func branch(fullname: String, name: String) -> Single<Branch> {
+        return requestObject(.branch(fullname: fullname, name: name), type: Branch.self)
     }
 
-    func pullRequests(fullName: String, state: String, page: Int) -> Observable<[PullRequest]> {
-        return requestArray(.pullRequests(fullName: fullName, state: state, page: page), type: PullRequest.self)
+    func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]> {
+        return requestArray(.pullRequests(fullname: fullname, state: state, page: page), type: PullRequest.self)
     }
 
-    func pullRequest(fullName: String, number: Int) -> Observable<PullRequest> {
-        return requestObject(.pullRequest(fullName: fullName, number: number), type: PullRequest.self)
+    func pullRequest(fullname: String, number: Int) -> Single<PullRequest> {
+        return requestObject(.pullRequest(fullname: fullname, number: number), type: PullRequest.self)
     }
 
-    func contributors(fullName: String, page: Int) -> Observable<[User]> {
-        return requestArray(.contributors(fullName: fullName, page: page), type: User.self)
+    func contributors(fullname: String, page: Int) -> Single<[User]> {
+        return requestArray(.contributors(fullname: fullname, page: page), type: User.self)
     }
 
-    func repository(fullName: String) -> Observable<Repository> {
-        return requestObject(.repository(fullName: fullName), type: Repository.self)
+    func repository(fullname: String) -> Single<Repository> {
+        return requestObject(.repository(fullname: fullname), type: Repository.self)
     }
 
-    func searchUsers(query: String) -> Observable<UserSearch> {
+    func searchUsers(query: String) -> Single<UserSearch> {
         return requestObject(.searchUsers(query: query), type: UserSearch.self)
     }
 
-    func user(owner: String) -> Observable<User> {
+    func user(owner: String) -> Single<User> {
         return requestObject(.user(owner: owner), type: User.self)
     }
 
-    func organization(owner: String) -> Observable<User> {
+    func organization(owner: String) -> Single<User> {
         return requestObject(.organization(owner: owner), type: User.self)
     }
 
-    func userRepositories(username: String, page: Int) -> Observable<[Repository]> {
+    func userRepositories(username: String, page: Int) -> Single<[Repository]> {
         return requestArray(.userRepositories(username: username, page: page), type: Repository.self)
     }
 
-    func userStarredRepositories(username: String, page: Int) -> Observable<[Repository]> {
+    func userStarredRepositories(username: String, page: Int) -> Single<[Repository]> {
         return requestArray(.userStarredRepositories(username: username, page: page), type: Repository.self)
     }
 
-    func userFollowers(username: String, page: Int) -> Observable<[User]> {
+    func userFollowers(username: String, page: Int) -> Single<[User]> {
         return requestArray(.userFollowers(username: username, page: page), type: User.self)
     }
 
-    func userFollowing(username: String, page: Int) -> Observable<[User]> {
+    func userFollowing(username: String, page: Int) -> Single<[User]> {
         return requestArray(.userFollowing(username: username, page: page), type: User.self)
     }
 
-    func events(page: Int) -> Observable<[Event]> {
+    func events(page: Int) -> Single<[Event]> {
         return requestArray(.events(page: page), type: Event.self)
     }
 
-    func repositoryEvents(owner: String, repo: String, page: Int) -> Observable<[Event]> {
+    func repositoryEvents(owner: String, repo: String, page: Int) -> Single<[Event]> {
         return requestArray(.repositoryEvents(owner: owner, repo: repo, page: page), type: Event.self)
     }
 
-    func userReceivedEvents(username: String, page: Int) -> Observable<[Event]> {
+    func userReceivedEvents(username: String, page: Int) -> Single<[Event]> {
         return requestArray(.userReceivedEvents(username: username, page: page), type: Event.self)
     }
 
-    func userPerformedEvents(username: String, page: Int) -> Observable<[Event]> {
+    func userPerformedEvents(username: String, page: Int) -> Single<[Event]> {
         return requestArray(.userPerformedEvents(username: username, page: page), type: Event.self)
     }
 
     // MARK: - Authentication is required
 
-    func profile() -> Observable<User> {
+    func profile() -> Single<User> {
         return requestObject(.profile, type: User.self)
     }
 
-    func notifications(all: Bool, participating: Bool, page: Int) -> Observable<[Notification]> {
+    func notifications(all: Bool, participating: Bool, page: Int) -> Single<[Notification]> {
         return requestArray(.notifications(all: all, participating: participating, page: page), type: Notification.self)
     }
 
-    func repositoryNotifications(fullName: String, all: Bool, participating: Bool, page: Int) -> Observable<[Notification]> {
-        return requestArray(.repositoryNotifications(fullName: fullName, all: all, participating: participating, page: page), type: Notification.self)
+    func repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int) -> Single<[Notification]> {
+        return requestArray(.repositoryNotifications(fullname: fullname, all: all, participating: participating, page: page), type: Notification.self)
+    }
+
+    func checkStarring(fullname: String) -> Single<Void> {
+        return requestWithoutMapping(.checkStarring(fullname: fullname)).map { _ in }
+    }
+
+    func starRepository(fullname: String) -> Single<Void> {
+        return requestWithoutMapping(.starRepository(fullname: fullname)).map { _ in }
+    }
+
+    func unstarRepository(fullname: String) -> Single<Void> {
+        return requestWithoutMapping(.unstarRepository(fullname: fullname)).map { _ in }
+    }
+
+    func checkFollowing(username: String) -> Single<Void> {
+        return requestWithoutMapping(.checkFollowing(username: username)).map { _ in }
+    }
+
+    func followUser(username: String) -> Single<Void> {
+        return requestWithoutMapping(.followUser(username: username)).map { _ in }
+    }
+
+    func unfollowUser(username: String) -> Single<Void> {
+        return requestWithoutMapping(.unfollowUser(username: username)).map { _ in }
     }
 }
 
 extension Api {
-    private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Observable<T> {
+    private func request(_ target: GithubAPI) -> Single<Any> {
+        return provider.request(target)
+            .mapJSON()
+            .observeOn(MainScheduler.instance)
+            .asSingle()
+    }
+
+    private func requestWithoutMapping(_ target: GithubAPI) -> Single<Moya.Response> {
+        return provider.request(target)
+            .observeOn(MainScheduler.instance)
+            .asSingle()
+    }
+
+    private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
         return provider.request(target)
             .mapObject(T.self)
             .observeOn(MainScheduler.instance)
+            .asSingle()
     }
 
-    private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Observable<[T]> {
+    private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
         return provider.request(target)
             .mapArray(T.self)
             .observeOn(MainScheduler.instance)
+            .asSingle()
     }
 }

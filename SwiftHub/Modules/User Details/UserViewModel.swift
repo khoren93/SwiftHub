@@ -52,7 +52,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
         input.headerRefresh.flatMapLatest { [weak self] () -> Observable<User> in
             guard let self = self else { return Observable.just(User()) }
-            let request: Observable<User>
+            let request: Single<User>
             if let user = self.user.value, !user.isMine() {
                 let owner = user.login ?? ""
                 switch user.type {

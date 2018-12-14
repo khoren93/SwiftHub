@@ -66,12 +66,12 @@ struct Event: Mappable {
 
         payload = Mapper<Payload>().map(JSON: map.JSON)
 
-        if let fullName = repository?.name {
-            let parts = fullName.components(separatedBy: "/")
+        if let fullname = repository?.name {
+            let parts = fullname.components(separatedBy: "/")
             repository?.name = parts.last
             repository?.owner = User()
             repository?.owner?.login = parts.first
-            repository?.fullName = fullName
+            repository?.fullname = fullname
         }
     }
 }

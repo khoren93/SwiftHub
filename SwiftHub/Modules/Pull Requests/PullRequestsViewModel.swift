@@ -61,7 +61,7 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         let navigationTitle = repository.map({ (repository) -> String in
-            return repository.fullName ?? ""
+            return repository.fullname ?? ""
         }).asDriver(onErrorJustReturn: "")
 
         let pullRequestSelected = input.selection.map { (cellViewModel) -> URL? in
@@ -81,9 +81,9 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[PullRequestCellViewModel]> {
-        let fullname = repository.value.fullName ?? ""
+        let fullname = repository.value.fullname ?? ""
         let state = segment.value.state.rawValue
-        return provider.pullRequests(fullName: fullname, state: state, page: page)
+        return provider.pullRequests(fullname: fullname, state: state, page: page)
             .trackActivity(loading)
             .trackError(error)
             .map { $0.map({ (pullRequest) -> PullRequestCellViewModel in

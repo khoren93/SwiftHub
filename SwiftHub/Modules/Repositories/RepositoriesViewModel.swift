@@ -99,14 +99,14 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[RepositoryCellViewModel]> {
-        var request: Observable<[Repository]>
+        var request: Single<[Repository]>
         switch self.mode.value {
         case .userRepositories(let user):
             request = provider.userRepositories(username: user.login ?? "", page: page)
         case .userStarredRepositories(let user):
             request = provider.userStarredRepositories(username: user.login ?? "", page: page)
         case .forks(let repository):
-            request = provider.forks(fullName: repository.fullName ?? "", page: page)
+            request = provider.forks(fullname: repository.fullname ?? "", page: page)
         }
         return request
             .trackActivity(loading)

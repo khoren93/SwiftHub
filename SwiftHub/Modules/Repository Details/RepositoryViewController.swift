@@ -29,12 +29,28 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
+    lazy var starButton: Button = {
+        let view = Button()
+        view.borderColor = .white
+        view.borderWidth = Configs.BaseDimensions.borderWidth
+        view.imageForNormal = R.image.icon_button_star()?.template
+        view.tintColor = .white
+        view.cornerRadius = 20
+        return view
+    }()
+
     lazy var headerStackView: StackView = {
         let imageView = View()
         imageView.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
+        })
+        imageView.addSubview(self.starButton)
+        self.starButton.snp.remakeConstraints({ (make) in
+            make.bottom.equalTo(self.ownerImageView)
+            make.right.equalTo(self.ownerImageView).offset(15)
+            make.size.equalTo(40)
         })
         let subviews: [UIView] = [imageView]
         let view = StackView(arrangedSubviews: subviews)
@@ -108,7 +124,8 @@ class RepositoryViewController: TableViewController {
                                               watchersSelection: watchersButton.rx.tap.asObservable(),
                                               starsSelection: starsButton.rx.tap.asObservable(),
                                               forksSelection: forksButton.rx.tap.asObservable(),
-                                              selection: tableView.rx.modelSelected(RepositorySectionItem.self).asDriver())
+                                              selection: tableView.rx.modelSelected(RepositorySectionItem.self).asDriver(),
+                                              starSelection: starButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -170,14 +187,14 @@ class RepositoryViewController: TableViewController {
             case .readmeItem:
                 if let url = self?.viewModel.readme.value?.htmlUrl?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
-                    if let fullname = self?.viewModel.repository.value.fullName {
+                    if let fullname = self?.viewModel.repository.value.fullname {
                         analytics.log(.readme(fullname: fullname))
                     }
                 }
             case .sourceItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
                     self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
-                    if let fullname = viewModel.repository.value.fullName {
+                    if let fullname = viewModel.repository.value.fullname {
                         analytics.log(.source(fullname: fullname))
                     }
                 }
@@ -196,6 +213,11 @@ class RepositoryViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
+
+        output.starring.map { (starred) -> UIImage? in
+            let image = starred ? R.image.icon_button_unstar() : R.image.icon_button_star()
+            return image?.template
+        }.drive(starButton.rx.image()).disposed(by: rx.disposeBag)
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.repositoryWatchersButtonTitle.key.localized()

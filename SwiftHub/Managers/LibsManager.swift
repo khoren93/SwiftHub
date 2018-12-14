@@ -27,6 +27,7 @@ import PMAlertController
 import KafkaRefresh
 import Umbrella
 import Mixpanel
+import Firebase
 
 typealias AlertController = PMAlertController
 typealias AlertAction = PMAlertAction
@@ -41,7 +42,6 @@ class LibsManager: NSObject {
     func setupLibs(with window: UIWindow? = nil) {
         let libsManager = LibsManager.shared
         libsManager.setupCocoaLumberjack()
-        libsManager.setupFabric()
         libsManager.setupAnalytics()
         libsManager.setupTheme()
         libsManager.setupKafkaRefresh()
@@ -100,14 +100,13 @@ class LibsManager: NSObject {
         FLEXManager.shared().isNetworkDebuggingEnabled = true
     }
 
-    func setupFabric() {
-        //Fabric.with([Crashlytics.self])
-        //Fabric.sharedSDK().debug = false
-    }
-
     func setupAnalytics() {
+        FirebaseApp.configure()
         Mixpanel.sharedInstance(withToken: Keys.mixpanel.apiKey)
+        Fabric.with([Crashlytics.self])
+        Fabric.sharedSDK().debug = false
         analytics.register(provider: MixpanelProvider())
+        analytics.register(provider: FirebaseProvider())
     }
 }
 
