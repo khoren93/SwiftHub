@@ -57,7 +57,7 @@ class ContentsViewModel: ViewModel, ViewModelType {
         let openUrl = input.selection.map { $0.content }.filter { $0.type != .dir }.map { $0.htmlUrl?.url }.filterNil()
 
         let navigationTitle = content.map({ (content) -> String in
-            return content?.name ?? self.repository.value.fullName ?? ""
+            return content?.name ?? self.repository.value.fullname ?? ""
         }).asDriver(onErrorJustReturn: "")
 
         return Output(navigationTitle: navigationTitle,
@@ -67,10 +67,10 @@ class ContentsViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[ContentCellViewModel]> {
-        let fullName = repository.value.fullName ?? ""
+        let fullname = repository.value.fullname ?? ""
         let path = content.value?.path ?? ""
         let ref = self.ref.value
-        return provider.contents(fullName: fullName, path: path, ref: ref)
+        return provider.contents(fullname: fullname, path: path, ref: ref)
             .trackActivity(loading)
             .trackError(error)
             .map { $0.sorted(by: { (lhs, rhs) -> Bool in

@@ -24,7 +24,7 @@ class NotificationCellViewModel {
         self.notification = notification
 
         let actionText = notification.subject?.title ?? ""
-        let repoName = notification.repository?.fullName ?? ""
+        let repoName = notification.repository?.fullname ?? ""
 
         title = Driver.just([repoName, actionText].joined(separator: "\n"))
         detail = Driver.just("\(notification.updatedAt?.toRelative() ?? "")")

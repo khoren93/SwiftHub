@@ -43,7 +43,7 @@ class EventsViewModel: ViewModel, ViewModelType {
         super.init(provider: provider)
         switch mode {
         case .repository(let repository):
-            if let fullname = repository.fullName {
+            if let fullname = repository.fullname {
                 analytics.log(.repositoryEvents(fullname: fullname))
             }
         case .user(let user):
@@ -117,7 +117,7 @@ class EventsViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[EventCellViewModel]> {
-        var request: Observable<[Event]>
+        var request: Single<[Event]>
         switch mode.value {
         case .repository(let repository):
             request = provider.repositoryEvents(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: page)

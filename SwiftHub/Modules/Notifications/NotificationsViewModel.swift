@@ -101,12 +101,12 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[NotificationCellViewModel]> {
-        var request: Observable<[Notification]>
+        var request: Single<[Notification]>
         switch mode.value {
         case .mine:
             request = provider.notifications(all: all.value, participating: participating.value, page: page)
         case .repository(let repository):
-            request = provider.repositoryNotifications(fullName: repository.fullName ?? "", all: all.value, participating: participating.value, page: page)
+            request = provider.repositoryNotifications(fullname: repository.fullname ?? "", all: all.value, participating: participating.value, page: page)
         }
         return request
             .trackActivity(loading)

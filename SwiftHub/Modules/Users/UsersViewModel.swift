@@ -107,18 +107,18 @@ class UsersViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[UserCellViewModel]> {
-        var request: Observable<[User]>
+        var request: Single<[User]>
         switch self.mode.value {
         case .followers(let user):
             request = provider.userFollowers(username: user.login ?? "", page: page)
         case .following(let user):
             request = provider.userFollowing(username: user.login ?? "", page: page)
         case .watchers(let repository):
-            request = provider.watchers(fullName: repository.fullName ?? "", page: page)
+            request = provider.watchers(fullname: repository.fullname ?? "", page: page)
         case .stars(let repository):
-            request = provider.stargazers(fullName: repository.fullName ?? "", page: page)
+            request = provider.stargazers(fullname: repository.fullname ?? "", page: page)
         case .contributors(let repository):
-            request = provider.contributors(fullName: repository.fullName ?? "", page: page)
+            request = provider.contributors(fullname: repository.fullname ?? "", page: page)
         }
         return request
             .trackActivity(loading)

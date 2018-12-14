@@ -34,7 +34,7 @@ struct Repository: Mappable {
     var forks: Int?
     var forksCount: Int?
     var forksUrl: String?
-    var fullName: String?
+    var fullname: String?
     var gitCommitsUrl: String?
     var gitRefsUrl: String?
     var gitTagsUrl: String?
@@ -114,7 +114,7 @@ struct Repository: Mappable {
         forks <- map["forks"]
         forksCount <- map["forks_count"]
         forksUrl <- map["forks_url"]
-        fullName <- map["full_name"]
+        fullname <- map["full_name"]
         gitCommitsUrl <- map["git_commits_url"]
         gitRefsUrl <- map["git_refs_url"]
         gitTagsUrl <- map["git_tags_url"]

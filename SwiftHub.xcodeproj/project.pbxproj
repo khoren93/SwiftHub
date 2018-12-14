@@ -152,6 +152,8 @@
 		A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */; };
 		A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */; };
 		A09DE8E320EBB75700F6F2BF /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */; };
+		A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B521C28D9200C4C0E5 /* EmptyArray.json */; };
+		A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B721C28DA700C4C0E5 /* EmptyObject.json */; };
 		A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0752101F77C000DA282 /* UsersViewController.swift */; };
 		A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0772101F789000DA282 /* UsersViewModel.swift */; };
 		A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0792101FCE4000DA282 /* UserFollowers.json */; };
@@ -379,6 +381,8 @@
 		A09DE8DE20E7CDE600F6F2BF /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideImageView.swift; sourceTree = "<group>"; };
 		A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		A0CE88B521C28D9200C4C0E5 /* EmptyArray.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EmptyArray.json; sourceTree = "<group>"; };
+		A0CE88B721C28DA700C4C0E5 /* EmptyObject.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EmptyObject.json; sourceTree = "<group>"; };
 		A0E2B0752101F77C000DA282 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		A0E2B0772101F789000DA282 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		A0E2B0792101FCE4000DA282 /* UserFollowers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserFollowers.json; sourceTree = "<group>"; };
@@ -766,6 +770,8 @@
 		A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				A0CE88B521C28D9200C4C0E5 /* EmptyArray.json */,
+				A0CE88B721C28DA700C4C0E5 /* EmptyObject.json */,
 				073204542141377D00C1E39F /* Events.json */,
 				073204562141379500C1E39F /* EventsRepository.json */,
 				0732045A214137B800C1E39F /* EventsUserPerformed.json */,
@@ -1140,6 +1146,7 @@
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07241D2121B18A7400F800BD /* PullRequestCell.xib in Resources */,
 				07FC33811FFFE52A00D53888 /* .swiftlint.yml in Resources */,
+				A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */,
 				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
 				07241D1921B1768E00F800BD /* CommitCell.xib in Resources */,
@@ -1160,6 +1167,7 @@
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
+				A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07D46E5721920EDF008E5369 /* RepositoryContents.json in Resources */,

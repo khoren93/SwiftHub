@@ -20,6 +20,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let starsSelection: Observable<Void>
         let forksSelection: Observable<Void>
         let selection: Driver<RepositorySectionItem>
+        let starSelection: Observable<Void>
     }
 
     struct Output {
@@ -27,6 +28,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let name: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
+        let starring: Driver<Bool>
         let watchersCount: Driver<Int>
         let starsCount: Driver<Int>
         let forksCount: Driver<Int>
@@ -39,12 +41,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     let repository: BehaviorRelay<Repository>
     let readme = BehaviorRelay<Content?>(value: nil)
+    let starring = BehaviorRelay<Bool>(value: false)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
         super.init(provider: provider)
-        if let fullName = repository.fullName {
-            analytics.log(.repository(fullname: fullName))
+        if let fullname = repository.fullname {
+            analytics.log(.repository(fullname: fullname))
         }
     }
 
@@ -52,8 +55,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         input.headerRefresh.flatMapLatest { [weak self] () -> Observable<Repository> in
             guard let self = self else { return Observable.just(Repository()) }
-            let fullName = self.repository.value.fullName ?? ""
-            return self.provider.repository(fullName: fullName)
+            let fullname = self.repository.value.fullname ?? ""
+            return self.provider.repository(fullname: fullname)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
@@ -63,8 +66,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         input.headerRefresh.flatMapLatest { [weak self] () -> Observable<Content> in
             guard let self = self else { return Observable.just(Content()) }
-            let fullName = self.repository.value.fullName ?? ""
-            return self.provider.readme(fullName: fullName, ref: nil)
+            let fullname = self.repository.value.fullname ?? ""
+            return self.provider.readme(fullname: fullname, ref: nil)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
@@ -72,7 +75,48 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 self?.readme.accept(content)
             }).disposed(by: rx.disposeBag)
 
-        let name = repository.map { $0.fullName ?? "" }.asDriverOnErrorJustComplete()
+        let starred = input.starSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
+            guard let self = self else { return Observable.just(RxSwift.Event.next(())) }
+            let fullname = self.repository.value.fullname ?? ""
+            let starring = self.starring.value
+            let request = starring ? self.provider.unstarRepository(fullname: fullname) : self.provider.starRepository(fullname: fullname)
+            return request
+                .trackActivity(self.loading)
+                .trackError(self.error)
+                .materialize()
+                .share()
+            }
+
+        starred.subscribe(onNext: { (event) in
+            switch event {
+            case .next:
+                logDebug("Starred success")
+            case .error(let error):
+                logError("\(error.localizedDescription)")
+            case .completed: break
+            }
+        }).disposed(by: rx.disposeBag)
+
+        let refreshStarring = Observable.of(input.headerRefresh, starred.mapToVoid()).merge()
+        refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
+            guard let self = self else { return Observable.just(RxSwift.Event.next(())) }
+            let fullname = self.repository.value.fullname ?? ""
+            return self.provider.checkStarring(fullname: fullname)
+                .trackActivity(self.loading)
+                .trackError(self.error)
+                .materialize()
+                .share()
+            }.subscribe(onNext: { [weak self] (event) in
+                switch event {
+                case .next:
+                    self?.starring.accept(true)
+                case .error:
+                    self?.starring.accept(false)
+                case .completed: break
+                }
+            }).disposed(by: rx.disposeBag)
+
+        let name = repository.map { $0.fullname ?? "" }.asDriverOnErrorJustComplete()
         let description = repository.map { $0.descriptionField ?? "" }.asDriverOnErrorJustComplete()
         let watchersCount = repository.map { $0.subscribersCount ?? 0 }.asDriverOnErrorJustComplete()
         let starsCount = repository.map { $0.stargazersCount ?? 0 }.asDriverOnErrorJustComplete()
@@ -217,6 +261,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       name: name,
                       description: description,
                       imageUrl: imageUrl,
+                      starring: starring.asDriver(),
                       watchersCount: watchersCount,
                       starsCount: starsCount,
                       forksCount: forksCount,

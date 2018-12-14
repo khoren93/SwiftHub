@@ -75,7 +75,7 @@ class EventCellViewModel {
         default: break
         }
 
-        let repoName = event.repository?.fullName ?? ""
+        let repoName = event.repository?.fullname ?? ""
 
         title = Driver.just([actorName, actionText, repoName].joined(separator: " "))
         detail = Driver.just("\(event.createdAt?.toRelative() ?? "")")

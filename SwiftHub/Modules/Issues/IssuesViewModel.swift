@@ -35,8 +35,8 @@ class IssuesViewModel: ViewModel, ViewModelType {
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
         super.init(provider: provider)
-        if let fullName = repository.fullName {
-            analytics.log(.issues(fullname: fullName))
+        if let fullname = repository.fullname {
+            analytics.log(.issues(fullname: fullname))
         }
     }
 
@@ -91,9 +91,9 @@ class IssuesViewModel: ViewModel, ViewModelType {
     }
 
     func request() -> Observable<[IssueCellViewModel]> {
-        let fullname = repository.value.fullName ?? ""
+        let fullname = repository.value.fullname ?? ""
         let state = segment.value.state.rawValue
-        return provider.repositoryIssues(fullName: fullname, state: state, page: page)
+        return provider.repositoryIssues(fullname: fullname, state: state, page: page)
             .trackActivity(loading)
             .trackError(error)
             .map { $0.map({ (issue) -> IssueCellViewModel in

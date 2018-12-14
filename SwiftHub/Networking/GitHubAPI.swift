@@ -19,21 +19,21 @@ enum GithubAPI {
     // MARK: - Authentication is optional
 
     case searchRepositories(query: String)
-    case repository(fullName: String)
-    case watchers(fullName: String, page: Int)
-    case stargazers(fullName: String, page: Int)
-    case forks(fullName: String, page: Int)
-    case readme(fullName: String, ref: String?)
-    case contents(fullName: String, path: String, ref: String?)
+    case repository(fullname: String)
+    case watchers(fullname: String, page: Int)
+    case stargazers(fullname: String, page: Int)
+    case forks(fullname: String, page: Int)
+    case readme(fullname: String, ref: String?)
+    case contents(fullname: String, path: String, ref: String?)
 
-    case repositoryIssues(fullName: String, state: String, page: Int)
-    case commits(fullName: String, page: Int)
-    case commit(fullName: String, sha: String)
-    case branches(fullName: String, page: Int)
-    case branch(fullName: String, name: String)
-    case pullRequests(fullName: String, state: String, page: Int)
-    case pullRequest(fullName: String, number: Int)
-    case contributors(fullName: String, page: Int)
+    case repositoryIssues(fullname: String, state: String, page: Int)
+    case commits(fullname: String, page: Int)
+    case commit(fullname: String, sha: String)
+    case branches(fullname: String, page: Int)
+    case branch(fullname: String, name: String)
+    case pullRequests(fullname: String, state: String, page: Int)
+    case pullRequest(fullname: String, number: Int)
+    case contributors(fullname: String, page: Int)
 
     case searchUsers(query: String)
     case user(owner: String)
@@ -53,7 +53,15 @@ enum GithubAPI {
     case profile
 
     case notifications(all: Bool, participating: Bool, page: Int)
-    case repositoryNotifications(fullName: String, all: Bool, participating: Bool, page: Int)
+    case repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int)
+
+    case checkStarring(fullname: String)
+    case starRepository(fullname: String)
+    case unstarRepository(fullname: String)
+
+    case checkFollowing(username: String)
+    case followUser(username: String)
+    case unfollowUser(username: String)
 }
 
 extension GithubAPI: TargetType, ProductAPIType {
@@ -65,20 +73,20 @@ extension GithubAPI: TargetType, ProductAPIType {
     var path: String {
         switch self {
         case .searchRepositories: return "/search/repositories"
-        case .repository(let fullName): return "/repos/\(fullName)"
-        case .watchers(let fullName, _): return "/repos/\(fullName)/subscribers"
-        case .stargazers(let fullName, _): return "/repos/\(fullName)/stargazers"
-        case .forks(let fullName, _): return "/repos/\(fullName)/forks"
-        case .readme(let fullName, _): return "/repos/\(fullName)/readme"
-        case .contents(let fullName, let path, _): return "/repos/\(fullName)/contents/\(path)"
-        case .repositoryIssues(let fullName, _, _): return "/repos/\(fullName)/issues"
-        case .commits(let fullName, _): return "/repos/\(fullName)/commits"
-        case .commit(let fullName, let sha): return "/repos/\(fullName)/commits/\(sha)"
-        case .branches(let fullName, _): return "/repos/\(fullName)/branches"
-        case .branch(let fullName, let name): return "/repos/\(fullName)/branches/\(name)"
-        case .pullRequests(let fullName, _, _): return "/repos/\(fullName)/pulls"
-        case .pullRequest(let fullName, let number): return "/repos/\(fullName)/pulls/\(number)"
-        case .contributors(let fullName, _): return "/repos/\(fullName)/contributors"
+        case .repository(let fullname): return "/repos/\(fullname)"
+        case .watchers(let fullname, _): return "/repos/\(fullname)/subscribers"
+        case .stargazers(let fullname, _): return "/repos/\(fullname)/stargazers"
+        case .forks(let fullname, _): return "/repos/\(fullname)/forks"
+        case .readme(let fullname, _): return "/repos/\(fullname)/readme"
+        case .contents(let fullname, let path, _): return "/repos/\(fullname)/contents/\(path)"
+        case .repositoryIssues(let fullname, _, _): return "/repos/\(fullname)/issues"
+        case .commits(let fullname, _): return "/repos/\(fullname)/commits"
+        case .commit(let fullname, let sha): return "/repos/\(fullname)/commits/\(sha)"
+        case .branches(let fullname, _): return "/repos/\(fullname)/branches"
+        case .branch(let fullname, let name): return "/repos/\(fullname)/branches/\(name)"
+        case .pullRequests(let fullname, _, _): return "/repos/\(fullname)/pulls"
+        case .pullRequest(let fullname, let number): return "/repos/\(fullname)/pulls/\(number)"
+        case .contributors(let fullname, _): return "/repos/\(fullname)/contributors"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
         case .organization(let owner): return "/orgs/\(owner)"
@@ -93,12 +101,22 @@ extension GithubAPI: TargetType, ProductAPIType {
 
         case .profile: return "/user"
         case .notifications: return "/notifications"
-        case .repositoryNotifications(let fullName, _, _, _): return "/repos/\(fullName)/notifications"
+        case .repositoryNotifications(let fullname, _, _, _): return "/repos/\(fullname)/notifications"
+        case .checkStarring(let fullname),
+             .starRepository(let fullname),
+             .unstarRepository(let fullname): return "/user/starred/\(fullname)"
+        case .checkFollowing(let username),
+             .followUser(let username),
+             .unfollowUser(let username): return "/user/following/\(username)"
         }
     }
 
     var method: Moya.Method {
         switch self {
+        case .starRepository, .followUser:
+            return .put
+        case .unstarRepository, .unfollowUser:
+            return .delete
         default:
             return .get
         }
@@ -202,6 +220,12 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .profile: return stubbedResponse("Profile")
         case .notifications: return stubbedResponse("Notifications")
         case .repositoryNotifications: return stubbedResponse("NotificationsRepository")
+        case .checkStarring: return stubbedResponse("EmptyObject")
+        case .starRepository: return stubbedResponse("EmptyObject")
+        case .unstarRepository: return stubbedResponse("EmptyObject")
+        case .checkFollowing: return stubbedResponse("EmptyObject")
+        case .followUser: return stubbedResponse("EmptyObject")
+        case .unfollowUser: return stubbedResponse("EmptyObject")
         }
     }
 
