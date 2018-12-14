@@ -33,26 +33,25 @@ class RepositoryViewController: TableViewController {
         let view = Button()
         view.borderColor = .white
         view.borderWidth = Configs.BaseDimensions.borderWidth
-        view.imageForNormal = R.image.icon_button_star()?.template
         view.tintColor = .white
         view.cornerRadius = 20
         return view
     }()
 
     lazy var headerStackView: StackView = {
-        let imageView = View()
-        imageView.addSubview(self.ownerImageView)
+        let headerView = View()
+        headerView.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
         })
-        imageView.addSubview(self.starButton)
+        headerView.addSubview(self.starButton)
         self.starButton.snp.remakeConstraints({ (make) in
             make.bottom.equalTo(self.ownerImageView)
             make.right.equalTo(self.ownerImageView).offset(15)
             make.size.equalTo(40)
         })
-        let subviews: [UIView] = [imageView]
+        let subviews: [UIView] = [headerView]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -213,6 +212,8 @@ class RepositoryViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
+
+        output.hidesStarButton.drive(starButton.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.starring.map { (starred) -> UIImage? in
             let image = starred ? R.image.icon_button_unstar() : R.image.icon_button_star()

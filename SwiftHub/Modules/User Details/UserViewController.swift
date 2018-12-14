@@ -48,14 +48,29 @@ class UserViewController: TableViewController {
         return view
     }()
 
+    lazy var followButton: Button = {
+        let view = Button()
+        view.borderColor = .white
+        view.borderWidth = Configs.BaseDimensions.borderWidth
+        view.tintColor = .white
+        view.cornerRadius = 20
+        return view
+    }()
+
     lazy var headerStackView: StackView = {
-        let imageView = View()
-        imageView.addSubview(self.ownerImageView)
+        let headerView = View()
+        headerView.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.centerX.centerY.equalToSuperview()
             make.size.equalTo(80)
         })
-        let subviews: [UIView] = [imageView]
+        headerView.addSubview(self.followButton)
+        self.followButton.snp.remakeConstraints({ (make) in
+            make.bottom.equalTo(self.ownerImageView)
+            make.right.equalTo(self.ownerImageView).offset(15)
+            make.size.equalTo(40)
+        })
+        let subviews: [UIView] = [headerView]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -131,7 +146,8 @@ class UserViewController: TableViewController {
                                         repositoriesSelection: repositoriesButton.rx.tap.asObservable(),
                                         followersSelection: followersButton.rx.tap.asObservable(),
                                         followingSelection: followingButton.rx.tap.asObservable(),
-                                        selection: tableView.rx.modelSelected(UserSectionItem.self).asDriver())
+                                        selection: tableView.rx.modelSelected(UserSectionItem.self).asDriver(),
+                                        followSelection: followButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -182,6 +198,13 @@ class UserViewController: TableViewController {
                 self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
+
+        output.hidesFollowButton.drive(followButton.rx.isHidden).disposed(by: rx.disposeBag)
+
+        output.following.map { (followed) -> UIImage? in
+            let image = followed ? R.image.icon_button_user_x() : R.image.icon_button_user_plus()
+            return image?.template
+        }.drive(followButton.rx.image()).disposed(by: rx.disposeBag)
 
         output.repositoriesCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.userRepositoriesButtonTitle.key.localized()

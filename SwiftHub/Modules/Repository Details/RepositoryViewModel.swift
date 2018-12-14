@@ -29,6 +29,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let description: Driver<String>
         let imageUrl: Driver<URL?>
         let starring: Driver<Bool>
+        let hidesStarButton: Driver<Bool>
         let watchersCount: Driver<Int>
         let starsCount: Driver<Int>
         let forksCount: Driver<Int>
@@ -42,9 +43,11 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     let repository: BehaviorRelay<Repository>
     let readme = BehaviorRelay<Content?>(value: nil)
     let starring = BehaviorRelay<Bool>(value: false)
+    let loggedIn = BehaviorRelay<Bool>(value: false)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
+        self.loggedIn.accept(AuthManager.shared.hasToken)
         super.init(provider: provider)
         if let fullname = repository.fullname {
             analytics.log(.repository(fullname: fullname))
@@ -76,42 +79,36 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         let starred = input.starSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let fullname = self.repository.value.fullname ?? ""
             let starring = self.starring.value
             let request = starring ? self.provider.unstarRepository(fullname: fullname) : self.provider.starRepository(fullname: fullname)
             return request
                 .trackActivity(self.loading)
-                .trackError(self.error)
                 .materialize()
                 .share()
             }
 
         starred.subscribe(onNext: { (event) in
             switch event {
-            case .next:
-                logDebug("Starred success")
-            case .error(let error):
-                logError("\(error.localizedDescription)")
+            case .next: logDebug("Starred success")
+            case .error(let error): logError("\(error.localizedDescription)")
             case .completed: break
             }
         }).disposed(by: rx.disposeBag)
 
         let refreshStarring = Observable.of(input.headerRefresh, starred.mapToVoid()).merge()
         refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let fullname = self.repository.value.fullname ?? ""
             return self.provider.checkStarring(fullname: fullname)
                 .trackActivity(self.loading)
-                .trackError(self.error)
                 .materialize()
                 .share()
             }.subscribe(onNext: { [weak self] (event) in
                 switch event {
-                case .next:
-                    self?.starring.accept(true)
-                case .error:
-                    self?.starring.accept(false)
+                case .next: self?.starring.accept(true)
+                case .error: self?.starring.accept(false)
                 case .completed: break
                 }
             }).disposed(by: rx.disposeBag)
@@ -122,6 +119,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let starsCount = repository.map { $0.stargazersCount ?? 0 }.asDriverOnErrorJustComplete()
         let forksCount = repository.map { $0.forks ?? 0 }.asDriverOnErrorJustComplete()
         let imageUrl = repository.map { $0.owner?.avatarUrl?.url }.asDriverOnErrorJustComplete()
+        let hidesStarButton = loggedIn.map { !$0 }.asDriver(onErrorJustReturn: false)
 
         let imageSelected = input.imageSelection.asDriver(onErrorJustReturn: ())
             .map { () -> UserViewModel in
@@ -262,6 +260,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       description: description,
                       imageUrl: imageUrl,
                       starring: starring.asDriver(),
+                      hidesStarButton: hidesStarButton,
                       watchersCount: watchersCount,
                       starsCount: starsCount,
                       forksCount: forksCount,

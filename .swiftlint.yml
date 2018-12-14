@@ -26,7 +26,7 @@ force_try:
 line_length: 300
 
 function_body_length:
-  - 150 # warning
+  - 200 # warning
   - 300 # error
 
 function_parameter_count:

@@ -20,6 +20,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let followersSelection: Observable<Void>
         let followingSelection: Observable<Void>
         let selection: Driver<UserSectionItem>
+        let followSelection: Observable<Void>
     }
 
     struct Output {
@@ -28,6 +29,8 @@ class UserViewModel: ViewModel, ViewModelType {
         let fullname: Driver<String>
         let description: Driver<String>
         let imageUrl: Driver<URL?>
+        let following: Driver<Bool>
+        let hidesFollowButton: Driver<Bool>
         let repositoriesCount: Driver<Int>
         let followersCount: Driver<Int>
         let followingCount: Driver<Int>
@@ -39,9 +42,12 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     let user: BehaviorRelay<User?>
+    let following = BehaviorRelay<Bool>(value: false)
+    let loggedIn = BehaviorRelay<Bool>(value: false)
 
     init(user: User?, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
+        self.loggedIn.accept(AuthManager.shared.hasToken)
         super.init(provider: provider)
         if let login = user?.login {
             analytics.log(.user(login: login))
@@ -70,6 +76,41 @@ class UserViewModel: ViewModel, ViewModelType {
                 self?.user.accept(user)
             }).disposed(by: rx.disposeBag)
 
+        let followed = input.followSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
+            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            let username = self.user.value?.login ?? ""
+            let following = self.following.value
+            let request = following ? self.provider.unfollowUser(username: username) : self.provider.followUser(username: username)
+            return request
+                .trackActivity(self.loading)
+                .materialize()
+                .share()
+        }
+
+        followed.subscribe(onNext: { (event) in
+            switch event {
+            case .next: logDebug("Followed success")
+            case .error(let error): logError("\(error.localizedDescription)")
+            case .completed: break
+            }
+        }).disposed(by: rx.disposeBag)
+
+        let refreshStarring = Observable.of(input.headerRefresh, followed.mapToVoid()).merge()
+        refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
+            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            let username = self.user.value?.login ?? ""
+            return self.provider.checkFollowing(username: username)
+                .trackActivity(self.loading)
+                .materialize()
+                .share()
+            }.subscribe(onNext: { [weak self] (event) in
+                switch event {
+                case .next: self?.following.accept(true)
+                case .error: self?.following.accept(false)
+                case .completed: break
+            }
+        }).disposed(by: rx.disposeBag)
+
         let username = user.map { $0?.login ?? "" }.asDriverOnErrorJustComplete()
         let fullname = user.map { $0?.name ?? "" }.asDriverOnErrorJustComplete()
         let description = user.map { $0?.descriptionField ?? "" }.asDriverOnErrorJustComplete()
@@ -81,6 +122,11 @@ class UserViewModel: ViewModel, ViewModelType {
         let openInWebSelected = input.openInWebSelection.map { () -> URL? in
             self.user.value?.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
+
+        let hidesFollowButton = loggedIn.map({ (loggedIn) -> Bool in
+            guard let user = self.user.value, loggedIn == true else { return true }
+            return user.isMine() == true
+        }).asDriver(onErrorJustReturn: false)
 
         let repositoriesSelected = input.repositoriesSelection.asDriver(onErrorJustReturn: ())
             .map { () -> RepositoriesViewModel in
@@ -137,6 +183,8 @@ class UserViewModel: ViewModel, ViewModelType {
                       fullname: fullname,
                       description: description,
                       imageUrl: imageUrl,
+                      following: following.asDriver(),
+                      hidesFollowButton: hidesFollowButton,
                       repositoriesCount: repositoriesCount,
                       followersCount: followersCount,
                       followingCount: followingCount,
