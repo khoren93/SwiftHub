@@ -4,8 +4,8 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 ## Screenshots
 
 <img alt="01_search_repository_screen_light" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen_light.png?raw=true" width="290">&nbsp;
-<img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen_dark.png?raw=true" width="290">&nbsp;
-<img alt="01_search_repository_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_events_screen_dark.png?raw=true" width="290">&nbsp;
+<img alt="02_repository_details_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen_dark.png?raw=true" width="290">&nbsp;
+<img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen_dark.png?raw=true" width="290">&nbsp;
 
 ## Features
 - [x] Basic authentication
@@ -19,9 +19,9 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Support iPhone and iPad (Split View)
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
+- [x] Whats New ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
-- [ ] More screens
 - [ ] Add tests
 
 ## Building and Running
