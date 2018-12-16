@@ -19,6 +19,7 @@ enum SwifthubEvent {
     case appLanguage(language: String)
     case appCacheRemoved
     case acknowledgements
+    case whatsNew
     case flexOpened
 
     case login(login: String)
@@ -42,6 +43,7 @@ extension SwifthubEvent: Umbrella.EventType {
         case .appLanguage: return "Language"
         case .appCacheRemoved: return "Cache Removed"
         case .acknowledgements: return "Acknowledgements"
+        case .whatsNew: return "Whats New"
         case .flexOpened: return "Flex Opened"
         case .login: return "Login"
         case .logout: return "Logout"

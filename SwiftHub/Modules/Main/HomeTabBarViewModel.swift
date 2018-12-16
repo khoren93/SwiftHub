@@ -9,19 +9,26 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import WhatsNewKit
 
 class HomeTabBarViewModel: ViewModel, ViewModelType {
 
-    struct Input { }
+    struct Input {
+        let whatsNewTrigger: Observable<Void>
+    }
 
     struct Output {
         let tabBarItems: Driver<[HomeTabBarItem]>
+        let openWhatsNew: Driver<WhatsNewBlock>
     }
 
     let loggedIn: BehaviorRelay<Bool>
 
+    let whatsNewManager: WhatsNewManager
+
     init(loggedIn: Bool, provider: SwiftHubAPI) {
         self.loggedIn = BehaviorRelay(value: loggedIn)
+        whatsNewManager = WhatsNewManager.shared
         super.init(provider: provider)
     }
 
@@ -35,7 +42,10 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             }
         }.asDriver(onErrorJustReturn: [])
 
-        return Output(tabBarItems: tabBarItems)
+        let whatsNewItems = Driver.just(whatsNewManager.whatsNew())
+
+        return Output(tabBarItems: tabBarItems,
+                      openWhatsNew: whatsNewItems)
     }
 
     func viewModel(for tabBarItem: HomeTabBarItem) -> ViewModel {

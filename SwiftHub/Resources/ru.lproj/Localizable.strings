@@ -87,6 +87,7 @@
 "Settings.RemoveCache.Alert.SuccessMessage" = "Кэш успешно очищен";
 "Settings.SupportSection.Title" = "Поддержка";
 "Settings.Acknowledgements.Title" = "Признательность";
+"Settings.WhatsNew.Title" = "Что Нового";
 "Settings.LogOut.Title" = "Выйти";
 "Settings.Logout.Alert.Message" = "Вы действительно хотите выйти из SwiftHub?";
 "Settings.Logout.Alert.ConfirmButton.Title" = "Выйти";
@@ -109,3 +110,12 @@
 "Users.WatchersNavigation.Title" = "Наблюдатели";
 "Users.StargazersNavigation.Title" = "Звездочеты";
 "Users.ContributorsNavigation.Title" = "Вкладчики";
+/* Whats New */
+"WhatsNew.Title" = "Что Нового";
+"WhatsNew.Item1.Title" = "WhatsNewKit";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit позволяет вам легко продемонстрировать свои потрясающие новые функции приложения.";
+"WhatsNew.Item2.Title" = "Темы";
+"WhatsNew.Item2.Subtitle" = "Вы можете применять различные темы с светлыми и темными режимами";
+"WhatsNew.Item3.Title" = "Открытый исходный код";
+"WhatsNew.Item3.Subtitle" = "SwiftHub полностью с открытым исходным кодом\nЗвезды очень приветствуются ★";
+"WhatsNew.CompletionButton.Title" = "Продолжить";

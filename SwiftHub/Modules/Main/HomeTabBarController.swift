@@ -128,7 +128,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
     }
 
     func bindViewModel() {
-        let input = HomeTabBarViewModel.Input()
+        let input = HomeTabBarViewModel.Input(whatsNewTrigger: rx.viewDidAppear.mapToVoid())
         let output = viewModel.transform(input: input)
 
         output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
@@ -137,6 +137,10 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
                 strongSelf.setViewControllers(controllers, animated: false)
                 strongSelf.navigator.injectTabBarControllers(in: strongSelf)
             }
+        }).disposed(by: rx.disposeBag)
+
+        output.openWhatsNew.drive(onNext: { [weak self](block) in
+            self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
     }
 }

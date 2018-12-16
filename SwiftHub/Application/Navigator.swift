@@ -13,6 +13,7 @@ import RxCocoa
 import SafariServices
 import Hero
 import AcknowList
+import WhatsNewKit
 
 protocol Navigatable {
     var navigator: Navigator! { get set }
@@ -37,6 +38,7 @@ class Navigator {
         case theme(viewModel: ThemeViewModel)
         case language(viewModel: LanguageViewModel)
         case acknowledgements
+        case whatsNew(block: WhatsNewBlock)
         case safari(URL)
         case safariController(URL)
         case webController(URL)
@@ -54,7 +56,7 @@ class Navigator {
     }
 
     // MARK: - get a single VC
-    func get(segue: Scene) -> UIViewController {
+    func get(segue: Scene) -> UIViewController? {
         switch segue {
         case .tabs(let viewModel):
             let rootVC = R.storyboard.main.homeTabBarController()!
@@ -131,9 +133,16 @@ class Navigator {
             let vc = AcknowListViewController()
             return vc
 
+        case .whatsNew(let block):
+            if let versionStore = block.2 {
+                return WhatsNewViewController(whatsNew: block.0, configuration: block.1, versionStore: versionStore)
+            } else {
+                return WhatsNewViewController(whatsNew: block.0, configuration: block.1)
+            }
+
         case .safari(let url):
             UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-            return ViewController()
+            return nil
 
         case .safariController(let url):
             let vc = SFSafariViewController(url: url)
@@ -179,9 +188,9 @@ class Navigator {
 
     // MARK: - invoke a single segue
     func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .cover(direction: .left))) {
-        let target = get(segue: segue)
-
-        show(target: target, sender: sender, transition: transition)
+        if let target = get(segue: segue) {
+            show(target: target, sender: sender, transition: transition)
+        }
     }
 
     private func show(target: UIViewController, sender: UIViewController?, transition: Transition) {

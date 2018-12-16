@@ -19,6 +19,7 @@
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
+		071F761B21C6756D003EEB35 /* WhatsNewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071F761A21C6756D003EEB35 /* WhatsNewManager.swift */; };
 		07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0421B1740000F800BD /* RepositoryCommits.json */; };
 		07241D0721B1741800F800BD /* RepositoryCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0621B1741800F800BD /* RepositoryCommit.json */; };
 		07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0821B1742700F800BD /* RepositoryBranches.json */; };
@@ -235,6 +236,7 @@
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		071F761A21C6756D003EEB35 /* WhatsNewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewManager.swift; sourceTree = "<group>"; };
 		07241D0421B1740000F800BD /* RepositoryCommits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommits.json; sourceTree = "<group>"; };
 		07241D0621B1741800F800BD /* RepositoryCommit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommit.json; sourceTree = "<group>"; };
 		07241D0821B1742700F800BD /* RepositoryBranches.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryBranches.json; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				07FC337B1FFFE4E300D53888 /* LibsManager.swift */,
 				07FC337C1FFFE4E300D53888 /* LogManager.swift */,
 				07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */,
+				071F761A21C6756D003EEB35 /* WhatsNewManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1264,6 +1267,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Umbrella/Umbrella.framework",
+				"${BUILT_PRODUCTS_DIR}/WhatsNewKit/WhatsNewKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1309,6 +1313,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Umbrella.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNewKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1438,6 +1443,7 @@
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
 				A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */,
+				071F761B21C6756D003EEB35 /* WhatsNewManager.swift in Sources */,
 				0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */,
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
 				07FC33871FFFE68800D53888 /* Api.swift in Sources */,

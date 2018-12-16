@@ -87,6 +87,7 @@
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache-ը հաջողությամբ մաքրվել է";
 "Settings.SupportSection.Title" = "Աջակցություն";
 "Settings.Acknowledgements.Title" = "Երախտագիտություն";
+"Settings.WhatsNew.Title" = "Ինչ է Նոր";
 "Settings.LogOut.Title" = "Դուրս գալ";
 "Settings.Logout.Alert.Message" = "Ցանկանում ե՞ք դուրս գալ SwiftHub-ից:";
 "Settings.Logout.Alert.ConfirmButton.Title" = "Ելք";
@@ -109,3 +110,12 @@
 "Users.WatchersNavigation.Title" = "Դիտորդներ";
 "Users.StargazersNavigation.Title" = "Աստղանշողներ";
 "Users.ContributorsNavigation.Title" = "Ներդրողներ";
+/* Whats New */
+"WhatsNew.Title" = "Ինչ է Նոր";
+"WhatsNew.Item1.Title" = "WhatsNewKit";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit- ը Ձեզ հնարավորություն է տալիս հեշտությամբ ցուցադրել ձեր հիանալի հավելվածի նոր առանձնահատկությունները:";
+"WhatsNew.Item2.Title" = "Գունային Թեմաներ";
+"WhatsNew.Item2.Subtitle" = "Դուք կարող եք կիրառել տարբեր Գունային թեմաներ բաց եւ մուգ եղանակներով";
+"WhatsNew.Item3.Title" = "Բաց կոդով";
+"WhatsNew.Item3.Subtitle" = "SwiftHub-ը լիովին բաց կոդով է\nԱստղերը շատ ողջունելի են ★";
+"WhatsNew.CompletionButton.Title" = "Շարունակել";

@@ -56,6 +56,7 @@ class SettingsViewController: TableViewController {
                  .languageItem(let viewModel),
                  .removeCacheItem(let viewModel),
                  .acknowledgementsItem(let viewModel),
+                 .whatsNewItem(let viewModel),
                  .logoutItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
                 cell.bind(to: viewModel)
@@ -88,6 +89,11 @@ class SettingsViewController: TableViewController {
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 analytics.log(.acknowledgements)
+            case .whatsNewItem:
+                if let block = self?.viewModel.whatsNewBlock() {
+                    self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
+                    analytics.log(.whatsNew)
+                }
             case .logoutItem:
                 self?.deselectSelectedRow()
                 self?.logout()

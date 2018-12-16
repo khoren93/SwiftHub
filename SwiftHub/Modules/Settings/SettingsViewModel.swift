@@ -27,8 +27,11 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     let loggedIn: BehaviorRelay<Bool>
 
+    let whatsNewManager: WhatsNewManager
+
     init(loggedIn: BehaviorRelay<Bool>, provider: SwiftHubAPI) {
         self.loggedIn = loggedIn
+        whatsNewManager = WhatsNewManager.shared
         super.init(provider: provider)
     }
 
@@ -53,6 +56,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let acknowledgementsModel = SettingModel(leftImage: R.image.icon_cell_acknowledgements.name, title: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: "", showDisclosure: true)
             let acknowledgementsCellViewModel = SettingCellViewModel(with: acknowledgementsModel)
 
+            let whatsNewModel = SettingModel(leftImage: R.image.icon_cell_whats_new.name, title: R.string.localizable.settingsWhatsNewTitle.key.localized(), detail: "", showDisclosure: true)
+            let whatsNewCellViewModel = SettingCellViewModel(with: whatsNewModel)
+
             var items = [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
                         SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
@@ -61,7 +67,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
                         SettingsSectionItem.removeCacheItem(viewModel: removeCacheCellViewModel)
                     ]),
                 SettingsSection.setting(title: R.string.localizable.settingsSupportSectionTitle.key.localized(), items: [
-                    SettingsSectionItem.acknowledgementsItem(viewModel: acknowledgementsCellViewModel)
+                    SettingsSectionItem.acknowledgementsItem(viewModel: acknowledgementsCellViewModel),
+                    SettingsSectionItem.whatsNewItem(viewModel: whatsNewCellViewModel)
                     ])
             ]
 
@@ -105,5 +112,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
         default:
             return nil
         }
+    }
+
+    func whatsNewBlock() -> WhatsNewBlock {
+        return whatsNewManager.whatsNew(trackVersion: false)
     }
 }

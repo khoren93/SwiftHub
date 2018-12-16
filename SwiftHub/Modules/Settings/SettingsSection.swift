@@ -19,6 +19,7 @@ enum SettingsSectionItem {
     case languageItem(viewModel: SettingCellViewModel)
     case removeCacheItem(viewModel: SettingCellViewModel)
     case acknowledgementsItem(viewModel: SettingCellViewModel)
+    case whatsNewItem(viewModel: SettingCellViewModel)
     case logoutItem(viewModel: SettingCellViewModel)
 }
 

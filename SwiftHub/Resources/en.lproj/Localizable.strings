@@ -87,6 +87,7 @@
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache Successfully Cleared";
 "Settings.SupportSection.Title" = "Support";
 "Settings.Acknowledgements.Title" = "Acknowledgements";
+"Settings.WhatsNew.Title" = "Whats New";
 "Settings.LogOut.Title" = "Log Out";
 "Settings.Logout.Alert.Message" = "Are you sure want to log out from WishApp?";
 "Settings.Logout.Alert.ConfirmButton.Title" = "Logout";
@@ -109,3 +110,12 @@
 "Users.WatchersNavigation.Title" = "Watchers";
 "Users.StargazersNavigation.Title" = "Stargazers";
 "Users.ContributorsNavigation.Title" = "Contributors";
+/* Whats New */
+"WhatsNew.Title" = "Whats New";
+"WhatsNew.Item1.Title" = "WhatsNewKit";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit enables you to easily showcase your awesome new app features.";
+"WhatsNew.Item2.Title" = "Themes";
+"WhatsNew.Item2.Subtitle" = "You can apply different themes with Light and Dark modes";
+"WhatsNew.Item3.Title" = "Open Source";
+"WhatsNew.Item3.Subtitle" = "SwiftHub is fully open source\nStars are very welcome ★";
+"WhatsNew.CompletionButton.Title" = "Continue";
