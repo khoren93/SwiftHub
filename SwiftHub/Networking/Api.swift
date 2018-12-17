@@ -56,11 +56,24 @@ protocol SwiftHubAPI {
     func checkFollowing(username: String) -> Single<Void>
     func followUser(username: String) -> Single<Void>
     func unfollowUser(username: String) -> Single<Void>
+
+    // MARK: - Trending
+    func trendingRepositories(language: String, since: String) -> Single<[TrendingRepository]>
+    func trendingDevelopers(language: String, since: String) -> Single<[TrendingUser]>
+    func languages() -> Single<LanguageSection>
 }
 
 class Api: SwiftHubAPI {
     static let shared = Api()
-    var provider = Configs.Network.useStaging ? Networking.newStubbingNetworking() : Networking.newDefaultNetworking()
+
+    let githubProvider: GithubNetworking
+    let trendingGithubProvider: TrendingGithubNetworking
+
+    init() {
+        let staging = Configs.Network.useStaging
+        githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
+        trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
+    }
 }
 
 extension Api {
@@ -207,31 +220,60 @@ extension Api {
     func unfollowUser(username: String) -> Single<Void> {
         return requestWithoutMapping(.unfollowUser(username: username)).map { _ in }
     }
+
+    // MARK: - Trending
+    func trendingRepositories(language: String, since: String) -> Single<[TrendingRepository]> {
+        return trendingRequestArray(.trendingRepositories(language: language, since: since), type: TrendingRepository.self)
+    }
+
+    func trendingDevelopers(language: String, since: String) -> Single<[TrendingUser]> {
+        return trendingRequestArray(.trendingDevelopers(language: language, since: since), type: TrendingUser.self)
+    }
+
+    func languages() -> Single<LanguageSection> {
+        return trendingRequestObject(.languages, type: LanguageSection.self)
+    }
 }
 
 extension Api {
     private func request(_ target: GithubAPI) -> Single<Any> {
-        return provider.request(target)
+        return githubProvider.request(target)
             .mapJSON()
             .observeOn(MainScheduler.instance)
             .asSingle()
     }
 
     private func requestWithoutMapping(_ target: GithubAPI) -> Single<Moya.Response> {
-        return provider.request(target)
+        return githubProvider.request(target)
             .observeOn(MainScheduler.instance)
             .asSingle()
     }
 
     private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
-        return provider.request(target)
+        return githubProvider.request(target)
             .mapObject(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()
     }
 
     private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
-        return provider.request(target)
+        return githubProvider.request(target)
+            .mapArray(T.self)
+            .observeOn(MainScheduler.instance)
+            .asSingle()
+    }
+}
+
+extension Api {
+    private func trendingRequestObject<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<T> {
+        return trendingGithubProvider.request(target)
+            .mapObject(T.self)
+            .observeOn(MainScheduler.instance)
+            .asSingle()
+    }
+
+    private func trendingRequestArray<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<[T]> {
+        return trendingGithubProvider.request(target)
             .mapArray(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()

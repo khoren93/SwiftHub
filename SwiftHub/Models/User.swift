@@ -68,6 +68,12 @@ struct User: Mappable {
 
     init?(map: Map) {}
     init() {}
+    init(user: TrendingUser) {
+        login = user.username
+        name = user.name
+        htmlUrl = user.url
+        avatarUrl = user.avatar
+    }
 
     mutating func mapping(map: Map) {
         avatarUrl <- map["avatar_url"]
@@ -157,5 +163,27 @@ struct UserSearch: Mappable {
         items <- map["items"]
         totalCount <- map["total_count"]
         incompleteResults <- map["incomplete_results"]
+    }
+}
+
+struct TrendingUser: Mappable {
+
+    var username: String?
+    var name: String?
+    var url: String?
+    var avatar: String?
+    var repo: TrendingRepository?
+
+    init?(map: Map) {}
+    init() {}
+
+    mutating func mapping(map: Map) {
+        username <- map["username"]
+        name <- map["name"]
+        url <- map["url"]
+        avatar <- map["avatar"]
+        avatar = avatar?.replacingOccurrences(of: "s=40&", with: "").replacingOccurrences(of: "s=96&", with: "")
+        repo <- map["repo"]
+        repo?.author = username
     }
 }

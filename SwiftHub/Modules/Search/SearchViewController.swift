@@ -56,7 +56,7 @@ class SearchViewController: TableViewController {
 
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
-        tableView.headRefreshControl = nil
+//        tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }
 
@@ -64,13 +64,16 @@ class SearchViewController: TableViewController {
         super.bindViewModel()
 
         let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { SearchSegments(rawValue: $0)! }).merge()
-        let input = SearchViewModel.Input(keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let input = SearchViewModel.Input(trigger: refresh,
+                                          keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
                                           textDidBeginEditing: searchBar.rx.textDidBeginEditing.asDriver(),
                                           segmentSelection: segmentSelected,
                                           selection: tableView.rx.modelSelected(SearchSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {

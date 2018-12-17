@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0700EAEE21C815E600F979A7 /* TrendingGithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */; };
+		0700EAF021C823CD00F979A7 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0700EAEF21C823CD00F979A7 /* Language.swift */; };
 		070E177A21AC7C85004B6FB2 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070E177921AC7C85004B6FB2 /* Release.swift */; };
 		070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF83B20F221970070F5E8 /* UserViewController.swift */; };
 		070FF83E20F221AB0070F5E8 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF83D20F221AB0070F5E8 /* UserViewModel.swift */; };
@@ -224,6 +226,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingGithubAPI.swift; sourceTree = "<group>"; };
+		0700EAEF21C823CD00F979A7 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		070E177921AC7C85004B6FB2 /* Release.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
 		070FF83B20F221970070F5E8 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		070FF83D20F221AB0070F5E8 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -616,6 +620,7 @@
 				07320452214128ED00C1E39F /* Event.swift */,
 				0732046921419DB200C1E39F /* ISO8601DateTransform.swift */,
 				07E1B2F221A4349500F6EAE3 /* Issue.swift */,
+				0700EAEF21C823CD00F979A7 /* Language.swift */,
 				A09DE8A220E7A0C500F6F2BF /* License.swift */,
 				07E1B2F621A4366200F6EAE3 /* Milestone.swift */,
 				A034AF6F21527EF8004C310B /* Notification.swift */,
@@ -1017,6 +1022,7 @@
 			children = (
 				07FC33861FFFE68800D53888 /* Api.swift */,
 				C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */,
+				0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */,
 				C762C68C1E1D5D6E00C09EBD /* Networking.swift */,
 				C762C68E1E1D5D6E00C09EBD /* Reachability.swift */,
 				A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */,
@@ -1452,8 +1458,10 @@
 				07241D2321B18A8600F800BD /* PullRequestCellViewModel.swift in Sources */,
 				C762C6861E1D5A7300C09EBD /* UIView+SwiftHub.swift in Sources */,
 				C762C66B1E1D559000C09EBD /* TextField.swift in Sources */,
+				0700EAF021C823CD00F979A7 /* Language.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
 				C762C66C1E1D559000C09EBD /* View.swift in Sources */,
+				0700EAEE21C815E600F979A7 /* TrendingGithubAPI.swift in Sources */,
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */,
 				0757B53521669DAC00C04163 /* LanguageCell.swift in Sources */,

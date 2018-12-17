@@ -17,7 +17,6 @@ protocol ProductAPIType {
 
 enum GithubAPI {
     // MARK: - Authentication is optional
-
     case searchRepositories(query: String)
     case repository(fullname: String)
     case watchers(fullname: String, page: Int)
@@ -49,7 +48,6 @@ enum GithubAPI {
     case userPerformedEvents(username: String, page: Int)
 
     // MARK: - Authentication is required
-
     case profile
 
     case notifications(all: Bool, participating: Bool, page: Int)
@@ -67,7 +65,7 @@ enum GithubAPI {
 extension GithubAPI: TargetType, ProductAPIType {
 
     var baseURL: URL {
-        return Configs.Network.baseURL.url!
+        return Configs.Network.githubBaseUrl.url!
     }
 
     var path: String {

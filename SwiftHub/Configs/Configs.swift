@@ -37,11 +37,12 @@ struct Configs {
     struct Network {
         static let useStaging = false
         static let loggingEnabled = false
-        static var baseDomain: String {
+
+        static var githubBaseUrl: String {
             return "https://api.github.com"
         }
-        static var baseURL: String {
-            return baseDomain //+ "/api/v1"
+        static var trendingGithubBaseUrl: String {
+            return "https://github-trending-api.now.sh"
         }
     }
 

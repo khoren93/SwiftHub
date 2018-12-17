@@ -90,6 +90,22 @@ struct Repository: Mappable {
 
     init?(map: Map) {}
     init() {}
+    init(repo: TrendingRepository) {
+        name = repo.name
+        if let author = repo.author, let name = repo.name {
+            fullname = "\(author)/\(name)"
+        }
+        htmlUrl = repo.url
+        descriptionField = repo.description
+        language = repo.language
+//        trendingRepository.languageColor
+        stargazersCount = repo.stars
+        forks = repo.forks
+//        trendingRepository.currentPeriodStars
+        if let user = repo.builtBy?.first {
+            owner = User(user: user)
+        }
+    }
 
     mutating func mapping(map: Map) {
         archiveUrl <- map["archive_url"]
@@ -189,5 +205,39 @@ struct RepositorySearch: Mappable {
         items <- map["items"]
         totalCount <- map["total_count"]
         incompleteResults <- map["incomplete_results"]
+    }
+}
+
+struct TrendingRepository: Mappable {
+
+    var author: String?
+    var name: String?
+    var url: String?
+    var description: String?
+    var language: String?
+    var languageColor: String?
+    var stars: Int?
+    var forks: Int?
+    var currentPeriodStars: Int?
+    var builtBy: [TrendingUser]?
+
+    var avatarUrl: String? {
+        return builtBy?.first?.avatar
+    }
+
+    init?(map: Map) {}
+    init() {}
+
+    mutating func mapping(map: Map) {
+        author <- map["author"]
+        name <- map["name"]
+        url <- map["url"]
+        description <- map["description"]
+        language <- map["language"]
+        languageColor <- map["languageColor"]
+        stars <- map["stars"]
+        forks <- map["forks"]
+        currentPeriodStars <- map["currentPeriodStars"]
+        builtBy <- map["builtBy"]
     }
 }
