@@ -656,6 +656,84 @@
 			"name": "Users",
 			"item": [
 				{
+					"name": "Followers",
+					"item": [
+						{
+							"name": "Check if you are following a user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/following/{{owner}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"following",
+										"{{owner}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						},
+						{
+							"name": "Follow a user",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/following/{{owner}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"following",
+										"{{owner}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						},
+						{
+							"name": "Unfollow a user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/following/{{owner}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"following",
+										"{{owner}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Get the authenticated user",
 					"request": {
 						"method": "GET",
@@ -1087,6 +1165,81 @@
 								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
 							},
 							"response": []
+						},
+						{
+							"name": "Check if you are starring a repository",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"starred",
+										"{{owner}}",
+										"{{repo}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						},
+						{
+							"name": "Star a repository",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"starred",
+										"{{owner}}",
+										"{{repo}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
+						},
+						{
+							"name": "Unstar a repository",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"starred",
+										"{{owner}}",
+										"{{repo}}"
+									]
+								},
+								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+							},
+							"response": []
 						}
 					],
 					"description": "Repository Starring is a feature that lets users bookmark repositories. Stars are shown next to repositories to show an approximate level of interest. Stars have no effect on notifications or the activity feed. For that, see Repository Watching.",
@@ -1469,6 +1622,101 @@
 								}
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trending",
+			"item": [
+				{
+					"name": "List trending repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{trending_base_url}}/repositories?language=swift&since",
+							"host": [
+								"{{trending_base_url}}"
+							],
+							"path": [
+								"repositories"
+							],
+							"query": [
+								{
+									"key": "language",
+									"value": "swift",
+									"description": "Programming language"
+								},
+								{
+									"key": "since",
+									"value": "",
+									"description": "Trending period: daily, weekly, monthly Default: daily."
+								}
+							]
+						},
+						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+					},
+					"response": []
+				},
+				{
+					"name": "List trending developers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{trending_base_url}}/developers?language=swift&since",
+							"host": [
+								"{{trending_base_url}}"
+							],
+							"path": [
+								"developers"
+							],
+							"query": [
+								{
+									"key": "language",
+									"value": "swift",
+									"description": "Programming language"
+								},
+								{
+									"key": "since",
+									"value": null,
+									"description": "Trending period: daily, weekly, monthly Default: daily."
+								}
+							]
+						},
+						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+					},
+					"response": []
+				},
+				{
+					"name": "List languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{trending_base_url}}/languages",
+							"host": [
+								"{{trending_base_url}}"
+							],
+							"path": [
+								"languages"
+							]
+						},
+						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
 					},
 					"response": []
 				}
