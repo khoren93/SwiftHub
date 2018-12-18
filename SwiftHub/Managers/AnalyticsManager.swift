@@ -25,6 +25,7 @@ enum SwifthubEvent {
     case login(login: String)
     case logout
     case search(keyword: String)
+    case repoLanguage(language: String)
     case repository(fullname: String)
     case user(login: String)
     case userEvents(login: String)
@@ -48,6 +49,7 @@ extension SwifthubEvent: Umbrella.EventType {
         case .login: return "Login"
         case .logout: return "Logout"
         case .search: return "Search"
+        case .repoLanguage: return "Repo Language"
         case .repository: return "Repository"
         case .user: return "User"
         case .userEvents: return "User Events"
@@ -70,6 +72,8 @@ extension SwifthubEvent: Umbrella.EventType {
             return ["Login": login]
         case .search(let keyword):
             return ["Keyword": keyword]
+        case .repoLanguage(let language):
+            return ["Language": language]
         case .repository(let fullname):
             return ["Fullname": fullname]
         case .user(let login):
