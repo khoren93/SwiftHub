@@ -117,11 +117,13 @@
 /* Whats New */
 "WhatsNew.Title" = "Ինչ է Նոր";
 "WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit- ը Ձեզ հնարավորություն է տալիս հեշտությամբ ցուցադրել ձեր հիանալի հավելվածի նոր առանձնահատկությունները:";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit- ը Ձեզ հնարավորություն է տալիս հեշտությամբ ցուցադրել ձեր հիանալի հավելվածի նոր առանձնահատկությունները";
 "WhatsNew.Item2.Title" = "Գունային Թեմաներ";
 "WhatsNew.Item2.Subtitle" = "Դուք կարող եք կիրառել տարբեր Գունային թեմաներ բաց եւ մուգ եղանակներով";
 "WhatsNew.Item3.Title" = "Բաց կոդով";
 "WhatsNew.Item3.Subtitle" = "SwiftHub-ը լիովին բաց կոդով է\nԱստղերը շատ ողջունելի են ★";
+"WhatsNew.Item4.Title" = "Ընթացիկ";
+"WhatsNew.Item4.Subtitle" = "Տեսեք, թե ինչով է այսօր GitHub համայնքը առավել հետաքրքրված";
 "WhatsNew.CompletionButton.Title" = "Շարունակել";
 /* Languages */
 "Languages.Navigation.Title" = "Լեզուներ";

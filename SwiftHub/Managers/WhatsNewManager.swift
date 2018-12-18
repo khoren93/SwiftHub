@@ -25,6 +25,9 @@ class WhatsNewManager: NSObject {
         let whatsNew = WhatsNew(
             title: R.string.localizable.whatsNewTitle.key.localized(),
             items: [
+                WhatsNew.Item(title: R.string.localizable.whatsNewItem4Title.key.localized(),
+                              subtitle: R.string.localizable.whatsNewItem4Subtitle.key.localized(),
+                              image: R.image.icon_whatsnew_trending()),
                 WhatsNew.Item(title: R.string.localizable.whatsNewItem1Title.key.localized(),
                               subtitle: R.string.localizable.whatsNewItem1Subtitle.key.localized(),
                               image: R.image.icon_whatsnew_whats_new()),

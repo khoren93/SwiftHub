@@ -117,11 +117,13 @@
 /* Whats New */
 "WhatsNew.Title" = "Что Нового";
 "WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit позволяет вам легко продемонстрировать свои потрясающие новые функции приложения.";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit позволяет вам легко продемонстрировать свои потрясающие новые функции приложения";
 "WhatsNew.Item2.Title" = "Темы";
 "WhatsNew.Item2.Subtitle" = "Вы можете применять различные темы с светлыми и темными режимами";
 "WhatsNew.Item3.Title" = "Открытый исходный код";
 "WhatsNew.Item3.Subtitle" = "SwiftHub полностью с открытым исходным кодом\nЗвезды очень приветствуются ★";
+"WhatsNew.Item4.Title" = "Актуальные";
+"WhatsNew.Item4.Subtitle" = "Посмотрите, чем сообщество GitHub больше всего взволновано сегодня";
 "WhatsNew.CompletionButton.Title" = "Продолжить";
 /* Languages */
 "Languages.Navigation.Title" = "Языки";
