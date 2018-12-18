@@ -126,3 +126,5 @@
 /* Languages */
 "Languages.Navigation.Title" = "Languages";
 "Languages.allButton.Title" = "All Languages";
+"Languages.PopularSection.Title" = "Popular";
+"Languages.AllSection.Title" = "All";

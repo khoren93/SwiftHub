@@ -126,3 +126,5 @@
 /* Languages */
 "Languages.Navigation.Title" = "Языки";
 "Languages.allButton.Title" = "Все Языки";
+"Languages.PopularSection.Title" = "Популярные";
+"Languages.AllSection.Title" = "Все";

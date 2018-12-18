@@ -51,7 +51,8 @@ class LanguagesViewModel: ViewModel, ViewModelType {
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
                 }) {
-                elements.append(LanguageSection.languages(title: "Popular", items: popularLanguages))
+                    let title = R.string.localizable.languagesPopularSectionTitle.key.localized()
+                    elements.append(LanguageSection.languages(title: title, items: popularLanguages))
             }
                 if let allLanguages = languages.all?.filtered({ (language) -> Bool in
                     if keyword.isEmpty { return true }
@@ -60,7 +61,8 @@ class LanguagesViewModel: ViewModel, ViewModelType {
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
                 }) {
-                elements.append(LanguageSection.languages(title: "All", items: allLanguages))
+                    let title = R.string.localizable.languagesAllSectionTitle.key.localized()
+                    elements.append(LanguageSection.languages(title: title, items: allLanguages))
             }
             return elements
         }).bind(to: elements).disposed(by: rx.disposeBag)

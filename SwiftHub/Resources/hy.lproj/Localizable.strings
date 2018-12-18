@@ -126,3 +126,5 @@
 /* Languages */
 "Languages.Navigation.Title" = "Լեզուներ";
 "Languages.allButton.Title" = "Բոլոր Լեզուներ";
+"Languages.PopularSection.Title" = "Հանրահայտ";
+"Languages.AllSection.Title" = "Բոլորը";

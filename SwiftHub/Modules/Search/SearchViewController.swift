@@ -84,6 +84,7 @@ class SearchViewController: TableViewController {
         navigationItem.rightBarButtonItem = rightBarButton
 
         languageChanged.subscribe(onNext: { [weak self] () in
+            self?.searchBar.placeholder = R.string.localizable.searchSearchBarPlaceholder.key.localized()
             self?.segmentedControl.setTitle(SearchSegments.repositories.title, forSegmentAt: 0)
             self?.segmentedControl.setTitle(SearchSegments.users.title, forSegmentAt: 1)
             self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.daily.title, forSegmentAt: 0)
@@ -98,8 +99,6 @@ class SearchViewController: TableViewController {
         stackView.insertArrangedSubview(trendingPeriodView, at: 0)
         stackView.insertArrangedSubview(searchBar, at: 0)
 //        stackView.addArrangedSubview(trendingPeriodSegmentedControl)
-
-        searchBar.placeholder = "Global Search"
 
         tableView.register(R.nib.trendingRepositoryCell)
         tableView.register(R.nib.trendingUserCell)
