@@ -92,11 +92,9 @@ struct Repository: Mappable {
     init() {}
     init(repo: TrendingRepository) {
         name = repo.name
-        if let author = repo.author, let name = repo.name {
-            fullname = "\(author)/\(name)"
-        }
+        fullname = repo.fullname
         htmlUrl = repo.url
-        descriptionField = repo.description
+        descriptionField = repo.descriptionField
         language = repo.language
 //        trendingRepository.languageColor
         stargazersCount = repo.stars
@@ -213,13 +211,17 @@ struct TrendingRepository: Mappable {
     var author: String?
     var name: String?
     var url: String?
-    var description: String?
+    var descriptionField: String?
     var language: String?
     var languageColor: String?
     var stars: Int?
     var forks: Int?
     var currentPeriodStars: Int?
     var builtBy: [TrendingUser]?
+
+    var fullname: String? {
+        return "\(author ?? "")/\(name ?? "")"
+    }
 
     var avatarUrl: String? {
         return builtBy?.first?.avatar
@@ -232,12 +234,18 @@ struct TrendingRepository: Mappable {
         author <- map["author"]
         name <- map["name"]
         url <- map["url"]
-        description <- map["description"]
+        descriptionField <- map["description"]
         language <- map["language"]
         languageColor <- map["languageColor"]
         stars <- map["stars"]
         forks <- map["forks"]
         currentPeriodStars <- map["currentPeriodStars"]
         builtBy <- map["builtBy"]
+    }
+}
+
+extension TrendingRepository: Equatable {
+    static func == (lhs: TrendingRepository, rhs: TrendingRepository) -> Bool {
+        return lhs.fullname == rhs.fullname
     }
 }

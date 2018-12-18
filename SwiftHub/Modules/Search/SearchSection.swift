@@ -15,6 +15,8 @@ enum SearchSection {
 }
 
 enum SearchSectionItem {
+    case trendingRepositoriesItem(cellViewModel: TrendingRepositoryCellViewModel)
+    case trendingUsersItem(cellViewModel: TrendingUserCellViewModel)
     case repositoriesItem(cellViewModel: RepositoryCellViewModel)
     case usersItem(cellViewModel: UserCellViewModel)
 }

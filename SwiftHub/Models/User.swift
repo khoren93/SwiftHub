@@ -187,3 +187,9 @@ struct TrendingUser: Mappable {
         repo?.author = username
     }
 }
+
+extension TrendingUser: Equatable {
+    static func == (lhs: TrendingUser, rhs: TrendingUser) -> Bool {
+        return lhs.username == rhs.username
+    }
+}

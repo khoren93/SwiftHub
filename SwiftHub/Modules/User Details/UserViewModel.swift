@@ -123,9 +123,9 @@ class UserViewModel: ViewModel, ViewModelType {
             self.user.value?.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
 
-        let hidesFollowButton = loggedIn.map({ (loggedIn) -> Bool in
-            guard let user = self.user.value, loggedIn == true else { return true }
-            return user.isMine() == true
+        let hidesFollowButton = Observable.combineLatest(loggedIn, user).map({ (loggedIn, user) -> Bool in
+            guard let user = user, loggedIn == true else { return true }
+            return user.isMine() == true || user.type == .organization
         }).asDriver(onErrorJustReturn: false)
 
         let repositoriesSelected = input.repositoriesSelection.asDriver(onErrorJustReturn: ())

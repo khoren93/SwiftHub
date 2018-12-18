@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+private let trendingRepositoryReuseIdentifier = R.reuseIdentifier.trendingRepositoryCell
+private let trendingUserReuseIdentifier = R.reuseIdentifier.trendingUserCell
 private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell
 private let userReuseIdentifier = R.reuseIdentifier.userCell
 
@@ -54,6 +56,8 @@ class SearchViewController: TableViewController {
 
         stackView.insertArrangedSubview(searchBar, at: 0)
 
+        tableView.register(R.nib.trendingRepositoryCell)
+        tableView.register(R.nib.trendingUserCell)
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
 //        tableView.headRefreshControl = nil
@@ -77,6 +81,14 @@ class SearchViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
+            case .trendingRepositoriesItem(let cellViewModel):
+                let cell = tableView.dequeueReusableCell(withIdentifier: trendingRepositoryReuseIdentifier, for: indexPath)!
+                cell.bind(to: cellViewModel)
+                return cell
+            case .trendingUsersItem(let cellViewModel):
+                let cell = tableView.dequeueReusableCell(withIdentifier: trendingUserReuseIdentifier, for: indexPath)!
+                cell.bind(to: cellViewModel)
+                return cell
             case .repositoriesItem(let cellViewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath)!
                 cell.bind(to: cellViewModel)

@@ -33,6 +33,9 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let elements = BehaviorRelay<[SearchSection]>(value: [])
 
+        let trendingRepositoryElements = BehaviorRelay<[TrendingRepository]>(value: [])
+        let trendingUserElements = BehaviorRelay<[TrendingUser]>(value: [])
+
         let repositoryElements = BehaviorRelay<[Repository]>(value: [])
         let userElements = BehaviorRelay<[User]>(value: [])
 
@@ -44,7 +47,12 @@ class SearchViewModel: ViewModel, ViewModelType {
         let dismissKeyboard = input.selection.mapToVoid()
 
         let keyword = BehaviorRelay(value: "")
-        input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged().asObservable().bind(to: keyword).disposed(by: rx.disposeBag)
+        input.keywordTrigger.skip(1).throttle(0.5).distinctUntilChanged().asObservable()
+            .bind(to: keyword).disposed(by: rx.disposeBag)
+
+        let showTrendings = BehaviorRelay(value: true)
+        keyword.map { $0.isEmpty }
+            .bind(to: showTrendings).disposed(by: rx.disposeBag)
 
         keyword.asObservable().filterEmpty().flatMapLatest({ [weak self] (keyword) -> Observable<[Repository]> in
             guard let self = self else { return Observable.just([]) }
@@ -87,7 +95,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
             }.subscribe(onNext: { (items) in
-                repositoryElements.accept(items.map { Repository(repo: $0) })
+                trendingRepositoryElements.accept(items)
             }).disposed(by: rx.disposeBag)
 
         trendingTrigger.flatMapLatest { () -> Observable<[TrendingUser]> in
@@ -96,11 +104,15 @@ class SearchViewModel: ViewModel, ViewModelType {
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
             }.subscribe(onNext: { (items) in
-                userElements.accept(items.map { User(user: $0) })
+                trendingUserElements.accept(items)
             }).disposed(by: rx.disposeBag)
 
         input.selection.drive(onNext: { (item) in
             switch item {
+            case .trendingRepositoriesItem(let cellViewModel):
+                repositorySelected.onNext(Repository(repo: cellViewModel.repository))
+            case .trendingUsersItem(let cellViewModel):
+                userSelected.onNext(User(user: cellViewModel.user))
             case .repositoriesItem(let cellViewModel):
                 repositorySelected.onNext(cellViewModel.repository)
             case .usersItem(let cellViewModel):
@@ -108,26 +120,47 @@ class SearchViewModel: ViewModel, ViewModelType {
             }
         }).disposed(by: rx.disposeBag)
 
-        Observable.combineLatest(repositoryElements, userElements, input.segmentSelection)
-            .map { (repositories, users, segment) -> [SearchSection] in
+        Observable.combineLatest(trendingRepositoryElements, trendingUserElements, repositoryElements, userElements, input.segmentSelection)
+            .map { (trendingRepositories, trendingUsers, repositories, users, segment) -> [SearchSection] in
                 var elements: [SearchSection] = []
-                let title = keyword.value.isEmpty ? "Trending" : ""
+                let showTrendings = showTrendings.value
+                let title = showTrendings ? "Trending" : ""
                 switch segment {
                 case .repositories:
-                    let repositories = repositories.map({ (repository) -> SearchSectionItem in
-                        let cellViewModel = RepositoryCellViewModel(with: repository)
-                        return SearchSectionItem.repositoriesItem(cellViewModel: cellViewModel)
-                    })
-                    if repositories.isNotEmpty {
-                        elements.append(SearchSection.repositories(title: title, items: repositories))
+                    if showTrendings {
+                        let repositories = trendingRepositories.map({ (repository) -> SearchSectionItem in
+                            let cellViewModel = TrendingRepositoryCellViewModel(with: repository)
+                            return SearchSectionItem.trendingRepositoriesItem(cellViewModel: cellViewModel)
+                        })
+                        if repositories.isNotEmpty {
+                            elements.append(SearchSection.repositories(title: title, items: repositories))
+                        }
+                    } else {
+                        let repositories = repositories.map({ (repository) -> SearchSectionItem in
+                            let cellViewModel = RepositoryCellViewModel(with: repository)
+                            return SearchSectionItem.repositoriesItem(cellViewModel: cellViewModel)
+                        })
+                        if repositories.isNotEmpty {
+                            elements.append(SearchSection.repositories(title: title, items: repositories))
+                        }
                     }
                 case .users:
-                    let users = users.map({ (user) -> SearchSectionItem in
-                        let cellViewModel = UserCellViewModel(with: user)
-                        return SearchSectionItem.usersItem(cellViewModel: cellViewModel)
-                    })
-                    if users.isNotEmpty {
-                        elements.append(SearchSection.repositories(title: title, items: users))
+                    if showTrendings {
+                        let users = trendingUsers.map({ (user) -> SearchSectionItem in
+                            let cellViewModel = TrendingUserCellViewModel(with: user)
+                            return SearchSectionItem.trendingUsersItem(cellViewModel: cellViewModel)
+                        })
+                        if users.isNotEmpty {
+                            elements.append(SearchSection.users(title: title, items: users))
+                        }
+                    } else {
+                        let users = users.map({ (user) -> SearchSectionItem in
+                            let cellViewModel = UserCellViewModel(with: user)
+                            return SearchSectionItem.usersItem(cellViewModel: cellViewModel)
+                        })
+                        if users.isNotEmpty {
+                            elements.append(SearchSection.users(title: title, items: users))
+                        }
                     }
                 }
                 return elements
