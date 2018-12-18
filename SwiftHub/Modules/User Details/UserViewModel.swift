@@ -148,6 +148,13 @@ class UserViewModel: ViewModel, ViewModelType {
         let items = user.map { (user) -> [UserSection] in
             var items: [UserSectionItem] = []
 
+            // Stars
+            let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
+                                                             detail: "",
+                                                             image: R.image.icon_cell_star(),
+                                                             hidesDisclosure: false)
+            items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
+
             // Events
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
                                                               detail: "",
@@ -197,16 +204,23 @@ class UserViewModel: ViewModel, ViewModelType {
 
     func viewModel(for item: UserSectionItem) -> ViewModel? {
         switch item {
+        case .starsItem:
+            if let user = self.user.value {
+                let mode = RepositoriesMode.userStarredRepositories(user: user)
+                let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
+                return viewModel
+            }
         case .eventsItem:
             if let user = self.user.value {
-                let viewModel = EventsViewModel(mode: EventsMode.user(user: user), provider: self.provider)
+                let mode = EventsMode.user(user: user)
+                let viewModel = EventsViewModel(mode: mode, provider: provider)
                 return viewModel
             }
         case .companyItem:
             if let companyName = self.user.value?.company?.removingPrefix("@") {
                 var user = User()
                 user.login = companyName
-                let viewModel = UserViewModel(user: user, provider: self.provider)
+                let viewModel = UserViewModel(user: user, provider: provider)
                 return viewModel
             }
         case .blogItem: return nil

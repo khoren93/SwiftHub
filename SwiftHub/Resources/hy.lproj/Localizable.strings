@@ -104,6 +104,7 @@
 "User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";
 "User.FollowersButton.Title" = "Հետեւորդներ";
 "User.FollowingButton.Title" = "Համախոհներ";
+"User.StarsCell.Title" = "Աստղեր";
 "User.EventsCell.Title" = "Միջոցառումներ";
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";

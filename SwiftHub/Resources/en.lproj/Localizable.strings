@@ -104,6 +104,7 @@
 "User.RepositoriesButton.Title" = "Repositories";
 "User.FollowersButton.Title" = "Followers";
 "User.FollowingButton.Title" = "Following";
+"User.StarsCell.Title" = "Stars";
 "User.EventsCell.Title" = "Events";
 "User.CompanyCell.Title" = "Company";
 "User.BlogCell.Title" = "Blog";

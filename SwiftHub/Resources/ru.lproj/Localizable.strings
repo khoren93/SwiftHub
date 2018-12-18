@@ -104,6 +104,7 @@
 "User.RepositoriesButton.Title" = "Репозитории";
 "User.FollowersButton.Title" = "Подписчики";
 "User.FollowingButton.Title" = "Подписки";
+"User.StarsCell.Title" = "Звезды";
 "User.EventsCell.Title" = "События";
 "User.CompanyCell.Title" = "Компания";
 "User.BlogCell.Title" = "Блог";
