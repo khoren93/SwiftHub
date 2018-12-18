@@ -75,8 +75,12 @@
 "Issues.ClosedSegment.Title" = "Closed";
 /* Search */
 //"Search.Navigation.Title" = "Search";
+"Search.SearchBar.Placeholder" = "Global Search";
 "Search.RepositoriesSegment.Title" = "Repositories";
 "Search.UsersSegment.Title" = "Users";
+"Search.DailySegment.Title" = "Daily";
+"Search.WeeklySegment.Title" = "Weekly";
+"Search.MonthlySegment.Title" = "Monthly";
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
 "Settings.PreferencesSection.Title" = "Preferences";
@@ -119,3 +123,6 @@
 "WhatsNew.Item3.Title" = "Open Source";
 "WhatsNew.Item3.Subtitle" = "SwiftHub is fully open source\nStars are very welcome ★";
 "WhatsNew.CompletionButton.Title" = "Continue";
+/* Languages */
+"Languages.Navigation.Title" = "Languages";
+"Languages.allButton.Title" = "All Languages";

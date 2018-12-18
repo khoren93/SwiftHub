@@ -249,6 +249,21 @@
             </objects>
             <point key="canvasLocation" x="11550" y="116"/>
         </scene>
+        <!--Languages View Controller-->
+        <scene sceneID="awS-XW-LY4">
+            <objects>
+                <viewController storyboardIdentifier="LanguagesViewController" id="ENb-Cp-meW" customClass="LanguagesViewController" customModule="SwiftHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mro-AN-f1L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Hvg-Of-9PG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ONH-cR-sK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12295" y="116"/>
+        </scene>
         <!--Notifications View Controller-->
         <scene sceneID="4AO-bn-F1V">
             <objects>

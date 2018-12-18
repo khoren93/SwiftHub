@@ -57,6 +57,12 @@
 		0752F48D21C8D9BA00A30BF2 /* TrendingUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0752F48B21C8D9BA00A30BF2 /* TrendingUserCell.xib */; };
 		0752F48F21C8D9CD00A30BF2 /* TrendingRepositoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48E21C8D9CD00A30BF2 /* TrendingRepositoryCellViewModel.swift */; };
 		0752F49121C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49021C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift */; };
+		0752F49421C8E64500A30BF2 /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49321C8E64500A30BF2 /* LanguagesViewController.swift */; };
+		0752F49621C8E65900A30BF2 /* LanguagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49521C8E65900A30BF2 /* LanguagesViewModel.swift */; };
+		0752F49921C8E67D00A30BF2 /* RepoLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49721C8E67D00A30BF2 /* RepoLanguageCell.swift */; };
+		0752F49A21C8E67D00A30BF2 /* RepoLanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0752F49821C8E67D00A30BF2 /* RepoLanguageCell.xib */; };
+		0752F49C21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49B21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift */; };
+		0752F49E21C8EDB600A30BF2 /* LanguagesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F49D21C8EDB600A30BF2 /* LanguagesSection.swift */; };
 		0757B53221669DAC00C04163 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B52D21669DAC00C04163 /* LanguageViewModel.swift */; };
 		0757B53321669DAC00C04163 /* LanguageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B52E21669DAC00C04163 /* LanguageCellViewModel.swift */; };
 		0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0757B52F21669DAC00C04163 /* LanguageCell.xib */; };
@@ -282,6 +288,12 @@
 		0752F48B21C8D9BA00A30BF2 /* TrendingUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingUserCell.xib; sourceTree = "<group>"; };
 		0752F48E21C8D9CD00A30BF2 /* TrendingRepositoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepositoryCellViewModel.swift; sourceTree = "<group>"; };
 		0752F49021C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingUserCellViewModel.swift; sourceTree = "<group>"; };
+		0752F49321C8E64500A30BF2 /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
+		0752F49521C8E65900A30BF2 /* LanguagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewModel.swift; sourceTree = "<group>"; };
+		0752F49721C8E67D00A30BF2 /* RepoLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoLanguageCell.swift; sourceTree = "<group>"; };
+		0752F49821C8E67D00A30BF2 /* RepoLanguageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoLanguageCell.xib; sourceTree = "<group>"; };
+		0752F49B21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoLanguageCellViewModel.swift; sourceTree = "<group>"; };
+		0752F49D21C8EDB600A30BF2 /* LanguagesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesSection.swift; sourceTree = "<group>"; };
 		0757B52D21669DAC00C04163 /* LanguageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		0757B52E21669DAC00C04163 /* LanguageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCellViewModel.swift; sourceTree = "<group>"; };
 		0757B52F21669DAC00C04163 /* LanguageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguageCell.xib; sourceTree = "<group>"; };
@@ -542,6 +554,19 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		0752F49221C8E61E00A30BF2 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				0752F49D21C8EDB600A30BF2 /* LanguagesSection.swift */,
+				0752F49321C8E64500A30BF2 /* LanguagesViewController.swift */,
+				0752F49521C8E65900A30BF2 /* LanguagesViewModel.swift */,
+				0752F49721C8E67D00A30BF2 /* RepoLanguageCell.swift */,
+				0752F49821C8E67D00A30BF2 /* RepoLanguageCell.xib */,
+				0752F49B21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		0757B52C21669DAC00C04163 /* Settings Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,6 +679,7 @@
 				07D46E5821921C01008E5369 /* Contents */,
 				0732045C2141395200C1E39F /* Events */,
 				07E1B2FE21A44D1700F6EAE3 /* Issues */,
+				0752F49221C8E61E00A30BF2 /* Languages */,
 				A0ED264620F76A45004E8137 /* Login */,
 				07FC33751FFFD47600D53888 /* Main */,
 				A034AF7121528087004C310B /* Notifications */,
@@ -1223,6 +1249,7 @@
 				07241D0D21B1744900F800BD /* RepositoryPullRequests.json in Resources */,
 				07320459214137A800C1E39F /* EventsUserReceived.json in Resources */,
 				0752F48D21C8D9BA00A30BF2 /* TrendingUserCell.xib in Resources */,
+				0752F49A21C8E67D00A30BF2 /* RepoLanguageCell.xib in Resources */,
 				0732046521413B5200C1E39F /* EventCell.xib in Resources */,
 				070FF84220F225200070F5E8 /* Organization.json in Resources */,
 			);
@@ -1565,6 +1592,7 @@
 				070FF85120F290100070F5E8 /* SectionType.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
 				073204602141399400C1E39F /* EventsViewModel.swift in Sources */,
+				0752F49E21C8EDB600A30BF2 /* LanguagesSection.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				07D46E5321920029008E5369 /* Content.swift in Sources */,
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,
@@ -1575,6 +1603,7 @@
 				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
 				07241D1D21B18A6000F800BD /* PullRequestsViewModel.swift in Sources */,
 				07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */,
+				0752F49621C8E65900A30BF2 /* LanguagesViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				0752F49121C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift in Sources */,
@@ -1582,8 +1611,10 @@
 				07B4AB642190C56E001E9337 /* RepositoryDetailCell.swift in Sources */,
 				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
 				07E1B2F321A4349500F6EAE3 /* Issue.swift in Sources */,
+				0752F49C21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift in Sources */,
 				070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */,
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
+				0752F49921C8E67D00A30BF2 /* RepoLanguageCell.swift in Sources */,
 				07B4AB602190C403001E9337 /* RepositorySection.swift in Sources */,
 				07241D1121B175EB00F800BD /* CommitsViewController.swift in Sources */,
 				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
@@ -1598,6 +1629,7 @@
 				A09DE8C920E7B8F400F6F2BF /* ViewModelType.swift in Sources */,
 				C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */,
 				C762C66F1E1D58B200C09EBD /* Configs.swift in Sources */,
+				0752F49421C8E64500A30BF2 /* LanguagesViewController.swift in Sources */,
 				07241D1521B1766C00F800BD /* CommitCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

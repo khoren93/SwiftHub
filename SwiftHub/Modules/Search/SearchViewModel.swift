@@ -17,7 +17,9 @@ class SearchViewModel: ViewModel, ViewModelType {
         let trigger: Observable<Void>
         let keywordTrigger: Driver<String>
         let textDidBeginEditing: Driver<Void>
+        let languagesSelection: Observable<Void>
         let segmentSelection: Observable<SearchSegments>
+        let trendingPeriodSegmentSelection: Observable<TrendingPeriodSegments>
         let selection: Driver<SearchSectionItem>
     }
 
@@ -25,8 +27,10 @@ class SearchViewModel: ViewModel, ViewModelType {
         let items: BehaviorRelay<[SearchSection]>
         let textDidBeginEditing: Driver<Void>
         let dismissKeyboard: Driver<Void>
+        let languagesSelection: Driver<LanguagesViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
         let userSelected: Driver<UserViewModel>
+        let hidesTrendingPeriodSegment: Driver<Bool>
     }
 
     func transform(input: Input) -> Output {
@@ -39,7 +43,8 @@ class SearchViewModel: ViewModel, ViewModelType {
         let repositoryElements = BehaviorRelay<[Repository]>(value: [])
         let userElements = BehaviorRelay<[User]>(value: [])
 
-        let languageElements = BehaviorRelay<LanguageSection?>(value: nil)
+        let languageElements = BehaviorRelay<Languages?>(value: nil)
+        let currentLanguage = BehaviorRelay<Language?>(value: nil)
 
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
@@ -80,7 +85,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             }
         }).disposed(by: rx.disposeBag)
 
-        Observable.just(()).flatMapLatest { () -> Observable<LanguageSection> in
+        Observable.just(()).flatMapLatest { () -> Observable<Languages> in
             return self.provider.languages()
                 .trackActivity(self.loading)
                 .trackError(self.error)
@@ -88,9 +93,17 @@ class SearchViewModel: ViewModel, ViewModelType {
                 languageElements.accept(item)
             }).disposed(by: rx.disposeBag)
 
-        let trendingTrigger = Observable.of(input.trigger, keyword.asObservable().map { $0.isEmpty }.filter { $0 == true }.mapToVoid()).merge()
+        let trendingPeriodSegment = BehaviorRelay(value: TrendingPeriodSegments.daily)
+        input.trendingPeriodSegmentSelection.bind(to: trendingPeriodSegment).disposed(by: rx.disposeBag)
+
+        let trendingTrigger = Observable.of(input.trigger,
+                                            input.trendingPeriodSegmentSelection.mapToVoid(),
+                                            currentLanguage.mapToVoid(),
+                                            keyword.asObservable().map { $0.isEmpty }.filter { $0 == true }.mapToVoid()).merge()
         trendingTrigger.flatMapLatest { () -> Observable<[TrendingRepository]> in
-            return self.provider.trendingRepositories(language: "", since: "daily")
+            let language = currentLanguage.value?.urlParam ?? ""
+            let since = trendingPeriodSegment.value.paramValue
+            return self.provider.trendingRepositories(language: language, since: since)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
@@ -99,7 +112,9 @@ class SearchViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         trendingTrigger.flatMapLatest { () -> Observable<[TrendingUser]> in
-            return self.provider.trendingDevelopers(language: "", since: "daily")
+            let language = currentLanguage.value?.urlParam ?? ""
+            let since = trendingPeriodSegment.value.paramValue
+            return self.provider.trendingDevelopers(language: language, since: since)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
@@ -124,12 +139,16 @@ class SearchViewModel: ViewModel, ViewModelType {
             .map { (trendingRepositories, trendingUsers, repositories, users, segment) -> [SearchSection] in
                 var elements: [SearchSection] = []
                 let showTrendings = showTrendings.value
-                let title = showTrendings ? "Trending" : ""
+                let language = currentLanguage.value?.name
+                let since = trendingPeriodSegment.value
+                let trendingTitle = "Trending" + " " + "\((language != nil) ? "results for \(language ?? "")" : "")"
+                let searchTitle = "Search" + " " + "\((language != nil) ? "results for \(language ?? "")" : "")"
+                let title = showTrendings ? trendingTitle: searchTitle
                 switch segment {
                 case .repositories:
                     if showTrendings {
                         let repositories = trendingRepositories.map({ (repository) -> SearchSectionItem in
-                            let cellViewModel = TrendingRepositoryCellViewModel(with: repository)
+                            let cellViewModel = TrendingRepositoryCellViewModel(with: repository, since: since)
                             return SearchSectionItem.trendingRepositoriesItem(cellViewModel: cellViewModel)
                         })
                         if repositories.isNotEmpty {
@@ -178,10 +197,20 @@ class SearchViewModel: ViewModel, ViewModelType {
             return viewModel
         }).asDriverOnErrorJustComplete()
 
+        let languagesSelection = input.languagesSelection.asDriver(onErrorJustReturn: ()).map { () -> LanguagesViewModel in
+            let viewModel = LanguagesViewModel(currentLanguage: currentLanguage.value, languages: languageElements.value, provider: self.provider)
+            viewModel.currentLanguage.skip(1).bind(to: currentLanguage).disposed(by: self.rx.disposeBag)
+            return viewModel
+        }
+
+        let hidesTrendingPeriodSegment = showTrendings.not().asDriver(onErrorJustReturn: false)
+
         return Output(items: elements,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
+                      languagesSelection: languagesSelection,
                       repositorySelected: repositoryDetails,
-                      userSelected: userDetails)
+                      userSelected: userDetails,
+                      hidesTrendingPeriodSegment: hidesTrendingPeriodSegment)
     }
 }

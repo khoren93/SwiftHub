@@ -60,7 +60,7 @@ protocol SwiftHubAPI {
     // MARK: - Trending
     func trendingRepositories(language: String, since: String) -> Single<[TrendingRepository]>
     func trendingDevelopers(language: String, since: String) -> Single<[TrendingUser]>
-    func languages() -> Single<LanguageSection>
+    func languages() -> Single<Languages>
 }
 
 class Api: SwiftHubAPI {
@@ -230,8 +230,8 @@ extension Api {
         return trendingRequestArray(.trendingDevelopers(language: language, since: since), type: TrendingUser.self)
     }
 
-    func languages() -> Single<LanguageSection> {
-        return trendingRequestObject(.languages, type: LanguageSection.self)
+    func languages() -> Single<Languages> {
+        return trendingRequestObject(.languages, type: Languages.self)
     }
 }
 

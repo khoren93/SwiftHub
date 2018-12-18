@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-struct LanguageSection: Mappable {
+struct Languages: Mappable {
 
     var popular: [Language]?
     var all: [Language]?
@@ -34,5 +34,11 @@ struct Language: Mappable {
     mutating func mapping(map: Map) {
         urlParam <- map["urlParam"]
         name <- map["name"]
+    }
+}
+
+extension Language: Equatable {
+    static func == (lhs: Language, rhs: Language) -> Bool {
+        return lhs.urlParam == rhs.urlParam
     }
 }

@@ -21,11 +21,11 @@ class TrendingRepositoryCellViewModel {
 
     let repository: TrendingRepository
 
-    init(with repository: TrendingRepository) {
+    init(with repository: TrendingRepository, since: TrendingPeriodSegments) {
         self.repository = repository
         title = Driver.just("\(repository.fullname ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
-        secondDetail = Driver.just("★ \(repository.stars ?? 0)\t\t★ \(repository.currentPeriodStars ?? 0) today\t\t\(repository.language ?? "")")
+        secondDetail = Driver.just("★ \(repository.stars ?? 0)\t\t★ \(repository.currentPeriodStars ?? 0) \(since.title.lowercased())\t\t\(repository.language ?? "")")
         imageUrl = Driver.just(repository.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
         badgeColor = Driver.just(UIColor.flatGreenDark)

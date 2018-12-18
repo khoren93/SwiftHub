@@ -75,8 +75,12 @@
 "Issues.ClosedSegment.Title" = "Закрыто";
 /* Search */
 //"Search.Navigation.Title" = "Search";
+"Search.SearchBar.Placeholder" = "Глобальный поиск";
 "Search.RepositoriesSegment.Title" = "Репозитории";
 "Search.UsersSegment.Title" = "Пользователей";
+"Search.DailySegment.Title" = "За день";
+"Search.WeeklySegment.Title" = "За недельку";
+"Search.MonthlySegment.Title" = "За месяц";
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
 "Settings.PreferencesSection.Title" = "Параметры";
@@ -119,3 +123,6 @@
 "WhatsNew.Item3.Title" = "Открытый исходный код";
 "WhatsNew.Item3.Subtitle" = "SwiftHub полностью с открытым исходным кодом\nЗвезды очень приветствуются ★";
 "WhatsNew.CompletionButton.Title" = "Продолжить";
+/* Languages */
+"Languages.Navigation.Title" = "Языки";
+"Languages.allButton.Title" = "Все Языки";
