@@ -125,6 +125,7 @@
 "WhatsNew.Item3.Subtitle" = "SwiftHub is fully open source\nStars are very welcomed ★";
 "WhatsNew.Item4.Title" = "Trending";
 "WhatsNew.Item4.Subtitle" = "See what the GitHub community is most excited about today";
+"WhatsNew.DetailButton.Title" = "Learn More";
 "WhatsNew.CompletionButton.Title" = "Continue";
 /* Languages */
 "Languages.Navigation.Title" = "Languages";

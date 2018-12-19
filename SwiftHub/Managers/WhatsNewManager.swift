@@ -42,7 +42,11 @@ class WhatsNewManager: NSObject {
     }
 
     private func configuration() -> WhatsNewViewController.Configuration {
-        var configuration = WhatsNewViewController.Configuration()
+        var configuration = WhatsNewViewController.Configuration(
+            detailButton: .init(title: R.string.localizable.whatsNewDetailButtonTitle.key.localized(),
+                                action: .website(url: "https://github.com/khoren93/SwiftHub")),
+            completionButton: .init(stringLiteral: R.string.localizable.whatsNewCompletionButtonTitle.key.localized())
+        )
         //        configuration.itemsView.layout = .centered
         configuration.itemsView.imageSize = .original
         configuration.apply(animation: .slideRight)
