@@ -9,6 +9,8 @@
 import Foundation
 import ObjectMapper
 
+private let languageKey = "CurrentLanguageKey"
+
 struct Languages: Mappable {
 
     var popular: [Language]?
@@ -34,6 +36,29 @@ struct Language: Mappable {
     mutating func mapping(map: Map) {
         urlParam <- map["urlParam"]
         name <- map["name"]
+    }
+}
+
+extension Language {
+
+    func save() {
+        if let json = self.toJSONString() {
+            UserDefaults.standard.set(json, forKey: languageKey)
+        } else {
+            logError("Language can't be saved")
+        }
+    }
+
+    static func currentLanguage() -> Language? {
+        if let json = UserDefaults.standard.string(forKey: languageKey),
+            let language = Language(JSONString: json) {
+            return language
+        }
+        return nil
+    }
+
+    static func removeCurrentLanguage() {
+        UserDefaults.standard.removeObject(forKey: languageKey)
     }
 }
 

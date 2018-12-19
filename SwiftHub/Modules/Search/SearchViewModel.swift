@@ -44,7 +44,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let userElements = BehaviorRelay<[User]>(value: [])
 
         let languageElements = BehaviorRelay<Languages?>(value: nil)
-        let currentLanguage = BehaviorRelay<Language?>(value: nil)
+        let currentLanguage = BehaviorRelay<Language?>(value: Language.currentLanguage())
 
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()

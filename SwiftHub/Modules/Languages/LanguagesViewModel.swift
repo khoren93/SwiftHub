@@ -70,6 +70,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
         let saved = input.saveTrigger.map { () -> Void in
             let language = selectedLanguage.value
             self.currentLanguage.accept(language)
+            language?.save()
             if let language = language?.name {
                 analytics.log(.repoLanguage(language: language))
             }
@@ -78,6 +79,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
         let allTriggered = input.allTrigger
         allTriggered.drive(onNext: { () in
             self.currentLanguage.accept(nil)
+            Language.removeCurrentLanguage()
             analytics.log(.repoLanguage(language: "All"))
         }).disposed(by: rx.disposeBag)
 
