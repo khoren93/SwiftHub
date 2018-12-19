@@ -1,4 +1,5 @@
-# SwiftHub iOS
+<img src="https://github.com/khoren93/SwiftHub/blob/master/Sketch/app_logo.svg" alt="SwiftHub logo" height="80" >
+
 Open source Github iOS client written in RxSwift and MVVM architecture.
 
 ## Screenshots
@@ -28,7 +29,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 
 ## Building and Running
 
-You'll need a few things before we get started. Make sure you have Xcode installed from the App Store. Then run the following two commands to install Xcode's command line tools and `bundler`, if you don't have that yet.
+You'll need a few things before we get started. Make sure you have Xcode installed from the App Store. Then run the following two commands to install Xcode's command line tools and [`bundler`](https://bundler.io), if you don't have that yet.
 
 ```sh
 [sudo] gem install bundler
@@ -43,6 +44,7 @@ bundle install
 bundle exec fastlane setup
 ```
 
+Try `pod update` if you got some errors.
 Alrighty! We're ready to go!
 
 ## Debugging
@@ -58,10 +60,10 @@ All icons used in the application are taken from the [Feather](https://github.co
 Thanks to them for the beautiful open source icons.
 
 ## References
-* [RxSwift](https://github.com/ReactiveX/RxSwift)
-* [Clean Architecture with RxSwift](https://github.com/sergdort/CleanArchitectureRxSwift)
-* [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5)
-* [Moya](https://github.com/Moya/Moya)
+* [Moya](https://github.com/Moya/Moya) - Network abstraction layer
+* [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Export JSON objects as model classes
+* [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
+* [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
 
 ## License
 MIT License. See [LICENSE](https://github.com/khoren93/SwiftHub/blob/master/LICENSE).
