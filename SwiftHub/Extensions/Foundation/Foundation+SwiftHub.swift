@@ -10,7 +10,11 @@ import Foundation
 
 extension Int {
 
-    func size() -> String {
+    func sizeFromKB() -> String {
+        return (self*1024).sizeFromByte()
+    }
+
+    func sizeFromByte() -> String {
         return ByteCountFormatter.string(fromByteCount: Int64(self), countStyle: .file)
     }
 }

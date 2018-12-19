@@ -21,7 +21,7 @@ class ContentCellViewModel {
     init(with content: Content) {
         self.content = content
         title = Driver.just("\(content.name ?? "")")
-        detail = Driver.just("\(content.type == .file ? content.size?.size() ?? "" : "")")
+        detail = Driver.just("\(content.type == .file ? content.size?.sizeFromByte() ?? "" : "")")
         image = Driver.just(content.type.image()?.template)
     }
 }

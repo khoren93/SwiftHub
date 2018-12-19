@@ -164,7 +164,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             // Size
             if let size = repository.size {
                 let sizeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySizeCellTitle.key.localized(),
-                                                                      detail: size.size(),
+                                                                      detail: size.sizeFromKB(),
                                                                       image: R.image.icon_cell_size(),
                                                                       hidesDisclosure: true)
                 items.append(RepositorySectionItem.sizeItem(viewModel: sizeCellViewModel))
