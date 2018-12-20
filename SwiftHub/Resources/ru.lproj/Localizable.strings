@@ -81,6 +81,10 @@
 "Search.DailySegment.Title" = "За день";
 "Search.WeeklySegment.Title" = "За недельку";
 "Search.MonthlySegment.Title" = "За месяц";
+"Search.TrendingSection.Title" = "Тренды";
+"Search.TrendingSectionWithLanguage.Title" = "Популярные результаты для %@";
+"Search.SearchSection.Title" = "Поиск";
+"Search.SearchSectionWithLanguage.Title" = "Результаты поиска по %@";
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
 "Settings.PreferencesSection.Title" = "Параметры";

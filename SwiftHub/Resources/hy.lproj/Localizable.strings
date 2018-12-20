@@ -81,6 +81,10 @@
 "Search.DailySegment.Title" = "Օրվա";
 "Search.WeeklySegment.Title" = "Շաբաթվա";
 "Search.MonthlySegment.Title" = "Ամսվա";
+"Search.TrendingSection.Title" = "Թրենդինգ";
+"Search.TrendingSectionWithLanguage.Title" = "Թրենդինգ արդյունքներ %@-ում";
+"Search.SearchSection.Title" = "Որոնում";
+"Search.SearchSectionWithLanguage.Title" = "Որոնման արդյունքներ %@-ում";
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";

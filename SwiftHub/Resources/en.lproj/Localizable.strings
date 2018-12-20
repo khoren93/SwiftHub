@@ -81,6 +81,10 @@
 "Search.DailySegment.Title" = "Daily";
 "Search.WeeklySegment.Title" = "Weekly";
 "Search.MonthlySegment.Title" = "Monthly";
+"Search.TrendingSection.Title" = "Trending";
+"Search.TrendingSectionWithLanguage.Title" = "Trending results for %@";
+"Search.SearchSection.Title" = "Search";
+"Search.SearchSectionWithLanguage.Title" = "Search results for %@";
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
 "Settings.PreferencesSection.Title" = "Preferences";

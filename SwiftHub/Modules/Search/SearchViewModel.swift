@@ -141,8 +141,12 @@ class SearchViewModel: ViewModel, ViewModelType {
                 let showTrendings = showTrendings.value
                 let language = currentLanguage.value?.name
                 let since = trendingPeriodSegment.value
-                let trendingTitle = "Trending" + " " + "\((language != nil) ? "results for \(language ?? "")" : "")"
-                let searchTitle = "Search" + " " + "\((language != nil) ? "results for \(language ?? "")" : "")"
+                let trendingTitle = language != nil ?
+                    R.string.localizable.searchTrendingSectionWithLanguageTitle.key.localizedFormat("\(language ?? "")") :
+                    R.string.localizable.searchTrendingSectionTitle.key.localized()
+                let searchTitle = language != nil ?
+                    R.string.localizable.searchSearchSectionWithLanguageTitle.key.localizedFormat("\(language ?? "")") :
+                    R.string.localizable.searchSearchSectionTitle.key.localized()
                 let title = showTrendings ? trendingTitle: searchTitle
                 switch segment {
                 case .repositories:
