@@ -44,7 +44,7 @@ class UserViewController: TableViewController {
 
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
-        view.cornerRadius = 40
+        view.cornerRadius = 50
         return view
     }()
 
@@ -61,13 +61,13 @@ class UserViewController: TableViewController {
         let headerView = View()
         headerView.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
-            make.top.centerX.centerY.equalToSuperview()
-            make.size.equalTo(80)
+            make.top.left.centerX.centerY.equalToSuperview()
+            make.size.equalTo(100)
         })
         headerView.addSubview(self.followButton)
         self.followButton.snp.remakeConstraints({ (make) in
             make.bottom.equalTo(self.ownerImageView)
-            make.right.equalTo(self.ownerImageView).offset(15)
+            make.right.equalTo(self.ownerImageView)
             make.size.equalTo(40)
         })
         let subviews: [UIView] = [headerView]
@@ -80,7 +80,8 @@ class UserViewController: TableViewController {
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .vertical
+        stackView.axis = .horizontal
+        stackView.alignment = .center
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(self.inset)
@@ -257,13 +258,13 @@ class UserViewController: TableViewController {
 
         let valueAttributes = Attributes {
             return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 20))
+                .font(.boldSystemFont(ofSize: 18))
                 .paragraphStyle(paragraph)
         }
 
         let titleAttributes = Attributes {
             return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 14))
+                .font(.boldSystemFont(ofSize: 12))
                 .paragraphStyle(paragraph)
         }
 
