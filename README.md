@@ -16,7 +16,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Color themes in Light and Dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
-- [x] In-app language switching ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
+- [x] In-app language switching (en, zh, ru, hy) ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
 - [x] Support iPhone and iPad (Split View)
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
@@ -53,7 +53,7 @@ There are also included debugging [Hero](https://github.com/HeroTransitions/Hero
 
 ## Fastlane
 
-[fastlane](https://fastlane.tools) automates common development tasks - for example bumping version numbers, running tests on multiple configurations, or submitting to the App Store. You can list the available lanes (our project-specific scripts) using `bundle exec fastlane lanes`. You can list available actions (all actions available to be scripted via lanes) using `bundle exec fastlane actions`. The fastlane configuration and scripts are in the `fastlane` folder.
+[Fastlane](https://fastlane.tools) automates common development tasks - for example bumping version numbers, running tests on multiple configurations, or submitting to the App Store. You can list the available lanes (our project-specific scripts) using `bundle exec fastlane lanes`. You can list available actions (all actions available to be scripted via lanes) using `bundle exec fastlane actions`. The fastlane configuration and scripts are in the `fastlane` folder.
 
 ## Design
 All icons used in the application are taken from the [Feather](https://github.com/feathericons/feather).
