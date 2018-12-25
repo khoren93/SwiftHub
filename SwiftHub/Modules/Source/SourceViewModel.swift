@@ -29,6 +29,7 @@ class SourceViewModel: ViewModel, ViewModelType {
         let languages: Driver<[String]>
         let selectedLanguageIndex: Driver<Int?>
         let highlightedCode: Observable<NSAttributedString?>
+        let themeBackgroundColor: Observable<UIColor?>
         let hidesThemes: Driver<Bool>
         let hidesLanguages: Driver<Bool>
     }
@@ -101,12 +102,15 @@ class SourceViewModel: ViewModel, ViewModelType {
             return languages.indices(of: language).first
         }
 
+        let themeBackgroundColor = highlightedCode.map { _ in self.highlightr?.theme.themeBackgroundColor }
+
         return Output(navigationTitle: navigationTitle,
                       themes: themes.asDriver(onErrorJustReturn: []),
                       selectedThemeIndex: selectedThemeIndex.asDriver(onErrorJustReturn: nil),
                       languages: languages.asDriver(onErrorJustReturn: []),
                       selectedLanguageIndex: selectedLanguageIndex.asDriver(onErrorJustReturn: nil),
                       highlightedCode: highlightedCode,
+                      themeBackgroundColor: themeBackgroundColor,
                       hidesThemes: hidesThemes,
                       hidesLanguages: hidesLanguages)
     }

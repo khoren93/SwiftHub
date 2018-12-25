@@ -110,6 +110,8 @@ class SourceViewController: ViewController {
             })
         }).disposed(by: rx.disposeBag)
 
+        output.themeBackgroundColor.asDriver(onErrorJustReturn: nil).drive(textView.rx.backgroundColor).disposed(by: rx.disposeBag)
+
         output.hidesThemes.drive(themesPicker.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesLanguages.drive(languagesPicker.rx.isHidden).disposed(by: rx.disposeBag)
 
