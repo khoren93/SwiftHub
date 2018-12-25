@@ -64,6 +64,7 @@ Thanks to them for the beautiful open source icons.
 * [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Export JSON objects as model classes
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
 * [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
+* [github-trending-api](https://github.com/huchenme/github-trending-api) - The missing APIs for GitHub trending projects and developers
 
 ## License
 MIT License. See [LICENSE](https://github.com/khoren93/SwiftHub/blob/master/LICENSE).
