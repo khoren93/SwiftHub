@@ -55,6 +55,7 @@ target 'SwiftHub' do
     pod 'AcknowList', '~> 1.8'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
+    pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
 
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager

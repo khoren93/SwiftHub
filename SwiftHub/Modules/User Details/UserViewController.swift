@@ -233,10 +233,8 @@ class UserViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.openInWebSelected.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
-            }
+        output.openInWebSelected.filterNil().drive(onNext: { [weak self] (url) in
+            self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
 
         output.repositoriesSelected.drive(onNext: { [weak self] (viewModel) in

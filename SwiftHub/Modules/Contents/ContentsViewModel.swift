@@ -15,13 +15,15 @@ class ContentsViewModel: ViewModel, ViewModelType {
     struct Input {
         let headerRefresh: Observable<Void>
         let selection: Driver<ContentCellViewModel>
+        let openInWebSelection: Observable<Void>
     }
 
     struct Output {
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[ContentCellViewModel]>
         let openContents: Driver<ContentsViewModel>
-        let openUrl: Driver<URL>
+        let openUrl: Driver<URL?>
+        let openSource: Driver<SourceViewModel>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -54,7 +56,13 @@ class ContentsViewModel: ViewModel, ViewModelType {
             return viewModel
         })
 
-        let openUrl = input.selection.map { $0.content }.filter { $0.type != .dir }.map { $0.htmlUrl?.url }.filterNil()
+        let openUrl = input.openInWebSelection.map { self.content.value?.htmlUrl?.url ?? self.repository.value.htmlUrl?.url }
+            .filterNil().asDriver(onErrorJustReturn: nil)
+
+        let openSource = input.selection.map { $0.content }.filter { $0.type != .dir }.map { (content) -> SourceViewModel in
+            let viewModel = SourceViewModel(content: content, provider: self.provider)
+            return viewModel
+        }
 
         let navigationTitle = content.map({ (content) -> String in
             return content?.name ?? self.repository.value.fullname ?? ""
@@ -63,7 +71,8 @@ class ContentsViewModel: ViewModel, ViewModelType {
         return Output(navigationTitle: navigationTitle,
                       items: elements,
                       openContents: openContents,
-                      openUrl: openUrl)
+                      openUrl: openUrl,
+                      openSource: openSource)
     }
 
     func request() -> Observable<[ContentCellViewModel]> {

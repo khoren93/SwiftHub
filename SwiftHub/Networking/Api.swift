@@ -18,6 +18,9 @@ enum ApiError: Error {
 }
 
 protocol SwiftHubAPI {
+    func downloadString(url: URL) -> Single<String>
+    func downloadFile(url: URL, fileName: String?) -> Single<Void>
+
     // MARK: - Authentication is optional
     func searchRepositories(query: String) -> Single<RepositorySearch>
     func repository(fullname: String) -> Single<Repository>
@@ -77,6 +80,27 @@ class Api: SwiftHubAPI {
 }
 
 extension Api {
+
+    func downloadString(url: URL) -> Single<String> {
+        return Single.create { single in
+            DispatchQueue.global().async {
+                do {
+                    single(.success(try String.init(contentsOf: url)))
+                } catch {
+                    single(.error(error))
+                }
+            }
+            return Disposables.create { }
+        }
+            .observeOn(MainScheduler.instance)
+    }
+
+    func downloadFile(url: URL, fileName: String?) -> Single<Void> {
+        return githubProvider.request(.download(url: url, fileName: fileName))
+            .mapToVoid()
+            .asSingle()
+    }
+
     // MARK: - Authentication is optional
 
     func searchRepositories(query: String) -> Single<RepositorySearch> {
