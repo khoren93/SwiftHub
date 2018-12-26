@@ -15,7 +15,14 @@ protocol ProductAPIType {
     var addXAuth: Bool { get }
 }
 
+private let assetDir: URL = {
+    let directoryURLs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return directoryURLs.first ?? URL(fileURLWithPath: NSTemporaryDirectory())
+}()
+
 enum GithubAPI {
+    case download(url: URL, fileName: String?)
+
     // MARK: - Authentication is optional
     case searchRepositories(query: String)
     case repository(fullname: String)
@@ -65,11 +72,17 @@ enum GithubAPI {
 extension GithubAPI: TargetType, ProductAPIType {
 
     var baseURL: URL {
-        return Configs.Network.githubBaseUrl.url!
+        switch self {
+        case .download(let url, _):
+            return url
+        default:
+            return Configs.Network.githubBaseUrl.url!
+        }
     }
 
     var path: String {
         switch self {
+        case .download: return ""
         case .searchRepositories: return "/search/repositories"
         case .repository(let fullname): return "/repos/\(fullname)"
         case .watchers(let fullname, _): return "/repos/\(fullname)/subscribers"
@@ -186,8 +199,36 @@ extension GithubAPI: TargetType, ProductAPIType {
         return URLEncoding.default
     }
 
+    var localLocation: URL {
+        switch self {
+        case .download(_, let fileName):
+            if let fileName = fileName {
+                return assetDir.appendingPathComponent(fileName)
+            }
+        default: break
+        }
+        return assetDir
+    }
+
+    var downloadDestination: DownloadDestination {
+        return { _, _ in return (self.localLocation, .removePreviousFile) }
+    }
+
+    public var task: Task {
+        switch self {
+        case .download:
+            return .downloadDestination(downloadDestination)
+        default:
+            if let parameters = parameters {
+                return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+            }
+            return .requestPlain
+        }
+    }
+
     var sampleData: Data {
         switch self {
+        case .download: return Data()
         case .searchRepositories: return stubbedResponse("RepositorySearch")
         case .repository: return stubbedResponse("Repository")
         case .watchers: return stubbedResponse("RepositoryWatchers")
@@ -214,7 +255,6 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .repositoryEvents: return stubbedResponse("EventsRepository")
         case .userReceivedEvents: return stubbedResponse("EventsUserReceived")
         case .userPerformedEvents: return stubbedResponse("EventsUserPerformed")
-
         case .profile: return stubbedResponse("Profile")
         case .notifications: return stubbedResponse("Notifications")
         case .repositoryNotifications: return stubbedResponse("NotificationsRepository")
@@ -225,13 +265,6 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .followUser: return stubbedResponse("EmptyObject")
         case .unfollowUser: return stubbedResponse("EmptyObject")
         }
-    }
-
-    public var task: Task {
-        if let parameters = parameters {
-            return .requestParameters(parameters: parameters, encoding: parameterEncoding)
-        }
-        return .requestPlain
     }
 
     var addXAuth: Bool {

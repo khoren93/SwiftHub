@@ -35,7 +35,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0.0'  #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.29.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.29.2'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -55,6 +55,7 @@ target 'SwiftHub' do
     pod 'AcknowList', '~> 1.8'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
+    pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
 
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager

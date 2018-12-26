@@ -17,6 +17,11 @@ class ContentsViewController: TableViewController {
 
     var viewModel: ContentsViewModel!
 
+    lazy var rightBarButton: BarButtonItem = {
+        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +30,8 @@ class ContentsViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
+
+        navigationItem.rightBarButtonItem = rightBarButton
 
         tableView.register(R.nib.contentCell)
         tableView.footRefreshControl = nil
@@ -35,7 +42,8 @@ class ContentsViewController: TableViewController {
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = ContentsViewModel.Input(headerRefresh: refresh,
-                                            selection: tableView.rx.modelSelected(ContentCellViewModel.self).asDriver())
+                                            selection: tableView.rx.modelSelected(ContentCellViewModel.self).asDriver(),
+                                            openInWebSelection: rightBarButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -55,8 +63,12 @@ class ContentsViewController: TableViewController {
             self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
-        output.openUrl.drive(onNext: { [weak self] (url) in
+        output.openUrl.filterNil().drive(onNext: { [weak self] (url) in
             self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
+        }).disposed(by: rx.disposeBag)
+
+        output.openSource.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .source(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
