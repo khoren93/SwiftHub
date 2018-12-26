@@ -25,7 +25,7 @@ class TrendingRepositoryCellViewModel {
         self.repository = repository
         title = Driver.just("\(repository.fullname ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
-        secondDetail = Driver.just("★ \(repository.stars ?? 0) \t★ \(repository.currentPeriodStars ?? 0) \(since.title.lowercased()) \t\(repository.language ?? "")")
+        secondDetail = Driver.just("★ \((repository.stars ?? 0).kFormatted()) \t★ \((repository.currentPeriodStars ?? 0).kFormatted()) \(since.title.lowercased()) \t\(repository.language ?? "")")
         imageUrl = Driver.just(repository.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
         badgeColor = Driver.just(UIColor.flatGreenDark)
