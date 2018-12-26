@@ -22,6 +22,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
 - [x] Whats New ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
+- [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
 - [ ] App Store application
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
