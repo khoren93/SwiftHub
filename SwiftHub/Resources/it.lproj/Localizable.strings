@@ -1,0 +1,138 @@
+/* Localizable.strings
+  SwiftHub
+
+  Created by Sygnoos9 on 10/4/18.
+  Copyright © 2018 Khoren Markosyan. All rights reserved. */
+
+/* Common */
+"Common.Yes" = "Yes";
+"Common.No" = "No";
+"Common.OK" = "OK";
+"Common.Cancel" = "Cancel";
+"Common.Done" = "Done";
+"Common.Back" = "Back";
+"Common.Close" = "Close";
+"Common.Edit" = "Edit";
+"Common.Next" = "Next";
+"Common.Skip" = "Skip";
+"Common.Reset" = "Reset";
+"Common.Save" = "Save";
+"Common.Delete" = "Delete";
+"Common.Search" = "Search";
+"Common.Error" = "Error";
+"Common.NoResults" = "No Results";
+/* Home TabBar */
+"Home.TabBar.Events.Title" = "Events";
+"Home.TabBar.Search.Title" = "Search";
+"Home.TabBar.Profile.Title" = "Profile";
+"Home.TabBar.Login.Title" = "Login";
+"Home.TabBar.Notifications.Title" = "Activities";
+"Home.TabBar.Settings.Title" = "Settings";
+/* Events */
+"Events.Navigation.Title" = "Events";
+"Events.ReceivedSegment.Title" = "Received";
+"Events.PerformedSegment.Title" = "Performed";
+/* Login */
+//"Login.Navigation.Title" = "Login";
+"Login.BasicSegment.Title" = "Basic";
+"Login.oAuthSegment.Title" = "oAuth";
+"Login.LoginTextField.Placeholder" = "login";
+"Login.PasswordTextField.Placeholder" = "password";
+"Login.BasicLoginButton.Title" = "Login";
+"Login.TitleLabel.Text" = "Welcome to SwiftHub";
+"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
+"Login.oAuthloginButton.Title" = "Sign in with Github";
+"Login.LoginFailed.Description" = "Please check your login or password";
+/* Notifications */
+"Notifications.Navigation.Title" = "Notifications";
+"Notifications.UnreadSegment.Title" = "Unread";
+"Notifications.ParticipatingSegment.Title" = "Participating";
+"Notifications.AllSegment.Title" = "All";
+/* Repositories */
+"Repositories.RepositoriesNavigation.Title" = "Repositories";
+"Repositories.StarredNavigation.Title" = "Starred";
+"Repositories.ForksNavigation.Title" = "Forks";
+/* Repository Details */
+//"Repository.Navigation.Title" = "Repository";
+"Repository.WatchersButton.Title" = "Watchers";
+"Repository.StarsButton.Title" = "Stars";
+"Repository.ForksButton.Title" = "Forks";
+"Repository.LanguageCell.Title" = "Language";
+"Repository.SizeCell.Title" = "Size";
+"Repository.CreatedCell.Title" = "Created";
+"Repository.UpdatedCell.Title" = "Updated";
+"Repository.HomepageCell.Title" = "Homepage";
+"Repository.IssuesCell.Title" = "Issues";
+"Repository.CommitsCell.Title" = "Commits";
+"Repository.PullRequestsCell.Title" = "Pull Requests";
+"Repository.EventsCell.Title" = "Events";
+"Repository.ContributorsCell.Title" = "Contributors";
+"Repository.ReadmeCell.Title" = "Readme";
+"Repository.SourceCell.Title" = "Source Code";
+/* Issues */
+"Issues.Navigation.Title" = "Issues";
+"Issues.OpenSegment.Title" = "Open";
+"Issues.ClosedSegment.Title" = "Closed";
+/* Search */
+//"Search.Navigation.Title" = "Search";
+"Search.SearchBar.Placeholder" = "Global Search";
+"Search.RepositoriesSegment.Title" = "Repositories";
+"Search.UsersSegment.Title" = "Users";
+"Search.DailySegment.Title" = "Daily";
+"Search.WeeklySegment.Title" = "Weekly";
+"Search.MonthlySegment.Title" = "Monthly";
+"Search.TrendingSection.Title" = "Trending";
+"Search.TrendingSectionWithLanguage.Title" = "Trending results for %@";
+"Search.SearchSection.Title" = "Search";
+"Search.SearchSectionWithLanguage.Title" = "Search results for %@";
+/* Settings */
+"Settings.Navigation.Title" = "Settings";
+"Settings.PreferencesSection.Title" = "Preferences";
+"Settings.NightMode.Title" = "Night Mode";
+"Settings.Theme.Title" = "Color theme";
+"Settings.Language.Title" = "Language";
+"Settings.RemoveCache.Title" = "Remove Cache";
+"Settings.RemoveCache.Alert.SuccessMessage" = "Cache Successfully Cleared";
+"Settings.SupportSection.Title" = "Support";
+"Settings.Acknowledgements.Title" = "Acknowledgements";
+"Settings.WhatsNew.Title" = "Whats New";
+"Settings.LogOut.Title" = "Log Out";
+"Settings.Logout.Alert.Message" = "Are you sure want to log out from WishApp?";
+"Settings.Logout.Alert.ConfirmButton.Title" = "Logout";
+/* Language */
+"Language.Navigation.Title" = "Language";
+/* Theme */
+"Theme.Navigation.Title" = "Color theme";
+/* User Details */
+//"User.Navigation.Title" = "User";
+"User.RepositoriesButton.Title" = "Repositories";
+"User.FollowersButton.Title" = "Followers";
+"User.FollowingButton.Title" = "Following";
+"User.StarsCell.Title" = "Stars";
+"User.EventsCell.Title" = "Events";
+"User.CompanyCell.Title" = "Company";
+"User.BlogCell.Title" = "Blog";
+/* Users */
+//"Users.Navigation.Title" = "Users";
+"Users.FollowersNavigation.Title" = "Followers";
+"Users.FollowingNavigation.Title" = "Following";
+"Users.WatchersNavigation.Title" = "Watchers";
+"Users.StargazersNavigation.Title" = "Stargazers";
+"Users.ContributorsNavigation.Title" = "Contributors";
+/* Whats New */
+"WhatsNew.Title" = "Whats New";
+"WhatsNew.Item1.Title" = "WhatsNewKit";
+"WhatsNew.Item1.Subtitle" = "WhatsNewKit enables you to easily showcase your awesome new app features";
+"WhatsNew.Item2.Title" = "Themes";
+"WhatsNew.Item2.Subtitle" = "You can apply different themes with Light and Dark modes";
+"WhatsNew.Item3.Title" = "Open Source";
+"WhatsNew.Item3.Subtitle" = "SwiftHub is fully open source\nStars are very welcomed ★";
+"WhatsNew.Item4.Title" = "Trending";
+"WhatsNew.Item4.Subtitle" = "See what the GitHub community is most excited about today";
+"WhatsNew.DetailButton.Title" = "Learn More";
+"WhatsNew.CompletionButton.Title" = "Continue";
+/* Languages */
+"Languages.Navigation.Title" = "Languages";
+"Languages.allButton.Title" = "All Languages";
+"Languages.PopularSection.Title" = "Popular";
+"Languages.AllSection.Title" = "All";

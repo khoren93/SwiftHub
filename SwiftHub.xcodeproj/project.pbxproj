@@ -353,6 +353,7 @@
 		07E1B30521A44D9D00F6EAE3 /* IssueCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCellViewModel.swift; sourceTree = "<group>"; };
 		07E1B30721A44DB300F6EAE3 /* IssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewController.swift; sourceTree = "<group>"; };
 		07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryIssues.json; sourceTree = "<group>"; };
+		07EC7CF521DE248B00EC1635 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07FC336D1FFFCB8B00D53888 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		07FC336F1FFFCBF600D53888 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		07FC33761FFFD4A600D53888 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
@@ -1195,6 +1196,7 @@
 				ru,
 				hy,
 				"zh-Hans",
+				it,
 			);
 			mainGroup = A09499491E1D1CB500EFDE29;
 			productRefGroup = A09499531E1D1CB600EFDE29 /* Products */;
@@ -1698,6 +1700,7 @@
 				0757B53D2166A6C300C04163 /* ru */,
 				0757B53E2166A6E900C04163 /* hy */,
 				079E1AE121CC0D1D00C9448B /* zh-Hans */,
+				07EC7CF521DE248B00EC1635 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
