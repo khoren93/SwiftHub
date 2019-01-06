@@ -32,8 +32,14 @@ platform :ios do
     capture_screenshots(workspace: "SwiftHub.xcworkspace", scheme: "SwiftHubUITests")
   end
 
+  desc "Submit a new beta build to apple TestFlight"
   lane :beta do
-    build_app(scheme: "SwiftHub")
+    build_app(scheme: "SwiftHub",
+              workspace: "SwiftHub.xcworkspace",
+              include_bitcode: true,
+              xcargs: "-allowProvisioningUpdates")
+
+    pilot
   end
 
   lane :increment_build do
