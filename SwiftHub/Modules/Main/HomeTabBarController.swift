@@ -9,6 +9,7 @@
 import UIKit
 import RAMAnimatedTabBarController
 import Localize_Swift
+import RxSwift
 
 enum HomeTabBarItem: Int {
     case search, news, profile, notifications, settings, login
@@ -125,6 +126,13 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         themeService.rx
             .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)
+
+        themeService.relay.delay(0.5, scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
+            switch theme {
+            case .light(let color), .dark(let color):
+                self.changeSelectedColor(color.color, iconSelectedColor: color.color)
+            }
+        }).disposed(by: rx.disposeBag)
     }
 
     func bindViewModel() {
