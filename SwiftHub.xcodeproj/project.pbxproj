@@ -1168,7 +1168,7 @@
 				TargetAttributes = {
 					A09499511E1D1CB600EFDE29 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = T7PRF59H28;
+						DevelopmentTeam = RE853S4FBU;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
@@ -1844,7 +1844,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = T7PRF59H28;
+				DEVELOPMENT_TEAM = RE853S4FBU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1862,7 +1862,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = T7PRF59H28;
+				DEVELOPMENT_TEAM = RE853S4FBU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
