@@ -35,7 +35,7 @@ struct Configs {
     }
 
     struct Network {
-        static let useStaging = false
+        static let useStaging = false  // set true for tests and generating screenshots with fastlane
         static let loggingEnabled = false
 
         static var githubBaseUrl: String {

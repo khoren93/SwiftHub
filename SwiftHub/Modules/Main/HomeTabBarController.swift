@@ -147,8 +147,10 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.openWhatsNew.drive(onNext: { [weak self](block) in
-            self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
+        output.openWhatsNew.drive(onNext: { [weak self] (block) in
+            if Configs.Network.useStaging == false {
+                self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
+            }
         }).disposed(by: rx.disposeBag)
     }
 }

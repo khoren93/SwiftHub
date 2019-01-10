@@ -1,0 +1,277 @@
+[
+    {
+        "username": "facebook",
+        "name": "Facebook",
+        "url": "https://github.com/facebook",
+        "avatar": "https://avatars2.githubusercontent.com/u/69631",
+        "repo": {
+            "name": "facebook-swift-sdk",
+            "description": "Integrate your iOS apps in Swift with Facebook Platform.",
+            "url": "https://github.com/facebook/facebook-swift-sdk"
+        }
+    },
+    {
+        "username": "sindresorhus",
+        "name": "Sindre Sorhus",
+        "url": "https://github.com/sindresorhus",
+        "avatar": "https://avatars1.githubusercontent.com/u/170270",
+        "repo": {
+            "name": "gifski-app",
+            "description": "Convert videos to high-quality GIFs on your Mac",
+            "url": "https://github.com/sindresorhus/gifski-app"
+        }
+    },
+    {
+        "username": "airbnb",
+        "name": "Airbnb",
+        "url": "https://github.com/airbnb",
+        "avatar": "https://avatars1.githubusercontent.com/u/698437",
+        "repo": {
+            "name": "Lona",
+            "description": "A tool for defining design systems and using them to generate cross-platform UI code, Sketch files, and other artifacts.",
+            "url": "https://github.com/airbnb/Lona"
+        }
+    },
+    {
+        "username": "uber",
+        "name": "Uber Open Source",
+        "url": "https://github.com/uber",
+        "avatar": "https://avatars2.githubusercontent.com/u/538264",
+        "repo": {
+            "name": "rides-ios-sdk",
+            "description": "Uber Rides iOS SDK (beta)",
+            "url": "https://github.com/uber/rides-ios-sdk"
+        }
+    },
+    {
+        "username": "fossasia",
+        "name": "FOSSASIA",
+        "url": "https://github.com/fossasia",
+        "avatar": "https://avatars3.githubusercontent.com/u/6295529",
+        "repo": {
+            "name": "susi_iOS",
+            "description": "SUSI AI iOS app",
+            "url": "https://github.com/fossasia/susi_iOS"
+        }
+    },
+    {
+        "username": "iina",
+        "name": "IINA",
+        "url": "https://github.com/iina",
+        "avatar": "https://avatars3.githubusercontent.com/u/35151645",
+        "repo": {
+            "name": "iina",
+            "description": "The modern video player for macOS.",
+            "url": "https://github.com/iina/iina"
+        }
+    },
+    {
+        "username": "home-assistant",
+        "name": "Home Assistant",
+        "url": "https://github.com/home-assistant",
+        "avatar": "https://avatars2.githubusercontent.com/u/13844975",
+        "repo": {
+            "name": "home-assistant-iOS",
+            "description": "📱 The iOS app for Home Assistant, the open-source home automation platform running on Python 3",
+            "url": "https://github.com/home-assistant/home-assistant-iOS"
+        }
+    },
+    {
+        "username": "ReactiveX",
+        "name": "ReactiveX",
+        "url": "https://github.com/ReactiveX",
+        "avatar": "https://avatars1.githubusercontent.com/u/6407041",
+        "repo": {
+            "name": "RxSwift",
+            "description": "Reactive Programming in Swift",
+            "url": "https://github.com/ReactiveX/RxSwift"
+        }
+    },
+    {
+        "username": "awslabs",
+        "name": "Amazon Web Services - Labs",
+        "url": "https://github.com/awslabs",
+        "avatar": "https://avatars0.githubusercontent.com/u/3299148",
+        "repo": {
+            "name": "aws-sdk-ios-samples",
+            "description": "This repository has samples that demonstrate various aspects of the AWS SDK for iOS, you can get the SDK source on Github",
+            "url": "https://github.com/awslabs/aws-sdk-ios-samples"
+        }
+    },
+    {
+        "username": "apple",
+        "name": "Apple",
+        "url": "https://github.com/apple",
+        "avatar": "https://avatars0.githubusercontent.com/u/10639145",
+        "repo": {
+            "name": "swift-package-manager",
+            "description": "The Package Manager for the Swift Programming Language",
+            "url": "https://github.com/apple/swift-package-manager"
+        }
+    },
+    {
+        "username": "apollographql",
+        "name": "Apollo GraphQL",
+        "url": "https://github.com/apollographql",
+        "avatar": "https://avatars3.githubusercontent.com/u/17189275",
+        "repo": {
+            "name": "apollo-ios",
+            "description": "📱 A strongly-typed, caching GraphQL client for iOS, written in Swift",
+            "url": "https://github.com/apollographql/apollo-ios"
+        }
+    },
+    {
+        "username": "rwbutler",
+        "name": "Ross Butler",
+        "url": "https://github.com/rwbutler",
+        "avatar": "https://avatars0.githubusercontent.com/u/1029504",
+        "repo": {
+            "name": "Connectivity",
+            "description": "Makes Internet connectivity detection more robust by detecting Wi-Fi networks without Internet access.",
+            "url": "https://github.com/rwbutler/Connectivity"
+        }
+    },
+    {
+        "username": "mongodb",
+        "name": "mongodb",
+        "url": "https://github.com/mongodb",
+        "avatar": "https://avatars1.githubusercontent.com/u/45120",
+        "repo": {
+            "name": "mongo-swift-driver",
+            "description": "The Swift driver for MongoDB",
+            "url": "https://github.com/mongodb/mongo-swift-driver"
+        }
+    },
+    {
+        "username": "firebase",
+        "name": "Firebase",
+        "url": "https://github.com/firebase",
+        "avatar": "https://avatars0.githubusercontent.com/u/1335026",
+        "repo": {
+            "name": "friendlypix-ios",
+            "description": "Friendly Pix iOS is a sample app demonstrating how to build an iOS app with the Firebase Platform.",
+            "url": "https://github.com/firebase/friendlypix-ios"
+        }
+    },
+    {
+        "username": "inamiy",
+        "name": "Yasuhiro Inami",
+        "url": "https://github.com/inamiy",
+        "avatar": "https://avatars0.githubusercontent.com/u/138476",
+        "repo": {
+            "name": "RxAutomaton",
+            "description": "RxSwift + State Machine, inspired by Redux and Elm.",
+            "url": "https://github.com/inamiy/RxAutomaton"
+        }
+    },
+    {
+        "username": "IvanVorobei",
+        "name": "Ivan Vorobei",
+        "url": "https://github.com/IvanVorobei",
+        "avatar": "https://avatars2.githubusercontent.com/u/10995774",
+        "repo": {
+            "name": "SPPermission",
+            "description": "Simple request permission with native UI and interactive animation",
+            "url": "https://github.com/IvanVorobei/SPPermission"
+        }
+    },
+    {
+        "username": "googleapis",
+        "name": "Google APIs",
+        "url": "https://github.com/googleapis",
+        "avatar": "https://avatars2.githubusercontent.com/u/16785467",
+        "repo": {
+            "name": "gnostic",
+            "description": "A compiler for API described by the OpenAPI Specification with plugins for code generation and other API support tasks.",
+            "url": "https://github.com/googleapis/gnostic"
+        }
+    },
+    {
+        "username": "igorkulman",
+        "name": "Igor Kulman",
+        "url": "https://github.com/igorkulman",
+        "avatar": "https://avatars2.githubusercontent.com/u/4746070",
+        "repo": {
+            "name": "iOSLocalizationEditor",
+            "description": "Simple macOS editor app to help you manage iOS app localizations by allowing you to edit all the translations side by side",
+            "url": "https://github.com/igorkulman/iOSLocalizationEditor"
+        }
+    },
+    {
+        "username": "Ramotion",
+        "name": "Ramotion",
+        "url": "https://github.com/Ramotion",
+        "avatar": "https://avatars1.githubusercontent.com/u/6028820",
+        "repo": {
+            "name": "animated-tab-bar",
+            "description": "RAMAnimatedTabBarController is a Swift UI module library for adding animation to iOS tabbar items and icons. iOS library made by",
+            "url": "https://github.com/Ramotion/animated-tab-bar"
+        }
+    },
+    {
+        "username": "onevcat",
+        "name": "Wei Wang",
+        "url": "https://github.com/onevcat",
+        "avatar": "https://avatars0.githubusercontent.com/u/1019875",
+        "repo": {
+            "name": "Kingfisher",
+            "description": "A lightweight, pure-Swift library for downloading and caching images from the web.",
+            "url": "https://github.com/onevcat/Kingfisher"
+        }
+    },
+    {
+        "username": "TwoLivesLeft",
+        "name": "Simeon Saëns",
+        "url": "https://github.com/TwoLivesLeft",
+        "avatar": "https://avatars0.githubusercontent.com/u/816857",
+        "repo": {
+            "name": "Menu",
+            "description": "The iOS Menu",
+            "url": "https://github.com/TwoLivesLeft/Menu"
+        }
+    },
+    {
+        "username": "realm",
+        "name": "Realm",
+        "url": "https://github.com/realm",
+        "avatar": "https://avatars0.githubusercontent.com/u/7575099",
+        "repo": {
+            "name": "SwiftLint",
+            "description": "A tool to enforce Swift style and conventions.",
+            "url": "https://github.com/realm/SwiftLint"
+        }
+    },
+    {
+        "username": "khoren93",
+        "name": "Khoren Markosyan",
+        "url": "https://github.com/khoren93",
+        "avatar": "https://avatars2.githubusercontent.com/u/11523360",
+        "repo": {
+            "name": "SwiftHub",
+            "description": "Github iOS client written in RxSwift and MVVM clean architecture",
+            "url": "https://github.com/khoren93/SwiftHub"
+        }
+    },
+    {
+        "username": "brave",
+        "name": "Brave Software",
+        "url": "https://github.com/brave",
+        "avatar": "https://avatars1.githubusercontent.com/u/12301619",
+        "repo": {
+            "name": "brave-ios",
+            "description": "Brave iOS Browser",
+            "url": "https://github.com/brave/brave-ios"
+        }
+    },
+    {
+        "username": "RocketChat",
+        "name": "Rocket.Chat",
+        "url": "https://github.com/RocketChat",
+        "avatar": "https://avatars3.githubusercontent.com/u/12508788",
+        "repo": {
+            "name": "Rocket.Chat.iOS",
+            "description": "Rocket.Chat client in Swift for iOS",
+            "url": "https://github.com/RocketChat/Rocket.Chat.iOS"
+        }
+    }
+]

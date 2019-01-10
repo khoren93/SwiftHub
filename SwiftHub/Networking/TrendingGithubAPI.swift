@@ -58,9 +58,9 @@ extension TrendingGithubAPI: TargetType, ProductAPIType {
 
     var sampleData: Data {
         switch self {
-        case .trendingRepositories: return stubbedResponse("EmptyArray")
-        case .trendingDevelopers: return stubbedResponse("EmptyArray")
-        case .languages: return stubbedResponse("EmptyArray")
+        case .trendingRepositories: return stubbedResponse("RepositoryTrendings")
+        case .trendingDevelopers: return stubbedResponse("UserTrendings")
+        case .languages: return stubbedResponse("Languages")
         }
     }
 

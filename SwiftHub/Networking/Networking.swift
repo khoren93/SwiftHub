@@ -89,7 +89,7 @@ extension NetworkingType {
     }
 
     static func stubbingGithubNetworking() -> GithubNetworking {
-        return GithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: GithubNetworking.endpointResolver(), stubClosure: MoyaProvider.delayedStub(0.5), online: .just(true)))
+        return GithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: GithubNetworking.endpointResolver(), stubClosure: MoyaProvider.delayedStub(0.2), online: .just(true)))
     }
 }
 
