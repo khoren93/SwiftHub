@@ -23,6 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let libsManager = LibsManager.shared
         libsManager.setupLibs(with: window)
 
+        /*
+        var theme = ThemeType.currentTheme()
+        if theme.isDark != true {
+            theme = theme.toggled()
+        }
+        themeService.set(theme)
+*/
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 

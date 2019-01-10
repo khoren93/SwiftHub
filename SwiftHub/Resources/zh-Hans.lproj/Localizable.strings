@@ -28,6 +28,8 @@
 "Home.TabBar.Login.Title" = "登录";
 "Home.TabBar.Notifications.Title" = "活动";
 "Home.TabBar.Settings.Title" = "设置";
+/* Initial */
+"Initial.NoResults" = "欢迎来到SwiftHub！";
 /* 活动 */
 "Events.Navigation.Title" = "活动";
 "Events.ReceivedSegment.Title" = "收到";

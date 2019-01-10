@@ -28,6 +28,8 @@
 "Home.TabBar.Login.Title" = "Вход";
 "Home.TabBar.Notifications.Title" = "Уведомления";
 "Home.TabBar.Settings.Title" = "Настройки";
+/* Initial */
+"Initial.NoResults" = "Добро пожаловать в SwiftHub!";
 /* Events */
 "Events.Navigation.Title" = "События";
 "Events.ReceivedSegment.Title" = "Получено";

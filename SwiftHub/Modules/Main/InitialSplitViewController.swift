@@ -23,7 +23,7 @@ class InitialSplitViewController: TableViewController {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
 
-        emptyDataSetTitle = "Welcome to SwiftHub!"
+        emptyDataSetTitle = R.string.localizable.initialNoResults.key.localized()
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }

@@ -28,6 +28,8 @@
 "Home.TabBar.Login.Title" = "Login";
 "Home.TabBar.Notifications.Title" = "Activities";
 "Home.TabBar.Settings.Title" = "Settings";
+/* Initial */
+"Initial.NoResults" = "Welcome to SwiftHub!";
 /* Events */
 "Events.Navigation.Title" = "Events";
 "Events.ReceivedSegment.Title" = "Received";

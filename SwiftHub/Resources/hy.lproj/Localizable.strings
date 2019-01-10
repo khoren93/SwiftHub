@@ -28,6 +28,8 @@
 "Home.TabBar.Login.Title" = "Մուտք";
 "Home.TabBar.Notifications.Title" = "Ծանուցումներ";
 "Home.TabBar.Settings.Title" = "Կարգավորումներ";
+/* Initial */
+"Initial.NoResults" = "Բարի գալուստ SwiftHub!";
 /* Events */
 "Events.Navigation.Title" = "Միջոցառումներ";
 "Events.ReceivedSegment.Title" = "Ստացված";
