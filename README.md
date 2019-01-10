@@ -24,6 +24,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
 - [ ] App Store application
+- [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
 - [ ] Add tests
