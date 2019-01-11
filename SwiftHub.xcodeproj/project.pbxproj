@@ -84,6 +84,7 @@
 		07A34DC521E29ACC00B05857 /* RepositoryTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */; };
 		07A34DC721E29BE200B05857 /* UserTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC621E29BE200B05857 /* UserTrendings.json */; };
 		07A34DC921E29C2400B05857 /* Languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC821E29C2400B05857 /* Languages.json */; };
+		07A4ADB221E89899001D198F /* PRIVACY_POLICY.md in Resources */ = {isa = PBXBuildFile; fileRef = 07A4ADB121E89899001D198F /* PRIVACY_POLICY.md */; };
 		07B1837F2172257D007CC23B /* UserSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1837E2172257D007CC23B /* UserSection.swift */; };
 		07B183832172268C007CC23B /* UserDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B183812172268C007CC23B /* UserDetailCell.swift */; };
 		07B183842172268C007CC23B /* UserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B183822172268C007CC23B /* UserDetailCell.xib */; };
@@ -327,6 +328,7 @@
 		07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryTrendings.json; sourceTree = "<group>"; };
 		07A34DC621E29BE200B05857 /* UserTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserTrendings.json; sourceTree = "<group>"; };
 		07A34DC821E29C2400B05857 /* Languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Languages.json; sourceTree = "<group>"; };
+		07A4ADB121E89899001D198F /* PRIVACY_POLICY.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY_POLICY.md; sourceTree = SOURCE_ROOT; };
 		07B1837E2172257D007CC23B /* UserSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSection.swift; sourceTree = "<group>"; };
 		07B183812172268C007CC23B /* UserDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailCell.swift; sourceTree = "<group>"; };
 		07B183822172268C007CC23B /* UserDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailCell.xib; sourceTree = "<group>"; };
@@ -751,11 +753,12 @@
 		07FC33781FFFE2BD00D53888 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				0724E64D21E209E6002530CA /* fastlane */,
 				07FC33821FFFE53800D53888 /* .gitignore */,
 				07FC33801FFFE52A00D53888 /* .swiftlint.yml */,
 				C762C66E1E1D58B200C09EBD /* Configs.swift */,
+				0724E64D21E209E6002530CA /* fastlane */,
 				075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */,
+				07A4ADB121E89899001D198F /* PRIVACY_POLICY.md */,
 				07FC33841FFFE54800D53888 /* README.md */,
 			);
 			path = Configs;
@@ -1269,6 +1272,7 @@
 				07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */,
 				07FC33831FFFE53800D53888 /* .gitignore in Resources */,
 				A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */,
+				07A4ADB221E89899001D198F /* PRIVACY_POLICY.md in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07D46E5721920EDF008E5369 /* RepositoryContents.json in Resources */,
