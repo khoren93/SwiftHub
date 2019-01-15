@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let themeReuseIdentifier = R.reuseIdentifier.settingThemeCell.identifier
+private let switchReuseIdentifier = R.reuseIdentifier.settingSwitchCell.identifier
 private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
 
 class SettingsViewController: TableViewController {
@@ -32,7 +32,7 @@ class SettingsViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         tableView.register(R.nib.settingCell)
-        tableView.register(R.nib.settingThemeCell)
+        tableView.register(R.nib.settingSwitchCell)
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }
@@ -48,8 +48,9 @@ class SettingsViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .nightModeItem(let viewModel):
-                let cell = (tableView.dequeueReusableCell(withIdentifier: themeReuseIdentifier, for: indexPath) as? SettingThemeCell)!
+            case .bannerItem(let viewModel),
+                 .nightModeItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: switchReuseIdentifier, for: indexPath) as? SettingSwitchCell)!
                 cell.bind(to: viewModel)
                 return cell
             case .themeItem(let viewModel),
@@ -73,7 +74,8 @@ class SettingsViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
-            case .nightModeItem:
+            case .bannerItem,
+                 .nightModeItem:
                 self?.deselectSelectedRow()
             case .themeItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? ThemeViewModel {

@@ -65,6 +65,6 @@ struct Configs {
     }
 
     struct UserDefaultsKeys {
-
+        static let bannersEnabled = "BannersEnabled"
     }
 }

@@ -14,7 +14,8 @@ enum SettingsSection {
 }
 
 enum SettingsSectionItem {
-    case nightModeItem(viewModel: SettingThemeCellViewModel)
+    case bannerItem(viewModel: SettingSwitchCellViewModel)
+    case nightModeItem(viewModel: SettingSwitchCellViewModel)
     case themeItem(viewModel: SettingCellViewModel)
     case languageItem(viewModel: SettingCellViewModel)
     case removeCacheItem(viewModel: SettingCellViewModel)

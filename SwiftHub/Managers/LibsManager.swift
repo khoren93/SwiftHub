@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 import SnapKit
 import IQKeyboardManagerSwift
 import CocoaLumberjack
@@ -39,10 +41,21 @@ class LibsManager: NSObject {
     /// The default singleton instance.
     static let shared = LibsManager()
 
+    let bannersEnabled = BehaviorRelay(value: UserDefaults.standard.bool(forKey: Configs.UserDefaultsKeys.bannersEnabled))
+
+    override init() {
+        super.init()
+
+        bannersEnabled.subscribe(onNext: { (enabled) in
+            UserDefaults.standard.set(enabled, forKey: Configs.UserDefaultsKeys.bannersEnabled)
+        }).disposed(by: rx.disposeBag)
+    }
+
     func setupLibs(with window: UIWindow? = nil) {
         let libsManager = LibsManager.shared
         libsManager.setupCocoaLumberjack()
         libsManager.setupAnalytics()
+        libsManager.setupAds()
         libsManager.setupTheme()
         libsManager.setupKafkaRefresh()
         libsManager.setupFLEX()
@@ -107,6 +120,10 @@ class LibsManager: NSObject {
         Fabric.sharedSDK().debug = false
         analytics.register(provider: MixpanelProvider())
         analytics.register(provider: FirebaseProvider())
+    }
+
+    func setupAds() {
+        GADMobileAds.configure(withApplicationID: "")
     }
 }
 

@@ -187,9 +187,9 @@
 		A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */; };
 		A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */; };
 		A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */; };
-		A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B085210625C0000DA282 /* SettingThemeCell.swift */; };
-		A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B086210625C0000DA282 /* SettingThemeCell.xib */; };
-		A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */; };
+		A0E2B087210625C0000DA282 /* SettingSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B085210625C0000DA282 /* SettingSwitchCell.swift */; };
+		A0E2B088210625C0000DA282 /* SettingSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B086210625C0000DA282 /* SettingSwitchCell.xib */; };
+		A0E2B08A210625D5000DA282 /* SettingSwitchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B089210625D5000DA282 /* SettingSwitchCellViewModel.swift */; };
 		A0E2B08D2106293A000DA282 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08C2106293A000DA282 /* Switch.swift */; };
 		A0E2B08F21062B9B000DA282 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B08E21062B9B000DA282 /* SettingsSection.swift */; };
 		A0E2B091210738C9000DA282 /* KafkaRefresh+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */; };
@@ -443,9 +443,9 @@
 		A0E2B07F2102343E000DA282 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		A0E2B0812102344F000DA282 /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
 		A0E2B08321060F79000DA282 /* InitialSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSplitViewController.swift; sourceTree = "<group>"; };
-		A0E2B085210625C0000DA282 /* SettingThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeCell.swift; sourceTree = "<group>"; };
-		A0E2B086210625C0000DA282 /* SettingThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingThemeCell.xib; sourceTree = "<group>"; };
-		A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingThemeCellViewModel.swift; sourceTree = "<group>"; };
+		A0E2B085210625C0000DA282 /* SettingSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCell.swift; sourceTree = "<group>"; };
+		A0E2B086210625C0000DA282 /* SettingSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSwitchCell.xib; sourceTree = "<group>"; };
+		A0E2B089210625D5000DA282 /* SettingSwitchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCellViewModel.swift; sourceTree = "<group>"; };
 		A0E2B08C2106293A000DA282 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		A0E2B08E21062B9B000DA282 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		A0E2B090210738C9000DA282 /* KafkaRefresh+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KafkaRefresh+Rx.swift"; sourceTree = "<group>"; };
@@ -979,9 +979,9 @@
 				070FF84820F285180070F5E8 /* SettingCell.swift */,
 				070FF84920F285180070F5E8 /* SettingCell.xib */,
 				070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */,
-				A0E2B085210625C0000DA282 /* SettingThemeCell.swift */,
-				A0E2B086210625C0000DA282 /* SettingThemeCell.xib */,
-				A0E2B089210625D5000DA282 /* SettingThemeCellViewModel.swift */,
+				A0E2B085210625C0000DA282 /* SettingSwitchCell.swift */,
+				A0E2B086210625C0000DA282 /* SettingSwitchCell.xib */,
+				A0E2B089210625D5000DA282 /* SettingSwitchCellViewModel.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1279,7 +1279,7 @@
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
 				07D46E6221922141008E5369 /* ContentCell.xib in Resources */,
 				07A34DC521E29ACC00B05857 /* RepositoryTrendings.json in Resources */,
-				A0E2B088210625C0000DA282 /* SettingThemeCell.xib in Resources */,
+				A0E2B088210625C0000DA282 /* SettingSwitchCell.xib in Resources */,
 				A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */,
 				07B183842172268C007CC23B /* UserDetailCell.xib in Resources */,
 				0724E65821E209E6002530CA /* Appfile in Resources */,
@@ -1545,7 +1545,7 @@
 			files = (
 				07241D2021B18A7400F800BD /* PullRequestCell.swift in Sources */,
 				0752F48F21C8D9CD00A30BF2 /* TrendingRepositoryCellViewModel.swift in Sources */,
-				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
+				A0E2B087210625C0000DA282 /* SettingSwitchCell.swift in Sources */,
 				07B183832172268C007CC23B /* UserDetailCell.swift in Sources */,
 				07E1B2FB21A4400900F6EAE3 /* Commit.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
@@ -1659,7 +1659,7 @@
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,
 				A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */,
 				07E1B30621A44D9D00F6EAE3 /* IssueCellViewModel.swift in Sources */,
-				A0E2B08A210625D5000DA282 /* SettingThemeCellViewModel.swift in Sources */,
+				A0E2B08A210625D5000DA282 /* SettingSwitchCellViewModel.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
 				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
 				07241D1D21B18A6000F800BD /* PullRequestsViewModel.swift in Sources */,

@@ -90,10 +90,11 @@
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
 "Settings.PreferencesSection.Title" = "Preferences";
-"Settings.NightMode.Title" = "Night Mode";
+"Settings.Banner.Title" = "Banners enabled";
+"Settings.NightMode.Title" = "Night mode";
 "Settings.Theme.Title" = "Color theme";
 "Settings.Language.Title" = "Language";
-"Settings.RemoveCache.Title" = "Remove Cache";
+"Settings.RemoveCache.Title" = "Remove cache";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache Successfully Cleared";
 "Settings.SupportSection.Title" = "Support";
 "Settings.Acknowledgements.Title" = "Acknowledgements";

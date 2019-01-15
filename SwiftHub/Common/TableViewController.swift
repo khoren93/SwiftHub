@@ -45,7 +45,7 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         super.makeUI()
 
         stackView.spacing = 0
-        stackView.addArrangedSubview(tableView)
+        stackView.insertArrangedSubview(tableView, at: 0)
 
         tableView.bindGlobalStyle(forHeadRefreshHandler: { [weak self] in
             if self?.tableView.headRefreshControl.isTriggeredRefreshByUser == false {

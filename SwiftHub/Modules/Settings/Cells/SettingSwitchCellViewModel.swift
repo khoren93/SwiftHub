@@ -1,5 +1,5 @@
 //
-//  SettingThemeCellViewModel.swift
+//  SettingSwitchCellViewModel.swift
 //  SwiftHub
 //
 //  Created by Khoren Markosyan on 7/23/18.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SettingThemeCellViewModel {
+class SettingSwitchCellViewModel {
 
     let title: Driver<String>
     let imageName: Driver<String>
@@ -19,7 +19,7 @@ class SettingThemeCellViewModel {
 
     let model: SettingModel
 
-    let nightModeEnabled = PublishSubject<Bool>()
+    let switchChanged = PublishSubject<Bool>()
 
     init(with model: SettingModel, isEnabled: Bool) {
         self.model = model
