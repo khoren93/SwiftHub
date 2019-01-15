@@ -9,6 +9,7 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 <img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen_dark.png?raw=true" width="290">&nbsp;
 
 ## Features
+- [x] App Store application ([Download](https://itunes.apple.com/app/swifthub-git-client/id1448628710))
 - [x] Basic authentication
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators
@@ -23,7 +24,6 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 - [x] Whats New ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
-- [ ] App Store application
 - [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
 - [ ] OAuth2 authentication
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
