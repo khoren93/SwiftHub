@@ -90,7 +90,7 @@
 /* 设置 */
 "Settings.Navigation.Title" = "设置";
 "Settings.PreferencesSection.Title" = "首选项";
-"Settings.Banner.Title" = "横幅已启用";
+"Settings.Banner.Title" = "已启用广告";
 "Settings.NightMode.Title" = "夜间模式";
 "Settings.Theme.Title" = "颜色主题";
 "Settings.Language.Title" = "语言";

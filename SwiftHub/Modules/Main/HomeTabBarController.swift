@@ -127,7 +127,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
             .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)
 
-        themeService.relay.delay(0.6, scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
+        themeService.relay.delay(0.7, scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
             switch theme {
             case .light(let color), .dark(let color):
                 self.changeSelectedColor(color.color, iconSelectedColor: color.color)

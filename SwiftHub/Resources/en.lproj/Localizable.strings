@@ -90,7 +90,7 @@
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
 "Settings.PreferencesSection.Title" = "Preferences";
-"Settings.Banner.Title" = "Banners enabled";
+"Settings.Banner.Title" = "Ads enabled";
 "Settings.NightMode.Title" = "Night mode";
 "Settings.Theme.Title" = "Color theme";
 "Settings.Language.Title" = "Language";
