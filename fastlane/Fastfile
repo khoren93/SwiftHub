@@ -42,6 +42,18 @@ platform :ios do
     pilot
   end
 
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    screenshots
+
+    build_app(scheme: "SwiftHub",
+              workspace: "SwiftHub.xcworkspace",
+              include_bitcode: true,
+              xcargs: "-allowProvisioningUpdates")
+
+    deliver
+  end
+
   lane :increment_build do
     increment_build_number
     commit_version_bump
