@@ -36,6 +36,11 @@ Generate new localized screenshots
 fastlane ios beta
 ```
 Submit a new beta build to apple TestFlight
+### ios release
+```
+fastlane ios release
+```
+Deploy a new version to the App Store
 ### ios increment_build
 ```
 fastlane ios increment_build
