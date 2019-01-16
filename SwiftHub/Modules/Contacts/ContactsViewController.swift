@@ -27,6 +27,7 @@ class ContactsViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
+        navigationTitle = R.string.localizable.contactsNavigationTitle.key.localized()
         stackView.insertArrangedSubview(searchBar, at: 0)
 
         tableView.register(R.nib.contactCell)

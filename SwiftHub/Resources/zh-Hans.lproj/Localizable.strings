@@ -107,6 +107,8 @@
 "Language.Navigation.Title" = "语言";
 /* 主题 */
 "Theme.Navigation.Title" = "颜色主题";
+/* Contacts */
+"Contacts.Navigation.Title" = "邀请朋友";
 /* 用户详细信息 */
 //"User.Navigation.Title" = "用户";
 "User.RepositoriesButton.Title" = "存储库";

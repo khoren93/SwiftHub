@@ -107,6 +107,8 @@
 "Language.Navigation.Title" = "Language";
 /* Theme */
 "Theme.Navigation.Title" = "Color theme";
+/* Contacts */
+"Contacts.Navigation.Title" = "Invite friends";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Repositories";

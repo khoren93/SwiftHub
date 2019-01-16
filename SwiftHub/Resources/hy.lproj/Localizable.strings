@@ -107,6 +107,8 @@
 "Language.Navigation.Title" = "Լեզու";
 /* Theme */
 "Theme.Navigation.Title" = "Գունային թեման";
+/* Contacts */
+"Contacts.Navigation.Title" = "Հրավիրել ընկերներին";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";
