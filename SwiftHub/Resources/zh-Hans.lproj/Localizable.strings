@@ -93,6 +93,7 @@
 "Settings.NightMode.Title" = "夜间模式";
 "Settings.Theme.Title" = "颜色主题";
 "Settings.Language.Title" = "语言";
+"Settings.Contacts.Title" = "邀请朋友";
 "Settings.RemoveCache.Title" = "删除缓存";
 "Settings.RemoveCache.Alert.SuccessMessage" = "缓存成功清除";
 "Settings.SupportSection.Title" = "支持";

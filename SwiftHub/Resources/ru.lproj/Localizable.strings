@@ -93,6 +93,7 @@
 "Settings.NightMode.Title" = "Ночной режим";
 "Settings.Theme.Title" = "Цветовая тема";
 "Settings.Language.Title" = "Язык";
+"Settings.Contacts.Title" = "Пригласить друзей";
 "Settings.RemoveCache.Title" = "Удалить кеш";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Кэш успешно очищен";
 "Settings.SupportSection.Title" = "Поддержка";

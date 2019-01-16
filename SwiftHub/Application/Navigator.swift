@@ -14,6 +14,7 @@ import SafariServices
 import Hero
 import AcknowList
 import WhatsNewKit
+import MessageUI
 
 protocol Navigatable {
     var navigator: Navigator! { get set }
@@ -41,6 +42,7 @@ class Navigator {
         case language(viewModel: LanguageViewModel)
         case acknowledgements
         case whatsNew(block: WhatsNewBlock)
+        case contacts(viewModel: ContactsViewModel)
         case safari(URL)
         case safariController(URL)
         case webController(URL)
@@ -151,6 +153,11 @@ class Navigator {
             } else {
                 return WhatsNewViewController(whatsNew: block.0, configuration: block.1)
             }
+
+        case .contacts(let viewModel):
+            let vc = R.storyboard.main.contactsViewController()!
+            vc.viewModel = viewModel
+            return vc
 
         case .safari(let url):
             UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
@@ -277,6 +284,13 @@ class Navigator {
         if let target = target as? UISplitViewController, let root = target.viewControllers.first {
             injectNavigator(in: root)
         }
+    }
+
+    func toInviteContact(withPhone phone: String) -> MFMessageComposeViewController {
+        let vc = MFMessageComposeViewController()
+        vc.body = "Hey! Come join SwiftHub at \(Configs.App.githubUrl)"
+        vc.recipients = [phone]
+        return vc
     }
 }
 

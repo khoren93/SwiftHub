@@ -61,7 +61,7 @@ class DefaultTableViewCell: TableViewCell {
 
         themeService.rx
             .bind({ $0.text }, to: titleLabel.rx.textColor)
-            .bind({ $0.secondary }, to: rightImageView.rx.tintColor)
+            .bind({ $0.secondary }, to: [leftImageView.rx.tintColor, rightImageView.rx.tintColor])
             .disposed(by: rx.disposeBag)
 
         stackView.spacing = self.inset

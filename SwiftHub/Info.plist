@@ -4,6 +4,8 @@
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>SwiftHub requires access to the photo library.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>SwiftHub requires access to the contacts list.</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

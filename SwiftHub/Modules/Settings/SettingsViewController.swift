@@ -54,6 +54,7 @@ class SettingsViewController: TableViewController {
                 return cell
             case .themeItem(let viewModel),
                  .languageItem(let viewModel),
+                 .contactsItem(let viewModel),
                  .removeCacheItem(let viewModel),
                  .acknowledgementsItem(let viewModel),
                  .whatsNewItem(let viewModel),
@@ -82,6 +83,10 @@ class SettingsViewController: TableViewController {
             case .languageItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? LanguageViewModel {
                     self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .contactsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? ContactsViewModel {
+                    self?.navigator.show(segue: .contacts(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .removeCacheItem:
                 self?.deselectSelectedRow()

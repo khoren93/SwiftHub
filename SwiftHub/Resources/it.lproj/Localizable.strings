@@ -93,6 +93,7 @@
 "Settings.NightMode.Title" = "Night Mode";
 "Settings.Theme.Title" = "Color theme";
 "Settings.Language.Title" = "Language";
+"Settings.Contacts.Title" = "Invite Friends";
 "Settings.RemoveCache.Title" = "Remove Cache";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache Successfully Cleared";
 "Settings.SupportSection.Title" = "Support";

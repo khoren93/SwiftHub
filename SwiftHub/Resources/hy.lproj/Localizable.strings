@@ -93,6 +93,7 @@
 "Settings.NightMode.Title" = "Գիշերային ռեժիմ";
 "Settings.Theme.Title" = "Գունային թեման";
 "Settings.Language.Title" = "Լեզու";
+"Settings.Contacts.Title" = "Հրավիրել ընկերներին";
 "Settings.RemoveCache.Title" = "Հեռացնել Cache-ը";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache-ը հաջողությամբ մաքրվել է";
 "Settings.SupportSection.Title" = "Աջակցություն";

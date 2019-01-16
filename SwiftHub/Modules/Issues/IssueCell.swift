@@ -15,9 +15,6 @@ class IssueCell: DetailedTableViewCell {
         super.makeUI()
         titleLabel.numberOfLines = 2
         leftImageView.cornerRadius = 25
-        themeService.rx
-            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
-            .disposed(by: rx.disposeBag)
     }
 
     func bind(to viewModel: IssueCellViewModel) {

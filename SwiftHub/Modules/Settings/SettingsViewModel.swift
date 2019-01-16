@@ -50,6 +50,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let languageModel = SettingModel(leftImage: R.image.icon_cell_language.name, title: R.string.localizable.settingsLanguageTitle.key.localized(), detail: "", showDisclosure: true)
             let languageCellViewModel = SettingCellViewModel(with: languageModel)
 
+            let contactsModel = SettingModel(leftImage: R.image.icon_cell_company.name, title: R.string.localizable.settingsContactsTitle.key.localized(), detail: "", showDisclosure: true)
+            let contactsCellViewModel = SettingCellViewModel(with: contactsModel)
+
             let removeCacheModel = SettingModel(leftImage: R.image.icon_cell_remove.name, title: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: "", showDisclosure: false)
             let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel)
 
@@ -64,6 +67,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
                         SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
                         SettingsSectionItem.themeItem(viewModel: themeCellViewModel),
                         SettingsSectionItem.languageItem(viewModel: languageCellViewModel),
+                        SettingsSectionItem.contactsItem(viewModel: contactsCellViewModel),
                         SettingsSectionItem.removeCacheItem(viewModel: removeCacheCellViewModel)
                     ]),
                 SettingsSection.setting(title: R.string.localizable.settingsSupportSectionTitle.key.localized(), items: [
@@ -108,6 +112,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
             return viewModel
         case .languageItem:
             let viewModel = LanguageViewModel(provider: self.provider)
+            return viewModel
+        case .contactsItem:
+            let viewModel = ContactsViewModel(provider: self.provider)
             return viewModel
         default:
             return nil

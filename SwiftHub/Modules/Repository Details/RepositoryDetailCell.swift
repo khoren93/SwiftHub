@@ -17,9 +17,6 @@ class RepositoryDetailCell: DetailedTableViewCell {
         secondDetailLabel.textAlignment = .right
         textsStackView.axis = .horizontal
         textsStackView.distribution = .fillEqually
-        themeService.rx
-            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
-            .disposed(by: rx.disposeBag)
     }
 
     func bind(to viewModel: RepositoryDetailCellViewModel) {

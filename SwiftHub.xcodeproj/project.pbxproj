@@ -148,6 +148,13 @@
 		A034AF7B21528108004C310B /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034AF7A21528108004C310B /* NotificationCellViewModel.swift */; };
 		A034AF7F215287B2004C310B /* Notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = A034AF7E215287B2004C310B /* Notifications.json */; };
 		A034AF8121529194004C310B /* NotificationsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = A034AF8021529193004C310B /* NotificationsRepository.json */; };
+		A07DC84821EDF6A200AA7951 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84721EDF6A200AA7951 /* ContactsViewController.swift */; };
+		A07DC84A21EDF6B800AA7951 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84921EDF6B800AA7951 /* ContactsViewModel.swift */; };
+		A07DC84C21EDF6C700AA7951 /* ContactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84B21EDF6C700AA7951 /* ContactCellViewModel.swift */; };
+		A07DC84F21EDF6E100AA7951 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84D21EDF6E100AA7951 /* ContactCell.swift */; };
+		A07DC85021EDF6E100AA7951 /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07DC84E21EDF6E100AA7951 /* ContactCell.xib */; };
+		A07DC85221EE0C0600AA7951 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC85121EE0C0600AA7951 /* Contact.swift */; };
+		A07DC85421EE0DED00AA7951 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC85321EE0DED00AA7951 /* ContactsManager.swift */; };
 		A088B12921008FDF0093D248 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A088B12821008FDF0093D248 /* WebViewController.swift */; };
 		A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09499551E1D1CB600EFDE29 /* AppDelegate.swift */; };
 		A094995B1E1D1CB600EFDE29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09499591E1D1CB600EFDE29 /* Main.storyboard */; };
@@ -398,6 +405,13 @@
 		A034AF7A21528108004C310B /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		A034AF7E215287B2004C310B /* Notifications.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Notifications.json; sourceTree = "<group>"; };
 		A034AF8021529193004C310B /* NotificationsRepository.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationsRepository.json; sourceTree = "<group>"; };
+		A07DC84721EDF6A200AA7951 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		A07DC84921EDF6B800AA7951 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
+		A07DC84B21EDF6C700AA7951 /* ContactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellViewModel.swift; sourceTree = "<group>"; };
+		A07DC84D21EDF6E100AA7951 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		A07DC84E21EDF6E100AA7951 /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		A07DC85121EE0C0600AA7951 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		A07DC85321EE0DED00AA7951 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		A088B12821008FDF0093D248 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		A09499521E1D1CB600EFDE29 /* SwiftHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09499551E1D1CB600EFDE29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -694,6 +708,7 @@
 				A00871CE21A6E2BD006E5A2B /* Comment.swift */,
 				07E1B2FA21A4400900F6EAE3 /* Commit.swift */,
 				07241D1A21B183AE00F800BD /* Committer.swift */,
+				A07DC85121EE0C0600AA7951 /* Contact.swift */,
 				07D46E5221920029008E5369 /* Content.swift */,
 				07320452214128ED00C1E39F /* Event.swift */,
 				0732046921419DB200C1E39F /* ISO8601DateTransform.swift */,
@@ -717,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				07241D0121B173A400F800BD /* Commits */,
+				A07DC84621EDF67F00AA7951 /* Contacts */,
 				07D46E5821921C01008E5369 /* Contents */,
 				0732045C2141395200C1E39F /* Events */,
 				07E1B2FE21A44D1700F6EAE3 /* Issues */,
@@ -769,6 +785,7 @@
 			children = (
 				07FC337A1FFFE4E300D53888 /* AnalyticsManager.swift */,
 				07B2C1F5213ADF9000FE7AC0 /* AuthManager.swift */,
+				A07DC85321EE0DED00AA7951 /* ContactsManager.swift */,
 				07FC337B1FFFE4E300D53888 /* LibsManager.swift */,
 				07FC337C1FFFE4E300D53888 /* LogManager.swift */,
 				07CE0F7F21027DEC00E1F6BD /* ThemeManager.swift */,
@@ -797,6 +814,18 @@
 				A034AF72215280B3004C310B /* NotificationsViewModel.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		A07DC84621EDF67F00AA7951 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				A07DC84D21EDF6E100AA7951 /* ContactCell.swift */,
+				A07DC84E21EDF6E100AA7951 /* ContactCell.xib */,
+				A07DC84B21EDF6C700AA7951 /* ContactCellViewModel.swift */,
+				A07DC84721EDF6A200AA7951 /* ContactsViewController.swift */,
+				A07DC84921EDF6B800AA7951 /* ContactsViewModel.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		A09499491E1D1CB500EFDE29 = {
@@ -1274,6 +1303,7 @@
 				A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */,
 				07A4ADB221E89899001D198F /* PRIVACY_POLICY.md in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
+				A07DC85021EDF6E100AA7951 /* ContactCell.xib in Resources */,
 				075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */,
 				07D46E5721920EDF008E5369 /* RepositoryContents.json in Resources */,
 				07FC33851FFFE54800D53888 /* README.md in Resources */,
@@ -1548,10 +1578,12 @@
 				A0E2B087210625C0000DA282 /* SettingThemeCell.swift in Sources */,
 				07B183832172268C007CC23B /* UserDetailCell.swift in Sources */,
 				07E1B2FB21A4400900F6EAE3 /* Commit.swift in Sources */,
+				A07DC84A21EDF6B800AA7951 /* ContactsViewModel.swift in Sources */,
 				C762C6801E1D5A7300C09EBD /* Observable+Operators.swift in Sources */,
 				070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
 				A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */,
+				A07DC85421EE0DED00AA7951 /* ContactsManager.swift in Sources */,
 				C762C6611E1D559000C09EBD /* CollectionView.swift in Sources */,
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
@@ -1572,6 +1604,7 @@
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */,
 				0757B53521669DAC00C04163 /* LanguageCell.swift in Sources */,
+				A07DC84C21EDF6C700AA7951 /* ContactCellViewModel.swift in Sources */,
 				0757B53621669DAC00C04163 /* LanguageViewController.swift in Sources */,
 				07241D1821B1768E00F800BD /* CommitCell.swift in Sources */,
 				A034A8AE20F61A6500E2B678 /* HomeTabBarViewModel.swift in Sources */,
@@ -1666,6 +1699,7 @@
 				07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */,
 				0752F49621C8E65900A30BF2 /* LanguagesViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
+				A07DC84821EDF6A200AA7951 /* ContactsViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				0752F49121C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift in Sources */,
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
@@ -1677,7 +1711,9 @@
 				A09DE8BE20E7B81F00F6F2BF /* RepositoryCell.swift in Sources */,
 				0752F49921C8E67D00A30BF2 /* RepoLanguageCell.swift in Sources */,
 				07B4AB602190C403001E9337 /* RepositorySection.swift in Sources */,
+				A07DC85221EE0C0600AA7951 /* Contact.swift in Sources */,
 				07241D1121B175EB00F800BD /* CommitsViewController.swift in Sources */,
+				A07DC84F21EDF6E100AA7951 /* ContactCell.swift in Sources */,
 				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
 				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,

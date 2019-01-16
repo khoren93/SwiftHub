@@ -17,6 +17,7 @@ enum SettingsSectionItem {
     case nightModeItem(viewModel: SettingThemeCellViewModel)
     case themeItem(viewModel: SettingCellViewModel)
     case languageItem(viewModel: SettingCellViewModel)
+    case contactsItem(viewModel: SettingCellViewModel)
     case removeCacheItem(viewModel: SettingCellViewModel)
     case acknowledgementsItem(viewModel: SettingCellViewModel)
     case whatsNewItem(viewModel: SettingCellViewModel)
