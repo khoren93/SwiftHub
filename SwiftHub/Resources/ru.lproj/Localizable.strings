@@ -90,6 +90,7 @@
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
 "Settings.PreferencesSection.Title" = "Параметры";
+"Settings.Banner.Title" = "Баннеры включены";
 "Settings.NightMode.Title" = "Ночной режим";
 "Settings.Theme.Title" = "Цветовая тема";
 "Settings.Language.Title" = "Язык";

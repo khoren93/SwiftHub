@@ -90,6 +90,7 @@
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";
+"Settings.Banner.Title" = "Վահանակները միացված են";
 "Settings.NightMode.Title" = "Գիշերային ռեժիմ";
 "Settings.Theme.Title" = "Գունային թեման";
 "Settings.Language.Title" = "Լեզու";

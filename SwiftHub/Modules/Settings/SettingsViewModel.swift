@@ -23,26 +23,42 @@ class SettingsViewModel: ViewModel, ViewModelType {
         let selectedEvent: Driver<SettingsSectionItem>
     }
 
-    let nightModeEnabled = PublishSubject<Bool>()
+    let bannerEnabled: BehaviorRelay<Bool>
+    let nightModeEnabled: BehaviorRelay<Bool>
 
     let loggedIn: BehaviorRelay<Bool>
 
     let whatsNewManager: WhatsNewManager
 
+    var cellDisposeBag = DisposeBag()
+
     init(loggedIn: BehaviorRelay<Bool>, provider: SwiftHubAPI) {
         self.loggedIn = loggedIn
         whatsNewManager = WhatsNewManager.shared
+        bannerEnabled = BehaviorRelay(value: LibsManager.shared.bannersEnabled.value)
+        nightModeEnabled = BehaviorRelay(value: ThemeType.currentTheme().isDark)
         super.init(provider: provider)
+        bannerEnabled.bind(to: LibsManager.shared.bannersEnabled).disposed(by: rx.disposeBag)
     }
 
     func transform(input: Input) -> Output {
 
         let elements = BehaviorRelay<[SettingsSection]>(value: [])
-        input.trigger.map { () -> [SettingsSection] in
-            let isNightMode = ThemeType.currentTheme().isDark
+        let refresh = Observable.of(input.trigger, bannerEnabled.mapToVoid()).merge()
+        refresh.map { [weak self] () -> [SettingsSection] in
+            guard let self = self else { return [] }
+            self.cellDisposeBag = DisposeBag()
+
+            let bannerEnabled = self.bannerEnabled.value
+            let bannerImageName = bannerEnabled ? R.image.icon_cell_smile.name : R.image.icon_cell_frown.name
+            let bannerModel = SettingModel(leftImage: bannerImageName, title: R.string.localizable.settingsBannerTitle.key.localized(), detail: "", showDisclosure: false)
+            let bannerCellViewModel = SettingSwitchCellViewModel(with: bannerModel, isEnabled: bannerEnabled)
+            bannerCellViewModel.switchChanged.skip(1).bind(to: self.bannerEnabled).disposed(by: self.cellDisposeBag)
+
+            let nightModeEnabled = self.nightModeEnabled.value
             let nightModeModel = SettingModel(leftImage: R.image.icon_cell_night_mode.name, title: R.string.localizable.settingsNightModeTitle.key.localized(), detail: "", showDisclosure: false)
-            let nightModeCellViewModel = SettingThemeCellViewModel(with: nightModeModel, isEnabled: isNightMode)
-            nightModeCellViewModel.nightModeEnabled.bind(to: self.nightModeEnabled).disposed(by: self.rx.disposeBag)
+            let nightModeCellViewModel = SettingSwitchCellViewModel(with: nightModeModel, isEnabled: nightModeEnabled)
+            nightModeCellViewModel.switchChanged.skip(1).bind(to: self.nightModeEnabled).disposed(by: self.cellDisposeBag)
 
             let themeModel = SettingModel(leftImage: R.image.icon_cell_theme.name, title: R.string.localizable.settingsThemeTitle.key.localized(), detail: "", showDisclosure: true)
             let themeCellViewModel = SettingCellViewModel(with: themeModel)
@@ -64,6 +80,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
             var items = [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
+                        SettingsSectionItem.bannerItem(viewModel: bannerCellViewModel),
                         SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
                         SettingsSectionItem.themeItem(viewModel: themeCellViewModel),
                         SettingsSectionItem.languageItem(viewModel: languageCellViewModel),

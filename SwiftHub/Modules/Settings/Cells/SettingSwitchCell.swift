@@ -1,5 +1,5 @@
 //
-//  SettingThemeCell.swift
+//  SettingSwitchCell.swift
 //  SwiftHub
 //
 //  Created by Khoren Markosyan on 7/23/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingThemeCell: DefaultTableViewCell {
+class SettingSwitchCell: DefaultTableViewCell {
 
     lazy var switchView: Switch = {
         let view = Switch()
@@ -23,7 +23,7 @@ class SettingThemeCell: DefaultTableViewCell {
             .disposed(by: rx.disposeBag)
     }
 
-    func bind(to viewModel: SettingThemeCellViewModel) {
+    func bind(to viewModel: SettingSwitchCellViewModel) {
         viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.isEnabled.drive(switchView.rx.isOn).disposed(by: rx.disposeBag)
 
@@ -35,6 +35,6 @@ class SettingThemeCell: DefaultTableViewCell {
             self?.leftImageView.image = UIImage(named: imageName)?.template
         }).disposed(by: rx.disposeBag)
 
-        switchView.rx.isOn.bind(to: viewModel.nightModeEnabled).disposed(by: rx.disposeBag)
+        switchView.rx.isOn.bind(to: viewModel.switchChanged).disposed(by: rx.disposeBag)
     }
 }

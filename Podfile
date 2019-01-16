@@ -80,6 +80,9 @@ target 'SwiftHub' do
     pod 'Umbrella/Firebase'
     pod 'Mixpanel', '~> 3.0'  # https://github.com/mixpanel/mixpanel-iphone
     pod 'Firebase/Analytics'
+
+    # Ads
+    pod 'Firebase/AdMob'
 end
 
 target 'SwiftHubTests' do
