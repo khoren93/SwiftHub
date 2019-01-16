@@ -1,7 +1,7 @@
 <img src="https://github.com/khoren93/SwiftHub/blob/master/Sketch/app_logo.svg" alt="SwiftHub logo" height="80" >
 
 Open source Github iOS client written in RxSwift and MVVM architecture.
-Download on the ([App Store](https://itunes.apple.com/app/swifthub-git-client/id1448628710))
+Download on the [` App Store`](https://itunes.apple.com/app/swifthub-git-client/id1448628710)
 
 ## Screenshots
 
