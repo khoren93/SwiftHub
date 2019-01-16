@@ -29,6 +29,8 @@ platform :ios do
 
   desc "Generate new localized screenshots"
   lane :screenshots do
+    reset_simulators
+
     capture_screenshots(workspace: "SwiftHub.xcworkspace", scheme: "SwiftHubUITests")
   end
 
@@ -44,8 +46,6 @@ platform :ios do
 
   desc "Deploy a new version to the App Store"
   lane :release do
-    screenshots
-
     build_app(scheme: "SwiftHub",
               workspace: "SwiftHub.xcworkspace",
               include_bitcode: true,
