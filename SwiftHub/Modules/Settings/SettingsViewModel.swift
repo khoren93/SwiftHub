@@ -118,6 +118,10 @@ class SettingsViewModel: ViewModel, ViewModelType {
             analytics.log(.appNightMode(enabled: isEnabled))
         }).disposed(by: rx.disposeBag)
 
+        bannerEnabled.skip(1).subscribe(onNext: { (isEnabled) in
+            analytics.log(.appAds(enabled: isEnabled))
+        }).disposed(by: rx.disposeBag)
+
         return Output(items: elements,
                       selectedEvent: selectedEvent)
     }

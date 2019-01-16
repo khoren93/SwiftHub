@@ -71,8 +71,10 @@ extension ContactsViewController: MFMessageComposeViewControllerDelegate {
 
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch result {
-        case .sent: break
-        case .failed: break
+        case .sent:
+            analytics.log(.userInvited(success: true))
+        case .failed:
+            analytics.log(.userInvited(success: false))
         case .cancelled: break
         }
         controller.dismiss(animated: true, completion: nil)

@@ -59,7 +59,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     lazy var bannerView: GADBannerView = {
         let view = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
         view.rootViewController = self
-        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.adUnitID = Keys.adMob.apiKey
         view.hero.id = "BannerView"
         return view
     }()

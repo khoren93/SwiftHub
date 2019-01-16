@@ -9,12 +9,13 @@
 import UIKit
 
 enum Keys {
-    case github, mixpanel
+    case github, mixpanel, adMob
 
     var apiKey: String {
         switch self {
         case .github: return ""
         case .mixpanel: return "7e428bc407e3612f6d3a4c8f50fd4643"
+        case .adMob: return "ca-app-pub-3940256099942544/2934735716"
         }
     }
 
@@ -22,6 +23,7 @@ enum Keys {
         switch self {
         case .github: return ""
         case .mixpanel: return ""
+        case .adMob: return ""
         }
     }
 }

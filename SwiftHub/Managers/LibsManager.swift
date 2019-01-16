@@ -123,7 +123,7 @@ class LibsManager: NSObject {
     }
 
     func setupAds() {
-        GADMobileAds.configure(withApplicationID: "")
+        GADMobileAds.configure(withApplicationID: Keys.adMob.appId)
     }
 }
 

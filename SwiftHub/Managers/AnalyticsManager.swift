@@ -14,11 +14,13 @@ import FirebaseAnalytics
 let analytics = Umbrella.Analytics<SwifthubEvent>()
 
 enum SwifthubEvent {
+    case appAds(enabled: Bool)
     case appNightMode(enabled: Bool)
     case appTheme(color: String)
     case appLanguage(language: String)
     case appCacheRemoved
     case acknowledgements
+    case userInvited(success: Bool)
     case whatsNew
     case flexOpened
 
@@ -39,11 +41,13 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func name(for provider: ProviderType) -> String? {
         switch self {
+        case .appAds: return "Ads Changed"
         case .appNightMode: return "Night Mode Changed"
         case .appTheme: return "Theme"
         case .appLanguage: return "Language"
         case .appCacheRemoved: return "Cache Removed"
         case .acknowledgements: return "Acknowledgements"
+        case .userInvited: return "User Invited"
         case .whatsNew: return "Whats New"
         case .flexOpened: return "Flex Opened"
         case .login: return "Login"
@@ -62,12 +66,16 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func parameters(for provider: ProviderType) -> [String: Any]? {
         switch self {
+        case .appAds(let enabled):
+            return ["Enabled": enabled]
         case .appNightMode(let enabled):
             return ["Enabled": enabled]
         case .appTheme(let color):
             return ["Color": color]
         case .appLanguage(let language):
             return ["Language": language]
+        case .userInvited(let success):
+            return ["Success": success]
         case .login(let login):
             return ["Login": login]
         case .search(let keyword):
