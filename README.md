@@ -1,6 +1,7 @@
 <img src="https://github.com/khoren93/SwiftHub/blob/master/Sketch/app_logo.svg" alt="SwiftHub logo" height="80" >
 
 Open source Github iOS client written in RxSwift and MVVM architecture.
+Download on the ([App Store](https://itunes.apple.com/app/swifthub-git-client/id1448628710))
 
 ## Screenshots
 
@@ -8,24 +9,29 @@ Open source Github iOS client written in RxSwift and MVVM architecture.
 <img alt="02_repository_details_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen_dark.png?raw=true" width="290">&nbsp;
 <img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen_dark.png?raw=true" width="290">&nbsp;
 
-## Features
-- [x] App Store application ([Download](https://itunes.apple.com/app/swifthub-git-client/id1448628710))
+## App Features
 - [x] Basic authentication
-- [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
-- [x] Flow coordinators
-- [x] Networking ([Moya](https://github.com/Moya/Moya))
-- [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
+- [x] View trendings, search repositories and users, filter by language
+- [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
+- [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
 - [x] Color themes in Light and Dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
-- [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] In-app language switching (en, zh, ru, hy) ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
+- [x] Whats New functionality ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
+- [x] Invite friends functionality
 - [x] Support iPhone and iPad (Split View)
+- [ ] OAuth2 authentication
+- [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
+
+## Technologies
+- [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
+- [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
+- [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
+- [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
+- [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
-- [x] Whats New ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
-- [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
-- [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
-- [ ] OAuth2 authentication
+- [x] Google ads implementation, can be enabled/disabled from settings ([Firebase AdMob](https://firebase.google.com/docs/admob/ios/quick-start))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
 - [ ] Add tests
 
@@ -63,10 +69,11 @@ Thanks to them for the beautiful open source icons.
 
 ## References
 * [Moya](https://github.com/Moya/Moya) - Network abstraction layer
+* [github-trending-api](https://github.com/huchenme/github-trending-api) - The missing APIs for GitHub trending projects and developers
+* [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
 * [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Export JSON objects as model classes
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
 * [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
-* [github-trending-api](https://github.com/huchenme/github-trending-api) - The missing APIs for GitHub trending projects and developers
 
 ## License
 MIT License. See [LICENSE](https://github.com/khoren93/SwiftHub/blob/master/LICENSE).
