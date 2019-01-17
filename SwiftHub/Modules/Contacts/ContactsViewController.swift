@@ -28,6 +28,8 @@ class ContactsViewController: TableViewController {
         super.makeUI()
 
         navigationTitle = R.string.localizable.contactsNavigationTitle.key.localized()
+        emptyDataSetTitle = R.string.localizable.contactsPermissionDeniedTitle.key.localized()
+        emptyDataSetDescription = R.string.localizable.contactsPermissionDeniedDescription.key.localized()
         stackView.insertArrangedSubview(searchBar, at: 0)
 
         tableView.register(R.nib.contactCell)
@@ -64,6 +66,20 @@ class ContactsViewController: TableViewController {
                 }
             }
         }).disposed(by: rx.disposeBag)
+
+        emptyDataSetButtonTap.subscribe(onNext: { () in
+            let app = UIApplication.shared
+            if let settingsUrl = UIApplication.openSettingsURLString.url, app.canOpenURL(settingsUrl) {
+                app.open(settingsUrl, completionHandler: nil)
+            }
+        }).disposed(by: rx.disposeBag)
+    }
+}
+
+extension ContactsViewController {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
+        return NSAttributedString(string: R.string.localizable.contactsPermissionDeniedButton.key.localized(),
+                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondary()])
     }
 }
 

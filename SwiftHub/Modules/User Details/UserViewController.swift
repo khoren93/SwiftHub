@@ -24,13 +24,13 @@ class UserViewController: TableViewController {
     }()
 
     lazy var usernameLabel: Label = {
-        let view = Label(style: .style223)
+        let view = Label()
         view.textAlignment = .center
         return view
     }()
 
     lazy var fullnameLabel: Label = {
-        let view = Label(style: .style133)
+        let view = Label()
         view.textAlignment = .center
         return view
     }()
@@ -255,13 +255,13 @@ class UserViewController: TableViewController {
         paragraph.alignment = .center
 
         let valueAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
+            return $0.foreground(color: .white)
                 .font(.boldSystemFont(ofSize: 18))
                 .paragraphStyle(paragraph)
         }
 
         let titleAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
+            return $0.foreground(color: .white)
                 .font(.boldSystemFont(ofSize: 12))
                 .paragraphStyle(paragraph)
         }

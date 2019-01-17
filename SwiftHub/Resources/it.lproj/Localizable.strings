@@ -101,7 +101,7 @@
 "Settings.Acknowledgements.Title" = "Acknowledgements";
 "Settings.WhatsNew.Title" = "Whats New";
 "Settings.LogOut.Title" = "Log Out";
-"Settings.Logout.Alert.Message" = "Are you sure want to log out from WishApp?";
+"Settings.Logout.Alert.Message" = "Are you sure want to log out from SwiftHub?";
 "Settings.Logout.Alert.ConfirmButton.Title" = "Logout";
 /* Language */
 "Language.Navigation.Title" = "Language";
@@ -109,6 +109,9 @@
 "Theme.Navigation.Title" = "Color theme";
 /* Contacts */
 "Contacts.Navigation.Title" = "Invite friends";
+"Contacts.PermissionDenied.Title" = "We need your permission!";
+"Contacts.PermissionDenied.Description" = "We can't continue without your \npermission to access your contacts. \nTry Again?";
+"Contacts.PermissionDenied.Button" = "Settings";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Repositories";

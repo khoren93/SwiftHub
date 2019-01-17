@@ -78,14 +78,14 @@ class LoginViewController: ViewController {
     }()
 
     lazy var titleLabel: Label = {
-        let view = Label(style: .style211)
+        let view = Label()
         view.font = view.font.withSize(22)
         view.textAlignment = .center
         return view
     }()
 
     lazy var detailLabel: Label = {
-        let view = Label(style: .style122)
+        let view = Label()
         view.font = view.font.withSize(17)
         view.numberOfLines = 0
         view.textAlignment = .center

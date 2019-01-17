@@ -34,7 +34,8 @@ class DefaultTableViewCell: TableViewCell {
     }()
 
     lazy var titleLabel: Label = {
-        let view = Label(style: .style123)
+        let view = Label()
+        view.font = view.font.withSize(14)
         return view
     }()
 

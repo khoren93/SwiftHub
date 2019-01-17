@@ -29,7 +29,9 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         }
     }
 
+    let emptyDataSetButtonTap = PublishSubject<Void>()
     var emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
+    var emptyDataSetDescription = ""
     var emptyDataSetImage = R.image.image_no_result()
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
 
@@ -278,6 +280,10 @@ extension ViewController: DZNEmptyDataSetSource {
         return NSAttributedString(string: emptyDataSetTitle)
     }
 
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: emptyDataSetDescription)
+    }
+
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return emptyDataSetImage
     }
@@ -303,5 +309,9 @@ extension ViewController: DZNEmptyDataSetDelegate {
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        emptyDataSetButtonTap.onNext(())
     }
 }

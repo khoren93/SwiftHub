@@ -101,7 +101,7 @@
 "Settings.Acknowledgements.Title" = "致谢";
 "Settings.WhatsNew.Title" = "什么是新的";
 "Settings.LogOut.Title" = "退出";
-"Settings.Logout.Alert.Message" = "您确定要退出WishApp吗？";
+"Settings.Logout.Alert.Message" = "您确定要退出SwiftHub吗？";
 "Settings.Logout.Alert.ConfirmButton.Title" = "退出";
 /* 语言 */
 "Language.Navigation.Title" = "语言";
@@ -109,6 +109,9 @@
 "Theme.Navigation.Title" = "颜色主题";
 /* Contacts */
 "Contacts.Navigation.Title" = "邀请朋友";
+"Contacts.PermissionDenied.Title" = "我们需要你的许可！";
+"Contacts.PermissionDenied.Description" = "未经您的许可，\n我们无法继续访问您的联系人。 \n再试一次？";
+"Contacts.PermissionDenied.Button" = "设置";
 /* 用户详细信息 */
 //"User.Navigation.Title" = "用户";
 "User.RepositoriesButton.Title" = "存储库";

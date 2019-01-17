@@ -43,18 +43,21 @@ class DetailedTableViewCell: TableViewCell {
     }()
 
     lazy var titleLabel: Label = {
-        let view = Label(style: .style123)
+        let view = Label()
+        view.font = view.font.withSize(14)
         return view
     }()
 
     lazy var detailLabel: Label = {
-        let view = Label(style: .style132)
+        let view = Label()
+        view.font = view.font.withSize(12)
         view.setPriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.vertical)
         return view
     }()
 
     lazy var secondDetailLabel: Label = {
-        let view = Label(style: .style234)
+        let view = Label()
+        view.font = view.font.bold.withSize(12)
         return view
     }()
 

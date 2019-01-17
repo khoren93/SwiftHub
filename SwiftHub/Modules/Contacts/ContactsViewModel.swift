@@ -46,7 +46,11 @@ class ContactsViewModel: ViewModel, ViewModelType {
                     return viewModel
                 })
             }
-        }).bind(to: elements).disposed(by: rx.disposeBag)
+        }).subscribe(onNext: { (items) in
+            elements.accept(items)
+        }, onError: { (error) in
+            logError(error.localizedDescription)
+        }).disposed(by: rx.disposeBag)
 
         let cancelSearchEvent = input.cancelSearchTrigger
 

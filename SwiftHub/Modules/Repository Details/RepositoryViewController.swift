@@ -260,13 +260,13 @@ class RepositoryViewController: TableViewController {
         paragraph.alignment = .center
 
         let valueAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
+            return $0.foreground(color: .white)
                 .font(.boldSystemFont(ofSize: 18))
                 .paragraphStyle(paragraph)
         }
 
         let titleAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
+            return $0.foreground(color: .white)
                 .font(.boldSystemFont(ofSize: 12))
                 .paragraphStyle(paragraph)
         }

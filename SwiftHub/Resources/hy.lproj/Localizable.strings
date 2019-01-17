@@ -109,6 +109,9 @@
 "Theme.Navigation.Title" = "Գունային թեման";
 /* Contacts */
 "Contacts.Navigation.Title" = "Հրավիրել ընկերներին";
+"Contacts.PermissionDenied.Title" = "Մեզ հարկավոր է ձեր թույլտվությունը:";
+"Contacts.PermissionDenied.Description" = "Մենք չենք կարող շարունակել \nարանց ձեր կոնտակտների \nմուտքի թույլտվության: \nՓորձեք կրկին?";
+"Contacts.PermissionDenied.Button" = "Կարգավորումներ";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";

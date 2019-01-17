@@ -109,6 +109,9 @@
 "Theme.Navigation.Title" = "Цветовая тема";
 /* Contacts */
 "Contacts.Navigation.Title" = "Пригласить друзей";
+"Contacts.PermissionDenied.Title" = "Нам нужно ваше разрешение!";
+"Contacts.PermissionDenied.Description" = "Мы не можем продолжать без вашего \nразрешения на доступ к вашим контактам. \nПопробуйте снова?";
+"Contacts.PermissionDenied.Button" = "Настройки";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Репозитории";
