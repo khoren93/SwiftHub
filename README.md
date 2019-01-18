@@ -29,6 +29,7 @@
 - [x] Invite friends functionality
 - [x] Support iPhone and iPad (Split View)
 - [ ] OAuth2 authentication
+- [ ] Advanced searching and sorting repositories
 - [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
 
 ## Technologies
