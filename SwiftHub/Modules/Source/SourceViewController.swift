@@ -56,6 +56,7 @@ class SourceViewController: ViewController {
         stackView.addArrangedSubview(textView)
         stackView.addArrangedSubview(languagesPicker)
         stackView.addArrangedSubview(themesPicker)
+        bannerView.isHidden = true
     }
 
     override func bindViewModel() {

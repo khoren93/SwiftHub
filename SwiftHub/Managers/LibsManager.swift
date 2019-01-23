@@ -46,6 +46,10 @@ class LibsManager: NSObject {
     override init() {
         super.init()
 
+        if UserDefaults.standard.object(forKey: Configs.UserDefaultsKeys.bannersEnabled) == nil {
+            bannersEnabled.accept(true)
+        }
+
         bannersEnabled.subscribe(onNext: { (enabled) in
             UserDefaults.standard.set(enabled, forKey: Configs.UserDefaultsKeys.bannersEnabled)
         }).disposed(by: rx.disposeBag)

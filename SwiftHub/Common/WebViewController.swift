@@ -22,10 +22,6 @@ class WebViewController: ViewController {
     lazy var webView: UIWebView = {
         let view = UIWebView()
         view.delegate = self
-        self.contentView.addSubview(view)
-        view.snp.makeConstraints({ (make) in
-            make.edges.equalToSuperview()
-        })
         return view
     }()
 
@@ -39,6 +35,7 @@ class WebViewController: ViewController {
         super.makeUI()
 
         navigationItem.rightBarButtonItem = rightBarButton
+        stackView.insertArrangedSubview(webView, at: 0)
     }
 
     override func bindViewModel() {
