@@ -184,8 +184,8 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         }).disposed(by: rx.disposeBag)
 
         motionShakeEvent.subscribe(onNext: { () in
-            let theme = themeService.theme.toggled()
-            themeService.set(theme)
+            let theme = themeService.type.toggled()
+            themeService.switch(theme)
         }).disposed(by: rx.disposeBag)
 
         themeService.rx

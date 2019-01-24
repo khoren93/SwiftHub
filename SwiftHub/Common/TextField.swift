@@ -22,7 +22,7 @@ class TextField: UITextField {
 
     override var placeholder: String? {
         didSet {
-            themeService.set(themeService.theme)
+            themeService.switch(themeService.type)
         }
     }
 

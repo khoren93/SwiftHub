@@ -111,7 +111,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             if theme.isDark != isEnabled {
                 theme = theme.toggled()
             }
-            themeService.set(theme)
+            themeService.switch(theme)
         }).disposed(by: rx.disposeBag)
 
         nightModeEnabled.skip(1).subscribe(onNext: { (isEnabled) in

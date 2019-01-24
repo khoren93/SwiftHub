@@ -19,7 +19,7 @@ target 'SwiftHub' do
     pod 'RxViewController', '~> 0.3'  # https://github.com/devxoul/RxViewController
     pod 'RxGesture', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxGesture
     pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
-    pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
+    pod 'RxTheme', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxTheme
     #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
 
     # JSON Mapping
@@ -35,7 +35,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0.0'  #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.30.0'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.30.1'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
