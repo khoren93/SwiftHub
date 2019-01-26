@@ -47,6 +47,82 @@ enum TrendingPeriodSegments: Int {
     }
 }
 
+enum SortRepositoryItems: Int {
+    case bestMatch, mostStars, fewestStars, mostForks, fewestForks, recentlyUpdated, lastRecentlyUpdated
+
+    var title: String {
+        switch self {
+        case .bestMatch: return "Best match"
+        case .mostStars: return "Most stars"
+        case .fewestStars: return "Fewest stars"
+        case .mostForks: return "Most forks"
+        case .fewestForks: return "Fewest forks"
+        case .recentlyUpdated: return "Recently updated"
+        case .lastRecentlyUpdated: return "Last recently updated"
+        }
+    }
+
+    var sortValue: String {
+        switch self {
+        case .bestMatch: return ""
+        case .mostStars, .fewestStars: return "stars"
+        case .mostForks, .fewestForks: return "forks"
+        case .recentlyUpdated, .lastRecentlyUpdated: return "updated"
+        }
+    }
+
+    var orderValue: String {
+        switch self {
+        case .bestMatch: return ""
+        case .mostStars, .mostForks, .recentlyUpdated: return "desc"
+        case .fewestStars, .fewestForks, .lastRecentlyUpdated: return "asc"
+        }
+    }
+
+    static func allItems() -> [String] {
+        return (0...SortRepositoryItems.lastRecentlyUpdated.rawValue)
+            .map { SortRepositoryItems(rawValue: $0)!.title }
+    }
+}
+
+enum SortUserItems: Int {
+    case bestMatch, mostFollowers, fewestFollowers, mostRecentlyJoined, leastRecentlyJoined, mostRepositories, fewestRepositories
+
+    var title: String {
+        switch self {
+        case .bestMatch: return "Best match"
+        case .mostFollowers: return "Most followers"
+        case .fewestFollowers: return "Fewest followers"
+        case .mostRecentlyJoined: return "Most recently joined"
+        case .leastRecentlyJoined: return "Least recently joined"
+        case .mostRepositories: return "Most repositories"
+        case .fewestRepositories: return "Fewest repositories"
+        }
+    }
+
+    var sortValue: String {
+        switch self {
+        case .bestMatch: return ""
+        case .mostFollowers, .fewestFollowers: return "followers"
+        case .mostRecentlyJoined, .leastRecentlyJoined: return "joined"
+        case .mostRepositories, .fewestRepositories: return "repositories"
+        }
+    }
+
+    var orderValue: String {
+        switch self {
+        case .bestMatch: return ""
+        case .mostFollowers, .mostRecentlyJoined, .mostRepositories: return "desc"
+        case .fewestFollowers, .leastRecentlyJoined, .fewestRepositories: return "asc"
+        }
+    }
+
+    static func allItems() -> [String] {
+        return (0...SortUserItems.fewestRepositories.rawValue)
+            .map { SortUserItems(rawValue: $0)!.title }
+    }
+}
+
 class SearchViewController: TableViewController {
 
     var viewModel: SearchViewModel!
@@ -70,6 +146,35 @@ class SearchViewController: TableViewController {
         view.selectedSegmentIndex = 0
         return view
     }()
+
+    lazy var totalCountLabel: Label = {
+        let view = Label()
+        view.font = view.font.withSize(14)
+        view.leftTextInset = self.inset
+        return view
+    }()
+
+    lazy var sortLabel: Label = {
+        let view = Label()
+        view.font = view.font.withSize(14)
+        view.textAlignment = .right
+        view.rightTextInset = self.inset
+        return view
+    }()
+
+    lazy var labelsStackView: StackView = {
+        let view = StackView(arrangedSubviews: [self.totalCountLabel, self.sortLabel])
+        view.axis = .horizontal
+        return view
+    }()
+
+    lazy var sortDropDown: DropDownView = {
+        let view = DropDownView(anchorView: self.tableView)
+        return view
+    }()
+
+    let sortRepositoryItem = BehaviorRelay(value: SortRepositoryItems.bestMatch)
+    let sortUserItem = BehaviorRelay(value: SortUserItems.bestMatch)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,9 +201,26 @@ class SearchViewController: TableViewController {
         trendingPeriodSegmentedControl.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(self.inset)
         }
+        stackView.insertArrangedSubview(labelsStackView, at: 0)
         stackView.insertArrangedSubview(trendingPeriodView, at: 0)
         stackView.insertArrangedSubview(searchBar, at: 0)
 //        stackView.addArrangedSubview(trendingPeriodSegmentedControl)
+
+        labelsStackView.snp.makeConstraints { (make) in
+            make.height.equalTo(50)
+        }
+
+        sortDropDown.selectionAction = { [weak self] (index: Int, item: String) in
+            if self?.segmentedControl.selectedSegmentIndex == 0 {
+                if let item = SortRepositoryItems(rawValue: index) {
+                    self?.sortRepositoryItem.accept(item)
+                }
+            } else {
+                if let item = SortUserItems(rawValue: index) {
+                    self?.sortUserItem.accept(item)
+                }
+            }
+        }
 
         tableView.register(R.nib.trendingRepositoryCell)
         tableView.register(R.nib.trendingUserCell)
@@ -106,6 +228,14 @@ class SearchViewController: TableViewController {
         tableView.register(R.nib.userCell)
 //        tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
+
+        themeService.rx
+            .bind({ $0.text }, to: [totalCountLabel.rx.textColor, sortLabel.rx.textColor])
+            .disposed(by: rx.disposeBag)
+
+        themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
+            self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
+        }).disposed(by: rx.disposeBag)
     }
 
     override func bindViewModel() {
@@ -120,6 +250,8 @@ class SearchViewController: TableViewController {
                                           languagesSelection: rightBarButton.rx.tap.asObservable(),
                                           segmentSelection: segmentSelected,
                                           trendingPeriodSegmentSelection: trendingPerionSegmentSelected,
+                                          sortRepositorySelection: sortRepositoryItem.asObservable(),
+                                          sortUserSelection: sortUserItem.asObservable(),
                                           selection: tableView.rx.modelSelected(SearchSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
@@ -171,5 +303,18 @@ class SearchViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.hidesTrendingPeriodSegment.drive(trendingPeriodView.rx.isHidden).disposed(by: rx.disposeBag)
+        output.hidesSortLabel.drive(labelsStackView.rx.isHidden).disposed(by: rx.disposeBag)
+
+        sortLabel.rx.tap().subscribe(onNext: { [weak self] () in
+            self?.sortDropDown.show()
+        }).disposed(by: rx.disposeBag)
+
+        output.sortItems.drive(onNext: { [weak self] (items) in
+            self?.sortDropDown.dataSource = items
+            self?.sortDropDown.reloadAllComponents()
+        }).disposed(by: rx.disposeBag)
+
+        output.totalCountText.drive(totalCountLabel.rx.text).disposed(by: rx.disposeBag)
+        output.sortText.drive(sortLabel.rx.text).disposed(by: rx.disposeBag)
     }
 }

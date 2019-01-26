@@ -30,10 +30,12 @@ import KafkaRefresh
 import Umbrella
 import Mixpanel
 import Firebase
+import DropDown
 
 typealias AlertController = PMAlertController
 typealias AlertAction = PMAlertAction
 typealias AlertControllerStyle = PMAlertControllerStyle
+typealias DropDownView = DropDown
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager: NSObject {
@@ -65,12 +67,23 @@ class LibsManager: NSObject {
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
         libsManager.setupActivityView()
+        libsManager.setupDropDown()
     }
 
     func setupTheme() {
         themeService.rx
             .bind({ $0.statusBarStyle }, to: UIApplication.shared.rx.statusBarStyle)
             .disposed(by: rx.disposeBag)
+    }
+
+    func setupDropDown() {
+        themeService.attrsStream.subscribe(onNext: { (theme) in
+            DropDown.appearance().backgroundColor = theme.primary
+            DropDown.appearance().selectionBackgroundColor = theme.primaryDark
+            DropDown.appearance().textColor = theme.text
+            DropDown.appearance().selectedTextColor = theme.text
+            DropDown.appearance().separatorColor = theme.separator
+        }).disposed(by: rx.disposeBag)
     }
 
     func setupKafkaRefresh() {

@@ -22,7 +22,7 @@ protocol SwiftHubAPI {
     func downloadFile(url: URL, fileName: String?) -> Single<Void>
 
     // MARK: - Authentication is optional
-    func searchRepositories(query: String) -> Single<RepositorySearch>
+    func searchRepositories(query: String, sort: String, order: String, page: Int) -> Single<RepositorySearch>
     func repository(fullname: String) -> Single<Repository>
     func watchers(fullname: String, page: Int) -> Single<[User]>
     func stargazers(fullname: String, page: Int) -> Single<[User]>
@@ -37,7 +37,7 @@ protocol SwiftHubAPI {
     func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]>
     func pullRequest(fullname: String, number: Int) -> Single<PullRequest>
     func contributors(fullname: String, page: Int) -> Single<[User]>
-    func searchUsers(query: String) -> Single<UserSearch>
+    func searchUsers(query: String, sort: String, order: String, page: Int) -> Single<UserSearch>
     func user(owner: String) -> Single<User>
     func organization(owner: String) -> Single<User>
     func userRepositories(username: String, page: Int) -> Single<[Repository]>
@@ -103,8 +103,8 @@ extension Api {
 
     // MARK: - Authentication is optional
 
-    func searchRepositories(query: String) -> Single<RepositorySearch> {
-        return requestObject(.searchRepositories(query: query), type: RepositorySearch.self)
+    func searchRepositories(query: String, sort: String, order: String, page: Int) -> Single<RepositorySearch> {
+        return requestObject(.searchRepositories(query: query, sort: sort, order: order, page: page), type: RepositorySearch.self)
     }
 
     func watchers(fullname: String, page: Int) -> Single<[User]> {
@@ -163,8 +163,8 @@ extension Api {
         return requestObject(.repository(fullname: fullname), type: Repository.self)
     }
 
-    func searchUsers(query: String) -> Single<UserSearch> {
-        return requestObject(.searchUsers(query: query), type: UserSearch.self)
+    func searchUsers(query: String, sort: String, order: String, page: Int) -> Single<UserSearch> {
+        return requestObject(.searchUsers(query: query, sort: sort, order: order, page: page), type: UserSearch.self)
     }
 
     func user(owner: String) -> Single<User> {

@@ -24,7 +24,7 @@ enum GithubAPI {
     case download(url: URL, fileName: String?)
 
     // MARK: - Authentication is optional
-    case searchRepositories(query: String)
+    case searchRepositories(query: String, sort: String, order: String, page: Int)
     case repository(fullname: String)
     case watchers(fullname: String, page: Int)
     case stargazers(fullname: String, page: Int)
@@ -41,7 +41,7 @@ enum GithubAPI {
     case pullRequest(fullname: String, number: Int)
     case contributors(fullname: String, page: Int)
 
-    case searchUsers(query: String)
+    case searchUsers(query: String, sort: String, order: String, page: Int)
     case user(owner: String)
     case organization(owner: String)
     case userRepositories(username: String, page: Int)
@@ -143,8 +143,11 @@ extension GithubAPI: TargetType, ProductAPIType {
     var parameters: [String: Any]? {
         var params: [String: Any] = [:]
         switch self {
-        case .searchRepositories(let query):
+        case .searchRepositories(let query, let sort, let order, let page):
             params["q"] = query
+            params["sort"] = sort
+            params["order"] = order
+            params["page"] = page
         case .watchers(_, let page):
             params["page"] = page
         case .stargazers(_, let page):
@@ -167,8 +170,11 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["page"] = page
         case .contributors(_, let page):
             params["page"] = page
-        case .searchUsers(let query):
+        case .searchUsers(let query, let sort, let order, let page):
             params["q"] = query
+            params["sort"] = sort
+            params["order"] = order
+            params["page"] = page
         case .userRepositories(_, let page):
             params["page"] = page
         case .userStarredRepositories(_, let page):

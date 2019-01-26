@@ -20,17 +20,23 @@ class SearchViewModel: ViewModel, ViewModelType {
         let languagesSelection: Observable<Void>
         let segmentSelection: Observable<SearchSegments>
         let trendingPeriodSegmentSelection: Observable<TrendingPeriodSegments>
+        let sortRepositorySelection: Observable<SortRepositoryItems>
+        let sortUserSelection: Observable<SortUserItems>
         let selection: Driver<SearchSectionItem>
     }
 
     struct Output {
         let items: BehaviorRelay<[SearchSection]>
+        let sortItems: Driver<[String]>
+        let sortText: Driver<String>
+        let totalCountText: Driver<String>
         let textDidBeginEditing: Driver<Void>
         let dismissKeyboard: Driver<Void>
         let languagesSelection: Driver<LanguagesViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
         let userSelected: Driver<UserViewModel>
         let hidesTrendingPeriodSegment: Driver<Bool>
+        let hidesSortLabel: Driver<Bool>
     }
 
     func transform(input: Input) -> Output {
@@ -42,6 +48,9 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let repositoryElements = BehaviorRelay<[Repository]>(value: [])
         let userElements = BehaviorRelay<[User]>(value: [])
+
+        let repositoryTotalItems = BehaviorRelay(value: 0)
+        let userTotalItems = BehaviorRelay(value: 0)
 
         let languageElements = BehaviorRelay<Languages?>(value: nil)
         let currentLanguage = BehaviorRelay<Language?>(value: Language.currentLanguage())
@@ -59,25 +68,47 @@ class SearchViewModel: ViewModel, ViewModelType {
         keyword.map { $0.isEmpty }
             .bind(to: showTrendings).disposed(by: rx.disposeBag)
 
-        keyword.asObservable().filterEmpty().flatMapLatest({ [weak self] (keyword) -> Observable<[Repository]> in
-            guard let self = self else { return Observable.just([]) }
-            return self.provider.searchRepositories(query: keyword)
-                .trackActivity(self.loading)
-                .trackError(self.error)
-                .map { $0.items }
-        }).subscribe(onNext: { (items) in
-            repositoryElements.accept(items)
-        }).disposed(by: rx.disposeBag)
+        let sortRepositoryItem = BehaviorRelay(value: SortRepositoryItems.bestMatch)
+        let sortUserItem = BehaviorRelay(value: SortUserItems.bestMatch)
 
-        keyword.asObservable().filterEmpty().flatMapLatest({ [weak self] (keyword) -> Observable<[User]> in
-            guard let self = self else { return Observable.just([]) }
-            return self.provider.searchUsers(query: keyword)
-                .trackActivity(self.loading)
-                .trackError(self.error)
-                .map { $0.items }
-        }).subscribe(onNext: { (items) in
-            userElements.accept(items)
-        }).disposed(by: rx.disposeBag)
+        input.sortRepositorySelection.bind(to: sortRepositoryItem).disposed(by: rx.disposeBag)
+        input.sortUserSelection.bind(to: sortUserItem).disposed(by: rx.disposeBag)
+
+        Observable.combineLatest(keyword.asObservable().filterEmpty(), currentLanguage, sortRepositoryItem)
+            .flatMapLatest({ [weak self] (keyword, currentLanguage, sortRepositoryItem) -> Observable<RepositorySearch> in
+                guard let self = self else { return Observable.just(RepositorySearch()) }
+                var query = keyword
+                let sort = sortRepositoryItem.sortValue
+                let order = sortRepositoryItem.orderValue
+                if let language = currentLanguage?.name {
+                    query += " language:\(language)"
+                }
+                return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.page)
+                    .trackActivity(self.loading)
+                    .trackActivity(self.headerLoading)
+                    .trackError(self.error)
+            }).subscribe(onNext: { (result) in
+                repositoryElements.accept(result.items)
+                repositoryTotalItems.accept(result.totalCount)
+            }).disposed(by: rx.disposeBag)
+
+        Observable.combineLatest(keyword.asObservable().filterEmpty(), currentLanguage, sortUserItem)
+            .flatMapLatest({ [weak self] (keyword, currentLanguage, sortUserItem) -> Observable<UserSearch> in
+                guard let self = self else { return Observable.just(UserSearch()) }
+                var query = keyword
+                let sort = sortUserItem.sortValue
+                let order = sortUserItem.orderValue
+                if let language = currentLanguage?.name {
+                    query += " language:\(language)"
+                }
+                return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.page)
+                    .trackActivity(self.loading)
+                    .trackActivity(self.headerLoading)
+                    .trackError(self.error)
+            }).subscribe(onNext: { (result) in
+                userElements.accept(result.items)
+                userTotalItems.accept(result.totalCount)
+            }).disposed(by: rx.disposeBag)
 
         keyword.asDriver().throttle(3.0).drive(onNext: { (keyword) in
             if keyword.isNotEmpty {
@@ -209,12 +240,41 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let hidesTrendingPeriodSegment = showTrendings.not().asDriver(onErrorJustReturn: false)
 
+        let hidesSortLabel = keyword.map { $0.isEmpty }.asDriver(onErrorJustReturn: false)
+
+        let sortItems = input.segmentSelection.map { (segment) -> [String] in
+            switch segment {
+            case .repositories: return SortRepositoryItems.allItems()
+            case .users: return SortUserItems.allItems()
+            }
+        }.asDriver(onErrorJustReturn: [])
+
+        let sortText = Observable.combineLatest(input.segmentSelection, sortRepositoryItem, sortUserItem)
+            .map { (segment, sortRepositoryItem, sortUserItem) -> String in
+                switch segment {
+                case .repositories: return sortRepositoryItem.title + " ▼"
+                case .users: return sortUserItem.title + " ▼"
+                }
+            }.asDriver(onErrorJustReturn: "")
+
+        let totalCountText = Observable.combineLatest(input.segmentSelection, repositoryTotalItems, userTotalItems)
+            .map { (segment, repositoryTotalItems, userTotalItems) -> String in
+                switch segment {
+                case .repositories: return "\(repositoryTotalItems.kFormatted()) repositories"
+                case .users: return "\(userTotalItems.kFormatted()) users"
+                }
+            }.asDriver(onErrorJustReturn: "")
+
         return Output(items: elements,
+                      sortItems: sortItems,
+                      sortText: sortText,
+                      totalCountText: totalCountText,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,
                       languagesSelection: languagesSelection,
                       repositorySelected: repositoryDetails,
                       userSelected: userDetails,
-                      hidesTrendingPeriodSegment: hidesTrendingPeriodSegment)
+                      hidesTrendingPeriodSegment: hidesTrendingPeriodSegment,
+                      hidesSortLabel: hidesSortLabel)
     }
 }
