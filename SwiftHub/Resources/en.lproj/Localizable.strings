@@ -87,6 +87,22 @@
 "Search.TrendingSectionWithLanguage.Title" = "Trending results for %@";
 "Search.SearchSection.Title" = "Search";
 "Search.SearchSectionWithLanguage.Title" = "Search results for %@";
+"Search.RepositoriesTotalCount.Title" = "%@ repositories";
+"Search.UsersTotalCount.Title" = "%@ users";
+"Search.SortRepositories.BestMatch.Title" = "Best match";
+"Search.SortRepositories.MostStars.Title" = "Most stars";
+"Search.SortRepositories.FewestStars.Title" = "Fewest stars";
+"Search.SortRepositories.MostForks.Title" = "Most forks";
+"Search.SortRepositories.FewestForks.Title" = "Fewest forks";
+"Search.SortRepositories.RecentlyUpdated.Title" = "Recently updated";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "Last recently updated";
+"Search.SortUsers.BestMatch.Title" = "Best match";
+"Search.SortUsers.MostFollowers.Title" = "Most followers";
+"Search.SortUsers.FewestFollowers.Title" = "Fewest followers";
+"Search.SortUsers.MostRecentlyJoined.Title" = "Most recently joined";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "Least recently joined";
+"Search.SortUsers.MostRepositories.Title" = "Most repositories";
+"Search.SortUsers.FewestRepositories.Title" = "Fewest repositories";
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
 "Settings.PreferencesSection.Title" = "Preferences";

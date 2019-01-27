@@ -120,7 +120,8 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
                 self?.animatedItems.forEach({ (item) in
                     item.title = HomeTabBarItem(rawValue: item.tag)?.title
                 })
-                self?.viewControllers = self?.viewControllers
+                self?.setViewControllers(self?.viewControllers, animated: false)
+                self?.setSelectIndex(from: 0, to: self?.selectedIndex ?? 0)
             }.disposed(by: rx.disposeBag)
 
         themeService.rx

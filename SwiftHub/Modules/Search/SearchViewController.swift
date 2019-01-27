@@ -52,13 +52,13 @@ enum SortRepositoryItems: Int {
 
     var title: String {
         switch self {
-        case .bestMatch: return "Best match"
-        case .mostStars: return "Most stars"
-        case .fewestStars: return "Fewest stars"
-        case .mostForks: return "Most forks"
-        case .fewestForks: return "Fewest forks"
-        case .recentlyUpdated: return "Recently updated"
-        case .lastRecentlyUpdated: return "Last recently updated"
+        case .bestMatch: return R.string.localizable.searchSortRepositoriesBestMatchTitle.key.localized()
+        case .mostStars: return R.string.localizable.searchSortRepositoriesMostStarsTitle.key.localized()
+        case .fewestStars: return R.string.localizable.searchSortRepositoriesFewestStarsTitle.key.localized()
+        case .mostForks: return R.string.localizable.searchSortRepositoriesMostForksTitle.key.localized()
+        case .fewestForks: return R.string.localizable.searchSortRepositoriesFewestForksTitle.key.localized()
+        case .recentlyUpdated: return R.string.localizable.searchSortRepositoriesRecentlyUpdatedTitle.key.localized()
+        case .lastRecentlyUpdated: return R.string.localizable.searchSortRepositoriesLastRecentlyUpdatedTitle.key.localized()
         }
     }
 
@@ -90,13 +90,13 @@ enum SortUserItems: Int {
 
     var title: String {
         switch self {
-        case .bestMatch: return "Best match"
-        case .mostFollowers: return "Most followers"
-        case .fewestFollowers: return "Fewest followers"
-        case .mostRecentlyJoined: return "Most recently joined"
-        case .leastRecentlyJoined: return "Least recently joined"
-        case .mostRepositories: return "Most repositories"
-        case .fewestRepositories: return "Fewest repositories"
+        case .bestMatch: return R.string.localizable.searchSortUsersBestMatchTitle.key.localized()
+        case .mostFollowers: return R.string.localizable.searchSortUsersMostFollowersTitle.key.localized()
+        case .fewestFollowers: return R.string.localizable.searchSortUsersFewestFollowersTitle.key.localized()
+        case .mostRecentlyJoined: return R.string.localizable.searchSortUsersMostRecentlyJoinedTitle.key.localized()
+        case .leastRecentlyJoined: return R.string.localizable.searchSortUsersLeastRecentlyJoinedTitle.key.localized()
+        case .mostRepositories: return R.string.localizable.searchSortUsersMostRepositoriesTitle.key.localized()
+        case .fewestRepositories: return R.string.localizable.searchSortUsersFewestRepositoriesTitle.key.localized()
         }
     }
 
@@ -245,6 +245,7 @@ class SearchViewController: TableViewController {
         let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.rx.selectedSegmentIndex.map { TrendingPeriodSegments(rawValue: $0)! }
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = SearchViewModel.Input(trigger: refresh,
+                                          languageTrigger: languageChanged.asObservable(),
                                           keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
                                           textDidBeginEditing: searchBar.rx.textDidBeginEditing.asDriver(),
                                           languagesSelection: rightBarButton.rx.tap.asObservable(),

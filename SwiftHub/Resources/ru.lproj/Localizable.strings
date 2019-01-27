@@ -87,6 +87,22 @@
 "Search.TrendingSectionWithLanguage.Title" = "Популярные результаты для %@";
 "Search.SearchSection.Title" = "Поиск";
 "Search.SearchSectionWithLanguage.Title" = "Результаты поиска по %@";
+"Search.RepositoriesTotalCount.Title" = "%@ репозиторий";
+"Search.UsersTotalCount.Title" = "%@ пользователей";
+"Search.SortRepositories.BestMatch.Title" = "Лучшее совпадение";
+"Search.SortRepositories.MostStars.Title" = "Большинство звезд";
+"Search.SortRepositories.FewestStars.Title" = "Наименее звезд";
+"Search.SortRepositories.MostForks.Title" = "Большинство вилок";
+"Search.SortRepositories.FewestForks.Title" = "Наименее вилок";
+"Search.SortRepositories.RecentlyUpdated.Title" = "Недавно обновлено";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "Последнее обновление";
+"Search.SortUsers.BestMatch.Title" = "Лучшее совпадение";
+"Search.SortUsers.MostFollowers.Title" = "Большинство подписчиков";
+"Search.SortUsers.FewestFollowers.Title" = "Наименее подписчиков";
+"Search.SortUsers.MostRecentlyJoined.Title" = "Недавно присоединенился";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "Наименее недавно присоединился";
+"Search.SortUsers.MostRepositories.Title" = "Большинство репозиториев";
+"Search.SortUsers.FewestRepositories.Title" = "Наименее репозиториев";
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
 "Settings.PreferencesSection.Title" = "Параметры";

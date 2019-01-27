@@ -87,6 +87,22 @@
 "Search.TrendingSectionWithLanguage.Title" = "Թրենդինգ արդյունքներ %@-ում";
 "Search.SearchSection.Title" = "Որոնում";
 "Search.SearchSectionWithLanguage.Title" = "Որոնման արդյունքներ %@-ում";
+"Search.RepositoriesTotalCount.Title" = "%@ ռեպոզիտորիաներ";
+"Search.UsersTotalCount.Title" = "%@ օգտագործողներ";
+"Search.SortRepositories.BestMatch.Title" = "Լավագույն համընկնում";
+"Search.SortRepositories.MostStars.Title" = "Շատ աստղեր";
+"Search.SortRepositories.FewestStars.Title" = "Քիչ աստղեր";
+"Search.SortRepositories.MostForks.Title" = "Շատ ճյուղեր";
+"Search.SortRepositories.FewestForks.Title" = "Քիչ ճյուղեր";
+"Search.SortRepositories.RecentlyUpdated.Title" = "Վերջերս է թարմացվել";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "Շուտ է թարմացվել";
+"Search.SortUsers.BestMatch.Title" = "Լավագույն համընկնում";
+"Search.SortUsers.MostFollowers.Title" = "Շատ հետեւորդներ";
+"Search.SortUsers.FewestFollowers.Title" = "Քիչ հետեւորդներ";
+"Search.SortUsers.MostRecentlyJoined.Title" = "Վերջերս է միացել";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "Շուտ է միացել";
+"Search.SortUsers.MostRepositories.Title" = "Շատ ռեպոզիտորիաներ";
+"Search.SortUsers.FewestRepositories.Title" = "Քիչ ռեպոզիտորիաներ";
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";

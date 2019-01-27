@@ -15,6 +15,7 @@ class SearchViewModel: ViewModel, ViewModelType {
 
     struct Input {
         let trigger: Observable<Void>
+        let languageTrigger: Observable<Void>
         let keywordTrigger: Driver<String>
         let textDidBeginEditing: Driver<Void>
         let languagesSelection: Observable<Void>
@@ -242,26 +243,26 @@ class SearchViewModel: ViewModel, ViewModelType {
 
         let hidesSortLabel = keyword.map { $0.isEmpty }.asDriver(onErrorJustReturn: false)
 
-        let sortItems = input.segmentSelection.map { (segment) -> [String] in
+        let sortItems = Observable.combineLatest(input.segmentSelection, input.languageTrigger).map { (segment, _) -> [String] in
             switch segment {
             case .repositories: return SortRepositoryItems.allItems()
             case .users: return SortUserItems.allItems()
             }
         }.asDriver(onErrorJustReturn: [])
 
-        let sortText = Observable.combineLatest(input.segmentSelection, sortRepositoryItem, sortUserItem)
-            .map { (segment, sortRepositoryItem, sortUserItem) -> String in
+        let sortText = Observable.combineLatest(input.segmentSelection, sortRepositoryItem, sortUserItem, input.languageTrigger)
+            .map { (segment, sortRepositoryItem, sortUserItem, _) -> String in
                 switch segment {
                 case .repositories: return sortRepositoryItem.title + " ▼"
                 case .users: return sortUserItem.title + " ▼"
                 }
             }.asDriver(onErrorJustReturn: "")
 
-        let totalCountText = Observable.combineLatest(input.segmentSelection, repositoryTotalItems, userTotalItems)
-            .map { (segment, repositoryTotalItems, userTotalItems) -> String in
+        let totalCountText = Observable.combineLatest(input.segmentSelection, repositoryTotalItems, userTotalItems, input.languageTrigger)
+            .map { (segment, repositoryTotalItems, userTotalItems, _) -> String in
                 switch segment {
-                case .repositories: return "\(repositoryTotalItems.kFormatted()) repositories"
-                case .users: return "\(userTotalItems.kFormatted()) users"
+                case .repositories: return R.string.localizable.searchRepositoriesTotalCountTitle.key.localizedFormat("\(repositoryTotalItems.kFormatted())")
+                case .users: return R.string.localizable.searchUsersTotalCountTitle.key.localizedFormat("\(userTotalItems.kFormatted())")
                 }
             }.asDriver(onErrorJustReturn: "")
 
