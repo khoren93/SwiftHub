@@ -20,22 +20,22 @@
 
 ## App Features
 - [x] Basic authentication
-- [x] View trendings, search repositories and users, filter by language
+- [x] View trendings ([github-trending-api](https://github.com/huchenme/github-trending-api))
+- [x] Advanced searching and sorting repositories and users, filter by language
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
 - [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
-- [x] Color themes in Light and Dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
+- [x] Color themes in light and dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
 - [x] In-app language switching (en, zh, ru, hy) ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
 - [x] Whats New functionality ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [x] Invite friends functionality
 - [x] Support iPhone and iPad (Split View)
 - [ ] OAuth2 authentication
-- [ ] Advanced searching and sorting repositories
 - [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
 
 ## Technologies
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
-- [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
 - [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
+- [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
@@ -43,7 +43,7 @@
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Google ads implementation, can be enabled/disabled from settings ([Firebase AdMob](https://firebase.google.com/docs/admob/ios/quick-start))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
-- [ ] Add tests
+- [ ] Add tests (help is welcome)
 
 ## Building and Running
 
@@ -79,7 +79,6 @@ Thanks to them for the beautiful open source icons.
 
 ## References
 * [Moya](https://github.com/Moya/Moya) - Network abstraction layer
-* [github-trending-api](https://github.com/huchenme/github-trending-api) - The missing APIs for GitHub trending projects and developers
 * [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
 * [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Export JSON objects as model classes
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
