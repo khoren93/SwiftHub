@@ -258,6 +258,7 @@ class SearchViewController: TableViewController {
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
         viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        viewModel.parsedError.asObservable().bind(to: error).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
@@ -305,6 +306,8 @@ class SearchViewController: TableViewController {
 
         output.hidesTrendingPeriodSegment.drive(trendingPeriodView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(labelsStackView.rx.isHidden).disposed(by: rx.disposeBag)
+        output.hidesSortLabel.drive(totalCountLabel.rx.isHidden).disposed(by: rx.disposeBag)
+        output.hidesSortLabel.drive(sortLabel.rx.isHidden).disposed(by: rx.disposeBag)
 
         sortLabel.rx.tap().subscribe(onNext: { [weak self] () in
             self?.sortDropDown.show()

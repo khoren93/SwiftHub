@@ -20,6 +20,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     var navigator: Navigator!
 
     let isLoading = BehaviorRelay(value: false)
+    let error = PublishSubject<ApiError>()
 
     var automaticallyAdjustsLeftBarButtonItem = true
 

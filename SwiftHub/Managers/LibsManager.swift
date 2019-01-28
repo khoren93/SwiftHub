@@ -31,6 +31,7 @@ import Umbrella
 import Mixpanel
 import Firebase
 import DropDown
+import Toast_Swift
 
 typealias AlertController = PMAlertController
 typealias AlertAction = PMAlertAction
@@ -68,6 +69,7 @@ class LibsManager: NSObject {
         libsManager.setupKeyboardManager()
         libsManager.setupActivityView()
         libsManager.setupDropDown()
+        libsManager.setupToast()
     }
 
     func setupTheme() {
@@ -84,6 +86,16 @@ class LibsManager: NSObject {
             DropDown.appearance().selectedTextColor = theme.text
             DropDown.appearance().separatorColor = theme.separator
         }).disposed(by: rx.disposeBag)
+    }
+
+    func setupToast() {
+        ToastManager.shared.isTapToDismissEnabled = true
+        ToastManager.shared.position = .top
+        var style = ToastStyle()
+        style.backgroundColor = .flatRed
+        style.messageColor = .white
+        style.imageSize = CGSize(width: 30, height: 30)
+        ToastManager.shared.style = style
     }
 
     func setupKafkaRefresh() {

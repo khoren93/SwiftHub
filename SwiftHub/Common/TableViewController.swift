@@ -66,6 +66,18 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         updateEmptyDataSet.subscribe(onNext: { [weak self] () in
             self?.tableView.reloadEmptyDataSet()
         }).disposed(by: rx.disposeBag)
+
+        error.subscribe(onNext: { [weak self] (error) in
+            var title = ""
+            var description = ""
+            let image = R.image.icon_toast_warning()
+            switch error {
+            case .serverError(let response):
+                title = response.message ?? ""
+                description = response.detail()
+            }
+            self?.tableView.makeToast(description, title: title, image: image)
+        }).disposed(by: rx.disposeBag)
     }
 
     override func updateUI() {

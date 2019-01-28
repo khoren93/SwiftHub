@@ -13,8 +13,10 @@ import ObjectMapper
 import Moya
 import Moya_ObjectMapper
 
+typealias MoyaError = Moya.MoyaError
+
 enum ApiError: Error {
-    case serverError(title: String, description: String)
+    case serverError(response: ErrorResponse)
 }
 
 protocol SwiftHubAPI {

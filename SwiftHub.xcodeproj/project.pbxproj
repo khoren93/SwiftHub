@@ -81,6 +81,7 @@
 		07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */; };
 		0791946C214D4F0700A7067E /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791946A214D4F0700A7067E /* ThemeCell.swift */; };
 		0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791946B214D4F0700A7067E /* ThemeCell.xib */; };
+		079BF51721FF618500FFA334 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BF51621FF618500FFA334 /* ErrorResponse.swift */; };
 		07A34DC521E29ACC00B05857 /* RepositoryTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */; };
 		07A34DC721E29BE200B05857 /* UserTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC621E29BE200B05857 /* UserTrendings.json */; };
 		07A34DC921E29C2400B05857 /* Languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC821E29C2400B05857 /* Languages.json */; };
@@ -331,6 +332,7 @@
 		07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellViewModel.swift; sourceTree = "<group>"; };
 		0791946A214D4F0700A7067E /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		0791946B214D4F0700A7067E /* ThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
+		079BF51621FF618500FFA334 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		079E1AE121CC0D1D00C9448B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryTrendings.json; sourceTree = "<group>"; };
 		07A34DC621E29BE200B05857 /* UserTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserTrendings.json; sourceTree = "<group>"; };
@@ -1142,11 +1144,12 @@
 			isa = PBXGroup;
 			children = (
 				07FC33861FFFE68800D53888 /* Api.swift */,
+				079BF51621FF618500FFA334 /* ErrorResponse.swift */,
 				C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */,
-				0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */,
 				C762C68C1E1D5D6E00C09EBD /* Networking.swift */,
 				C762C68E1E1D5D6E00C09EBD /* Reachability.swift */,
 				A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */,
+				0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1408,6 +1411,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Umbrella/Umbrella.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNewKit/WhatsNewKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1456,6 +1460,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Umbrella.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNewKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -1687,6 +1692,7 @@
 				07FC33701FFFCBF600D53888 /* Navigator.swift in Sources */,
 				070FF85120F290100070F5E8 /* SectionType.swift in Sources */,
 				C762C6651E1D559000C09EBD /* Label.swift in Sources */,
+				079BF51721FF618500FFA334 /* ErrorResponse.swift in Sources */,
 				073204602141399400C1E39F /* EventsViewModel.swift in Sources */,
 				0752F49E21C8EDB600A30BF2 /* LanguagesSection.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,

@@ -52,24 +52,27 @@ class LoginViewModel: ViewModel, ViewModelType {
             logDebug("oAuth login coming soon.")
         }).disposed(by: rx.disposeBag)
 
-        tokenSaved.flatMapLatest { () -> Observable<User> in
+        tokenSaved.flatMapLatest { () -> Observable<RxSwift.Event<User>> in
             return self.provider.profile()
                 .trackActivity(self.loading)
                 .trackError(self.error)
-            }.subscribe(onNext: { (user) in
-                user.save()
-                AuthManager.tokenValidated()
-                if let login = user.login {
-                    analytics.log(SwifthubEvent.login(login: login))
+                .materialize()
+            }.subscribe(onNext: { (event) in
+                switch event {
+                case .next(let user):
+                    user.save()
+                    AuthManager.tokenValidated()
+                    if let login = user.login {
+                        analytics.log(SwifthubEvent.login(login: login))
+                    }
+                case .error(let error):
+                    logError(error.localizedDescription)
+                default: break
                 }
-            }, onError: { (error) in
-                AuthManager.removeToken()
             }).disposed(by: rx.disposeBag)
 
-        let inputs = BehaviorRelay.combineLatest(login, password)
-
-        let basicLoginButtonEnabled = BehaviorRelay.combineLatest(inputs, self.loading.asObservable()) {
-            return $0.0.isNotEmpty && $0.1.isNotEmpty && !$1
+        let basicLoginButtonEnabled = BehaviorRelay.combineLatest(login, password, self.loading.asObservable()) {
+            return $0.isNotEmpty && $1.isNotEmpty && !$2
         }.asDriver(onErrorJustReturn: false)
 
         let hidesBasicLoginView = input.segmentSelection.map { $0 != LoginSegments.basic }
