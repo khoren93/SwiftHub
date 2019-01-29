@@ -12,12 +12,8 @@ class CollectionViewController: ViewController {
 
     lazy var collectionView: CollectionView = {
         let view = CollectionView()
-        self.view.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.topLayoutGuide.snp.bottom)
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-        }
+        view.emptyDataSetSource = self
+        view.emptyDataSetDelegate = self
         return view
     }()
 
@@ -46,7 +42,8 @@ class CollectionViewController: ViewController {
     override func makeUI() {
         super.makeUI()
 
-        _ = collectionView
+        stackView.spacing = 0
+        stackView.insertArrangedSubview(collectionView, at: 0)
     }
 
     override func updateUI() {

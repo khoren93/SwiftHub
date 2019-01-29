@@ -22,31 +22,29 @@ final class Application: NSObject {
         authManager = AuthManager.shared
         navigator = Navigator.default
         super.init()
-
-        authManager.tokenChanged.subscribe(onNext: { [weak self] (token) in
-            if let window = self?.window, token == nil || token?.isValid == true {
-                self?.presentInitialScreen(in: window)
-            }
-        }).disposed(by: rx.disposeBag)
     }
 
-    func presentInitialScreen(in window: UIWindow) {
+    func presentInitialScreen(in window: UIWindow?) {
+        guard let window = window else { return }
         self.window = window
 
 //        presentTestScreen(in: window)
 //        return
 
-        if let user = User.currentUser(), let userId = user.id?.string {
-            analytics.identify(userId: userId)
-            analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let user = User.currentUser(), let userId = user.id?.string {
+                analytics.identify(userId: userId)
+                analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
+            }
 
-        let loggedIn = authManager.hasToken
-        let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
-        navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+            let loggedIn = self.authManager.hasValidToken
+            let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: self.provider)
+            self.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+        }
     }
 
-    func presentTestScreen(in window: UIWindow) {
+    func presentTestScreen(in window: UIWindow?) {
+        guard let window = window else { return }
         let viewModel = UserViewModel(user: nil, provider: provider)
         navigator.show(segue: .userDetails(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }

@@ -42,7 +42,7 @@
 "Login.PasswordTextField.Placeholder" = "密码";
 "Login.BasicLoginButton.Title" = "登录";
 "Login.TitleLabel.Text" = "欢迎来到SwiftHub";
-"Login.DetailLabel.Text" = "用RxSwift和MVVM架构编写的开源Github iOS客户端。";
+"Login.DetailLabel.Text" = "对于使用基本身份验证或OAuth的API请求，您每小时最多可以处理5000个请求。 \n\n它允许您每小时请求最多60个请求。";
 "Login.oAuthloginButton.Title" = "使用Github登录";
 "Login.LoginFailed.Description" = "请检查您的登录名或密码";
 /* 通知 */

@@ -42,7 +42,7 @@
 "Login.PasswordTextField.Placeholder" = "password";
 "Login.BasicLoginButton.Title" = "Login";
 "Login.TitleLabel.Text" = "Welcome to SwiftHub";
-"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
+"Login.DetailLabel.Text" = "For API requests using Basic Authentication or OAuth, you can make up to 5000 requests per hour. \n\nFor unauthenticated requests, the rate limit allows for up to 60 requests per hour.";
 "Login.oAuthloginButton.Title" = "Sign in with Github";
 "Login.LoginFailed.Description" = "Please check your login or password";
 /* Notifications */

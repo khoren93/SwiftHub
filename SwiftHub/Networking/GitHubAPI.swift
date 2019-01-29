@@ -134,8 +134,14 @@ extension GithubAPI: TargetType, ProductAPIType {
     }
 
     var headers: [String: String]? {
-        if addXAuth, let basicToken = AuthManager.shared.token?.basicToken {
-            return ["Authorization": basicToken]
+        if let token = AuthManager.shared.token {
+            switch token.type() {
+            case .basic(let token):
+                return ["Authorization": "Basic \(token)"]
+            case .oAuth(let token):
+                return ["Authorization": "token \(token)"]
+            case .unauthorized: break
+            }
         }
         return nil
     }

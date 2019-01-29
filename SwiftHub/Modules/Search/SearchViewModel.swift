@@ -64,7 +64,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             .bind(to: keyword).disposed(by: rx.disposeBag)
 
         let showTrendings = BehaviorRelay(value: true)
-        keyword.map { $0.isEmpty }
+        input.keywordTrigger.asObservable().map { $0.isEmpty }
             .bind(to: showTrendings).disposed(by: rx.disposeBag)
 
         let sortRepositoryItem = BehaviorRelay(value: SortRepositoryItems.bestMatch)

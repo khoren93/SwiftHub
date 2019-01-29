@@ -1927,7 +1927,7 @@
 				DEVELOPMENT_TEAM = T7PRF59H28;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.public.SwiftHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1945,7 +1945,7 @@
 				DEVELOPMENT_TEAM = T7PRF59H28;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.public.SwiftHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -47,7 +47,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
-        self.loggedIn.accept(AuthManager.shared.hasToken)
+        self.loggedIn.accept(AuthManager.shared.hasValidToken)
         super.init(provider: provider)
         if let fullname = repository.fullname {
             analytics.log(.repository(fullname: fullname))

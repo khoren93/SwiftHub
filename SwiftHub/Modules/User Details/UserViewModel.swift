@@ -47,7 +47,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
     init(user: User?, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
-        self.loggedIn.accept(AuthManager.shared.hasToken)
+        self.loggedIn.accept(AuthManager.shared.hasValidToken)
         super.init(provider: provider)
         if let login = user?.login {
             analytics.log(.user(login: login))

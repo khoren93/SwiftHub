@@ -12,6 +12,7 @@ import RxCocoa
 import ObjectMapper
 import Moya
 import Moya_ObjectMapper
+import Alamofire
 
 typealias MoyaError = Moya.MoyaError
 
@@ -24,6 +25,7 @@ protocol SwiftHubAPI {
     func downloadFile(url: URL, fileName: String?) -> Single<Void>
 
     // MARK: - Authentication is optional
+    func createAccessToken(clientId: String, clientSecret: String, code: String, redirectUri: String?, state: String?) -> Single<Token>
     func searchRepositories(query: String, sort: String, order: String, page: Int) -> Single<RepositorySearch>
     func repository(fullname: String) -> Single<Repository>
     func watchers(fullname: String, page: Int) -> Single<[User]>
@@ -104,6 +106,37 @@ extension Api {
     }
 
     // MARK: - Authentication is optional
+
+    func createAccessToken(clientId: String, clientSecret: String, code: String, redirectUri: String?, state: String?) -> Single<Token> {
+        return Single.create { single in
+            var params: Parameters = [:]
+            params["client_id"] = clientId
+            params["client_secret"] = clientSecret
+            params["code"] = code
+            params["redirect_uri"] = redirectUri
+            params["state"] = state
+            Alamofire.request("https://github.com/login/oauth/access_token",
+                              method: .post,
+                              parameters: params,
+                              encoding: URLEncoding.default,
+                              headers: ["Accept": "application/json"])
+                .responseJSON(completionHandler: { (response) in
+                    if let error = response.error {
+                        single(.error(error))
+                        return
+                    }
+                    if let json = response.result.value as? [String: Any] {
+                        if let token = Mapper<Token>().map(JSON: json) {
+                            single(.success(token))
+                            return
+                        }
+                    }
+                    single(.error(RxError.unknown))
+                })
+            return Disposables.create { }
+            }
+            .observeOn(MainScheduler.instance)
+    }
 
     func searchRepositories(query: String, sort: String, order: String, page: Int) -> Single<RepositorySearch> {
         return requestObject(.searchRepositories(query: query, sort: sort, order: order, page: page), type: RepositorySearch.self)

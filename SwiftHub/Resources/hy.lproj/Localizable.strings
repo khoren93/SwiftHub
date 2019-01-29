@@ -42,7 +42,7 @@
 "Login.PasswordTextField.Placeholder" = "գաղտնաբառ";
 "Login.BasicLoginButton.Title" = "Մուտք";
 "Login.TitleLabel.Text" = "Բարի գալուստ SwiftHub";
-"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
+"Login.DetailLabel.Text" = "Հիմնական Authentication-ի կամ OAuth-ի օգտագործման շնորհիվ կարող եք կատարել ժամում մինչեւ 5000 հարցում: \n\nԱնանուն հարցումների համար սահմանվում է ժամում մինչեւ 60 հարցում:";
 "Login.oAuthloginButton.Title" = "Մուտք Github-ով";
 "Login.LoginFailed.Description" = "Խնդրում ենք ստուգել ձեր մուտքանունը կամ գաղտնաբառը";
 /* Notifications */

@@ -72,13 +72,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         //        view.hero.id = "CententView"
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.edges.equalTo(self.view.safeAreaLayoutGuide)
-            } else {
-                make.left.right.equalToSuperview()
-                make.top.equalTo(self.topLayoutGuide.snp.bottom)
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-            }
+            make.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
         return view
     }()

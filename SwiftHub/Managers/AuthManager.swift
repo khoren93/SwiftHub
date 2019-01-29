@@ -37,11 +37,8 @@ class AuthManager {
         }
     }
 
-    var hasToken: Bool {
-        if let basicToken = token?.basicToken, token?.isValid == true {
-            return !basicToken.isEmpty
-        }
-        return false
+    var hasValidToken: Bool {
+        return token?.isValid == true
     }
 
     class func setToken(token: Token) {

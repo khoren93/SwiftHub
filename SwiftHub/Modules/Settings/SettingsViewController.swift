@@ -103,7 +103,7 @@ class SettingsViewController: TableViewController {
                 }
             case .logoutItem:
                 self?.deselectSelectedRow()
-                self?.logout()
+                self?.logoutAction()
             }
         }).disposed(by: rx.disposeBag)
     }
@@ -119,9 +119,33 @@ class SettingsViewController: TableViewController {
         }
     }
 
+    func logoutAction() {
+        var name = ""
+        if let user = User.currentUser() {
+            name = user.name ?? user.login ?? ""
+        }
+
+        let alertController = UIAlertController(title: name,
+                                                message: R.string.localizable.settingsLogoutAlertMessage.key.localized(),
+                                                preferredStyle: UIAlertController.Style.alert)
+        let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertConfirmButtonTitle.key.localized(),
+                                         style: .destructive) { [weak self] (result: UIAlertAction) in
+            self?.logout()
+        }
+
+        let cancelAction = UIAlertAction(title: R.string.localizable.commonCancel.key.localized(),
+                                         style: .default) { (result: UIAlertAction) in
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(logoutAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     func logout() {
         User.removeCurrentUser()
         AuthManager.removeToken()
+        Application.shared.presentInitialScreen(in: Application.shared.window)
 
         analytics.log(.logout)
         analytics.reset()

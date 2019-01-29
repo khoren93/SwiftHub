@@ -12,12 +12,12 @@ import RxCocoa
 import SafariServices
 
 enum LoginSegments: Int {
-    case basic, oAuth
+    case oAuth, basic
 
     var title: String {
         switch self {
-        case .basic: return R.string.localizable.loginBasicSegmentTitle.key.localized()
         case .oAuth: return R.string.localizable.loginOAuthSegmentTitle.key.localized()
+        case .basic: return R.string.localizable.loginBasicSegmentTitle.key.localized()
         }
     }
 }
@@ -27,7 +27,7 @@ class LoginViewController: ViewController {
     var viewModel: LoginViewModel!
 
     lazy var segmentedControl: SegmentedControl = {
-        let items = [LoginSegments.basic.title, LoginSegments.oAuth.title]
+        let items = [LoginSegments.oAuth.title, LoginSegments.basic.title]
         let view = SegmentedControl(items: items)
         view.selectedSegmentIndex = 0
         return view
@@ -124,8 +124,8 @@ class LoginViewController: ViewController {
             self?.titleLabel.text = R.string.localizable.loginTitleLabelText.key.localized()
             self?.detailLabel.text = R.string.localizable.loginDetailLabelText.key.localized()
             self?.oAuthloginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
-            self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 1)
+            self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 0)
+            self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 1)
             self?.navigationItem.titleView = self?.segmentedControl
         }).disposed(by: rx.disposeBag)
 
