@@ -19,7 +19,7 @@
 <img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen_dark.png?raw=true" width="290">&nbsp;
 
 ## App Features
-- [x] Basic and oAuth2 authentication
+- [x] Basic and OAuth2 authentication
 - [x] View trending repositories and users ([github-trending-api](https://github.com/huchenme/github-trending-api))
 - [x] Advanced searching and sorting repositories and users, filter by language
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
