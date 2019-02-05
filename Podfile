@@ -90,6 +90,11 @@ end
 target 'SwiftHubTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Quick', '~> 1.0'  # https://github.com/Quick/Quick
+    pod 'Nimble', '~> 7.0'  # https://github.com/Quick/Nimble
+    pod 'RxNimble', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxNimble
+    pod 'RxAtomic', :modular_headers => true
+    pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
 end
 
 target 'SwiftHubUITests' do
