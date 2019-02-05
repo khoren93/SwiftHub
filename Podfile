@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '10.0'
+platform :ios, '11.0'
+
+use_frameworks!
+inhibit_all_warnings!
 
 target 'SwiftHub' do
     # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-    use_frameworks!
-    inhibit_all_warnings!
-
     # Pods for SwiftHub
 
     # Networking
@@ -95,6 +95,7 @@ target 'SwiftHubTests' do
     pod 'RxNimble', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxNimble
     pod 'RxAtomic', :modular_headers => true
     pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
+    pod 'Firebase'
 end
 
 target 'SwiftHubUITests' do
