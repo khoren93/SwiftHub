@@ -37,13 +37,13 @@
 /* 登录 */
 //"Login.Navigation.Title" = "Login";
 "Login.BasicSegment.Title" = "基本";
-"Login.oAuthSegment.Title" = "OAuth的";
+"Login.OAuthSegment.Title" = "OAuth的";
 "Login.LoginTextField.Placeholder" = "登录";
 "Login.PasswordTextField.Placeholder" = "密码";
 "Login.BasicLoginButton.Title" = "登录";
 "Login.TitleLabel.Text" = "欢迎来到SwiftHub";
 "Login.DetailLabel.Text" = "对于使用基本身份验证或OAuth的API请求，您每小时最多可以处理5000个请求。 \n\n它允许您每小时请求最多60个请求。";
-"Login.oAuthloginButton.Title" = "使用Github登录";
+"Login.OAuthloginButton.Title" = "使用Github登录";
 "Login.LoginFailed.Description" = "请检查您的登录名或密码";
 /* 通知 */
 "Notifications.Navigation.Title" = "通知";

@@ -54,6 +54,7 @@ class UserViewController: TableViewController {
         view.borderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
         view.cornerRadius = 20
+        view.hero.id = "ActionButtonId"
         return view
     }()
 

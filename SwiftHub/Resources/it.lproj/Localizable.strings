@@ -37,13 +37,13 @@
 /* Login */
 //"Login.Navigation.Title" = "Login";
 "Login.BasicSegment.Title" = "Basic";
-"Login.oAuthSegment.Title" = "oAuth";
+"Login.OAuthSegment.Title" = "OAuth";
 "Login.LoginTextField.Placeholder" = "login";
 "Login.PasswordTextField.Placeholder" = "password";
 "Login.BasicLoginButton.Title" = "Login";
 "Login.TitleLabel.Text" = "Welcome to SwiftHub";
 "Login.DetailLabel.Text" = "For API requests using Basic Authentication or OAuth, you can make up to 5000 requests per hour. \n\nFor unauthenticated requests, the rate limit allows for up to 60 requests per hour.";
-"Login.oAuthloginButton.Title" = "Sign in with Github";
+"Login.OAuthloginButton.Title" = "Sign in with Github";
 "Login.LoginFailed.Description" = "Please check your login or password";
 /* Notifications */
 "Notifications.Navigation.Title" = "Notifications";

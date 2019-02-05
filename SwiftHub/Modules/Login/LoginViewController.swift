@@ -40,7 +40,7 @@ class LoginViewController: ViewController {
     }()
 
     lazy var oAuthLoginStackView: StackView = {
-        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthloginButton]
+        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthLoginButton]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -92,7 +92,7 @@ class LoginViewController: ViewController {
         return view
     }()
 
-    lazy var oAuthloginButton: Button = {
+    lazy var oAuthLoginButton: Button = {
         let view = Button()
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
@@ -123,7 +123,7 @@ class LoginViewController: ViewController {
             self?.basicLoginButton.titleForNormal = R.string.localizable.loginBasicLoginButtonTitle.key.localized()
             self?.titleLabel.text = R.string.localizable.loginTitleLabelText.key.localized()
             self?.detailLabel.text = R.string.localizable.loginDetailLabelText.key.localized()
-            self?.oAuthloginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
+            self?.oAuthLoginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
             self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 0)
             self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 1)
             self?.navigationItem.titleView = self?.segmentedControl
@@ -155,7 +155,7 @@ class LoginViewController: ViewController {
         let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { LoginSegments(rawValue: $0)! }).merge()
         let input = LoginViewModel.Input(segmentSelection: segmentSelected.asDriverOnErrorJustComplete(),
                                          basicLoginTrigger: basicLoginButton.rx.tap.asDriver(),
-                                         oAuthLoginTrigger: oAuthloginButton.rx.tap.asDriver())
+                                         oAuthLoginTrigger: oAuthLoginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)

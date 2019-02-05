@@ -22,7 +22,7 @@ struct Token: Mappable {
     // Basic
     var basicToken: String?
 
-    // oAuth2
+    // OAuth2
     var accessToken: String?
     var tokenType: String?
     var scope: String?
