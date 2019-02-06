@@ -42,7 +42,7 @@
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Google ads implementation, can be enabled/disabled from settings ([Firebase AdMob](https://firebase.google.com/docs/admob/ios/quick-start))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
-- [ ] Add tests (help is welcome)
+- [ ] Add tests
 
 ## Building and Running
 
@@ -63,6 +63,9 @@ bundle exec fastlane setup
 
 Try `pod update` if you got some errors.
 Alrighty! We're ready to go!
+
+## Sponsors
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YDRAP3F94999S&source=url)
 
 ## Debugging
 [Flex](https://github.com/Flipboard/FLEX) debugging tool has been integrated in this application. To enable it, just swipe right anywhere in the application.
