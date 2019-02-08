@@ -34,20 +34,13 @@ struct Configs {
     struct App {
         static let githubUrl = "https://github.com/khoren93/SwiftHub"
         static let bundleIdentifier = "com.public.SwiftHub"
-        static let IsTesting = true
-        static let NavigationTitleFont = UIFont.navigationTitleFont()
     }
 
     struct Network {
         static let useStaging = false  // set true for tests and generating screenshots with fastlane
         static let loggingEnabled = false
-
-        static var githubBaseUrl: String {
-            return "https://api.github.com"
-        }
-        static var trendingGithubBaseUrl: String {
-            return "https://github-trending-api.now.sh"
-        }
+        static let githubBaseUrl = "https://api.github.com"
+        static let trendingGithubBaseUrl = "https://github-trending-api.now.sh"
     }
 
     struct BaseDimensions {

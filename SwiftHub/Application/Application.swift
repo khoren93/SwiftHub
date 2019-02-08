@@ -18,7 +18,10 @@ final class Application: NSObject {
     let navigator: Navigator
 
     private override init() {
-        provider = Api.shared
+        let staging = Configs.Network.useStaging
+        let githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
+        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
+        provider = Api(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
         authManager = AuthManager.shared
         navigator = Navigator.default
         super.init()

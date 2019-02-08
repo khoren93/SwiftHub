@@ -71,15 +71,14 @@ protocol SwiftHubAPI {
 }
 
 class Api: SwiftHubAPI {
-    static let shared = Api()
 
     let githubProvider: GithubNetworking
+
     let trendingGithubProvider: TrendingGithubNetworking
 
-    init() {
-        let staging = Configs.Network.useStaging
-        githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
-        trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
+    init(githubProvider: GithubNetworking, trendingGithubProvider: TrendingGithubNetworking) {
+        self.githubProvider = githubProvider
+        self.trendingGithubProvider = trendingGithubProvider
     }
 }
 

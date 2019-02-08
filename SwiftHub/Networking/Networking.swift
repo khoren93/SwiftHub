@@ -89,7 +89,7 @@ extension NetworkingType {
     }
 
     static func stubbingGithubNetworking() -> GithubNetworking {
-        return GithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: GithubNetworking.endpointResolver(), stubClosure: MoyaProvider.delayedStub(0.2), online: .just(true)))
+        return GithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: GithubNetworking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 }
 
@@ -99,7 +99,7 @@ extension NetworkingType {
     }
 
     static func stubbingTrendingGithubNetworking() -> TrendingGithubNetworking {
-        return TrendingGithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: TrendingGithubNetworking.endpointResolver(), stubClosure: MoyaProvider.delayedStub(0.5), online: .just(true)))
+        return TrendingGithubNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: TrendingGithubNetworking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 }
 

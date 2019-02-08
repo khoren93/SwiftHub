@@ -244,7 +244,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .searchRepositories: return stubbedResponse("RepositorySearch")
         case .repository: return stubbedResponse("Repository")
         case .watchers: return stubbedResponse("RepositoryWatchers")
-        case .stargazers: return stubbedResponse("RepositoryStargers")
+        case .stargazers: return stubbedResponse("RepositoryStargazers")
         case .forks: return stubbedResponse("RepositoryForks")
         case .readme: return stubbedResponse("RepositoryReadme")
         case .contents: return stubbedResponse("RepositoryContents")

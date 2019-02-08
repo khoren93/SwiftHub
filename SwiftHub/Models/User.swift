@@ -182,7 +182,7 @@ struct TrendingUser: Mappable {
         name <- map["name"]
         url <- map["url"]
         avatar <- map["avatar"]
-        avatar = avatar?.replacingOccurrences(of: "s=40&", with: "").replacingOccurrences(of: "s=96&", with: "")
+//        avatar = avatar?.appending("?v=4")
         repo <- map["repo"]
         repo?.author = username
     }
