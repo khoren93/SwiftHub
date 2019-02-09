@@ -24,7 +24,7 @@ enum SwifthubEvent {
     case whatsNew
     case flexOpened
 
-    case login(login: String)
+    case login(login: String, type: String)
     case logout
     case search(keyword: String)
     case repoLanguage(language: String)
@@ -76,8 +76,8 @@ extension SwifthubEvent: Umbrella.EventType {
             return ["Language": language]
         case .userInvited(let success):
             return ["Success": success]
-        case .login(let login):
-            return ["Login": login]
+        case .login(let login, let type):
+            return ["Login": login, "Type": type]
         case .search(let keyword):
             return ["Keyword": keyword]
         case .repoLanguage(let language):

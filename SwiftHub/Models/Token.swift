@@ -13,6 +13,14 @@ enum TokenType {
     case basic(token: String)
     case oAuth(token: String)
     case unauthorized
+
+    var description: String {
+        switch self {
+        case .basic: return "basic"
+        case .oAuth: return "OAuth"
+        case .unauthorized: return "unauthorized"
+        }
+    }
 }
 
 struct Token: Mappable {

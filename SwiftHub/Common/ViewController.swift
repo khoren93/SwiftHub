@@ -23,6 +23,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     let error = PublishSubject<ApiError>()
 
     var automaticallyAdjustsLeftBarButtonItem = true
+    var canOpenFlex = true
 
     var navigationTitle = "" {
         didSet {
@@ -80,6 +81,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     lazy var stackView: StackView = {
         let subviews: [UIView] = []
         let view = StackView(arrangedSubviews: subviews)
+        view.spacing = 0
         self.contentView.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
@@ -246,7 +248,7 @@ extension ViewController {
     }
 
     @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
-        if swipeRecognizer.state == .recognized {
+        if swipeRecognizer.state == .recognized, canOpenFlex {
             LibsManager.shared.showFlex()
         }
     }

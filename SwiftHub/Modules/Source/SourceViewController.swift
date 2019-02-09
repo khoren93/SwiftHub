@@ -14,6 +14,11 @@ class SourceViewController: ViewController {
 
     var viewModel: SourceViewModel!
 
+    lazy var historyBarButton: BarButtonItem = {
+        let view = BarButtonItem(image: R.image.icon_navigation_history(), style: .done, target: nil, action: nil)
+        return view
+    }()
+
     lazy var themesBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_theme(), style: .done, target: nil, action: nil)
         return view
@@ -51,11 +56,16 @@ class SourceViewController: ViewController {
 
     override func makeUI() {
         super.makeUI()
-        navigationItem.rightBarButtonItems = [themesBarButton, languagesBarButton]
+
+        let toolbar = Toolbar()
+        let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        toolbar.items = [space, themesBarButton, space, languagesBarButton, space, historyBarButton, space]
 
         stackView.addArrangedSubview(textView)
         stackView.addArrangedSubview(languagesPicker)
         stackView.addArrangedSubview(themesPicker)
+        stackView.addArrangedSubview(toolbar)
+
         bannerView.isHidden = true
     }
 
@@ -63,6 +73,7 @@ class SourceViewController: ViewController {
         super.bindViewModel()
 
         let input = SourceViewModel.Input(trigger: Observable.just(()),
+                                          historySelection: historyBarButton.rx.tap.asObservable(),
                                           themesSelection: themesBarButton.rx.tap.asObservable(),
                                           languagesSelection: languagesBarButton.rx.tap.asObservable(),
                                           themeSelected: themesPicker.rx.modelSelected(String.self).map { $0.first }.filterNil(),
@@ -122,6 +133,10 @@ class SourceViewController: ViewController {
 
         output.selectedLanguageIndex.filterNil().drive(onNext: { [weak self] (index) in
             self?.languagesPicker.selectRow(index, inComponent: 0, animated: true)
+        }).disposed(by: rx.disposeBag)
+
+        output.historySelected.drive(onNext: { [weak self] (url) in
+            self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
     }
 }

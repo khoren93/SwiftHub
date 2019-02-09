@@ -24,6 +24,7 @@
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
 		0716601F21CFB1D100B5827C /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0716601E21CFB1D100B5827C /* SourceViewController.swift */; };
 		0716602121CFB1E000B5827C /* SourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0716602021CFB1E000B5827C /* SourceViewModel.swift */; };
+		07178A61220F581C0020AE12 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07178A60220F581C0020AE12 /* Toolbar.swift */; };
 		071F761B21C6756D003EEB35 /* WhatsNewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071F761A21C6756D003EEB35 /* WhatsNewManager.swift */; };
 		07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0421B1740000F800BD /* RepositoryCommits.json */; };
 		07241D0721B1741800F800BD /* RepositoryCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0621B1741800F800BD /* RepositoryCommit.json */; };
@@ -275,6 +276,7 @@
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		0716601E21CFB1D100B5827C /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
 		0716602021CFB1E000B5827C /* SourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewModel.swift; sourceTree = "<group>"; };
+		07178A60220F581C0020AE12 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		071F761A21C6756D003EEB35 /* WhatsNewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewManager.swift; sourceTree = "<group>"; };
 		07241D0421B1740000F800BD /* RepositoryCommits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommits.json; sourceTree = "<group>"; };
 		07241D0621B1741800F800BD /* RepositoryCommit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommit.json; sourceTree = "<group>"; };
@@ -1093,6 +1095,7 @@
 				C762C6551E1D559000C09EBD /* ImageView.swift */,
 				C762C6561E1D559000C09EBD /* Label.swift */,
 				C762C6571E1D559000C09EBD /* NavigationController.swift */,
+				075E75E421D2C6B200213683 /* PickerView.swift */,
 				C762C6581E1D559000C09EBD /* ScrollView.swift */,
 				A09DE8DC20E7C82E00F6F2BF /* SearchBar.swift */,
 				A09DE8DA20E7C73900F6F2BF /* SegmentedControl.swift */,
@@ -1104,11 +1107,11 @@
 				C762C6591E1D559000C09EBD /* TableView.swift */,
 				C762C65B1E1D559000C09EBD /* TableViewController.swift */,
 				C762C65C1E1D559000C09EBD /* TextField.swift */,
+				07178A60220F581C0020AE12 /* Toolbar.swift */,
 				C762C65D1E1D559000C09EBD /* View.swift */,
 				C762C65E1E1D559000C09EBD /* ViewController.swift */,
 				A09DE8C820E7B8F400F6F2BF /* ViewModelType.swift */,
 				A088B12821008FDF0093D248 /* WebViewController.swift */,
-				075E75E421D2C6B200213683 /* PickerView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1762,6 +1765,7 @@
 				079BF51721FF618500FFA334 /* ErrorResponse.swift in Sources */,
 				073204602141399400C1E39F /* EventsViewModel.swift in Sources */,
 				0752F49E21C8EDB600A30BF2 /* LanguagesSection.swift in Sources */,
+				07178A61220F581C0020AE12 /* Toolbar.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				07D46E5321920029008E5369 /* Content.swift in Sources */,
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,

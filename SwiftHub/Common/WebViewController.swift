@@ -36,6 +36,7 @@ class WebViewController: ViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
         stackView.insertArrangedSubview(webView, at: 0)
+        canOpenFlex = false
     }
 
     override func bindViewModel() {

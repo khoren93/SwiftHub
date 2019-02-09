@@ -16,6 +16,7 @@ class SourceViewModel: ViewModel, ViewModelType {
 
     struct Input {
         let trigger: Observable<Void>
+        let historySelection: Observable<Void>
         let themesSelection: Observable<Void>
         let languagesSelection: Observable<Void>
         let themeSelected: Observable<String>
@@ -28,6 +29,7 @@ class SourceViewModel: ViewModel, ViewModelType {
         let selectedThemeIndex: Driver<Int?>
         let languages: Driver<[String]>
         let selectedLanguageIndex: Driver<Int?>
+        let historySelected: Driver<URL>
         let highlightedCode: Observable<NSAttributedString?>
         let themeBackgroundColor: Observable<UIColor?>
         let hidesThemes: Driver<Bool>
@@ -70,6 +72,10 @@ class SourceViewModel: ViewModel, ViewModelType {
                 return highlightedCode
         }
 
+        let historySelected = input.historySelection.map { (_) -> URL? in
+            return self.content.value.htmlUrl?.replacingOccurrences(of: "github.com", with: "github.githistory.xyz").url
+        }.asDriver(onErrorJustReturn: nil).filterNil()
+
         let hidesThemes = input.themesSelection.map({ () -> Bool in
             self.hidesThemes = !self.hidesThemes
             return self.hidesThemes
@@ -109,6 +115,7 @@ class SourceViewModel: ViewModel, ViewModelType {
                       selectedThemeIndex: selectedThemeIndex.asDriver(onErrorJustReturn: nil),
                       languages: languages.asDriver(onErrorJustReturn: []),
                       selectedLanguageIndex: selectedLanguageIndex.asDriver(onErrorJustReturn: nil),
+                      historySelected: historySelected,
                       highlightedCode: highlightedCode,
                       themeBackgroundColor: themeBackgroundColor,
                       hidesThemes: hidesThemes,
