@@ -8,45 +8,7 @@
 
 import UIKit
 
-class DetailedTableViewCell: TableViewCell {
-
-    lazy var leftImageView: ImageView = {
-        let view = ImageView(frame: CGRect())
-        view.contentMode = .scaleAspectFit
-        view.snp.makeConstraints({ (make) in
-            make.size.equalTo(50)
-        })
-        return view
-    }()
-
-    lazy var badgeImageView: ImageView = {
-        let view = ImageView(frame: CGRect())
-        view.backgroundColor = .white
-        view.cornerRadius = 10
-        view.borderColor = .white
-        view.borderWidth = 1
-        containerView.addSubview(view)
-        view.snp.makeConstraints({ (make) in
-            make.bottom.right.equalTo(self.leftImageView)
-            make.size.equalTo(20)
-        })
-        return view
-    }()
-
-    lazy var rightImageView: ImageView = {
-        let view = ImageView(frame: CGRect())
-        view.image = R.image.icon_cell_disclosure()?.template
-        view.snp.makeConstraints({ (make) in
-            make.width.equalTo(20)
-        })
-        return view
-    }()
-
-    lazy var titleLabel: Label = {
-        let view = Label()
-        view.font = view.font.withSize(14)
-        return view
-    }()
+class DetailedTableViewCell: DefaultTableViewCell {
 
     lazy var detailLabel: Label = {
         let view = Label()
@@ -68,28 +30,17 @@ class DetailedTableViewCell: TableViewCell {
         return view
     }()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-        if isSelection {
-//            rightImageView.image = selected ? R.image.icon_selected() : R.image.icon_unselected()
-        }
-    }
-
     override func makeUI() {
         super.makeUI()
 
         themeService.rx
-            .bind({ $0.text }, to: titleLabel.rx.textColor)
             .bind({ $0.textGray }, to: detailLabel.rx.textColor)
-            .bind({ $0.secondary }, to: [leftImageView.rx.tintColor, rightImageView.rx.tintColor, secondDetailLabel.rx.textColor])
+            .bind({ $0.secondary }, to: secondDetailLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
-        stackView.spacing = self.inset
-        stackView.addArrangedSubview(leftImageView)
-        stackView.addArrangedSubview(textsStackView)
-        stackView.addArrangedSubview(rightImageView)
+        titleLabel.removeFromSuperview()
+        stackView.removeArrangedSubview(titleLabel)
+        stackView.insertArrangedSubview(textsStackView, at: 1)
         stackView.snp.remakeConstraints({ (make) in
             let inset = self.inset
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: inset/2, left: inset, bottom: inset/2, right: inset))

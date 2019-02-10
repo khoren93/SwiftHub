@@ -14,7 +14,7 @@ class DefaultTableViewCell: TableViewCell {
         let view = ImageView(frame: CGRect())
         view.contentMode = .scaleAspectFit
         view.snp.makeConstraints({ (make) in
-            make.width.equalTo(Configs.BaseDimensions.tableRowHeight)
+            make.size.equalTo(Configs.BaseDimensions.tableRowHeight)
         })
         return view
     }()
@@ -48,15 +48,6 @@ class DefaultTableViewCell: TableViewCell {
         return view
     }()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-        if isSelection {
-//            rightImageView.image = selected ? R.image.icon_selected() : R.image.icon_unselected()
-        }
-    }
-
     override func makeUI() {
         super.makeUI()
 
@@ -65,7 +56,6 @@ class DefaultTableViewCell: TableViewCell {
             .bind({ $0.secondary }, to: [leftImageView.rx.tintColor, rightImageView.rx.tintColor])
             .disposed(by: rx.disposeBag)
 
-        stackView.spacing = self.inset
         stackView.addArrangedSubview(leftImageView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(rightImageView)

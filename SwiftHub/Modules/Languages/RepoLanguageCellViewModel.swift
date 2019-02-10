@@ -18,6 +18,6 @@ class RepoLanguageCellViewModel {
 
     init(with language: Language) {
         self.language = language
-        title = Driver.just("\(language.name ?? "")")
+        title = Driver.just("\(language.displayName())")
     }
 }

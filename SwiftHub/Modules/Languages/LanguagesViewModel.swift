@@ -46,7 +46,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
             var elements: [LanguageSection] = []
                 if let popularLanguages = languages.popular?.filtered({ (language) -> Bool in
                     if keyword.isEmpty { return true }
-                    return language.name?.contains(keyword, caseSensitive: false) ?? false
+                    return language.displayName().contains(keyword, caseSensitive: false)
                 }, map: { (language) -> LanguageSectionItem in
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
@@ -56,7 +56,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
             }
                 if let allLanguages = languages.all?.filtered({ (language) -> Bool in
                     if keyword.isEmpty { return true }
-                    return language.name?.contains(keyword, caseSensitive: false) ?? false
+                    return language.displayName().contains(keyword, caseSensitive: false)
                 }, map: { (language) -> LanguageSectionItem in
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)

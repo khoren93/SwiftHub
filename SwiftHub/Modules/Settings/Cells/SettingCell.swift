@@ -12,6 +12,7 @@ class SettingCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
+        leftImageView.contentMode = .center
     }
 
     func bind(to viewModel: SettingCellViewModel) {

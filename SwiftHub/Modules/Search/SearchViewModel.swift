@@ -79,7 +79,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                 var query = keyword
                 let sort = sortRepositoryItem.sortValue
                 let order = sortRepositoryItem.orderValue
-                if let language = currentLanguage?.name {
+                if let language = currentLanguage?.urlParam {
                     query += " language:\(language)"
                 }
                 return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.page)
@@ -102,7 +102,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                 var query = keyword
                 let sort = sortUserItem.sortValue
                 let order = sortUserItem.orderValue
-                if let language = currentLanguage?.name {
+                if let language = currentLanguage?.urlParam {
                     query += " language:\(language)"
                 }
                 return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.page)
@@ -185,7 +185,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             .map { (trendingRepositories, trendingUsers, repositories, users, segment) -> [SearchSection] in
                 var elements: [SearchSection] = []
                 let showTrendings = showTrendings.value
-                let language = currentLanguage.value?.name
+                let language = currentLanguage.value?.displayName()
                 let since = trendingPeriodSegment.value
                 let trendingTitle = language != nil ?
                     R.string.localizable.searchTrendingSectionWithLanguageTitle.key.localizedFormat("\(language ?? "")") :

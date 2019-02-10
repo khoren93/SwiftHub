@@ -23,7 +23,7 @@ extension Reactive where Base: UIImageView {
                                   placeholder: placeholderImage,
                                   options: options,
                                   progressBlock: nil,
-                                  completionHandler: { (image, error, type, url) in })
+                                  completionHandler: { (result) in })
         })
     }
 }

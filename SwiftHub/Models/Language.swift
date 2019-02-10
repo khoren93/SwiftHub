@@ -37,6 +37,10 @@ struct Language: Mappable {
         urlParam <- map["urlParam"]
         name <- map["name"]
     }
+
+    func displayName() -> String {
+        return (name.isNilOrEmpty == false ? name: urlParam) ?? ""
+    }
 }
 
 extension Language {

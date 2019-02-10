@@ -119,10 +119,10 @@ class LibsManager: NSObject {
 
     func setupKingfisher() {
         // Set maximum disk cache size for default cache. Default value is 0, which means no limit.
-        ImageCache.default.maxDiskCacheSize = UInt(500 * 1024 * 1024) // 500 MB
+        ImageCache.default.diskStorage.config.sizeLimit = UInt(500 * 1024 * 1024) // 500 MB
 
         // Set longest time duration of the cache being stored in disk. Default value is 1 week
-        ImageCache.default.maxCachePeriodInSecond = TimeInterval(60 * 60 * 24 * 7) // 1 week
+        ImageCache.default.diskStorage.config.expiration = .days(7) // 1 week
 
         // Set timeout duration for default image downloader. Default value is 15 sec.
         ImageDownloader.default.downloadTimeout = 15.0 // 15 sec

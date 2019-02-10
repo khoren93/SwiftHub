@@ -24,10 +24,10 @@ target 'SwiftHub' do
 
     # JSON Mapping
     #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
-    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/hankbao/Moya-ObjectMapper.git' #'~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
+    pod 'Moya-ObjectMapper/RxSwift', '~> 2.8'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
-    pod 'Kingfisher', '~> 4.0'  # https://github.com/onevcat/Kingfisher
+    pod 'Kingfisher', '~> 5.0'  # https://github.com/onevcat/Kingfisher
 
     # Date
     pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
@@ -47,7 +47,7 @@ target 'SwiftHub' do
     # UI
     pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
     pod 'PMAlertController', '~> 3.5.0'  # https://github.com/pmusolino/PMAlertController
-    pod 'ImageSlideshow/Kingfisher', '~> 1.0'  # https://github.com/zvonicek/ImageSlideshow
+    pod 'ImageSlideshow/Kingfisher', :git => 'https://github.com/khoren93/ImageSlideshow.git'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.4.0'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
