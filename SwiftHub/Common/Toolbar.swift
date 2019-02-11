@@ -21,6 +21,8 @@ class Toolbar: UIToolbar {
     }
 
     func makeUI() {
+        isTranslucent = false
+
         themeService.rx
             .bind({ $0.barStyle }, to: rx.barStyle)
             .bind({ $0.primaryDark }, to: rx.barTintColor)

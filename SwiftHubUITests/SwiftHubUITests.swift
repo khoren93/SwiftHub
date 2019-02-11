@@ -18,7 +18,6 @@ class SwiftHubUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
         let app = XCUIApplication()
@@ -39,9 +38,13 @@ class SwiftHubUITests: XCTestCase {
     func testScreenshotSettings() {
         let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
         element.children(matching: .other).element(boundBy: 3).tap()
-
         sleep(1)
-        snapshot("01_settings_screen")
+        element.children(matching: .other).element(boundBy: 1).tap()
+        sleep(1)
+        element.children(matching: .other).element(boundBy: 3).tap()
+
+        sleep(3)
+        snapshot("03_settings_screen")
     }
 
     func testScreenshotRepositoryDetails() {
@@ -50,8 +53,8 @@ class SwiftHubUITests: XCTestCase {
         let tablesQuery = app.tables
         tablesQuery.staticTexts["Github iOS client written in RxSwift and MVVM clean architecture"].tap()
 
-        sleep(1)
-        snapshot("01_repository_details_screen")
+        sleep(3)
+        snapshot("02_repository_details_screen")
     }
 
     func testScreenshotSearch() {
@@ -68,7 +71,7 @@ class SwiftHubUITests: XCTestCase {
         app/*@START_MENU_TOKEN@*/.keys["t"]/*[[".keyboards.keys[\"t\"]",".keys[\"t\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards.buttons[\"Search\"]",".buttons[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
          */
-        sleep(1)
+        sleep(3)
         snapshot("01_search_repository_screen")
     }
 }

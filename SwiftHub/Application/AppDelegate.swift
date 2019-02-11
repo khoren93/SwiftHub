@@ -23,13 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let libsManager = LibsManager.shared
         libsManager.setupLibs(with: window)
 
-        /*
-        var theme = ThemeType.currentTheme()
-        if theme.isDark != true {
-            theme = theme.toggled()
+        if Configs.Network.useStaging == true {
+            // Use Green Dark theme
+            var theme = ThemeType.currentTheme()
+            if theme.isDark != true {
+                theme = theme.toggled()
+            }
+            theme = theme.withColor(color: .green)
+            themeService.switch(theme)
+
+            // Disable banners
+            libsManager.bannersEnabled.accept(false)
         }
-        themeService.set(theme)
-*/
+
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 

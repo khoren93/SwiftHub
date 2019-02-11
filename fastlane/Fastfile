@@ -32,6 +32,7 @@ platform :ios do
     reset_simulators
 
     capture_screenshots(workspace: "SwiftHub.xcworkspace", scheme: "SwiftHubUITests")
+    frameit  # brew install imagemagick
   end
 
   desc "Submit a new beta build to apple TestFlight"
