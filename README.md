@@ -35,6 +35,7 @@
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
 - [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
+- [x] App automation, generate localized screenshots, distribute beta builds ([Fastlane](https://github.com/fastlane/fastlane))
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
