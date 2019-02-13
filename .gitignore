@@ -63,7 +63,8 @@ Cartfile.resolved
 
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
 fastlane/test_output
 
 # AppCode
