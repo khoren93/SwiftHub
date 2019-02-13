@@ -42,6 +42,7 @@
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Google ads implementation, can be enabled/disabled from settings ([Firebase AdMob](https://firebase.google.com/docs/admob/ios/quick-start))
+- [ ] Migrating to GraphQL API v4 ([Apollo](https://github.com/apollographql/apollo-ios))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
 - [ ] Add tests
 
