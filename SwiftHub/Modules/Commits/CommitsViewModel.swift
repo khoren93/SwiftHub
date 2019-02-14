@@ -20,7 +20,7 @@ class CommitsViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let navigationTitle: Driver<String>
-        let items: BehaviorRelay<[CommitCellViewModel]>
+        let items: Driver<[CommitCellViewModel]>
         let commitSelected: Driver<URL?>
         let userSelected: Driver<UserViewModel>
     }
@@ -72,7 +72,7 @@ class CommitsViewModel: ViewModel, ViewModelType {
             })
 
         return Output(navigationTitle: navigationTitle,
-                      items: elements,
+                      items: elements.asDriver(),
                       commitSelected: commitSelected,
                       userSelected: userDetails)
     }

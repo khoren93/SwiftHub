@@ -46,10 +46,9 @@ class CommitsViewController: TableViewController {
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)
 
-        output.items.asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: CommitCell.self)) { tableView, viewModel, cell in
-                cell.bind(to: viewModel)
-            }.disposed(by: rx.disposeBag)
+        output.items.drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: CommitCell.self)) { tableView, viewModel, cell in
+            cell.bind(to: viewModel)
+        }.disposed(by: rx.disposeBag)
 
         output.commitSelected.drive(onNext: { [weak self] (url) in
             if let url  = url {

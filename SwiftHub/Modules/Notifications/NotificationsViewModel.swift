@@ -28,7 +28,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
     struct Output {
         let navigationTitle: Driver<String>
         let imageUrl: Driver<URL?>
-        let items: BehaviorRelay<[NotificationCellViewModel]>
+        let items: Driver<[NotificationCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
     }
@@ -95,7 +95,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
 
         return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
-                      items: elements,
+                      items: elements.asDriver(),
                       userSelected: userDetails,
                       repositorySelected: repositoryDetails)
     }

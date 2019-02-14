@@ -54,10 +54,9 @@ class ContentsViewController: TableViewController {
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)
 
-        output.items.asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: ContentCell.self)) { tableView, viewModel, cell in
-                cell.bind(to: viewModel)
-            }.disposed(by: rx.disposeBag)
+        output.items.drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: ContentCell.self)) { tableView, viewModel, cell in
+            cell.bind(to: viewModel)
+        }.disposed(by: rx.disposeBag)
 
         output.openContents.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)

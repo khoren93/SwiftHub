@@ -109,10 +109,9 @@ class EventsViewController: TableViewController {
             }
         }).disposed(by: rx.disposeBag)
 
-        output.items.asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: EventCell.self)) { tableView, viewModel, cell in
-                cell.bind(to: viewModel)
-            }.disposed(by: rx.disposeBag)
+        output.items.drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: EventCell.self)) { tableView, viewModel, cell in
+            cell.bind(to: viewModel)
+        }.disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
