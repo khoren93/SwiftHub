@@ -32,7 +32,7 @@ class UsersViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let navigationTitle: Driver<String>
-        let items: Driver<[UserCellViewModel]>
+        let items: BehaviorRelay<[UserCellViewModel]>
         let imageUrl: Driver<URL?>
         let textDidBeginEditing: Driver<Void>
         let dismissKeyboard: Driver<Void>
@@ -99,7 +99,7 @@ class UsersViewModel: ViewModel, ViewModelType {
         }).asDriver(onErrorJustReturn: nil)
 
         return Output(navigationTitle: navigationTitle,
-                      items: elements.asDriver(),
+                      items: elements,
                       imageUrl: imageUrl,
                       textDidBeginEditing: textDidBeginEditing,
                       dismissKeyboard: dismissKeyboard,

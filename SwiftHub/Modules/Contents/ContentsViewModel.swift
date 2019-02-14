@@ -20,7 +20,7 @@ class ContentsViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let navigationTitle: Driver<String>
-        let items: Driver<[ContentCellViewModel]>
+        let items: BehaviorRelay<[ContentCellViewModel]>
         let openContents: Driver<ContentsViewModel>
         let openUrl: Driver<URL?>
         let openSource: Driver<SourceViewModel>
@@ -69,7 +69,7 @@ class ContentsViewModel: ViewModel, ViewModelType {
         }).asDriver(onErrorJustReturn: "")
 
         return Output(navigationTitle: navigationTitle,
-                      items: elements.asDriver(),
+                      items: elements,
                       openContents: openContents,
                       openUrl: openUrl,
                       openSource: openSource)

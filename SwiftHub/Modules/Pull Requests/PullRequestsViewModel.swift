@@ -21,7 +21,7 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
 
     struct Output {
         let navigationTitle: Driver<String>
-        let items: Driver<[PullRequestCellViewModel]>
+        let items: BehaviorRelay<[PullRequestCellViewModel]>
         let pullRequestSelected: Driver<URL?>
         let userSelected: Driver<UserViewModel>
     }
@@ -75,7 +75,7 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
             })
 
         return Output(navigationTitle: navigationTitle,
-                      items: elements.asDriver(),
+                      items: elements,
                       pullRequestSelected: pullRequestSelected,
                       userSelected: userDetails)
     }

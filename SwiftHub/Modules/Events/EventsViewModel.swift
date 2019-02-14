@@ -28,7 +28,7 @@ class EventsViewModel: ViewModel, ViewModelType {
     struct Output {
         let navigationTitle: Driver<String>
         let imageUrl: Driver<URL?>
-        let items: Driver<[EventCellViewModel]>
+        let items: BehaviorRelay<[EventCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
         let hidesSegment: Driver<Bool>
@@ -110,7 +110,7 @@ class EventsViewModel: ViewModel, ViewModelType {
 
         return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
-                      items: elements.asDriver(),
+                      items: elements,
                       userSelected: userDetails,
                       repositorySelected: repositoryDetails,
                       hidesSegment: hidesSegment)

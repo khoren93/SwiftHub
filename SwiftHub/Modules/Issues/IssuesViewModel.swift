@@ -23,7 +23,7 @@ class IssuesViewModel: ViewModel, ViewModelType {
     struct Output {
         let navigationTitle: Driver<String>
         let imageUrl: Driver<URL?>
-        let items: Driver<[IssueCellViewModel]>
+        let items: BehaviorRelay<[IssueCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let issueSelected: Driver<URL?>
     }
@@ -85,7 +85,7 @@ class IssuesViewModel: ViewModel, ViewModelType {
 
         return Output(navigationTitle: navigationTitle,
                       imageUrl: imageUrl,
-                      items: elements.asDriver(),
+                      items: elements,
                       userSelected: userDetails,
                       issueSelected: issueSelected)
     }
