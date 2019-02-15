@@ -35,7 +35,6 @@
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
 - [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
-- [x] App automation, generate localized screenshots, distribute beta builds ([Fastlane](https://github.com/fastlane/fastlane))
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
@@ -45,6 +44,18 @@
 - [ ] Migrating to GraphQL API v4 ([Apollo](https://github.com/apollographql/apollo-ios))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
 - [ ] Add tests
+
+## Tools
+- [x] [bundler](https://bundler.io) - Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+- [x] [Fastlane](https://github.com/fastlane/fastlane) - The easiest way to automate building and releasing your iOS and Android apps, generating localized screenshots
+- [x] [SwiftLint](https://github.com/realm/SwiftLint) - A tool to enforce Swift style and conventions
+- [x] [Jazzy](https://github.com/realm/jazzy) - Soulful docs for Swift & Objective-C
+- [x] [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - JSONExport is a desktop application which enables you to export JSON objects as model classes
+- [x] [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
+- [x] [Flex](https://github.com/Flipboard/FLEX) - An in-app debugging and exploration tool for iOS
+- [x] [Postman](https://www.getpostman.com) - Postman Tools Support Every Stage of the API Lifecycle
+- [x] [Sketch](https://www.sketchapp.com) - A digital design app (paid)
+- [ ] [iThoughtsX](https://www.toketaware.com) - A mind mapping app for Windows, Mac, iPad and iPhone (paid)
 
 ## Building and Running
 
@@ -82,9 +93,6 @@ All icons used in the application are taken from the [Feather](https://github.co
 Thanks to them for the beautiful open source icons.
 
 ## References
-* [Moya](https://github.com/Moya/Moya) - Network abstraction layer
-* [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
-* [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Export JSON objects as model classes
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
 * [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
 
