@@ -50,12 +50,12 @@
 - [x] [Fastlane](https://github.com/fastlane/fastlane) - The easiest way to automate building and releasing your iOS and Android apps
 - [x] [SwiftLint](https://github.com/realm/SwiftLint) - A tool to enforce Swift style and conventions
 - [x] [Jazzy](https://github.com/realm/jazzy) - Soulful docs for Swift & Objective-C
-- [x] [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - JSONExport is a desktop application which enables you to export JSON objects as model classes
+- [x] [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Is a desktop application which enables you to export JSON objects as model classes
 - [x] [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
 - [x] [Flex](https://github.com/Flipboard/FLEX) - An in-app debugging and exploration tool for iOS
 - [x] [Postman](https://www.getpostman.com) - A powerful HTTP client for testing web services
 - [x] [Sketch](https://www.sketchapp.com) - A digital design app (paid)
-- [ ] [iThoughtsX](https://www.toketaware.com) - A mind mapping app for Windows, Mac, iPad and iPhone (paid)
+- [x] [iThoughtsX](https://www.toketaware.com) - A mind mapping app for Windows, Mac, iPad and iPhone (paid)
 
 ## Building and Running
 

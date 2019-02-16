@@ -254,6 +254,7 @@
 /* Begin PBXFileReference section */
 		0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingGithubAPI.swift; sourceTree = "<group>"; };
 		0700EAEF21C823CD00F979A7 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		0703ED1022186E1D0017136C /* .jazzy.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .jazzy.yaml; sourceTree = SOURCE_ROOT; };
 		0709DD79220A1CA800F379FA /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		070E069F2214940800141262 /* keyword.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; path = keyword.strings; sourceTree = "<group>"; };
 		070E06A22214940800141262 /* title.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; path = title.strings; sourceTree = "<group>"; };
@@ -828,6 +829,7 @@
 			children = (
 				070E069A2214940800141262 /* fastlane */,
 				07FC33821FFFE53800D53888 /* .gitignore */,
+				0703ED1022186E1D0017136C /* .jazzy.yaml */,
 				07FC33801FFFE52A00D53888 /* .swiftlint.yml */,
 				C762C66E1E1D58B200C09EBD /* Configs.swift */,
 				075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */,
