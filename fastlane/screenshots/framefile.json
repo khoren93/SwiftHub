@@ -5,9 +5,9 @@
       "color": "#545454"
     },
     "background": "./background.jpg",
-    "padding": 50,
+    "padding": 30,
     "show_complete_frame": false,
-    "stack_title" : false,
+    "stack_title" : true,
     "title_below_image": false,
     "frame": "BLACK"
   },
