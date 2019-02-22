@@ -58,8 +58,7 @@ class SourceViewController: ViewController {
         super.makeUI()
 
         let toolbar = Toolbar()
-        let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.items = [space, themesBarButton, space, languagesBarButton, space, historyBarButton, space]
+        toolbar.items = [spaceBarButton, themesBarButton, spaceBarButton, languagesBarButton, spaceBarButton, historyBarButton, spaceBarButton]
 
         stackView.addArrangedSubview(textView)
         stackView.addArrangedSubview(languagesPicker)

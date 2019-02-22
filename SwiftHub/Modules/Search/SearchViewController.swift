@@ -16,7 +16,7 @@ private let trendingUserReuseIdentifier = R.reuseIdentifier.trendingUserCell
 private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell
 private let userReuseIdentifier = R.reuseIdentifier.userCell
 
-enum SearchSegments: Int {
+enum SearchTypeSegments: Int {
     case repositories, users
 
     var title: String {
@@ -43,6 +43,17 @@ enum TrendingPeriodSegments: Int {
         case .daily: return "daily"
         case .weekly: return "weekly"
         case .montly: return "monthly"
+        }
+    }
+}
+
+enum SearchModeSegments: Int {
+    case trending, search
+
+    var title: String {
+        switch self {
+        case .trending: return R.string.localizable.searchTrendingSegmentTitle.key.localized()
+        case .search: return R.string.localizable.searchSearchSegmentTitle.key.localized()
         }
     }
 }
@@ -133,7 +144,7 @@ class SearchViewController: TableViewController {
     }()
 
     lazy var segmentedControl: SegmentedControl = {
-        let items = [SearchSegments.repositories.title, SearchSegments.users.title]
+        let items = [SearchTypeSegments.repositories.title, SearchTypeSegments.users.title]
         let view = SegmentedControl(items: items)
         view.selectedSegmentIndex = 0
         return view
@@ -142,6 +153,14 @@ class SearchViewController: TableViewController {
     let trendingPeriodView = View()
     lazy var trendingPeriodSegmentedControl: SegmentedControl = {
         let items = [TrendingPeriodSegments.daily.title, TrendingPeriodSegments.weekly.title, TrendingPeriodSegments.montly.title]
+        let view = SegmentedControl(items: items)
+        view.selectedSegmentIndex = 0
+        return view
+    }()
+
+    let searchModeView = View()
+    lazy var searchModeSegmentedControl: SegmentedControl = {
+        let items = [SearchModeSegments.trending.title, SearchModeSegments.search.title]
         let view = SegmentedControl(items: items)
         view.selectedSegmentIndex = 0
         return view
@@ -190,21 +209,29 @@ class SearchViewController: TableViewController {
 
         languageChanged.subscribe(onNext: { [weak self] () in
             self?.searchBar.placeholder = R.string.localizable.searchSearchBarPlaceholder.key.localized()
-            self?.segmentedControl.setTitle(SearchSegments.repositories.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(SearchSegments.users.title, forSegmentAt: 1)
+            self?.segmentedControl.setTitle(SearchTypeSegments.repositories.title, forSegmentAt: 0)
+            self?.segmentedControl.setTitle(SearchTypeSegments.users.title, forSegmentAt: 1)
             self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.daily.title, forSegmentAt: 0)
             self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.weekly.title, forSegmentAt: 1)
             self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.montly.title, forSegmentAt: 2)
+            self?.searchModeSegmentedControl.setTitle(SearchModeSegments.trending.title, forSegmentAt: 0)
+            self?.searchModeSegmentedControl.setTitle(SearchModeSegments.search.title, forSegmentAt: 1)
         }).disposed(by: rx.disposeBag)
 
         trendingPeriodView.addSubview(trendingPeriodSegmentedControl)
         trendingPeriodSegmentedControl.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(self.inset)
         }
+
+        searchModeView.addSubview(searchModeSegmentedControl)
+        searchModeSegmentedControl.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(self.inset)
+        }
+
         stackView.insertArrangedSubview(labelsStackView, at: 0)
         stackView.insertArrangedSubview(trendingPeriodView, at: 0)
         stackView.insertArrangedSubview(searchBar, at: 0)
-//        stackView.addArrangedSubview(trendingPeriodSegmentedControl)
+        stackView.addArrangedSubview(searchModeView)
 
         labelsStackView.snp.makeConstraints { (make) in
             make.height.equalTo(50)
@@ -222,12 +249,12 @@ class SearchViewController: TableViewController {
             }
         }
 
+        bannerView.isHidden = true
+
         tableView.register(R.nib.trendingRepositoryCell)
         tableView.register(R.nib.trendingUserCell)
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
-//        tableView.headRefreshControl = nil
-        tableView.footRefreshControl = nil
 
         themeService.rx
             .bind({ $0.text }, to: [totalCountLabel.rx.textColor, sortLabel.rx.textColor])
@@ -241,16 +268,19 @@ class SearchViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = segmentedControl.rx.selectedSegmentIndex.map { SearchSegments(rawValue: $0)! }
+        let searchTypeSegmentSelected = segmentedControl.rx.selectedSegmentIndex.map { SearchTypeSegments(rawValue: $0)! }
         let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.rx.selectedSegmentIndex.map { TrendingPeriodSegments(rawValue: $0)! }
+        let searchModeSegmentSelected = searchModeSegmentedControl.rx.selectedSegmentIndex.map { SearchModeSegments(rawValue: $0)! }
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
-        let input = SearchViewModel.Input(trigger: refresh,
+        let input = SearchViewModel.Input(headerRefresh: refresh,
+                                          footerRefresh: footerRefreshTrigger,
                                           languageTrigger: languageChanged.asObservable(),
                                           keywordTrigger: searchBar.rx.text.orEmpty.asDriver(),
                                           textDidBeginEditing: searchBar.rx.textDidBeginEditing.asDriver(),
                                           languagesSelection: rightBarButton.rx.tap.asObservable(),
-                                          segmentSelection: segmentSelected,
+                                          searchTypeSegmentSelection: searchTypeSegmentSelected,
                                           trendingPeriodSegmentSelection: trendingPerionSegmentSelected,
+                                          searchModeSelection: searchModeSegmentSelected,
                                           sortRepositorySelection: sortRepositoryItem.asObservable(),
                                           sortUserSelection: sortUserItem.asObservable(),
                                           selection: tableView.rx.modelSelected(SearchSectionItem.self).asDriver())
@@ -258,6 +288,7 @@ class SearchViewController: TableViewController {
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
         viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
         viewModel.parsedError.asObservable().bind(to: error).disposed(by: rx.disposeBag)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
@@ -305,6 +336,7 @@ class SearchViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.hidesTrendingPeriodSegment.drive(trendingPeriodView.rx.isHidden).disposed(by: rx.disposeBag)
+        output.hidesSearchModeSegment.drive(searchModeView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(labelsStackView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(totalCountLabel.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(sortLabel.rx.isHidden).disposed(by: rx.disposeBag)
@@ -320,5 +352,9 @@ class SearchViewController: TableViewController {
 
         output.totalCountText.drive(totalCountLabel.rx.text).disposed(by: rx.disposeBag)
         output.sortText.drive(sortLabel.rx.text).disposed(by: rx.disposeBag)
+
+        viewModel.searchMode.asDriver().drive(onNext: { [weak self] (searchMode) in
+            self?.searchModeSegmentedControl.selectedSegmentIndex = searchMode.rawValue
+        }).disposed(by: rx.disposeBag)
     }
 }

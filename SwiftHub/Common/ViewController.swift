@@ -31,6 +31,8 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         }
     }
 
+    let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+
     let emptyDataSetButtonTap = PublishSubject<Void>()
     var emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
     var emptyDataSetDescription = ""

@@ -83,6 +83,8 @@
 "Search.DailySegment.Title" = "Daily";
 "Search.WeeklySegment.Title" = "Weekly";
 "Search.MonthlySegment.Title" = "Monthly";
+"Search.TrendingSegment.Title" = "Trending";
+"Search.SearchSegment.Title" = "Search";
 "Search.TrendingSection.Title" = "Trending";
 "Search.TrendingSectionWithLanguage.Title" = "Trending results for %@";
 "Search.SearchSection.Title" = "Search";

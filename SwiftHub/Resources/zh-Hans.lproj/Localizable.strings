@@ -83,6 +83,8 @@
 "Search.DailySegment.Title" = "每日";
 "Search.WeeklySegment.Title" = "每周";
 "Search.MonthlySegment.Title" = "每月";
+"Search.TrendingSegment.Title" = "趋势";
+"Search.SearchSegment.Title" = "搜索";
 "Search.TrendingSection.Title" = "趋势";
 "Search.TrendingSectionWithLanguage.Title" = "%@的趋势结果";
 "Search.SearchSection.Title" = "搜索";
