@@ -18,6 +18,13 @@
 <img alt="02_repository_details_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen.png?raw=true" width="290">&nbsp;
 <img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen.png?raw=true" width="290">&nbsp;
 
+## Mind Mapping ([full version](https://github.com/khoren93/SwiftHub/blob/master/iThoughtsX/SwiftHub_full.pdf))
+<p align="center">
+  <a href="https://github.com/khoren93/SwiftHub/blob/master/iThoughtsX/SwiftHub_full.pdf">
+    <img alt="SwiftHub mind note" src="https://github.com/khoren93/SwiftHub/blob/master/iThoughtsX/SwiftHub.png?raw=true" height="250">
+  </a>
+</p>
+
 ## App Features
 - [x] Basic and OAuth2 authentication
 - [x] View trending repositories and users ([github-trending-api](https://github.com/huchenme/github-trending-api))
