@@ -77,9 +77,6 @@ bundle exec fastlane setup
 Try `pod update` if you got some errors.
 Alrighty! We're ready to go!
 
-## Sponsors
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YDRAP3F94999S&source=url)
-
 ## Debugging
 [Flex](https://github.com/Flipboard/FLEX) debugging tool has been integrated in this application. To enable it, just swipe right anywhere in the application.
 There are also included debugging [Hero](https://github.com/HeroTransitions/Hero) animations. To use it, swipe right with two fingers. Repeat this to disable.
