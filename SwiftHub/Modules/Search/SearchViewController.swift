@@ -113,7 +113,7 @@ enum SortUserItems: Int {
 
     var sortValue: String {
         switch self {
-        case .bestMatch: return ""
+        case .bestMatch: return "best match"
         case .mostFollowers, .fewestFollowers: return "followers"
         case .mostRecentlyJoined, .leastRecentlyJoined: return "joined"
         case .mostRepositories, .fewestRepositories: return "repositories"
@@ -122,8 +122,7 @@ enum SortUserItems: Int {
 
     var orderValue: String {
         switch self {
-        case .bestMatch: return ""
-        case .mostFollowers, .mostRecentlyJoined, .mostRepositories: return "desc"
+        case .bestMatch, .mostFollowers, .mostRecentlyJoined, .mostRepositories: return "desc"
         case .fewestFollowers, .leastRecentlyJoined, .fewestRepositories: return "asc"
         }
     }

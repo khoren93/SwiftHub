@@ -135,7 +135,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             })
             .flatMapLatest({ [weak self] (keyword, currentLanguage, sortUserItem) -> Observable<RxSwift.Event<UserSearch>> in
                 guard let self = self else { return Observable.just(RxSwift.Event.next(UserSearch())) }
-                self.usersPage += 1
+                self.usersPage = 1
                 let query = self.makeQuery()
                 let sort = sortUserItem.sortValue
                 let order = sortUserItem.orderValue

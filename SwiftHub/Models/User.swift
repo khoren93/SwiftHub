@@ -43,6 +43,7 @@ struct User: Mappable {
     var type: UserType = .user
     var updatedAt: Date?
     var url: String?
+    var score: Float?
 
     // Only for Organization type
     var descriptionField: String?
@@ -104,6 +105,7 @@ struct User: Mappable {
         type <- map["type"]
         updatedAt <- (map["updated_at"], ISO8601DateTransform())
         url <- map["url"]
+        score <- map["score"]
         bio <- map["bio"]
         followersUrl <- map["followers_url"]
         followingUrl <- map["following_url"]
