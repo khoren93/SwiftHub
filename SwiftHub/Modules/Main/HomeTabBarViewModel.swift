@@ -36,7 +36,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
 
         let tabBarItems = loggedIn.map { (loggedIn) -> [HomeTabBarItem] in
             if loggedIn {
-                return [.search, .news, .profile, .notifications, .settings]
+                return [.news, .search, .profile, .notifications, .settings]
             } else {
                 return [.search, .login, .settings]
             }
