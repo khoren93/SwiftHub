@@ -47,6 +47,7 @@ class EventCellViewModel {
         case .issues:
             let payload = event.payload as? IssuesPayload
             actionText = [(payload?.action ?? ""), "issue", "in"].joined(separator: " ")
+            body = payload?.issue?.title ?? ""
             badgeImage = R.image.icon_cell_badge_issue()
         case .member:
             let payload = event.payload as? MemberPayload
@@ -55,6 +56,7 @@ class EventCellViewModel {
         case .pullRequest:
             let payload = event.payload as? PullRequestPayload
             actionText = [(payload?.action ?? ""), "pull request", "#\(payload?.number ?? 0)", "in"].joined(separator: " ")
+            body = payload?.pullRequest?.title ?? ""
             badgeImage = R.image.icon_cell_badge_pull_request()
         case .pullRequestReviewComment:
             let payload = event.payload as? PullRequestReviewCommentPayload
@@ -68,6 +70,7 @@ class EventCellViewModel {
         case .release:
             let payload = event.payload as? ReleasePayload
             actionText = [payload?.action ?? "", "release", payload?.release?.name ?? "", "in"].joined(separator: " ")
+            body = payload?.release?.body ?? ""
             badgeImage = R.image.icon_cell_badge_tag()
         case .star:
             actionText = "starred"
