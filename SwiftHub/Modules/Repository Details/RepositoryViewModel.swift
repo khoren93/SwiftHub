@@ -227,6 +227,15 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.eventsItem(viewModel: eventsCellViewModel))
 
+            if self.loggedIn.value {
+                // Notifications
+                let notificationsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryNotificationsCellTitle.key.localized(),
+                                                                               detail: "",
+                                                                               image: R.image.icon_tabbar_activity(),
+                                                                               hidesDisclosure: false)
+                items.append(RepositorySectionItem.notificationsItem(viewModel: notificationsCellViewModel))
+            }
+
             // Contributors
             let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
                                                                           detail: "",
@@ -288,6 +297,11 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         case .eventsItem:
             let mode = EventsMode.repository(repository: repository.value)
             let viewModel = EventsViewModel(mode: mode, provider: provider)
+            return viewModel
+
+        case .notificationsItem:
+            let mode = NotificationsMode.repository(repository: repository.value)
+            let viewModel = NotificationsViewModel(mode: mode, provider: provider)
             return viewModel
 
         case .contributorsItem:

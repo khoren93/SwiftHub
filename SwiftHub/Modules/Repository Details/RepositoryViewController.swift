@@ -143,6 +143,7 @@ class RepositoryViewController: TableViewController {
                  .commitsItem(let viewModel),
                  .pullRequestsItem(let viewModel),
                  .eventsItem(let viewModel),
+                 .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
                  .readmeItem(let viewModel),
                  .sourceItem(let viewModel):
@@ -180,6 +181,10 @@ class RepositoryViewController: TableViewController {
             case .eventsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
+                }
+            case .notificationsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? NotificationsViewModel {
+                    self?.navigator.show(segue: .notifications(viewModel: viewModel), sender: self)
                 }
             case .contributorsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? UsersViewModel {

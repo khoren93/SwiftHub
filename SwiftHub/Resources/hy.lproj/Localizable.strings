@@ -68,6 +68,7 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";
 "Repository.EventsCell.Title" = "Իրադարձություններ";
+"Repository.NotificationsCell.Title" = "Իմ Ծանուցումները";
 "Repository.ContributorsCell.Title" = "Ներդրողներ";
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";

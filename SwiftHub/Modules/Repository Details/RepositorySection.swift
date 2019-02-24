@@ -24,6 +24,7 @@ enum RepositorySectionItem {
     case commitsItem(viewModel: RepositoryDetailCellViewModel)
     case pullRequestsItem(viewModel: RepositoryDetailCellViewModel)
     case eventsItem(viewModel: RepositoryDetailCellViewModel)
+    case notificationsItem(viewModel: RepositoryDetailCellViewModel)
     case contributorsItem(viewModel: RepositoryDetailCellViewModel)
     case readmeItem(viewModel: RepositoryDetailCellViewModel)
     case sourceItem(viewModel: RepositoryDetailCellViewModel)

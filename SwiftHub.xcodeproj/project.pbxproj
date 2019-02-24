@@ -73,6 +73,7 @@
 		0757B53521669DAC00C04163 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B53021669DAC00C04163 /* LanguageCell.swift */; };
 		0757B53621669DAC00C04163 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757B53121669DAC00C04163 /* LanguageViewController.swift */; };
 		0757B53A2166A6A000C04163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0757B53C2166A6A000C04163 /* Localizable.strings */; };
+		0758D7E02222C20200E99DDD /* UserRepositoriesWatching.json in Resources */ = {isa = PBXBuildFile; fileRef = 0758D7DF2222C20200E99DDD /* UserRepositoriesWatching.json */; };
 		075AB1AA20F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */; };
 		075E75E521D2C6B200213683 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075E75E421D2C6B200213683 /* PickerView.swift */; };
 		07919465214D4EB500A7067E /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919464214D4EB500A7067E /* ThemeViewController.swift */; };
@@ -332,6 +333,7 @@
 		0757B53B2166A6A000C04163 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0757B53D2166A6C300C04163 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0757B53E2166A6E900C04163 /* hy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hy; path = hy.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0758D7DF2222C20200E99DDD /* UserRepositoriesWatching.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UserRepositoriesWatching.json; sourceTree = "<group>"; };
 		075AB1A920F2988F00B7E923 /* Pods-SwiftHub-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SwiftHub-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SwiftHub/Pods-SwiftHub-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		075E75E421D2C6B200213683 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		07919464214D4EB500A7067E /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
@@ -982,6 +984,7 @@
 				A0E2B07B2101FCF4000DA282 /* UserFollowing.json */,
 				A09DE8AA20E7A98F00F6F2BF /* UserRepositories.json */,
 				A0E2B07D2102025A000DA282 /* UserRepositoriesStarred.json */,
+				0758D7DF2222C20200E99DDD /* UserRepositoriesWatching.json */,
 				07DFF6D420E90574004DAA68 /* UserSearch.json */,
 				07A34DC621E29BE200B05857 /* UserTrendings.json */,
 			);
@@ -1354,6 +1357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0E2B07E2102025A000DA282 /* UserRepositoriesStarred.json in Resources */,
+				0758D7E02222C20200E99DDD /* UserRepositoriesWatching.json in Resources */,
 				A09DE8BF20E7B81F00F6F2BF /* RepositoryCell.xib in Resources */,
 				07DFF6D720E90584004DAA68 /* RepositorySearch.json in Resources */,
 				07241D2121B18A7400F800BD /* PullRequestCell.xib in Resources */,

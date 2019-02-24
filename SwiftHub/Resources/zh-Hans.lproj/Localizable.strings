@@ -68,6 +68,7 @@
 "Repository.CommitsCell.Title" = "提交";
 "Repository.PullRequestsCell.Title" = "拉请求";
 "Repository.EventsCell.Title" = "事件";
+"Repository.NotificationsCell.Title" = "我的通知";
 "Repository.ContributorsCell.Title" = "贡献者";
 "Repository.ReadmeCell.Title" = "自述";
 "Repository.SourceCell.Title" = "源代码";

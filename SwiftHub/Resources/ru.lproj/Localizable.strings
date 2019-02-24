@@ -68,6 +68,7 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "Запросы";
 "Repository.EventsCell.Title" = "События";
+"Repository.NotificationsCell.Title" = "Мои Уведомления";
 "Repository.ContributorsCell.Title" = "Вкладчики";
 "Repository.ReadmeCell.Title" = "Прочти меня";
 "Repository.SourceCell.Title" = "Исходный код";

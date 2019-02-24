@@ -68,6 +68,7 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "Pull Requests";
 "Repository.EventsCell.Title" = "Events";
+"Repository.NotificationsCell.Title" = "My Notifications";
 "Repository.ContributorsCell.Title" = "Contributors";
 "Repository.ReadmeCell.Title" = "Readme";
 "Repository.SourceCell.Title" = "Source Code";

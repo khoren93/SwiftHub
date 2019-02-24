@@ -265,7 +265,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .organization: return stubbedResponse("Organization")
         case .userRepositories: return stubbedResponse("UserRepositories")
         case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
-        case .userWatchingRepositories: return stubbedResponse("UserRepositoriesStarred")
+        case .userWatchingRepositories: return stubbedResponse("UserRepositoriesWatching")
         case .userFollowers: return stubbedResponse("UserFollowers")
         case .userFollowing: return stubbedResponse("UserFollowing")
         case .events: return stubbedResponse("Events")
