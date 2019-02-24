@@ -19,6 +19,7 @@
 "Common.Save" = "Сохранить";
 "Common.Delete" = "Удалить";
 "Common.Search" = "Поиск";
+"Common.Success" = "Успешно";
 "Common.Error" = "Ошибка";
 "Common.NoResults" = "Нет результатов";
 /* Home TabBar */
@@ -50,6 +51,7 @@
 "Notifications.UnreadSegment.Title" = "Новые";
 "Notifications.ParticipatingSegment.Title" = "Участвующий";
 "Notifications.AllSegment.Title" = "Все";
+"Notifications.MarkAsRead.Success" = "Все уведомления помечены как прочитанные";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Репозитории";
 "Repositories.StarredNavigation.Title" = "Избранные";

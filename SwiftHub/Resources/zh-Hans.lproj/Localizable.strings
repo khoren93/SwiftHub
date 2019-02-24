@@ -19,6 +19,7 @@
 "Common.Save" = "保存";
 "Common.Delete" = "删除";
 "Common.Search" = "搜索";
+"Common.Success" = "成功";
 "Common.Error" = "错误";
 "Common.NoResults" = "没有结果";
 /* 主页TabBar */
@@ -50,6 +51,7 @@
 "Notifications.UnreadSegment.Title" = "未读";
 "Notifications.ParticipatingSegment.Title" = "参与";
 "Notifications.AllSegment.Title" = "全部";
+"Notifications.MarkAsRead.Success" = "所有通知都标记为已读";
 /* 存储库 */
 "Repositories.RepositoriesNavigation.Title" = "存储库";
 "Repositories.StarredNavigation.Title" = "已加星标";

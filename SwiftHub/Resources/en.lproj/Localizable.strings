@@ -19,6 +19,7 @@
 "Common.Save" = "Save";
 "Common.Delete" = "Delete";
 "Common.Search" = "Search";
+"Common.Success" = "Success";
 "Common.Error" = "Error";
 "Common.NoResults" = "No Results";
 /* Home TabBar */
@@ -50,6 +51,7 @@
 "Notifications.UnreadSegment.Title" = "Unread";
 "Notifications.ParticipatingSegment.Title" = "Participating";
 "Notifications.AllSegment.Title" = "All";
+"Notifications.MarkAsRead.Success" = "All notifications marked as read";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Repositories";
 "Repositories.StarredNavigation.Title" = "Starred";

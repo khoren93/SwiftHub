@@ -58,6 +58,8 @@ protocol SwiftHubAPI {
     func profile() -> Single<User>
     func notifications(all: Bool, participating: Bool, page: Int) -> Single<[Notification]>
     func repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int) -> Single<[Notification]>
+    func markAsReadNotifications() -> Single<Void>
+    func markAsReadRepositoryNotifications(fullname: String) -> Single<Void>
     func checkStarring(fullname: String) -> Single<Void>
     func starRepository(fullname: String) -> Single<Void>
     func unstarRepository(fullname: String) -> Single<Void>
@@ -258,6 +260,14 @@ extension Api {
 
     func repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int) -> Single<[Notification]> {
         return requestArray(.repositoryNotifications(fullname: fullname, all: all, participating: participating, page: page), type: Notification.self)
+    }
+
+    func markAsReadNotifications() -> Single<Void> {
+        return requestWithoutMapping(.markAsReadNotifications).map { _ in }
+    }
+
+    func markAsReadRepositoryNotifications(fullname: String) -> Single<Void> {
+        return requestWithoutMapping(.markAsReadRepositoryNotifications(fullname: fullname)).map { _ in }
     }
 
     func checkStarring(fullname: String) -> Single<Void> {

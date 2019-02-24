@@ -19,6 +19,7 @@
 "Common.Save" = "Save";
 "Common.Delete" = "Delete";
 "Common.Search" = "Search";
+"Common.Success" = "Success";
 "Common.Error" = "Error";
 "Common.NoResults" = "No Results";
 /* Home TabBar */
@@ -54,6 +55,7 @@
 "Repositories.RepositoriesNavigation.Title" = "Repositories";
 "Repositories.StarredNavigation.Title" = "Starred";
 "Repositories.ForksNavigation.Title" = "Forks";
+"Notifications.MarkAsRead.Success" = "All notifications marked as read";
 /* Repository Details */
 //"Repository.Navigation.Title" = "Repository";
 "Repository.WatchersButton.Title" = "Watchers";

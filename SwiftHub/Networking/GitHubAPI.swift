@@ -60,6 +60,8 @@ enum GithubAPI {
 
     case notifications(all: Bool, participating: Bool, page: Int)
     case repositoryNotifications(fullname: String, all: Bool, participating: Bool, page: Int)
+    case markAsReadNotifications
+    case markAsReadRepositoryNotifications(fullname: String)
 
     case checkStarring(fullname: String)
     case starRepository(fullname: String)
@@ -113,8 +115,10 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .userPerformedEvents(let username, _): return "/users/\(username)/events"
 
         case .profile: return "/user"
-        case .notifications: return "/notifications"
-        case .repositoryNotifications(let fullname, _, _, _): return "/repos/\(fullname)/notifications"
+        case .notifications,
+             .markAsReadNotifications: return "/notifications"
+        case .repositoryNotifications(let fullname, _, _, _),
+             .markAsReadRepositoryNotifications(let fullname): return "/repos/\(fullname)/notifications"
         case .checkStarring(let fullname),
              .starRepository(let fullname),
              .unstarRepository(let fullname): return "/user/starred/\(fullname)"
@@ -126,7 +130,8 @@ extension GithubAPI: TargetType, ProductAPIType {
 
     var method: Moya.Method {
         switch self {
-        case .starRepository, .followUser:
+        case .starRepository, .followUser,
+             .markAsReadNotifications, .markAsReadRepositoryNotifications:
             return .put
         case .unstarRepository, .unfollowUser:
             return .delete
@@ -275,6 +280,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .profile: return stubbedResponse("Profile")
         case .notifications: return stubbedResponse("Notifications")
         case .repositoryNotifications: return stubbedResponse("NotificationsRepository")
+        case .markAsReadNotifications: return stubbedResponse("EmptyObject")
+        case .markAsReadRepositoryNotifications: return stubbedResponse("EmptyObject")
         case .checkStarring: return stubbedResponse("EmptyObject")
         case .starRepository: return stubbedResponse("EmptyObject")
         case .unstarRepository: return stubbedResponse("EmptyObject")

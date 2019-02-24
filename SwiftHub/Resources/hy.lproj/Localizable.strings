@@ -19,6 +19,7 @@
 "Common.Save" = "Պահել";
 "Common.Delete" = "Հեռացնել";
 "Common.Search" = "Որոնում";
+"Common.Success" = "Հաջողություն";
 "Common.Error" = "Սխալ";
 "Common.NoResults" = "Ոչ մի արդյունք";
 /* Home TabBar */
@@ -50,6 +51,7 @@
 "Notifications.UnreadSegment.Title" = "Չընթերցված";
 "Notifications.ParticipatingSegment.Title" = "Մասնակից";
 "Notifications.AllSegment.Title" = "Բոլորը";
+"Notifications.MarkAsRead.Success" = "Բոլոր ծանուցումները նշված են որպես ընթերցված";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Ռեպոզիտորիաներ";
 "Repositories.StarredNavigation.Title" = "Աստղանշված";

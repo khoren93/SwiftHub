@@ -22,6 +22,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
         let headerRefresh: Observable<Void>
         let footerRefresh: Observable<Void>
         let segmentSelection: Observable<NotificationSegments>
+        let markAsReadSelection: Observable<Void>
         let selection: Driver<NotificationCellViewModel>
     }
 
@@ -31,6 +32,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
         let items: BehaviorRelay<[NotificationCellViewModel]>
         let userSelected: Driver<UserViewModel>
         let repositorySelected: Driver<RepositoryViewModel>
+        let markAsReadSelected: Driver<Void>
     }
 
     let mode: BehaviorRelay<NotificationsMode>
@@ -49,7 +51,11 @@ class NotificationsViewModel: ViewModel, ViewModelType {
 
         let elements = BehaviorRelay<[NotificationCellViewModel]>(value: [])
 
-        let refresh = Observable.of(input.headerRefresh, input.segmentSelection.mapToVoid()).merge()
+        let markAsRead = input.markAsReadSelection.flatMapLatest { () -> Observable<Void> in
+            return self.markAsReadRequest()
+        }.asDriver(onErrorJustReturn: ())
+
+        let refresh = Observable.of(input.headerRefresh, input.segmentSelection.mapToVoid(), markAsRead.asObservable()).merge()
         refresh.flatMapLatest({ [weak self] () -> Observable<[NotificationCellViewModel]> in
             guard let self = self else { return Observable.just([]) }
             self.page = 1
@@ -83,7 +89,7 @@ class NotificationsViewModel: ViewModel, ViewModelType {
             })
 
         let navigationTitle = mode.map({ (mode) -> String in
-            return "Notifications"
+            return R.string.localizable.notificationsNavigationTitle.key.localized()
         }).asDriver(onErrorJustReturn: "")
 
         let imageUrl = mode.map({ (mode) -> URL? in
@@ -97,7 +103,8 @@ class NotificationsViewModel: ViewModel, ViewModelType {
                       imageUrl: imageUrl,
                       items: elements,
                       userSelected: userDetails,
-                      repositorySelected: repositoryDetails)
+                      repositorySelected: repositoryDetails,
+                      markAsReadSelected: markAsRead)
     }
 
     func request() -> Observable<[NotificationCellViewModel]> {
@@ -116,5 +123,18 @@ class NotificationsViewModel: ViewModel, ViewModelType {
                 viewModel.userSelected.bind(to: self.userSelected).disposed(by: self.rx.disposeBag)
                 return viewModel
             })}
+    }
+
+    func markAsReadRequest() -> Observable<Void> {
+        var request: Single<Void>
+        switch mode.value {
+        case .mine:
+            request = provider.markAsReadNotifications()
+        case .repository(let repository):
+            request = provider.markAsReadRepositoryNotifications(fullname: repository.fullname ?? "")
+        }
+        return request
+            .trackActivity(loading)
+            .trackError(error)
     }
 }
