@@ -46,6 +46,7 @@ enum GithubAPI {
     case organization(owner: String)
     case userRepositories(username: String, page: Int)
     case userStarredRepositories(username: String, page: Int)
+    case userWatchingRepositories(username: String, page: Int)
     case userFollowers(username: String, page: Int)
     case userFollowing(username: String, page: Int)
 
@@ -103,6 +104,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .organization(let owner): return "/orgs/\(owner)"
         case .userRepositories(let username, _): return "/users/\(username)/repos"
         case .userStarredRepositories(let username, _): return "/users/\(username)/starred"
+        case .userWatchingRepositories(let username, _): return "/users/\(username)/subscriptions"
         case .userFollowers(let username, _): return "/users/\(username)/followers"
         case .userFollowing(let username, _): return "/users/\(username)/following"
         case .events: return "/events"
@@ -185,6 +187,8 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["page"] = page
         case .userStarredRepositories(_, let page):
             params["page"] = page
+        case .userWatchingRepositories(_, let page):
+            params["page"] = page
         case .userFollowers(_, let page):
             params["page"] = page
         case .userFollowing(_, let page):
@@ -261,6 +265,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .organization: return stubbedResponse("Organization")
         case .userRepositories: return stubbedResponse("UserRepositories")
         case .userStarredRepositories: return stubbedResponse("UserRepositoriesStarred")
+        case .userWatchingRepositories: return stubbedResponse("UserRepositoriesStarred")
         case .userFollowers: return stubbedResponse("UserFollowers")
         case .userFollowing: return stubbedResponse("UserFollowing")
         case .events: return stubbedResponse("Events")

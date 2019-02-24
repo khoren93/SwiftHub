@@ -136,6 +136,7 @@
 "User.FollowersButton.Title" = "Հետեւորդներ";
 "User.FollowingButton.Title" = "Համախոհներ";
 "User.StarsCell.Title" = "Աստղեր";
+"User.WatchingCell.Title" = "Դիտում է";
 "User.EventsCell.Title" = "Միջոցառումներ";
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";
@@ -156,7 +157,7 @@
 "WhatsNew.Item3.Subtitle" = "SwiftHub-ը լիովին բաց կոդով է\nԱստղերը շատ ողջունելի են ★";
 "WhatsNew.Item4.Title" = "Ընթացիկ";
 "WhatsNew.Item4.Subtitle" = "Տեսեք, թե ինչով է այսօր GitHub համայնքը առավել հետաքրքրված";
-"WhatsNew.DetailButton.Title" = "Իմացեք Ավելին";
+"WhatsNew.DetailButton.Title" = "Դիտել GitHub- ում";
 "WhatsNew.CompletionButton.Title" = "Շարունակել";
 /* Languages */
 "Languages.Navigation.Title" = "Լեզուներ";

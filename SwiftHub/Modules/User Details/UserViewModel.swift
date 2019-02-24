@@ -155,6 +155,13 @@ class UserViewModel: ViewModel, ViewModelType {
                                                              hidesDisclosure: false)
             items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
 
+            // Watching
+            let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
+                                                                detail: "",
+                                                                image: R.image.icon_cell_theme(),
+                                                                hidesDisclosure: false)
+            items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
+
             // Events
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
                                                               detail: "",
@@ -207,6 +214,12 @@ class UserViewModel: ViewModel, ViewModelType {
         case .starsItem:
             if let user = self.user.value {
                 let mode = RepositoriesMode.userStarredRepositories(user: user)
+                let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
+                return viewModel
+            }
+        case .watchingItem:
+            if let user = self.user.value {
+                let mode = RepositoriesMode.userWatchingRepositories(user: user)
                 let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
                 return viewModel
             }

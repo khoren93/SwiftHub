@@ -46,6 +46,7 @@ protocol SwiftHubAPI {
     func organization(owner: String) -> Single<User>
     func userRepositories(username: String, page: Int) -> Single<[Repository]>
     func userStarredRepositories(username: String, page: Int) -> Single<[Repository]>
+    func userWatchingRepositories(username: String, page: Int) -> Single<[Repository]>
     func userFollowers(username: String, page: Int) -> Single<[User]>
     func userFollowing(username: String, page: Int) -> Single<[User]>
     func events(page: Int) -> Single<[Event]>
@@ -215,6 +216,10 @@ extension Api {
 
     func userStarredRepositories(username: String, page: Int) -> Single<[Repository]> {
         return requestArray(.userStarredRepositories(username: username, page: page), type: Repository.self)
+    }
+
+    func userWatchingRepositories(username: String, page: Int) -> Single<[Repository]> {
+        return requestArray(.userWatchingRepositories(username: username, page: page), type: Repository.self)
     }
 
     func userFollowers(username: String, page: Int) -> Single<[User]> {

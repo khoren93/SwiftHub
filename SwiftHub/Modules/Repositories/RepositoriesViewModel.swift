@@ -14,6 +14,7 @@ import RxDataSources
 enum RepositoriesMode {
     case userRepositories(user: User)
     case userStarredRepositories(user: User)
+    case userWatchingRepositories(user: User)
 
     case forks(repository: Repository)
 }
@@ -78,15 +79,19 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             switch mode {
             case .userRepositories: return R.string.localizable.repositoriesRepositoriesNavigationTitle.key.localized()
             case .userStarredRepositories: return R.string.localizable.repositoriesStarredNavigationTitle.key.localized()
+            case .userWatchingRepositories: return "Watching"
             case .forks: return R.string.localizable.repositoriesForksNavigationTitle.key.localized()
             }
         }).asDriver(onErrorJustReturn: "")
 
         let imageUrl = mode.map({ (mode) -> URL? in
             switch mode {
-            case .userRepositories(let user): return user.avatarUrl?.url
-            case .userStarredRepositories(let user): return user.avatarUrl?.url
-            case .forks(let repository): return repository.owner?.avatarUrl?.url
+            case .userRepositories(let user),
+                 .userStarredRepositories(let user),
+                 .userWatchingRepositories(let user):
+                return user.avatarUrl?.url
+            case .forks(let repository):
+                return repository.owner?.avatarUrl?.url
             }
         }).asDriver(onErrorJustReturn: nil)
 
@@ -105,6 +110,8 @@ class RepositoriesViewModel: ViewModel, ViewModelType {
             request = provider.userRepositories(username: user.login ?? "", page: page)
         case .userStarredRepositories(let user):
             request = provider.userStarredRepositories(username: user.login ?? "", page: page)
+        case .userWatchingRepositories(let user):
+            request = provider.userWatchingRepositories(username: user.login ?? "", page: page)
         case .forks(let repository):
             request = provider.forks(fullname: repository.fullname ?? "", page: page)
         }

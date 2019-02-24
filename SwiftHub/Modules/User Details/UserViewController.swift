@@ -158,6 +158,7 @@ class UserViewController: TableViewController {
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
             case .starsItem(let viewModel),
+                 .watchingItem(let viewModel),
                  .eventsItem(let viewModel),
                  .companyItem(let viewModel),
                  .blogItem(let viewModel):
@@ -177,6 +178,10 @@ class UserViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .starsItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoriesViewModel {
+                    self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
+                }
+            case .watchingItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoriesViewModel {
                     self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
                 }

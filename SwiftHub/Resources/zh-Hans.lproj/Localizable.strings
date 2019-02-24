@@ -136,6 +136,7 @@
 "User.FollowersButton.Title" = "追随者";
 "User.FollowingButton.Title" = "关注";
 "User.StarsCell.Title" = "星星";
+"User.WatchingCell.Title" = "正在看";
 "User.EventsCell.Title" = "事件";
 "User.CompanyCell.Title" = "公司";
 "User.BlogCell.Title" = "博客";
@@ -156,7 +157,7 @@
 "WhatsNew.Item3.Subtitle" = "SwiftHub是完全开源的\ nStars非常受欢迎★";
 "WhatsNew.Item4.Title" = "趋势";
 "WhatsNew.Item4.Subtitle" = "看看今天GitHub社区最为兴奋的是什么";
-"WhatsNew.DetailButton.Title" = "了解更多";
+"WhatsNew.DetailButton.Title" = "在GitHub上查看";
 "WhatsNew.CompletionButton.Title" = "继续";
 /* *语言* */
 "Languages.Navigation.Title" = "语言";
