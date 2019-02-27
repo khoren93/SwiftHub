@@ -73,7 +73,7 @@ class SourceViewModel: ViewModel, ViewModelType {
         }
 
         let historySelected = input.historySelection.map { (_) -> URL? in
-            return self.content.value.htmlUrl?.replacingOccurrences(of: "github.com", with: "github.githistory.xyz").url
+            return self.content.value.htmlUrl?.replacingOccurrences(of: "https://github.com", with: Configs.Network.githistoryBaseUrl).url
         }.asDriver(onErrorJustReturn: nil).filterNil()
 
         let hidesThemes = input.themesSelection.map({ () -> Bool in

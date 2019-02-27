@@ -74,6 +74,7 @@
 "Repository.ContributorsCell.Title" = "贡献者";
 "Repository.ReadmeCell.Title" = "自述";
 "Repository.SourceCell.Title" = "源代码";
+"Repository.StarsHistoryCell.Title" = "星历史";
 /* 问题 */
 "Issues.Navigation.Title" = "问题";
 "Issues.OpenSegment.Title" = "打开";

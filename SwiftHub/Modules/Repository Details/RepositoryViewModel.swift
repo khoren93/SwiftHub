@@ -34,7 +34,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let starsCount: Driver<Int>
         let forksCount: Driver<Int>
         let imageSelected: Driver<UserViewModel>
-        let openInWebSelected: Driver<URL?>
+        let openInWebSelected: Driver<URL>
         let repositoriesSelected: Driver<RepositoriesViewModel>
         let usersSelected: Driver<UsersViewModel>
         let selectedEvent: Driver<RepositorySectionItem>
@@ -130,7 +130,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         let openInWebSelected = input.openInWebSelection.map { () -> URL? in
             self.repository.value.htmlUrl?.url
-        }.asDriver(onErrorJustReturn: nil)
+        }.asDriver(onErrorJustReturn: nil).filterNil()
 
         let repositoriesSelected = input.forksSelection.asDriver(onErrorJustReturn: ())
             .map { () -> RepositoriesViewModel in
@@ -257,6 +257,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.sourceItem(viewModel: sourceCellViewModel))
 
+            // Stars history
+            let starHistoryCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryStarsHistoryCellTitle.key.localized(),
+                                                                          detail: Configs.Network.starHistoryBaseUrl,
+                                                                          image: R.image.icon_cell_stars_history(),
+                                                                          hidesDisclosure: false)
+            items.append(RepositorySectionItem.starHistoryItem(viewModel: starHistoryCellViewModel))
+
             return [
                 RepositorySection.repository(title: "", items: items)
             ]
@@ -316,5 +323,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         default: return nil
         }
+    }
+
+    func starHistoryUrl() -> URL? {
+        return "\(Configs.Network.starHistoryBaseUrl)/#\(self.repository.value.fullname ?? "")".url
     }
 }

@@ -70,10 +70,11 @@
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";
 "Repository.EventsCell.Title" = "Իրադարձություններ";
-"Repository.NotificationsCell.Title" = "Իմ Ծանուցումները";
+"Repository.NotificationsCell.Title" = "Իմ ծանուցումները";
 "Repository.ContributorsCell.Title" = "Ներդրողներ";
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";
+"Repository.StarsHistoryCell.Title" = "Աստղերի պատմություն";
 /* Issues */
 "Issues.Navigation.Title" = "Խնդիրներ";
 "Issues.OpenSegment.Title" = "Բաց";
