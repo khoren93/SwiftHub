@@ -28,6 +28,7 @@ enum RepositorySectionItem {
     case contributorsItem(viewModel: RepositoryDetailCellViewModel)
     case readmeItem(viewModel: RepositoryDetailCellViewModel)
     case sourceItem(viewModel: RepositoryDetailCellViewModel)
+    case starHistoryItem(viewModel: RepositoryDetailCellViewModel)
 }
 
 extension RepositorySection: SectionModelType {

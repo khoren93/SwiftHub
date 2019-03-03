@@ -146,7 +146,8 @@ class RepositoryViewController: TableViewController {
                  .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
                  .readmeItem(let viewModel),
-                 .sourceItem(let viewModel):
+                 .sourceItem(let viewModel),
+                 .starHistoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -204,6 +205,10 @@ class RepositoryViewController: TableViewController {
                         analytics.log(.source(fullname: fullname))
                     }
                 }
+            case .starHistoryItem:
+                if let url = self?.viewModel.starHistoryUrl() {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
             default:
                 self?.deselectSelectedRow()
             }
@@ -247,9 +252,7 @@ class RepositoryViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.openInWebSelected.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
-            }
+            self?.navigator.show(segue: .webController(url), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.repositoriesSelected.drive(onNext: { [weak self] (viewModel) in

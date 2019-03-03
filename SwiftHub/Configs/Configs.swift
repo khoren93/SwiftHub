@@ -41,6 +41,8 @@ struct Configs {
         static let loggingEnabled = false
         static let githubBaseUrl = "https://api.github.com"
         static let trendingGithubBaseUrl = "https://github-trending-api.now.sh"
+        static let githistoryBaseUrl = "https://github.githistory.xyz"
+        static let starHistoryBaseUrl = "https://timqian.com/star-history"
     }
 
     struct BaseDimensions {
