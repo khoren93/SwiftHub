@@ -37,7 +37,8 @@ class ContactsViewModel: ViewModel, ViewModelType {
 
         input.keywordTrigger.skip(1).throttle(0.3).distinctUntilChanged().asObservable().bind(to: keyword).disposed(by: rx.disposeBag)
 
-        refresh.flatMapLatest({ () -> Observable<[ContactCellViewModel]> in
+        refresh.flatMapLatest({ [weak self] () -> Observable<[ContactCellViewModel]> in
+            guard let self = self else { return Observable.just([]) }
             return ContactsManager.default.getContacts(with: self.keyword.value)
                 .trackActivity(self.loading)
                 .trackError(self.error)

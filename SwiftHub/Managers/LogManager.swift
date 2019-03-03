@@ -8,6 +8,7 @@
 
 import Foundation
 import CocoaLumberjack
+import RxSwift
 
 public func logDebug(_ message: @autoclosure () -> String) {
     DDLogDebug(message)
@@ -27,4 +28,10 @@ public func logVerbose(_ message: @autoclosure () -> String) {
 
 public func logWarn(_ message: @autoclosure () -> String) {
     DDLogWarn(message)
+}
+
+public func logResourcesCount() {
+    #if DEBUG
+    logDebug("RxSwift resources count: \(RxSwift.Resources.total)")
+    #endif
 }

@@ -55,5 +55,6 @@ class ViewModel: NSObject {
 
     deinit {
         logDebug("\(type(of: self)): Deinited")
+        logResourcesCount()
     }
 }
