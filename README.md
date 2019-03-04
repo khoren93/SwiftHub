@@ -84,6 +84,9 @@ bundle exec fastlane setup
 Try `pod update` if you got some errors.
 Alrighty! We're ready to go!
 
+## Documentation
+You can generate the API docs locally. Run `jazzy` from the root of this repository. This requires installation of [jazzy](https://github.com/realm/jazzy/). You will find the output in `docs/`. You can set options for your project’s documentation in a configuration file, [.jazzy.yaml](https://github.com/khoren93/SwiftHub/blob/master/.jazzy.yaml) by default.
+
 ## Debugging
 [Flex](https://github.com/Flipboard/FLEX) debugging tool has been integrated in this application. To enable it, just swipe right anywhere in the application.
 There are also included debugging [Hero](https://github.com/HeroTransitions/Hero) animations. To use it, swipe right with two fingers. Repeat this to disable.
