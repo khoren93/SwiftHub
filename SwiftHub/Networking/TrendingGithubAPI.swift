@@ -57,11 +57,16 @@ extension TrendingGithubAPI: TargetType, ProductAPIType {
     }
 
     var sampleData: Data {
+        var dataUrl: URL?
         switch self {
-        case .trendingRepositories: return stubbedResponse("RepositoryTrendings")
-        case .trendingDevelopers: return stubbedResponse("UserTrendings")
-        case .languages: return stubbedResponse("Languages")
+        case .trendingRepositories: dataUrl = R.file.repositoryTrendingsJson()
+        case .trendingDevelopers: dataUrl = R.file.userTrendingsJson()
+        case .languages: dataUrl = R.file.languagesJson()
         }
+        if let url = dataUrl, let data = try? Data(contentsOf: url) {
+            return data
+        }
+        return Data()
     }
 
     public var task: Task {

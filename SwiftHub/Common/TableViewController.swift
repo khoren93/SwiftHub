@@ -48,9 +48,7 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         stackView.insertArrangedSubview(tableView, at: 0)
 
         tableView.bindGlobalStyle(forHeadRefreshHandler: { [weak self] in
-            if self?.tableView.headRefreshControl.isTriggeredRefreshByUser == false {
-                self?.headerRefreshTrigger.onNext(())
-            }
+            self?.headerRefreshTrigger.onNext(())
         })
 
         tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in

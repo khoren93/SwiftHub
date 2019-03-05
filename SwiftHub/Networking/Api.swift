@@ -314,12 +314,14 @@ extension Api {
             .mapJSON()
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 
     private func requestWithoutMapping(_ target: GithubAPI) -> Single<Moya.Response> {
         return githubProvider.request(target)
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 
     private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
@@ -327,6 +329,7 @@ extension Api {
             .mapObject(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 
     private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
@@ -334,6 +337,7 @@ extension Api {
             .mapArray(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 }
 
@@ -343,6 +347,7 @@ extension Api {
             .mapObject(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 
     private func trendingRequestArray<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<[T]> {
@@ -350,5 +355,6 @@ extension Api {
             .mapArray(T.self)
             .observeOn(MainScheduler.instance)
             .asSingle()
+//            .delay(0.2, scheduler: MainScheduler.instance)
     }
 }
