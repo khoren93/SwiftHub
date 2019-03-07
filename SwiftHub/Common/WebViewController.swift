@@ -109,6 +109,7 @@ class WebViewController: ViewController {
 extension WebViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        self.url.accept(webView.url)
         updateUI()
     }
 
