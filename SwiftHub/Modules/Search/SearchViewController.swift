@@ -353,7 +353,19 @@ class SearchViewController: TableViewController {
         output.sortText.drive(sortLabel.rx.text).disposed(by: rx.disposeBag)
 
         viewModel.searchMode.asDriver().drive(onNext: { [weak self] (searchMode) in
-            self?.searchModeSegmentedControl.selectedSegmentIndex = searchMode.rawValue
+            guard let self = self else { return }
+            self.searchModeSegmentedControl.selectedSegmentIndex = searchMode.rawValue
+
+            switch searchMode {
+            case .trending:
+                self.tableView.footRefreshControl = nil
+            case .search:
+                self.tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in
+                    self?.footerRefreshTrigger.onNext(())
+                })
+                self.tableView.footRefreshControl.autoRefreshOnFoot = true
+                self.isFooterLoading.bind(to: self.tableView.footRefreshControl.rx.isAnimating).disposed(by: self.rx.disposeBag)
+            }
         }).disposed(by: rx.disposeBag)
     }
 }
