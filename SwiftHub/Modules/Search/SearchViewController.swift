@@ -270,7 +270,7 @@ class SearchViewController: TableViewController {
         let searchTypeSegmentSelected = segmentedControl.rx.selectedSegmentIndex.map { SearchTypeSegments(rawValue: $0)! }
         let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.rx.selectedSegmentIndex.map { TrendingPeriodSegments(rawValue: $0)! }
         let searchModeSegmentSelected = searchModeSegmentedControl.rx.selectedSegmentIndex.map { SearchModeSegments(rawValue: $0)! }
-        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, themeService.attrsStream.mapToVoid()).merge()
         let input = SearchViewModel.Input(headerRefresh: refresh,
                                           footerRefresh: footerRefreshTrigger,
                                           languageTrigger: languageChanged.asObservable(),

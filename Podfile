@@ -12,6 +12,8 @@ target 'SwiftHub' do
     pod 'Moya/RxSwift', '~> 12.0'  # https://github.com/Moya/Moya
     pod 'ReachabilitySwift', '~> 4.0' # https://github.com/ashleymills/Reachability.swift
 
+    pod 'Apollo', '0.9.5'  # https://github.com/apollographql/apollo-ios
+
     # Rx Extensions
     pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
     pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt

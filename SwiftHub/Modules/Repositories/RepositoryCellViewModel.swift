@@ -9,12 +9,13 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import AttributedLib
 
 class RepositoryCellViewModel {
 
     let title: Driver<String>
     let detail: Driver<String>
-    let secondDetail: Driver<String>
+    let secondDetail: Driver<NSAttributedString>
     let imageUrl: Driver<URL?>
     let badge: Driver<UIImage?>
     let badgeColor: Driver<UIColor>
@@ -25,7 +26,7 @@ class RepositoryCellViewModel {
         self.repository = repository
         title = Driver.just("\(repository.fullname ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
-        secondDetail = Driver.just("★ \((repository.stargazersCount ?? 0).kFormatted()) \t\(repository.language ?? "")")
+        secondDetail = Driver.just(repository.attributetDetail())
         imageUrl = Driver.just(repository.owner?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
         badgeColor = Driver.just(UIColor.flatGreenDark)
@@ -35,5 +36,22 @@ class RepositoryCellViewModel {
 extension RepositoryCellViewModel: Equatable {
     static func == (lhs: RepositoryCellViewModel, rhs: RepositoryCellViewModel) -> Bool {
         return lhs.repository == rhs.repository
+    }
+}
+
+extension Repository {
+    func attributetDetail() -> NSAttributedString {
+        let starsString = (stargazersCount ?? 0).kFormatted()
+
+        let textAttributes = Attributes {
+            return $0.foreground(color: themeService.attrs.text)
+        }
+
+        let languageColorAttributes = Attributes {
+            return $0.foreground(color: UIColor(hexString: languageColor ?? "") ?? .clear)
+        }
+
+        return "★ \(starsString) \t".at.attributed(with: textAttributes) +
+            "● ".at.attributed(with: languageColorAttributes) + "\(language ?? "")".at.attributed(with: textAttributes)
     }
 }

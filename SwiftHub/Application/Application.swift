@@ -13,22 +13,36 @@ final class Application: NSObject {
 
     var window: UIWindow?
 
-    let provider: SwiftHubAPI
+    var provider: SwiftHubAPI?
     let authManager: AuthManager
     let navigator: Navigator
 
     private override init() {
-        let staging = Configs.Network.useStaging
-        let githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
-        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
-        provider = Api(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
         authManager = AuthManager.shared
         navigator = Navigator.default
         super.init()
+        updateProvider()
+    }
+
+    private func updateProvider() {
+        let staging = Configs.Network.useStaging
+        let githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
+        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
+        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
+        provider = restApi
+
+        if let token = authManager.token {
+            switch token.type() {
+            case .oAuth(let token):
+                provider = GraphApi(restApi: restApi, token: token)
+            default: break
+            }
+        }
     }
 
     func presentInitialScreen(in window: UIWindow?) {
-        guard let window = window else { return }
+        updateProvider()
+        guard let window = window, let provider = provider else { return }
         self.window = window
 
 //        presentTestScreen(in: window)
@@ -41,13 +55,13 @@ final class Application: NSObject {
             }
 
             let loggedIn = self.authManager.hasValidToken
-            let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: self.provider)
+            let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
             self.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
         }
     }
 
     func presentTestScreen(in window: UIWindow?) {
-        guard let window = window else { return }
+        guard let window = window, let provider = provider else { return }
         let viewModel = UserViewModel(user: nil, provider: provider)
         navigator.show(segue: .userDetails(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }

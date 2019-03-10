@@ -9,12 +9,13 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import AttributedLib
 
 class TrendingRepositoryCellViewModel {
 
     let title: Driver<String>
     let detail: Driver<String>
-    let secondDetail: Driver<String>
+    let secondDetail: Driver<NSAttributedString>
     let imageUrl: Driver<URL?>
     let badge: Driver<UIImage?>
     let badgeColor: Driver<UIColor>
@@ -25,7 +26,7 @@ class TrendingRepositoryCellViewModel {
         self.repository = repository
         title = Driver.just("\(repository.fullname ?? "")")
         detail = Driver.just("\(repository.descriptionField ?? "")")
-        secondDetail = Driver.just("★ \((repository.stars ?? 0).kFormatted()) \t★ \((repository.currentPeriodStars ?? 0).kFormatted()) \(since.title.lowercased()) \t\(repository.language ?? "")")
+        secondDetail = Driver.just(repository.attributetDetail(since: since.title))
         imageUrl = Driver.just(repository.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
         badgeColor = Driver.just(UIColor.flatGreenDark)
@@ -35,5 +36,23 @@ class TrendingRepositoryCellViewModel {
 extension TrendingRepositoryCellViewModel: Equatable {
     static func == (lhs: TrendingRepositoryCellViewModel, rhs: TrendingRepositoryCellViewModel) -> Bool {
         return lhs.repository == rhs.repository
+    }
+}
+
+extension TrendingRepository {
+    func attributetDetail(since: String) -> NSAttributedString {
+        let starsString = (stars ?? 0).kFormatted()
+        let currentPeriodStarsString = "\((currentPeriodStars ?? 0).kFormatted()) \(since.lowercased())"
+
+        let textAttributes = Attributes {
+            return $0.foreground(color: themeService.attrs.text)
+        }
+
+        let languageColorAttributes = Attributes {
+            return $0.foreground(color: UIColor(hexString: languageColor ?? "") ?? .clear)
+        }
+
+        return "★ \(starsString) \t★ \(currentPeriodStarsString) \t".at.attributed(with: textAttributes) +
+            "● ".at.attributed(with: languageColorAttributes) + "\(language ?? "")".at.attributed(with: textAttributes)
     }
 }

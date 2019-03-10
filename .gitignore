@@ -75,3 +75,8 @@ fastlane/test_output
 
 # Jazzy docs
 docs/
+
+# GraphQL
+node_modules
+package-lock.json
+SwiftHub/Networking/GraphQL/API.swift

@@ -19,14 +19,14 @@ class DetailedTableViewCell: DefaultTableViewCell {
 
     lazy var secondDetailLabel: Label = {
         let view = Label()
-        view.font = view.font.bold.withSize(12)
+        view.font = view.font.bold.withSize(11)
         return view
     }()
 
     lazy var textsStackView: StackView = {
         let views: [UIView] = [self.titleLabel, self.detailLabel, self.secondDetailLabel]
         let view = StackView(arrangedSubviews: views)
-        view.spacing = 0
+        view.spacing = 2
         return view
     }()
 
@@ -35,7 +35,7 @@ class DetailedTableViewCell: DefaultTableViewCell {
 
         themeService.rx
             .bind({ $0.textGray }, to: detailLabel.rx.textColor)
-            .bind({ $0.secondary }, to: secondDetailLabel.rx.textColor)
+            .bind({ $0.text }, to: secondDetailLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
         titleLabel.removeFromSuperview()

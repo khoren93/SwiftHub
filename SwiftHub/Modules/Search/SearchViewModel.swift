@@ -51,8 +51,9 @@ class SearchViewModel: ViewModel, ViewModelType {
     let currentLanguage = BehaviorRelay<Language?>(value: Language.currentLanguage())
     let sortRepositoryItem = BehaviorRelay(value: SortRepositoryItems.bestMatch)
     let sortUserItem = BehaviorRelay(value: SortUserItems.bestMatch)
-    let repositoryTotalItems = BehaviorRelay(value: 0)
-    let userTotalItems = BehaviorRelay(value: 0)
+
+    let repositorySearchElements = BehaviorRelay(value: RepositorySearch())
+    let userSearchElements = BehaviorRelay(value: UserSearch())
 
     var repositoriesPage = 1
     var usersPage = 1
@@ -61,8 +62,6 @@ class SearchViewModel: ViewModel, ViewModelType {
         let elements = BehaviorRelay<[SearchSection]>(value: [])
         let trendingRepositoryElements = BehaviorRelay<[TrendingRepository]>(value: [])
         let trendingUserElements = BehaviorRelay<[TrendingUser]>(value: [])
-        let repositoryElements = BehaviorRelay<[Repository]>(value: [])
-        let userElements = BehaviorRelay<[User]>(value: [])
         let languageElements = BehaviorRelay<Languages?>(value: nil)
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
@@ -75,8 +74,8 @@ class SearchViewModel: ViewModel, ViewModelType {
         input.keywordTrigger.skip(1).debounce(0.5).distinctUntilChanged().asObservable()
             .bind(to: keyword).disposed(by: rx.disposeBag)
 
-        input.keywordTrigger.map { keyword in
-            return keyword.isEmpty ? SearchModeSegments.trending: SearchModeSegments.search
+        Observable.combineLatest(keyword, currentLanguage).map { keyword, currentLanguage in
+            return keyword.isEmpty && currentLanguage == nil ? .trending: .search
         }.asObservable().bind(to: searchMode).disposed(by: rx.disposeBag)
 
         input.sortRepositorySelection.bind(to: sortRepositoryItem).disposed(by: rx.disposeBag)
@@ -92,7 +91,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                 let query = self.makeQuery()
                 let sort = sortRepositoryItem.sortValue
                 let order = sortRepositoryItem.orderValue
-                return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.repositoriesPage)
+                return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.repositoriesPage, endCursor: nil)
                     .trackActivity(self.loading)
                     .trackActivity(self.headerLoading)
                     .trackError(self.error)
@@ -100,15 +99,14 @@ class SearchViewModel: ViewModel, ViewModelType {
             }).subscribe(onNext: { [weak self] (event) in
                 switch event {
                 case .next(let result):
-                    repositoryElements.accept(result.items)
-                    self?.repositoryTotalItems.accept(result.totalCount)
+                    self?.repositorySearchElements.accept(result)
                 default: break
                 }
             }).disposed(by: rx.disposeBag)
 
         input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<RxSwift.Event<RepositorySearch>> in
             guard let self = self else { return Observable.just(RxSwift.Event.next(RepositorySearch())) }
-            if self.searchMode.value != .search {
+            if self.searchMode.value != .search || !self.repositorySearchElements.value.hasNextPage {
                 return Observable.just(RxSwift.Event.next(RepositorySearch()))
                     .trackActivity(self.footerLoading) // for force stoping table footer animation
             }
@@ -116,15 +114,18 @@ class SearchViewModel: ViewModel, ViewModelType {
             let query = self.makeQuery()
             let sort = self.sortRepositoryItem.value.sortValue
             let order = self.sortRepositoryItem.value.orderValue
-            return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.repositoriesPage)
+            let endCursor = self.repositorySearchElements.value.endCursor
+            return self.provider.searchRepositories(query: query, sort: sort, order: order, page: self.repositoriesPage, endCursor: endCursor)
                 .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
                 .trackError(self.error)
                 .materialize()
-        }).subscribe(onNext: { (event) in
+        }).subscribe(onNext: { [weak self] (event) in
             switch event {
             case .next(let result):
-                repositoryElements.accept(repositoryElements.value + result.items)
+                var newResult = result
+                newResult.items = (self?.repositorySearchElements.value.items ?? []) + result.items
+                self?.repositorySearchElements.accept(newResult)
             default: break
             }
         }).disposed(by: rx.disposeBag)
@@ -139,7 +140,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                 let query = self.makeQuery()
                 let sort = sortUserItem.sortValue
                 let order = sortUserItem.orderValue
-                return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.usersPage)
+                return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.usersPage, endCursor: nil)
                     .trackActivity(self.loading)
                     .trackActivity(self.headerLoading)
                     .trackError(self.error)
@@ -147,28 +148,32 @@ class SearchViewModel: ViewModel, ViewModelType {
             }).subscribe(onNext: { [weak self] (event) in
                 switch event {
                 case .next(let result):
-                    userElements.accept(result.items)
-                    self?.userTotalItems.accept(result.totalCount)
+                    self?.userSearchElements.accept(result)
                 default: break
                 }
             }).disposed(by: rx.disposeBag)
 
         input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<RxSwift.Event<UserSearch>> in
             guard let self = self else { return Observable.just(RxSwift.Event.next(UserSearch())) }
-            if self.searchMode.value != .search { return Observable.just(RxSwift.Event.next(UserSearch())) }
+            if self.searchMode.value != .search || !self.userSearchElements.value.hasNextPage {
+                return Observable.just(RxSwift.Event.next(UserSearch()))
+            }
             self.usersPage += 1
             let query = self.makeQuery()
             let sort = self.sortRepositoryItem.value.sortValue
             let order = self.sortRepositoryItem.value.orderValue
-            return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.usersPage)
+            let endCursor = self.repositorySearchElements.value.endCursor
+            return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.usersPage, endCursor: endCursor)
                 .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)
                 .trackError(self.error)
                 .materialize()
-        }).subscribe(onNext: { (event) in
+        }).subscribe(onNext: { [weak self] (event) in
             switch event {
             case .next(let result):
-                userElements.accept(userElements.value + result.items)
+                var newResult = result
+                newResult.items = (self?.userSearchElements.value.items ?? []) + result.items
+                self?.userSearchElements.accept(newResult)
             default: break
             }
         }).disposed(by: rx.disposeBag)
@@ -188,9 +193,9 @@ class SearchViewModel: ViewModel, ViewModelType {
         let trendingPeriodSegment = BehaviorRelay(value: TrendingPeriodSegments.daily)
         input.trendingPeriodSegmentSelection.bind(to: trendingPeriodSegment).disposed(by: rx.disposeBag)
 
-        let trendingTrigger = Observable.of(input.headerRefresh,
-                                            input.trendingPeriodSegmentSelection.mapToVoid(),
-                                            currentLanguage.mapToVoid(),
+        let trendingTrigger = Observable.of(input.headerRefresh.skip(1),
+                                            input.trendingPeriodSegmentSelection.mapToVoid().skip(1),
+                                            currentLanguage.mapToVoid().skip(1),
                                             keyword.asObservable().map { $0.isEmpty }.filter { $0 == true }.mapToVoid()).merge()
         trendingTrigger.flatMapLatest { () -> Observable<RxSwift.Event<[TrendingRepository]>> in
             let language = self.currentLanguage.value?.urlParam ?? ""
@@ -235,7 +240,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             }
         }).disposed(by: rx.disposeBag)
 
-        Observable.combineLatest(trendingRepositoryElements, trendingUserElements, repositoryElements, userElements, searchType, searchMode)
+        Observable.combineLatest(trendingRepositoryElements, trendingUserElements, repositorySearchElements, userSearchElements, searchType, searchMode)
             .map { (trendingRepositories, trendingUsers, repositories, users, searchType, searchMode) -> [SearchSection] in
                 var elements: [SearchSection] = []
                 let language = self.currentLanguage.value?.displayName()
@@ -262,7 +267,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                             elements.append(SearchSection.repositories(title: title, items: repositories))
                         }
                     case .search:
-                        let repositories = repositories.map({ (repository) -> SearchSectionItem in
+                        let repositories = repositories.items.map({ (repository) -> SearchSectionItem in
                             let cellViewModel = RepositoryCellViewModel(with: repository)
                             return SearchSectionItem.repositoriesItem(cellViewModel: cellViewModel)
                         })
@@ -281,7 +286,7 @@ class SearchViewModel: ViewModel, ViewModelType {
                             elements.append(SearchSection.users(title: title, items: users))
                         }
                     case .search:
-                        let users = users.map({ (user) -> SearchSectionItem in
+                        let users = users.items.map({ (user) -> SearchSectionItem in
                             let cellViewModel = UserCellViewModel(with: user)
                             return SearchSectionItem.usersItem(cellViewModel: cellViewModel)
                         })
@@ -334,11 +339,11 @@ class SearchViewModel: ViewModel, ViewModelType {
                 }
         }.asDriver(onErrorJustReturn: "")
 
-        let totalCountText = Observable.combineLatest(searchType, repositoryTotalItems, userTotalItems, input.languageTrigger)
-            .map { (searchType, repositoryTotalItems, userTotalItems, _) -> String in
+        let totalCountText = Observable.combineLatest(searchType, repositorySearchElements, userSearchElements, input.languageTrigger)
+            .map { (searchType, repositorySearchElements, userSearchElements, _) -> String in
                 switch searchType {
-                case .repositories: return R.string.localizable.searchRepositoriesTotalCountTitle.key.localizedFormat("\(repositoryTotalItems.kFormatted())")
-                case .users: return R.string.localizable.searchUsersTotalCountTitle.key.localizedFormat("\(userTotalItems.kFormatted())")
+                case .repositories: return R.string.localizable.searchRepositoriesTotalCountTitle.key.localizedFormat("\(repositorySearchElements.totalCount.kFormatted())")
+                case .users: return R.string.localizable.searchUsersTotalCountTitle.key.localizedFormat("\(userSearchElements.totalCount.kFormatted())")
                 }
         }.asDriver(onErrorJustReturn: "")
 
