@@ -129,7 +129,7 @@ struct RepositorySearch: Mappable {
     var items: [Repository] = []
     var totalCount: Int = 0
     var incompleteResults: Bool = false
-    var hasNextPage: Bool = true
+    var hasNextPage: Bool = false
     var endCursor: String?
 
     init?(map: Map) {}
@@ -148,6 +148,7 @@ struct RepositorySearch: Mappable {
         items <- map["items"]
         totalCount <- map["total_count"]
         incompleteResults <- map["incomplete_results"]
+        hasNextPage = items.isNotEmpty
     }
 }
 
