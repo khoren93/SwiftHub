@@ -30,6 +30,8 @@
 - [x] View trending repositories and users ([github-trending-api](https://github.com/huchenme/github-trending-api))
 - [x] Advanced searching and sorting repositories and users, filter by language
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
+- [x] The missing star history graph of github repos ([stars-history](https://github.com/timqian/star-history))
+- [x] Quickly browse the history of a file from any git repository ([git-history](https://github.com/pomber/git-history))
 - [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
 - [x] Color themes in light and dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
 - [x] In-app language switching (en, zh, ru, hy) ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
@@ -41,14 +43,14 @@
 ## Technologies
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
-- [x] Networking REST API v3 ([Moya](https://github.com/Moya/Moya))
+- [x] REST API v3 (for unauthenticated or basic authentication) ([Moya](https://github.com/Moya/Moya))
+- [x] GraphQL API v4 (for OAuth2 authentication) ([Apollo](https://github.com/apollographql/apollo-ios))
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
 - [x] Mixpanel and Firebase analytics events ([Umbrella](https://github.com/devxoul/Umbrella))
 - [x] Crash reporting ([Crashlytics](https://fabric.io/kits/ios/crashlytics))
 - [x] Logging ([CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack))
 - [x] Google ads implementation, can be enabled/disabled from settings ([Firebase AdMob](https://firebase.google.com/docs/admob/ios/quick-start))
-- [ ] Migrating to GraphQL API v4 ([Apollo](https://github.com/apollographql/apollo-ios))
 - [ ] Dependency injection ([Swinject](https://github.com/Swinject/Swinject))
 - [ ] Add tests
 
