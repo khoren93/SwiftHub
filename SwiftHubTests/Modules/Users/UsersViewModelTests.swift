@@ -19,8 +19,8 @@ class UsersViewModelTests: QuickSpec {
         var disposeBag: DisposeBag!
 
         beforeEach {
-            provider = Api(githubProvider: GithubNetworking.stubbingGithubNetworking(),
-                           trendingGithubProvider: TrendingGithubNetworking.stubbingTrendingGithubNetworking())
+            provider = RestApi(githubProvider: GithubNetworking.stubbingGithubNetworking(),
+                               trendingGithubProvider: TrendingGithubNetworking.stubbingTrendingGithubNetworking())
             disposeBag = DisposeBag()
         }
 

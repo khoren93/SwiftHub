@@ -31,7 +31,7 @@ final class Application: NSObject {
         let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
         provider = restApi
 
-        if let token = authManager.token {
+        if let token = authManager.token, Configs.Network.useStaging == false {
             switch token.type() {
             case .oAuth(let token):
                 provider = GraphApi(restApi: restApi, token: token)

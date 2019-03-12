@@ -21,9 +21,15 @@ platform :ios do
   lane :setup do
     sh("/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"") # install brew package manager  for macOS
     sh("brew install node") # install node
-    sh("npm install -g apollo@") # install apollo
-
+    sh("npm install -g apollo") # install apollo
     cocoapods # install pods
+  end
+
+  desc "Update all tools and pods"
+  lane :update do
+    sh("bundle update") # update node
+    sh("npm update -g apollo") # update apollo
+    sh("pod update") # update pods
   end
 
   desc "Runs all the tests"

@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios setup
 ```
 Install all libraries
+### ios update
+```
+fastlane ios update
+```
+Update all tools and pods
 ### ios test
 ```
 fastlane ios test

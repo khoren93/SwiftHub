@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         libsManager.setupLibs(with: window)
 
         if Configs.Network.useStaging == true {
+            // Logout
+            User.removeCurrentUser()
+            AuthManager.removeToken()
+
             // Use Green Dark theme
             var theme = ThemeType.currentTheme()
             if theme.isDark != true {
