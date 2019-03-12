@@ -55,6 +55,7 @@
 - [ ] Add tests
 
 ## Tools
+- [x] [Brew](https://github.com/Homebrew/brew) - The missing package manager for macOS
 - [x] [Bundler](https://github.com/bundler/bundler) - Manage your Ruby application's gem dependencies
 - [x] [Fastlane](https://github.com/fastlane/fastlane) - The easiest way to automate building and releasing your iOS and Android apps
 - [x] [SwiftLint](https://github.com/realm/SwiftLint) - A tool to enforce Swift style and conventions
@@ -83,7 +84,7 @@ bundle install
 bundle exec fastlane setup
 ```
 
-Try `pod update` if you got some errors.
+Use `bundle exec fastlane update` to update all tools and pods.
 Alrighty! We're ready to go!
 
 ## Documentation
