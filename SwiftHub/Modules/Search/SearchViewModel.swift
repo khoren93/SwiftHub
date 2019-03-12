@@ -107,7 +107,9 @@ class SearchViewModel: ViewModel, ViewModelType {
         input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<RxSwift.Event<RepositorySearch>> in
             guard let self = self else { return Observable.just(RxSwift.Event.next(RepositorySearch())) }
             if self.searchMode.value != .search || !self.repositorySearchElements.value.hasNextPage {
-                return Observable.just(RxSwift.Event.next(RepositorySearch()))
+                var result = RepositorySearch()
+                result.totalCount = self.repositorySearchElements.value.totalCount
+                return Observable.just(RxSwift.Event.next(result))
                     .trackActivity(self.footerLoading) // for force stoping table footer animation
             }
             self.repositoriesPage += 1
@@ -156,6 +158,8 @@ class SearchViewModel: ViewModel, ViewModelType {
         input.footerRefresh.flatMapLatest({ [weak self] () -> Observable<RxSwift.Event<UserSearch>> in
             guard let self = self else { return Observable.just(RxSwift.Event.next(UserSearch())) }
             if self.searchMode.value != .search || !self.userSearchElements.value.hasNextPage {
+                var result = UserSearch()
+                result.totalCount = self.userSearchElements.value.totalCount
                 return Observable.just(RxSwift.Event.next(UserSearch()))
             }
             self.usersPage += 1

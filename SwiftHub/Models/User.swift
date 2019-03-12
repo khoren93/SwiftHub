@@ -145,7 +145,7 @@ struct UserSearch: Mappable {
     var items: [User] = []
     var totalCount: Int = 0
     var incompleteResults: Bool = false
-    var hasNextPage: Bool = true
+    var hasNextPage: Bool = false
     var endCursor: String?
 
     init?(map: Map) {}
@@ -164,6 +164,7 @@ struct UserSearch: Mappable {
         items <- map["items"]
         totalCount <- map["total_count"]
         incompleteResults <- map["incomplete_results"]
+        hasNextPage = items.isNotEmpty
     }
 }
 
