@@ -43,7 +43,7 @@
 ## Technologies
 - [x] Clean architecture ([RxSwift](https://github.com/ReactiveX/RxSwift) and MVVM)
 - [x] Flow coordinators ([Realm demo](https://github.com/realm/EventKit/blob/master/iOS/EventBlank2-iOS/Services/Navigator.swift))
-- [x] REST API v3 (for unauthenticated or basic authentication) ([Moya](https://github.com/Moya/Moya))
+- [x] REST API v3 (for unauthenticated or basic authentication) ([Moya](https://github.com/Moya/Moya), [ObjectMapper](https://github.com/tristanhimmelman/ObjectMapper))
 - [x] GraphQL API v4 (for OAuth2 authentication) ([Apollo](https://github.com/apollographql/apollo-ios))
 - [x] Custom transition animations ([Hero](https://github.com/HeroTransitions/Hero))
 - [x] Programmatically UI ([SnapKit](https://github.com/SnapKit/SnapKit))
