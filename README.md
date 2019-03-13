@@ -106,5 +106,13 @@ Thanks to them for the beautiful open source icons.
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
 * [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
 
+## See Also
+* [GitHawk](https://github.com/GitHawkApp/GitHawk) - The best iOS app for GitHub
+* [CodeHub](https://github.com/CodeHubApp/CodeHub) - An iOS application written using Xamarin
+* [GitPoint](https://github.com/gitpoint/git-point) - GitHub in your pocket
+* [DevHub](https://github.com/devhubapp/devhub) - TweetDeck for GitHub - Android, iOS, Web & Desktop
+* [OpenHub](https://github.com/ThirtyDegreesRay/OpenHub) - An open source GitHub Android client app, faster and concise
+* [Trailer](https://github.com/ptsochantaris/trailer) - Managing Pull Requests and Issues For GitHub & GitHub Enterprise
+
 ## License
 MIT License. See [LICENSE](https://github.com/khoren93/SwiftHub/blob/master/LICENSE).
