@@ -53,9 +53,9 @@ struct Configs {
         static let navBarWithStatusBarHeight: CGFloat = 64
         static let cornerRadius: CGFloat = 5
         static let borderWidth: CGFloat = 1
-        static let buttonHeight: CGFloat = 50
+        static let buttonHeight: CGFloat = 40
         static let textFieldHeight: CGFloat = 40
-        static let tableRowHeight: CGFloat = 50
+        static let tableRowHeight: CGFloat = 40
         static let segmentedControlHeight: CGFloat = 30
     }
 

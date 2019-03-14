@@ -39,6 +39,12 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
+    lazy var detailLabel: Label = {
+        var view = Label()
+        view.numberOfLines = 0
+        return view
+    }()
+
     lazy var headerStackView: StackView = {
         let headerView = View()
         headerView.addSubview(self.ownerImageView)
@@ -52,8 +58,9 @@ class RepositoryViewController: TableViewController {
             make.right.equalTo(self.ownerImageView)
             make.size.equalTo(40)
         })
-        let subviews: [UIView] = [headerView]
+        let subviews: [UIView] = [headerView, self.detailLabel]
         let view = StackView(arrangedSubviews: subviews)
+        view.axis = .horizontal
         return view
     }()
 
@@ -62,8 +69,6 @@ class RepositoryViewController: TableViewController {
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .horizontal
-        stackView.alignment = .center
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(self.inset)
@@ -105,6 +110,7 @@ class RepositoryViewController: TableViewController {
 
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
+            .bind({ $0.text }, to: detailLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
@@ -217,6 +223,8 @@ class RepositoryViewController: TableViewController {
         output.name.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)
+
+        output.description.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
