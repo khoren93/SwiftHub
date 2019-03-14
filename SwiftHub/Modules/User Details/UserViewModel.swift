@@ -113,7 +113,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
         let username = user.map { $0?.login ?? "" }.asDriverOnErrorJustComplete()
         let fullname = user.map { $0?.name ?? "" }.asDriverOnErrorJustComplete()
-        let description = user.map { $0?.descriptionField ?? "" }.asDriverOnErrorJustComplete()
+        let description = user.map { $0?.bio ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = user.map { $0?.avatarUrl?.url }.asDriverOnErrorJustComplete()
         let repositoriesCount = user.map { $0?.publicRepos ?? 0 }.asDriverOnErrorJustComplete()
         let followersCount = user.map { $0?.followers ?? 0 }.asDriverOnErrorJustComplete()

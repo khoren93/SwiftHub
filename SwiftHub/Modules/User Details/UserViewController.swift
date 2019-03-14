@@ -58,6 +58,12 @@ class UserViewController: TableViewController {
         return view
     }()
 
+    lazy var detailLabel: Label = {
+        var view = Label()
+        view.numberOfLines = 0
+        return view
+    }()
+
     lazy var headerStackView: StackView = {
         let headerView = View()
         headerView.addSubview(self.ownerImageView)
@@ -71,8 +77,9 @@ class UserViewController: TableViewController {
             make.right.equalTo(self.ownerImageView)
             make.size.equalTo(40)
         })
-        let subviews: [UIView] = [headerView]
+        let subviews: [UIView] = [headerView, self.detailLabel]
         let view = StackView(arrangedSubviews: subviews)
+        view.axis = .horizontal
         return view
     }()
 
@@ -81,8 +88,6 @@ class UserViewController: TableViewController {
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .horizontal
-        stackView.alignment = .center
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(self.inset)
@@ -124,7 +129,7 @@ class UserViewController: TableViewController {
 
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
-            .bind({ $0.text }, to: usernameLabel.rx.textColor)
+            .bind({ $0.text }, to: [usernameLabel.rx.textColor, detailLabel.rx.textColor])
             .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
@@ -208,6 +213,7 @@ class UserViewController: TableViewController {
         output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.map { $0.isEmpty }.drive(fullnameLabel.rx.isHidden).disposed(by: rx.disposeBag)
+        output.description.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
