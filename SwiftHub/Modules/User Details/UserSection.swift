@@ -19,6 +19,7 @@ enum UserSectionItem {
     case eventsItem(viewModel: UserDetailCellViewModel)
     case companyItem(viewModel: UserDetailCellViewModel)
     case blogItem(viewModel: UserDetailCellViewModel)
+    case profileSummaryItem(viewModel: UserDetailCellViewModel)
 }
 
 extension UserSection: SectionModelType {

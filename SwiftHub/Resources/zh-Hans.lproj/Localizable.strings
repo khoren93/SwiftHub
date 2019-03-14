@@ -144,6 +144,7 @@
 "User.EventsCell.Title" = "事件";
 "User.CompanyCell.Title" = "公司";
 "User.BlogCell.Title" = "博客";
+"User.ProfileSummaryCell.Title" = "资料概要";
 /* 用户 */
 //"Users.Navigation.Title" = "用户";
 "Users.FollowersNavigation.Title" = "追随者";

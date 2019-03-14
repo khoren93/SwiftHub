@@ -161,7 +161,8 @@ class UserViewController: TableViewController {
                  .watchingItem(let viewModel),
                  .eventsItem(let viewModel),
                  .companyItem(let viewModel),
-                 .blogItem(let viewModel):
+                 .blogItem(let viewModel),
+                 .profileSummaryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? UserDetailCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -195,6 +196,10 @@ class UserViewController: TableViewController {
                 }
             case .blogItem:
                 if let url = self?.viewModel.user.value?.blog?.url {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
+            case .profileSummaryItem:
+                if let url = self?.viewModel.profileSummaryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             }

@@ -43,6 +43,7 @@ struct Configs {
         static let trendingGithubBaseUrl = "https://github-trending-api.now.sh"
         static let githistoryBaseUrl = "https://github.githistory.xyz"
         static let starHistoryBaseUrl = "https://star-history.t9t.io"
+        static let profileSummaryBaseUrl = "https://profile-summary-for-github.com"
     }
 
     struct BaseDimensions {

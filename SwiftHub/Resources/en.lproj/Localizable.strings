@@ -144,6 +144,7 @@
 "User.EventsCell.Title" = "Events";
 "User.CompanyCell.Title" = "Company";
 "User.BlogCell.Title" = "Blog";
+"User.ProfileSummaryCell.Title" = "Profile Summary";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Followers";

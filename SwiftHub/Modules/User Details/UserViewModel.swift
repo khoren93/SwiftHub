@@ -185,6 +185,13 @@ class UserViewModel: ViewModel, ViewModelType {
                 items.append(UserSectionItem.blogItem(viewModel: companyCellViewModel))
             }
 
+            // Profile Summary
+            let profileSummaryCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userProfileSummaryCellTitle.key.localized(),
+                                                                      detail: "\(Configs.Network.profileSummaryBaseUrl)",
+                                                                      image: R.image.icon_cell_profile_summary(),
+                                                                      hidesDisclosure: false)
+            items.append(UserSectionItem.profileSummaryItem(viewModel: profileSummaryCellViewModel))
+
             return [
                 UserSection.user(title: "", items: items)
             ]
@@ -237,7 +244,12 @@ class UserViewModel: ViewModel, ViewModelType {
                 return viewModel
             }
         case .blogItem: return nil
+        case .profileSummaryItem: return nil
         }
         return nil
+    }
+
+    func profileSummaryUrl() -> URL? {
+        return "\(Configs.Network.profileSummaryBaseUrl)/user/\(self.user.value?.login ?? "")".url
     }
 }

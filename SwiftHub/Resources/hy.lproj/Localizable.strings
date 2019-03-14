@@ -144,6 +144,7 @@
 "User.EventsCell.Title" = "Միջոցառումներ";
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";
+"User.ProfileSummaryCell.Title" = "Պրոֆիլի Ամփոփագիր";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Հետեւորդներ";
