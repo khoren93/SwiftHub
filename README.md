@@ -32,6 +32,7 @@
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
 - [x] The missing star history graph of github repos ([stars-history](https://github.com/timqian/star-history))
 - [x] Quickly browse the history of a file from any git repository ([git-history](https://github.com/pomber/git-history))
+- [x] Tool for visualizing GitHub profiles ([profile-summary-for-github](https://github.com/tipsy/profile-summary-for-github))
 - [x] Source file viewer and syntax highlighting ([Highlightr](https://github.com/raspu/Highlightr))
 - [x] Color themes in light and dark modes ([RxTheme](https://github.com/RxSwiftCommunity/RxTheme))
 - [x] In-app language switching (en, zh, ru, hy) ([Localize-Swift](https://github.com/marmelroy/Localize-Swift))
