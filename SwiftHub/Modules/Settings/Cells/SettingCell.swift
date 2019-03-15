@@ -13,6 +13,9 @@ class SettingCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         leftImageView.contentMode = .center
+        leftImageView.snp.remakeConstraints { (make) in
+            make.size.equalTo(40)
+        }
     }
 
     func bind(to viewModel: SettingCellViewModel) {

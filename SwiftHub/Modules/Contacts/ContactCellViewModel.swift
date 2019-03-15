@@ -24,6 +24,6 @@ class ContactCellViewModel {
         self.title = Driver.just("\(contact.name ?? "")")
         let info = contact.phones + contact.emails
         self.detail = Driver.just(info.joined(separator: ", "))
-        self.image = Driver.just(UIImage(data: contact.imageData ?? Data()) ?? R.image.icon_cell_badge_user()?.template)
+        self.image = Driver.just(UIImage(data: contact.imageData ?? Data()) ?? R.image.icon_cell_contact_no_image()?.template)
     }
 }

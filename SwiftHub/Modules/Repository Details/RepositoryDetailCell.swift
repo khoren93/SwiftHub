@@ -13,6 +13,9 @@ class RepositoryDetailCell: DetailedTableViewCell {
     override func makeUI() {
         super.makeUI()
         leftImageView.contentMode = .center
+        leftImageView.snp.remakeConstraints { (make) in
+            make.size.equalTo(40)
+        }
         detailLabel.isHidden = true
         secondDetailLabel.textAlignment = .right
         textsStackView.axis = .horizontal

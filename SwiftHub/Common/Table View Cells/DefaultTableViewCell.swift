@@ -14,7 +14,7 @@ class DefaultTableViewCell: TableViewCell {
         let view = ImageView(frame: CGRect())
         view.contentMode = .scaleAspectFit
         view.snp.makeConstraints({ (make) in
-            make.size.equalTo(Configs.BaseDimensions.tableRowHeight)
+            make.size.equalTo(50)
         })
         return view
     }()
