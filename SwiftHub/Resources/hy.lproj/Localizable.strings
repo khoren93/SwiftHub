@@ -61,6 +61,7 @@
 "Repository.WatchersButton.Title" = "Դիտորդներ";
 "Repository.StarsButton.Title" = "Աստղեր";
 "Repository.ForksButton.Title" = "Ճյուղեր";
+"Repository.ParentCell.Title" = "Ճյուղավորված է";
 "Repository.LanguageCell.Title" = "Լեզուն";
 "Repository.SizeCell.Title" = "Չափը";
 "Repository.CreatedCell.Title" = "Ստեղծվել է";
@@ -69,6 +70,8 @@
 "Repository.IssuesCell.Title" = "Խնդիրներ";
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";
+"Repository.BranchesCell.Title" = "Ճյուղեր";
+"Repository.ReleasesCell.Title" = "Թողարկումներ";
 "Repository.EventsCell.Title" = "Իրադարձություններ";
 "Repository.NotificationsCell.Title" = "Իմ ծանուցումները";
 "Repository.ContributorsCell.Title" = "Ներդրողներ";

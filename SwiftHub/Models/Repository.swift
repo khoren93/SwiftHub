@@ -49,6 +49,13 @@ struct Repository: Mappable {
     var url: String?
     var watchers: Int?
     var watchersCount: Int?
+    var parentFullname: String?
+
+    var commitsCount: Int?
+    var pullRequestsCount: Int?
+    var branchesCount: Int?
+    var releasesCount: Int?
+    var contributorsCount: Int?
 
     init?(map: Map) {}
     init() {}
@@ -64,6 +71,34 @@ struct Repository: Mappable {
         if let user = repo.builtBy?.first {
             owner = User(user: user)
         }
+    }
+
+    init(graph: RepositoryQuery.Data.Repository?) {
+        guard let graph = graph else { return }
+        name = graph.name
+        fullname = graph.nameWithOwner
+        descriptionField = graph.description
+        url = graph.url
+        homepage = graph.homepageUrl
+        createdAt =  graph.createdAt.toISODate()?.date
+        updatedAt = graph.updatedAt.toISODate()?.date
+        size = graph.diskUsage
+        fork = graph.isFork
+        parentFullname = graph.parent?.nameWithOwner
+        language = graph.primaryLanguage?.name
+        languageColor = graph.primaryLanguage?.color
+        defaultBranch = graph.defaultBranchRef?.name
+        stargazersCount = graph.stargazers.totalCount
+        subscribersCount = graph.watchers.totalCount
+        forks = graph.forks.totalCount
+        openIssuesCount = graph.issues.totalCount
+        commitsCount = graph.ref?.target.asCommit?.history.totalCount
+        pullRequestsCount = graph.pullRequests.totalCount
+        releasesCount = graph.releases.totalCount
+        contributorsCount = graph.mentionableUsers.totalCount
+        owner = User()
+        owner?.login = graph.owner.login
+        owner?.avatarUrl = graph.owner.avatarUrl
     }
 
     init(graph: SearchRepositoriesQuery.Data.Search.Node.AsRepository?) {
@@ -115,6 +150,14 @@ struct Repository: Mappable {
         url <- map["url"]
         watchers <- map["watchers"]
         watchersCount <- map["watchers_count"]
+        parentFullname <- map["parent.full_name"]
+    }
+
+    func parentRepository() -> Repository? {
+        guard let parentFullName = parentFullname else { return nil }
+        var repository = Repository()
+        repository.fullname = parentFullName
+        return repository
     }
 }
 

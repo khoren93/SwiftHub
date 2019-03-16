@@ -140,13 +140,16 @@ class RepositoryViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<RepositorySection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .languageItem(let viewModel),
+            case .parentItem(let viewModel),
+                 .languageItem(let viewModel),
                  .sizeItem(let viewModel),
                  .createdItem(let viewModel),
                  .updatedItem(let viewModel),
                  .homepageItem(let viewModel),
                  .issuesItem(let viewModel),
                  .commitsItem(let viewModel),
+                 .branchesItem(let viewModel),
+                 .releasesItem(let viewModel),
                  .pullRequestsItem(let viewModel),
                  .eventsItem(let viewModel),
                  .notificationsItem(let viewModel),
@@ -169,6 +172,10 @@ class RepositoryViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .parentItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+                }
             case .homepageItem:
                 if let url = self?.viewModel.repository.value.homepage?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)

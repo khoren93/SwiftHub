@@ -61,6 +61,7 @@
 "Repository.WatchersButton.Title" = "Watchers";
 "Repository.StarsButton.Title" = "Stars";
 "Repository.ForksButton.Title" = "Forks";
+"Repository.ParentCell.Title" = "Forked from";
 "Repository.LanguageCell.Title" = "Language";
 "Repository.SizeCell.Title" = "Size";
 "Repository.CreatedCell.Title" = "Created";
@@ -69,6 +70,8 @@
 "Repository.IssuesCell.Title" = "Issues";
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "Pull Requests";
+"Repository.BranchesCell.Title" = "Branches";
+"Repository.ReleasesCell.Title" = "Releases";
 "Repository.EventsCell.Title" = "Events";
 "Repository.NotificationsCell.Title" = "My Notifications";
 "Repository.ContributorsCell.Title" = "Contributors";

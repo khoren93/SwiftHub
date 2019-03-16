@@ -152,6 +152,15 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let items = repository.map { (repository) -> [RepositorySection] in
             var items: [RepositorySectionItem] = []
 
+            // Parent
+            if let parentName = repository.parentFullname {
+                let parentCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryParentCellTitle.key.localized(),
+                                                                        detail: parentName,
+                                                                        image: R.image.icon_cell_git_fork(),
+                                                                        hidesDisclosure: false)
+                items.append(RepositorySectionItem.parentItem(viewModel: parentCellViewModel))
+            }
+
             // Language
             if let language = repository.language {
                 let languageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryLanguageCellTitle.key.localized(),
@@ -198,27 +207,46 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             }
 
             // Issues
-            if let issues = repository.openIssuesCount?.string {
-                let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
-                                                                        detail: issues,
-                                                                        image: R.image.icon_cell_issues(),
-                                                                        hidesDisclosure: false)
-                items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
-            }
+            let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
+                                                                    detail: repository.openIssuesCount?.string ?? "",
+                                                                    image: R.image.icon_cell_issues(),
+                                                                    hidesDisclosure: false)
+            items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
+
+            // Pull Requests
+            let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
+                                                                          detail: repository.pullRequestsCount?.string ?? "",
+                                                                          image: R.image.icon_cell_git_pull_request(),
+                                                                          hidesDisclosure: false)
+            items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
 
             // Commits
             let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
-                                                                     detail: "",
+                                                                     detail: repository.commitsCount?.string ?? "",
                                                                      image: R.image.icon_cell_git_commit(),
                                                                      hidesDisclosure: false)
             items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
 
-            // Pull Requests
-            let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
-                                                                          detail: "",
-                                                                          image: R.image.icon_cell_git_pull_request(),
+            // Branches
+            let branchesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryBranchesCellTitle.key.localized(),
+                                                                      detail: repository.defaultBranch ?? "",
+                                                                      image: R.image.icon_cell_git_branch(),
+                                                                      hidesDisclosure: true)
+            items.append(RepositorySectionItem.branchesItem(viewModel: branchesCellViewModel))
+
+            // Releases
+            let releasesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReleasesCellTitle.key.localized(),
+                                                                      detail: repository.releasesCount?.string ?? "",
+                                                                      image: R.image.icon_cell_releases(),
+                                                                      hidesDisclosure: true)
+            items.append(RepositorySectionItem.releasesItem(viewModel: releasesCellViewModel))
+
+            // Contributors
+            let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
+                                                                          detail: repository.contributorsCount?.string ?? "",
+                                                                          image: R.image.icon_cell_company(),
                                                                           hidesDisclosure: false)
-            items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
+            items.append(RepositorySectionItem.contributorsItem(viewModel: contributorsCellViewModel))
 
             // Events
             let eventsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryEventsCellTitle.key.localized(),
@@ -236,13 +264,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 items.append(RepositorySectionItem.notificationsItem(viewModel: notificationsCellViewModel))
             }
 
-            // Contributors
-            let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
-                                                                          detail: "",
-                                                                          image: R.image.icon_cell_company(),
-                                                                          hidesDisclosure: false)
-            items.append(RepositorySectionItem.contributorsItem(viewModel: contributorsCellViewModel))
-
             // Readme
             let readmeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReadmeCellTitle.key.localized(),
                                                                     detail: "",
@@ -259,9 +280,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Stars history
             let starHistoryCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryStarsHistoryCellTitle.key.localized(),
-                                                                          detail: Configs.Network.starHistoryBaseUrl,
-                                                                          image: R.image.icon_cell_stars_history(),
-                                                                          hidesDisclosure: false)
+                                                                         detail: Configs.Network.starHistoryBaseUrl,
+                                                                         image: R.image.icon_cell_stars_history(),
+                                                                         hidesDisclosure: false)
             items.append(RepositorySectionItem.starHistoryItem(viewModel: starHistoryCellViewModel))
 
             return [
@@ -289,6 +310,12 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     func viewModel(for item: RepositorySectionItem) -> ViewModel? {
         switch item {
+        case .parentItem:
+            if let parentRepository = repository.value.parentRepository() {
+                let viewModel = RepositoryViewModel(repository: parentRepository, provider: provider)
+                return viewModel
+            }
+
         case .issuesItem:
             let viewModel = IssuesViewModel(repository: repository.value, provider: provider)
             return viewModel
@@ -323,6 +350,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         default: return nil
         }
+        return nil
     }
 
     func starHistoryUrl() -> URL? {

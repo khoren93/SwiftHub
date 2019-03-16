@@ -101,7 +101,9 @@ extension GraphApi {
     }
 
     func repository(fullname: String) -> Single<Repository> {
-        return restApi.repository(fullname: fullname)
+        let qualifiedName = "master"
+        return client.rx.fetch(query: RepositoryQuery(owner: ownerName(from: fullname), name: repoName(from: fullname), qualifiedName: qualifiedName))
+            .map { Repository(graph: $0.repository) }
     }
 
     func searchUsers(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<UserSearch> {
@@ -210,5 +212,15 @@ extension GraphApi {
 
     func languages() -> Single<Languages> {
         return restApi.languages()
+    }
+}
+
+extension GraphApi {
+    private func ownerName(from fullname: String) -> String {
+        return fullname.components(separatedBy: "/").first ?? ""
+    }
+
+    private func repoName(from fullname: String) -> String {
+        return fullname.components(separatedBy: "/").last ?? ""
     }
 }

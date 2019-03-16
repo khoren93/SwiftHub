@@ -61,6 +61,7 @@
 "Repository.WatchersButton.Title" = "看守";
 "Repository.StarsButton.Title" = "星星";
 "Repository.ForksButton.Title" = "福克斯";
+"Repository.ParentCell.Title" = "分叉";
 "Repository.LanguageCell.Title" = "语言";
 "Repository.SizeCell.Title" = "大小";
 "Repository.CreatedCell.Title" = "创建";
@@ -69,6 +70,8 @@
 "Repository.IssuesCell.Title" = "问题";
 "Repository.CommitsCell.Title" = "提交";
 "Repository.PullRequestsCell.Title" = "拉请求";
+"Repository.BranchesCell.Title" = "分行";
+"Repository.ReleasesCell.Title" = "发布";
 "Repository.EventsCell.Title" = "事件";
 "Repository.NotificationsCell.Title" = "我的通知";
 "Repository.ContributorsCell.Title" = "贡献者";

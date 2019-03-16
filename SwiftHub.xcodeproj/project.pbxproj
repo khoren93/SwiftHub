@@ -136,6 +136,7 @@
 		07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC337B1FFFE4E300D53888 /* LibsManager.swift */; };
 		07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC337C1FFFE4E300D53888 /* LogManager.swift */; };
 		07FC33871FFFE68800D53888 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FC33861FFFE68800D53888 /* Api.swift */; };
+		07FDBC0B223D090C00D72AFC /* Repository.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 07FDBC0A223D090C00D72AFC /* Repository.graphql */; };
 		10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6D5D7DF286987ECF4F8FDD /* Pods_SwiftHub.framework */; };
 		21C12854A33FB761C193427F /* Pods_SwiftHubUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCB88A802BEA0D429184566 /* Pods_SwiftHubUITests.framework */; };
 		A00871CF21A6E2BD006E5A2B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00871CE21A6E2BD006E5A2B /* Comment.swift */; };
@@ -408,6 +409,7 @@
 		07FC33821FFFE53800D53888 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		07FC33841FFFE54800D53888 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		07FC33861FFFE68800D53888 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		07FDBC0A223D090C00D72AFC /* Repository.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Repository.graphql; sourceTree = "<group>"; };
 		3796635402BD18001EDA5A16 /* Pods-SwiftHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubUITests/Pods-SwiftHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3843260FF1EFDD3029A69CCB /* Pods-SwiftHubTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftHubTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftHubTests/Pods-SwiftHubTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E6D5D7DF286987ECF4F8FDD /* Pods_SwiftHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -791,6 +793,7 @@
 		07F9E46C223433090012BA6D /* Queries */ = {
 			isa = PBXGroup;
 			children = (
+				07FDBC0A223D090C00D72AFC /* Repository.graphql */,
 				073A1F782233F2F000D6F487 /* Search.graphql */,
 			);
 			path = Queries;
@@ -1441,6 +1444,7 @@
 				072B8EDA21B4143200B2C28C /* RepositoryContributors.json in Resources */,
 				07241D0F21B1745D00F800BD /* RepositoryPullRequest.json in Resources */,
 				0752F48921C8D9A800A30BF2 /* TrendingRepositoryCell.xib in Resources */,
+				07FDBC0B223D090C00D72AFC /* Repository.graphql in Resources */,
 				A0E2B0972108B024000DA282 /* RepositoryForks.json in Resources */,
 				07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */,
 				070FF84020F2250F0070F5E8 /* User.json in Resources */,
