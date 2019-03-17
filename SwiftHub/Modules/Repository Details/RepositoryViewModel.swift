@@ -43,11 +43,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
     let repository: BehaviorRelay<Repository>
     let readme = BehaviorRelay<Content?>(value: nil)
     let starring = BehaviorRelay<Bool>(value: false)
-    let loggedIn = BehaviorRelay<Bool>(value: false)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
-        self.loggedIn.accept(AuthManager.shared.hasValidToken)
         super.init(provider: provider)
         if let fullname = repository.fullname {
             analytics.log(.repository(fullname: fullname))
@@ -79,7 +77,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         let starred = input.starSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let fullname = self.repository.value.fullname ?? ""
             let starring = self.starring.value
             let request = starring ? self.provider.unstarRepository(fullname: fullname) : self.provider.starRepository(fullname: fullname)
@@ -99,7 +97,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         let refreshStarring = Observable.of(input.headerRefresh, starred.mapToVoid()).merge()
         refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let fullname = self.repository.value.fullname ?? ""
             return self.provider.checkStarring(fullname: fullname)
                 .trackActivity(self.loading)
@@ -255,7 +253,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.eventsItem(viewModel: eventsCellViewModel))
 
-            if self.loggedIn.value {
+            if loggedIn.value {
                 // Notifications
                 let notificationsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryNotificationsCellTitle.key.localized(),
                                                                                detail: "",

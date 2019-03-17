@@ -15,7 +15,7 @@ class RepositoryCellViewModel {
 
     let title: Driver<String>
     let detail: Driver<String>
-    let secondDetail: Driver<NSAttributedString>
+    let secondDetail: Driver<NSAttributedString?>
     let imageUrl: Driver<URL?>
     let badge: Driver<UIImage?>
     let badgeColor: Driver<UIColor>
@@ -44,7 +44,7 @@ extension RepositoryCellViewModel: Equatable {
 }
 
 extension Repository {
-    func attributetDetail() -> NSAttributedString {
+    func attributetDetail() -> NSAttributedString? {
         let starsString = (stargazersCount ?? 0).kFormatted()
 
         let textAttributes = Attributes {

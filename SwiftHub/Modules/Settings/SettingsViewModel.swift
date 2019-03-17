@@ -26,14 +26,11 @@ class SettingsViewModel: ViewModel, ViewModelType {
     let bannerEnabled: BehaviorRelay<Bool>
     let nightModeEnabled: BehaviorRelay<Bool>
 
-    let loggedIn: BehaviorRelay<Bool>
-
     let whatsNewManager: WhatsNewManager
 
     var cellDisposeBag = DisposeBag()
 
-    init(loggedIn: BehaviorRelay<Bool>, provider: SwiftHubAPI) {
-        self.loggedIn = loggedIn
+    override init(provider: SwiftHubAPI) {
         whatsNewManager = WhatsNewManager.shared
         bannerEnabled = BehaviorRelay(value: LibsManager.shared.bannersEnabled.value)
         nightModeEnabled = BehaviorRelay(value: ThemeType.currentTheme().isDark)
@@ -93,7 +90,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
                     ])
             ]
 
-            if self.loggedIn.value {
+            if loggedIn.value {
                 let logoutModel = SettingModel(leftImage: R.image.icon_cell_logout.name, title: R.string.localizable.settingsLogOutTitle.key.localized(), detail: "", showDisclosure: false)
                 let logoutCellViewModel = SettingCellViewModel(with: logoutModel)
                 items.append(SettingsSection.setting(title: "", items: [

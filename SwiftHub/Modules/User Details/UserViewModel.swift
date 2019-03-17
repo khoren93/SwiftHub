@@ -43,11 +43,9 @@ class UserViewModel: ViewModel, ViewModelType {
 
     let user: BehaviorRelay<User?>
     let following = BehaviorRelay<Bool>(value: false)
-    let loggedIn = BehaviorRelay<Bool>(value: false)
 
     init(user: User?, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
-        self.loggedIn.accept(AuthManager.shared.hasValidToken)
         super.init(provider: provider)
         if let login = user?.login {
             analytics.log(.user(login: login))
@@ -77,7 +75,7 @@ class UserViewModel: ViewModel, ViewModelType {
             }).disposed(by: rx.disposeBag)
 
         let followed = input.followSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let username = self.user.value?.login ?? ""
             let following = self.following.value
             let request = following ? self.provider.unfollowUser(username: username) : self.provider.followUser(username: username)
@@ -97,7 +95,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
         let refreshStarring = Observable.of(input.headerRefresh, followed.mapToVoid()).merge()
         refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
-            guard let self = self, self.loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
+            guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let username = self.user.value?.login ?? ""
             return self.provider.checkFollowing(username: username)
                 .trackActivity(self.loading)

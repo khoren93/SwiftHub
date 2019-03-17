@@ -61,7 +61,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let viewModel = NotificationsViewModel(mode: .mine, provider: provider)
             return viewModel
         case .settings:
-            let viewModel = SettingsViewModel(loggedIn: loggedIn, provider: provider)
+            let viewModel = SettingsViewModel(provider: provider)
             return viewModel
         case .login:
             let viewModel = LoginViewModel(provider: provider)

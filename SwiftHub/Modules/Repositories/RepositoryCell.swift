@@ -15,9 +15,9 @@ class RepositoryCell: DetailedTableViewCell {
         view.borderColor = .white
         view.borderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
-        view.cornerRadius = 16
+        view.cornerRadius = 17
         view.snp.remakeConstraints({ (make) in
-            make.size.equalTo(32)
+            make.size.equalTo(34)
         })
         return view
     }()
@@ -45,6 +45,6 @@ class RepositoryCell: DetailedTableViewCell {
             let image = starred ? R.image.icon_button_unstar() : R.image.icon_button_star()
             return image?.template
         }.drive(starButton.rx.image()).disposed(by: rx.disposeBag)
-        viewModel.starring.map { $0 ? 1.0: 0.7 }.drive(starButton.rx.alpha).disposed(by: rx.disposeBag)
+        viewModel.starring.map { $0 ? 1.0: 0.6 }.drive(starButton.rx.alpha).disposed(by: rx.disposeBag)
     }
 }
