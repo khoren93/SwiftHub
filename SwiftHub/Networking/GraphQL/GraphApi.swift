@@ -44,6 +44,7 @@ extension GraphApi {
     }
 
     func searchRepositories(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<RepositorySearch> {
+        let query = "\(query) sort:\(sort)-\(order)"
         return client.rx.fetch(query: SearchRepositoriesQuery(query: query, before: endCursor))
             .map { RepositorySearch(graph: $0.search) }
     }
