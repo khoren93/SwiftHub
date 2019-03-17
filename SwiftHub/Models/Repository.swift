@@ -57,6 +57,8 @@ struct Repository: Mappable {
     var releasesCount: Int?
     var contributorsCount: Int?
 
+    var viewerHasStarred: Bool?
+
     init?(map: Map) {}
     init() {}
 
@@ -109,6 +111,7 @@ struct Repository: Mappable {
         language = graph.primaryLanguage?.name
         languageColor = graph.primaryLanguage?.color
         stargazersCount = graph.stargazers.totalCount
+        viewerHasStarred = graph.viewerHasStarred
         owner = User()
         owner?.avatarUrl = graph.owner.avatarUrl
     }

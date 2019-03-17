@@ -44,7 +44,7 @@ extension GraphApi {
     }
 
     func searchRepositories(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<RepositorySearch> {
-        let query = "\(query) sort:\(sort)-\(order)"
+        let query = query + (sort.isNotEmpty ? " sort:\(sort)-\(order)": "")
         return client.rx.fetch(query: SearchRepositoriesQuery(query: query, before: endCursor))
             .map { RepositorySearch(graph: $0.search) }
     }
@@ -108,6 +108,7 @@ extension GraphApi {
     }
 
     func searchUsers(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<UserSearch> {
+        let query = query + (sort.isNotEmpty ? " sort:\(sort)-\(order)": "")
         return client.rx.fetch(query: SearchUsersQuery(query: query, before: endCursor))
             .map { UserSearch(graph: $0.search) }
     }

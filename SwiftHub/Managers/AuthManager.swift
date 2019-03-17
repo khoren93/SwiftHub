@@ -10,6 +10,9 @@ import Foundation
 import KeychainAccess
 import ObjectMapper
 import RxSwift
+import RxCocoa
+
+let loggedIn = BehaviorRelay<Bool>(value: false)
 
 class AuthManager {
 
@@ -21,6 +24,10 @@ class AuthManager {
     fileprivate let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
     let tokenChanged = PublishSubject<Token?>()
+
+    init() {
+        loggedIn.accept(hasValidToken)
+    }
 
     var token: Token? {
         get {
@@ -34,6 +41,7 @@ class AuthManager {
                 keychain[tokenKey] = nil
             }
             tokenChanged.onNext(newValue)
+            loggedIn.accept(hasValidToken)
         }
     }
 

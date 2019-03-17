@@ -22,12 +22,9 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
         let openWhatsNew: Driver<WhatsNewBlock>
     }
 
-    let loggedIn: BehaviorRelay<Bool>
-
     let whatsNewManager: WhatsNewManager
 
-    init(loggedIn: Bool, provider: SwiftHubAPI) {
-        self.loggedIn = BehaviorRelay(value: loggedIn)
+    override init(provider: SwiftHubAPI) {
         whatsNewManager = WhatsNewManager.shared
         super.init(provider: provider)
     }

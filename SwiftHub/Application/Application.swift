@@ -54,8 +54,7 @@ final class Application: NSObject {
                 analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
             }
 
-            let loggedIn = self.authManager.hasValidToken
-            let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
+            let viewModel = HomeTabBarViewModel(provider: provider)
             self.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
         }
     }
