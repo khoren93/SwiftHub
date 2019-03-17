@@ -42,7 +42,6 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     let user: BehaviorRelay<User?>
-    let following = BehaviorRelay<Bool>(value: false)
 
     init(user: User?, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
@@ -77,8 +76,8 @@ class UserViewModel: ViewModel, ViewModelType {
         let followed = input.followSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
             guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let username = self.user.value?.login ?? ""
-            let following = self.following.value
-            let request = following ? self.provider.unfollowUser(username: username) : self.provider.followUser(username: username)
+            let following = self.user.value?.viewerIsFollowing
+            let request = following == true ? self.provider.unfollowUser(username: username) : self.provider.followUser(username: username)
             return request
                 .trackActivity(self.loading)
                 .materialize()
@@ -102,9 +101,16 @@ class UserViewModel: ViewModel, ViewModelType {
                 .materialize()
                 .share()
             }.subscribe(onNext: { [weak self] (event) in
+                guard let self = self else { return }
                 switch event {
-                case .next: self?.following.accept(true)
-                case .error: self?.following.accept(false)
+                case .next:
+                    var user = self.user.value
+                    user?.viewerIsFollowing = true
+                    self.user.accept(user)
+                case .error:
+                    var user = self.user.value
+                    user?.viewerIsFollowing = false
+                    self.user.accept(user)
                 case .completed: break
             }
         }).disposed(by: rx.disposeBag)
@@ -142,6 +148,8 @@ class UserViewModel: ViewModel, ViewModelType {
                 let viewModel = UsersViewModel(mode: mode, provider: self.provider)
                 return viewModel
         }
+
+        let following = user.map { $0?.viewerIsFollowing }.filterNil()
 
         let items = user.map { (user) -> [UserSection] in
             var items: [UserSectionItem] = []
@@ -202,7 +210,7 @@ class UserViewModel: ViewModel, ViewModelType {
                       fullname: fullname,
                       description: description,
                       imageUrl: imageUrl,
-                      following: following.asDriver(),
+                      following: following.asDriver(onErrorJustReturn: false),
                       hidesFollowButton: hidesFollowButton,
                       repositoriesCount: repositoriesCount,
                       followersCount: followersCount,

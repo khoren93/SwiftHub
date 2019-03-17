@@ -42,7 +42,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     let repository: BehaviorRelay<Repository>
     let readme = BehaviorRelay<Content?>(value: nil)
-    let starring = BehaviorRelay<Bool>(value: false)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -79,8 +78,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         let starred = input.starSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
             guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
             let fullname = self.repository.value.fullname ?? ""
-            let starring = self.starring.value
-            let request = starring ? self.provider.unstarRepository(fullname: fullname) : self.provider.starRepository(fullname: fullname)
+            let starring = self.repository.value.viewerHasStarred
+            let request = starring == true ? self.provider.unstarRepository(fullname: fullname) : self.provider.starRepository(fullname: fullname)
             return request
                 .trackActivity(self.loading)
                 .materialize()
@@ -104,9 +103,16 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 .materialize()
                 .share()
             }.subscribe(onNext: { [weak self] (event) in
+                guard let self = self else { return }
                 switch event {
-                case .next: self?.starring.accept(true)
-                case .error: self?.starring.accept(false)
+                case .next:
+                    var repository = self.repository.value
+                    repository.viewerHasStarred = true
+                    self.repository.accept(repository)
+                case .error:
+                    var repository = self.repository.value
+                    repository.viewerHasStarred = false
+                    self.repository.accept(repository)
                 case .completed: break
                 }
             }).disposed(by: rx.disposeBag)
@@ -146,6 +152,8 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 let viewModel = UsersViewModel(mode: mode, provider: self.provider)
                 return viewModel
         }
+
+        let starring = repository.map { $0.viewerHasStarred }.filterNil()
 
         let items = repository.map { (repository) -> [RepositorySection] in
             var items: [RepositorySectionItem] = []
@@ -294,7 +302,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                       name: name,
                       description: description,
                       imageUrl: imageUrl,
-                      starring: starring.asDriver(),
+                      starring: starring.asDriver(onErrorJustReturn: false),
                       hidesStarButton: hidesStarButton,
                       watchersCount: watchersCount,
                       starsCount: starsCount,
