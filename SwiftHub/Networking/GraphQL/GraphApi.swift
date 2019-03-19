@@ -114,7 +114,8 @@ extension GraphApi {
     }
 
     func user(owner: String) -> Single<User> {
-        return restApi.user(owner: owner)
+        return client.rx.fetch(query: UserQuery(login: owner))
+            .map { User(graph: $0.user) }
     }
 
     func organization(owner: String) -> Single<User> {
@@ -160,7 +161,8 @@ extension GraphApi {
     // MARK: - Authentication is required
 
     func profile() -> Single<User> {
-        return restApi.profile()
+        return client.rx.fetch(query: ViewerQuery())
+            .map { User(graph: $0.viewer) }
     }
 
     func notifications(all: Bool, participating: Bool, page: Int) -> Single<[Notification]> {

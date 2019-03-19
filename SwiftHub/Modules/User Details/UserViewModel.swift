@@ -119,7 +119,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let fullname = user.map { $0?.name ?? "" }.asDriverOnErrorJustComplete()
         let description = user.map { $0?.bio ?? "" }.asDriverOnErrorJustComplete()
         let imageUrl = user.map { $0?.avatarUrl?.url }.asDriverOnErrorJustComplete()
-        let repositoriesCount = user.map { $0?.publicRepos ?? 0 }.asDriverOnErrorJustComplete()
+        let repositoriesCount = user.map { $0?.repositoriesCount ?? 0 }.asDriverOnErrorJustComplete()
         let followersCount = user.map { $0?.followers ?? 0 }.asDriverOnErrorJustComplete()
         let followingCount = user.map { $0?.following ?? 0 }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
@@ -154,19 +154,39 @@ class UserViewModel: ViewModel, ViewModelType {
         let items = user.map { (user) -> [UserSection] in
             var items: [UserSectionItem] = []
 
-            // Stars
-            let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
-                                                             detail: "",
-                                                             image: R.image.icon_cell_star(),
-                                                             hidesDisclosure: false)
-            items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
+            // Created
+            if let created = user?.createdAt {
+                let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
+                                                                   detail: created.toRelative(),
+                                                                   image: R.image.icon_cell_created(),
+                                                                   hidesDisclosure: true)
+                items.append(UserSectionItem.createdItem(viewModel: createdCellViewModel))
+            }
 
-            // Watching
-            let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
-                                                                detail: "",
-                                                                image: R.image.icon_cell_theme(),
-                                                                hidesDisclosure: false)
-            items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
+            // Updated
+            if let updated = user?.updatedAt {
+                let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
+                                                                   detail: updated.toRelative(),
+                                                                   image: R.image.icon_cell_updated(),
+                                                                   hidesDisclosure: true)
+                items.append(UserSectionItem.updatedItem(viewModel: updatedCellViewModel))
+            }
+
+            if user?.type == .user {
+                // Stars
+                let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
+                                                                 detail: user?.starredRepositoriesCount?.string ?? "",
+                                                                 image: R.image.icon_cell_star(),
+                                                                 hidesDisclosure: false)
+                items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
+
+                // Watching
+                let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
+                                                                    detail: user?.watchingCount?.string ?? "",
+                                                                    image: R.image.icon_cell_theme(),
+                                                                    hidesDisclosure: false)
+                items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
+            }
 
             // Events
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
@@ -175,7 +195,8 @@ class UserViewModel: ViewModel, ViewModelType {
                                                               hidesDisclosure: false)
             items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
-            if let company = user?.company {
+            // Company
+            if let company = user?.company, company.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
                                                                    detail: company,
                                                                    image: R.image.icon_cell_company(),
@@ -183,6 +204,7 @@ class UserViewModel: ViewModel, ViewModelType {
                 items.append(UserSectionItem.companyItem(viewModel: companyCellViewModel))
             }
 
+            // Blog
             if let blog = user?.blog, blog.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
                                                                    detail: blog,
@@ -198,9 +220,19 @@ class UserViewModel: ViewModel, ViewModelType {
                                                                       hidesDisclosure: false)
             items.append(UserSectionItem.profileSummaryItem(viewModel: profileSummaryCellViewModel))
 
-            return [
-                UserSection.user(title: "", items: items)
-            ]
+            var pinnedItems: [UserSectionItem] = []
+            if let repos = user?.pinnedRepositories?.map({ RepositoryCellViewModel(with: $0) }) {
+                repos.forEach({ (cellViewModel) in
+                    pinnedItems.append(UserSectionItem.repositoryItem(viewModel: cellViewModel))
+                })
+            }
+
+            var userSections: [UserSection] = []
+            userSections.append(UserSection.user(title: "", items: items))
+            if pinnedItems.isNotEmpty {
+                userSections.append(UserSection.user(title: "Pinned", items: pinnedItems))
+            }
+            return userSections
         }
 
         let selectedEvent = input.selection
@@ -224,6 +256,8 @@ class UserViewModel: ViewModel, ViewModelType {
 
     func viewModel(for item: UserSectionItem) -> ViewModel? {
         switch item {
+        case .createdItem: return nil
+        case .updatedItem: return nil
         case .starsItem:
             if let user = self.user.value {
                 let mode = RepositoriesMode.userStarredRepositories(user: user)
@@ -251,6 +285,9 @@ class UserViewModel: ViewModel, ViewModelType {
             }
         case .blogItem: return nil
         case .profileSummaryItem: return nil
+        case .repositoryItem(let cellViewModel):
+            let viewModel = RepositoryViewModel(repository: cellViewModel.repository, provider: provider)
+            return viewModel
         }
         return nil
     }

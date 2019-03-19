@@ -13,6 +13,7 @@ import RxDataSources
 import AttributedLib
 
 private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
+private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
 
 class UserViewController: TableViewController {
 
@@ -141,6 +142,7 @@ class UserViewController: TableViewController {
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
         tableView.register(R.nib.userDetailCell)
+        tableView.register(R.nib.repositoryCell)
     }
 
     override func bindViewModel() {
@@ -162,13 +164,19 @@ class UserViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .starsItem(let viewModel),
+            case .createdItem(let viewModel),
+                 .updatedItem(let viewModel),
+                 .starsItem(let viewModel),
                  .watchingItem(let viewModel),
                  .eventsItem(let viewModel),
                  .companyItem(let viewModel),
                  .blogItem(let viewModel),
                  .profileSummaryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? UserDetailCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .repositoryItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
                 cell.bind(to: viewModel)
                 return cell
             }
@@ -207,6 +215,12 @@ class UserViewController: TableViewController {
                 if let url = self?.viewModel.profileSummaryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
+            case .repositoryItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+                }
+            default:
+                self?.deselectSelectedRow()
             }
         }).disposed(by: rx.disposeBag)
 

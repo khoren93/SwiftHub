@@ -14,106 +14,69 @@ struct Repository: Mappable {
 
     var archived: Bool?
     var cloneUrl: String?
-    var createdAt: Date?
-    var defaultBranch: String?
-    var descriptionField: String?
-    var fork: Bool?
-    var forks: Int?
+    var createdAt: Date?  // Identifies the date and time when the object was created.
+    var defaultBranch: String?  // The Ref name associated with the repository's default branch.
+    var descriptionField: String?  // The description of the repository.
+    var fork: Bool?  // Identifies if the repository is a fork.
+    var forks: Int?  // Identifies the total count of direct forked repositories
     var forksCount: Int?
-    var fullname: String?
+    var fullname: String?  // The repository's name with owner.
     var hasDownloads: Bool?
     var hasIssues: Bool?
     var hasPages: Bool?
     var hasProjects: Bool?
     var hasWiki: Bool?
-    var homepage: String?
+    var homepage: String?  // The repository's URL.
     var htmlUrl: String?
-    var id: Int?
-    var language: String?
-    var languageColor: String?
+    var language: String?  // The name of the current language.
+    var languageColor: String?  // The color defined for the current language.
     var license: License?
-    var name: String?
+    var name: String?  // The name of the repository.
     var networkCount: Int?
     var nodeId: String?
     var openIssues: Int?
-    var openIssuesCount: Int?
+    var openIssuesCount: Int?  // Identifies the total count of issues that have been opened in the repository.
     var organization: User?
-    var owner: User?
+    var owner: User?  // The User owner of the repository.
     var privateField: Bool?
     var pushedAt: String?
-    var size: Int?
+    var size: Int?  // The number of kilobytes this repository occupies on disk.
     var sshUrl: String?
-    var stargazersCount: Int?
-    var subscribersCount: Int?
-    var updatedAt: Date?
-    var url: String?
+    var stargazersCount: Int?  // Identifies the total count of items who have starred this starrable.
+    var subscribersCount: Int?  // Identifies the total count of users watching the repository
+    var updatedAt: Date?  // Identifies the date and time when the object was last updated.
+    var url: String?  // The HTTP URL for this repository
     var watchers: Int?
     var watchersCount: Int?
-    var parentFullname: String?
+    var parentFullname: String?  // The parent repository's name with owner, if this is a fork.
 
-    var commitsCount: Int?
-    var pullRequestsCount: Int?
+    var commitsCount: Int?  // Identifies the total count of the commits
+    var pullRequestsCount: Int?  // Identifies the total count of a list of pull requests that have been opened in the repository.
     var branchesCount: Int?
-    var releasesCount: Int?
-    var contributorsCount: Int?
+    var releasesCount: Int?  // Identifies the total count of releases which are dependent on this repository.
+    var contributorsCount: Int?  // Identifies the total count of Users that can be mentioned in the context of the repository.
 
-    var viewerHasStarred: Bool?
+    var viewerHasStarred: Bool?  // Returns a boolean indicating whether the viewing user has starred this starrable.
 
     init?(map: Map) {}
     init() {}
 
+    init(name: String?, fullname: String?, description: String?, language: String?, languageColor: String?, stargazers: Int?, viewerHasStarred: Bool?, ownerAvatarUrl: String?) {
+        self.name = name
+        self.fullname = fullname
+        self.descriptionField = description
+        self.language = language
+        self.languageColor = languageColor
+        self.stargazersCount = stargazers
+        self.viewerHasStarred = viewerHasStarred
+        owner = User()
+        owner?.avatarUrl = ownerAvatarUrl
+    }
+
     init(repo: TrendingRepository) {
-        name = repo.name
-        fullname = repo.fullname
-        htmlUrl = repo.url
-        descriptionField = repo.descriptionField
-        language = repo.language
-        stargazersCount = repo.stars
-        forks = repo.forks
-        if let user = repo.builtBy?.first {
-            owner = User(user: user)
-        }
-    }
-
-    init(graph: RepositoryQuery.Data.Repository?) {
-        guard let graph = graph else { return }
-        name = graph.name
-        fullname = graph.nameWithOwner
-        descriptionField = graph.description
-        url = graph.url
-        homepage = graph.homepageUrl
-        createdAt =  graph.createdAt.toISODate()?.date
-        updatedAt = graph.updatedAt.toISODate()?.date
-        size = graph.diskUsage
-        fork = graph.isFork
-        parentFullname = graph.parent?.nameWithOwner
-        language = graph.primaryLanguage?.name
-        languageColor = graph.primaryLanguage?.color
-        defaultBranch = graph.defaultBranchRef?.name
-        stargazersCount = graph.stargazers.totalCount
-        subscribersCount = graph.watchers.totalCount
-        forks = graph.forks.totalCount
-        openIssuesCount = graph.issues.totalCount
-        commitsCount = graph.ref?.target.asCommit?.history.totalCount
-        pullRequestsCount = graph.pullRequests.totalCount
-        releasesCount = graph.releases.totalCount
-        contributorsCount = graph.mentionableUsers.totalCount
-        owner = User()
-        owner?.login = graph.owner.login
-        owner?.avatarUrl = graph.owner.avatarUrl
-    }
-
-    init(graph: SearchRepositoriesQuery.Data.Search.Node.AsRepository?) {
-        guard let graph = graph else { return }
-        name = graph.name
-        fullname = graph.nameWithOwner
-        descriptionField = graph.description
-        language = graph.primaryLanguage?.name
-        languageColor = graph.primaryLanguage?.color
-        stargazersCount = graph.stargazers.totalCount
-        viewerHasStarred = graph.viewerHasStarred
-        owner = User()
-        owner?.avatarUrl = graph.owner.avatarUrl
+        self.init(name: repo.name, fullname: repo.fullname, description: repo.descriptionField,
+                  language: repo.language, languageColor: repo.languageColor, stargazers: repo.stars,
+                  viewerHasStarred: nil, ownerAvatarUrl: repo.builtBy?.first?.avatar)
     }
 
     mutating func mapping(map: Map) {
@@ -133,7 +96,6 @@ struct Repository: Mappable {
         hasWiki <- map["has_wiki"]
         homepage <- map["homepage"]
         htmlUrl <- map["html_url"]
-        id <- map["id"]
         language <- map["language"]
         license <- map["license"]
         name <- map["name"]
@@ -164,9 +126,52 @@ struct Repository: Mappable {
     }
 }
 
+extension Repository {
+    init(graph: RepositoryQuery.Data.Repository?) {
+        self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
+                  language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
+                  stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
+        url = graph?.url
+        homepage = graph?.homepageUrl
+        createdAt =  graph?.createdAt.toISODate()?.date
+        updatedAt = graph?.updatedAt.toISODate()?.date
+        size = graph?.diskUsage
+        fork = graph?.isFork
+        parentFullname = graph?.parent?.nameWithOwner
+        defaultBranch = graph?.defaultBranchRef?.name
+        subscribersCount = graph?.watchers.totalCount
+        forks = graph?.forks.totalCount
+        openIssuesCount = graph?.issues.totalCount
+        commitsCount = graph?.ref?.target.asCommit?.history.totalCount
+        pullRequestsCount = graph?.pullRequests.totalCount
+        releasesCount = graph?.releases.totalCount
+        contributorsCount = graph?.mentionableUsers.totalCount
+        owner?.login = graph?.owner.login
+        owner?.type = graph?.owner.asOrganization != nil ? UserType.organization: UserType.user
+    }
+
+    init(graph: SearchRepositoriesQuery.Data.Search.Node.AsRepository?) {
+        self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
+                  language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
+                  stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
+    }
+
+    init(graph: UserQuery.Data.User.PinnedRepository.Node?) {
+        self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
+                  language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
+                  stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
+    }
+
+    init(graph: ViewerQuery.Data.Viewer.PinnedRepository.Node?) {
+        self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
+                  language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
+                  stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
+    }
+}
+
 extension Repository: Equatable {
     static func == (lhs: Repository, rhs: Repository) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.fullname == rhs.fullname
     }
 }
 

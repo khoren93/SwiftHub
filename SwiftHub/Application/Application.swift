@@ -49,8 +49,8 @@ final class Application: NSObject {
 //        return
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if let user = User.currentUser(), let userId = user.id?.string {
-                analytics.identify(userId: userId)
+            if let user = User.currentUser(), let login = user.login {
+                analytics.identify(userId: login)
                 analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
             }
 

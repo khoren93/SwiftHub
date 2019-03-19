@@ -19,63 +19,52 @@ enum UserType: String {
     case organization = "Organization"
 }
 
+/// User model
 struct User: Mappable {
 
-    // Common
-    var avatarUrl: String?
-    var blog: String?
-    var company: String?
+    var avatarUrl: String?  // A URL pointing to the user's public avatar.
+    var blog: String?  // A URL pointing to the user's public website/blog.
+    var company: String?  // The user's public profile company.
     var contributions: Int?
-    var createdAt: Date?
-    var email: String?
-    var followers: Int?
-    var following: Int?
-    var htmlUrl: String?
-    var id: Int?
-    var location: String?
-    var login: String?
-    var name: String?
-    var nodeId: String?
-    var publicGists: Int?
-    var publicRepos: Int?
+    var createdAt: Date?  // Identifies the date and time when the object was created.
+    var email: String?  // The user's publicly visible profile email.
+    var followers: Int?  // Identifies the total count of followers.
+    var following: Int? // Identifies the total count of following.
+    var htmlUrl: String?  // The HTTP URL for this user
+    var location: String?  // The user's public profile location.
+    var login: String?  // The username used to login.
+    var name: String?  // The user's public profile name.
     var type: UserType = .user
-    var updatedAt: Date?
-    var score: Float?
+    var updatedAt: Date?  // Identifies the date and time when the object was last updated.
+    var starredRepositoriesCount: Int?  // Identifies the total count of repositories the user has starred.
+    var repositoriesCount: Int?  // Identifies the total count of repositories that the user owns.
+    var issuesCount: Int?  // Identifies the total count of issues associated with this user
+    var watchingCount: Int?  // Identifies the total count of repositories the given user is watching
+    var viewerCanFollow: Bool?  // Whether or not the viewer is able to follow the user.
+    var viewerIsFollowing: Bool?  // Whether or not this user is followed by the viewer.
+    var isViewer: Bool?  // Whether or not this user is the viewing user.
+    var pinnedRepositories: [Repository]?  // A list of repositories this user has pinned to their profile
 
     // Only for Organization type
     var descriptionField: String?
-    var hasOrganizationProjects: Bool?
-    var hasRepositoryProjects: Bool?
 
     // Only for User type
-    var bio: String?
-    var gravatarId: String?
-    var hireable: Bool?
-    var siteAdmin: Bool?
-
-    var viewerCanFollow: Bool?
-    var viewerIsFollowing: Bool?
+    var bio: String?  // The user's public profile bio.
 
     init?(map: Map) {}
     init() {}
 
-    init(user: TrendingUser) {
-        login = user.username
-        name = user.name
-        htmlUrl = user.url
-        avatarUrl = user.avatar
+    init(login: String?, name: String?, avatarUrl: String?, followers: Int?, viewerCanFollow: Bool?, viewerIsFollowing: Bool?) {
+        self.login = login
+        self.name = name
+        self.avatarUrl = avatarUrl
+        self.followers = followers
+        self.viewerCanFollow = viewerCanFollow
+        self.viewerIsFollowing = viewerIsFollowing
     }
 
-    init(graph: SearchUsersQuery.Data.Search.Node.AsUser?) {
-        guard let graph = graph else { return }
-        name = graph.name
-        login = graph.login
-        avatarUrl = graph.avatarUrl
-        location = graph.location
-        email = graph.email
-        followers = graph.followers.totalCount
-        viewerCanFollow = graph.viewerCanFollow
-        viewerIsFollowing = graph.viewerIsFollowing
+    init(user: TrendingUser) {
+        self.init(login: user.username, name: user.name, avatarUrl: user.avatar, followers: nil, viewerCanFollow: nil, viewerIsFollowing: nil)
     }
 
     mutating func mapping(map: Map) {
@@ -88,29 +77,70 @@ struct User: Mappable {
         email <- map["email"]
         followers <- map["followers"]
         following <- map["following"]
-        hasOrganizationProjects <- map["has_organization_projects"]
-        hasRepositoryProjects <- map["has_repository_projects"]
         htmlUrl <- map["html_url"]
-        id <- map["id"]
         location <- map["location"]
         login <- map["login"]
         name <- map["name"]
-        nodeId <- map["node_id"]
-        publicGists <- map["public_gists"]
-        publicRepos <- map["public_repos"]
+        repositoriesCount <- map["public_repos"]
         type <- map["type"]
         updatedAt <- (map["updated_at"], ISO8601DateTransform())
-        score <- map["score"]
         bio <- map["bio"]
-        gravatarId <- map["gravatar_id"]
-        hireable <- map["hireable"]
-        siteAdmin <- map["site_admin"]
+    }
+}
+
+/// GraphQL initializators for User model
+extension User {
+    init(graph: ViewerQuery.Data.Viewer?) {
+        self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl, followers: graph?.followers.totalCount,
+                  viewerCanFollow: graph?.viewerCanFollow, viewerIsFollowing: graph?.viewerIsFollowing)
+        htmlUrl = graph?.url
+        blog = graph?.websiteUrl
+        bio = graph?.bio
+        company = graph?.company
+        email = graph?.email
+        location = graph?.location
+        createdAt = graph?.createdAt.toISODate()?.date
+        updatedAt = graph?.updatedAt.toISODate()?.date
+        isViewer = graph?.isViewer
+        following = graph?.following.totalCount
+        starredRepositoriesCount = graph?.starredRepositories.totalCount
+        repositoriesCount = graph?.repositories.totalCount
+        issuesCount = graph?.issues.totalCount
+        watchingCount = graph?.watching.totalCount
+        pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+    }
+
+    init(graph: UserQuery.Data.User?) {
+        self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl, followers: graph?.followers.totalCount,
+                  viewerCanFollow: graph?.viewerCanFollow, viewerIsFollowing: graph?.viewerIsFollowing)
+        htmlUrl = graph?.url
+        blog = graph?.websiteUrl
+        bio = graph?.bio
+        company = graph?.company
+        email = graph?.email
+        location = graph?.location
+        createdAt = graph?.createdAt.toISODate()?.date
+        updatedAt = graph?.updatedAt.toISODate()?.date
+        isViewer = graph?.isViewer
+        following = graph?.following.totalCount
+        starredRepositoriesCount = graph?.starredRepositories.totalCount
+        repositoriesCount = graph?.repositories.totalCount
+        issuesCount = graph?.issues.totalCount
+        watchingCount = graph?.watching.totalCount
+        pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+    }
+
+    init(graph: SearchUsersQuery.Data.Search.Node.AsUser?) {
+        self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl, followers: graph?.followers.totalCount,
+                  viewerCanFollow: graph?.viewerCanFollow, viewerIsFollowing: graph?.viewerIsFollowing)
     }
 }
 
 extension User {
-
     func isMine() -> Bool {
+        if let isViewer = isViewer {
+            return isViewer
+        }
         return self == User.currentUser()
     }
 
@@ -136,10 +166,11 @@ extension User {
 
 extension User: Equatable {
     static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.login == rhs.login
     }
 }
 
+/// UserSearch model
 struct UserSearch: Mappable {
 
     var items: [User] = []
@@ -151,15 +182,6 @@ struct UserSearch: Mappable {
     init?(map: Map) {}
     init() {}
 
-    init(graph: SearchUsersQuery.Data.Search) {
-        if let users = graph.nodes?.map({ User(graph: $0?.asUser) }) {
-            items = users
-        }
-        totalCount = graph.userCount
-        hasNextPage = graph.pageInfo.hasNextPage
-        endCursor = graph.pageInfo.endCursor
-    }
-
     mutating func mapping(map: Map) {
         items <- map["items"]
         totalCount <- map["total_count"]
@@ -168,6 +190,19 @@ struct UserSearch: Mappable {
     }
 }
 
+/// GraphQL initializators for UserSearch model
+extension UserSearch {
+    init(graph: SearchUsersQuery.Data.Search) {
+        if let users = graph.nodes?.map({ User(graph: $0?.asUser) }) {
+            items = users
+        }
+        totalCount = graph.userCount
+        hasNextPage = graph.pageInfo.hasNextPage
+        endCursor = graph.pageInfo.endCursor
+    }
+}
+
+/// TrendingUser model
 struct TrendingUser: Mappable {
 
     var username: String?

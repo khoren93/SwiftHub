@@ -152,6 +152,7 @@
 		A034AF7B21528108004C310B /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A034AF7A21528108004C310B /* NotificationCellViewModel.swift */; };
 		A034AF7F215287B2004C310B /* Notifications.json in Resources */ = {isa = PBXBuildFile; fileRef = A034AF7E215287B2004C310B /* Notifications.json */; };
 		A034AF8121529194004C310B /* NotificationsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = A034AF8021529193004C310B /* NotificationsRepository.json */; };
+		A07DB584223FC02E000E3312 /* User.graphql in Resources */ = {isa = PBXBuildFile; fileRef = A07DB583223FC02E000E3312 /* User.graphql */; };
 		A07DC84821EDF6A200AA7951 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84721EDF6A200AA7951 /* ContactsViewController.swift */; };
 		A07DC84A21EDF6B800AA7951 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84921EDF6B800AA7951 /* ContactsViewModel.swift */; };
 		A07DC84C21EDF6C700AA7951 /* ContactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07DC84B21EDF6C700AA7951 /* ContactCellViewModel.swift */; };
@@ -431,6 +432,7 @@
 		A034AF7A21528108004C310B /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		A034AF7E215287B2004C310B /* Notifications.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Notifications.json; sourceTree = "<group>"; };
 		A034AF8021529193004C310B /* NotificationsRepository.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationsRepository.json; sourceTree = "<group>"; };
+		A07DB583223FC02E000E3312 /* User.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = User.graphql; sourceTree = "<group>"; };
 		A07DC84721EDF6A200AA7951 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A07DC84921EDF6B800AA7951 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		A07DC84B21EDF6C700AA7951 /* ContactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellViewModel.swift; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 			children = (
 				07FDBC0A223D090C00D72AFC /* Repository.graphql */,
 				073A1F782233F2F000D6F487 /* Search.graphql */,
+				A07DB583223FC02E000E3312 /* User.graphql */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */,
 				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
+				A07DB584223FC02E000E3312 /* User.graphql in Resources */,
 				07241D1921B1768E00F800BD /* CommitCell.xib in Resources */,
 				073A1F792233F2F000D6F487 /* Search.graphql in Resources */,
 				A09DE8AF20E7A99000F6F2BF /* UserRepositories.json in Resources */,
