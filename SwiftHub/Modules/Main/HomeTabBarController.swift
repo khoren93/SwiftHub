@@ -12,7 +12,7 @@ import Localize_Swift
 import RxSwift
 
 enum HomeTabBarItem: Int {
-    case search, news, profile, notifications, settings, login
+    case search, news, notifications, settings, login
 
     func controller(with viewModel: ViewModel) -> UIViewController {
         switch self {
@@ -23,10 +23,6 @@ enum HomeTabBarItem: Int {
         case .news:
             let vc = R.storyboard.main.eventsViewController()!
             vc.viewModel = (viewModel as? EventsViewModel)!
-            return NavigationController(rootViewController: vc)
-        case .profile:
-            let vc = R.storyboard.main.userViewController()!
-            vc.viewModel = (viewModel as? UserViewModel)!
             return NavigationController(rootViewController: vc)
         case .notifications:
             let vc = R.storyboard.main.notificationsViewController()!
@@ -47,7 +43,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: return R.image.icon_tabbar_search()
         case .news: return R.image.icon_tabbar_news()
-        case .profile: return R.image.icon_tabbar_profile()
         case .notifications: return R.image.icon_tabbar_activity()
         case .settings: return R.image.icon_tabbar_settings()
         case .login: return R.image.icon_tabbar_login()
@@ -58,7 +53,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: return R.string.localizable.homeTabBarSearchTitle.key.localized()
         case .news: return R.string.localizable.homeTabBarEventsTitle.key.localized()
-        case .profile: return R.string.localizable.homeTabBarProfileTitle.key.localized()
         case .notifications: return R.string.localizable.homeTabBarNotificationsTitle.key.localized()
         case .settings: return R.string.localizable.homeTabBarSettingsTitle.key.localized()
         case .login: return R.string.localizable.homeTabBarLoginTitle.key.localized()
@@ -70,7 +64,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: animation = RAMFlipLeftTransitionItemAnimations()
         case .news: animation = RAMBounceAnimation()
-        case .profile: animation = RAMBounceAnimation()
         case .notifications: animation = RAMBounceAnimation()
         case .settings: animation = RAMRightRotationAnimation()
         case .login: animation = RAMBounceAnimation()

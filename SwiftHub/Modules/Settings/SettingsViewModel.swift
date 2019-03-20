@@ -23,6 +23,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
         let selectedEvent: Driver<SettingsSectionItem>
     }
 
+    let currentUser: User?
+
     let bannerEnabled: BehaviorRelay<Bool>
     let nightModeEnabled: BehaviorRelay<Bool>
 
@@ -31,6 +33,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
     var cellDisposeBag = DisposeBag()
 
     override init(provider: SwiftHubAPI) {
+        currentUser = User.currentUser()
         whatsNewManager = WhatsNewManager.shared
         bannerEnabled = BehaviorRelay(value: LibsManager.shared.bannersEnabled.value)
         nightModeEnabled = BehaviorRelay(value: ThemeType.currentTheme().isDark)
@@ -45,6 +48,21 @@ class SettingsViewModel: ViewModel, ViewModelType {
         refresh.map { [weak self] () -> [SettingsSection] in
             guard let self = self else { return [] }
             self.cellDisposeBag = DisposeBag()
+            var items: [SettingsSection] = []
+
+            if loggedIn.value {
+                var accountItems: [SettingsSectionItem] = []
+                if let user = self.currentUser {
+                    let profileCellViewModel = UserCellViewModel(with: user)
+                    accountItems.append(SettingsSectionItem.profileItem(viewModel: profileCellViewModel))
+                }
+
+                let logoutModel = SettingModel(leftImage: R.image.icon_cell_logout.name, title: R.string.localizable.settingsLogOutTitle.key.localized(), detail: "", showDisclosure: false)
+                let logoutCellViewModel = SettingCellViewModel(with: logoutModel)
+                accountItems.append(SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel))
+
+                items.append(SettingsSection.setting(title: R.string.localizable.settingsAccountSectionTitle.key.localized(), items: accountItems))
+            }
 
             let bannerEnabled = self.bannerEnabled.value
             let bannerImageName = bannerEnabled ? R.image.icon_cell_smile.name : R.image.icon_cell_frown.name
@@ -75,7 +93,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let whatsNewModel = SettingModel(leftImage: R.image.icon_cell_whats_new.name, title: R.string.localizable.settingsWhatsNewTitle.key.localized(), detail: "", showDisclosure: true)
             let whatsNewCellViewModel = SettingCellViewModel(with: whatsNewModel)
 
-            var items = [
+            items += [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
                         SettingsSectionItem.bannerItem(viewModel: bannerCellViewModel),
                         SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
@@ -89,14 +107,6 @@ class SettingsViewModel: ViewModel, ViewModelType {
                     SettingsSectionItem.whatsNewItem(viewModel: whatsNewCellViewModel)
                     ])
             ]
-
-            if loggedIn.value {
-                let logoutModel = SettingModel(leftImage: R.image.icon_cell_logout.name, title: R.string.localizable.settingsLogOutTitle.key.localized(), detail: "", showDisclosure: false)
-                let logoutCellViewModel = SettingCellViewModel(with: logoutModel)
-                items.append(SettingsSection.setting(title: "", items: [
-                    SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel)
-                    ]))
-            }
 
             return items
         }.bind(to: elements).disposed(by: rx.disposeBag)
@@ -125,6 +135,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     func viewModel(for item: SettingsSectionItem) -> ViewModel? {
         switch item {
+        case .profileItem:
+            let viewModel = UserViewModel(user: currentUser, provider: provider)
+            return viewModel
         case .themeItem:
             let viewModel = ThemeViewModel(provider: self.provider)
             return viewModel

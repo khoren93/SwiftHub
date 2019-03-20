@@ -114,6 +114,7 @@
 "Search.SortUsers.FewestRepositories.Title" = "Քիչ ռեպոզիտորիաներ";
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
+"Settings.AccountSection.Title" = "Հաշիվ";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";
 "Settings.Banner.Title" = "Գովազդները միացված են";
 "Settings.NightMode.Title" = "Գիշերային ռեժիմ";

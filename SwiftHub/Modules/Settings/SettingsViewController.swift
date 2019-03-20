@@ -13,6 +13,7 @@ import RxDataSources
 
 private let switchReuseIdentifier = R.reuseIdentifier.settingSwitchCell.identifier
 private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
+private let profileReuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class SettingsViewController: TableViewController {
 
@@ -33,6 +34,7 @@ class SettingsViewController: TableViewController {
 
         tableView.register(R.nib.settingCell)
         tableView.register(R.nib.settingSwitchCell)
+        tableView.register(R.nib.userCell)
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }
@@ -48,6 +50,10 @@ class SettingsViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
+            case .profileItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: profileReuseIdentifier, for: indexPath) as? UserCell)!
+                cell.bind(to: viewModel)
+                return cell
             case .bannerItem(let viewModel),
                  .nightModeItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: switchReuseIdentifier, for: indexPath) as? SettingSwitchCell)!
@@ -75,6 +81,13 @@ class SettingsViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .profileItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .logoutItem:
+                self?.deselectSelectedRow()
+                self?.logoutAction()
             case .bannerItem,
                  .nightModeItem:
                 self?.deselectSelectedRow()
@@ -101,9 +114,6 @@ class SettingsViewController: TableViewController {
                     self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
                     analytics.log(.whatsNew)
                 }
-            case .logoutItem:
-                self?.deselectSelectedRow()
-                self?.logoutAction()
             }
         }).disposed(by: rx.disposeBag)
     }

@@ -14,15 +14,21 @@ enum SettingsSection {
 }
 
 enum SettingsSectionItem {
+    // Account
+    case profileItem(viewModel: UserCellViewModel)
+    case logoutItem(viewModel: SettingCellViewModel)
+
+    // Preferences
     case bannerItem(viewModel: SettingSwitchCellViewModel)
     case nightModeItem(viewModel: SettingSwitchCellViewModel)
     case themeItem(viewModel: SettingCellViewModel)
     case languageItem(viewModel: SettingCellViewModel)
     case contactsItem(viewModel: SettingCellViewModel)
     case removeCacheItem(viewModel: SettingCellViewModel)
+
+    // Support
     case acknowledgementsItem(viewModel: SettingCellViewModel)
     case whatsNewItem(viewModel: SettingCellViewModel)
-    case logoutItem(viewModel: SettingCellViewModel)
 }
 
 extension SettingsSection: SectionModelType {

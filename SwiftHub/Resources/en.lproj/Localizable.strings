@@ -114,6 +114,7 @@
 "Search.SortUsers.FewestRepositories.Title" = "Fewest repositories";
 /* Settings */
 "Settings.Navigation.Title" = "Settings";
+"Settings.AccountSection.Title" = "Account";
 "Settings.PreferencesSection.Title" = "Preferences";
 "Settings.Banner.Title" = "Ads enabled";
 "Settings.NightMode.Title" = "Night mode";

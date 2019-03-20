@@ -114,6 +114,7 @@
 "Search.SortUsers.FewestRepositories.Title" = "Наименее репозиториев";
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
+"Settings.AccountSection.Title" = "Учетная Запись";
 "Settings.PreferencesSection.Title" = "Параметры";
 "Settings.Banner.Title" = "Реклама включена";
 "Settings.NightMode.Title" = "Ночной режим";
