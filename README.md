@@ -14,9 +14,9 @@
 
 ## Screenshots
 
-<img alt="01_search_repository_screen_light" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen.png?raw=true" width="290">&nbsp;
-<img alt="02_repository_details_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen.png?raw=true" width="290">&nbsp;
-<img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen.png?raw=true" width="290">&nbsp;
+<img alt="01_search_repository_screen_light" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen.png?raw=true" width="280">&nbsp;
+<img alt="02_repository_details_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen.png?raw=true" width="280">&nbsp;
+<img alt="03_settings_screen_dark" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen.png?raw=true" width="280">&nbsp;
 
 ## Mind Mapping ([full version](https://github.com/khoren93/SwiftHub/blob/master/iThoughtsX/SwiftHub_full.pdf))
 <p align="center">
