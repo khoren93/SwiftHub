@@ -42,6 +42,9 @@ query SearchUsers($query: String!, $before: String) {
                 followers {
                     totalCount
                 }
+                repositories {
+                    totalCount
+                }
             }
         }
         pageInfo {

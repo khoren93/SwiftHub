@@ -149,6 +149,8 @@
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";
 "User.ProfileSummaryCell.Title" = "Պրոֆիլի Ամփոփագիր";
+"User.PinnedSection.Title" = "Կապակցված";
+"User.OrganizationsSection.Title" = "Կազմակերպություններ";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Հետեւորդներ";

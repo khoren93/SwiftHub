@@ -149,6 +149,8 @@
 "User.CompanyCell.Title" = "Company";
 "User.BlogCell.Title" = "Blog";
 "User.ProfileSummaryCell.Title" = "Profile Summary";
+"User.PinnedSection.Title" = "Pinned";
+"User.OrganizationsSection.Title" = "Organizations";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Followers";

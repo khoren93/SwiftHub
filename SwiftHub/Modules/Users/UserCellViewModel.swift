@@ -49,12 +49,22 @@ extension UserCellViewModel: Equatable {
 
 extension User {
     func attributetDetail() -> NSAttributedString? {
-        guard let followers = followers else { return nil }
+        let text = NSMutableAttributedString(string: "")
 
-        let followersString = followers.kFormatted()
         let textAttributes = Attributes {
             return $0.foreground(color: themeService.attrs.text)
         }
-        return "\(followersString) \(R.string.localizable.userFollowersButtonTitle.key.localized())".at.attributed(with: textAttributes)
+
+        if let followers = followers {
+            let followersString = followers.kFormatted()
+            text.append("\(followersString) \(R.string.localizable.userFollowersButtonTitle.key.localized())\t".at.attributed(with: textAttributes))
+        }
+
+        if let repositories = repositoriesCount {
+            let repositoriesString = repositories.kFormatted()
+            text.append("\(repositoriesString) \(R.string.localizable.userRepositoriesButtonTitle.key.localized())".at.attributed(with: textAttributes))
+        }
+
+        return text
     }
 }

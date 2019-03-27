@@ -149,6 +149,8 @@
 "User.CompanyCell.Title" = "公司";
 "User.BlogCell.Title" = "博客";
 "User.ProfileSummaryCell.Title" = "资料概要";
+"User.PinnedSection.Title" = "置顶";
+"User.OrganizationsSection.Title" = "组织";
 /* 用户 */
 //"Users.Navigation.Title" = "用户";
 "Users.FollowersNavigation.Title" = "追随者";

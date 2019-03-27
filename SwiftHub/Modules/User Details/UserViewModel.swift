@@ -220,6 +220,7 @@ class UserViewModel: ViewModel, ViewModelType {
                                                                       hidesDisclosure: false)
             items.append(UserSectionItem.profileSummaryItem(viewModel: profileSummaryCellViewModel))
 
+            // Pinned Repositories
             var pinnedItems: [UserSectionItem] = []
             if let repos = user?.pinnedRepositories?.map({ RepositoryCellViewModel(with: $0) }) {
                 repos.forEach({ (cellViewModel) in
@@ -227,10 +228,21 @@ class UserViewModel: ViewModel, ViewModelType {
                 })
             }
 
+            // User Organizations
+            var organizationItems: [UserSectionItem] = []
+            if let repos = user?.organizations?.map({ UserCellViewModel(with: $0) }) {
+                repos.forEach({ (cellViewModel) in
+                    organizationItems.append(UserSectionItem.organizationItem(viewModel: cellViewModel))
+                })
+            }
+
             var userSections: [UserSection] = []
             userSections.append(UserSection.user(title: "", items: items))
             if pinnedItems.isNotEmpty {
-                userSections.append(UserSection.user(title: "Pinned", items: pinnedItems))
+                userSections.append(UserSection.user(title: R.string.localizable.userPinnedSectionTitle.key.localized(), items: pinnedItems))
+            }
+            if organizationItems.isNotEmpty {
+                userSections.append(UserSection.user(title: R.string.localizable.userOrganizationsSectionTitle.key.localized(), items: organizationItems))
             }
             return userSections
         }
@@ -287,6 +299,9 @@ class UserViewModel: ViewModel, ViewModelType {
         case .profileSummaryItem: return nil
         case .repositoryItem(let cellViewModel):
             let viewModel = RepositoryViewModel(repository: cellViewModel.repository, provider: provider)
+            return viewModel
+        case .organizationItem(let cellViewModel):
+            let viewModel = UserViewModel(user: cellViewModel.user, provider: provider)
             return viewModel
         }
         return nil

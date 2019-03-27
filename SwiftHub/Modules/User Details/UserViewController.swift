@@ -14,6 +14,7 @@ import AttributedLib
 
 private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
 private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
+private let organizationReuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class UserViewController: TableViewController {
 
@@ -143,6 +144,7 @@ class UserViewController: TableViewController {
         tableView.footRefreshControl = nil
         tableView.register(R.nib.userDetailCell)
         tableView.register(R.nib.repositoryCell)
+        tableView.register(R.nib.userCell)
     }
 
     override func bindViewModel() {
@@ -177,6 +179,10 @@ class UserViewController: TableViewController {
                 return cell
             case .repositoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .organizationItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: organizationReuseIdentifier, for: indexPath) as? UserCell)!
                 cell.bind(to: viewModel)
                 return cell
             }
@@ -218,6 +224,10 @@ class UserViewController: TableViewController {
             case .repositoryItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoryViewModel {
                     self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+                }
+            case .organizationItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
                 }
             default:
                 self?.deselectSelectedRow()

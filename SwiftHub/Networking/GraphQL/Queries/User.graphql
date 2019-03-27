@@ -55,6 +55,16 @@ query Viewer {
                 }
             }
         }
+        organizations(first: 10) {
+            nodes {
+                name
+                login
+                avatarUrl
+                ... on Organization {
+                    description
+                }
+            }
+        }
     }
 }
 
@@ -108,6 +118,16 @@ query User($login: String!) {
                 }
                 stargazers {
                     totalCount
+                }
+            }
+        }
+        organizations(first: 10) {
+            nodes {
+                name
+                login
+                avatarUrl
+                ... on Organization {
+                    description
                 }
             }
         }

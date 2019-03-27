@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SafariServices
 
-private let loginURL = URL(string: "http://github.com/login/oauth/authorize?client_id=\(Keys.github.appId)&scope=user+repo+notifications")!
+private let loginURL = URL(string: "http://github.com/login/oauth/authorize?client_id=\(Keys.github.appId)&scope=user+repo+notifications+read:org")!
 private let callbackURLScheme = "swifthub"
 
 class LoginViewModel: ViewModel, ViewModelType {

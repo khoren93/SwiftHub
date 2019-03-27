@@ -44,6 +44,7 @@ struct User: Mappable {
     var viewerIsFollowing: Bool?  // Whether or not this user is followed by the viewer.
     var isViewer: Bool?  // Whether or not this user is the viewing user.
     var pinnedRepositories: [Repository]?  // A list of repositories this user has pinned to their profile
+    var organizations: [User]?  // A list of organizations the user belongs to.
 
     // Only for Organization type
     var descriptionField: String?
@@ -108,6 +109,7 @@ extension User {
         issuesCount = graph?.issues.totalCount
         watchingCount = graph?.watching.totalCount
         pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+        organizations = graph?.organizations.nodes?.map { User(graph: $0) }
     }
 
     init(graph: UserQuery.Data.User?) {
@@ -128,11 +130,27 @@ extension User {
         issuesCount = graph?.issues.totalCount
         watchingCount = graph?.watching.totalCount
         pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+        organizations = graph?.organizations.nodes?.map { User(graph: $0) }
     }
 
     init(graph: SearchUsersQuery.Data.Search.Node.AsUser?) {
         self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl, followers: graph?.followers.totalCount,
                   viewerCanFollow: graph?.viewerCanFollow, viewerIsFollowing: graph?.viewerIsFollowing)
+        repositoriesCount = graph?.repositories.totalCount
+    }
+
+    init(graph: UserQuery.Data.User.Organization.Node?) {
+        self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl,
+                  followers: nil, viewerCanFollow: nil, viewerIsFollowing: nil)
+        descriptionField = graph?.description
+        type = UserType.organization
+    }
+
+    init(graph: ViewerQuery.Data.Viewer.Organization.Node?) {
+        self.init(login: graph?.login, name: graph?.name, avatarUrl: graph?.avatarUrl,
+                  followers: nil, viewerCanFollow: nil, viewerIsFollowing: nil)
+        descriptionField = graph?.description
+        type = UserType.organization
     }
 }
 

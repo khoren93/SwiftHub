@@ -149,6 +149,8 @@
 "User.CompanyCell.Title" = "Компания";
 "User.BlogCell.Title" = "Блог";
 "User.ProfileSummaryCell.Title" = "Резюме Профиля";
+"User.PinnedSection.Title" = "Закрепленные";
+"User.OrganizationsSection.Title" = "Организации";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Подписчики";
