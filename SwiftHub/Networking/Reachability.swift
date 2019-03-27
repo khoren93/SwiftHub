@@ -21,9 +21,9 @@ private class ReachabilityManager: NSObject {
 
     fileprivate let reachability = Reachability.init()
 
-    let _reach = ReplaySubject<Bool>.create(bufferSize: 1)
+    let reachSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     var reach: Observable<Bool> {
-        return _reach.asObservable()
+        return reachSubject.asObservable()
     }
 
     override init() {
@@ -31,19 +31,19 @@ private class ReachabilityManager: NSObject {
 
         reachability?.whenReachable = { reachability in
             DispatchQueue.main.async {
-                self._reach.onNext(true)
+                self.reachSubject.onNext(true)
             }
         }
 
         reachability?.whenUnreachable = { reachability in
             DispatchQueue.main.async {
-                self._reach.onNext(false)
+                self.reachSubject.onNext(false)
             }
         }
 
         do {
             try reachability?.startNotifier()
-            _reach.onNext(reachability?.connection != .none)
+            reachSubject.onNext(reachability?.connection != .none)
         } catch {
             print("Unable to start notifier")
         }
