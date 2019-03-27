@@ -58,7 +58,7 @@ target 'SwiftHub' do
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
     pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
-    pod 'DropDown', '~> 2.0'  # https://github.com/AssistoLab/DropDown
+    pod 'DropDown', '2.3.12'  # https://github.com/AssistoLab/DropDown
     pod 'Toast-Swift', '~> 4.0'  # https://github.com/scalessec/Toast-Swift
 
     # Keyboard
