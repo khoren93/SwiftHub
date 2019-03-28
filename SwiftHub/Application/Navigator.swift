@@ -47,7 +47,6 @@ class Navigator {
         case safari(URL)
         case safariController(URL)
         case webController(URL)
-        case alert(title: String, description: String, image: UIImage?, imageID: String?, actions: [AlertAction])
     }
 
     enum Transition {
@@ -177,17 +176,6 @@ class Navigator {
             let vc = WebViewController()
             vc.load(url: url)
             return vc
-
-        case .alert(let title, let description, let image, let imageID, let actions):
-            let alert = AlertController(title: title, description: description, image: image, style: AlertControllerStyle.alert)
-            alert.hero.isEnabled = true
-            alert.alertImage.hero.id = imageID
-            alert.alertImage.hero.modifiers = [.arc]
-            alert.alertImage.contentMode = .scaleAspectFill
-            actions.forEach { (action) in
-                alert.addAction(action)
-            }
-            return alert
         }
     }
 

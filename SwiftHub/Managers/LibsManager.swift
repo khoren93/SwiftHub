@@ -25,7 +25,6 @@ import RxGesture
 import SwifterSwift
 import SwiftDate
 import Hero
-import PMAlertController
 import KafkaRefresh
 import Umbrella
 import Mixpanel
@@ -33,10 +32,7 @@ import Firebase
 import DropDown
 import Toast_Swift
 
-typealias AlertController = PMAlertController
-typealias AlertAction = PMAlertAction
-typealias AlertControllerStyle = PMAlertControllerStyle
-typealias DropDownView = DropDown
+  typealias DropDownView = DropDown
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager: NSObject {

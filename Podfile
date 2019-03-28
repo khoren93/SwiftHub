@@ -33,7 +33,7 @@ target 'SwiftHub' do
 
     # Date
     pod 'DateToolsSwift', '~> 4.0'  # https://github.com/MatthewYork/DateTools
-    pod 'SwiftDate', '~> 5.0'  # https://github.com/malcommac/SwiftDate
+    pod 'SwiftDate', '~> 6.0'  # https://github.com/malcommac/SwiftDate
 
     # Tools
     pod 'R.swift', '~> 5.0.0'  #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
@@ -48,12 +48,12 @@ target 'SwiftHub' do
 
     # UI
     pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
-    pod 'PMAlertController', '~> 3.5.0'  # https://github.com/pmusolino/PMAlertController
+    #pod 'PMAlertController', '~> 3.5.0'  # https://github.com/pmusolino/PMAlertController
     pod 'ImageSlideshow/Kingfisher', :git => 'https://github.com/khoren93/ImageSlideshow.git'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.4.0'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
-    pod 'RAMAnimatedTabBarController', '~> 4.0.1'  # https://github.com/Ramotion/animated-tab-bar
+    pod 'RAMAnimatedTabBarController', '~> 5.0'  # https://github.com/Ramotion/animated-tab-bar
     pod 'AcknowList', '~> 1.8'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
