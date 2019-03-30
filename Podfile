@@ -58,7 +58,7 @@ target 'SwiftHub' do
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
     pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
-    pod 'DropDown', '2.3.12'  # https://github.com/AssistoLab/DropDown
+    pod 'DropDown', '~> 2.0'  # https://github.com/AssistoLab/DropDown
     pod 'Toast-Swift', '~> 4.0'  # https://github.com/scalessec/Toast-Swift
 
     # Keyboard
@@ -87,7 +87,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.41.0'
+    pod 'Google-Mobile-Ads-SDK', '7.42.2'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
@@ -106,8 +106,9 @@ target 'SwiftHubUITests' do
     # Pods for testing
 end
 
-# Cocoapods optimization, always clean project after pod updating
+
 post_install do |installer|
+    # Cocoapods optimization, always clean project after pod updating
     Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
         flag_name = File.basename(script, ".sh") + "-Installation-Flag"
         folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
@@ -117,7 +118,7 @@ post_install do |installer|
         File.write(script, content)
     end
     
-    # enable tracing resources
+    # Enable tracing resources
     installer.pods_project.targets.each do |target|
       if target.name == 'RxSwift'
         target.build_configurations.each do |config|

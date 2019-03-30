@@ -148,7 +148,7 @@ class LibsManager: NSObject {
     }
 
     func setupAds() {
-        GADMobileAds.configure(withApplicationID: Keys.adMob.appId)
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
 }
 

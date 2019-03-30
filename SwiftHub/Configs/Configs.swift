@@ -24,7 +24,7 @@ enum Keys {
         switch self {
         case .github: return "00cbdbffb01ec72e280a"
         case .mixpanel: return ""
-        case .adMob: return ""
+        case .adMob: return ""  // See GADApplicationIdentifier in Info.plist
         }
     }
 }
