@@ -100,12 +100,12 @@ class SourceViewModel: ViewModel, ViewModelType {
 
         let themesEvent = Observable.combineLatest(themes, self.theme)
         let selectedThemeIndex = themesEvent.map { (themes, theme) -> Int? in
-            return themes.indices(of: theme).first
+            return themes.firstIndex(of: theme)
         }
 
         let languagesEvent = Observable.combineLatest(languages, self.language.filterNil())
         let selectedLanguageIndex = languagesEvent.map { (languages, language) -> Int? in
-            return languages.indices(of: language).first
+            return languages.firstIndex(of: language)
         }
 
         let themeBackgroundColor = highlightedCode.map { _ in self.highlightr?.theme.themeBackgroundColor }
