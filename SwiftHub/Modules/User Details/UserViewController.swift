@@ -214,7 +214,7 @@ class UserViewController: TableViewController {
                     self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
                 }
             case .blogItem:
-                if let url = self?.viewModel.user.value?.blog?.url {
+                if let url = self?.viewModel.user.value.blog?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             case .profileSummaryItem:

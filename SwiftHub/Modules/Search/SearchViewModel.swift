@@ -164,9 +164,9 @@ class SearchViewModel: ViewModel, ViewModelType {
             }
             self.usersPage += 1
             let query = self.makeQuery()
-            let sort = self.sortRepositoryItem.value.sortValue
-            let order = self.sortRepositoryItem.value.orderValue
-            let endCursor = self.repositorySearchElements.value.endCursor
+            let sort = self.sortUserItem.value.sortValue
+            let order = self.sortUserItem.value.orderValue
+            let endCursor = self.userSearchElements.value.endCursor
             return self.provider.searchUsers(query: query, sort: sort, order: order, page: self.usersPage, endCursor: endCursor)
                 .trackActivity(self.loading)
                 .trackActivity(self.footerLoading)

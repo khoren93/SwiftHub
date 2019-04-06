@@ -61,7 +61,7 @@ final class Application: NSObject {
 
     func presentTestScreen(in window: UIWindow?) {
         guard let window = window, let provider = provider else { return }
-        let viewModel = UserViewModel(user: nil, provider: provider)
+        let viewModel = UserViewModel(user: User(), provider: provider)
         navigator.show(segue: .userDetails(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }
 }

@@ -136,7 +136,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
     func viewModel(for item: SettingsSectionItem) -> ViewModel? {
         switch item {
         case .profileItem:
-            let viewModel = UserViewModel(user: currentUser, provider: provider)
+            let viewModel = UserViewModel(user: currentUser ?? User(), provider: provider)
             return viewModel
         case .themeItem:
             let viewModel = ThemeViewModel(provider: self.provider)

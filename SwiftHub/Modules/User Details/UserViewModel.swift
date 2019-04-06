@@ -41,12 +41,12 @@ class UserViewModel: ViewModel, ViewModelType {
         let selectedEvent: Driver<UserSectionItem>
     }
 
-    let user: BehaviorRelay<User?>
+    let user: BehaviorRelay<User>
 
-    init(user: User?, provider: SwiftHubAPI) {
+    init(user: User, provider: SwiftHubAPI) {
         self.user = BehaviorRelay(value: user)
         super.init(provider: provider)
-        if let login = user?.login {
+        if let login = user.login {
             analytics.log(.user(login: login))
         }
     }
@@ -55,8 +55,9 @@ class UserViewModel: ViewModel, ViewModelType {
 
         input.headerRefresh.flatMapLatest { [weak self] () -> Observable<User> in
             guard let self = self else { return Observable.just(User()) }
+            let user = self.user.value
             let request: Single<User>
-            if let user = self.user.value, !user.isMine() {
+            if !user.isMine() {
                 let owner = user.login ?? ""
                 switch user.type {
                 case .user: request = self.provider.user(owner: owner)
@@ -75,8 +76,8 @@ class UserViewModel: ViewModel, ViewModelType {
 
         let followed = input.followSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
             guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
-            let username = self.user.value?.login ?? ""
-            let following = self.user.value?.viewerIsFollowing
+            let username = self.user.value.login ?? ""
+            let following = self.user.value.viewerIsFollowing
             let request = following == true ? self.provider.unfollowUser(username: username) : self.provider.followUser(username: username)
             return request
                 .trackActivity(self.loading)
@@ -95,7 +96,7 @@ class UserViewModel: ViewModel, ViewModelType {
         let refreshStarring = Observable.of(input.headerRefresh, followed.mapToVoid()).merge()
         refreshStarring.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in
             guard let self = self, loggedIn.value == true else { return Observable.just(RxSwift.Event.next(())) }
-            let username = self.user.value?.login ?? ""
+            let username = self.user.value.login ?? ""
             return self.provider.checkFollowing(username: username)
                 .trackActivity(self.loading)
                 .materialize()
@@ -105,42 +106,42 @@ class UserViewModel: ViewModel, ViewModelType {
                 switch event {
                 case .next:
                     var user = self.user.value
-                    user?.viewerIsFollowing = true
+                    user.viewerIsFollowing = true
                     self.user.accept(user)
                 case .error:
                     var user = self.user.value
-                    user?.viewerIsFollowing = false
+                    user.viewerIsFollowing = false
                     self.user.accept(user)
                 case .completed: break
             }
         }).disposed(by: rx.disposeBag)
 
-        let username = user.map { $0?.login ?? "" }.asDriverOnErrorJustComplete()
-        let fullname = user.map { $0?.name ?? "" }.asDriverOnErrorJustComplete()
-        let description = user.map { $0?.bio ?? "" }.asDriverOnErrorJustComplete()
-        let imageUrl = user.map { $0?.avatarUrl?.url }.asDriverOnErrorJustComplete()
-        let repositoriesCount = user.map { $0?.repositoriesCount ?? 0 }.asDriverOnErrorJustComplete()
-        let followersCount = user.map { $0?.followers ?? 0 }.asDriverOnErrorJustComplete()
-        let followingCount = user.map { $0?.following ?? 0 }.asDriverOnErrorJustComplete()
+        let username = user.map { $0.login ?? "" }.asDriverOnErrorJustComplete()
+        let fullname = user.map { $0.name ?? "" }.asDriverOnErrorJustComplete()
+        let description = user.map { $0.bio ?? "" }.asDriverOnErrorJustComplete()
+        let imageUrl = user.map { $0.avatarUrl?.url }.asDriverOnErrorJustComplete()
+        let repositoriesCount = user.map { $0.repositoriesCount ?? 0 }.asDriverOnErrorJustComplete()
+        let followersCount = user.map { $0.followers ?? 0 }.asDriverOnErrorJustComplete()
+        let followingCount = user.map { $0.following ?? 0 }.asDriverOnErrorJustComplete()
         let imageSelected = input.imageSelection.asDriverOnErrorJustComplete()
         let openInWebSelected = input.openInWebSelection.map { () -> URL? in
-            self.user.value?.htmlUrl?.url
+            self.user.value.htmlUrl?.url
         }.asDriver(onErrorJustReturn: nil)
 
         let hidesFollowButton = Observable.combineLatest(loggedIn, user).map({ (loggedIn, user) -> Bool in
-            guard let user = user, loggedIn == true else { return true }
+            guard loggedIn == true else { return true }
             return user.isMine() == true || user.type == .organization
         }).asDriver(onErrorJustReturn: false)
 
         let repositoriesSelected = input.repositoriesSelection.asDriver(onErrorJustReturn: ())
             .map { () -> RepositoriesViewModel in
-                let mode = RepositoriesMode.userRepositories(user: self.user.value ?? User())
+                let mode = RepositoriesMode.userRepositories(user: self.user.value)
                 let viewModel = RepositoriesViewModel(mode: mode, provider: self.provider)
                 return viewModel
         }
 
-        let followersSelected = input.followersSelection.map { UsersMode.followers(user: self.user.value ?? User()) }
-        let followingSelected = input.followingSelection.map { UsersMode.following(user: self.user.value ?? User()) }
+        let followersSelected = input.followersSelection.map { UsersMode.followers(user: self.user.value) }
+        let followingSelected = input.followingSelection.map { UsersMode.following(user: self.user.value) }
 
         let usersSelected = Observable.of(followersSelected, followingSelected).merge()
             .asDriver(onErrorJustReturn: .followers(user: User()))
@@ -149,13 +150,13 @@ class UserViewModel: ViewModel, ViewModelType {
                 return viewModel
         }
 
-        let following = user.map { $0?.viewerIsFollowing }.filterNil()
+        let following = user.map { $0.viewerIsFollowing }.filterNil()
 
         let items = user.map { (user) -> [UserSection] in
             var items: [UserSectionItem] = []
 
             // Created
-            if let created = user?.createdAt {
+            if let created = user.createdAt {
                 let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
                                                                    detail: created.toRelative(),
                                                                    image: R.image.icon_cell_created(),
@@ -164,7 +165,7 @@ class UserViewModel: ViewModel, ViewModelType {
             }
 
             // Updated
-            if let updated = user?.updatedAt {
+            if let updated = user.updatedAt {
                 let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
                                                                    detail: updated.toRelative(),
                                                                    image: R.image.icon_cell_updated(),
@@ -172,17 +173,17 @@ class UserViewModel: ViewModel, ViewModelType {
                 items.append(UserSectionItem.updatedItem(viewModel: updatedCellViewModel))
             }
 
-            if user?.type == .user {
+            if user.type == .user {
                 // Stars
                 let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
-                                                                 detail: user?.starredRepositoriesCount?.string ?? "",
+                                                                 detail: user.starredRepositoriesCount?.string ?? "",
                                                                  image: R.image.icon_cell_star(),
                                                                  hidesDisclosure: false)
                 items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
 
                 // Watching
                 let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
-                                                                    detail: user?.watchingCount?.string ?? "",
+                                                                    detail: user.watchingCount?.string ?? "",
                                                                     image: R.image.icon_cell_theme(),
                                                                     hidesDisclosure: false)
                 items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
@@ -196,7 +197,7 @@ class UserViewModel: ViewModel, ViewModelType {
             items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
             // Company
-            if let company = user?.company, company.isNotEmpty {
+            if let company = user.company, company.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
                                                                    detail: company,
                                                                    image: R.image.icon_cell_company(),
@@ -205,7 +206,7 @@ class UserViewModel: ViewModel, ViewModelType {
             }
 
             // Blog
-            if let blog = user?.blog, blog.isNotEmpty {
+            if let blog = user.blog, blog.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
                                                                    detail: blog,
                                                                    image: R.image.icon_cell_link(),
@@ -222,7 +223,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
             // Pinned Repositories
             var pinnedItems: [UserSectionItem] = []
-            if let repos = user?.pinnedRepositories?.map({ RepositoryCellViewModel(with: $0) }) {
+            if let repos = user.pinnedRepositories?.map({ RepositoryCellViewModel(with: $0) }) {
                 repos.forEach({ (cellViewModel) in
                     pinnedItems.append(UserSectionItem.repositoryItem(viewModel: cellViewModel))
                 })
@@ -230,7 +231,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
             // User Organizations
             var organizationItems: [UserSectionItem] = []
-            if let repos = user?.organizations?.map({ UserCellViewModel(with: $0) }) {
+            if let repos = user.organizations?.map({ UserCellViewModel(with: $0) }) {
                 repos.forEach({ (cellViewModel) in
                     organizationItems.append(UserSectionItem.organizationItem(viewModel: cellViewModel))
                 })
@@ -267,29 +268,25 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     func viewModel(for item: UserSectionItem) -> ViewModel? {
+        let user = self.user.value
         switch item {
         case .createdItem: return nil
         case .updatedItem: return nil
         case .starsItem:
-            if let user = self.user.value {
-                let mode = RepositoriesMode.userStarredRepositories(user: user)
-                let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
-                return viewModel
-            }
+            let mode = RepositoriesMode.userStarredRepositories(user: user)
+            let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
+            return viewModel
+
         case .watchingItem:
-            if let user = self.user.value {
-                let mode = RepositoriesMode.userWatchingRepositories(user: user)
-                let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
-                return viewModel
-            }
+            let mode = RepositoriesMode.userWatchingRepositories(user: user)
+            let viewModel = RepositoriesViewModel(mode: mode, provider: provider)
+            return viewModel
         case .eventsItem:
-            if let user = self.user.value {
-                let mode = EventsMode.user(user: user)
-                let viewModel = EventsViewModel(mode: mode, provider: provider)
-                return viewModel
-            }
+            let mode = EventsMode.user(user: user)
+            let viewModel = EventsViewModel(mode: mode, provider: provider)
+            return viewModel
         case .companyItem:
-            if let companyName = self.user.value?.company?.removingPrefix("@") {
+            if let companyName = user.company?.removingPrefix("@") {
                 var user = User()
                 user.login = companyName
                 let viewModel = UserViewModel(user: user, provider: provider)
@@ -308,6 +305,6 @@ class UserViewModel: ViewModel, ViewModelType {
     }
 
     func profileSummaryUrl() -> URL? {
-        return "\(Configs.Network.profileSummaryBaseUrl)/user/\(self.user.value?.login ?? "")".url
+        return "\(Configs.Network.profileSummaryBaseUrl)/user/\(self.user.value.login ?? "")".url
     }
 }
