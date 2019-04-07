@@ -136,7 +136,7 @@ extension RestApi {
         return requestArray(.contributors(fullname: fullname, page: page), type: User.self)
     }
 
-    func repository(fullname: String) -> Single<Repository> {
+    func repository(fullname: String, qualifiedName: String) -> Single<Repository> {
         return requestObject(.repository(fullname: fullname), type: Repository.self)
     }
 

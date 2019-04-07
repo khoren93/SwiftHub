@@ -15,7 +15,7 @@ struct Repository: Mappable {
     var archived: Bool?
     var cloneUrl: String?
     var createdAt: Date?  // Identifies the date and time when the object was created.
-    var defaultBranch: String?  // The Ref name associated with the repository's default branch.
+    var defaultBranch = "master"  // The Ref name associated with the repository's default branch.
     var descriptionField: String?  // The description of the repository.
     var fork: Bool?  // Identifies if the repository is a fork.
     var forks: Int?  // Identifies the total count of direct forked repositories
@@ -138,7 +138,7 @@ extension Repository {
         size = graph?.diskUsage
         fork = graph?.isFork
         parentFullname = graph?.parent?.nameWithOwner
-        defaultBranch = graph?.defaultBranchRef?.name
+        defaultBranch = graph?.defaultBranchRef?.name ?? "master"
         subscribersCount = graph?.watchers.totalCount
         forks = graph?.forks.totalCount
         openIssuesCount = graph?.issues.totalCount

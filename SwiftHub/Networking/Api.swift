@@ -24,7 +24,7 @@ protocol SwiftHubAPI {
     // MARK: - Authentication is optional
     func createAccessToken(clientId: String, clientSecret: String, code: String, redirectUri: String?, state: String?) -> Single<Token>
     func searchRepositories(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<RepositorySearch>
-    func repository(fullname: String) -> Single<Repository>
+    func repository(fullname: String, qualifiedName: String) -> Single<Repository>
     func watchers(fullname: String, page: Int) -> Single<[User]>
     func stargazers(fullname: String, page: Int) -> Single<[User]>
     func forks(fullname: String, page: Int) -> Single<[Repository]>

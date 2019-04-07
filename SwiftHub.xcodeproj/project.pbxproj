@@ -82,6 +82,11 @@
 		07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */; };
 		0791946C214D4F0700A7067E /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791946A214D4F0700A7067E /* ThemeCell.swift */; };
 		0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791946B214D4F0700A7067E /* ThemeCell.xib */; };
+		0795E5C722592084008EFD50 /* BranchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795E5C622592084008EFD50 /* BranchesViewController.swift */; };
+		0795E5C922592096008EFD50 /* BranchesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795E5C822592096008EFD50 /* BranchesViewModel.swift */; };
+		0795E5CE225920E1008EFD50 /* BranchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795E5CC225920E1008EFD50 /* BranchCell.swift */; };
+		0795E5CF225920E2008EFD50 /* BranchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0795E5CD225920E1008EFD50 /* BranchCell.xib */; };
+		0795E5D1225920FA008EFD50 /* BranchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795E5D0225920FA008EFD50 /* BranchCellViewModel.swift */; };
 		079BF51721FF618500FFA334 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BF51621FF618500FFA334 /* ErrorResponse.swift */; };
 		07A34DC521E29ACC00B05857 /* RepositoryTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */; };
 		07A34DC721E29BE200B05857 /* UserTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC621E29BE200B05857 /* UserTrendings.json */; };
@@ -350,6 +355,11 @@
 		07919468214D4EEC00A7067E /* ThemeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellViewModel.swift; sourceTree = "<group>"; };
 		0791946A214D4F0700A7067E /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		0791946B214D4F0700A7067E /* ThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
+		0795E5C622592084008EFD50 /* BranchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewController.swift; sourceTree = "<group>"; };
+		0795E5C822592096008EFD50 /* BranchesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewModel.swift; sourceTree = "<group>"; };
+		0795E5CC225920E1008EFD50 /* BranchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchCell.swift; sourceTree = "<group>"; };
+		0795E5CD225920E1008EFD50 /* BranchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BranchCell.xib; sourceTree = "<group>"; };
+		0795E5D0225920FA008EFD50 /* BranchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchCellViewModel.swift; sourceTree = "<group>"; };
 		079BF51621FF618500FFA334 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		079E1AE121CC0D1D00C9448B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryTrendings.json; sourceTree = "<group>"; };
@@ -722,6 +732,18 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		0795E5C52259205C008EFD50 /* Branches */ = {
+			isa = PBXGroup;
+			children = (
+				0795E5CC225920E1008EFD50 /* BranchCell.swift */,
+				0795E5CD225920E1008EFD50 /* BranchCell.xib */,
+				0795E5D0225920FA008EFD50 /* BranchCellViewModel.swift */,
+				0795E5C622592084008EFD50 /* BranchesViewController.swift */,
+				0795E5C822592096008EFD50 /* BranchesViewModel.swift */,
+			);
+			path = Branches;
+			sourceTree = "<group>";
+		};
 		07D46E5821921C01008E5369 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,6 +864,7 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0795E5C52259205C008EFD50 /* Branches */,
 				07241D0121B173A400F800BD /* Commits */,
 				A07DC84621EDF67F00AA7951 /* Contacts */,
 				07D46E5821921C01008E5369 /* Contents */,
@@ -1381,6 +1404,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				ru,
@@ -1427,6 +1451,7 @@
 				07E1B30421A44D8D00F6EAE3 /* IssueCell.xib in Resources */,
 				0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */,
 				0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */,
+				0795E5CF225920E2008EFD50 /* BranchCell.xib in Resources */,
 				0732045B214137B800C1E39F /* EventsUserPerformed.json in Resources */,
 				0757B53A2166A6A000C04163 /* Localizable.strings in Resources */,
 				A034AF79215280EF004C310B /* NotificationCell.xib in Resources */,
@@ -1678,7 +1703,7 @@
 			);
 			name = R.swift;
 			outputPaths = (
-				"$SRCROOT/SwiftHub/Resources/R.generated.swift",
+				$SRCROOT/SwiftHub/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1821,6 +1846,7 @@
 				070FF83E20F221AB0070F5E8 /* UserViewModel.swift in Sources */,
 				A09DE8A520E7A15A00F6F2BF /* User.swift in Sources */,
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
+				0795E5D1225920FA008EFD50 /* BranchCellViewModel.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
 				C762C6681E1D559000C09EBD /* TableView.swift in Sources */,
 				07CE0F8021027DEC00E1F6BD /* ThemeManager.swift in Sources */,
@@ -1858,6 +1884,7 @@
 				A09DE8D620E7C2C400F6F2BF /* ErrorTracker.swift in Sources */,
 				A09DE8A320E7A0C500F6F2BF /* License.swift in Sources */,
 				A00C54C920E25B5A00DA5F98 /* StackView.swift in Sources */,
+				0795E5CE225920E1008EFD50 /* BranchCell.swift in Sources */,
 				A034AF75215280CA004C310B /* NotificationsViewController.swift in Sources */,
 				07919465214D4EB500A7067E /* ThemeViewController.swift in Sources */,
 				0791946C214D4F0700A7067E /* ThemeCell.swift in Sources */,
@@ -1877,6 +1904,7 @@
 				079BF51721FF618500FFA334 /* ErrorResponse.swift in Sources */,
 				073204602141399400C1E39F /* EventsViewModel.swift in Sources */,
 				0752F49E21C8EDB600A30BF2 /* LanguagesSection.swift in Sources */,
+				0795E5C722592084008EFD50 /* BranchesViewController.swift in Sources */,
 				07178A61220F581C0020AE12 /* Toolbar.swift in Sources */,
 				C762C6821E1D5A7300C09EBD /* UIColor+SwiftHub.swift in Sources */,
 				07D46E5321920029008E5369 /* Content.swift in Sources */,
@@ -1890,6 +1918,7 @@
 				07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */,
 				0752F49621C8E65900A30BF2 /* LanguagesViewModel.swift in Sources */,
 				C762C66A1E1D559000C09EBD /* TableViewController.swift in Sources */,
+				0795E5C922592096008EFD50 /* BranchesViewModel.swift in Sources */,
 				A07DC84821EDF6A200AA7951 /* ContactsViewController.swift in Sources */,
 				A09DE8B520E7B56B00F6F2BF /* SearchViewController.swift in Sources */,
 				0752F49121C8D9DC00A30BF2 /* TrendingUserCellViewModel.swift in Sources */,

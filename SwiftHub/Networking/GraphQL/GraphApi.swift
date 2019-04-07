@@ -101,8 +101,7 @@ extension GraphApi {
         return restApi.contributors(fullname: fullname, page: page)
     }
 
-    func repository(fullname: String) -> Single<Repository> {
-        let qualifiedName = "master"
+    func repository(fullname: String, qualifiedName: String) -> Single<Repository> {
         return client.rx.fetch(query: RepositoryQuery(owner: ownerName(from: fullname), name: repoName(from: fullname), qualifiedName: qualifiedName))
             .map { Repository(graph: $0.repository) }
     }

@@ -42,6 +42,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     let repository: BehaviorRelay<Repository>
     let readme = BehaviorRelay<Content?>(value: nil)
+    let selectedBranch = BehaviorRelay<String?>(value: nil)
 
     init(repository: Repository, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
@@ -53,10 +54,12 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
     func transform(input: Input) -> Output {
 
-        input.headerRefresh.flatMapLatest { [weak self] () -> Observable<Repository> in
+        let refreshRepository = Observable.combineLatest(input.headerRefresh, selectedBranch)
+        refreshRepository.flatMapLatest { [weak self] (_, branch) -> Observable<Repository> in
             guard let self = self else { return Observable.just(Repository()) }
             let fullname = self.repository.value.fullname ?? ""
-            return self.provider.repository(fullname: fullname)
+            let qualifiedName = branch ?? self.repository.value.defaultBranch
+            return self.provider.repository(fullname: fullname, qualifiedName: qualifiedName)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
                 .trackError(self.error)
@@ -235,9 +238,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Branches
             let branchesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryBranchesCellTitle.key.localized(),
-                                                                      detail: repository.defaultBranch ?? "",
+                                                                      detail: self.selectedBranch.value ?? repository.defaultBranch,
                                                                       image: R.image.icon_cell_git_branch(),
-                                                                      hidesDisclosure: true)
+                                                                      hidesDisclosure: false)
             items.append(RepositorySectionItem.branchesItem(viewModel: branchesCellViewModel))
 
             // Releases
@@ -328,6 +331,11 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
         case .commitsItem:
             let viewModel = CommitsViewModel(repository: repository.value, provider: provider)
+            return viewModel
+
+        case .branchesItem:
+            let viewModel = BranchesViewModel(repository: repository.value, provider: provider)
+            viewModel.branchSelected.map { $0.name }.bind(to: selectedBranch).disposed(by: rx.disposeBag)
             return viewModel
 
         case .pullRequestsItem:

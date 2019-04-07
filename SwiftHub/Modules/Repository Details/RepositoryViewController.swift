@@ -188,6 +188,10 @@ class RepositoryViewController: TableViewController {
                 if let viewModel = self?.viewModel.viewModel(for: item) as? CommitsViewModel {
                     self?.navigator.show(segue: .commits(viewModel: viewModel), sender: self)
                 }
+            case .branchesItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? BranchesViewModel {
+                    self?.navigator.show(segue: .branches(viewModel: viewModel), sender: self)
+                }
             case .pullRequestsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? PullRequestsViewModel {
                     self?.navigator.show(segue: .pullRequests(viewModel: viewModel), sender: self)
@@ -276,6 +280,10 @@ class RepositoryViewController: TableViewController {
 
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
+        }).disposed(by: rx.disposeBag)
+
+        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
     }
 
