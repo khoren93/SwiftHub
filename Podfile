@@ -9,7 +9,7 @@ target 'SwiftHub' do
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift', '~> 12.0'  # https://github.com/Moya/Moya
+    pod 'Moya/RxSwift', '~> 13.0'  # https://github.com/Moya/Moya
     pod 'ReachabilitySwift', '~> 4.0' # https://github.com/ashleymills/Reachability.swift
 
     pod 'Apollo', :git => 'https://github.com/apollographql/apollo-ios.git'  # , '0.9.5'  # https://github.com/apollographql/apollo-ios
@@ -26,7 +26,7 @@ target 'SwiftHub' do
 
     # JSON Mapping
     #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
-    pod 'Moya-ObjectMapper/RxSwift', '~> 2.8'  # https://github.com/ivanbruel/Moya-ObjectMapper
+    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git', :branch => 'moya13'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
     pod 'Kingfisher', '~> 5.0'  # https://github.com/onevcat/Kingfisher
@@ -59,7 +59,7 @@ target 'SwiftHub' do
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
     pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
     pod 'DropDown', '~> 2.0'  # https://github.com/AssistoLab/DropDown
-    pod 'Toast-Swift', '~> 4.0'  # https://github.com/scalessec/Toast-Swift
+    pod 'Toast-Swift', '~> 5.0'  # https://github.com/scalessec/Toast-Swift
 
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
