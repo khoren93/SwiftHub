@@ -192,6 +192,10 @@ class RepositoryViewController: TableViewController {
                 if let viewModel = self?.viewModel.viewModel(for: item) as? BranchesViewModel {
                     self?.navigator.show(segue: .branches(viewModel: viewModel), sender: self)
                 }
+            case .releasesItem:
+                if let viewModel = self?.viewModel.viewModel(for: item) as? ReleasesViewModel {
+                    self?.navigator.show(segue: .releases(viewModel: viewModel), sender: self)
+                }
             case .pullRequestsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? PullRequestsViewModel {
                     self?.navigator.show(segue: .pullRequests(viewModel: viewModel), sender: self)

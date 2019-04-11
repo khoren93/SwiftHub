@@ -36,6 +36,7 @@ class Navigator {
         case source(viewModel: SourceViewModel)
         case commits(viewModel: CommitsViewModel)
         case branches(viewModel: BranchesViewModel)
+        case releases(viewModel: ReleasesViewModel)
         case pullRequests(viewModel: PullRequestsViewModel)
         case events(viewModel: EventsViewModel)
         case notifications(viewModel: NotificationsViewModel)
@@ -121,6 +122,11 @@ class Navigator {
 
         case .branches(let viewModel):
             let vc = R.storyboard.main.branchesViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .releases(let viewModel):
+            let vc = R.storyboard.main.releasesViewController()!
             vc.viewModel = viewModel
             return vc
 

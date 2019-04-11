@@ -35,6 +35,8 @@ protocol SwiftHubAPI {
     func commit(fullname: String, sha: String) -> Single<Commit>
     func branches(fullname: String, page: Int) -> Single<[Branch]>
     func branch(fullname: String, name: String) -> Single<Branch>
+    func releases(fullname: String, page: Int) -> Single<[Release]>
+    func release(fullname: String, releaseId: Int) -> Single<Release>
     func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]>
     func pullRequest(fullname: String, number: Int) -> Single<PullRequest>
     func contributors(fullname: String, page: Int) -> Single<[User]>

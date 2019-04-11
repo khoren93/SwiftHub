@@ -124,6 +124,14 @@ extension RestApi {
         return requestObject(.branch(fullname: fullname, name: name), type: Branch.self)
     }
 
+    func releases(fullname: String, page: Int) -> Single<[Release]> {
+        return requestArray(.releases(fullname: fullname, page: page), type: Release.self)
+    }
+
+    func release(fullname: String, releaseId: Int) -> Single<Release> {
+        return requestObject(.release(fullname: fullname, releaseId: releaseId), type: Release.self)
+    }
+
     func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]> {
         return requestArray(.pullRequests(fullname: fullname, state: state, page: page), type: PullRequest.self)
     }

@@ -19,8 +19,6 @@ class BranchCellViewModel {
 
     let branch: Branch
 
-    let userSelected = PublishSubject<User>()
-
     init(with branch: Branch) {
         self.branch = branch
         title = Driver.just("\(branch.name ?? "")")

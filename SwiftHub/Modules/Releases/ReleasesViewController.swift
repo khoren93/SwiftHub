@@ -1,8 +1,8 @@
 //
-//  BranchesViewController.swift
+//  ReleasesViewController.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 4/6/19.
+//  Created by Sygnoos9 on 4/12/19.
 //  Copyright © 2019 Khoren Markosyan. All rights reserved.
 //
 
@@ -11,11 +11,11 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.branchCell.identifier
+private let reuseIdentifier = R.reuseIdentifier.releaseCell.identifier
 
-class BranchesViewController: TableViewController {
+class ReleasesViewController: TableViewController {
 
-    var viewModel: BranchesViewModel!
+    var viewModel: ReleasesViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,16 @@ class BranchesViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        tableView.register(R.nib.branchCell)
+        tableView.register(R.nib.releaseCell)
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
-        let input = BranchesViewModel.Input(headerRefresh: refresh,
+        let input = ReleasesViewModel.Input(headerRefresh: refresh,
                                             footerRefresh: footerRefreshTrigger,
-                                            selection: tableView.rx.modelSelected(BranchCellViewModel.self).asDriver())
+                                            selection: tableView.rx.modelSelected(ReleaseCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
@@ -47,12 +47,16 @@ class BranchesViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.items.asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: BranchCell.self)) { tableView, viewModel, cell in
+            .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: ReleaseCell.self)) { tableView, viewModel, cell in
                 cell.bind(to: viewModel)
             }.disposed(by: rx.disposeBag)
 
-        viewModel.branchSelected.subscribe(onNext: { [weak self] (branch) in
-            self?.navigator.pop(sender: self)
+        output.releaseSelected.drive(onNext: { [weak self] (url) in
+            self?.navigator.show(segue: .webController(url), sender: self)
+        }).disposed(by: rx.disposeBag)
+
+        output.userSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in

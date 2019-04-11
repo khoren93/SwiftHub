@@ -37,6 +37,8 @@ enum GithubAPI {
     case commit(fullname: String, sha: String)
     case branches(fullname: String, page: Int)
     case branch(fullname: String, name: String)
+    case releases(fullname: String, page: Int)
+    case release(fullname: String, releaseId: Int)
     case pullRequests(fullname: String, state: String, page: Int)
     case pullRequest(fullname: String, number: Int)
     case contributors(fullname: String, page: Int)
@@ -98,6 +100,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .commit(let fullname, let sha): return "/repos/\(fullname)/commits/\(sha)"
         case .branches(let fullname, _): return "/repos/\(fullname)/branches"
         case .branch(let fullname, let name): return "/repos/\(fullname)/branches/\(name)"
+        case .releases(let fullname, _): return "/repos/\(fullname)/releases"
+        case .release(let fullname, let releaseId): return "/repos/\(fullname)/releases/\(releaseId)"
         case .pullRequests(let fullname, _, _): return "/repos/\(fullname)/pulls"
         case .pullRequest(let fullname, let number): return "/repos/\(fullname)/pulls/\(number)"
         case .contributors(let fullname, _): return "/repos/\(fullname)/contributors"
@@ -177,6 +181,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .commits(_, let page):
             params["page"] = page
         case .branches(_, let page):
+            params["page"] = page
+        case .releases(_, let page):
             params["page"] = page
         case .pullRequests(_, let state, let page):
             params["state"] = state
@@ -263,6 +269,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .commit: dataUrl = R.file.repositoryCommitJson()
         case .branches: dataUrl = R.file.repositoryBranchesJson()
         case .branch: dataUrl = R.file.repositoryBranchJson()
+        case .releases: dataUrl = R.file.repositoryReleasesJson()
+        case .release: dataUrl = R.file.repositoryReleaseJson()
         case .pullRequests: dataUrl = R.file.repositoryPullRequestsJson()
         case .pullRequest: dataUrl = R.file.repositoryPullRequestJson()
         case .contributors: dataUrl = R.file.repositoryContributorsJson()

@@ -89,6 +89,14 @@ extension GraphApi {
         return restApi.branch(fullname: fullname, name: name)
     }
 
+    func releases(fullname: String, page: Int) -> Single<[Release]> {
+        return restApi.releases(fullname: fullname, page: page)
+    }
+
+    func release(fullname: String, releaseId: Int) -> Single<Release> {
+        return restApi.release(fullname: fullname, releaseId: releaseId)
+    }
+
     func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]> {
         return restApi.pullRequests(fullname: fullname, state: state, page: page)
     }

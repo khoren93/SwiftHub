@@ -247,7 +247,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let releasesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReleasesCellTitle.key.localized(),
                                                                       detail: repository.releasesCount?.string ?? "",
                                                                       image: R.image.icon_cell_releases(),
-                                                                      hidesDisclosure: true)
+                                                                      hidesDisclosure: false)
             items.append(RepositorySectionItem.releasesItem(viewModel: releasesCellViewModel))
 
             // Contributors
@@ -336,6 +336,10 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         case .branchesItem:
             let viewModel = BranchesViewModel(repository: repository.value, provider: provider)
             viewModel.branchSelected.map { $0.name }.bind(to: selectedBranch).disposed(by: rx.disposeBag)
+            return viewModel
+
+        case .releasesItem:
+            let viewModel = ReleasesViewModel(repository: repository.value, provider: provider)
             return viewModel
 
         case .pullRequestsItem:

@@ -44,6 +44,13 @@
 		07241D2321B18A8600F800BD /* PullRequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */; };
 		07241D2521B18AA000F800BD /* PullRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07241D2421B18AA000F800BD /* PullRequestsViewController.swift */; };
 		072B8EDA21B4143200B2C28C /* RepositoryContributors.json in Resources */ = {isa = PBXBuildFile; fileRef = 072B8ED921B4143200B2C28C /* RepositoryContributors.json */; };
+		072BD798225FD4F200E6C580 /* RepositoryReleases.json in Resources */ = {isa = PBXBuildFile; fileRef = 072BD797225FD4F200E6C580 /* RepositoryReleases.json */; };
+		072BD79A225FD50400E6C580 /* RepositoryRelease.json in Resources */ = {isa = PBXBuildFile; fileRef = 072BD799225FD50400E6C580 /* RepositoryRelease.json */; };
+		072BD79D225FD6C800E6C580 /* ReleasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BD79C225FD6C800E6C580 /* ReleasesViewModel.swift */; };
+		072BD79F225FD6DF00E6C580 /* ReleasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BD79E225FD6DF00E6C580 /* ReleasesViewController.swift */; };
+		072BD7A2225FD6FD00E6C580 /* ReleaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BD7A0225FD6FD00E6C580 /* ReleaseCell.swift */; };
+		072BD7A3225FD6FD00E6C580 /* ReleaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072BD7A1225FD6FD00E6C580 /* ReleaseCell.xib */; };
+		072BD7A5225FD70F00E6C580 /* ReleaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BD7A4225FD70F00E6C580 /* ReleaseCellViewModel.swift */; };
 		07320453214128ED00C1E39F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07320452214128ED00C1E39F /* Event.swift */; };
 		073204552141377D00C1E39F /* Events.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204542141377D00C1E39F /* Events.json */; };
 		073204572141379500C1E39F /* EventsRepository.json in Resources */ = {isa = PBXBuildFile; fileRef = 073204562141379500C1E39F /* EventsRepository.json */; };
@@ -315,6 +322,13 @@
 		07241D2221B18A8600F800BD /* PullRequestCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestCellViewModel.swift; sourceTree = "<group>"; };
 		07241D2421B18AA000F800BD /* PullRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewController.swift; sourceTree = "<group>"; };
 		072B8ED921B4143200B2C28C /* RepositoryContributors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryContributors.json; sourceTree = "<group>"; };
+		072BD797225FD4F200E6C580 /* RepositoryReleases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryReleases.json; sourceTree = "<group>"; };
+		072BD799225FD50400E6C580 /* RepositoryRelease.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryRelease.json; sourceTree = "<group>"; };
+		072BD79C225FD6C800E6C580 /* ReleasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleasesViewModel.swift; sourceTree = "<group>"; };
+		072BD79E225FD6DF00E6C580 /* ReleasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleasesViewController.swift; sourceTree = "<group>"; };
+		072BD7A0225FD6FD00E6C580 /* ReleaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseCell.swift; sourceTree = "<group>"; };
+		072BD7A1225FD6FD00E6C580 /* ReleaseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReleaseCell.xib; sourceTree = "<group>"; };
+		072BD7A4225FD70F00E6C580 /* ReleaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseCellViewModel.swift; sourceTree = "<group>"; };
 		07320452214128ED00C1E39F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		073204542141377D00C1E39F /* Events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Events.json; sourceTree = "<group>"; };
 		073204562141379500C1E39F /* EventsRepository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EventsRepository.json; sourceTree = "<group>"; };
@@ -683,6 +697,18 @@
 			path = "Pull Requests";
 			sourceTree = "<group>";
 		};
+		072BD79B225FD64B00E6C580 /* Releases */ = {
+			isa = PBXGroup;
+			children = (
+				072BD7A0225FD6FD00E6C580 /* ReleaseCell.swift */,
+				072BD7A1225FD6FD00E6C580 /* ReleaseCell.xib */,
+				072BD7A4225FD70F00E6C580 /* ReleaseCellViewModel.swift */,
+				072BD79E225FD6DF00E6C580 /* ReleasesViewController.swift */,
+				072BD79C225FD6C800E6C580 /* ReleasesViewModel.swift */,
+			);
+			path = Releases;
+			sourceTree = "<group>";
+		};
 		0732045C2141395200C1E39F /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +890,7 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				072BD79B225FD64B00E6C580 /* Releases */,
 				0795E5C52259205C008EFD50 /* Branches */,
 				07241D0121B173A400F800BD /* Commits */,
 				A07DC84621EDF67F00AA7951 /* Contacts */,
@@ -1049,6 +1076,8 @@
 				07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */,
 				07241D0C21B1744900F800BD /* RepositoryPullRequests.json */,
 				07D46E5421920E8D008E5369 /* RepositoryReadme.json */,
+				072BD799225FD50400E6C580 /* RepositoryRelease.json */,
+				072BD797225FD4F200E6C580 /* RepositoryReleases.json */,
 				07DFF6D620E90584004DAA68 /* RepositorySearch.json */,
 				A0E2B0942108B00D000DA282 /* RepositoryStargazers.json */,
 				07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */,
@@ -1437,6 +1466,7 @@
 				A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */,
 				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
+				072BD79A225FD50400E6C580 /* RepositoryRelease.json in Resources */,
 				A07DB584223FC02E000E3312 /* User.graphql in Resources */,
 				07241D1921B1768E00F800BD /* CommitCell.xib in Resources */,
 				073A1F792233F2F000D6F487 /* Search.graphql in Resources */,
@@ -1444,6 +1474,7 @@
 				073204552141377D00C1E39F /* Events.json in Resources */,
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				A024C7C621BAB5F400FEA133 /* GoogleService-Info.plist in Resources */,
+				072BD798225FD4F200E6C580 /* RepositoryReleases.json in Resources */,
 				07A34DC921E29C2400B05857 /* Languages.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				07241D0B21B1743900F800BD /* RepositoryBranch.json in Resources */,
@@ -1456,6 +1487,7 @@
 				0757B53A2166A6A000C04163 /* Localizable.strings in Resources */,
 				A034AF79215280EF004C310B /* NotificationCell.xib in Resources */,
 				07B2C1F9213AF74B00FE7AC0 /* Profile.json in Resources */,
+				072BD7A3225FD6FD00E6C580 /* ReleaseCell.xib in Resources */,
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */,
 				07F9E4622234010C0012BA6D /* schema.json in Resources */,
@@ -1798,6 +1830,7 @@
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
 				C762C6601E1D559000C09EBD /* Button.swift in Sources */,
 				A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */,
+				072BD7A5225FD70F00E6C580 /* ReleaseCellViewModel.swift in Sources */,
 				071F761B21C6756D003EEB35 /* WhatsNewManager.swift in Sources */,
 				0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */,
 				07FC337F1FFFE4E300D53888 /* LogManager.swift in Sources */,
@@ -1844,6 +1877,7 @@
 				070FF83E20F221AB0070F5E8 /* UserViewModel.swift in Sources */,
 				A09DE8A520E7A15A00F6F2BF /* User.swift in Sources */,
 				C762C6631E1D559000C09EBD /* CollectionViewController.swift in Sources */,
+				072BD7A2225FD6FD00E6C580 /* ReleaseCell.swift in Sources */,
 				0795E5D1225920FA008EFD50 /* BranchCellViewModel.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
 				C762C6681E1D559000C09EBD /* TableView.swift in Sources */,
@@ -1871,6 +1905,8 @@
 				C762C67F1E1D5A7300C09EBD /* Observable+Logging.swift in Sources */,
 				A034AF7021527EF8004C310B /* Notification.swift in Sources */,
 				C762C66D1E1D559000C09EBD /* ViewController.swift in Sources */,
+				072BD79D225FD6C800E6C580 /* ReleasesViewModel.swift in Sources */,
+				072BD79F225FD6DF00E6C580 /* ReleasesViewController.swift in Sources */,
 				A0E2B08D2106293A000DA282 /* Switch.swift in Sources */,
 				07B183862172269C007CC23B /* UserDetailCellViewModel.swift in Sources */,
 				0757B53221669DAC00C04163 /* LanguageViewModel.swift in Sources */,
