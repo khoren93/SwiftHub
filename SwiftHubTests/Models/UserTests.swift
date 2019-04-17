@@ -14,7 +14,6 @@ class UserTests: QuickSpec {
 
     override func spec() {
 
-        let id = 11523360
         let login = "khoren93"
         let name = "Khoren Markosyan"
         let type = "User"
@@ -24,10 +23,9 @@ class UserTests: QuickSpec {
 
         describe("converts from JSON") {
             it("User") {
-                let data: [String: Any] = ["id": id, "login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
+                let data: [String: Any] = ["login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
                 let user = User(JSON: data)
 
-                expect(user?.id) == id
                 expect(user?.login) == login
                 expect(user?.name) == name
                 expect(user?.type) == UserType(rawValue: type)
@@ -49,7 +47,7 @@ class UserTests: QuickSpec {
 
         describe("user lifecycle") {
             it("save and remove user") {
-                let data: [String: Any] = ["id": id, "login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
+                let data: [String: Any] = ["login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
                 let user = User(JSON: data)
 
                 User.removeCurrentUser()
