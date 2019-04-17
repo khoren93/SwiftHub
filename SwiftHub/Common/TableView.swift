@@ -31,12 +31,9 @@ class TableView: UITableView {
         backgroundColor = .clear
         cellLayoutMarginsFollowReadableWidth = false
         keyboardDismissMode = .onDrag
+        separatorColor = .clear
         separatorInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
         tableHeaderView = View(height: 1)
         tableFooterView = UIView()
-
-        themeService.rx
-            .bind({ $0.separator }, to: rx.separatorColor)
-            .disposed(by: rx.disposeBag)
     }
 }

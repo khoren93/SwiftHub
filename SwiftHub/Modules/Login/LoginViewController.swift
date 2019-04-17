@@ -28,8 +28,11 @@ class LoginViewController: ViewController {
 
     lazy var segmentedControl: SegmentedControl = {
         let items = [LoginSegments.oAuth.title, LoginSegments.basic.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -124,8 +127,8 @@ class LoginViewController: ViewController {
             self?.titleLabel.text = R.string.localizable.loginTitleLabelText.key.localized()
             self?.detailLabel.text = R.string.localizable.loginDetailLabelText.key.localized()
             self?.oAuthLoginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
-            self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 1)
+            self?.segmentedControl.sectionTitles = [LoginSegments.oAuth.title,
+                                                    LoginSegments.basic.title]
             self?.navigationItem.titleView = self?.segmentedControl
         }).disposed(by: rx.disposeBag)
 
@@ -152,7 +155,7 @@ class LoginViewController: ViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { LoginSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { LoginSegments(rawValue: $0)! }).merge()
         let input = LoginViewModel.Input(segmentSelection: segmentSelected.asDriverOnErrorJustComplete(),
                                          basicLoginTrigger: basicLoginButton.rx.tap.asDriver(),
                                          oAuthLoginTrigger: oAuthLoginButton.rx.tap.asDriver())

@@ -144,15 +144,20 @@ class SearchViewController: TableViewController {
 
     lazy var segmentedControl: SegmentedControl = {
         let items = [SearchTypeSegments.repositories.title, SearchTypeSegments.users.title]
-        let view = SegmentedControl(items: items)
+        let images = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
+        let selectedImages = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
+        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(200)
+        })
         return view
     }()
 
     let trendingPeriodView = View()
     lazy var trendingPeriodSegmentedControl: SegmentedControl = {
         let items = [TrendingPeriodSegments.daily.title, TrendingPeriodSegments.weekly.title, TrendingPeriodSegments.montly.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
         return view
     }()
@@ -160,7 +165,7 @@ class SearchViewController: TableViewController {
     let searchModeView = View()
     lazy var searchModeSegmentedControl: SegmentedControl = {
         let items = [SearchModeSegments.trending.title, SearchModeSegments.search.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
         return view
     }()
@@ -208,13 +213,11 @@ class SearchViewController: TableViewController {
 
         languageChanged.subscribe(onNext: { [weak self] () in
             self?.searchBar.placeholder = R.string.localizable.searchSearchBarPlaceholder.key.localized()
-            self?.segmentedControl.setTitle(SearchTypeSegments.repositories.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(SearchTypeSegments.users.title, forSegmentAt: 1)
-            self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.daily.title, forSegmentAt: 0)
-            self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.weekly.title, forSegmentAt: 1)
-            self?.trendingPeriodSegmentedControl.setTitle(TrendingPeriodSegments.montly.title, forSegmentAt: 2)
-            self?.searchModeSegmentedControl.setTitle(SearchModeSegments.trending.title, forSegmentAt: 0)
-            self?.searchModeSegmentedControl.setTitle(SearchModeSegments.search.title, forSegmentAt: 1)
+            self?.trendingPeriodSegmentedControl.sectionTitles = [TrendingPeriodSegments.daily.title,
+                                                                  TrendingPeriodSegments.weekly.title,
+                                                                  TrendingPeriodSegments.montly.title]
+            self?.searchModeSegmentedControl.sectionTitles = [SearchModeSegments.trending.title,
+                                                              SearchModeSegments.search.title]
         }).disposed(by: rx.disposeBag)
 
         trendingPeriodView.addSubview(trendingPeriodSegmentedControl)
@@ -261,15 +264,24 @@ class SearchViewController: TableViewController {
 
         themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
             self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
+
+            self?.segmentedControl.sectionImages = [
+                R.image.icon_cell_badge_repository()!.tint(UIColor.flatBlack, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_user()!.tint(UIColor.flatBlack, blendMode: .normal).withRoundedCorners()!
+            ]
+            self?.segmentedControl.sectionSelectedImages = [
+                R.image.icon_cell_badge_repository()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_user()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!
+            ]
         }).disposed(by: rx.disposeBag)
     }
 
     override func bindViewModel() {
         super.bindViewModel()
 
-        let searchTypeSegmentSelected = segmentedControl.rx.selectedSegmentIndex.map { SearchTypeSegments(rawValue: $0)! }
-        let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.rx.selectedSegmentIndex.map { TrendingPeriodSegments(rawValue: $0)! }
-        let searchModeSegmentSelected = searchModeSegmentedControl.rx.selectedSegmentIndex.map { SearchModeSegments(rawValue: $0)! }
+        let searchTypeSegmentSelected = segmentedControl.segmentSelection.map { SearchTypeSegments(rawValue: $0)! }
+        let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.segmentSelection.map { TrendingPeriodSegments(rawValue: $0)! }
+        let searchModeSegmentSelected = searchModeSegmentedControl.segmentSelection.map { SearchModeSegments(rawValue: $0)! }
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, themeService.attrsStream.mapToVoid()).merge()
         let input = SearchViewModel.Input(headerRefresh: refresh,
                                           footerRefresh: footerRefreshTrigger,

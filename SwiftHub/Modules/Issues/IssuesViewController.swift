@@ -38,8 +38,11 @@ class IssuesViewController: TableViewController {
     lazy var segmentedControl: SegmentedControl = {
         let items = [IssueSegments.open.title,
                      IssueSegments.closed.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -73,8 +76,8 @@ class IssuesViewController: TableViewController {
         navigationItem.titleView = segmentedControl
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.segmentedControl.setTitle(IssueSegments.open.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(IssueSegments.closed.title, forSegmentAt: 1)
+            self?.segmentedControl.sectionTitles = [IssueSegments.open.title,
+                                                    IssueSegments.closed.title]
         }).disposed(by: rx.disposeBag)
 
         themeService.rx
@@ -89,7 +92,7 @@ class IssuesViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { IssueSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { IssueSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()
         let input = IssuesViewModel.Input(headerRefresh: refresh,
                                           footerRefresh: footerRefreshTrigger,

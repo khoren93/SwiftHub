@@ -48,7 +48,6 @@ target 'SwiftHub' do
 
     # UI
     pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
-    #pod 'PMAlertController', '~> 3.5.0'  # https://github.com/pmusolino/PMAlertController
     pod 'ImageSlideshow/Kingfisher', :git => 'https://github.com/khoren93/ImageSlideshow.git'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.4.0'  # https://github.com/lkzhao/Hero
@@ -60,6 +59,7 @@ target 'SwiftHub' do
     pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
     pod 'DropDown', '~> 2.0'  # https://github.com/AssistoLab/DropDown
     pod 'Toast-Swift', '~> 5.0'  # https://github.com/scalessec/Toast-Swift
+    pod 'HMSegmentedControl', '~> 1.0'  # https://github.com/HeshamMegid/HMSegmentedControl
 
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager

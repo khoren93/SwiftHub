@@ -38,8 +38,11 @@ class PullRequestsViewController: TableViewController {
     lazy var segmentedControl: SegmentedControl = {
         let items = [IssueSegments.open.title,
                      IssueSegments.closed.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -60,7 +63,7 @@ class PullRequestsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { PullRequestSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { PullRequestSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()
         let input = PullRequestsViewModel.Input(headerRefresh: refresh,
                                                 footerRefresh: footerRefreshTrigger,

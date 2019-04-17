@@ -55,7 +55,7 @@ struct LightTheme: Theme {
 }
 
 struct DarkTheme: Theme {
-    let primary = UIColor.flatBlack
+    let primary = UIColor.flatBlack.lighten(by: 0.1)
     let primaryDark = UIColor.flatBlackDark
     var secondary = UIColor.flatRed
     var secondaryDark = UIColor.flatRedDark

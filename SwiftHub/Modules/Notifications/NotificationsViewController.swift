@@ -38,8 +38,11 @@ class NotificationsViewController: TableViewController {
         let items = [NotificationSegments.unread.title,
                      NotificationSegments.participating.title,
                      NotificationSegments.all.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(260)
+        })
         return view
     }()
 
@@ -56,9 +59,9 @@ class NotificationsViewController: TableViewController {
         navigationItem.rightBarButtonItem = rightBarButton
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.segmentedControl.setTitle(NotificationSegments.unread.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(NotificationSegments.participating.title, forSegmentAt: 1)
-            self?.segmentedControl.setTitle(NotificationSegments.all.title, forSegmentAt: 2)
+            self?.segmentedControl.sectionTitles = [NotificationSegments.unread.title,
+                                                    NotificationSegments.participating.title,
+                                                    NotificationSegments.all.title]
         }).disposed(by: rx.disposeBag)
 
         tableView.register(R.nib.notificationCell)
@@ -68,7 +71,7 @@ class NotificationsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { NotificationSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { NotificationSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), segmentSelected.mapToVoid()).merge()
         let input = NotificationsViewModel.Input(headerRefresh: refresh,
                                                  footerRefresh: footerRefreshTrigger,

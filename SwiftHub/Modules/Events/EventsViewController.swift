@@ -31,8 +31,11 @@ class EventsViewController: TableViewController {
     lazy var segmentedControl: SegmentedControl = {
         let items = [EventSegments.received.title,
                      EventSegments.performed.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -66,8 +69,8 @@ class EventsViewController: TableViewController {
         navigationItem.titleView = segmentedControl
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.segmentedControl.setTitle(EventSegments.received.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(EventSegments.performed.title, forSegmentAt: 1)
+            self?.segmentedControl.sectionTitles = [EventSegments.received.title,
+                                                    EventSegments.performed.title]
         }).disposed(by: rx.disposeBag)
 
         themeService.rx
@@ -82,7 +85,7 @@ class EventsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { EventSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { EventSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()
         let input = EventsViewModel.Input(headerRefresh: refresh,
                                          footerRefresh: footerRefreshTrigger,
