@@ -118,6 +118,7 @@ Thanks to them for the beautiful open source icons.
 * [DevHub](https://github.com/devhubapp/devhub) - TweetDeck for GitHub - Android, iOS, Web & Desktop
 * [OpenHub](https://github.com/ThirtyDegreesRay/OpenHub) - An open source GitHub Android client app, faster and concise
 * [Trailer](https://github.com/ptsochantaris/trailer) - Managing Pull Requests and Issues For GitHub & GitHub Enterprise
+* [FastHub](https://github.com/k0shk0sh/FastHub) - FastHub the ultimate GitHub client for Android.
 
 ## License
 MIT License. See [LICENSE](https://github.com/khoren93/SwiftHub/blob/master/LICENSE).
