@@ -196,6 +196,10 @@ extension RestApi {
         return requestArray(.userPerformedEvents(username: username, page: page), type: Event.self)
     }
 
+    func organizationEvents(username: String, page: Int) -> Single<[Event]> {
+        return requestArray(.organizationEvents(username: username, page: page), type: Event.self)
+    }
+
     // MARK: - Authentication is required
 
     func profile() -> Single<User> {

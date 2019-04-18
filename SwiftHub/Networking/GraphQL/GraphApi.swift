@@ -165,6 +165,10 @@ extension GraphApi {
         return restApi.userPerformedEvents(username: username, page: page)
     }
 
+    func organizationEvents(username: String, page: Int) -> Single<[Event]> {
+        return restApi.organizationEvents(username: username, page: page)
+    }
+
     // MARK: - Authentication is required
 
     func profile() -> Single<User> {

@@ -52,6 +52,7 @@ protocol SwiftHubAPI {
     func repositoryEvents(owner: String, repo: String, page: Int) -> Single<[Event]>
     func userReceivedEvents(username: String, page: Int) -> Single<[Event]>
     func userPerformedEvents(username: String, page: Int) -> Single<[Event]>
+    func organizationEvents(username: String, page: Int) -> Single<[Event]>
 
     // MARK: - Authentication is required
     func profile() -> Single<User>

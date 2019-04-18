@@ -56,6 +56,7 @@ enum GithubAPI {
     case repositoryEvents(owner: String, repo: String, page: Int)
     case userReceivedEvents(username: String, page: Int)
     case userPerformedEvents(username: String, page: Int)
+    case organizationEvents(username: String, page: Int)
 
     // MARK: - Authentication is required
     case profile
@@ -117,6 +118,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .repositoryEvents(let owner, let repo, _): return "/repos/\(owner)/\(repo)/events"
         case .userReceivedEvents(let username, _): return "/users/\(username)/received_events"
         case .userPerformedEvents(let username, _): return "/users/\(username)/events"
+        case .organizationEvents(let username, _): return "/orgs/\(username)/events"
 
         case .profile: return "/user"
         case .notifications,
@@ -212,6 +214,8 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["page"] = page
         case .userPerformedEvents(_, let page):
             params["page"] = page
+        case .organizationEvents(_, let page):
+            params["page"] = page
         case .notifications(let all, let participating, let page),
              .repositoryNotifications(_, let all, let participating, let page):
             params["all"] = all
@@ -286,6 +290,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .repositoryEvents: dataUrl = R.file.eventsRepositoryJson()
         case .userReceivedEvents: dataUrl = R.file.eventsUserReceivedJson()
         case .userPerformedEvents: dataUrl = R.file.eventsUserPerformedJson()
+        case .organizationEvents: dataUrl = R.file.eventsOrganizationJson()
         case .profile: dataUrl = R.file.profileJson()
         case .notifications: dataUrl = R.file.notificationsJson()
         case .repositoryNotifications: dataUrl = R.file.notificationsRepositoryJson()

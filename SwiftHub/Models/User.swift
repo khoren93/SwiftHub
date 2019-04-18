@@ -66,6 +66,10 @@ struct User: Mappable {
 
     init(user: TrendingUser) {
         self.init(login: user.username, name: user.name, avatarUrl: user.avatar, followers: nil, viewerCanFollow: nil, viewerIsFollowing: nil)
+        switch user.type {
+        case .user: self.type = .user
+        case .organization: self.type = .organization
+        }
     }
 
     mutating func mapping(map: Map) {
@@ -220,6 +224,11 @@ extension UserSearch {
     }
 }
 
+enum TrendingUserType: String {
+    case user
+    case organization
+}
+
 /// TrendingUser model
 struct TrendingUser: Mappable {
 
@@ -228,6 +237,7 @@ struct TrendingUser: Mappable {
     var url: String?
     var avatar: String?
     var repo: TrendingRepository?
+    var type: TrendingUserType = .user
 
     init?(map: Map) {}
     init() {}
@@ -238,6 +248,7 @@ struct TrendingUser: Mappable {
         url <- map["url"]
         avatar <- map["avatar"]
         repo <- map["repo"]
+        type <- map["type"]
         repo?.author = username
     }
 }
