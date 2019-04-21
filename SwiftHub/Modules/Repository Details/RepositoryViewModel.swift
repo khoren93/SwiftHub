@@ -73,7 +73,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             return self.provider.readme(fullname: fullname, ref: nil)
                 .trackActivity(self.loading)
                 .trackActivity(self.headerLoading)
-                .trackError(self.error)
             }.subscribe(onNext: { [weak self] (content) in
                 self?.readme.accept(content)
             }).disposed(by: rx.disposeBag)
@@ -272,13 +271,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                                hidesDisclosure: false)
                 items.append(RepositorySectionItem.notificationsItem(viewModel: notificationsCellViewModel))
             }
-
-            // Readme
-            let readmeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReadmeCellTitle.key.localized(),
-                                                                    detail: "",
-                                                                    image: R.image.icon_cell_readme(),
-                                                                    hidesDisclosure: false)
-            items.append(RepositorySectionItem.readmeItem(viewModel: readmeCellViewModel))
 
             // Source
             let sourceCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySourceCellTitle.key.localized(),

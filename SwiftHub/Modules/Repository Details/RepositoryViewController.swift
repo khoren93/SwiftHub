@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import AttributedLib
+import FloatingPanel
 
 private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
 
@@ -99,6 +100,9 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
+    let panelContent = WebViewController()
+    let panel = FloatingPanelController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -114,11 +118,17 @@ class RepositoryViewController: TableViewController {
             .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
+
+        panel.set(contentViewController: panelContent)
+        panel.track(scrollView: panelContent.webView.scrollView)
+        panel.delegate = self
+
         emptyDataSetTitle = ""
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
         tableView.register(R.nib.repositoryDetailCell)
+        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
@@ -154,7 +164,6 @@ class RepositoryViewController: TableViewController {
                  .eventsItem(let viewModel),
                  .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
-                 .readmeItem(let viewModel),
                  .sourceItem(let viewModel),
                  .starHistoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
@@ -211,13 +220,6 @@ class RepositoryViewController: TableViewController {
             case .contributorsItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? UsersViewModel {
                     self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
-                }
-            case .readmeItem:
-                if let url = self?.viewModel.readme.value?.htmlUrl?.url {
-                    self?.navigator.show(segue: .webController(url), sender: self)
-                    if let fullname = self?.viewModel.repository.value.fullname {
-                        analytics.log(.readme(fullname: fullname))
-                    }
                 }
             case .sourceItem:
                 if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
@@ -286,6 +288,16 @@ class RepositoryViewController: TableViewController {
             self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
+        viewModel.readme.subscribe(onNext: { [weak self] (content) in
+            guard let self = self else { return }
+            if let url = content?.htmlUrl?.url {
+                self.panelContent.load(url: url)
+                self.panel.addPanel(toParent: self, belowView: nil, animated: true)
+            } else {
+                self.panel.removePanelFromParent(animated: false)
+            }
+        }).disposed(by: rx.disposeBag)
+
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
@@ -308,5 +320,13 @@ class RepositoryViewController: TableViewController {
         }
 
         return "\(value)\n".at.attributed(with: valueAttributes) + title.at.attributed(with: titleAttributes)
+    }
+}
+
+extension RepositoryViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
+        if let inset = vc.layout.insetFor(position: vc.position) {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0)
+        }
     }
 }
