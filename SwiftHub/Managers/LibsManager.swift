@@ -159,10 +159,11 @@ extension LibsManager {
         analytics.log(.flexOpened)
     }
 
-    func removeKingfisherCache(completion handler: (() -> Void)?) {
-        ImageCache.default.clearMemoryCache()
-        ImageCache.default.clearDiskCache {
-            handler?()
-        }
+    func removeKingfisherCache() -> Observable<Void> {
+        return ImageCache.default.rx.clearCache()
+    }
+
+    func kingfisherCacheSize() -> Observable<Int> {
+        return ImageCache.default.rx.retrieveCacheSize()
     }
 }

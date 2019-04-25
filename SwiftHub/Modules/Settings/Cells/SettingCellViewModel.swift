@@ -13,6 +13,7 @@ import RxCocoa
 class SettingCellViewModel {
 
     let title: Driver<String>
+    let detail: Driver<String>
     let imageName: Driver<String>
     let showDisclosure: Driver<Bool>
 
@@ -21,6 +22,7 @@ class SettingCellViewModel {
     init(with model: SettingModel) {
         self.model = model
         title = Driver.just("\(model.title ?? "")")
+        detail = Driver.just("\(model.detail ?? "")")
         imageName = Driver.just("\(model.leftImage ?? "")")
         showDisclosure = Driver.just(model.showDisclosure)
     }

@@ -42,8 +42,7 @@ class SettingsViewController: TableViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(Observable.just(()),
-                                    languageChanged.asObservable()).merge()
+        let refresh = Observable.of(rx.viewWillAppear.mapToVoid(), languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
@@ -105,7 +104,6 @@ class SettingsViewController: TableViewController {
                 }
             case .removeCacheItem:
                 self?.deselectSelectedRow()
-                self?.clearCacheAction()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 analytics.log(.acknowledgements)
@@ -116,17 +114,6 @@ class SettingsViewController: TableViewController {
                 }
             }
         }).disposed(by: rx.disposeBag)
-    }
-
-    func clearCacheAction() {
-        LibsManager.shared.removeKingfisherCache { [weak self] in
-            let alertController = UIAlertController(title: R.string.localizable.settingsRemoveCacheAlertSuccessMessage.key.localized(),
-                                                    message: nil, preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: R.string.localizable.commonOK.key.localized(), style: .default) { (result: UIAlertAction) in }
-            alertController.addAction(okAction)
-            self?.present(alertController, animated: true, completion: nil)
-            analytics.log(.appCacheRemoved)
-        }
     }
 
     func logoutAction() {

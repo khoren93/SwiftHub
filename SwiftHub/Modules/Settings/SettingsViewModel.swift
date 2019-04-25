@@ -44,8 +44,19 @@ class SettingsViewModel: ViewModel, ViewModelType {
     func transform(input: Input) -> Output {
 
         let elements = BehaviorRelay<[SettingsSection]>(value: [])
-        let refresh = Observable.of(input.trigger, bannerEnabled.mapToVoid()).merge()
-        refresh.map { [weak self] () -> [SettingsSection] in
+        let removeCache = PublishSubject<Void>()
+
+        let cacheRemoved = removeCache.flatMapLatest { () -> Observable<Void> in
+            return LibsManager.shared.removeKingfisherCache()
+        }
+
+        let refresh = Observable.of(input.trigger, cacheRemoved, bannerEnabled.mapToVoid()).merge()
+
+        let cacheSize = refresh.flatMapLatest { () -> Observable<Int> in
+            return LibsManager.shared.kingfisherCacheSize()
+        }
+
+        Observable.combineLatest(refresh, cacheSize).map { [weak self] (_, size) -> [SettingsSection] in
             guard let self = self else { return [] }
             self.cellDisposeBag = DisposeBag()
             var items: [SettingsSection] = []
@@ -84,7 +95,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             let contactsModel = SettingModel(leftImage: R.image.icon_cell_company.name, title: R.string.localizable.settingsContactsTitle.key.localized(), detail: "", showDisclosure: true)
             let contactsCellViewModel = SettingCellViewModel(with: contactsModel)
 
-            let removeCacheModel = SettingModel(leftImage: R.image.icon_cell_remove.name, title: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: "", showDisclosure: false)
+            let removeCacheModel = SettingModel(leftImage: R.image.icon_cell_remove.name, title: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: size.sizeFromByte(), showDisclosure: false)
             let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel)
 
             let acknowledgementsModel = SettingModel(leftImage: R.image.icon_cell_acknowledgements.name, title: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: "", showDisclosure: true)
@@ -113,6 +124,13 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         let selectedEvent = input.selection
 
+        selectedEvent.asObservable().subscribe(onNext: { (item) in
+            switch item {
+            case .removeCacheItem: removeCache.onNext(())
+            default: break
+            }
+        }).disposed(by: rx.disposeBag)
+
         nightModeEnabled.subscribe(onNext: { (isEnabled) in
             var theme = ThemeType.currentTheme()
             if theme.isDark != isEnabled {
@@ -127,6 +145,10 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         bannerEnabled.skip(1).subscribe(onNext: { (isEnabled) in
             analytics.log(.appAds(enabled: isEnabled))
+        }).disposed(by: rx.disposeBag)
+
+        cacheRemoved.subscribe(onNext: { () in
+            analytics.log(.appCacheRemoved)
         }).disposed(by: rx.disposeBag)
 
         return Output(items: elements,
