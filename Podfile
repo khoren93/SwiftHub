@@ -10,9 +10,9 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '~> 13.0'  # https://github.com/Moya/Moya
-    pod 'ReachabilitySwift', '~> 4.0' # https://github.com/ashleymills/Reachability.swift
+    pod 'ReachabilitySwift', '~> 4.0'  # https://github.com/ashleymills/Reachability.swift
 
-    pod 'Apollo', :git => 'https://github.com/apollographql/apollo-ios.git'  # , '0.9.5'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.10.1'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -69,12 +69,12 @@ target 'SwiftHub' do
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'  # https://github.com/ViccAlexander/Chameleon
 
     # Auto Layout
-    pod 'SnapKit', '~> 4.0'  # https://github.com/SnapKit/SnapKit
+    pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', :git => 'https://github.com/Flipboard/FLEX.git', :commit => '1ef608cf8aa268716363586e894e053a3bed32c4'  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', '~> 3.0'  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
-    pod 'AttributedLib', :git => 'https://github.com/Nirma/Attributed.git'  # https://github.com/Nirma/Attributed
+    pod 'AttributedLib', '~> 3.0'  # https://github.com/Nirma/Attributed
 
     # Logging
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
