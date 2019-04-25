@@ -131,7 +131,7 @@ extension Repository {
         self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
                   language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
                   stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
-        url = graph?.url
+        htmlUrl = graph?.url
         homepage = graph?.homepageUrl
         createdAt =  graph?.createdAt.toISODate()?.date
         updatedAt = graph?.updatedAt.toISODate()?.date
