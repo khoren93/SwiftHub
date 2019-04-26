@@ -116,6 +116,21 @@ extension Umbrella.Analytics {
         FirebaseAnalytics.Analytics.setUserProperty(email, forName: "$email")
     }
 
+    func updateUser(ads enabled: Bool) {
+        Mixpanel.sharedInstance()?.people.set("$ads_enabled", to: enabled)
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$ads_enabled")
+    }
+
+    func updateUser(nightMode enabled: Bool) {
+        Mixpanel.sharedInstance()?.people.set("$night_mode_enabled", to: enabled)
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$night_mode_enabled")
+    }
+
+    func updateUser(colorTheme theme: String) {
+        Mixpanel.sharedInstance()?.people.set("$color_theme", to: theme)
+        FirebaseAnalytics.Analytics.setUserProperty(theme, forName: "$color_theme")
+    }
+
     func reset() {
         Mixpanel.sharedInstance()?.reset()
         FirebaseAnalytics.Analytics.resetAnalyticsData()

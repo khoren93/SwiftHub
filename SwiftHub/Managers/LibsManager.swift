@@ -51,6 +51,7 @@ class LibsManager: NSObject {
 
         bannersEnabled.subscribe(onNext: { (enabled) in
             UserDefaults.standard.set(enabled, forKey: Configs.UserDefaultsKeys.bannersEnabled)
+            analytics.updateUser(ads: enabled)
         }).disposed(by: rx.disposeBag)
     }
 

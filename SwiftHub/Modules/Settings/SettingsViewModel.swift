@@ -141,6 +141,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
         nightModeEnabled.skip(1).subscribe(onNext: { (isEnabled) in
             analytics.log(.appNightMode(enabled: isEnabled))
+            analytics.updateUser(nightMode: isEnabled)
         }).disposed(by: rx.disposeBag)
 
         bannerEnabled.skip(1).subscribe(onNext: { (isEnabled) in

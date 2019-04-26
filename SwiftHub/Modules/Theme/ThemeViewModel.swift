@@ -37,6 +37,7 @@ class ThemeViewModel: ViewModel, ViewModelType {
             let theme = ThemeType.currentTheme().withColor(color: color)
             themeService.switch(theme)
             analytics.log(.appTheme(color: color.title))
+            analytics.updateUser(colorTheme: color.title)
         }).disposed(by: rx.disposeBag)
 
         return Output(items: elements,
