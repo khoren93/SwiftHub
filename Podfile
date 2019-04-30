@@ -37,7 +37,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0.0'  #, '~> 4.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.31.0'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.32.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -72,7 +72,7 @@ target 'SwiftHub' do
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', '~> 3.0'  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', :git => 'https://github.com/Flipboard/FLEX.git', :commit => '1ef608cf8aa268716363586e894e053a3bed32c4'  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'AttributedLib', '~> 3.0'  # https://github.com/Nirma/Attributed
 
