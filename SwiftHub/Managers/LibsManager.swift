@@ -32,7 +32,7 @@ import Firebase
 import DropDown
 import Toast_Swift
 
-  typealias DropDownView = DropDown
+typealias DropDownView = DropDown
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager: NSObject {
@@ -111,7 +111,7 @@ class LibsManager: NSObject {
     }
 
     func setupKeyboardManager() {
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enable = false
     }
 
     func setupKingfisher() {

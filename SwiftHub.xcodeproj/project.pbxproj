@@ -22,6 +22,9 @@
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
 		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
+		0713D7B722816C9F00A10A08 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0713D7B622816C9F00A10A08 /* ChatViewController.swift */; };
+		0713D7B922816F5300A10A08 /* IssueCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0713D7B822816F5300A10A08 /* IssueCommentsViewController.swift */; };
+		0713D7BB22816F6700A10A08 /* IssueCommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0713D7BA22816F6700A10A08 /* IssueCommentsViewModel.swift */; };
 		0716601F21CFB1D100B5827C /* SourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0716601E21CFB1D100B5827C /* SourceViewController.swift */; };
 		0716602121CFB1E000B5827C /* SourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0716602021CFB1E000B5827C /* SourceViewModel.swift */; };
 		07178A61220F581C0020AE12 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07178A60220F581C0020AE12 /* Toolbar.swift */; };
@@ -98,6 +101,9 @@
 		07A34DC521E29ACC00B05857 /* RepositoryTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC421E29ACC00B05857 /* RepositoryTrendings.json */; };
 		07A34DC721E29BE200B05857 /* UserTrendings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC621E29BE200B05857 /* UserTrendings.json */; };
 		07A34DC921E29C2400B05857 /* Languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 07A34DC821E29C2400B05857 /* Languages.json */; };
+		07AD1549227F3B0800FC8109 /* RepositoryIssueComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 07AD1548227F3B0800FC8109 /* RepositoryIssueComments.json */; };
+		07AD154C227F3D7300FC8109 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AD154B227F3D7300FC8109 /* IssueViewController.swift */; };
+		07AD154E227F3E3300FC8109 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AD154D227F3E3300FC8109 /* IssueViewModel.swift */; };
 		07B1837F2172257D007CC23B /* UserSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1837E2172257D007CC23B /* UserSection.swift */; };
 		07B183832172268C007CC23B /* UserDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B183812172268C007CC23B /* UserDetailCell.swift */; };
 		07B183842172268C007CC23B /* UserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B183822172268C007CC23B /* UserDetailCell.xib */; };
@@ -301,6 +307,9 @@
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		0713D7B622816C9F00A10A08 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0713D7B822816F5300A10A08 /* IssueCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentsViewController.swift; sourceTree = "<group>"; };
+		0713D7BA22816F6700A10A08 /* IssueCommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentsViewModel.swift; sourceTree = "<group>"; };
 		0716601E21CFB1D100B5827C /* SourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewController.swift; sourceTree = "<group>"; };
 		0716602021CFB1E000B5827C /* SourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewModel.swift; sourceTree = "<group>"; };
 		07178A60220F581C0020AE12 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
@@ -381,6 +390,9 @@
 		07A34DC621E29BE200B05857 /* UserTrendings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserTrendings.json; sourceTree = "<group>"; };
 		07A34DC821E29C2400B05857 /* Languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Languages.json; sourceTree = "<group>"; };
 		07A4ADB121E89899001D198F /* PRIVACY_POLICY.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY_POLICY.md; sourceTree = SOURCE_ROOT; };
+		07AD1548227F3B0800FC8109 /* RepositoryIssueComments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryIssueComments.json; sourceTree = "<group>"; };
+		07AD154B227F3D7300FC8109 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		07AD154D227F3E3300FC8109 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		07B1837E2172257D007CC23B /* UserSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSection.swift; sourceTree = "<group>"; };
 		07B183812172268C007CC23B /* UserDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailCell.swift; sourceTree = "<group>"; };
 		07B183822172268C007CC23B /* UserDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailCell.xib; sourceTree = "<group>"; };
@@ -772,6 +784,17 @@
 			path = Branches;
 			sourceTree = "<group>";
 		};
+		07AD154A227F3D4400FC8109 /* Issue Details */ = {
+			isa = PBXGroup;
+			children = (
+				0713D7B822816F5300A10A08 /* IssueCommentsViewController.swift */,
+				0713D7BA22816F6700A10A08 /* IssueCommentsViewModel.swift */,
+				07AD154B227F3D7300FC8109 /* IssueViewController.swift */,
+				07AD154D227F3E3300FC8109 /* IssueViewModel.swift */,
+			);
+			path = "Issue Details";
+			sourceTree = "<group>";
+		};
 		07D46E5821921C01008E5369 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,18 +915,19 @@
 		07FC33741FFFD46D00D53888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				072BD79B225FD64B00E6C580 /* Releases */,
 				0795E5C52259205C008EFD50 /* Branches */,
 				07241D0121B173A400F800BD /* Commits */,
 				A07DC84621EDF67F00AA7951 /* Contacts */,
 				07D46E5821921C01008E5369 /* Contents */,
 				0732045C2141395200C1E39F /* Events */,
+				07AD154A227F3D4400FC8109 /* Issue Details */,
 				07E1B2FE21A44D1700F6EAE3 /* Issues */,
 				0752F49221C8E61E00A30BF2 /* Languages */,
 				A0ED264620F76A45004E8137 /* Login */,
 				07FC33751FFFD47600D53888 /* Main */,
 				A034AF7121528087004C310B /* Notifications */,
 				07241D0321B173C500F800BD /* Pull Requests */,
+				072BD79B225FD64B00E6C580 /* Releases */,
 				A09DE8BA20E7B7DE00F6F2BF /* Repositories */,
 				07DFF6D820E90860004DAA68 /* Repository Details */,
 				A09DE8B320E7AD0300F6F2BF /* Search */,
@@ -1076,6 +1100,7 @@
 				07D46E5621920EDF008E5369 /* RepositoryContents.json */,
 				072B8ED921B4143200B2C28C /* RepositoryContributors.json */,
 				A0E2B0962108B024000DA282 /* RepositoryForks.json */,
+				07AD1548227F3B0800FC8109 /* RepositoryIssueComments.json */,
 				07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */,
 				07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */,
 				07241D0C21B1744900F800BD /* RepositoryPullRequests.json */,
@@ -1242,6 +1267,7 @@
 			children = (
 				C762C6501E1D559000C09EBD /* BarButtonItem.swift */,
 				C762C6511E1D559000C09EBD /* Button.swift */,
+				0713D7B622816C9F00A10A08 /* ChatViewController.swift */,
 				C762C6521E1D559000C09EBD /* CollectionView.swift */,
 				C762C6531E1D559000C09EBD /* CollectionViewCell.swift */,
 				C762C6541E1D559000C09EBD /* CollectionViewController.swift */,
@@ -1478,6 +1504,7 @@
 				07DFF6D520E90574004DAA68 /* UserSearch.json in Resources */,
 				A024C7C621BAB5F400FEA133 /* GoogleService-Info.plist in Resources */,
 				072BD798225FD4F200E6C580 /* RepositoryReleases.json in Resources */,
+				07AD1549227F3B0800FC8109 /* RepositoryIssueComments.json in Resources */,
 				07A34DC921E29C2400B05857 /* Languages.json in Resources */,
 				C762C6881E1D5C3A00C09EBD /* Icons.xcassets in Resources */,
 				07241D0B21B1743900F800BD /* RepositoryBranch.json in Resources */,
@@ -1593,10 +1620,12 @@
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
+				"${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/KafkaRefresh/KafkaRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
@@ -1643,10 +1672,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputBarAccessoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KafkaRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
@@ -1741,7 +1772,7 @@
 			);
 			name = R.swift;
 			outputPaths = (
-				"$SRCROOT/SwiftHub/Resources/R.generated.swift",
+				$SRCROOT/SwiftHub/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1833,6 +1864,7 @@
 				070FF83C20F221970070F5E8 /* UserViewController.swift in Sources */,
 				C762C6661E1D559000C09EBD /* NavigationController.swift in Sources */,
 				A0ED264A20F76A7D004E8137 /* LoginViewController.swift in Sources */,
+				0713D7B722816C9F00A10A08 /* ChatViewController.swift in Sources */,
 				A07DC85421EE0DED00AA7951 /* ContactsManager.swift in Sources */,
 				C762C6611E1D559000C09EBD /* CollectionView.swift in Sources */,
 				07FC337E1FFFE4E300D53888 /* LibsManager.swift in Sources */,
@@ -1867,6 +1899,7 @@
 				07241D2521B18AA000F800BD /* PullRequestsViewController.swift in Sources */,
 				A0E2B0802102343E000DA282 /* RepositoriesViewController.swift in Sources */,
 				A09DE8C620E7B84D00F6F2BF /* UserCell.swift in Sources */,
+				0713D7B922816F5300A10A08 /* IssueCommentsViewController.swift in Sources */,
 				07B2C1F4213AD4CA00FE7AC0 /* Token.swift in Sources */,
 				07B1837F2172257D007CC23B /* UserSection.swift in Sources */,
 				07FC33771FFFD4A600D53888 /* HomeTabBarController.swift in Sources */,
@@ -1876,6 +1909,7 @@
 				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
 				07E1B2FD21A44B7600F6EAE3 /* Branch.swift in Sources */,
 				07D46E5A21921C28008E5369 /* ContentsViewController.swift in Sources */,
+				07AD154C227F3D7300FC8109 /* IssueViewController.swift in Sources */,
 				A0E2B08421060F79000DA282 /* InitialSplitViewController.swift in Sources */,
 				07E1B30321A44D8D00F6EAE3 /* IssueCell.swift in Sources */,
 				C762C6851E1D5A7300C09EBD /* UIView+Borders.swift in Sources */,
@@ -1921,6 +1955,7 @@
 				0732046421413B5200C1E39F /* EventCell.swift in Sources */,
 				C762C6641E1D559000C09EBD /* ImageView.swift in Sources */,
 				A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */,
+				07AD154E227F3E3300FC8109 /* IssueViewModel.swift in Sources */,
 				07241D1B21B183AE00F800BD /* Committer.swift in Sources */,
 				A0E2B0822102344F000DA282 /* RepositoriesViewModel.swift in Sources */,
 				A09DE8D620E7C2C400F6F2BF /* ErrorTracker.swift in Sources */,
@@ -1955,6 +1990,7 @@
 				07E1B30621A44D9D00F6EAE3 /* IssueCellViewModel.swift in Sources */,
 				A0E2B08A210625D5000DA282 /* SettingSwitchCellViewModel.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
+				0713D7BB22816F6700A10A08 /* IssueCommentsViewModel.swift in Sources */,
 				070FF84720F284F00070F5E8 /* SettingsViewModel.swift in Sources */,
 				07241D1D21B18A6000F800BD /* PullRequestsViewModel.swift in Sources */,
 				07919467214D4ED400A7067E /* ThemeViewModel.swift in Sources */,

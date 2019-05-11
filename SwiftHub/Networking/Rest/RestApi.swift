@@ -14,6 +14,12 @@ import Moya
 import Moya_ObjectMapper
 import Alamofire
 
+typealias MoyaError = Moya.MoyaError
+
+enum ApiError: Error {
+    case serverError(response: ErrorResponse)
+}
+
 class RestApi: SwiftHubAPI {
 
     let githubProvider: GithubNetworking
@@ -104,8 +110,12 @@ extension RestApi {
         return requestArray(.contents(fullname: fullname, path: path, ref: ref), type: Content.self)
     }
 
-    func repositoryIssues(fullname: String, state: String, page: Int) -> Single<[Issue]> {
-        return requestArray(.repositoryIssues(fullname: fullname, state: state, page: page), type: Issue.self)
+    func issues(fullname: String, state: String, page: Int) -> Single<[Issue]> {
+        return requestArray(.issues(fullname: fullname, state: state, page: page), type: Issue.self)
+    }
+
+    func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
+        return requestArray(.issueComments(fullname: fullname, number: number, page: page), type: Comment.self)
     }
 
     func commits(fullname: String, page: Int) -> Single<[Commit]> {

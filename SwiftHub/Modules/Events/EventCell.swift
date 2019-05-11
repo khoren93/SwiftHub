@@ -25,10 +25,8 @@ class EventCell: DetailedTableViewCell {
         viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.secondDetail.drive(secondDetailLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.imageUrl.drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
-        viewModel.imageUrl.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.leftImageView.hero.id = url.absoluteString
-            }
+        viewModel.imageUrl.filterNil().drive(onNext: { [weak self] (url) in
+            self?.leftImageView.hero.id = url.absoluteString
         }).disposed(by: rx.disposeBag)
         viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
         viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)

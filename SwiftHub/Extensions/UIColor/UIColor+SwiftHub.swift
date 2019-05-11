@@ -32,6 +32,10 @@ extension UIColor {
     static func separator() -> UIColor {
         return themeService.type.associatedObject.separator
     }
+
+    static func text() -> UIColor {
+        return themeService.type.associatedObject.text
+    }
 }
 
 // MARK: Averaging a Color

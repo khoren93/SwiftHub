@@ -32,7 +32,8 @@ enum GithubAPI {
     case readme(fullname: String, ref: String?)
     case contents(fullname: String, path: String, ref: String?)
 
-    case repositoryIssues(fullname: String, state: String, page: Int)
+    case issues(fullname: String, state: String, page: Int)
+    case issueComments(fullname: String, number: Int, page: Int)
     case commits(fullname: String, page: Int)
     case commit(fullname: String, sha: String)
     case branches(fullname: String, page: Int)
@@ -96,7 +97,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .forks(let fullname, _): return "/repos/\(fullname)/forks"
         case .readme(let fullname, _): return "/repos/\(fullname)/readme"
         case .contents(let fullname, let path, _): return "/repos/\(fullname)/contents/\(path)"
-        case .repositoryIssues(let fullname, _, _): return "/repos/\(fullname)/issues"
+        case .issues(let fullname, _, _): return "/repos/\(fullname)/issues"
+        case .issueComments(let fullname, let number, _): return "/repos/\(fullname)/issues/\(number)/comments"
         case .commits(let fullname, _): return "/repos/\(fullname)/commits"
         case .commit(let fullname, let sha): return "/repos/\(fullname)/commits/\(sha)"
         case .branches(let fullname, _): return "/repos/\(fullname)/branches"
@@ -177,8 +179,10 @@ extension GithubAPI: TargetType, ProductAPIType {
             params["ref"] = ref
         case .contents(_, _, let ref):
             params["ref"] = ref
-        case .repositoryIssues(_, let state, let page):
+        case .issues(_, let state, let page):
             params["state"] = state
+            params["page"] = page
+        case .issueComments(_, _, let page):
             params["page"] = page
         case .commits(_, let page):
             params["page"] = page
@@ -268,7 +272,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .forks: dataUrl = R.file.repositoryForksJson()
         case .readme: dataUrl = R.file.repositoryReadmeJson()
         case .contents: dataUrl = R.file.repositoryContentsJson()
-        case .repositoryIssues: dataUrl = R.file.repositoryIssuesJson()
+        case .issues: dataUrl = R.file.repositoryIssuesJson()
+        case .issueComments: dataUrl = R.file.repositoryIssueCommentsJson()
         case .commits: dataUrl = R.file.repositoryCommitsJson()
         case .commit: dataUrl = R.file.repositoryCommitJson()
         case .branches: dataUrl = R.file.repositoryBranchesJson()

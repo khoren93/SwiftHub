@@ -32,6 +32,7 @@ struct Release: Mappable {
     var zipballUrl: String?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         assets <- map["assets"]

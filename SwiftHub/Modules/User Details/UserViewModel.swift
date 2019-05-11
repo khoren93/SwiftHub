@@ -72,6 +72,9 @@ class UserViewModel: ViewModel, ViewModelType {
                 .trackError(self.error)
             }.subscribe(onNext: { [weak self] (user) in
                 self?.user.accept(user)
+                if user.isMine() {
+                    user.save()
+                }
             }).disposed(by: rx.disposeBag)
 
         let followed = input.followSelection.flatMapLatest { [weak self] () -> Observable<RxSwift.Event<Void>> in

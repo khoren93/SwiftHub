@@ -69,8 +69,12 @@ extension GraphApi {
         return restApi.contents(fullname: fullname, path: path, ref: ref)
     }
 
-    func repositoryIssues(fullname: String, state: String, page: Int) -> Single<[Issue]> {
-        return restApi.repositoryIssues(fullname: fullname, state: state, page: page)
+    func issues(fullname: String, state: String, page: Int) -> Single<[Issue]> {
+        return restApi.issues(fullname: fullname, state: state, page: page)
+    }
+
+    func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
+        return restApi.issueComments(fullname: fullname, number: number, page: page)
     }
 
     func commits(fullname: String, page: Int) -> Single<[Commit]> {

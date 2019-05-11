@@ -9,13 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Moya
-
-typealias MoyaError = Moya.MoyaError
-
-enum ApiError: Error {
-    case serverError(response: ErrorResponse)
-}
 
 protocol SwiftHubAPI {
     func downloadString(url: URL) -> Single<String>
@@ -30,7 +23,8 @@ protocol SwiftHubAPI {
     func forks(fullname: String, page: Int) -> Single<[Repository]>
     func readme(fullname: String, ref: String?) -> Single<Content>
     func contents(fullname: String, path: String, ref: String?) -> Single<[Content]>
-    func repositoryIssues(fullname: String, state: String, page: Int) -> Single<[Issue]>
+    func issues(fullname: String, state: String, page: Int) -> Single<[Issue]>
+    func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]>
     func commits(fullname: String, page: Int) -> Single<[Commit]>
     func commit(fullname: String, sha: String) -> Single<Commit>
     func branches(fullname: String, page: Int) -> Single<[Branch]>

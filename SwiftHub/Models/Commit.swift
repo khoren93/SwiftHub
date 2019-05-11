@@ -25,6 +25,7 @@ struct Commit: Mappable {
     var committer: User?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         url <- map["url"]

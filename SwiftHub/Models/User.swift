@@ -10,6 +10,7 @@
 import Foundation
 import ObjectMapper
 import KeychainAccess
+import MessageKit
 
 private let userKey = "CurrentUserKey"
 private let keychain = Keychain(service: Configs.App.bundleIdentifier)
@@ -20,7 +21,7 @@ enum UserType: String {
 }
 
 /// User model
-struct User: Mappable {
+struct User: Mappable, SenderType {
 
     var avatarUrl: String?  // A URL pointing to the user's public avatar.
     var blog: String?  // A URL pointing to the user's public website/blog.
@@ -51,6 +52,10 @@ struct User: Mappable {
 
     // Only for User type
     var bio: String?  // The user's public profile bio.
+
+    // SenderType
+    var senderId: String { return login ?? "" }
+    var displayName: String { return login ?? "" }
 
     init?(map: Map) {}
     init() {}

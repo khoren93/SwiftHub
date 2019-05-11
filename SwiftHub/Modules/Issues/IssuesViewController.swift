@@ -121,13 +121,11 @@ class IssuesViewController: TableViewController {
             }.disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
 
-        output.issueSelected.drive(onNext: { [weak self] (url) in
-            if let url  = url {
-                self?.navigator.show(segue: .webController(url), sender: self)
-            }
+        output.issueSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .issueDetails(viewModel: viewModel), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in

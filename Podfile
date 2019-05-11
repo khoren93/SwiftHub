@@ -61,6 +61,7 @@ target 'SwiftHub' do
     pod 'Toast-Swift', '~> 5.0'  # https://github.com/scalessec/Toast-Swift
     pod 'HMSegmentedControl', '~> 1.0'  # https://github.com/HeshamMegid/HMSegmentedControl
     pod 'FloatingPanel', '~> 1.0'  # https://github.com/SCENEE/FloatingPanel
+    pod 'MessageKit', '~> 3.0'  # https://github.com/MessageKit/MessageKit
 
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
@@ -88,7 +89,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.43.0'
+    pod 'Google-Mobile-Ads-SDK', '7.44.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths

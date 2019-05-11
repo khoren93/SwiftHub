@@ -59,6 +59,7 @@ struct PullRequest: Mappable {
     var user: User?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         activeLockReason <- map["active_lock_reason"]
