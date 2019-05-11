@@ -78,22 +78,35 @@
 
 ## Building and Running
 
-You'll need a few things before we get started. Make sure you have Xcode installed from the App Store. Then run the following two commands to install Xcode's command line tools and [`bundler`](https://bundler.io), if you don't have that yet.
-
+You'll need a few things before we get started. 
+Make sure you have Xcode installed from the App Store. 
+Then run the following command to install Xcode's command line tools, if you don't have that yet
 ```sh
-[sudo] gem install bundler
 xcode-select --install
 ```
 
-The following commands will set up SwiftHub.
+Install [`Bundler`](https://bundler.io) for managing Ruby gem dependencies
+```sh
+[sudo] gem install bundler
+```
 
+Install [Brew](https://github.com/Homebrew/brew) package manager for macOS
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+The following commands will set up SwiftHub
 ```sh
 cd SwiftHub
 bundle install
 bundle exec fastlane setup
 ```
 
-Use `bundle exec fastlane update` to update all tools and pods.
+To update all tools and pods
+```sh
+bundle exec fastlane update
+```
+
 Alrighty! We're ready to go!
 
 ## Documentation
