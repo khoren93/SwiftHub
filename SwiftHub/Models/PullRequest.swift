@@ -32,7 +32,7 @@ struct PullRequest: Mappable {
     var htmlUrl: String?
     var id: Int?
     var issueUrl: String?
-    var labels: [Label]?
+    var labels: [IssueLabel]?
     var locked: Bool?
     var maintainerCanModify: Bool?
     var mergeCommitSha: String?

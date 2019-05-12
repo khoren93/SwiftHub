@@ -100,7 +100,6 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
     let tabTapped = PublishSubject<UIGestureRecognizer>()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

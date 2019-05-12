@@ -49,9 +49,20 @@ extension Issue {
         if let commentsString = comments?.string.styled( with: .color(.text())) {
             let commentsImage = R.image.icon_cell_badge_comment()?.filled(withColor: .secondary()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
             texts.append(NSAttributedString.composed(of: [
-                commentsImage, Special.space, commentsString
+                commentsImage, Special.space, commentsString, Tab.headIndent(10)
             ]))
         }
+        labels?.forEach({ (label) in
+            if let name = label.name, let color = UIColor(hexString: label.color ?? "") {
+                let labelString = " \(name) ".styled(with: .color(color.darken(by: 0.35).brightnessAdjustedColor),
+                                                     .backgroundColor(color),
+                                                     .lineHeightMultiple(1.2),
+                                                     .baselineOffset(1))
+                texts.append(NSAttributedString.composed(of: [
+                    labelString, Special.space
+                ]))
+            }
+        })
         return NSAttributedString.composed(of: texts)
     }
 }
