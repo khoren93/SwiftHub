@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.commitCell.identifier
 
 class CommitsViewController: TableViewController {
 
-    var viewModel: CommitsViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +29,7 @@ class CommitsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? CommitsViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = CommitsViewModel.Input(headerRefresh: refresh,

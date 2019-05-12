@@ -17,8 +17,6 @@ private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
 
 class RepositoryViewController: TableViewController {
 
-    var viewModel: RepositoryViewModel!
-
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
         return view
@@ -100,7 +98,7 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
-    let panelContent = WebViewController()
+    var panelContent: WebViewController!
     let panel = FloatingPanelController()
 
     override func viewDidLoad() {
@@ -119,6 +117,7 @@ class RepositoryViewController: TableViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
 
+        panelContent = WebViewController(viewModel: nil, navigator: navigator)
         panel.set(contentViewController: panelContent)
         panel.track(scrollView: panelContent.webView.scrollView)
         panel.delegate = self
@@ -133,6 +132,7 @@ class RepositoryViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? RepositoryViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = RepositoryViewModel.Input(headerRefresh: refresh,
@@ -182,54 +182,54 @@ class RepositoryViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .parentItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoryViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
                     self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
                 }
             case .homepageItem:
-                if let url = self?.viewModel.repository.value.homepage?.url {
+                if let url = viewModel.repository.value.homepage?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             case .issuesItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? IssuesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? IssuesViewModel {
                     self?.navigator.show(segue: .issues(viewModel: viewModel), sender: self)
                 }
             case .commitsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? CommitsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? CommitsViewModel {
                     self?.navigator.show(segue: .commits(viewModel: viewModel), sender: self)
                 }
             case .branchesItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? BranchesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? BranchesViewModel {
                     self?.navigator.show(segue: .branches(viewModel: viewModel), sender: self)
                 }
             case .releasesItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ReleasesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ReleasesViewModel {
                     self?.navigator.show(segue: .releases(viewModel: viewModel), sender: self)
                 }
             case .pullRequestsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? PullRequestsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? PullRequestsViewModel {
                     self?.navigator.show(segue: .pullRequests(viewModel: viewModel), sender: self)
                 }
             case .eventsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
                 }
             case .notificationsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? NotificationsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? NotificationsViewModel {
                     self?.navigator.show(segue: .notifications(viewModel: viewModel), sender: self)
                 }
             case .contributorsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UsersViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UsersViewModel {
                     self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
                 }
             case .sourceItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ContentsViewModel {
                     self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
                     if let fullname = viewModel.repository.value.fullname {
                         analytics.log(.source(fullname: fullname))
                     }
                 }
             case .starHistoryItem:
-                if let url = self?.viewModel.starHistoryUrl() {
+                if let url = viewModel.starHistoryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             default:

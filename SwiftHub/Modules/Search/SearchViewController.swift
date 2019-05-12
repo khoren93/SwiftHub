@@ -135,8 +135,6 @@ enum SortUserItems: Int {
 
 class SearchViewController: TableViewController {
 
-    var viewModel: SearchViewModel!
-
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_language(), style: .done, target: nil, action: nil)
         return view
@@ -278,6 +276,7 @@ class SearchViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? SearchViewModel else { return }
 
         let searchTypeSegmentSelected = segmentedControl.segmentSelection.map { SearchTypeSegments(rawValue: $0)! }
         let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.segmentSelection.map { TrendingPeriodSegments(rawValue: $0)! }

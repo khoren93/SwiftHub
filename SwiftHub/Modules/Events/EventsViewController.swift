@@ -26,8 +26,6 @@ enum EventSegments: Int {
 
 class EventsViewController: TableViewController {
 
-    var viewModel: EventsViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
         let items = [EventSegments.received.title,
                      EventSegments.performed.title]
@@ -84,6 +82,7 @@ class EventsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? EventsViewModel else { return }
 
         let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { EventSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()

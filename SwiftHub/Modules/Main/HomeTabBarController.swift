@@ -14,27 +14,22 @@ import RxSwift
 enum HomeTabBarItem: Int {
     case search, news, notifications, settings, login
 
-    func controller(with viewModel: ViewModel) -> UIViewController {
+    private func controller(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
         switch self {
         case .search:
-            let vc = R.storyboard.main.searchViewController()!
-            vc.viewModel = (viewModel as? SearchViewModel)!
+            let vc = SearchViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .news:
-            let vc = R.storyboard.main.eventsViewController()!
-            vc.viewModel = (viewModel as? EventsViewModel)!
+            let vc = EventsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .notifications:
-            let vc = R.storyboard.main.notificationsViewController()!
-            vc.viewModel = (viewModel as? NotificationsViewModel)!
+            let vc = NotificationsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .settings:
-            let vc = R.storyboard.main.settingsViewController()!
-            vc.viewModel = (viewModel as? SettingsViewModel)!
+            let vc = SettingsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .login:
-            let vc = R.storyboard.main.loginViewController()!
-            vc.viewModel = (viewModel as? LoginViewModel)!
+            let vc = LoginViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         }
     }
@@ -74,8 +69,8 @@ enum HomeTabBarItem: Int {
         return animation
     }
 
-    func getController(with viewModel: ViewModel) -> UIViewController {
-        let vc = controller(with: viewModel)
+    func getController(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
+        let vc = controller(with: viewModel, navigator: navigator)
         let item = RAMAnimatedTabBarItem(title: title, image: image, tag: rawValue)
         item.animation = animation
         _ = themeService.rx
@@ -90,11 +85,22 @@ enum HomeTabBarItem: Int {
 
 class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
-    var viewModel: HomeTabBarViewModel!
+    var viewModel: HomeTabBarViewModel?
     var navigator: Navigator!
+
+    init(viewModel: ViewModel?, navigator: Navigator) {
+        self.viewModel = viewModel as? HomeTabBarViewModel
+        self.navigator = navigator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     let tabTapped = PublishSubject<UIGestureRecognizer>()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -138,14 +144,15 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
     }
 
     func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+
         let input = HomeTabBarViewModel.Input(whatsNewTrigger: rx.viewDidAppear.mapToVoid())
         let output = viewModel.transform(input: input)
 
         output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
             if let strongSelf = self {
-                let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
+                let controllers = tabBarItems.map { $0.getController(with: viewModel.viewModel(for: $0), navigator: strongSelf.navigator) }
                 strongSelf.setViewControllers(controllers, animated: false)
-                strongSelf.navigator.injectTabBarControllers(in: strongSelf)
             }
         }).disposed(by: rx.disposeBag)
 

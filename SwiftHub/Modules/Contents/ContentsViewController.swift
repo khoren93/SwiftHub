@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.contentCell.identifier
 
 class ContentsViewController: TableViewController {
 
-    var viewModel: ContentsViewModel!
-
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
         return view
@@ -39,6 +37,7 @@ class ContentsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? ContentsViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = ContentsViewModel.Input(headerRefresh: refresh,

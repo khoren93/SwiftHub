@@ -24,8 +24,6 @@ enum LoginSegments: Int {
 
 class LoginViewController: ViewController {
 
-    var viewModel: LoginViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
         let items = [LoginSegments.oAuth.title, LoginSegments.basic.title]
         let view = SegmentedControl(sectionTitles: items)
@@ -154,6 +152,7 @@ class LoginViewController: ViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? LoginViewModel else { return }
 
         let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { LoginSegments(rawValue: $0)! }).merge()
         let input = LoginViewModel.Input(segmentSelection: segmentSelected.asDriverOnErrorJustComplete(),

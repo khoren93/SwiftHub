@@ -33,8 +33,6 @@ enum PullRequestSegments: Int {
 
 class PullRequestsViewController: TableViewController {
 
-    var viewModel: PullRequestsViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
         let items = [IssueSegments.open.title,
                      IssueSegments.closed.title]
@@ -62,6 +60,7 @@ class PullRequestsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? PullRequestsViewModel else { return }
 
         let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { PullRequestSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()

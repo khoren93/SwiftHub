@@ -17,8 +17,6 @@ private let reuseIdentifier = R.reuseIdentifier.contactCell.identifier
 
 class ContactsViewController: TableViewController {
 
-    var viewModel: ContactsViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,6 +37,7 @@ class ContactsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? ContactsViewModel else { return }
 
         let pullToRefresh = Observable.of(Observable.just(()),
                                           searchBar.rx.cancelButtonClicked.asObservable()).merge()

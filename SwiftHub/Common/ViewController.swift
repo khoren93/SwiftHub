@@ -17,7 +17,18 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable {
 
+    var viewModel: ViewModel?
     var navigator: Navigator!
+
+    init(viewModel: ViewModel?, navigator: Navigator) {
+        self.viewModel = viewModel
+        self.navigator = navigator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(nibName: nil, bundle: nil)
+    }
 
     let isLoading = BehaviorRelay(value: false)
     let error = PublishSubject<ApiError>()

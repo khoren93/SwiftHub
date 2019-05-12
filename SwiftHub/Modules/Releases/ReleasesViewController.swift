@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.releaseCell.identifier
 
 class ReleasesViewController: TableViewController {
 
-    var viewModel: ReleasesViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +29,7 @@ class ReleasesViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? ReleasesViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = ReleasesViewModel.Input(headerRefresh: refresh,

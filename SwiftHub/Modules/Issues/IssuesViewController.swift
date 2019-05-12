@@ -33,8 +33,6 @@ enum IssueSegments: Int {
 
 class IssuesViewController: TableViewController {
 
-    var viewModel: IssuesViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
         let items = [IssueSegments.open.title,
                      IssueSegments.closed.title]
@@ -91,6 +89,7 @@ class IssuesViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? IssuesViewModel else { return }
 
         let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { IssueSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()

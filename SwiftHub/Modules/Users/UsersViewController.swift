@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class UsersViewController: TableViewController {
 
-    var viewModel: UsersViewModel!
-
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
         view.cornerRadius = 40
@@ -55,6 +53,7 @@ class UsersViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? UsersViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = UsersViewModel.Input(headerRefresh: refresh,

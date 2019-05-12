@@ -14,8 +14,6 @@ private let reuseIdentifier = R.reuseIdentifier.themeCell.identifier
 
 class ThemeViewController: TableViewController {
 
-    var viewModel: ThemeViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +31,7 @@ class ThemeViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? ThemeViewModel else { return }
 
         let input = ThemeViewModel.Input(refresh: Observable.just(()),
                                          selection: tableView.rx.modelSelected(ThemeCellViewModel.self).asDriver())

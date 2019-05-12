@@ -12,8 +12,6 @@ import RxSwift
 
 class SourceViewController: ViewController {
 
-    var viewModel: SourceViewModel!
-
     lazy var historyBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_history(), style: .done, target: nil, action: nil)
         return view
@@ -70,6 +68,7 @@ class SourceViewController: ViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? SourceViewModel else { return }
 
         let input = SourceViewModel.Input(trigger: Observable.just(()),
                                           historySelection: historyBarButton.rx.tap.asObservable(),

@@ -18,8 +18,6 @@ private let organizationReuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class UserViewController: TableViewController {
 
-    var viewModel: UserViewModel!
-
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
         return view
@@ -149,6 +147,7 @@ class UserViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? UserViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, languageChanged.asObservable()).merge()
         let input = UserViewModel.Input(headerRefresh: refresh,
@@ -198,35 +197,35 @@ class UserViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .starsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoriesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoriesViewModel {
                     self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
                 }
             case .watchingItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoriesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoriesViewModel {
                     self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
                 }
             case .eventsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
                 }
             case .companyItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
                     self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
                 }
             case .blogItem:
-                if let url = self?.viewModel.user.value.blog?.url {
+                if let url = viewModel.user.value.blog?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             case .profileSummaryItem:
-                if let url = self?.viewModel.profileSummaryUrl() {
+                if let url = viewModel.profileSummaryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             case .repositoryItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoryViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
                     self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
                 }
             case .organizationItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
                     self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
                 }
             default:

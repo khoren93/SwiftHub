@@ -50,7 +50,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             return LibsManager.shared.removeKingfisherCache()
         }
 
-        let refresh = Observable.of(input.trigger, cacheRemoved, bannerEnabled.mapToVoid()).merge()
+        let refresh = Observable.of(input.trigger, cacheRemoved, bannerEnabled.mapToVoid(), nightModeEnabled.mapToVoid()).merge()
 
         let cacheSize = refresh.flatMapLatest { () -> Observable<Int> in
             return LibsManager.shared.kingfisherCacheSize()

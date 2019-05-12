@@ -27,8 +27,6 @@ enum NotificationSegments: Int {
 
 class NotificationsViewController: TableViewController {
 
-    var viewModel: NotificationsViewModel!
-
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_cell_check(), style: .done, target: nil, action: nil)
         return view
@@ -70,6 +68,7 @@ class NotificationsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? NotificationsViewModel else { return }
 
         let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { NotificationSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), segmentSelected.mapToVoid()).merge()

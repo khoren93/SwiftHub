@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.branchCell.identifier
 
 class BranchesViewController: TableViewController {
 
-    var viewModel: BranchesViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +29,7 @@ class BranchesViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? BranchesViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = BranchesViewModel.Input(headerRefresh: refresh,

@@ -13,8 +13,6 @@ import MessageKit
 
 class PullRequestViewController: ViewController {
 
-    var viewModel: PullRequestViewModel!
-
     let conversationVC = PullRequestCommentsViewController()
 
     /// Required for the `MessageInputBar` to be visible
@@ -34,6 +32,7 @@ class PullRequestViewController: ViewController {
         bannerView.isHidden = true
 
         /// Add the `ConversationViewController` as a child view controller
+        guard let viewModel = viewModel as? PullRequestViewModel else { return }
         conversationVC.viewModel = viewModel.pullRequestCommentsViewModel()
         conversationVC.willMove(toParent: self)
         addChild(conversationVC)
@@ -49,6 +48,7 @@ class PullRequestViewController: ViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? PullRequestViewModel else { return }
 
         let refresh = Observable.of(Observable.just(())).merge()
         let input = PullRequestViewModel.Input(headerRefresh: refresh,

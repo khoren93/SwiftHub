@@ -17,8 +17,6 @@ private let profileReuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class SettingsViewController: TableViewController {
 
-    var viewModel: SettingsViewModel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,6 +39,7 @@ class SettingsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? SettingsViewModel else { return }
 
         let refresh = Observable.of(rx.viewWillAppear.mapToVoid(), languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
@@ -81,7 +80,7 @@ class SettingsViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .profileItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
                     self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .logoutItem:
@@ -91,15 +90,15 @@ class SettingsViewController: TableViewController {
                  .nightModeItem:
                 self?.deselectSelectedRow()
             case .themeItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ThemeViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ThemeViewModel {
                     self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .languageItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? LanguageViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? LanguageViewModel {
                     self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .contactsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ContactsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ContactsViewModel {
                     self?.navigator.show(segue: .contacts(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .removeCacheItem:
@@ -108,10 +107,8 @@ class SettingsViewController: TableViewController {
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 analytics.log(.acknowledgements)
             case .whatsNewItem:
-                if let block = self?.viewModel.whatsNewBlock() {
-                    self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
-                    analytics.log(.whatsNew)
-                }
+                self?.navigator.show(segue: .whatsNew(block: viewModel.whatsNewBlock()), sender: self, transition: .modal)
+                analytics.log(.whatsNew)
             }
         }).disposed(by: rx.disposeBag)
     }

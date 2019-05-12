@@ -13,8 +13,6 @@ import MessageKit
 
 class IssueViewController: ViewController {
 
-    var viewModel: IssueViewModel!
-
     let conversationVC = IssueCommentsViewController()
 
     /// Required for the `MessageInputBar` to be visible
@@ -34,6 +32,7 @@ class IssueViewController: ViewController {
         bannerView.isHidden = true
 
         /// Add the `ConversationViewController` as a child view controller
+        guard let viewModel = viewModel as? IssueViewModel else { return }
         conversationVC.viewModel = viewModel.issueCommentsViewModel()
         conversationVC.willMove(toParent: self)
         addChild(conversationVC)
@@ -49,6 +48,7 @@ class IssueViewController: ViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? IssueViewModel else { return }
 
         let refresh = Observable.of(Observable.just(())).merge()
         let input = IssueViewModel.Input(headerRefresh: refresh,
