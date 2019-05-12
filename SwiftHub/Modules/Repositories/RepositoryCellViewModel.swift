@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import AttributedLib
+import BonMot
 
 class RepositoryCellViewModel {
 
@@ -45,17 +45,12 @@ extension RepositoryCellViewModel: Equatable {
 
 extension Repository {
     func attributetDetail() -> NSAttributedString? {
+        let starImage = R.image.icon_cell_badge_star()?.filled(withColor: .text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
         let starsString = (stargazersCount ?? 0).kFormatted()
-
-        let textAttributes = Attributes {
-            return $0.foreground(color: themeService.attrs.text)
-        }
-
-        let languageColorAttributes = Attributes {
-            return $0.foreground(color: UIColor(hexString: languageColor ?? "") ?? .clear)
-        }
-
-        return "★ \(starsString) \t".at.attributed(with: textAttributes) +
-            "● ".at.attributed(with: languageColorAttributes) + "\(language ?? "")".at.attributed(with: textAttributes)
+        let languageColorShape = "●".styled(with: StringStyle([.color(UIColor(hexString: languageColor ?? "") ?? .clear)]))
+        return NSAttributedString.composed(of: [
+            starImage, Special.space, starsString, Special.space, Special.tab,
+            languageColorShape, Special.space, language ?? ""
+        ])
     }
 }

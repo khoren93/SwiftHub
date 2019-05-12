@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import AttributedLib
+import BonMot
 
 private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
 private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
@@ -292,21 +292,15 @@ class UserViewController: TableViewController {
     }
 
     func attributetText(title: String, value: Int) -> NSAttributedString {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-
-        let valueAttributes = Attributes {
-            return $0.foreground(color: .white)
-                .font(.boldSystemFont(ofSize: 18))
-                .paragraphStyle(paragraph)
-        }
-
-        let titleAttributes = Attributes {
-            return $0.foreground(color: .white)
-                .font(.boldSystemFont(ofSize: 12))
-                .paragraphStyle(paragraph)
-        }
-
-        return "\(value)\n".at.attributed(with: valueAttributes) + title.at.attributed(with: titleAttributes)
+        let titleText = title.styled(with: .color(.white),
+                                     .font(.boldSystemFont(ofSize: 12)),
+                                     .alignment(.center))
+        let valueText = value.string.styled(with: .color(.white),
+                                            .font(.boldSystemFont(ofSize: 18)),
+                                            .alignment(.center))
+        return NSAttributedString.composed(of: [
+            titleText, Special.nextLine,
+            valueText
+        ])
     }
 }

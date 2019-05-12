@@ -27,7 +27,7 @@ class DefaultTableViewCell: TableViewCell {
         view.borderWidth = 1
         containerView.addSubview(view)
         view.snp.makeConstraints({ (make) in
-            make.bottom.right.equalTo(self.leftImageView)
+            make.bottom.left.equalTo(self.leftImageView)
             make.size.equalTo(20)
         })
         return view

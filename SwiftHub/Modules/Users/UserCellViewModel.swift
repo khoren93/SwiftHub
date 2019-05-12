@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import AttributedLib
+import BonMot
 
 class UserCellViewModel {
 
@@ -49,22 +49,19 @@ extension UserCellViewModel: Equatable {
 
 extension User {
     func attributetDetail() -> NSAttributedString? {
-        let text = NSMutableAttributedString(string: "")
-
-        let textAttributes = Attributes {
-            return $0.foreground(color: themeService.attrs.text)
+        var texts: [NSAttributedString] = []
+        if let repositoriesString = repositoriesCount?.string.styled( with: .color(.text())) {
+            let repositoriesImage = R.image.icon_cell_badge_repository()?.filled(withColor: .text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
+            texts.append(NSAttributedString.composed(of: [
+                repositoriesImage, Special.space, repositoriesString, Special.space, Special.tab
+            ]))
         }
-
-        if let followers = followers {
-            let followersString = followers.kFormatted()
-            text.append("\(followersString) \(R.string.localizable.userFollowersButtonTitle.key.localized())\t".at.attributed(with: textAttributes))
+        if let followersString = followers?.kFormatted().styled( with: .color(.text())) {
+            let followersImage = R.image.icon_cell_badge_collaborator()?.filled(withColor: .text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
+            texts.append(NSAttributedString.composed(of: [
+                followersImage, Special.space, followersString
+            ]))
         }
-
-        if let repositories = repositoriesCount {
-            let repositoriesString = repositories.kFormatted()
-            text.append("\(repositoriesString) \(R.string.localizable.userRepositoriesButtonTitle.key.localized())".at.attributed(with: textAttributes))
-        }
-
-        return text
+        return NSAttributedString.composed(of: texts)
     }
 }

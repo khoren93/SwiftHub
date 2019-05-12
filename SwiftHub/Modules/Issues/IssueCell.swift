@@ -22,6 +22,7 @@ class IssueCell: DetailedTableViewCell {
 
         viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
         viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.secondDetail.drive(secondDetailLabel.rx.attributedText).disposed(by: rx.disposeBag)
         viewModel.imageUrl.drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
         viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
         viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
