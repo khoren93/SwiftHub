@@ -38,6 +38,7 @@
 - [x] View trending repositories and users ([github-trending-api](https://github.com/huchenme/github-trending-api))
 - [x] Advanced searching and sorting repositories and users, filter by language
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
+- [x] View issue and pull request messages ([MessageKit](https://github.com/MessageKit/MessageKit))
 - [x] The missing star history graph of github repos ([stars-history](https://github.com/timqian/star-history))
 - [x] Quickly browse the history of a file from any git repository ([git-history](https://github.com/pomber/git-history))
 - [x] Tool for visualizing GitHub profiles ([profile-summary-for-github](https://github.com/tipsy/profile-summary-for-github))
