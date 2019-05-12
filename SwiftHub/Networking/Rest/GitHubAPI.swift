@@ -33,6 +33,7 @@ enum GithubAPI {
     case contents(fullname: String, path: String, ref: String?)
 
     case issues(fullname: String, state: String, page: Int)
+    case issue(fullname: String, number: Int)
     case issueComments(fullname: String, number: Int, page: Int)
     case commits(fullname: String, page: Int)
     case commit(fullname: String, sha: String)
@@ -42,6 +43,7 @@ enum GithubAPI {
     case release(fullname: String, releaseId: Int)
     case pullRequests(fullname: String, state: String, page: Int)
     case pullRequest(fullname: String, number: Int)
+    case pullRequestComments(fullname: String, number: Int, page: Int)
     case contributors(fullname: String, page: Int)
 
     case searchUsers(query: String, sort: String, order: String, page: Int)
@@ -98,6 +100,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .readme(let fullname, _): return "/repos/\(fullname)/readme"
         case .contents(let fullname, let path, _): return "/repos/\(fullname)/contents/\(path)"
         case .issues(let fullname, _, _): return "/repos/\(fullname)/issues"
+        case .issue(let fullname, let number): return "/repos/\(fullname)/issues/\(number)"
         case .issueComments(let fullname, let number, _): return "/repos/\(fullname)/issues/\(number)/comments"
         case .commits(let fullname, _): return "/repos/\(fullname)/commits"
         case .commit(let fullname, let sha): return "/repos/\(fullname)/commits/\(sha)"
@@ -107,6 +110,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .release(let fullname, let releaseId): return "/repos/\(fullname)/releases/\(releaseId)"
         case .pullRequests(let fullname, _, _): return "/repos/\(fullname)/pulls"
         case .pullRequest(let fullname, let number): return "/repos/\(fullname)/pulls/\(number)"
+        case .pullRequestComments(let fullname, let number, _): return "/repos/\(fullname)/pulls/\(number)/comments"
         case .contributors(let fullname, _): return "/repos/\(fullname)/contributors"
         case .searchUsers: return "/search/users"
         case .user(let owner): return "/users/\(owner)"
@@ -193,6 +197,8 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .pullRequests(_, let state, let page):
             params["state"] = state
             params["page"] = page
+        case .pullRequestComments(_, _, let page):
+            params["page"] = page
         case .contributors(_, let page):
             params["page"] = page
         case .searchUsers(let query, let sort, let order, let page):
@@ -273,6 +279,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .readme: dataUrl = R.file.repositoryReadmeJson()
         case .contents: dataUrl = R.file.repositoryContentsJson()
         case .issues: dataUrl = R.file.repositoryIssuesJson()
+        case .issue: dataUrl = R.file.repositoryIssueJson()
         case .issueComments: dataUrl = R.file.repositoryIssueCommentsJson()
         case .commits: dataUrl = R.file.repositoryCommitsJson()
         case .commit: dataUrl = R.file.repositoryCommitJson()
@@ -282,6 +289,7 @@ extension GithubAPI: TargetType, ProductAPIType {
         case .release: dataUrl = R.file.repositoryReleaseJson()
         case .pullRequests: dataUrl = R.file.repositoryPullRequestsJson()
         case .pullRequest: dataUrl = R.file.repositoryPullRequestJson()
+        case .pullRequestComments: dataUrl = R.file.repositoryPullRequestCommentsJson()
         case .contributors: dataUrl = R.file.repositoryContributorsJson()
         case .searchUsers: dataUrl = R.file.userSearchJson()
         case .user: dataUrl = R.file.userJson()

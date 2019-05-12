@@ -73,6 +73,10 @@ extension GraphApi {
         return restApi.issues(fullname: fullname, state: state, page: page)
     }
 
+    func issue(fullname: String, number: Int) -> Single<Issue> {
+        return restApi.issue(fullname: fullname, number: number)
+    }
+
     func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
         return restApi.issueComments(fullname: fullname, number: number, page: page)
     }
@@ -107,6 +111,10 @@ extension GraphApi {
 
     func pullRequest(fullname: String, number: Int) -> Single<PullRequest> {
         return restApi.pullRequest(fullname: fullname, number: number)
+    }
+
+    func pullRequestComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
+        return restApi.pullRequestComments(fullname: fullname, number: number, page: page)
     }
 
     func contributors(fullname: String, page: Int) -> Single<[User]> {

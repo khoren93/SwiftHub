@@ -22,7 +22,7 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
     struct Output {
         let navigationTitle: Driver<String>
         let items: BehaviorRelay<[PullRequestCellViewModel]>
-        let pullRequestSelected: Driver<URL?>
+        let pullRequestSelected: Driver<PullRequestViewModel>
         let userSelected: Driver<UserViewModel>
     }
 
@@ -64,8 +64,9 @@ class PullRequestsViewModel: ViewModel, ViewModelType {
             return repository.fullname ?? ""
         }).asDriver(onErrorJustReturn: "")
 
-        let pullRequestSelected = input.selection.map { (cellViewModel) -> URL? in
-            cellViewModel.pullRequest.htmlUrl?.url
+        let pullRequestSelected = input.selection.map { (cellViewModel) -> PullRequestViewModel in
+            let viewModel = PullRequestViewModel(repository: self.repository.value, pullRequest: cellViewModel.pullRequest, provider: self.provider)
+            return viewModel
         }
 
         let userDetails = userSelected.asDriver(onErrorJustReturn: User())

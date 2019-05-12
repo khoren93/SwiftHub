@@ -84,10 +84,8 @@ class PullRequestsViewController: TableViewController {
                 cell.bind(to: viewModel)
             }.disposed(by: rx.disposeBag)
 
-        output.pullRequestSelected.drive(onNext: { [weak self] (url) in
-            if let url  = url {
-                self?.navigator.show(segue: .webController(url), sender: self)
-            }
+        output.pullRequestSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .pullRequestDetails(viewModel: viewModel), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in

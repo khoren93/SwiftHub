@@ -24,6 +24,7 @@ protocol SwiftHubAPI {
     func readme(fullname: String, ref: String?) -> Single<Content>
     func contents(fullname: String, path: String, ref: String?) -> Single<[Content]>
     func issues(fullname: String, state: String, page: Int) -> Single<[Issue]>
+    func issue(fullname: String, number: Int) -> Single<Issue>
     func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]>
     func commits(fullname: String, page: Int) -> Single<[Commit]>
     func commit(fullname: String, sha: String) -> Single<Commit>
@@ -33,6 +34,7 @@ protocol SwiftHubAPI {
     func release(fullname: String, releaseId: Int) -> Single<Release>
     func pullRequests(fullname: String, state: String, page: Int) -> Single<[PullRequest]>
     func pullRequest(fullname: String, number: Int) -> Single<PullRequest>
+    func pullRequestComments(fullname: String, number: Int, page: Int) -> Single<[Comment]>
     func contributors(fullname: String, page: Int) -> Single<[User]>
     func searchUsers(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<UserSearch>
     func user(owner: String) -> Single<User>

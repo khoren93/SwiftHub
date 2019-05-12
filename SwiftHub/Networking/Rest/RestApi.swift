@@ -114,6 +114,10 @@ extension RestApi {
         return requestArray(.issues(fullname: fullname, state: state, page: page), type: Issue.self)
     }
 
+    func issue(fullname: String, number: Int) -> Single<Issue> {
+        return requestObject(.issue(fullname: fullname, number: number), type: Issue.self)
+    }
+
     func issueComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
         return requestArray(.issueComments(fullname: fullname, number: number, page: page), type: Comment.self)
     }
@@ -148,6 +152,10 @@ extension RestApi {
 
     func pullRequest(fullname: String, number: Int) -> Single<PullRequest> {
         return requestObject(.pullRequest(fullname: fullname, number: number), type: PullRequest.self)
+    }
+
+    func pullRequestComments(fullname: String, number: Int, page: Int) -> Single<[Comment]> {
+        return requestArray(.pullRequestComments(fullname: fullname, number: number, page: page), type: Comment.self)
     }
 
     func contributors(fullname: String, page: Int) -> Single<[User]> {

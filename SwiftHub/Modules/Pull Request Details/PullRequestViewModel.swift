@@ -1,8 +1,8 @@
 //
-//  IssueViewModel.swift
+//  PullRequestViewModel.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 5/5/19.
+//  Created by Sygnoos9 on 5/12/19.
 //  Copyright © 2019 Khoren Markosyan. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import MessageKit
 
-class IssueViewModel: ViewModel, ViewModelType {
+class PullRequestViewModel: ViewModel, ViewModelType {
 
     struct Input {
         let headerRefresh: Observable<Void>
@@ -24,11 +24,11 @@ class IssueViewModel: ViewModel, ViewModelType {
     }
 
     let repository: BehaviorRelay<Repository>
-    let issue: BehaviorRelay<Issue>
+    let pullRequest: BehaviorRelay<PullRequest>
 
-    init(repository: Repository, issue: Issue, provider: SwiftHubAPI) {
+    init(repository: Repository, pullRequest: PullRequest, provider: SwiftHubAPI) {
         self.repository = BehaviorRelay(value: repository)
-        self.issue = BehaviorRelay(value: issue)
+        self.pullRequest = BehaviorRelay(value: pullRequest)
         super.init(provider: provider)
     }
 
@@ -46,8 +46,8 @@ class IssueViewModel: ViewModel, ViewModelType {
         return Output(userSelected: userSelected)
     }
 
-    func issueCommentsViewModel() -> IssueCommentsViewModel {
-        let viewModel = IssueCommentsViewModel(repository: repository.value, issue: issue.value, provider: provider)
+    func pullRequestCommentsViewModel() -> PullRequestCommentsViewModel {
+        let viewModel = PullRequestCommentsViewModel(repository: repository.value, pullRequest: pullRequest.value, provider: provider)
         return viewModel
     }
 }

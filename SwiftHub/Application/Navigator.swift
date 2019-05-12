@@ -38,6 +38,7 @@ class Navigator {
         case branches(viewModel: BranchesViewModel)
         case releases(viewModel: ReleasesViewModel)
         case pullRequests(viewModel: PullRequestsViewModel)
+        case pullRequestDetails(viewModel: PullRequestViewModel)
         case events(viewModel: EventsViewModel)
         case notifications(viewModel: NotificationsViewModel)
         case issues(viewModel: IssuesViewModel)
@@ -133,6 +134,11 @@ class Navigator {
 
         case .pullRequests(let viewModel):
             let vc = R.storyboard.main.pullRequestsViewController()!
+            vc.viewModel = viewModel
+            return vc
+
+        case .pullRequestDetails(let viewModel):
+            let vc = PullRequestViewController()
             vc.viewModel = viewModel
             return vc
 

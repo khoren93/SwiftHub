@@ -1,8 +1,8 @@
 //
-//  IssueViewController.swift
+//  PullRequestViewController.swift
 //  SwiftHub
 //
-//  Created by Sygnoos9 on 5/5/19.
+//  Created by Sygnoos9 on 5/12/19.
 //  Copyright © 2019 Khoren Markosyan. All rights reserved.
 //
 
@@ -11,11 +11,11 @@ import RxSwift
 import RxCocoa
 import MessageKit
 
-class IssueViewController: ViewController {
+class PullRequestViewController: ViewController {
 
-    var viewModel: IssueViewModel!
+    var viewModel: PullRequestViewModel!
 
-    let conversationVC = IssueCommentsViewController()
+    let conversationVC = PullRequestCommentsViewController()
 
     /// Required for the `MessageInputBar` to be visible
     override var canBecomeFirstResponder: Bool {
@@ -34,7 +34,7 @@ class IssueViewController: ViewController {
         bannerView.isHidden = true
 
         /// Add the `ConversationViewController` as a child view controller
-        conversationVC.viewModel = viewModel.issueCommentsViewModel()
+        conversationVC.viewModel = viewModel.pullRequestCommentsViewModel()
         conversationVC.willMove(toParent: self)
         addChild(conversationVC)
         stackView.addArrangedSubview(conversationVC.view)
@@ -51,14 +51,14 @@ class IssueViewController: ViewController {
         super.bindViewModel()
 
         let refresh = Observable.of(Observable.just(())).merge()
-        let input = IssueViewModel.Input(headerRefresh: refresh,
+        let input = PullRequestViewModel.Input(headerRefresh: refresh,
                                          userSelected: conversationVC.senderSelected.map { $0 as? User}.filterNil(),
                                          mentionSelected: conversationVC.mentionSelected)
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-//        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
-//        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
+        //        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
+        //        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
             self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
