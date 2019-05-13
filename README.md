@@ -126,13 +126,13 @@ All icons used in the application are taken from the [Feather](https://github.co
 Thanks to them for the beautiful open source icons.
 
 ## SwiftHub In
-* [open-source-ios-apps](https://github.com/dkhamsing/open-source-ios-apps#github)
-* [fantastic-ios-architecture](https://github.com/onmyway133/fantastic-ios-architecture#best-practices)
-* [Moya](https://github.com/Moya/Moya/blob/master/docs/CommunityProjects.md#Applications)
-* [MessageKit](https://github.com/MessageKit/MessageKit#apps-using-this-library)
-* [github-trending-api](https://github.com/huchenme/github-trending-api#projects-using-github-trending-api)
-* [awesome-rxswift](https://github.com/LeoMobileDeveloper/awesome-rxswift#open-source-apps)
-* [swift-weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-156-174508)
+* [open-source-ios-apps](https://github.com/dkhamsing/open-source-ios-apps#github) - Collaborative List of Open-Source iOS Apps
+* [fantastic-ios-architecture](https://github.com/onmyway133/fantastic-ios-architecture#repos-7) - Better ways to structure iOS apps
+* [Moya](https://github.com/Moya/Moya/blob/master/docs/CommunityProjects.md#Applications) - Community Projects
+* [MessageKit](https://github.com/MessageKit/MessageKit#apps-using-this-library) - Apps using this library
+* [github-trending-api](https://github.com/huchenme/github-trending-api#projects-using-github-trending-api) - Projects using this library
+* [awesome-rxswift](https://github.com/LeoMobileDeveloper/awesome-rxswift#open-source-apps) - Curated list of RxSwift library and learning material
+* [swift-weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-156-174508) - Issue #156 Libraries & Code
 
 ## References
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
