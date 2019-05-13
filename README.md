@@ -89,8 +89,9 @@
 - [x] [JSONExport](https://github.com/Ahmed-Ali/JSONExport) - Is a desktop application which enables you to export JSON objects as model classes
 - [x] [R.swift](https://github.com/mac-cain13/R.swift) - Get strong typed, autocompleted resources like images, fonts and segues in Swift projects
 - [x] [Flex](https://github.com/Flipboard/FLEX) - An in-app debugging and exploration tool for iOS
+- [x] [Sourcetree](https://www.sourcetreeapp.com) - A free Git client for Windows and Mac
 - [x] [Postman](https://www.getpostman.com) - A powerful HTTP client for testing web services ([view](https://github.com/khoren93/SwiftHub/tree/master/Postman))
-- [x] [Sketch](https://www.sketchapp.com) - A digital design app (paid) ([view](https://github.com/khoren93/SwiftHub/tree/master/Sketch))
+- [x] [Sketch](https://www.sketchapp.com) - A digital design app for Mac (paid) ([view](https://github.com/khoren93/SwiftHub/tree/master/Sketch))
 - [x] [iThoughtsX](https://www.toketaware.com) - A mind mapping app for Windows, Mac, iPad and iPhone (paid) ([view](https://github.com/khoren93/SwiftHub/tree/master/iThoughtsX))
 
 ## Building and Running
