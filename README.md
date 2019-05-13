@@ -125,6 +125,15 @@ There are also included debugging [Hero](https://github.com/HeroTransitions/Hero
 All icons used in the application are taken from the [Feather](https://github.com/feathericons/feather).
 Thanks to them for the beautiful open source icons.
 
+## SwiftHub In
+* [open-source-ios-apps](https://github.com/dkhamsing/open-source-ios-apps#github)
+* [fantastic-ios-architecture](https://github.com/onmyway133/fantastic-ios-architecture#best-practices)
+* [Moya](https://github.com/Moya/Moya/blob/master/docs/CommunityProjects.md#Applications)
+* [MessageKit](https://github.com/MessageKit/MessageKit#apps-using-this-library)
+* [github-trending-api](https://github.com/huchenme/github-trending-api#projects-using-github-trending-api)
+* [awesome-rxswift](https://github.com/LeoMobileDeveloper/awesome-rxswift#open-source-apps)
+* [swift-weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-156-174508)
+
 ## References
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
 * [View Model in RxSwift](https://medium.com/@SergDort/viewmodel-in-rxswift-world-13d39faa2cf5) - Good article
