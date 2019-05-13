@@ -16,6 +16,22 @@
   </a>
 </p>
 
+## Content
+- [Screenshots](#screenshots)
+- [Mind Mapping](#mind-mapping-full-version)
+- [App Features](#app-features)
+- [Technologies](#technologies)
+- [Tools](#tools)
+- [Building and Running](#building-and-running)
+- [Documentation](#documentation)
+- [Debugging](#debugging)
+- [Fastlane](#fastlane)
+- [Design](#design)
+- [SwiftHub In](#swifthub-in)
+- [References](#references)
+- [See Also](#see-also)
+- [License](#license)
+
 ## Screenshots
 
 <img alt="04_trending_repository_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/04_trending_repository_screen.png?raw=true" width="280">&nbsp;
