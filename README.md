@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Open source GitHub iOS client written in RxSwift and MVVM architecture.
+  GitHub iOS client in RxSwift and MVVM-C architecture.
 </p>
 
 <p align="center">
