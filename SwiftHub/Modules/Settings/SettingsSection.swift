@@ -18,6 +18,9 @@ enum SettingsSectionItem {
     case profileItem(viewModel: UserCellViewModel)
     case logoutItem(viewModel: SettingCellViewModel)
 
+    // My Projects
+    case repositoryItem(viewModel: RepositoryCellViewModel)
+
     // Preferences
     case bannerItem(viewModel: SettingSwitchCellViewModel)
     case nightModeItem(viewModel: SettingSwitchCellViewModel)

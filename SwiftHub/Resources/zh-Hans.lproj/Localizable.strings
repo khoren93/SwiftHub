@@ -115,6 +115,7 @@
 /* 设置 */
 "Settings.Navigation.Title" = "设置";
 "Settings.AccountSection.Title" = "帐户";
+"Settings.ProjectsSection.Title" = "我的项目";
 "Settings.PreferencesSection.Title" = "首选项";
 "Settings.Banner.Title" = "已启用广告";
 "Settings.NightMode.Title" = "夜间模式";

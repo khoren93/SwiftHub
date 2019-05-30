@@ -30,6 +30,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     let whatsNewManager: WhatsNewManager
 
+    let swiftHubRepository = BehaviorRelay<Repository?>(value: nil)
+
     var cellDisposeBag = DisposeBag()
 
     override init(provider: SwiftHubAPI) {
@@ -50,7 +52,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
             return LibsManager.shared.removeKingfisherCache()
         }
 
-        let refresh = Observable.of(input.trigger, cacheRemoved, bannerEnabled.mapToVoid(), nightModeEnabled.mapToVoid()).merge()
+        let refresh = Observable.of(input.trigger, cacheRemoved, swiftHubRepository.mapToVoid(),
+                                    bannerEnabled.mapToVoid(), nightModeEnabled.mapToVoid()).merge()
 
         let cacheSize = refresh.flatMapLatest { () -> Observable<Int> in
             return LibsManager.shared.kingfisherCacheSize()
@@ -73,6 +76,13 @@ class SettingsViewModel: ViewModel, ViewModelType {
                 accountItems.append(SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel))
 
                 items.append(SettingsSection.setting(title: R.string.localizable.settingsAccountSectionTitle.key.localized(), items: accountItems))
+            }
+
+            if let swiftHubRepository = self.swiftHubRepository.value {
+                let swiftHubCellViewModel = RepositoryCellViewModel(with: swiftHubRepository)
+                items.append(SettingsSection.setting(title: R.string.localizable.settingsProjectsSectionTitle.key.localized(), items: [
+                    SettingsSectionItem.repositoryItem(viewModel: swiftHubCellViewModel)
+                ]))
             }
 
             let bannerEnabled = self.bannerEnabled.value
@@ -106,21 +116,32 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
             items += [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
-                        SettingsSectionItem.bannerItem(viewModel: bannerCellViewModel),
-                        SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
-                        SettingsSectionItem.themeItem(viewModel: themeCellViewModel),
-                        SettingsSectionItem.languageItem(viewModel: languageCellViewModel),
-                        SettingsSectionItem.contactsItem(viewModel: contactsCellViewModel),
-                        SettingsSectionItem.removeCacheItem(viewModel: removeCacheCellViewModel)
-                    ]),
+                    SettingsSectionItem.bannerItem(viewModel: bannerCellViewModel),
+                    SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
+                    SettingsSectionItem.themeItem(viewModel: themeCellViewModel),
+                    SettingsSectionItem.languageItem(viewModel: languageCellViewModel),
+                    SettingsSectionItem.contactsItem(viewModel: contactsCellViewModel),
+                    SettingsSectionItem.removeCacheItem(viewModel: removeCacheCellViewModel)
+                ]),
                 SettingsSection.setting(title: R.string.localizable.settingsSupportSectionTitle.key.localized(), items: [
                     SettingsSectionItem.acknowledgementsItem(viewModel: acknowledgementsCellViewModel),
                     SettingsSectionItem.whatsNewItem(viewModel: whatsNewCellViewModel)
-                    ])
+                ])
             ]
 
             return items
         }.bind(to: elements).disposed(by: rx.disposeBag)
+
+        input.trigger.flatMapLatest { [weak self] () -> Observable<Repository> in
+            guard let self = self else { return Observable.just(Repository()) }
+            let fullname = "khoren93/SwiftHub"
+            let qualifiedName = "master"
+            return self.provider.repository(fullname: fullname, qualifiedName: qualifiedName)
+                .trackActivity(self.loading)
+                .trackError(self.error)
+            }.subscribe(onNext: { [weak self] (repository) in
+                self?.swiftHubRepository.accept(repository)
+            }).disposed(by: rx.disposeBag)
 
         let selectedEvent = input.selection
 
@@ -169,6 +190,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
             return viewModel
         case .contactsItem:
             let viewModel = ContactsViewModel(provider: self.provider)
+            return viewModel
+        case .repositoryItem(let viewModel):
+            let viewModel = RepositoryViewModel(repository: viewModel.repository, provider: self.provider)
             return viewModel
         default:
             return nil

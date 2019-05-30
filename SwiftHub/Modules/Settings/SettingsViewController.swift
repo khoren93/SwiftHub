@@ -14,6 +14,7 @@ import RxDataSources
 private let switchReuseIdentifier = R.reuseIdentifier.settingSwitchCell.identifier
 private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
 private let profileReuseIdentifier = R.reuseIdentifier.userCell.identifier
+private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
 
 class SettingsViewController: TableViewController {
 
@@ -33,6 +34,7 @@ class SettingsViewController: TableViewController {
         tableView.register(R.nib.settingCell)
         tableView.register(R.nib.settingSwitchCell)
         tableView.register(R.nib.userCell)
+        tableView.register(R.nib.repositoryCell)
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }
@@ -65,6 +67,10 @@ class SettingsViewController: TableViewController {
                  .whatsNewItem(let viewModel),
                  .logoutItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .repositoryItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
                 cell.bind(to: viewModel)
                 return cell
             }
@@ -109,6 +115,10 @@ class SettingsViewController: TableViewController {
             case .whatsNewItem:
                 self?.navigator.show(segue: .whatsNew(block: viewModel.whatsNewBlock()), sender: self, transition: .modal)
                 analytics.log(.whatsNew)
+            case .repositoryItem:
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
+                }
             }
         }).disposed(by: rx.disposeBag)
     }

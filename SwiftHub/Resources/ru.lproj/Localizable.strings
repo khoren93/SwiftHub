@@ -115,6 +115,7 @@
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
 "Settings.AccountSection.Title" = "Учетная Запись";
+"Settings.ProjectsSection.Title" = "Мои Проекты";
 "Settings.PreferencesSection.Title" = "Параметры";
 "Settings.Banner.Title" = "Реклама включена";
 "Settings.NightMode.Title" = "Ночной режим";

@@ -115,6 +115,7 @@
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
 "Settings.AccountSection.Title" = "Հաշիվ";
+"Settings.ProjectsSection.Title" = "Իմ Ծրագրերը";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";
 "Settings.Banner.Title" = "Գովազդները միացված են";
 "Settings.NightMode.Title" = "Գիշերային ռեժիմ";
