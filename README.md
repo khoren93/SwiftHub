@@ -150,6 +150,7 @@ Thanks to them for the beautiful open source icons.
 * [github-trending-api](https://github.com/huchenme/github-trending-api#projects-using-github-trending-api) - Projects using this library
 * [awesome-rxswift](https://github.com/LeoMobileDeveloper/awesome-rxswift#open-source-apps) - Curated list of RxSwift library and learning material
 * [swift-weekly](http://digest.swiftweekly.com/issues/swift-weekly-issue-156-174508) - Issue #156 Libraries & Code
+* [Medium-Mybridge](https://medium.mybridge.co/swift-open-source-for-the-past-month-v-may-2019-c0f6a0d61e34) - Swift Open Source for the Past Month (v.May 2019)
 
 ## References
 * [CleanArchitectureRxSwift](https://github.com/sergdort/CleanArchitectureRxSwift) - Clean architecture with RxSwift
