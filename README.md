@@ -64,6 +64,7 @@
 - [x] Whats New functionality ([WhatsNewKit](https://github.com/SvenTiigi/WhatsNewKit))
 - [x] Invite friends functionality
 - [x] Support iPhone and iPad (Split View)
+- [ ] Migrate to Apple's new [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 - [ ] Clone repository directly to app ([SwiftGit2](https://github.com/SwiftGit2/SwiftGit2))
 
 ## Technologies
