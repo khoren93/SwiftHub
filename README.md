@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  KotlinHub - Android version coming soon!
+  KotlinHub - Android version is coming soon!
 </p>
 
 <p align="center">
