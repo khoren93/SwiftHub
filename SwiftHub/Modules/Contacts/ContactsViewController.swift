@@ -91,6 +91,7 @@ extension ContactsViewController: MFMessageComposeViewControllerDelegate {
         case .failed:
             analytics.log(.userInvited(success: false))
         case .cancelled: break
+        @unknown default: break
         }
         controller.dismiss(animated: true, completion: nil)
     }

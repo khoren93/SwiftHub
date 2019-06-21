@@ -67,6 +67,7 @@ class ContactsManager: NSObject {
                     single(.error(error))
                     logError(error.localizedDescription)
                 }
+            @unknown default: break
             }
             return Disposables.create { }
             }.asObservable()
