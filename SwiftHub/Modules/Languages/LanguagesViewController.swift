@@ -85,7 +85,7 @@ class LanguagesViewController: TableViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        output.selectedRow.delay(0.3).drive(onNext: { [weak self] (indexPath) in
+        output.selectedRow.delay(DispatchTimeInterval.milliseconds(300)).drive(onNext: { [weak self] (indexPath) in
             self?.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         }).disposed(by: rx.disposeBag)
 

@@ -26,7 +26,7 @@ class TrendingUserCellViewModel {
         detail = Driver.just("\((user.repo?.fullname ?? ""))")
         imageUrl = Driver.just(user.avatar?.url)
         badge = Driver.just(R.image.icon_cell_badge_user()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green900)
     }
 }
 

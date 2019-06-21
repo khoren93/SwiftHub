@@ -17,7 +17,7 @@ extension UIView {
     }
 
     func defaultBorderColor() -> UIColor {
-        return .separator()
+        return UIColor.separator()
     }
 
     func defaultBorderDepth() -> CGFloat {

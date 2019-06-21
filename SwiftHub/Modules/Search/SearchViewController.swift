@@ -264,8 +264,8 @@ class SearchViewController: TableViewController {
             self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
 
             self?.segmentedControl.sectionImages = [
-                R.image.icon_cell_badge_repository()!.tint(UIColor.flatBlack, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_user()!.tint(UIColor.flatBlack, blendMode: .normal).withRoundedCorners()!
+                R.image.icon_cell_badge_repository()!.tint(UIColor.Material.grey900, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_user()!.tint(UIColor.Material.grey900, blendMode: .normal).withRoundedCorners()!
             ]
             self?.segmentedControl.sectionSelectedImages = [
                 R.image.icon_cell_badge_repository()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,

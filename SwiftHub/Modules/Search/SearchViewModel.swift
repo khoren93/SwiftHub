@@ -71,7 +71,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         input.trendingPeriodSegmentSelection.bind(to: trendingPeriod).disposed(by: rx.disposeBag)
         input.searchModeSelection.bind(to: searchMode).disposed(by: rx.disposeBag)
 
-        input.keywordTrigger.skip(1).debounce(0.5).distinctUntilChanged().asObservable()
+        input.keywordTrigger.skip(1).debounce(DispatchTimeInterval.milliseconds(500)).distinctUntilChanged().asObservable()
             .bind(to: keyword).disposed(by: rx.disposeBag)
 
         Observable.combineLatest(keyword, currentLanguage).map { keyword, currentLanguage in
@@ -182,7 +182,7 @@ class SearchViewModel: ViewModel, ViewModelType {
             }
         }).disposed(by: rx.disposeBag)
 
-        keyword.asDriver().debounce(3.0).filterEmpty().drive(onNext: { (keyword) in
+        keyword.asDriver().debounce(DispatchTimeInterval.milliseconds(300)).filterEmpty().drive(onNext: { (keyword) in
             analytics.log(.search(keyword: keyword))
         }).disposed(by: rx.disposeBag)
 

@@ -12,7 +12,6 @@ import RxCocoa
 import SnapKit
 import IQKeyboardManagerSwift
 import CocoaLumberjack
-import ChameleonFramework
 import Kingfisher
 import FLEX
 import Fabric
@@ -89,8 +88,8 @@ class LibsManager: NSObject {
         ToastManager.shared.isTapToDismissEnabled = true
         ToastManager.shared.position = .top
         var style = ToastStyle()
-        style.backgroundColor = .flatRed
-        style.messageColor = .white
+        style.backgroundColor = UIColor.Material.red
+        style.messageColor = UIColor.Material.white
         style.imageSize = CGSize(width: 30, height: 30)
         ToastManager.shared.style = style
     }

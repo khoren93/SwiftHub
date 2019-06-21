@@ -85,7 +85,7 @@ class EventCellViewModel {
         secondDetail = Driver.just(body)
         imageUrl = Driver.just(event.actor?.avatarUrl?.url)
         badge = Driver.just(badgeImage?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green)
     }
 }
 

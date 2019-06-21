@@ -115,7 +115,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         tabBar.isTranslucent = false
 
         // Fixed an issue when TabBar is switched quickly, the selected item is abnormal
-        tabTapped.throttle(1.0, scheduler: MainScheduler.asyncInstance)
+        tabTapped.throttle(DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] (gesture) in
                 self?.tabTapped(gesture)
             }).disposed(by: rx.disposeBag)
@@ -134,7 +134,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
             .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)
 
-        themeService.typeStream.delay(0.7, scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
+        themeService.typeStream.delay(DispatchTimeInterval.milliseconds(700), scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
             switch theme {
             case .light(let color), .dark(let color):
                 self.changeSelectedColor(color.color, iconSelectedColor: color.color)

@@ -9,24 +9,24 @@ target 'SwiftHub' do
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift', '~> 13.0'  # https://github.com/Moya/Moya
+    pod 'Moya/RxSwift', '14.0.0-alpha.1'  # https://github.com/Moya/Moya
     pod 'ReachabilitySwift', '~> 4.0'  # https://github.com/ashleymills/Reachability.swift
 
     pod 'Apollo', '0.10.1'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
-    pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
-    pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
-    pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
-    pod 'RxViewController', '~> 0.3'  # https://github.com/devxoul/RxViewController
-    pod 'RxGesture', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxGesture
-    pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
-    pod 'RxTheme', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxTheme
+    pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
+    pod 'RxSwiftExt', '~> 5.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
+    pod 'NSObject+Rx', '~> 5.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+    pod 'RxViewController', '~> 1.0'  # https://github.com/devxoul/RxViewController
+    pod 'RxGesture', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxGesture
+    pod 'RxOptional', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxOptional
+    pod 'RxTheme', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxTheme
     #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
 
     # JSON Mapping
     #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
-    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git', :branch => 'moya13'  # https://github.com/ivanbruel/Moya-ObjectMapper
+    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git', :branch => 'moya14'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
     pod 'Kingfisher', '~> 5.0'  # https://github.com/onevcat/Kingfisher
@@ -66,9 +66,6 @@ target 'SwiftHub' do
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 
-    # Color
-    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'  # https://github.com/ViccAlexander/Chameleon
-
     # Auto Layout
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
@@ -89,7 +86,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.44.0'
+    pod 'Google-Mobile-Ads-SDK', '7.45.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths

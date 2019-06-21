@@ -30,6 +30,6 @@ class CommitCellViewModel {
         secondDetail = Driver.just("\(commit.sha?.slicing(from: 0, length: 7) ?? "")")
         imageUrl = Driver.just(commit.committer?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_commit()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green)
     }
 }

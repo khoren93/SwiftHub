@@ -31,7 +31,7 @@ class RepositoryCellViewModel {
         secondDetail = Driver.just(repository.attributetDetail())
         imageUrl = Driver.just(repository.owner?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green900)
         starring = Driver.just(repository.viewerHasStarred).filterNil()
         hidesStarButton = loggedIn.map { !$0 || repository.viewerHasStarred == nil }.asDriver(onErrorJustReturn: false)
     }

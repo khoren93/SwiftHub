@@ -29,7 +29,7 @@ class TrendingRepositoryCellViewModel {
         secondDetail = Driver.just(repository.attributetDetail(since: since.title))
         imageUrl = Driver.just(repository.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_repository()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green900)
     }
 }
 

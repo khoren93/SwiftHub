@@ -35,7 +35,7 @@ class ContactsViewModel: ViewModel, ViewModelType {
 
         let refresh = Observable.of(input.trigger, keyword.mapToVoid()).merge()
 
-        input.keywordTrigger.skip(1).throttle(0.3).distinctUntilChanged().asObservable().bind(to: keyword).disposed(by: rx.disposeBag)
+        input.keywordTrigger.skip(1).throttle(DispatchTimeInterval.milliseconds(300)).distinctUntilChanged().asObservable().bind(to: keyword).disposed(by: rx.disposeBag)
 
         refresh.flatMapLatest({ [weak self] () -> Observable<[ContactCellViewModel]> in
             guard let self = self else { return Observable.just([]) }

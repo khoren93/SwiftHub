@@ -24,7 +24,7 @@ class SlideImageView: ImageSlideshow {
     func makeUI() {
         contentScaleMode = .scaleAspectFit
         contentMode = .scaleAspectFill
-        backgroundColor = .flatWhite
+        backgroundColor = UIColor.Material.grey100
         borderWidth = Configs.BaseDimensions.borderWidth
         borderColor = .white
         slideshowInterval = 3

@@ -80,7 +80,7 @@ extension Observable where Element: Equatable {
     }
 }
 
-extension ObservableType where E == Bool {
+extension ObservableType where Element == Bool {
     /// Boolean not operator
     public func not() -> Observable<Bool> {
         return self.map(!)
@@ -95,13 +95,13 @@ extension SharedSequenceConvertibleType {
 
 extension ObservableType {
 
-    func catchErrorJustComplete() -> Observable<E> {
+    func catchErrorJustComplete() -> Observable<Element> {
         return catchError { _ in
             return Observable.empty()
         }
     }
 
-    func asDriverOnErrorJustComplete() -> Driver<E> {
+    func asDriverOnErrorJustComplete() -> Driver<Element> {
         return asDriver { error in
             assertionFailure("Error \(error)")
             return Driver.empty()

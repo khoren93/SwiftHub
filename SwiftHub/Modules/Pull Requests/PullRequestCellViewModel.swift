@@ -31,7 +31,7 @@ class PullRequestCellViewModel {
         secondDetail = Driver.just(pullRequest.attributedDetail())
         imageUrl = Driver.just(pullRequest.user?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_pull_request()?.template)
-        badgeColor = Driver.just(pullRequest.state == .open ? .flatGreenDark : .flatPurpleDark)
+        badgeColor = Driver.just(pullRequest.state == .open ? UIColor.Material.green : UIColor.Material.purple)
     }
 }
 

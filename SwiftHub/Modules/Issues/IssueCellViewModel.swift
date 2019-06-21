@@ -31,7 +31,7 @@ class IssueCellViewModel {
         secondDetail = Driver.just(issue.attributedDetail())
         imageUrl = Driver.just(issue.user?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_issue()?.template)
-        badgeColor = Driver.just(issue.state == .open ? .flatGreenDark : .flatRedDark)
+        badgeColor = Driver.just(issue.state == .open ? UIColor.Material.green : UIColor.Material.red)
     }
 }
 

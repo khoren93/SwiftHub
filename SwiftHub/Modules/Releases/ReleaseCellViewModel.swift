@@ -29,6 +29,6 @@ class ReleaseCellViewModel {
         secondDetail = Driver.just("\(release.body ?? "")")
         imageUrl = Driver.just(release.author?.avatarUrl?.url)
         badge = Driver.just(R.image.icon_cell_badge_tag()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        badgeColor = Driver.just(UIColor.Material.green)
     }
 }

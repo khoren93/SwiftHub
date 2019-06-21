@@ -6,8 +6,7 @@
 //  Copyright © 2017 Khoren Markosyan. All rights reserved.
 //
 
-import Foundation
-import ChameleonFramework
+import UIKit
 
 // MARK: Colors
 
@@ -35,27 +34,6 @@ extension UIColor {
 
     static func text() -> UIColor {
         return themeService.type.associatedObject.text
-    }
-}
-
-// MARK: Averaging a Color
-
-extension UIColor {
-
-    static func averageColor(fromImage image: UIImage?) -> UIColor? {
-        guard let image = image else {
-            return nil
-        }
-        return AverageColorFromImage(image)
-    }
-}
-
-// MARK: Randomizing Colors
-
-extension UIColor {
-
-    static func randomColor() -> UIColor {
-        return randomFlat
     }
 }
 
