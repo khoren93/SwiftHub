@@ -11,14 +11,7 @@ import RxSwift
 import RxCocoa
 import BonMot
 
-class PullRequestCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<NSAttributedString>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class PullRequestCellViewModel: DefaultTableViewCellViewModel {
 
     let pullRequest: PullRequest
 
@@ -26,12 +19,13 @@ class PullRequestCellViewModel {
 
     init(with pullRequest: PullRequest) {
         self.pullRequest = pullRequest
-        title = Driver.just("\(pullRequest.title ?? "")")
-        detail = Driver.just(pullRequest.detail())
-        secondDetail = Driver.just(pullRequest.attributedDetail())
-        imageUrl = Driver.just(pullRequest.user?.avatarUrl?.url)
-        badge = Driver.just(R.image.icon_cell_badge_pull_request()?.template)
-        badgeColor = Driver.just(pullRequest.state == .open ? UIColor.Material.green : UIColor.Material.purple)
+        super.init()
+        title.accept(pullRequest.title)
+        detail.accept(pullRequest.detail())
+        attributedDetail.accept(pullRequest.attributedDetail())
+        imageUrl.accept(pullRequest.user?.avatarUrl)
+        badge.accept(R.image.icon_cell_badge_pull_request()?.template)
+        badgeColor.accept(pullRequest.state == .open ? UIColor.Material.green : UIColor.Material.purple)
     }
 }
 

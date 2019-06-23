@@ -7,26 +7,19 @@
 //
 
 import UIKit
+import RxSwift
 
-class PullRequestCell: DetailedTableViewCell {
+class PullRequestCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
         leftImageView.cornerRadius = 25
     }
 
-    func bind(to viewModel: PullRequestCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.secondDetail.drive(secondDetailLabel.rx.attributedText).disposed(by: rx.disposeBag)
-        viewModel.imageUrl.drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
-        viewModel.imageUrl.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.leftImageView.hero.id = url.absoluteString
-            }
-        }).disposed(by: rx.disposeBag)
-        viewModel.badge.drive(badgeImageView.rx.image).disposed(by: rx.disposeBag)
-        viewModel.badgeColor.drive(badgeImageView.rx.tintColor).disposed(by: rx.disposeBag)
+    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? PullRequestCellViewModel else { return }
+        cellDisposeBag = DisposeBag()
 
         leftImageView.rx.tap().map { _ in viewModel.pullRequest.user }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)
