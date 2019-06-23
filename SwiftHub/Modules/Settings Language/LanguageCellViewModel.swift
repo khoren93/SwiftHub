@@ -10,15 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class LanguageCellViewModel {
+class LanguageCellViewModel: DefaultTableViewCellViewModel {
 
-    let title: Driver<String>
-
-    var language: String
+    let language: String
 
     init(with language: String) {
         self.language = language
-        title = Driver.just("\(displayName(forLanguage: language))")
+        super.init()
+        title.accept(displayName(forLanguage: language))
     }
 }
 
