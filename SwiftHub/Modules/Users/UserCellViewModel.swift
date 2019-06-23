@@ -11,37 +11,33 @@ import RxSwift
 import RxCocoa
 import BonMot
 
-class UserCellViewModel {
+class UserCellViewModel: DefaultTableViewCellViewModel {
 
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<NSAttributedString?>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
-    let following: Driver<Bool>
-    let hidesFollowButton: Driver<Bool>
+    let following = BehaviorRelay<Bool>(value: false)
+    let hidesFollowButton = BehaviorRelay<Bool>(value: true)
 
     let user: User
 
     init(with user: User) {
         self.user = user
-        title = Driver.just("\(user.login ?? "")")
-        detail = Driver.just("\((user.contributions != nil) ? "\(user.contributions ?? 0) commits": (user.name ?? ""))")
-        secondDetail = Driver.just(user.attributetDetail())
-        imageUrl = Driver.just(user.avatarUrl?.url)
-        badge = Driver.just(R.image.icon_cell_badge_user()?.template)
-        badgeColor = Driver.just(UIColor.Material.green900)
-        following = Driver.just(user.viewerIsFollowing).filterNil()
-        hidesFollowButton = loggedIn.map({ loggedIn -> Bool in
+        super.init()
+        title.accept(user.login)
+        detail.accept("\((user.contributions != nil) ? "\(user.contributions ?? 0) commits": (user.name ?? ""))")
+        attributedDetail.accept(user.attributetDetail())
+        imageUrl.accept(user.avatarUrl)
+        badge.accept(R.image.icon_cell_badge_user()?.template)
+        badgeColor.accept(UIColor.Material.green900)
+
+        following.accept(user.viewerIsFollowing ?? false)
+        loggedIn.map({ loggedIn -> Bool in
             if loggedIn == false { return true }
             if let viewerCanFollow = user.viewerCanFollow { return !viewerCanFollow }
             return true
-        }).asDriver(onErrorJustReturn: false)
+        }).bind(to: hidesFollowButton).disposed(by: rx.disposeBag)
     }
 }
 
-extension UserCellViewModel: Equatable {
+extension UserCellViewModel {
     static func == (lhs: UserCellViewModel, rhs: UserCellViewModel) -> Bool {
         return lhs.user == rhs.user
     }
