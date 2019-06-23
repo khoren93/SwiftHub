@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingCell: DetailedTableViewCell {
+class SettingCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
@@ -17,21 +17,9 @@ class SettingCell: DetailedTableViewCell {
             make.size.equalTo(40)
         }
         detailLabel.isHidden = true
+        attributedDetailLabel.isHidden = true
         secondDetailLabel.textAlignment = .right
         textsStackView.axis = .horizontal
         textsStackView.distribution = .fillEqually
-    }
-
-    func bind(to viewModel: SettingCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(secondDetailLabel.rx.text).disposed(by: rx.disposeBag)
-
-        viewModel.showDisclosure.drive(onNext: { [weak self] (isHidden) in
-            self?.rightImageView.isHidden = !isHidden
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.imageName.drive(onNext: { [weak self] (imageName) in
-            self?.leftImageView.image = UIImage(named: imageName)?.template
-        }).disposed(by: rx.disposeBag)
     }
 }

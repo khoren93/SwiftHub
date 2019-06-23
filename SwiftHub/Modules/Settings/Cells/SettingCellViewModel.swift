@@ -10,20 +10,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SettingCellViewModel {
+class SettingCellViewModel: DefaultTableViewCellViewModel {
 
-    let title: Driver<String>
-    let detail: Driver<String>
-    let imageName: Driver<String>
-    let showDisclosure: Driver<Bool>
-
-    let model: SettingModel
-
-    init(with model: SettingModel) {
-        self.model = model
-        title = Driver.just("\(model.title ?? "")")
-        detail = Driver.just("\(model.detail ?? "")")
-        imageName = Driver.just("\(model.leftImage ?? "")")
-        showDisclosure = Driver.just(model.showDisclosure)
+    init(with title: String, detail: String?, image: UIImage?, hidesDisclosure: Bool) {
+        super.init()
+        self.title.accept(title)
+        self.secondDetail.accept(detail)
+        self.image.accept(image)
+        self.hidesDisclosure.accept(hidesDisclosure)
     }
 }

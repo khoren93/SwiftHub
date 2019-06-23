@@ -27,18 +27,11 @@ class SettingSwitchCell: DefaultTableViewCell {
             .disposed(by: rx.disposeBag)
     }
 
-    func bind(to viewModel: SettingSwitchCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.isEnabled.drive(switchView.rx.isOn).disposed(by: rx.disposeBag)
+    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? SettingSwitchCellViewModel else { return }
 
-        viewModel.showDisclosure.drive(onNext: { [weak self] (isHidden) in
-            self?.rightImageView.isHidden = !isHidden
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.imageName.drive(onNext: { [weak self] (imageName) in
-            self?.leftImageView.image = UIImage(named: imageName)?.template
-        }).disposed(by: rx.disposeBag)
-
+        viewModel.isEnabled.asDriver().drive(switchView.rx.isOn).disposed(by: rx.disposeBag)
         switchView.rx.isOn.bind(to: viewModel.switchChanged).disposed(by: rx.disposeBag)
     }
 }

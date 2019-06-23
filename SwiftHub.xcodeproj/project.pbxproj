@@ -20,7 +20,6 @@
 		070FF84A20F285180070F5E8 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84820F285180070F5E8 /* SettingCell.swift */; };
 		070FF84B20F285180070F5E8 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070FF84920F285180070F5E8 /* SettingCell.xib */; };
 		070FF84D20F285330070F5E8 /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */; };
-		070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF84E20F285560070F5E8 /* SettingModel.swift */; };
 		070FF85120F290100070F5E8 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FF85020F290100070F5E8 /* SectionType.swift */; };
 		0713D7B722816C9F00A10A08 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0713D7B622816C9F00A10A08 /* ChatViewController.swift */; };
 		0713D7B922816F5300A10A08 /* IssueCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0713D7B822816F5300A10A08 /* IssueCommentsViewController.swift */; };
@@ -29,6 +28,7 @@
 		0716602121CFB1E000B5827C /* SourceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0716602021CFB1E000B5827C /* SourceViewModel.swift */; };
 		07178A61220F581C0020AE12 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07178A60220F581C0020AE12 /* Toolbar.swift */; };
 		071F761B21C6756D003EEB35 /* WhatsNewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071F761A21C6756D003EEB35 /* WhatsNewManager.swift */; };
+		0722DB1C22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0722DB1B22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift */; };
 		07241D0521B1740000F800BD /* RepositoryCommits.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0421B1740000F800BD /* RepositoryCommits.json */; };
 		07241D0721B1741800F800BD /* RepositoryCommit.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0621B1741800F800BD /* RepositoryCommit.json */; };
 		07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */ = {isa = PBXBuildFile; fileRef = 07241D0821B1742700F800BD /* RepositoryBranches.json */; };
@@ -205,7 +205,6 @@
 		A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A09DE8C520E7B84D00F6F2BF /* UserCell.xib */; };
 		A09DE8C920E7B8F400F6F2BF /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8C820E7B8F400F6F2BF /* ViewModelType.swift */; };
 		A09DE8CC20E7BEBD00F6F2BF /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8CB20E7BEBD00F6F2BF /* DefaultTableViewCell.swift */; };
-		A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8CD20E7BEDF00F6F2BF /* DetailedTableViewCell.swift */; };
 		A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8CF20E7C05C00F6F2BF /* Kingfisher+Rx.swift */; };
 		A09DE8D620E7C2C400F6F2BF /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8D320E7C2C400F6F2BF /* ErrorTracker.swift */; };
 		A09DE8D720E7C2C400F6F2BF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8D520E7C2C400F6F2BF /* ActivityIndicator.swift */; };
@@ -311,7 +310,6 @@
 		070FF84820F285180070F5E8 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		070FF84920F285180070F5E8 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		070FF84C20F285330070F5E8 /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
-		070FF84E20F285560070F5E8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		070FF85020F290100070F5E8 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		0713D7B622816C9F00A10A08 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0713D7B822816F5300A10A08 /* IssueCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentsViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +318,7 @@
 		0716602021CFB1E000B5827C /* SourceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceViewModel.swift; sourceTree = "<group>"; };
 		07178A60220F581C0020AE12 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		071F761A21C6756D003EEB35 /* WhatsNewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewManager.swift; sourceTree = "<group>"; };
+		0722DB1B22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		07241D0421B1740000F800BD /* RepositoryCommits.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommits.json; sourceTree = "<group>"; };
 		07241D0621B1741800F800BD /* RepositoryCommit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryCommit.json; sourceTree = "<group>"; };
 		07241D0821B1742700F800BD /* RepositoryBranches.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoryBranches.json; sourceTree = "<group>"; };
@@ -516,7 +515,6 @@
 		A09DE8C520E7B84D00F6F2BF /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		A09DE8C820E7B8F400F6F2BF /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		A09DE8CB20E7BEBD00F6F2BF /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
-		A09DE8CD20E7BEDF00F6F2BF /* DetailedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTableViewCell.swift; sourceTree = "<group>"; };
 		A09DE8CF20E7C05C00F6F2BF /* Kingfisher+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kingfisher+Rx.swift"; sourceTree = "<group>"; };
 		A09DE8D320E7C2C400F6F2BF /* ErrorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		A09DE8D520E7C2C400F6F2BF /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -682,7 +680,6 @@
 			isa = PBXGroup;
 			children = (
 				A0E2B08B210625E6000DA282 /* Cells */,
-				070FF84E20F285560070F5E8 /* SettingModel.swift */,
 				A0E2B08E21062B9B000DA282 /* SettingsSection.swift */,
 				070FF84420F284D40070F5E8 /* SettingsViewController.swift */,
 				070FF84620F284F00070F5E8 /* SettingsViewModel.swift */,
@@ -1193,7 +1190,7 @@
 			isa = PBXGroup;
 			children = (
 				A09DE8CB20E7BEBD00F6F2BF /* DefaultTableViewCell.swift */,
-				A09DE8CD20E7BEDF00F6F2BF /* DetailedTableViewCell.swift */,
+				0722DB1B22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift */,
 				C762C65A1E1D559000C09EBD /* TableViewCell.swift */,
 			);
 			path = "Table View Cells";
@@ -1929,7 +1926,6 @@
 				A00871CF21A6E2BD006E5A2B /* Comment.swift in Sources */,
 				C762C6911E1D5D6E00C09EBD /* GitHubAPI.swift in Sources */,
 				A017B3DB1E92995300E4FCED /* SplitViewController.swift in Sources */,
-				070FF84F20F285560070F5E8 /* SettingModel.swift in Sources */,
 				07E1B2FD21A44B7600F6EAE3 /* Branch.swift in Sources */,
 				07D46E5A21921C28008E5369 /* ContentsViewController.swift in Sources */,
 				07AD154C227F3D7300FC8109 /* IssueViewController.swift in Sources */,
@@ -2040,7 +2036,6 @@
 				07241D1121B175EB00F800BD /* CommitsViewController.swift in Sources */,
 				A07DC84F21EDF6E100AA7951 /* ContactCell.swift in Sources */,
 				0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */,
-				A09DE8CE20E7BEDF00F6F2BF /* DetailedTableViewCell.swift in Sources */,
 				07DFF6DC20E90A5E004DAA68 /* RepositoryViewModel.swift in Sources */,
 				07E1B2F721A4366200F6EAE3 /* Milestone.swift in Sources */,
 				A09DE8DF20E7CDE600F6F2BF /* SearchSection.swift in Sources */,
@@ -2050,6 +2045,7 @@
 				07D46E5C21921C37008E5369 /* ContentsViewModel.swift in Sources */,
 				A09DE8C920E7B8F400F6F2BF /* ViewModelType.swift in Sources */,
 				07F9E469223406270012BA6D /* GraphApi.swift in Sources */,
+				0722DB1C22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift in Sources */,
 				C762C6921E1D5D6E00C09EBD /* Networking.swift in Sources */,
 				C762C66F1E1D58B200C09EBD /* Configs.swift in Sources */,
 				0716601F21CFB1D100B5827C /* SourceViewController.swift in Sources */,

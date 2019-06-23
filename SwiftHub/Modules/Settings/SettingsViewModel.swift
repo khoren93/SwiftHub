@@ -71,8 +71,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
                     accountItems.append(SettingsSectionItem.profileItem(viewModel: profileCellViewModel))
                 }
 
-                let logoutModel = SettingModel(leftImage: R.image.icon_cell_logout.name, title: R.string.localizable.settingsLogOutTitle.key.localized(), detail: "", showDisclosure: false)
-                let logoutCellViewModel = SettingCellViewModel(with: logoutModel)
+                let logoutCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsLogOutTitle.key.localized(), detail: nil,
+                                                               image: R.image.icon_cell_logout()?.template, hidesDisclosure: true)
                 accountItems.append(SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel))
 
                 items.append(SettingsSection.setting(title: R.string.localizable.settingsAccountSectionTitle.key.localized(), items: accountItems))
@@ -86,33 +86,33 @@ class SettingsViewModel: ViewModel, ViewModelType {
             }
 
             let bannerEnabled = self.bannerEnabled.value
-            let bannerImageName = bannerEnabled ? R.image.icon_cell_smile.name : R.image.icon_cell_frown.name
-            let bannerModel = SettingModel(leftImage: bannerImageName, title: R.string.localizable.settingsBannerTitle.key.localized(), detail: "", showDisclosure: false)
-            let bannerCellViewModel = SettingSwitchCellViewModel(with: bannerModel, isEnabled: bannerEnabled)
+            let bannerImage = bannerEnabled ? R.image.icon_cell_smile()?.template : R.image.icon_cell_frown()?.template
+            let bannerCellViewModel = SettingSwitchCellViewModel(with: R.string.localizable.settingsBannerTitle.key.localized(), detail: nil,
+                                                                 image: bannerImage, hidesDisclosure: true, isEnabled: bannerEnabled)
             bannerCellViewModel.switchChanged.skip(1).bind(to: self.bannerEnabled).disposed(by: self.cellDisposeBag)
 
             let nightModeEnabled = self.nightModeEnabled.value
-            let nightModeModel = SettingModel(leftImage: R.image.icon_cell_night_mode.name, title: R.string.localizable.settingsNightModeTitle.key.localized(), detail: "", showDisclosure: false)
-            let nightModeCellViewModel = SettingSwitchCellViewModel(with: nightModeModel, isEnabled: nightModeEnabled)
+            let nightModeCellViewModel = SettingSwitchCellViewModel(with: R.string.localizable.settingsNightModeTitle.key.localized(), detail: nil,
+                                                                    image: R.image.icon_cell_night_mode()?.template, hidesDisclosure: true, isEnabled: nightModeEnabled)
             nightModeCellViewModel.switchChanged.skip(1).bind(to: self.nightModeEnabled).disposed(by: self.cellDisposeBag)
 
-            let themeModel = SettingModel(leftImage: R.image.icon_cell_theme.name, title: R.string.localizable.settingsThemeTitle.key.localized(), detail: "", showDisclosure: true)
-            let themeCellViewModel = SettingCellViewModel(with: themeModel)
+            let themeCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsThemeTitle.key.localized(), detail: nil,
+                                                          image: R.image.icon_cell_theme()?.template, hidesDisclosure: false)
 
-            let languageModel = SettingModel(leftImage: R.image.icon_cell_language.name, title: R.string.localizable.settingsLanguageTitle.key.localized(), detail: "", showDisclosure: true)
-            let languageCellViewModel = SettingCellViewModel(with: languageModel)
+            let languageCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsLanguageTitle.key.localized(), detail: nil,
+                                                             image: R.image.icon_cell_language()?.template, hidesDisclosure: false)
 
-            let contactsModel = SettingModel(leftImage: R.image.icon_cell_company.name, title: R.string.localizable.settingsContactsTitle.key.localized(), detail: "", showDisclosure: true)
-            let contactsCellViewModel = SettingCellViewModel(with: contactsModel)
+            let contactsCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsContactsTitle.key.localized(), detail: nil,
+                                                             image: R.image.icon_cell_company()?.template, hidesDisclosure: false)
 
-            let removeCacheModel = SettingModel(leftImage: R.image.icon_cell_remove.name, title: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: size.sizeFromByte(), showDisclosure: false)
-            let removeCacheCellViewModel = SettingCellViewModel(with: removeCacheModel)
+            let removeCacheCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: size.sizeFromByte(),
+                                                                image: R.image.icon_cell_remove()?.template, hidesDisclosure: true)
 
-            let acknowledgementsModel = SettingModel(leftImage: R.image.icon_cell_acknowledgements.name, title: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: "", showDisclosure: true)
-            let acknowledgementsCellViewModel = SettingCellViewModel(with: acknowledgementsModel)
+            let acknowledgementsCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: nil,
+                                                                     image: R.image.icon_cell_acknowledgements()?.template, hidesDisclosure: false)
 
-            let whatsNewModel = SettingModel(leftImage: R.image.icon_cell_whats_new.name, title: R.string.localizable.settingsWhatsNewTitle.key.localized(), detail: "", showDisclosure: true)
-            let whatsNewCellViewModel = SettingCellViewModel(with: whatsNewModel)
+            let whatsNewCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsWhatsNewTitle.key.localized(), detail: nil,
+                                                             image: R.image.icon_cell_whats_new()?.template, hidesDisclosure: false)
 
             items += [
                 SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [

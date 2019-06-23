@@ -10,22 +10,18 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SettingSwitchCellViewModel {
+class SettingSwitchCellViewModel: DefaultTableViewCellViewModel {
 
-    let title: Driver<String>
-    let imageName: Driver<String>
-    let showDisclosure: Driver<Bool>
-    let isEnabled: Driver<Bool>
-
-    let model: SettingModel
+    let isEnabled = BehaviorRelay<Bool>(value: false)
 
     let switchChanged = PublishSubject<Bool>()
 
-    init(with model: SettingModel, isEnabled: Bool) {
-        self.model = model
-        title = Driver.just("\(model.title ?? "")")
-        imageName = Driver.just("\(model.leftImage ?? "")")
-        showDisclosure = Driver.just(model.showDisclosure)
-        self.isEnabled = Driver.just(isEnabled)
+    init(with title: String, detail: String?, image: UIImage?, hidesDisclosure: Bool, isEnabled: Bool) {
+        super.init()
+        self.title.accept(title)
+        self.secondDetail.accept(detail)
+        self.image.accept(image)
+        self.hidesDisclosure.accept(hidesDisclosure)
+        self.isEnabled.accept(isEnabled)
     }
 }

@@ -41,14 +41,14 @@ extension SettingsSectionItem: IdentifiableType {
         case .profileItem(let viewModel): return viewModel.user.login ?? ""
         case .repositoryItem(let viewModel): return viewModel.repository.fullname ?? ""
         case .bannerItem(let viewModel),
-             .nightModeItem(let viewModel): return viewModel.model.title ?? ""
+             .nightModeItem(let viewModel): return viewModel.title.value ?? ""
         case .logoutItem(let viewModel),
              .themeItem(let viewModel),
              .languageItem(let viewModel),
              .contactsItem(let viewModel),
              .removeCacheItem(let viewModel),
              .acknowledgementsItem(let viewModel),
-             .whatsNewItem(let viewModel): return viewModel.model.title ?? ""
+             .whatsNewItem(let viewModel): return viewModel.title.value ?? ""
         }
     }
 }
