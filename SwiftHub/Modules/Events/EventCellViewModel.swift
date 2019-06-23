@@ -10,14 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class EventCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<String>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class EventCellViewModel: DefaultTableViewCellViewModel {
 
     let event: Event
 
@@ -25,6 +18,7 @@ class EventCellViewModel {
 
     init(with event: Event) {
         self.event = event
+        super.init()
 
         let actorName = event.actor?.login ?? ""
         var badgeImage: UIImage?
@@ -80,16 +74,16 @@ class EventCellViewModel {
 
         let repoName = event.repository?.fullname ?? ""
 
-        title = Driver.just([actorName, actionText, repoName].joined(separator: " "))
-        detail = Driver.just("\(event.createdAt?.toRelative() ?? "")")
-        secondDetail = Driver.just(body)
-        imageUrl = Driver.just(event.actor?.avatarUrl?.url)
-        badge = Driver.just(badgeImage?.template)
-        badgeColor = Driver.just(UIColor.Material.green)
+        title.accept([actorName, actionText, repoName].joined(separator: " "))
+        detail.accept(event.createdAt?.toRelative())
+        secondDetail.accept(body)
+        imageUrl.accept(event.actor?.avatarUrl)
+        badge.accept(badgeImage?.template)
+        badgeColor.accept(UIColor.Material.green)
     }
 }
 
-extension EventCellViewModel: Equatable {
+extension EventCellViewModel {
     static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
         return lhs.event == rhs.event
     }
