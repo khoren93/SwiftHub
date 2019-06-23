@@ -10,14 +10,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class RepoLanguageCellViewModel {
-
-    let title: Driver<String>
+class RepoLanguageCellViewModel: DefaultTableViewCellViewModel {
 
     let language: Language
 
     init(with language: Language) {
         self.language = language
-        title = Driver.just("\(language.displayName())")
+        super.init()
+        title.accept(language.displayName())
     }
 }

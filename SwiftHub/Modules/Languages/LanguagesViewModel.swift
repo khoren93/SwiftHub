@@ -50,7 +50,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
                 }, map: { (language) -> LanguageSectionItem in
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
-                }) {
+                }), popularLanguages.isNotEmpty {
                     let title = R.string.localizable.languagesPopularSectionTitle.key.localized()
                     elements.append(LanguageSection.languages(title: title, items: popularLanguages))
             }
@@ -60,7 +60,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
                 }, map: { (language) -> LanguageSectionItem in
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
-                }) {
+                }), allLanguages.isNotEmpty {
                     let title = R.string.localizable.languagesAllSectionTitle.key.localized()
                     elements.append(LanguageSection.languages(title: title, items: allLanguages))
             }
