@@ -11,14 +11,7 @@ import RxSwift
 import RxCocoa
 import BonMot
 
-class IssueCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<NSAttributedString>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class IssueCellViewModel: DefaultTableViewCellViewModel {
 
     let issue: Issue
 
@@ -26,12 +19,13 @@ class IssueCellViewModel {
 
     init(with issue: Issue) {
         self.issue = issue
-        title = Driver.just("\(issue.title ?? "")")
-        detail = Driver.just(issue.detail())
-        secondDetail = Driver.just(issue.attributedDetail())
-        imageUrl = Driver.just(issue.user?.avatarUrl?.url)
-        badge = Driver.just(R.image.icon_cell_badge_issue()?.template)
-        badgeColor = Driver.just(issue.state == .open ? UIColor.Material.green : UIColor.Material.red)
+        super.init()
+        title.accept(issue.title)
+        detail.accept(issue.detail())
+        attributedDetail.accept(issue.attributedDetail())
+        imageUrl.accept(issue.user?.avatarUrl)
+        badge.accept(R.image.icon_cell_badge_issue()?.template)
+        badgeColor.accept(issue.state == .open ? UIColor.Material.green : UIColor.Material.red)
     }
 }
 
