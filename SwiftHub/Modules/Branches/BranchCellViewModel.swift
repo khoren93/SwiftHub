@@ -10,20 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class BranchCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<String>
-    let image: Driver<UIImage?>
+class BranchCellViewModel: DefaultTableViewCellViewModel {
 
     let branch: Branch
 
     init(with branch: Branch) {
         self.branch = branch
-        title = Driver.just("\(branch.name ?? "")")
-        detail = Driver.just("")
-        secondDetail = Driver.just("")
-        image = Driver.just(R.image.icon_cell_git_branch()?.template)
+        super.init()
+        title.accept(branch.name)
+        image.accept(R.image.icon_cell_git_branch()?.template)
     }
 }
