@@ -162,7 +162,7 @@ class UserViewModel: ViewModel, ViewModelType {
             if let created = user.createdAt {
                 let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
                                                                    detail: created.toRelative(),
-                                                                   image: R.image.icon_cell_created(),
+                                                                   image: R.image.icon_cell_created()?.template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.createdItem(viewModel: createdCellViewModel))
             }
@@ -171,7 +171,7 @@ class UserViewModel: ViewModel, ViewModelType {
             if let updated = user.updatedAt {
                 let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
                                                                    detail: updated.toRelative(),
-                                                                   image: R.image.icon_cell_updated(),
+                                                                   image: R.image.icon_cell_updated()?.template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.updatedItem(viewModel: updatedCellViewModel))
             }
@@ -180,14 +180,14 @@ class UserViewModel: ViewModel, ViewModelType {
                 // Stars
                 let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
                                                                  detail: user.starredRepositoriesCount?.string ?? "",
-                                                                 image: R.image.icon_cell_star(),
+                                                                 image: R.image.icon_cell_star()?.template,
                                                                  hidesDisclosure: false)
                 items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
 
                 // Watching
                 let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
                                                                     detail: user.watchingCount?.string ?? "",
-                                                                    image: R.image.icon_cell_theme(),
+                                                                    image: R.image.icon_cell_theme()?.template,
                                                                     hidesDisclosure: false)
                 items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
             }
@@ -195,7 +195,7 @@ class UserViewModel: ViewModel, ViewModelType {
             // Events
             let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
                                                               detail: "",
-                                                              image: R.image.icon_cell_events(),
+                                                              image: R.image.icon_cell_events()?.template,
                                                               hidesDisclosure: false)
             items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
@@ -203,7 +203,7 @@ class UserViewModel: ViewModel, ViewModelType {
             if let company = user.company, company.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
                                                                    detail: company,
-                                                                   image: R.image.icon_cell_company(),
+                                                                   image: R.image.icon_cell_company()?.template,
                                                                    hidesDisclosure: false)
                 items.append(UserSectionItem.companyItem(viewModel: companyCellViewModel))
             }
@@ -212,7 +212,7 @@ class UserViewModel: ViewModel, ViewModelType {
             if let blog = user.blog, blog.isNotEmpty {
                 let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
                                                                    detail: blog,
-                                                                   image: R.image.icon_cell_link(),
+                                                                   image: R.image.icon_cell_link()?.template,
                                                                    hidesDisclosure: false)
                 items.append(UserSectionItem.blogItem(viewModel: companyCellViewModel))
             }
@@ -220,7 +220,7 @@ class UserViewModel: ViewModel, ViewModelType {
             // Profile Summary
             let profileSummaryCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userProfileSummaryCellTitle.key.localized(),
                                                                       detail: "\(Configs.Network.profileSummaryBaseUrl)",
-                                                                      image: R.image.icon_cell_profile_summary(),
+                                                                      image: R.image.icon_cell_profile_summary()?.template,
                                                                       hidesDisclosure: false)
             items.append(UserSectionItem.profileSummaryItem(viewModel: profileSummaryCellViewModel))
 
