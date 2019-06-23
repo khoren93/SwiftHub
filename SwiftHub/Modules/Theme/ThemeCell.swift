@@ -19,8 +19,10 @@ class ThemeCell: DefaultTableViewCell {
         }
     }
 
-    func bind(to viewModel: ThemeCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.imageColor.drive(leftImageView.rx.backgroundColor).disposed(by: rx.disposeBag)
+    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? ThemeCellViewModel else { return }
+
+        viewModel.imageColor.asDriver().drive(leftImageView.rx.backgroundColor).disposed(by: rx.disposeBag)
     }
 }
