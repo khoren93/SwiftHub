@@ -10,19 +10,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ContentCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let image: Driver<UIImage?>
+class ContentCellViewModel: DefaultTableViewCellViewModel {
 
     let content: Content
 
     init(with content: Content) {
         self.content = content
-        title = Driver.just("\(content.name ?? "")")
-        detail = Driver.just("\(content.type == .file ? content.size?.sizeFromByte() ?? "" : "")")
-        image = Driver.just(content.type.image()?.template)
+        super.init()
+        title.accept(content.name)
+        detail.accept(content.type == .file ? content.size?.sizeFromByte() : nil)
+        image.accept(content.type.image()?.template)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContentCell: DetailedTableViewCell {
+class ContentCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
@@ -16,11 +16,5 @@ class ContentCell: DetailedTableViewCell {
         leftImageView.snp.remakeConstraints { (make) in
             make.size.equalTo(30)
         }
-    }
-
-    func bind(to viewModel: ContentCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.image.drive(leftImageView.rx.image).disposed(by: rx.disposeBag)
     }
 }
