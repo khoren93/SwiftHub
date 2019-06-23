@@ -10,20 +10,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ContactCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let image: Driver<UIImage?>
+class ContactCellViewModel: DefaultTableViewCellViewModel {
 
     let contact: Contact
 
     init(with contact: Contact) {
         self.contact = contact
-
-        self.title = Driver.just("\(contact.name ?? "")")
+        super.init()
+        title.accept(contact.name)
         let info = contact.phones + contact.emails
-        self.detail = Driver.just(info.joined(separator: ", "))
-        self.image = Driver.just(UIImage(data: contact.imageData ?? Data()) ?? R.image.icon_cell_contact_no_image()?.template)
+        detail.accept(info.joined(separator: ", "))
+        image.accept(UIImage(data: contact.imageData ?? Data()) ?? R.image.icon_cell_contact_no_image()?.template)
     }
 }

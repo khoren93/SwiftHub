@@ -8,16 +8,10 @@
 
 import UIKit
 
-class ContactCell: DetailedTableViewCell {
+class ContactCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
         leftImageView.cornerRadius = 25
-    }
-
-    func bind(to viewModel: ContactCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.image.drive(leftImageView.rx.image).disposed(by: rx.disposeBag)
     }
 }
