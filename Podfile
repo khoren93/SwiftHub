@@ -9,23 +9,23 @@ target 'SwiftHub' do
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift', '~> 12.0'  # https://github.com/Moya/Moya
+    pod 'Moya/RxSwift', '~> 14.0.0-alpha.1'  # https://github.com/Moya/Moya
     pod 'ReachabilitySwift', '~> 4.0' # https://github.com/ashleymills/Reachability.swift
 
     # Rx Extensions
-    pod 'RxDataSources', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxDataSources
-    pod 'RxSwiftExt', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
-    pod 'NSObject+Rx', '~> 4.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
-    pod 'RxViewController', '~> 0.3'  # https://github.com/devxoul/RxViewController
-    pod 'RxGesture', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxGesture
-    pod 'RxOptional', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxOptional
-    pod 'RxTheme', '~> 2.0'  # https://github.com/RxSwiftCommunity/RxTheme
+    pod 'RxDataSources', '~> 4.0.1'  # https://github.com/RxSwiftCommunity/RxDataSources
+    pod 'RxSwiftExt', '~> 5.0.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
+    pod 'NSObject+Rx', '~> 5.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+    pod 'RxViewController', '~> 1.0'  # https://github.com/devxoul/RxViewController
+    pod 'RxGesture', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxGesture
+    pod 'RxOptional', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxOptional
+    pod 'RxTheme', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxTheme
     #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
 
     # JSON Mapping
     #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
-    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/hankbao/Moya-ObjectMapper.git' #'~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
-
+    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/814349837/Moya-ObjectMapper.git', :branch => 'master'
+    
     # Image
     pod 'Kingfisher', '~> 4.0'  # https://github.com/onevcat/Kingfisher
 
