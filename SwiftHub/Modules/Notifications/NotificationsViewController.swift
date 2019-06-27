@@ -27,14 +27,20 @@ enum NotificationSegments: Int {
 
 class NotificationsViewController: TableViewController {
 
-    var viewModel: NotificationsViewModel!
+    lazy var rightBarButton: BarButtonItem = {
+        let view = BarButtonItem(image: R.image.icon_cell_check(), style: .done, target: nil, action: nil)
+        return view
+    }()
 
     lazy var segmentedControl: SegmentedControl = {
         let items = [NotificationSegments.unread.title,
                      NotificationSegments.participating.title,
                      NotificationSegments.all.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(260)
+        })
         return view
     }()
 
@@ -48,11 +54,12 @@ class NotificationsViewController: TableViewController {
         super.makeUI()
 
         navigationItem.titleView = segmentedControl
+        navigationItem.rightBarButtonItem = rightBarButton
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.segmentedControl.setTitle(NotificationSegments.unread.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(NotificationSegments.participating.title, forSegmentAt: 1)
-            self?.segmentedControl.setTitle(NotificationSegments.all.title, forSegmentAt: 2)
+            self?.segmentedControl.sectionTitles = [NotificationSegments.unread.title,
+                                                    NotificationSegments.participating.title,
+                                                    NotificationSegments.all.title]
         }).disposed(by: rx.disposeBag)
 
         tableView.register(R.nib.notificationCell)
@@ -61,17 +68,20 @@ class NotificationsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? NotificationsViewModel else { return }
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { NotificationSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { NotificationSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), segmentSelected.mapToVoid()).merge()
         let input = NotificationsViewModel.Input(headerRefresh: refresh,
                                                  footerRefresh: footerRefreshTrigger,
                                                  segmentSelection: segmentSelected,
+                                                 markAsReadSelection: rightBarButton.rx.tap.asObservable(),
                                                  selection: tableView.rx.modelSelected(NotificationCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
         viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
         viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
+        viewModel.parsedError.bind(to: error).disposed(by: rx.disposeBag)
 
         output.navigationTitle.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
@@ -90,8 +100,11 @@ class NotificationsViewController: TableViewController {
             self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
         }).disposed(by: rx.disposeBag)
 
-        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
+        output.markAsReadSelected.drive(onNext: { [weak self] () in
+            let title = R.string.localizable.commonSuccess.key.localized()
+            let description = R.string.localizable.notificationsMarkAsReadSuccess.key.localized()
+            let image = R.image.icon_toast_success()
+            self?.tableView.makeToast(description, title: title, image: image)
         }).disposed(by: rx.disposeBag)
     }
 }

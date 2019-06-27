@@ -10,27 +10,22 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class TrendingUserCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class TrendingUserCellViewModel: DefaultTableViewCellViewModel {
 
     let user: TrendingUser
 
     init(with user: TrendingUser) {
         self.user = user
-        title = Driver.just("\(user.username ?? "") (\(user.name ?? ""))")
-        detail = Driver.just("\((user.repo?.fullname ?? ""))")
-        imageUrl = Driver.just(user.avatar?.url)
-        badge = Driver.just(R.image.icon_cell_badge_user()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        super.init()
+        title.accept("\(user.username ?? "") (\(user.name ?? ""))")
+        detail.accept(user.repo?.fullname)
+        imageUrl.accept(user.avatar)
+        badge.accept(R.image.icon_cell_badge_user()?.template)
+        badgeColor.accept(UIColor.Material.green900)
     }
 }
 
-extension TrendingUserCellViewModel: Equatable {
+extension TrendingUserCellViewModel {
     static func == (lhs: TrendingUserCellViewModel, rhs: TrendingUserCellViewModel) -> Bool {
         return lhs.user == rhs.user
     }

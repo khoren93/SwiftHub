@@ -22,12 +22,9 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
         let openWhatsNew: Driver<WhatsNewBlock>
     }
 
-    let loggedIn: BehaviorRelay<Bool>
-
     let whatsNewManager: WhatsNewManager
 
-    init(loggedIn: Bool, provider: SwiftHubAPI) {
-        self.loggedIn = BehaviorRelay(value: loggedIn)
+    override init(provider: SwiftHubAPI) {
         whatsNewManager = WhatsNewManager.shared
         super.init(provider: provider)
     }
@@ -36,7 +33,7 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
 
         let tabBarItems = loggedIn.map { (loggedIn) -> [HomeTabBarItem] in
             if loggedIn {
-                return [.news, .search, .profile, .notifications, .settings]
+                return [.news, .search, .notifications, .settings]
             } else {
                 return [.search, .login, .settings]
             }
@@ -57,14 +54,11 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             let user = User.currentUser()!
             let viewModel = EventsViewModel(mode: .user(user: user), provider: provider)
             return viewModel
-        case .profile:
-            let viewModel = UserViewModel(user: nil, provider: provider)
-            return viewModel
         case .notifications:
             let viewModel = NotificationsViewModel(mode: .mine, provider: provider)
             return viewModel
         case .settings:
-            let viewModel = SettingsViewModel(loggedIn: loggedIn, provider: provider)
+            let viewModel = SettingsViewModel(provider: provider)
             return viewModel
         case .login:
             let viewModel = LoginViewModel(provider: provider)

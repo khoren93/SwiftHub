@@ -35,8 +35,9 @@ class ThemeViewModel: ViewModel, ViewModelType {
         selected.drive(onNext: { (cellViewModel) in
             let color = cellViewModel.theme
             let theme = ThemeType.currentTheme().withColor(color: color)
-            themeService.set(theme)
+            themeService.switch(theme)
             analytics.log(.appTheme(color: color.title))
+            analytics.updateUser(colorTheme: color.title)
         }).disposed(by: rx.disposeBag)
 
         return Output(items: elements,

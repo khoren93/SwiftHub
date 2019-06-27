@@ -16,6 +16,7 @@ struct Committer: Mappable {
     var date: Date?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         name <- map["name"]

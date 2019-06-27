@@ -104,7 +104,11 @@ class EventsViewModel: ViewModel, ViewModelType {
         let hidesSegment = mode.map { (mode) -> Bool in
             switch mode {
             case .repository: return true
-            case .user: return false
+            case .user(let user):
+                switch user.type {
+                case .user: return false
+                case .organization: return true
+                }
             }
         }.asDriver(onErrorJustReturn: false)
 
@@ -122,11 +126,13 @@ class EventsViewModel: ViewModel, ViewModelType {
         case .repository(let repository):
             request = provider.repositoryEvents(owner: repository.owner?.login ?? "", repo: repository.name ?? "", page: page)
         case .user(let user):
-            switch segment.value {
-            case .performed:
-                request = provider.userPerformedEvents(username: user.login ?? "", page: page)
-            case .received:
-                request = provider.userReceivedEvents(username: user.login ?? "", page: page)
+            switch user.type {
+            case .user:
+                switch segment.value {
+                case .performed: request = provider.userPerformedEvents(username: user.login ?? "", page: page)
+                case .received: request = provider.userReceivedEvents(username: user.login ?? "", page: page)
+                }
+            case .organization: request = provider.organizationEvents(username: user.login ?? "", page: page)
             }
         }
         return request

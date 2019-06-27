@@ -11,12 +11,12 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let themeReuseIdentifier = R.reuseIdentifier.settingThemeCell.identifier
+private let switchReuseIdentifier = R.reuseIdentifier.settingSwitchCell.identifier
 private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
+private let profileReuseIdentifier = R.reuseIdentifier.userCell.identifier
+private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
 
 class SettingsViewController: TableViewController {
-
-    var viewModel: SettingsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,33 +32,45 @@ class SettingsViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         tableView.register(R.nib.settingCell)
-        tableView.register(R.nib.settingThemeCell)
+        tableView.register(R.nib.settingSwitchCell)
+        tableView.register(R.nib.userCell)
+        tableView.register(R.nib.repositoryCell)
         tableView.headRefreshControl = nil
         tableView.footRefreshControl = nil
     }
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? SettingsViewModel else { return }
 
-        let refresh = Observable.of(Observable.just(()),
-                                    languageChanged.asObservable()).merge()
+        let refresh = Observable.of(rx.viewWillAppear.mapToVoid(), languageChanged.asObservable()).merge()
         let input = SettingsViewModel.Input(trigger: refresh,
                                             selection: tableView.rx.modelSelected(SettingsSectionItem.self).asDriver())
         let output = viewModel.transform(input: input)
 
         let dataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .nightModeItem(let viewModel):
-                let cell = (tableView.dequeueReusableCell(withIdentifier: themeReuseIdentifier, for: indexPath) as? SettingThemeCell)!
+            case .profileItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: profileReuseIdentifier, for: indexPath) as? UserCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .bannerItem(let viewModel),
+                 .nightModeItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: switchReuseIdentifier, for: indexPath) as? SettingSwitchCell)!
                 cell.bind(to: viewModel)
                 return cell
             case .themeItem(let viewModel),
                  .languageItem(let viewModel),
+                 .contactsItem(let viewModel),
                  .removeCacheItem(let viewModel),
                  .acknowledgementsItem(let viewModel),
                  .whatsNewItem(let viewModel),
                  .logoutItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .repositoryItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
                 cell.bind(to: viewModel)
                 return cell
             }
@@ -73,48 +85,71 @@ class SettingsViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
-            case .nightModeItem:
+            case .profileItem:
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .logoutItem:
+                self?.deselectSelectedRow()
+                self?.logoutAction()
+            case .bannerItem,
+                 .nightModeItem:
                 self?.deselectSelectedRow()
             case .themeItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ThemeViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ThemeViewModel {
                     self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .languageItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? LanguageViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? LanguageViewModel {
                     self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
+                }
+            case .contactsItem:
+                if let viewModel = viewModel.viewModel(for: item) as? ContactsViewModel {
+                    self?.navigator.show(segue: .contacts(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .removeCacheItem:
                 self?.deselectSelectedRow()
-                self?.clearCacheAction()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
                 analytics.log(.acknowledgements)
             case .whatsNewItem:
-                if let block = self?.viewModel.whatsNewBlock() {
-                    self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
-                    analytics.log(.whatsNew)
+                self?.navigator.show(segue: .whatsNew(block: viewModel.whatsNewBlock()), sender: self, transition: .modal)
+                analytics.log(.whatsNew)
+            case .repositoryItem:
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
                 }
-            case .logoutItem:
-                self?.deselectSelectedRow()
-                self?.logout()
             }
         }).disposed(by: rx.disposeBag)
     }
 
-    func clearCacheAction() {
-        LibsManager.shared.removeKingfisherCache { [weak self] in
-            let alertController = UIAlertController(title: R.string.localizable.settingsRemoveCacheAlertSuccessMessage.key.localized(),
-                                                    message: nil, preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: R.string.localizable.commonOK.key.localized(), style: .default) { (result: UIAlertAction) in }
-            alertController.addAction(okAction)
-            self?.present(alertController, animated: true, completion: nil)
-            analytics.log(.appCacheRemoved)
+    func logoutAction() {
+        var name = ""
+        if let user = User.currentUser() {
+            name = user.name ?? user.login ?? ""
         }
+
+        let alertController = UIAlertController(title: name,
+                                                message: R.string.localizable.settingsLogoutAlertMessage.key.localized(),
+                                                preferredStyle: UIAlertController.Style.alert)
+        let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertConfirmButtonTitle.key.localized(),
+                                         style: .destructive) { [weak self] (result: UIAlertAction) in
+            self?.logout()
+        }
+
+        let cancelAction = UIAlertAction(title: R.string.localizable.commonCancel.key.localized(),
+                                         style: .default) { (result: UIAlertAction) in
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(logoutAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func logout() {
         User.removeCurrentUser()
         AuthManager.removeToken()
+        Application.shared.presentInitialScreen(in: Application.shared.window)
 
         analytics.log(.logout)
         analytics.reset()

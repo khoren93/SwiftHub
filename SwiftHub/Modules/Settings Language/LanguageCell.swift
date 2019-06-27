@@ -21,8 +21,4 @@ class LanguageCell: DefaultTableViewCell {
         // Configure the view for the selected state
         rightImageView.image = selected ? R.image.icon_cell_check()?.template : nil
     }
-
-    func bind(to viewModel: LanguageCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-    }
 }

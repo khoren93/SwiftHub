@@ -9,35 +9,27 @@
 import UIKit
 import RAMAnimatedTabBarController
 import Localize_Swift
+import RxSwift
 
 enum HomeTabBarItem: Int {
-    case search, news, profile, notifications, settings, login
+    case search, news, notifications, settings, login
 
-    func controller(with viewModel: ViewModel) -> UIViewController {
+    private func controller(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
         switch self {
         case .search:
-            let vc = R.storyboard.main.searchViewController()!
-            vc.viewModel = (viewModel as? SearchViewModel)!
+            let vc = SearchViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .news:
-            let vc = R.storyboard.main.eventsViewController()!
-            vc.viewModel = (viewModel as? EventsViewModel)!
-            return NavigationController(rootViewController: vc)
-        case .profile:
-            let vc = R.storyboard.main.userViewController()!
-            vc.viewModel = (viewModel as? UserViewModel)!
+            let vc = EventsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .notifications:
-            let vc = R.storyboard.main.notificationsViewController()!
-            vc.viewModel = (viewModel as? NotificationsViewModel)!
+            let vc = NotificationsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .settings:
-            let vc = R.storyboard.main.settingsViewController()!
-            vc.viewModel = (viewModel as? SettingsViewModel)!
+            let vc = SettingsViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         case .login:
-            let vc = R.storyboard.main.loginViewController()!
-            vc.viewModel = (viewModel as? LoginViewModel)!
+            let vc = LoginViewController(viewModel: viewModel, navigator: navigator)
             return NavigationController(rootViewController: vc)
         }
     }
@@ -46,7 +38,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: return R.image.icon_tabbar_search()
         case .news: return R.image.icon_tabbar_news()
-        case .profile: return R.image.icon_tabbar_profile()
         case .notifications: return R.image.icon_tabbar_activity()
         case .settings: return R.image.icon_tabbar_settings()
         case .login: return R.image.icon_tabbar_login()
@@ -57,7 +48,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: return R.string.localizable.homeTabBarSearchTitle.key.localized()
         case .news: return R.string.localizable.homeTabBarEventsTitle.key.localized()
-        case .profile: return R.string.localizable.homeTabBarProfileTitle.key.localized()
         case .notifications: return R.string.localizable.homeTabBarNotificationsTitle.key.localized()
         case .settings: return R.string.localizable.homeTabBarSettingsTitle.key.localized()
         case .login: return R.string.localizable.homeTabBarLoginTitle.key.localized()
@@ -69,7 +59,6 @@ enum HomeTabBarItem: Int {
         switch self {
         case .search: animation = RAMFlipLeftTransitionItemAnimations()
         case .news: animation = RAMBounceAnimation()
-        case .profile: animation = RAMBounceAnimation()
         case .notifications: animation = RAMBounceAnimation()
         case .settings: animation = RAMRightRotationAnimation()
         case .login: animation = RAMBounceAnimation()
@@ -80,8 +69,8 @@ enum HomeTabBarItem: Int {
         return animation
     }
 
-    func getController(with viewModel: ViewModel) -> UIViewController {
-        let vc = controller(with: viewModel)
+    func getController(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
+        let vc = controller(with: viewModel, navigator: navigator)
         let item = RAMAnimatedTabBarItem(title: title, image: image, tag: rawValue)
         item.animation = animation
         _ = themeService.rx
@@ -96,8 +85,20 @@ enum HomeTabBarItem: Int {
 
 class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
 
-    var viewModel: HomeTabBarViewModel!
+    var viewModel: HomeTabBarViewModel?
     var navigator: Navigator!
+
+    init(viewModel: ViewModel?, navigator: Navigator) {
+        self.viewModel = viewModel as? HomeTabBarViewModel
+        self.navigator = navigator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    let tabTapped = PublishSubject<UIGestureRecognizer>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,34 +114,59 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
 
+        // Fixed an issue when TabBar is switched quickly, the selected item is abnormal
+        tabTapped.throttle(DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] (gesture) in
+                self?.tabTapped(gesture)
+            }).disposed(by: rx.disposeBag)
+
         NotificationCenter.default
             .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
             .subscribe { [weak self] (event) in
                 self?.animatedItems.forEach({ (item) in
                     item.title = HomeTabBarItem(rawValue: item.tag)?.title
                 })
-                self?.viewControllers = self?.viewControllers
+                self?.setViewControllers(self?.viewControllers, animated: false)
+                self?.setSelectIndex(from: 0, to: self?.selectedIndex ?? 0)
             }.disposed(by: rx.disposeBag)
 
         themeService.rx
             .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
             .disposed(by: rx.disposeBag)
+
+        themeService.typeStream.delay(DispatchTimeInterval.milliseconds(700), scheduler: MainScheduler.instance).subscribe(onNext: { (theme) in
+            switch theme {
+            case .light(let color), .dark(let color):
+                self.changeSelectedColor(color.color, iconSelectedColor: color.color)
+            }
+        }).disposed(by: rx.disposeBag)
     }
 
     func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+
         let input = HomeTabBarViewModel.Input(whatsNewTrigger: rx.viewDidAppear.mapToVoid())
         let output = viewModel.transform(input: input)
 
         output.tabBarItems.drive(onNext: { [weak self] (tabBarItems) in
             if let strongSelf = self {
-                let controllers = tabBarItems.map { $0.getController(with: strongSelf.viewModel.viewModel(for: $0)) }
+                let controllers = tabBarItems.map { $0.getController(with: viewModel.viewModel(for: $0), navigator: strongSelf.navigator) }
                 strongSelf.setViewControllers(controllers, animated: false)
-                strongSelf.navigator.injectTabBarControllers(in: strongSelf)
             }
         }).disposed(by: rx.disposeBag)
 
-        output.openWhatsNew.drive(onNext: { [weak self](block) in
-            self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
+        output.openWhatsNew.drive(onNext: { [weak self] (block) in
+            if Configs.Network.useStaging == false {
+                self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
+            }
         }).disposed(by: rx.disposeBag)
+    }
+
+    override func tapHandler(_ gesture: UIGestureRecognizer) {
+        tabTapped.onNext(gesture)
+    }
+
+    func tabTapped(_ gesture: UIGestureRecognizer) {
+        super.tapHandler(gesture)
     }
 }

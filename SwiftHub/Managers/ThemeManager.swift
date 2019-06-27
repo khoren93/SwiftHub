@@ -35,14 +35,14 @@ protocol Theme {
 }
 
 struct LightTheme: Theme {
-    let primary = UIColor.white
-    let primaryDark = UIColor.flatWhite
-    var secondary = UIColor.flatRed
-    var secondaryDark = UIColor.flatRedDark
-    let separator = UIColor.flatWhite
-    let text = UIColor.flatBlack
-    let textGray = UIColor.flatGray
-    let background = UIColor.white
+    let primary = UIColor.Material.white
+    let primaryDark = UIColor.Material.grey200
+    var secondary = UIColor.Material.red
+    var secondaryDark = UIColor.Material.red900
+    let separator = UIColor.Material.grey50
+    let text = UIColor.Material.grey900
+    let textGray = UIColor.Material.grey
+    let background = UIColor.Material.white
     let statusBarStyle = UIStatusBarStyle.default
     let barStyle = UIBarStyle.default
     let keyboardAppearance = UIKeyboardAppearance.light
@@ -55,14 +55,14 @@ struct LightTheme: Theme {
 }
 
 struct DarkTheme: Theme {
-    let primary = UIColor.flatBlack
-    let primaryDark = UIColor.flatBlackDark
-    var secondary = UIColor.flatRed
-    var secondaryDark = UIColor.flatRedDark
-    let separator = UIColor.flatBlackDark
-    let text = UIColor.flatWhite
-    let textGray = UIColor.flatGray
-    let background = UIColor.flatBlack
+    let primary = UIColor.Material.grey800
+    let primaryDark = UIColor.Material.grey900
+    var secondary = UIColor.Material.red
+    var secondaryDark = UIColor.Material.red900
+    let separator = UIColor.Material.grey900
+    let text = UIColor.Material.grey50
+    let textGray = UIColor.Material.grey
+    let background = UIColor.Material.grey800
     let statusBarStyle = UIStatusBarStyle.lightContent
     let barStyle = UIBarStyle.black
     let keyboardAppearance = UIKeyboardAppearance.dark
@@ -75,49 +75,79 @@ struct DarkTheme: Theme {
 }
 
 enum ColorTheme: Int {
-    case red, green, blue, skyBlue, magenta, purple, watermelon, lime, pink
+    case red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green, lightGreen, lime, yellow, amber, orange, deepOrange, brown, gray, blueGray
 
-    static let allValues = [red, green, blue, skyBlue, magenta, purple, watermelon, lime, pink]
+    static let allValues = [red, pink, purple, deepPurple, indigo, blue, lightBlue, cyan, teal, green, lightGreen, lime, yellow, amber, orange, deepOrange, brown, gray, blueGray]
 
     var color: UIColor {
         switch self {
-        case .red: return UIColor.flatRed
-        case .green: return UIColor.flatGreen
-        case .blue: return UIColor.flatBlue
-        case .skyBlue: return UIColor.flatSkyBlue
-        case .magenta: return UIColor.flatMagenta
-        case .purple: return UIColor.flatPurple
-        case .watermelon: return UIColor.flatWatermelon
-        case .lime: return UIColor.flatLime
-        case .pink: return UIColor.flatPink
+        case .red: return UIColor.Material.red
+        case .pink: return UIColor.Material.pink
+        case .purple: return UIColor.Material.purple
+        case .deepPurple: return UIColor.Material.deepPurple
+        case .indigo: return UIColor.Material.indigo
+        case .blue: return UIColor.Material.blue
+        case .lightBlue: return UIColor.Material.lightBlue
+        case .cyan: return UIColor.Material.cyan
+        case .teal: return UIColor.Material.teal
+        case .green: return UIColor.Material.green
+        case .lightGreen: return UIColor.Material.lightGreen
+        case .lime: return UIColor.Material.lime
+        case .yellow: return UIColor.Material.yellow
+        case .amber: return UIColor.Material.amber
+        case .orange: return UIColor.Material.orange
+        case .deepOrange: return UIColor.Material.deepOrange
+        case .brown: return UIColor.Material.brown
+        case .gray: return UIColor.Material.grey
+        case .blueGray: return UIColor.Material.blueGrey
         }
     }
 
     var colorDark: UIColor {
         switch self {
-        case .red: return UIColor.flatRedDark
-        case .green: return UIColor.flatGreenDark
-        case .blue: return UIColor.flatBlueDark
-        case .skyBlue: return UIColor.flatSkyBlueDark
-        case .magenta: return UIColor.flatMagentaDark
-        case .purple: return UIColor.flatPurpleDark
-        case .watermelon: return UIColor.flatWatermelonDark
-        case .lime: return UIColor.flatLimeDark
-        case .pink: return UIColor.flatPinkDark
+        case .red: return UIColor.Material.red900
+        case .pink: return UIColor.Material.pink900
+        case .purple: return UIColor.Material.purple900
+        case .deepPurple: return UIColor.Material.deepPurple900
+        case .indigo: return UIColor.Material.indigo900
+        case .blue: return UIColor.Material.blue900
+        case .lightBlue: return UIColor.Material.lightBlue900
+        case .cyan: return UIColor.Material.cyan900
+        case .teal: return UIColor.Material.teal900
+        case .green: return UIColor.Material.green900
+        case .lightGreen: return UIColor.Material.lightGreen900
+        case .lime: return UIColor.Material.lime900
+        case .yellow: return UIColor.Material.yellow900
+        case .amber: return UIColor.Material.amber900
+        case .orange: return UIColor.Material.orange900
+        case .deepOrange: return UIColor.Material.deepOrange900
+        case .brown: return UIColor.Material.brown900
+        case .gray: return UIColor.Material.grey900
+        case .blueGray: return UIColor.Material.blueGrey900
         }
     }
 
     var title: String {
         switch self {
         case .red: return "Red"
-        case .green: return "Green"
-        case .blue: return "Blue"
-        case .skyBlue: return "Sky Blue"
-        case .magenta: return "Magenta"
-        case .purple: return "Purple"
-        case .watermelon: return "Watermelon"
-        case .lime: return "Lime"
         case .pink: return "Pink"
+        case .purple: return "Purple"
+        case .deepPurple: return "Deep Purple"
+        case .indigo: return "Indigo"
+        case .blue: return "Blue"
+        case .lightBlue: return "Light Blue"
+        case .cyan: return "Cyan"
+        case .teal: return "Teal"
+        case .green: return "Green"
+        case .lightGreen: return "Light Green"
+        case .lime: return "Lime"
+        case .yellow: return "Yellow"
+        case .amber: return "Amber"
+        case .orange: return "Orange"
+        case .deepOrange: return "Deep Orange"
+        case .brown: return "Brown"
+        case .gray: return "Gray"
+        case .blueGray: return "Blue Gray"
         }
     }
 }
@@ -278,13 +308,13 @@ extension Reactive where Base: KafkaRefreshDefaults {
 
 public extension Reactive where Base: UISwitch {
 
-    public var onTintColor: Binder<UIColor?> {
+    var onTintColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.onTintColor = attr
         }
     }
 
-    public var thumbTintColor: Binder<UIColor?> {
+    var thumbTintColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
             view.thumbTintColor = attr
         }

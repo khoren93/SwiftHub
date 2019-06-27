@@ -1,0 +1,6 @@
+//"01_search_repository_screen" = "搜索";
+//"02_repository_details_screen" = "处置库";
+//"03_settings_screen" = "设置";
+"01_search_repository_screen" = "SEARCH";
+"02_repository_details_screen" = "REPOSITORY";
+"03_settings_screen" = "SETTINGS";

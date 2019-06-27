@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AttributedLib
 
 class NavigationController: UINavigationController {
 

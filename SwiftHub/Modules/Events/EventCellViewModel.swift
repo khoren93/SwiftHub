@@ -10,14 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class EventCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<String>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class EventCellViewModel: DefaultTableViewCellViewModel {
 
     let event: Event
 
@@ -25,6 +18,7 @@ class EventCellViewModel {
 
     init(with event: Event) {
         self.event = event
+        super.init()
 
         let actorName = event.actor?.login ?? ""
         var badgeImage: UIImage?
@@ -47,6 +41,7 @@ class EventCellViewModel {
         case .issues:
             let payload = event.payload as? IssuesPayload
             actionText = [(payload?.action ?? ""), "issue", "in"].joined(separator: " ")
+            body = payload?.issue?.title ?? ""
             badgeImage = R.image.icon_cell_badge_issue()
         case .member:
             let payload = event.payload as? MemberPayload
@@ -55,6 +50,7 @@ class EventCellViewModel {
         case .pullRequest:
             let payload = event.payload as? PullRequestPayload
             actionText = [(payload?.action ?? ""), "pull request", "#\(payload?.number ?? 0)", "in"].joined(separator: " ")
+            body = payload?.pullRequest?.title ?? ""
             badgeImage = R.image.icon_cell_badge_pull_request()
         case .pullRequestReviewComment:
             let payload = event.payload as? PullRequestReviewCommentPayload
@@ -68,6 +64,7 @@ class EventCellViewModel {
         case .release:
             let payload = event.payload as? ReleasePayload
             actionText = [payload?.action ?? "", "release", payload?.release?.name ?? "", "in"].joined(separator: " ")
+            body = payload?.release?.body ?? ""
             badgeImage = R.image.icon_cell_badge_tag()
         case .star:
             actionText = "starred"
@@ -77,16 +74,16 @@ class EventCellViewModel {
 
         let repoName = event.repository?.fullname ?? ""
 
-        title = Driver.just([actorName, actionText, repoName].joined(separator: " "))
-        detail = Driver.just("\(event.createdAt?.toRelative() ?? "")")
-        secondDetail = Driver.just(body)
-        imageUrl = Driver.just(event.actor?.avatarUrl?.url)
-        badge = Driver.just(badgeImage?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        title.accept([actorName, actionText, repoName].joined(separator: " "))
+        detail.accept(event.createdAt?.toRelative())
+        secondDetail.accept(body)
+        imageUrl.accept(event.actor?.avatarUrl)
+        badge.accept(badgeImage?.template)
+        badgeColor.accept(UIColor.Material.green)
     }
 }
 
-extension EventCellViewModel: Equatable {
+extension EventCellViewModel {
     static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
         return lhs.event == rhs.event
     }

@@ -13,14 +13,28 @@ import DZNEmptyDataSet
 import NVActivityIndicatorView
 import Hero
 import Localize_Swift
+import GoogleMobileAds
 
 class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable {
 
+    var viewModel: ViewModel?
     var navigator: Navigator!
 
+    init(viewModel: ViewModel?, navigator: Navigator) {
+        self.viewModel = viewModel
+        self.navigator = navigator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(nibName: nil, bundle: nil)
+    }
+
     let isLoading = BehaviorRelay(value: false)
+    let error = PublishSubject<ApiError>()
 
     var automaticallyAdjustsLeftBarButtonItem = true
+    var canOpenFlex = true
 
     var navigationTitle = "" {
         didSet {
@@ -28,7 +42,11 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         }
     }
 
+    let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+
+    let emptyDataSetButtonTap = PublishSubject<Void>()
     var emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
+    var emptyDataSetDescription = ""
     var emptyDataSetImage = R.image.image_no_result()
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
 
@@ -55,18 +73,20 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         return view
     }()
 
+    lazy var bannerView: GADBannerView = {
+        let view = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        view.rootViewController = self
+        view.adUnitID = Keys.adMob.apiKey
+        view.hero.id = "BannerView"
+        return view
+    }()
+
     lazy var contentView: View = {
         let view = View()
         //        view.hero.id = "CententView"
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.edges.equalTo(self.view.safeAreaLayoutGuide)
-            } else {
-                make.left.right.equalToSuperview()
-                make.top.equalTo(self.topLayoutGuide.snp.bottom)
-                make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-            }
+            make.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
         return view
     }()
@@ -74,6 +94,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     lazy var stackView: StackView = {
         let subviews: [UIView] = []
         let view = StackView(arrangedSubviews: subviews)
+        view.spacing = 0
         self.contentView.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
@@ -142,10 +163,13 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateUI()
+
+        logResourcesCount()
     }
 
     deinit {
         logDebug("\(type(of: self)): Deinited")
+        logResourcesCount()
     }
 
     override public func didReceiveMemoryWarning() {
@@ -158,17 +182,27 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
 
+        bannerView.load(GADRequest())
+        LibsManager.shared.bannersEnabled.asDriver().drive(onNext: { [weak self] (enabled) in
+            guard let self = self else { return }
+            self.bannerView.removeFromSuperview()
+            self.stackView.removeArrangedSubview(self.bannerView)
+            if enabled {
+                self.stackView.addArrangedSubview(self.bannerView)
+            }
+        }).disposed(by: rx.disposeBag)
+
         languageChanged.subscribe(onNext: { [weak self] () in
             self?.emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
         }).disposed(by: rx.disposeBag)
 
         motionShakeEvent.subscribe(onNext: { () in
-            let theme = themeService.theme.toggled()
-            themeService.set(theme)
+            let theme = themeService.type.toggled()
+            themeService.switch(theme)
         }).disposed(by: rx.disposeBag)
 
         themeService.rx
-            .bind({ $0.primary }, to: view.rx.backgroundColor)
+            .bind({ $0.primaryDark }, to: view.rx.backgroundColor)
             .bind({ $0.secondary }, to: [backBarButton.rx.tintColor, closeBarButton.rx.tintColor])
             .bind({ $0.text }, to: self.rx.emptyDataSetImageTintColorBinder)
             .disposed(by: rx.disposeBag)
@@ -230,7 +264,7 @@ extension ViewController {
     }
 
     @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
-        if swipeRecognizer.state == .recognized {
+        if swipeRecognizer.state == .recognized, canOpenFlex {
             LibsManager.shared.showFlex()
         }
     }
@@ -259,6 +293,10 @@ extension ViewController: DZNEmptyDataSetSource {
         return NSAttributedString(string: emptyDataSetTitle)
     }
 
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: emptyDataSetDescription)
+    }
+
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return emptyDataSetImage
     }
@@ -284,5 +322,9 @@ extension ViewController: DZNEmptyDataSetDelegate {
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        emptyDataSetButtonTap.onNext(())
     }
 }

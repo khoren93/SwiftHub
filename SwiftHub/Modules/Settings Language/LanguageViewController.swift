@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.languageCell.identifier
 
 class LanguageViewController: TableViewController {
 
-    var viewModel: LanguageViewModel!
-
     lazy var saveButtonItem: BarButtonItem = {
         let view = BarButtonItem(title: "",
                                  style: .plain, target: self, action: nil)
@@ -45,6 +43,7 @@ class LanguageViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? LanguageViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()),
                                     languageChanged.asObservable()).merge()

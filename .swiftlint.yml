@@ -9,11 +9,14 @@ opt_in_rules: # some rules are only opt-in
 # swiftlint rules
 
 included: # paths to include during linting. `--path` is ignored if present.
-- SwiftHub
+  - SwiftHub
+  - SwiftHubTests
+  - SwiftHubUITests
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - SwiftHub/Resources/R.generated.swift
+  - SwiftHub/Networking/GraphQL/API.swift
 
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level
@@ -26,8 +29,8 @@ force_try:
 line_length: 300
 
 function_body_length:
-  - 200 # warning
-  - 300 # error
+  - 300 # warning
+  - 400 # error
 
 function_parameter_count:
   - 10 # warning

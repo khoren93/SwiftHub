@@ -9,10 +9,31 @@
 import Foundation
 import ObjectMapper
 
+enum TokenType {
+    case basic(token: String)
+    case oAuth(token: String)
+    case unauthorized
+
+    var description: String {
+        switch self {
+        case .basic: return "basic"
+        case .oAuth: return "OAuth"
+        case .unauthorized: return "unauthorized"
+        }
+    }
+}
+
 struct Token: Mappable {
 
-    var basicToken: String?
     var isValid = false
+
+    // Basic
+    var basicToken: String?
+
+    // OAuth2
+    var accessToken: String?
+    var tokenType: String?
+    var scope: String?
 
     init?(map: Map) {}
     init() {}
@@ -22,7 +43,20 @@ struct Token: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        basicToken <- map["basic_token"]
         isValid <- map["valid"]
+        basicToken <- map["basic_token"]
+        accessToken <- map["access_token"]
+        tokenType <- map["token_type"]
+        scope <- map["scope"]
+    }
+
+    func type() -> TokenType {
+        if let token = basicToken {
+            return .basic(token: token)
+        }
+        if let token = accessToken {
+            return .oAuth(token: token)
+        }
+        return .unauthorized
     }
 }

@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios setup
 ```
 Install all libraries
+### ios update
+```
+fastlane ios update
+```
+Update all tools and pods
 ### ios test
 ```
 fastlane ios test
@@ -35,7 +40,12 @@ Generate new localized screenshots
 ```
 fastlane ios beta
 ```
-
+Submit a new beta build to apple TestFlight
+### ios release
+```
+fastlane ios release
+```
+Deploy a new version to the App Store
 ### ios increment_build
 ```
 fastlane ios increment_build

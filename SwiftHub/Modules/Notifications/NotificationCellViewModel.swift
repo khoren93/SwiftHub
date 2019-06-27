@@ -10,11 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class NotificationCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let imageUrl: Driver<URL?>
+class NotificationCellViewModel: DefaultTableViewCellViewModel {
 
     let notification: Notification
 
@@ -22,17 +18,16 @@ class NotificationCellViewModel {
 
     init(with notification: Notification) {
         self.notification = notification
-
+        super.init()
         let actionText = notification.subject?.title ?? ""
         let repoName = notification.repository?.fullname ?? ""
-
-        title = Driver.just([repoName, actionText].joined(separator: "\n"))
-        detail = Driver.just("\(notification.updatedAt?.toRelative() ?? "")")
-        imageUrl = Driver.just(notification.repository?.owner?.avatarUrl?.url)
+        title.accept([repoName, actionText].joined(separator: "\n"))
+        detail.accept(notification.updatedAt?.toRelative())
+        imageUrl.accept(notification.repository?.owner?.avatarUrl)
     }
 }
 
-extension NotificationCellViewModel: Equatable {
+extension NotificationCellViewModel {
     static func == (lhs: NotificationCellViewModel, rhs: NotificationCellViewModel) -> Bool {
         return lhs.notification == rhs.notification
     }

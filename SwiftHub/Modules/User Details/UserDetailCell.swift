@@ -8,28 +8,17 @@
 
 import UIKit
 
-class UserDetailCell: DetailedTableViewCell {
+class UserDetailCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
         leftImageView.contentMode = .center
+        leftImageView.snp.remakeConstraints { (make) in
+            make.size.equalTo(40)
+        }
         detailLabel.isHidden = true
         secondDetailLabel.textAlignment = .right
         textsStackView.axis = .horizontal
         textsStackView.distribution = .fillEqually
-        themeService.rx
-            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
-            .disposed(by: rx.disposeBag)
-    }
-
-    func bind(to viewModel: UserDetailCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(secondDetailLabel.rx.text).disposed(by: rx.disposeBag)
-
-        viewModel.hidesDisclosure.drive(rightImageView.rx.isHidden).disposed(by: rx.disposeBag)
-
-        viewModel.image.drive(onNext: { [weak self] (image) in
-            self?.leftImageView.image = image?.template
-        }).disposed(by: rx.disposeBag)
     }
 }

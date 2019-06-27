@@ -37,9 +37,6 @@ class ImageView: UIImageView {
 
         hero.modifiers = [.arc]
 
-        // Kingfisher
-        kf.indicatorType = .activity
-
         updateUI()
     }
 

@@ -10,13 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import AttributedLib
+import BonMot
+import FloatingPanel
 
 private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
 
 class RepositoryViewController: TableViewController {
-
-    var viewModel: RepositoryViewModel!
 
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
@@ -35,6 +34,13 @@ class RepositoryViewController: TableViewController {
         view.borderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
         view.cornerRadius = 20
+        view.hero.id = "ActionButtonId"
+        return view
+    }()
+
+    lazy var detailLabel: Label = {
+        var view = Label()
+        view.numberOfLines = 0
         return view
     }()
 
@@ -51,8 +57,9 @@ class RepositoryViewController: TableViewController {
             make.right.equalTo(self.ownerImageView)
             make.size.equalTo(40)
         })
-        let subviews: [UIView] = [headerView]
+        let subviews: [UIView] = [headerView, self.detailLabel]
         let view = StackView(arrangedSubviews: subviews)
+        view.axis = .horizontal
         return view
     }()
 
@@ -61,8 +68,6 @@ class RepositoryViewController: TableViewController {
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .horizontal
-        stackView.alignment = .center
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(self.inset)
@@ -93,6 +98,9 @@ class RepositoryViewController: TableViewController {
         return view
     }()
 
+    var panelContent: WebViewController!
+    let panel = FloatingPanelController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -104,18 +112,27 @@ class RepositoryViewController: TableViewController {
 
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
+            .bind({ $0.text }, to: detailLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = rightBarButton
+
+        panelContent = WebViewController(viewModel: nil, navigator: navigator)
+        panel.set(contentViewController: panelContent)
+        panel.track(scrollView: panelContent.webView.scrollView)
+        panel.delegate = self
+
         emptyDataSetTitle = ""
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
         tableView.register(R.nib.repositoryDetailCell)
+        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? RepositoryViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = RepositoryViewModel.Input(headerRefresh: refresh,
@@ -133,18 +150,22 @@ class RepositoryViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<RepositorySection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .languageItem(let viewModel),
+            case .parentItem(let viewModel),
+                 .languageItem(let viewModel),
                  .sizeItem(let viewModel),
                  .createdItem(let viewModel),
                  .updatedItem(let viewModel),
                  .homepageItem(let viewModel),
                  .issuesItem(let viewModel),
                  .commitsItem(let viewModel),
+                 .branchesItem(let viewModel),
+                 .releasesItem(let viewModel),
                  .pullRequestsItem(let viewModel),
                  .eventsItem(let viewModel),
+                 .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
-                 .readmeItem(let viewModel),
-                 .sourceItem(let viewModel):
+                 .sourceItem(let viewModel),
+                 .starHistoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -160,43 +181,56 @@ class RepositoryViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .parentItem:
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+                }
             case .homepageItem:
-                if let url = self?.viewModel.repository.value.homepage?.url {
+                if let url = viewModel.repository.value.homepage?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
             case .issuesItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? IssuesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? IssuesViewModel {
                     self?.navigator.show(segue: .issues(viewModel: viewModel), sender: self)
                 }
             case .commitsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? CommitsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? CommitsViewModel {
                     self?.navigator.show(segue: .commits(viewModel: viewModel), sender: self)
                 }
+            case .branchesItem:
+                if let viewModel = viewModel.viewModel(for: item) as? BranchesViewModel {
+                    self?.navigator.show(segue: .branches(viewModel: viewModel), sender: self)
+                }
+            case .releasesItem:
+                if let viewModel = viewModel.viewModel(for: item) as? ReleasesViewModel {
+                    self?.navigator.show(segue: .releases(viewModel: viewModel), sender: self)
+                }
             case .pullRequestsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? PullRequestsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? PullRequestsViewModel {
                     self?.navigator.show(segue: .pullRequests(viewModel: viewModel), sender: self)
                 }
             case .eventsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
                 }
+            case .notificationsItem:
+                if let viewModel = viewModel.viewModel(for: item) as? NotificationsViewModel {
+                    self?.navigator.show(segue: .notifications(viewModel: viewModel), sender: self)
+                }
             case .contributorsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UsersViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UsersViewModel {
                     self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
                 }
-            case .readmeItem:
-                if let url = self?.viewModel.readme.value?.htmlUrl?.url {
-                    self?.navigator.show(segue: .webController(url), sender: self)
-                    if let fullname = self?.viewModel.repository.value.fullname {
-                        analytics.log(.readme(fullname: fullname))
-                    }
-                }
             case .sourceItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? ContentsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? ContentsViewModel {
                     self?.navigator.show(segue: .contents(viewModel: viewModel), sender: self)
                     if let fullname = viewModel.repository.value.fullname {
                         analytics.log(.source(fullname: fullname))
                     }
+                }
+            case .starHistoryItem:
+                if let url = viewModel.starHistoryUrl() {
+                    self?.navigator.show(segue: .webController(url), sender: self)
                 }
             default:
                 self?.deselectSelectedRow()
@@ -206,6 +240,8 @@ class RepositoryViewController: TableViewController {
         output.name.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)
+
+        output.description.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
@@ -241,9 +277,7 @@ class RepositoryViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.openInWebSelected.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.navigator.show(segue: .webController(url), sender: self, transition: .modal)
-            }
+            self?.navigator.show(segue: .webController(url), sender: self)
         }).disposed(by: rx.disposeBag)
 
         output.repositoriesSelected.drive(onNext: { [weak self] (viewModel) in
@@ -253,24 +287,40 @@ class RepositoryViewController: TableViewController {
         output.usersSelected.drive(onNext: { [weak self] (viewModel) in
             self?.navigator.show(segue: .users(viewModel: viewModel), sender: self)
         }).disposed(by: rx.disposeBag)
+
+        viewModel.readme.subscribe(onNext: { [weak self] (content) in
+            guard let self = self else { return }
+            if let url = content?.htmlUrl?.url {
+                self.panelContent.load(url: url)
+                self.panel.addPanel(toParent: self, belowView: nil, animated: true)
+            } else {
+                self.panel.removePanelFromParent(animated: false)
+            }
+        }).disposed(by: rx.disposeBag)
+
+        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
+            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
+        }).disposed(by: rx.disposeBag)
     }
 
     func attributetText(title: String, value: Int) -> NSAttributedString {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
+        let titleText = title.styled(with: .color(.white),
+                                     .font(.boldSystemFont(ofSize: 12)),
+                                     .alignment(.center))
+        let valueText = value.string.styled(with: .color(.white),
+                                            .font(.boldSystemFont(ofSize: 18)),
+                                            .alignment(.center))
+        return NSAttributedString.composed(of: [
+            titleText, Special.nextLine,
+            valueText
+        ])
+    }
+}
 
-        let valueAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 18))
-                .paragraphStyle(paragraph)
+extension RepositoryViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
+        if let inset = vc.layout.insetFor(position: vc.position) {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0)
         }
-
-        let titleAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 12))
-                .paragraphStyle(paragraph)
-        }
-
-        return "\(value)\n".at.attributed(with: valueAttributes) + title.at.attributed(with: titleAttributes)
     }
 }

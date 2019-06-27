@@ -8,20 +8,23 @@
 
 import UIKit
 
+// All keys are demonstrative and used for the test.
 enum Keys {
-    case github, mixpanel
+    case github, mixpanel, adMob
 
     var apiKey: String {
         switch self {
-        case .github: return ""
+        case .github: return "5a39979251c0452a9476bd45c82a14d8e98c3fb3"
         case .mixpanel: return "7e428bc407e3612f6d3a4c8f50fd4643"
+        case .adMob: return "ca-app-pub-3940256099942544/2934735716"
         }
     }
 
     var appId: String {
         switch self {
-        case .github: return ""
+        case .github: return "00cbdbffb01ec72e280a"
         case .mixpanel: return ""
+        case .adMob: return ""  // See GADApplicationIdentifier in Info.plist
         }
     }
 }
@@ -29,21 +32,18 @@ enum Keys {
 struct Configs {
 
     struct App {
+        static let githubUrl = "https://github.com/khoren93/SwiftHub"
         static let bundleIdentifier = "com.public.SwiftHub"
-        static let IsTesting = true
-        static let NavigationTitleFont = UIFont.navigationTitleFont()
     }
 
     struct Network {
-        static let useStaging = false
+        static let useStaging = false  // set true for tests and generating screenshots with fastlane
         static let loggingEnabled = false
-
-        static var githubBaseUrl: String {
-            return "https://api.github.com"
-        }
-        static var trendingGithubBaseUrl: String {
-            return "https://github-trending-api.now.sh"
-        }
+        static let githubBaseUrl = "https://api.github.com"
+        static let trendingGithubBaseUrl = "https://github-trending-api.now.sh"
+        static let githistoryBaseUrl = "https://github.githistory.xyz"
+        static let starHistoryBaseUrl = "https://star-history.t9t.io"
+        static let profileSummaryBaseUrl = "https://profile-summary-for-github.com"
     }
 
     struct BaseDimensions {
@@ -53,10 +53,10 @@ struct Configs {
         static let navBarWithStatusBarHeight: CGFloat = 64
         static let cornerRadius: CGFloat = 5
         static let borderWidth: CGFloat = 1
-        static let buttonHeight: CGFloat = 50
+        static let buttonHeight: CGFloat = 40
         static let textFieldHeight: CGFloat = 40
-        static let tableRowHeight: CGFloat = 50
-        static let segmentedControlHeight: CGFloat = 30
+        static let tableRowHeight: CGFloat = 40
+        static let segmentedControlHeight: CGFloat = 36
     }
 
     struct Path {
@@ -65,6 +65,6 @@ struct Configs {
     }
 
     struct UserDefaultsKeys {
-
+        static let bannersEnabled = "BannersEnabled"
     }
 }

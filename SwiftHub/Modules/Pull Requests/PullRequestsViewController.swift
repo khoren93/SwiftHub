@@ -33,13 +33,14 @@ enum PullRequestSegments: Int {
 
 class PullRequestsViewController: TableViewController {
 
-    var viewModel: PullRequestsViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
         let items = [IssueSegments.open.title,
                      IssueSegments.closed.title]
-        let view = SegmentedControl(items: items)
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -59,8 +60,9 @@ class PullRequestsViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? PullRequestsViewModel else { return }
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { PullRequestSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { PullRequestSegments(rawValue: $0)! }).merge()
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, segmentSelected.mapToVoid().skip(1)).merge()
         let input = PullRequestsViewModel.Input(headerRefresh: refresh,
                                                 footerRefresh: footerRefreshTrigger,
@@ -81,10 +83,8 @@ class PullRequestsViewController: TableViewController {
                 cell.bind(to: viewModel)
             }.disposed(by: rx.disposeBag)
 
-        output.pullRequestSelected.drive(onNext: { [weak self] (url) in
-            if let url  = url {
-                self?.navigator.show(segue: .webController(url), sender: self)
-            }
+        output.pullRequestSelected.drive(onNext: { [weak self] (viewModel) in
+            self?.navigator.show(segue: .pullRequestDetails(viewModel: viewModel), sender: self, transition: .modal)
         }).disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in

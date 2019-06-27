@@ -14,19 +14,22 @@ enum RepositorySection {
 }
 
 enum RepositorySectionItem {
+    case parentItem(viewModel: RepositoryDetailCellViewModel)
     case languageItem(viewModel: RepositoryDetailCellViewModel)
     case sizeItem(viewModel: RepositoryDetailCellViewModel)
     case createdItem(viewModel: RepositoryDetailCellViewModel)
     case updatedItem(viewModel: RepositoryDetailCellViewModel)
-
     case homepageItem(viewModel: RepositoryDetailCellViewModel)
     case issuesItem(viewModel: RepositoryDetailCellViewModel)
-    case commitsItem(viewModel: RepositoryDetailCellViewModel)
     case pullRequestsItem(viewModel: RepositoryDetailCellViewModel)
-    case eventsItem(viewModel: RepositoryDetailCellViewModel)
+    case commitsItem(viewModel: RepositoryDetailCellViewModel)
+    case branchesItem(viewModel: RepositoryDetailCellViewModel)
+    case releasesItem(viewModel: RepositoryDetailCellViewModel)
     case contributorsItem(viewModel: RepositoryDetailCellViewModel)
-    case readmeItem(viewModel: RepositoryDetailCellViewModel)
+    case eventsItem(viewModel: RepositoryDetailCellViewModel)
+    case notificationsItem(viewModel: RepositoryDetailCellViewModel)
     case sourceItem(viewModel: RepositoryDetailCellViewModel)
+    case starHistoryItem(viewModel: RepositoryDetailCellViewModel)
 }
 
 extension RepositorySection: SectionModelType {

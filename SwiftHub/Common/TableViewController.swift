@@ -45,12 +45,10 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         super.makeUI()
 
         stackView.spacing = 0
-        stackView.addArrangedSubview(tableView)
+        stackView.insertArrangedSubview(tableView, at: 0)
 
         tableView.bindGlobalStyle(forHeadRefreshHandler: { [weak self] in
-            if self?.tableView.headRefreshControl.isTriggeredRefreshByUser == false {
-                self?.headerRefreshTrigger.onNext(())
-            }
+            self?.headerRefreshTrigger.onNext(())
         })
 
         tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in
@@ -65,6 +63,18 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         let updateEmptyDataSet = Observable.of(isLoading.mapToVoid().asObservable(), emptyDataSetImageTintColor.mapToVoid(), languageChanged.asObservable()).merge()
         updateEmptyDataSet.subscribe(onNext: { [weak self] () in
             self?.tableView.reloadEmptyDataSet()
+        }).disposed(by: rx.disposeBag)
+
+        error.subscribe(onNext: { [weak self] (error) in
+            var title = ""
+            var description = ""
+            let image = R.image.icon_toast_warning()
+            switch error {
+            case .serverError(let response):
+                title = response.message ?? ""
+                description = response.detail()
+            }
+            self?.tableView.makeToast(description, title: title, image: image)
         }).disposed(by: rx.disposeBag)
     }
 

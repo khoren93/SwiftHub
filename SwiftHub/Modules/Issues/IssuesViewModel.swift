@@ -25,7 +25,7 @@ class IssuesViewModel: ViewModel, ViewModelType {
         let imageUrl: Driver<URL?>
         let items: BehaviorRelay<[IssueCellViewModel]>
         let userSelected: Driver<UserViewModel>
-        let issueSelected: Driver<URL?>
+        let issueSelected: Driver<IssueViewModel>
     }
 
     let repository: BehaviorRelay<Repository>
@@ -79,8 +79,9 @@ class IssuesViewModel: ViewModel, ViewModelType {
             repository.owner?.avatarUrl?.url
         }).asDriver(onErrorJustReturn: nil)
 
-        let issueSelected = input.selection.map { (cellViewModel) -> URL? in
-            cellViewModel.issue.htmlUrl?.url
+        let issueSelected = input.selection.map { (cellViewModel) -> IssueViewModel in
+            let viewModel = IssueViewModel(repository: self.repository.value, issue: cellViewModel.issue, provider: self.provider)
+            return viewModel
         }
 
         return Output(navigationTitle: navigationTitle,
@@ -93,7 +94,7 @@ class IssuesViewModel: ViewModel, ViewModelType {
     func request() -> Observable<[IssueCellViewModel]> {
         let fullname = repository.value.fullname ?? ""
         let state = segment.value.state.rawValue
-        return provider.repositoryIssues(fullname: fullname, state: state, page: page)
+        return provider.issues(fullname: fullname, state: state, page: page)
             .trackActivity(loading)
             .trackError(error)
             .map { $0.map({ (issue) -> IssueCellViewModel in

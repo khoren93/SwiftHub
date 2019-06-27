@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.repoLanguageCell
 
 class LanguagesViewController: TableViewController {
 
-    var viewModel: LanguagesViewModel!
-
     lazy var saveButtonItem: BarButtonItem = {
         let view = BarButtonItem(title: "",
                                  style: .plain, target: self, action: nil)
@@ -60,6 +58,7 @@ class LanguagesViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? LanguagesViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()),
                                     languageChanged.asObservable()).merge()
@@ -86,7 +85,7 @@ class LanguagesViewController: TableViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        output.selectedRow.delay(0.3).drive(onNext: { [weak self] (indexPath) in
+        output.selectedRow.delay(DispatchTimeInterval.milliseconds(300)).drive(onNext: { [weak self] (indexPath) in
             self?.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         }).disposed(by: rx.disposeBag)
 

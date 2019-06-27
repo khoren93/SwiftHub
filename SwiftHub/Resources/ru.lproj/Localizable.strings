@@ -19,6 +19,7 @@
 "Common.Save" = "Сохранить";
 "Common.Delete" = "Удалить";
 "Common.Search" = "Поиск";
+"Common.Success" = "Успешно";
 "Common.Error" = "Ошибка";
 "Common.NoResults" = "Нет результатов";
 /* Home TabBar */
@@ -28,6 +29,8 @@
 "Home.TabBar.Login.Title" = "Вход";
 "Home.TabBar.Notifications.Title" = "Уведомления";
 "Home.TabBar.Settings.Title" = "Настройки";
+/* Initial */
+"Initial.NoResults" = "Добро пожаловать в SwiftHub!";
 /* Events */
 "Events.Navigation.Title" = "События";
 "Events.ReceivedSegment.Title" = "Получено";
@@ -35,19 +38,20 @@
 /* Login */
 //"Login.Navigation.Title" = "Вход";
 "Login.BasicSegment.Title" = "Базовое";
-"Login.oAuthSegment.Title" = "oAuth";
+"Login.OAuthSegment.Title" = "OAuth";
 "Login.LoginTextField.Placeholder" = "логин";
 "Login.PasswordTextField.Placeholder" = "пароль";
 "Login.BasicLoginButton.Title" = "Вход";
 "Login.TitleLabel.Text" = "Добро пожаловать в SwiftHub";
-"Login.DetailLabel.Text" = "Github iOS клиент с открытым исходным кодом, написанный на архитектуре RxSwift и MVVM.";
-"Login.oAuthloginButton.Title" = "Войти с Github";
+"Login.DetailLabel.Text" = "Для запросов API, использующих обычную аутентификацию или OAuth, вы можете делать до 5000 запросов в час. \n\nДля неаутентифицированных запросов ограничение скорости допускает до 60 запросов в час.";
+"Login.OAuthloginButton.Title" = "Войти с Github";
 "Login.LoginFailed.Description" = "Пожалуйста, проверьте свой логин или пароль";
 /* Notifications */
 "Notifications.Navigation.Title" = "Уведомления";
 "Notifications.UnreadSegment.Title" = "Новые";
 "Notifications.ParticipatingSegment.Title" = "Участвующий";
 "Notifications.AllSegment.Title" = "Все";
+"Notifications.MarkAsRead.Success" = "Все уведомления помечены как прочитанные";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Репозитории";
 "Repositories.StarredNavigation.Title" = "Избранные";
@@ -57,18 +61,23 @@
 "Repository.WatchersButton.Title" = "Наблюдатели";
 "Repository.StarsButton.Title" = "Звезды";
 "Repository.ForksButton.Title" = "Разветвление";
+"Repository.ParentCell.Title" = "Разветвленный из";
 "Repository.LanguageCell.Title" = "Язык";
 "Repository.SizeCell.Title" = "Размер";
 "Repository.CreatedCell.Title" = "Создана";
 "Repository.UpdatedCell.Title" = "Обновлено";
 "Repository.HomepageCell.Title" = "Вебсайт";
 "Repository.IssuesCell.Title" = "Проблемы";
-"Repository.CommitsCell.Title" = "Commits";
+"Repository.CommitsCell.Title" = "Коммиты";
 "Repository.PullRequestsCell.Title" = "Запросы";
+"Repository.BranchesCell.Title" = "Ветви";
+"Repository.ReleasesCell.Title" = "Релизы";
 "Repository.EventsCell.Title" = "События";
+"Repository.NotificationsCell.Title" = "Мои уведомления";
 "Repository.ContributorsCell.Title" = "Вкладчики";
 "Repository.ReadmeCell.Title" = "Прочти меня";
 "Repository.SourceCell.Title" = "Исходный код";
+"Repository.StarsHistoryCell.Title" = "История звезд";
 /* Issues */
 "Issues.Navigation.Title" = "Проблемы";
 "Issues.OpenSegment.Title" = "Открыто";
@@ -81,16 +90,38 @@
 "Search.DailySegment.Title" = "За день";
 "Search.WeeklySegment.Title" = "За недельку";
 "Search.MonthlySegment.Title" = "За месяц";
+"Search.TrendingSegment.Title" = "Тренды";
+"Search.SearchSegment.Title" = "Поиск";
 "Search.TrendingSection.Title" = "Тренды";
 "Search.TrendingSectionWithLanguage.Title" = "Популярные результаты для %@";
 "Search.SearchSection.Title" = "Поиск";
 "Search.SearchSectionWithLanguage.Title" = "Результаты поиска по %@";
+"Search.RepositoriesTotalCount.Title" = "%@ репозиторий";
+"Search.UsersTotalCount.Title" = "%@ пользователей";
+"Search.SortRepositories.BestMatch.Title" = "Лучшее совпадение";
+"Search.SortRepositories.MostStars.Title" = "Большинство звезд";
+"Search.SortRepositories.FewestStars.Title" = "Наименее звезд";
+"Search.SortRepositories.MostForks.Title" = "Большинство вилок";
+"Search.SortRepositories.FewestForks.Title" = "Наименее вилок";
+"Search.SortRepositories.RecentlyUpdated.Title" = "Недавно обновлено";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "Последнее обновление";
+"Search.SortUsers.BestMatch.Title" = "Лучшее совпадение";
+"Search.SortUsers.MostFollowers.Title" = "Большинство подписчиков";
+"Search.SortUsers.FewestFollowers.Title" = "Наименее подписчиков";
+"Search.SortUsers.MostRecentlyJoined.Title" = "Недавно присоединенился";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "Наименее недавно присоединился";
+"Search.SortUsers.MostRepositories.Title" = "Большинство репозиториев";
+"Search.SortUsers.FewestRepositories.Title" = "Наименее репозиториев";
 /* Settings */
 "Settings.Navigation.Title" = "Настройки";
+"Settings.AccountSection.Title" = "Учетная Запись";
+"Settings.ProjectsSection.Title" = "Мои Проекты";
 "Settings.PreferencesSection.Title" = "Параметры";
+"Settings.Banner.Title" = "Реклама включена";
 "Settings.NightMode.Title" = "Ночной режим";
 "Settings.Theme.Title" = "Цветовая тема";
 "Settings.Language.Title" = "Язык";
+"Settings.Contacts.Title" = "Пригласить друзей";
 "Settings.RemoveCache.Title" = "Удалить кеш";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Кэш успешно очищен";
 "Settings.SupportSection.Title" = "Поддержка";
@@ -103,15 +134,24 @@
 "Language.Navigation.Title" = "Язык";
 /* Theme */
 "Theme.Navigation.Title" = "Цветовая тема";
+/* Contacts */
+"Contacts.Navigation.Title" = "Пригласить друзей";
+"Contacts.PermissionDenied.Title" = "Нам нужно ваше разрешение!";
+"Contacts.PermissionDenied.Description" = "Мы не можем продолжать без вашего \nразрешения на доступ к вашим контактам. \nПопробуйте снова?";
+"Contacts.PermissionDenied.Button" = "Настройки";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Репозитории";
 "User.FollowersButton.Title" = "Подписчики";
 "User.FollowingButton.Title" = "Подписки";
 "User.StarsCell.Title" = "Звезды";
+"User.WatchingCell.Title" = "Наблюдает";
 "User.EventsCell.Title" = "События";
 "User.CompanyCell.Title" = "Компания";
 "User.BlogCell.Title" = "Блог";
+"User.ProfileSummaryCell.Title" = "Резюме Профиля";
+"User.PinnedSection.Title" = "Закрепленные";
+"User.OrganizationsSection.Title" = "Организации";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Подписчики";
@@ -129,7 +169,7 @@
 "WhatsNew.Item3.Subtitle" = "SwiftHub полностью с открытым исходным кодом\nЗвезды очень приветствуются ★";
 "WhatsNew.Item4.Title" = "Актуальные";
 "WhatsNew.Item4.Subtitle" = "Посмотрите, чем сообщество GitHub больше всего взволновано сегодня";
-"WhatsNew.DetailButton.Title" = "Узнать Больше";
+"WhatsNew.DetailButton.Title" = "Посмотреть на GitHub";
 "WhatsNew.CompletionButton.Title" = "Продолжить";
 /* Languages */
 "Languages.Navigation.Title" = "Языки";

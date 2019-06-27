@@ -9,7 +9,7 @@
 			"name": "OAuth Authorizations",
 			"item": [
 				{
-					"name": "Create a new authorization",
+					"name": "Create access token",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -22,55 +22,48 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "scopes",
-									"value": "public_repo",
-									"type": "text"
-								},
-								{
-									"key": "note",
-									"value": "Create the new authorization for SwiftHub",
-									"type": "text"
-								},
-								{
 									"key": "client_id",
 									"value": "00cbdbffb01ec72e280a",
+									"description": "Required. The client ID you received from GitHub for your GitHub App.",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
 									"value": "5a39979251c0452a9476bd45c82a14d8e98c3fb3",
+									"description": "Required. The client secret you received from GitHub for your GitHub App.",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "341528369f195e72c88e",
+									"description": "Required. The code you received as a response to Step 1.",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "swifthub://",
+									"description": "The URL in your application where users are sent after authorization.",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "",
+									"description": "The unguessable random string you provided in Step 1.",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/authorizations",
+							"raw": "https://github.com/login/oauth/access_token",
+							"protocol": "https",
 							"host": [
-								"{{base_url}}"
+								"github",
+								"com"
 							],
 							"path": [
-								"authorizations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List your authorizations",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/authorizations",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"authorizations"
+								"login",
+								"oauth",
+								"access_token"
 							]
 						}
 					},
@@ -151,7 +144,7 @@
 										}
 									]
 								},
-								"description": "This method returns the preferred README for a repository."
+								"description": "Gets the contents of a file or directory in a repository. Specify the file path or directory in :path. If you omit :path, you will receive the contents of all files in the repository."
 							},
 							"response": []
 						}
@@ -187,8 +180,7 @@
 											"value": "{{per_page}}"
 										}
 									]
-								},
-								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+								}
 							},
 							"response": []
 						},
@@ -220,7 +212,7 @@
 										}
 									]
 								},
-								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+								"description": "Diffs with binary data will have no patch property. Pass the appropriate media type to fetch diff and patch formats."
 							},
 							"response": []
 						}
@@ -256,8 +248,7 @@
 											"value": "{{per_page}}"
 										}
 									]
-								},
-								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+								}
 							},
 							"response": []
 						},
@@ -288,8 +279,111 @@
 											"value": "3.1.2"
 										}
 									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Releases",
+					"item": [
+						{
+							"name": "List releases for a repository",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
 								},
-								"description": "List repositories that are accessible to the authenticated user.\n\nThis includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership."
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/releases?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"releases"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "Information about published releases are available to everyone. Only users with push access will receive listings for draft releases."
+							},
+							"response": []
+						},
+						{
+							"name": "Get a single release",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/releases/:release_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"releases",
+										":release_id"
+									],
+									"variable": [
+										{
+											"key": "release_id",
+											"value": "16590874"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Forks",
+					"item": [
+						{
+							"name": "List Forks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/forks?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"forks"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								}
 							},
 							"response": []
 						}
@@ -450,37 +544,6 @@
 					"response": []
 				},
 				{
-					"name": "List Forks",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/forks?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"repos",
-								"{{owner}}",
-								"{{repo}}",
-								"forks"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
-				},
-				{
 					"name": "Get",
 					"request": {
 						"method": "GET",
@@ -499,8 +562,7 @@
 								"{{owner}}",
 								"{{repo}}"
 							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+						}
 					},
 					"response": []
 				},
@@ -646,7 +708,7 @@
 								"{{org}}"
 							]
 						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+						"description": "To see many of the organization response values, you need to be an authenticated organization owner with the admin:org scope. When the value of two_factor_requirement_enabled is true, the organization requires all members, billing managers, and outside collaborators to enable two-factor authentication."
 					},
 					"response": []
 				}
@@ -658,6 +720,69 @@
 				{
 					"name": "Followers",
 					"item": [
+						{
+							"name": "List followers of a user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/followers?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"followers"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "List a user's followers:"
+							},
+							"response": []
+						},
+						{
+							"name": "List users followed by another user",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/users/{{username}}/following?per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{username}}",
+										"following"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								},
+								"description": "List who a user is following:"
+							},
+							"response": []
+						},
 						{
 							"name": "Check if you are following a user",
 							"request": {
@@ -701,8 +826,7 @@
 										"following",
 										"{{owner}}"
 									]
-								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								}
 							},
 							"response": []
 						},
@@ -725,8 +849,7 @@
 										"following",
 										"{{owner}}"
 									]
-								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								}
 							},
 							"response": []
 						}
@@ -750,8 +873,7 @@
 							"path": [
 								"user"
 							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+						}
 					},
 					"response": []
 				},
@@ -774,70 +896,7 @@
 								"{{owner}}"
 							]
 						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
-				},
-				{
-					"name": "List followers of a user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/users/{{username}}/followers?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users",
-								"{{username}}",
-								"followers"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
-					},
-					"response": []
-				},
-				{
-					"name": "List users followed by another user",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/users/{{username}}/following?per_page={{per_page}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users",
-								"{{username}}",
-								"following"
-							],
-							"query": [
-								{
-									"key": "per_page",
-									"value": "{{per_page}}"
-								}
-							]
-						},
-						"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+						"description": "Provides publicly available information about someone with a GitHub account."
 					},
 					"response": []
 				}
@@ -856,7 +915,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/search/repositories?q=swift&page=1&per_page={{per_page}}",
+							"raw": "{{base_url}}/search/repositories?q=swift&sort=stars&order=desc&page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -867,7 +926,18 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "swift"
+									"value": "swift",
+									"description": "Required. The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see Constructing a search query. See \"Searching for repositories\" for a detailed list of qualifiers."
+								},
+								{
+									"key": "sort",
+									"value": "stars",
+									"description": "Sorts the results of your query by number of stars, forks, or help-wanted-issues or how recently the items were updated. Default: best match"
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"description": "Determines whether the first search result returned is the highest number of matches (desc) or lowest number of matches (asc). This parameter is ignored unless you provide sort. Default: desc"
 								},
 								{
 									"key": "page",
@@ -893,7 +963,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/search/users?q=realm&page=1&per_page={{per_page}}",
+							"raw": "{{base_url}}/search/users?q=realm&sort&order&page=1&per_page={{per_page}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -904,7 +974,18 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "realm"
+									"value": "realm",
+									"description": "Required. The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see Constructing a search query. See \"Searching users\" for a detailed list of qualifiers."
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"description": "Sorts the results of your query by number of followers or repositories, or when the person joined GitHub. Default: best match"
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "Determines whether the first search result returned is the highest number of matches (desc) or lowest number of matches (asc). This parameter is ignored unless you provide sort. Default: desc"
 								},
 								{
 									"key": "page",
@@ -916,7 +997,7 @@
 								}
 							]
 						},
-						"description": "Find repositories via various criteria. This method returns up to 100 results per page."
+						"description": "Find users via various criteria. This method returns up to 100 results per page."
 					},
 					"response": []
 				}
@@ -1131,8 +1212,7 @@
 											"value": "{{per_page}}"
 										}
 									]
-								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								}
 							},
 							"response": []
 						},
@@ -1162,7 +1242,7 @@
 										}
 									]
 								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								"description": "List repositories being starred by a user."
 							},
 							"response": []
 						},
@@ -1187,7 +1267,7 @@
 										"{{repo}}"
 									]
 								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								"description": "Requires for the user to be authenticated."
 							},
 							"response": []
 						},
@@ -1212,7 +1292,7 @@
 										"{{repo}}"
 									]
 								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								"description": "Requires for the user to be authenticated."
 							},
 							"response": []
 						},
@@ -1237,7 +1317,7 @@
 										"{{repo}}"
 									]
 								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								"description": "Requires for the user to be authenticated."
 							},
 							"response": []
 						}
@@ -1274,8 +1354,7 @@
 											"value": "{{per_page}}"
 										}
 									]
-								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								}
 							},
 							"response": []
 						},
@@ -1305,7 +1384,7 @@
 										}
 									]
 								},
-								"description": "Response: \nThe parent and source objects are present when the repository is a fork. parent is the repository this repository was forked from, source is the ultimate source for the network."
+								"description": "List repositories being watched by a user."
 							},
 							"response": []
 						}
@@ -1359,6 +1438,9 @@
 						{
 							"name": "List your notifications in a repository",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "GET",
 								"header": [],
 								"body": {
@@ -1440,7 +1522,7 @@
 								}
 							]
 						},
-						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+						"description": "List all issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories."
 					},
 					"response": []
 				},
@@ -1477,7 +1559,7 @@
 								}
 							]
 						},
-						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+						"description": "List all issues across owned and member repositories assigned to the authenticated user:"
 					},
 					"response": []
 				},
@@ -1516,8 +1598,7 @@
 									"disabled": true
 								}
 							]
-						},
-						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+						}
 					},
 					"response": []
 				},
@@ -1531,7 +1612,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/6009?",
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number?",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1540,7 +1621,7 @@
 								"{{owner}}",
 								"{{repo}}",
 								"issues",
-								"6009"
+								":number"
 							],
 							"query": [
 								{
@@ -1553,9 +1634,14 @@
 									"value": "{{per_page}}",
 									"disabled": true
 								}
+							],
+							"variable": [
+								{
+									"key": "number",
+									"value": "7"
+								}
 							]
-						},
-						"description": "We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago."
+						}
 					},
 					"response": []
 				}
@@ -1618,10 +1704,11 @@
 							"variable": [
 								{
 									"key": "number",
-									"value": "6021"
+									"value": "1"
 								}
 							]
-						}
+						},
+						"description": "Lists details of a pull request by providing its number."
 					},
 					"response": []
 				}
@@ -1660,7 +1747,7 @@
 								}
 							]
 						},
-						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+						"description": "Receive an array of trending repositories."
 					},
 					"response": []
 				},
@@ -1694,7 +1781,7 @@
 								}
 							]
 						},
-						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+						"description": "Receive an array of trending developers."
 					},
 					"response": []
 				},
@@ -1716,7 +1803,7 @@
 								"languages"
 							]
 						},
-						"description": "List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language."
+						"description": "Receive popular languages and all languages."
 					},
 					"response": []
 				}

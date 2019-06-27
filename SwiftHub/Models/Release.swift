@@ -16,14 +16,14 @@ struct Release: Mappable {
     var assetsUrl: String?
     var author: User?
     var body: String?
-    var createdAt: String?
+    var createdAt: Date?
     var draft: Bool?
     var htmlUrl: String?
     var id: Int?
     var name: String?
     var nodeId: String?
     var prerelease: Bool?
-    var publishedAt: String?
+    var publishedAt: Date?
     var tagName: String?
     var tarballUrl: String?
     var targetCommitish: String?
@@ -32,20 +32,21 @@ struct Release: Mappable {
     var zipballUrl: String?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         assets <- map["assets"]
         assetsUrl <- map["assets_url"]
         author <- map["author"]
         body <- map["body"]
-        createdAt <- map["created_at"]
+        createdAt <- (map["created_at"], ISO8601DateTransform())
         draft <- map["draft"]
         htmlUrl <- map["html_url"]
         id <- map["id"]
         name <- map["name"]
         nodeId <- map["node_id"]
         prerelease <- map["prerelease"]
-        publishedAt <- map["published_at"]
+        publishedAt <- (map["published_at"], ISO8601DateTransform())
         tagName <- map["tag_name"]
         tarballUrl <- map["tarball_url"]
         targetCommitish <- map["target_commitish"]

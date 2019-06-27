@@ -12,20 +12,14 @@ class SettingCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        themeService.rx
-            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
-            .disposed(by: rx.disposeBag)
-    }
-
-    func bind(to viewModel: SettingCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-
-        viewModel.showDisclosure.drive(onNext: { [weak self] (isHidden) in
-            self?.rightImageView.isHidden = !isHidden
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.imageName.drive(onNext: { [weak self] (imageName) in
-            self?.leftImageView.image = UIImage(named: imageName)?.template
-        }).disposed(by: rx.disposeBag)
+        leftImageView.contentMode = .center
+        leftImageView.snp.remakeConstraints { (make) in
+            make.size.equalTo(40)
+        }
+        detailLabel.isHidden = true
+        attributedDetailLabel.isHidden = true
+        secondDetailLabel.textAlignment = .right
+        textsStackView.axis = .horizontal
+        textsStackView.distribution = .fillEqually
     }
 }

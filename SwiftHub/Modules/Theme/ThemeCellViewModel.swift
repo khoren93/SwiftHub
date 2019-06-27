@@ -10,16 +10,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ThemeCellViewModel {
+class ThemeCellViewModel: DefaultTableViewCellViewModel {
 
-    let title: Driver<String>
-    let imageColor: Driver<UIColor>
+    let imageColor = BehaviorRelay<UIColor?>(value: nil)
 
     let theme: ColorTheme
 
     init(with theme: ColorTheme) {
         self.theme = theme
-        title = Driver.just(theme.title)
-        imageColor = Driver.just(theme.color)
+        super.init()
+        title.accept(theme.title)
+        imageColor.accept(theme.color)
     }
 }

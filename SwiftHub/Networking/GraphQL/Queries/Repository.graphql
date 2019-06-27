@@ -1,0 +1,64 @@
+query Repository($owner: String!, $name: String!, $qualifiedName: String!) {
+    repository(owner: $owner, name: $name) {
+        name
+        nameWithOwner
+        description
+        url
+        homepageUrl
+        createdAt
+        updatedAt
+        viewerHasStarred
+        diskUsage
+        isFork
+        parent {
+            nameWithOwner
+        }
+        owner {
+            login
+            avatarUrl
+            ... on Organization {
+                description
+            }
+        }
+        primaryLanguage {
+            name
+            color
+        }
+        licenseInfo {
+            name
+        }
+        defaultBranchRef {
+            name
+        }
+        stargazers {
+            totalCount
+        }
+        forks {
+            totalCount
+        }
+        watchers {
+            totalCount
+        }
+        mentionableUsers {
+            totalCount
+        }
+        issues(states: [OPEN]) {
+            totalCount
+        }
+        pullRequests(states: [OPEN]) {
+            totalCount
+        }
+        releases {
+            totalCount
+        }
+        ref(qualifiedName: $qualifiedName) {
+            target {
+                ... on Commit {
+                    history {
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}

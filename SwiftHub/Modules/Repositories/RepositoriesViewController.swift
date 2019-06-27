@@ -15,8 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
 
 class RepositoriesViewController: TableViewController {
 
-    var viewModel: RepositoriesViewModel!
-
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
         view.cornerRadius = 40
@@ -56,6 +54,7 @@ class RepositoriesViewController: TableViewController {
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? RepositoriesViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger).merge()
         let input = RepositoriesViewModel.Input(headerRefresh: refresh,

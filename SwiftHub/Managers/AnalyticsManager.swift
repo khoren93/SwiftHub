@@ -14,15 +14,17 @@ import FirebaseAnalytics
 let analytics = Umbrella.Analytics<SwifthubEvent>()
 
 enum SwifthubEvent {
+    case appAds(enabled: Bool)
     case appNightMode(enabled: Bool)
     case appTheme(color: String)
     case appLanguage(language: String)
     case appCacheRemoved
     case acknowledgements
+    case userInvited(success: Bool)
     case whatsNew
     case flexOpened
 
-    case login(login: String)
+    case login(login: String, type: String)
     case logout
     case search(keyword: String)
     case repoLanguage(language: String)
@@ -39,11 +41,13 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func name(for provider: ProviderType) -> String? {
         switch self {
+        case .appAds: return "Ads Changed"
         case .appNightMode: return "Night Mode Changed"
         case .appTheme: return "Theme"
         case .appLanguage: return "Language"
         case .appCacheRemoved: return "Cache Removed"
         case .acknowledgements: return "Acknowledgements"
+        case .userInvited: return "User Invited"
         case .whatsNew: return "Whats New"
         case .flexOpened: return "Flex Opened"
         case .login: return "Login"
@@ -62,14 +66,18 @@ extension SwifthubEvent: Umbrella.EventType {
 
     func parameters(for provider: ProviderType) -> [String: Any]? {
         switch self {
+        case .appAds(let enabled):
+            return ["Enabled": enabled]
         case .appNightMode(let enabled):
             return ["Enabled": enabled]
         case .appTheme(let color):
             return ["Color": color]
         case .appLanguage(let language):
             return ["Language": language]
-        case .login(let login):
-            return ["Login": login]
+        case .userInvited(let success):
+            return ["Success": success]
+        case .login(let login, let type):
+            return ["Login": login, "Type": type]
         case .search(let keyword):
             return ["Keyword": keyword]
         case .repoLanguage(let language):
@@ -106,6 +114,21 @@ extension Umbrella.Analytics {
         Mixpanel.sharedInstance()?.people.set("$email", to: email)
         FirebaseAnalytics.Analytics.setUserProperty(name, forName: "$name")
         FirebaseAnalytics.Analytics.setUserProperty(email, forName: "$email")
+    }
+
+    func updateUser(ads enabled: Bool) {
+        Mixpanel.sharedInstance()?.people.set("$ads_enabled", to: enabled)
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$ads_enabled")
+    }
+
+    func updateUser(nightMode enabled: Bool) {
+        Mixpanel.sharedInstance()?.people.set("$night_mode_enabled", to: enabled)
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$night_mode_enabled")
+    }
+
+    func updateUser(colorTheme theme: String) {
+        Mixpanel.sharedInstance()?.people.set("$color_theme", to: theme)
+        FirebaseAnalytics.Analytics.setUserProperty(theme, forName: "$color_theme")
     }
 
     func reset() {

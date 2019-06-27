@@ -6,63 +6,44 @@
 //  Copyright © 2017 Khoren Markosyan. All rights reserved.
 //
 
-import Foundation
-import ChameleonFramework
+import UIKit
 
 // MARK: Colors
 
 extension UIColor {
 
     static func primary() -> UIColor {
-        return flatBlack
+        return themeService.type.associatedObject.primary
     }
 
     static func primaryDark() -> UIColor {
-        return flatBlackDark
+        return themeService.type.associatedObject.primaryDark
     }
 
     static func secondary() -> UIColor {
-        return flatRed
+        return themeService.type.associatedObject.secondary
     }
 
     static func secondaryDark() -> UIColor {
-        return flatRedDark
+        return themeService.type.associatedObject.secondaryDark
     }
 
     static func separator() -> UIColor {
-        return flatBlackDark
+        return themeService.type.associatedObject.separator
     }
 
-    static func textBlack() -> UIColor {
-        return flatBlackDark
-    }
-
-    static func textWhite() -> UIColor {
-        return white
-    }
-
-    static func textGray() -> UIColor {
-        return .gray
+    static func text() -> UIColor {
+        return themeService.type.associatedObject.text
     }
 }
 
-// MARK: Averaging a Color
-
 extension UIColor {
 
-    static func averageColor(fromImage image: UIImage?) -> UIColor? {
-        guard let image = image else {
-            return nil
-        }
-        return AverageColorFromImage(image)
-    }
-}
-
-// MARK: Randomizing Colors
-
-extension UIColor {
-
-    static func randomColor() -> UIColor {
-        return randomFlat
+    var brightnessAdjustedColor: UIColor {
+        var components = self.cgColor.components
+        let alpha = components?.last
+        components?.removeLast()
+        let color = CGFloat(1-(components?.max())! >= 0.5 ? 1.0 : 0.0)
+        return UIColor(red: color, green: color, blue: color, alpha: alpha!)
     }
 }

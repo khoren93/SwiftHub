@@ -1,0 +1,135 @@
+query Viewer {
+    viewer {
+        id
+        name
+        login
+        avatarUrl
+        url
+        websiteUrl
+        bio
+        company
+        email
+        location
+        createdAt
+        updatedAt
+        viewerCanFollow
+        viewerIsFollowing
+        isViewer
+        followers {
+            totalCount
+        }
+        following {
+            totalCount
+        }
+        starredRepositories {
+            totalCount
+        }
+        issues {
+            totalCount
+        }
+        repositories {
+            totalCount
+        }
+        watching {
+            totalCount
+        }
+        contributionsCollection {
+            totalRepositoryContributions
+        }
+        pinnedRepositories(first: 6) {
+            nodes {
+                name
+                nameWithOwner
+                description
+                owner {
+                    avatarUrl
+                }
+                updatedAt
+                viewerHasStarred
+                primaryLanguage {
+                    name
+                    color
+                }
+                stargazers {
+                    totalCount
+                }
+            }
+        }
+        organizations(first: 10) {
+            nodes {
+                name
+                login
+                avatarUrl
+                ... on Organization {
+                    description
+                }
+            }
+        }
+    }
+}
+
+query User($login: String!) {
+    user(login: $login) {
+        name
+        login
+        avatarUrl
+        url
+        websiteUrl
+        bio
+        company
+        email
+        location
+        createdAt
+        updatedAt
+        viewerCanFollow
+        viewerIsFollowing
+        isViewer
+        followers {
+            totalCount
+        }
+        following {
+            totalCount
+        }
+        starredRepositories {
+            totalCount
+        }
+        issues {
+            totalCount
+        }
+        repositories {
+            totalCount
+        }
+        watching {
+            totalCount
+        }
+        pinnedRepositories(first: 6) {
+            nodes {
+                name
+                nameWithOwner
+                description
+                owner {
+                    avatarUrl
+                }
+                updatedAt
+                viewerHasStarred
+                primaryLanguage {
+                    name
+                    color
+                }
+                stargazers {
+                    totalCount
+                }
+            }
+        }
+        organizations(first: 10) {
+            nodes {
+                name
+                login
+                avatarUrl
+                ... on Organization {
+                    description
+                }
+            }
+        }
+    }
+}

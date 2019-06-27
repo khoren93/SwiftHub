@@ -10,13 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import AttributedLib
+import BonMot
 
 private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
+private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
+private let organizationReuseIdentifier = R.reuseIdentifier.userCell.identifier
 
 class UserViewController: TableViewController {
-
-    var viewModel: UserViewModel!
 
     lazy var rightBarButton: BarButtonItem = {
         let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
@@ -24,13 +24,13 @@ class UserViewController: TableViewController {
     }()
 
     lazy var usernameLabel: Label = {
-        let view = Label(style: .style223)
+        let view = Label()
         view.textAlignment = .center
         return view
     }()
 
     lazy var fullnameLabel: Label = {
-        let view = Label(style: .style133)
+        let view = Label()
         view.textAlignment = .center
         return view
     }()
@@ -54,6 +54,13 @@ class UserViewController: TableViewController {
         view.borderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
         view.cornerRadius = 20
+        view.hero.id = "ActionButtonId"
+        return view
+    }()
+
+    lazy var detailLabel: Label = {
+        var view = Label()
+        view.numberOfLines = 0
         return view
     }()
 
@@ -70,8 +77,9 @@ class UserViewController: TableViewController {
             make.right.equalTo(self.ownerImageView)
             make.size.equalTo(40)
         })
-        let subviews: [UIView] = [headerView]
+        let subviews: [UIView] = [headerView, self.detailLabel]
         let view = StackView(arrangedSubviews: subviews)
+        view.axis = .horizontal
         return view
     }()
 
@@ -80,8 +88,6 @@ class UserViewController: TableViewController {
         view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
-        stackView.axis = .horizontal
-        stackView.alignment = .center
         view.addSubview(stackView)
         stackView.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(self.inset)
@@ -123,7 +129,7 @@ class UserViewController: TableViewController {
 
         themeService.rx
             .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
-            .bind({ $0.text }, to: usernameLabel.rx.textColor)
+            .bind({ $0.text }, to: [usernameLabel.rx.textColor, detailLabel.rx.textColor])
             .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
             .disposed(by: rx.disposeBag)
 
@@ -135,10 +141,13 @@ class UserViewController: TableViewController {
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
         tableView.register(R.nib.userDetailCell)
+        tableView.register(R.nib.repositoryCell)
+        tableView.register(R.nib.userCell)
     }
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? UserViewModel else { return }
 
         let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, languageChanged.asObservable()).merge()
         let input = UserViewModel.Input(headerRefresh: refresh,
@@ -156,11 +165,23 @@ class UserViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
-            case .starsItem(let viewModel),
+            case .createdItem(let viewModel),
+                 .updatedItem(let viewModel),
+                 .starsItem(let viewModel),
+                 .watchingItem(let viewModel),
                  .eventsItem(let viewModel),
                  .companyItem(let viewModel),
-                 .blogItem(let viewModel):
+                 .blogItem(let viewModel),
+                 .profileSummaryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? UserDetailCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .repositoryItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .organizationItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: organizationReuseIdentifier, for: indexPath) as? UserCell)!
                 cell.bind(to: viewModel)
                 return cell
             }
@@ -176,27 +197,46 @@ class UserViewController: TableViewController {
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .starsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? RepositoriesViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoriesViewModel {
+                    self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
+                }
+            case .watchingItem:
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoriesViewModel {
                     self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)
                 }
             case .eventsItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? EventsViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? EventsViewModel {
                     self?.navigator.show(segue: .events(viewModel: viewModel), sender: self)
                 }
             case .companyItem:
-                if let viewModel = self?.viewModel.viewModel(for: item) as? UserViewModel {
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
                     self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
                 }
             case .blogItem:
-                if let url = self?.viewModel.user.value?.blog?.url {
+                if let url = viewModel.user.value.blog?.url {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
+            case .profileSummaryItem:
+                if let url = viewModel.profileSummaryUrl() {
+                    self?.navigator.show(segue: .webController(url), sender: self)
+                }
+            case .repositoryItem:
+                if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
+                    self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self)
+                }
+            case .organizationItem:
+                if let viewModel = viewModel.viewModel(for: item) as? UserViewModel {
+                    self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self)
+                }
+            default:
+                self?.deselectSelectedRow()
             }
         }).disposed(by: rx.disposeBag)
 
         output.username.drive(usernameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.drive(fullnameLabel.rx.text).disposed(by: rx.disposeBag)
         output.fullname.map { $0.isEmpty }.drive(fullnameLabel.rx.isHidden).disposed(by: rx.disposeBag)
+        output.description.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
 
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
@@ -251,21 +291,15 @@ class UserViewController: TableViewController {
     }
 
     func attributetText(title: String, value: Int) -> NSAttributedString {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-
-        let valueAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 18))
-                .paragraphStyle(paragraph)
-        }
-
-        let titleAttributes = Attributes {
-            return $0.foreground(color: .textWhite())
-                .font(.boldSystemFont(ofSize: 12))
-                .paragraphStyle(paragraph)
-        }
-
-        return "\(value)\n".at.attributed(with: valueAttributes) + title.at.attributed(with: titleAttributes)
+        let titleText = title.styled(with: .color(.white),
+                                     .font(.boldSystemFont(ofSize: 12)),
+                                     .alignment(.center))
+        let valueText = value.string.styled(with: .color(.white),
+                                            .font(.boldSystemFont(ofSize: 18)),
+                                            .alignment(.center))
+        return NSAttributedString.composed(of: [
+            titleText, Special.nextLine,
+            valueText
+        ])
     }
 }

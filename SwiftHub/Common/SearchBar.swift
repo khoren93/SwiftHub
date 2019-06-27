@@ -27,7 +27,7 @@ class SearchBar: UISearchBar {
         themeService.rx
             .bind({ $0.secondary }, to: rx.tintColor)
             .bind({ $0.primaryDark }, to: rx.barTintColor)
-            .bind({ $0.keyboardAppearance }, to: UITextField.appearanceWhenContained(within: [UISearchBar.self]).rx.keyboardAppearance)
+            .bind({ $0.keyboardAppearance }, to: UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).rx.keyboardAppearance)
             .disposed(by: rx.disposeBag)
 
         rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in

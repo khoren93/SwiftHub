@@ -12,24 +12,25 @@ import RxCocoa
 import SafariServices
 
 enum LoginSegments: Int {
-    case basic, oAuth
+    case oAuth, basic
 
     var title: String {
         switch self {
-        case .basic: return R.string.localizable.loginBasicSegmentTitle.key.localized()
         case .oAuth: return R.string.localizable.loginOAuthSegmentTitle.key.localized()
+        case .basic: return R.string.localizable.loginBasicSegmentTitle.key.localized()
         }
     }
 }
 
 class LoginViewController: ViewController {
 
-    var viewModel: LoginViewModel!
-
     lazy var segmentedControl: SegmentedControl = {
-        let items = [LoginSegments.basic.title, LoginSegments.oAuth.title]
-        let view = SegmentedControl(items: items)
+        let items = [LoginSegments.oAuth.title, LoginSegments.basic.title]
+        let view = SegmentedControl(sectionTitles: items)
         view.selectedSegmentIndex = 0
+        view.snp.makeConstraints({ (make) in
+            make.width.equalTo(250)
+        })
         return view
     }()
 
@@ -40,7 +41,7 @@ class LoginViewController: ViewController {
     }()
 
     lazy var oAuthLoginStackView: StackView = {
-        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthloginButton]
+        let subviews: [UIView] = [self.oAuthLogoImageView, self.titleLabel, self.detailLabel, self.oAuthLoginButton]
         let view = StackView(arrangedSubviews: subviews)
         return view
     }()
@@ -78,21 +79,21 @@ class LoginViewController: ViewController {
     }()
 
     lazy var titleLabel: Label = {
-        let view = Label(style: .style211)
+        let view = Label()
         view.font = view.font.withSize(22)
         view.textAlignment = .center
         return view
     }()
 
     lazy var detailLabel: Label = {
-        let view = Label(style: .style122)
+        let view = Label()
         view.font = view.font.withSize(17)
         view.numberOfLines = 0
         view.textAlignment = .center
         return view
     }()
 
-    lazy var oAuthloginButton: Button = {
+    lazy var oAuthLoginButton: Button = {
         let view = Button()
         view.imageForNormal = R.image.icon_button_github()
         view.centerTextAndImage(spacing: inset)
@@ -123,9 +124,9 @@ class LoginViewController: ViewController {
             self?.basicLoginButton.titleForNormal = R.string.localizable.loginBasicLoginButtonTitle.key.localized()
             self?.titleLabel.text = R.string.localizable.loginTitleLabelText.key.localized()
             self?.detailLabel.text = R.string.localizable.loginDetailLabelText.key.localized()
-            self?.oAuthloginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
-            self?.segmentedControl.setTitle(LoginSegments.basic.title, forSegmentAt: 0)
-            self?.segmentedControl.setTitle(LoginSegments.oAuth.title, forSegmentAt: 1)
+            self?.oAuthLoginButton.titleForNormal = R.string.localizable.loginOAuthloginButtonTitle.key.localized()
+            self?.segmentedControl.sectionTitles = [LoginSegments.oAuth.title,
+                                                    LoginSegments.basic.title]
             self?.navigationItem.titleView = self?.segmentedControl
         }).disposed(by: rx.disposeBag)
 
@@ -146,18 +147,23 @@ class LoginViewController: ViewController {
 
         stackView.addArrangedSubview(basicLoginStackView)
         stackView.addArrangedSubview(oAuthLoginStackView)
+        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
         super.bindViewModel()
+        guard let viewModel = viewModel as? LoginViewModel else { return }
 
-        let segmentSelected = Observable.of(segmentedControl.rx.selectedSegmentIndex.map { LoginSegments(rawValue: $0)! }).merge()
+        let segmentSelected = Observable.of(segmentedControl.segmentSelection.map { LoginSegments(rawValue: $0)! }).merge()
         let input = LoginViewModel.Input(segmentSelection: segmentSelected.asDriverOnErrorJustComplete(),
                                          basicLoginTrigger: basicLoginButton.rx.tap.asDriver(),
-                                         oAuthLoginTrigger: oAuthloginButton.rx.tap.asDriver())
+                                         oAuthLoginTrigger: oAuthLoginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asDriver().drive(onNext: { [weak self] (isLoading) in
+        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
+        viewModel.parsedError.asObservable().bind(to: error).disposed(by: rx.disposeBag)
+
+        isLoading.asDriver().drive(onNext: { [weak self] (isLoading) in
             isLoading ? self?.startAnimating() : self?.stopAnimating()
         }).disposed(by: rx.disposeBag)
 
@@ -169,9 +175,16 @@ class LoginViewController: ViewController {
         output.hidesBasicLoginView.drive(basicLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesOAuthLoginView.drive(oAuthLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
 
-        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: R.string.localizable.commonError.key.localized(),
-                            message: R.string.localizable.loginLoginFailedDescription.key.localized())
+        error.subscribe(onNext: { [weak self] (error) in
+            var title = ""
+            var description = ""
+            let image = R.image.icon_toast_warning()
+            switch error {
+            case .serverError(let response):
+                title = response.message ?? ""
+                description = response.detail()
+            }
+            self?.view.makeToast(description, title: title, image: image)
         }).disposed(by: rx.disposeBag)
     }
 }

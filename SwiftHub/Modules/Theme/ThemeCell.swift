@@ -13,14 +13,16 @@ class ThemeCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         rightImageView.isHidden = true
-        leftImageView.cornerRadius = 25
-        leftImageView.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
+        leftImageView.cornerRadius = 20
+        leftImageView.snp.remakeConstraints { (make) in
+            make.size.equalTo(40)
         }
     }
 
-    func bind(to viewModel: ThemeCellViewModel) {
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.imageColor.drive(leftImageView.rx.backgroundColor).disposed(by: rx.disposeBag)
+    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? ThemeCellViewModel else { return }
+
+        viewModel.imageColor.asDriver().drive(leftImageView.rx.backgroundColor).disposed(by: rx.disposeBag)
     }
 }

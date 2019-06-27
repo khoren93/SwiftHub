@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class NotificationCell: DetailedTableViewCell {
+class NotificationCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
@@ -17,17 +17,10 @@ class NotificationCell: DetailedTableViewCell {
         leftImageView.cornerRadius = 25
     }
 
-    func bind(to viewModel: NotificationCellViewModel) {
+    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? NotificationCellViewModel else { return }
         cellDisposeBag = DisposeBag()
-
-        viewModel.title.drive(titleLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.detail.drive(detailLabel.rx.text).disposed(by: rx.disposeBag)
-        viewModel.imageUrl.drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
-        viewModel.imageUrl.drive(onNext: { [weak self] (url) in
-            if let url = url {
-                self?.leftImageView.hero.id = url.absoluteString
-            }
-        }).disposed(by: rx.disposeBag)
 
         leftImageView.rx.tap().map { _ in viewModel.notification.repository?.owner }.filterNil()
             .bind(to: viewModel.userSelected).disposed(by: cellDisposeBag)

@@ -14,10 +14,17 @@ enum UserSection {
 }
 
 enum UserSectionItem {
+    case createdItem(viewModel: UserDetailCellViewModel)
+    case updatedItem(viewModel: UserDetailCellViewModel)
     case starsItem(viewModel: UserDetailCellViewModel)
+    case watchingItem(viewModel: UserDetailCellViewModel)
     case eventsItem(viewModel: UserDetailCellViewModel)
     case companyItem(viewModel: UserDetailCellViewModel)
     case blogItem(viewModel: UserDetailCellViewModel)
+    case profileSummaryItem(viewModel: UserDetailCellViewModel)
+
+    case repositoryItem(viewModel: RepositoryCellViewModel)
+    case organizationItem(viewModel: UserCellViewModel)
 }
 
 extension UserSection: SectionModelType {

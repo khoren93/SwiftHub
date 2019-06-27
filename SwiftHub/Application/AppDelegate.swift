@@ -23,6 +23,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let libsManager = LibsManager.shared
         libsManager.setupLibs(with: window)
 
+        if Configs.Network.useStaging == true {
+            // Logout
+            User.removeCurrentUser()
+            AuthManager.removeToken()
+
+            // Use Green Dark theme
+            var theme = ThemeType.currentTheme()
+            if theme.isDark != true {
+                theme = theme.toggled()
+            }
+            theme = theme.withColor(color: .green)
+            themeService.switch(theme)
+
+            // Disable banners
+            libsManager.bannersEnabled.accept(false)
+        }
+
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 

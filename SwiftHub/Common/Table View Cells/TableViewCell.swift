@@ -24,9 +24,10 @@ class TableViewCell: UITableViewCell {
     lazy var containerView: View = {
         let view = View()
         view.backgroundColor = .clear
+        view.cornerRadius = Configs.BaseDimensions.cornerRadius
         self.addSubview(view)
         view.snp.makeConstraints({ (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(horizontal: self.inset*2, vertical: self.inset))
         })
         return view
     }()
@@ -60,7 +61,8 @@ class TableViewCell: UITableViewCell {
         backgroundColor = .clear
 
         themeService.rx
-            .bind({ $0.primaryDark }, to: rx.selectionColor)
+            .bind({ $0.primary }, to: rx.selectionColor)
+            .bind({ $0.primary }, to: containerView.rx.backgroundColor)
             .disposed(by: rx.disposeBag)
 
         updateUI()

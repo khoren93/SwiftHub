@@ -13,41 +13,55 @@ final class Application: NSObject {
 
     var window: UIWindow?
 
-    let provider: SwiftHubAPI
+    var provider: SwiftHubAPI?
     let authManager: AuthManager
     let navigator: Navigator
 
     private override init() {
-        provider = Api.shared
         authManager = AuthManager.shared
         navigator = Navigator.default
         super.init()
-
-        authManager.tokenChanged.subscribe(onNext: { [weak self] (token) in
-            if let window = self?.window, token == nil || token?.isValid == true {
-                self?.presentInitialScreen(in: window)
-            }
-        }).disposed(by: rx.disposeBag)
+        updateProvider()
     }
 
-    func presentInitialScreen(in window: UIWindow) {
+    private func updateProvider() {
+        let staging = Configs.Network.useStaging
+        let githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
+        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
+        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
+        provider = restApi
+
+        if let token = authManager.token, Configs.Network.useStaging == false {
+            switch token.type() {
+            case .oAuth(let token):
+                provider = GraphApi(restApi: restApi, token: token)
+            default: break
+            }
+        }
+    }
+
+    func presentInitialScreen(in window: UIWindow?) {
+        updateProvider()
+        guard let window = window, let provider = provider else { return }
         self.window = window
 
 //        presentTestScreen(in: window)
 //        return
 
-        if let user = User.currentUser(), let userId = user.id?.string {
-            analytics.identify(userId: userId)
-            analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let user = User.currentUser(), let login = user.login {
+                analytics.identify(userId: login)
+                analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
+            }
 
-        let loggedIn = authManager.hasToken
-        let viewModel = HomeTabBarViewModel(loggedIn: loggedIn, provider: provider)
-        navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+            let viewModel = HomeTabBarViewModel(provider: provider)
+            self.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+        }
     }
 
-    func presentTestScreen(in window: UIWindow) {
-        let viewModel = UserViewModel(user: nil, provider: provider)
+    func presentTestScreen(in window: UIWindow?) {
+        guard let window = window, let provider = provider else { return }
+        let viewModel = UserViewModel(user: User(), provider: provider)
         navigator.show(segue: .userDetails(viewModel: viewModel), sender: nil, transition: .root(in: window))
     }
 }

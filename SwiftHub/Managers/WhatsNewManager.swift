@@ -44,7 +44,7 @@ class WhatsNewManager: NSObject {
     private func configuration() -> WhatsNewViewController.Configuration {
         var configuration = WhatsNewViewController.Configuration(
             detailButton: .init(title: R.string.localizable.whatsNewDetailButtonTitle.key.localized(),
-                                action: .website(url: "https://github.com/khoren93/SwiftHub")),
+                                action: .website(url: Configs.App.githubUrl)),
             completionButton: .init(stringLiteral: R.string.localizable.whatsNewCompletionButtonTitle.key.localized())
         )
         //        configuration.itemsView.layout = .centered

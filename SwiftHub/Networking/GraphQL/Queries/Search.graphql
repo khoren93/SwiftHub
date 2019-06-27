@@ -1,0 +1,56 @@
+query SearchRepositories($query: String!, $before: String) {
+    search(first: 20, query: $query, type: REPOSITORY, before: $before) {
+        repositoryCount
+        pageInfo {
+            endCursor
+            hasNextPage
+        }
+        nodes {
+            ... on Repository {
+                name
+                nameWithOwner
+                description
+                owner {
+                    avatarUrl
+                    ... on Organization {
+                        description
+                    }
+                }
+                updatedAt
+                viewerHasStarred
+                primaryLanguage {
+                    name
+                    color
+                }
+                stargazers {
+                    totalCount
+                }
+            }
+        }
+    }
+}
+
+query SearchUsers($query: String!, $before: String) {
+    search(first: 20, query: $query, type: USER, before: $before) {
+        nodes {
+            ... on User {
+                name
+                login
+                avatarUrl
+                viewerCanFollow
+                viewerIsFollowing
+                followers {
+                    totalCount
+                }
+                repositories {
+                    totalCount
+                }
+            }
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+        }
+        userCount
+    }
+}

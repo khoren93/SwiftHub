@@ -19,7 +19,16 @@ platform :ios do
 
   desc "Install all libraries"
   lane :setup do
-    cocoapods
+    sh("brew install node") # install node
+    sh("npm install -g apollo") # install apollo
+    cocoapods # install pods
+  end
+
+  desc "Update all tools and pods"
+  lane :update do
+    sh("bundle update") # update node
+    sh("npm update -g apollo") # update apollo
+    sh("pod update") # update pods
   end
 
   desc "Runs all the tests"
@@ -29,11 +38,30 @@ platform :ios do
 
   desc "Generate new localized screenshots"
   lane :screenshots do
+    reset_simulators
+
     capture_screenshots(workspace: "SwiftHub.xcworkspace", scheme: "SwiftHubUITests")
+    frameit  # brew install imagemagick
   end
 
+  desc "Submit a new beta build to apple TestFlight"
   lane :beta do
-    build_app(scheme: "SwiftHub")
+    build_app(scheme: "SwiftHub",
+              workspace: "SwiftHub.xcworkspace",
+              include_bitcode: true,
+              xcargs: "-allowProvisioningUpdates")
+
+    pilot
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    build_app(scheme: "SwiftHub",
+              workspace: "SwiftHub.xcworkspace",
+              include_bitcode: true,
+              xcargs: "-allowProvisioningUpdates")
+
+    deliver
   end
 
   lane :increment_build do

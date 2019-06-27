@@ -19,6 +19,7 @@
 "Common.Save" = "Պահել";
 "Common.Delete" = "Հեռացնել";
 "Common.Search" = "Որոնում";
+"Common.Success" = "Հաջողություն";
 "Common.Error" = "Սխալ";
 "Common.NoResults" = "Ոչ մի արդյունք";
 /* Home TabBar */
@@ -28,6 +29,8 @@
 "Home.TabBar.Login.Title" = "Մուտք";
 "Home.TabBar.Notifications.Title" = "Ծանուցումներ";
 "Home.TabBar.Settings.Title" = "Կարգավորումներ";
+/* Initial */
+"Initial.NoResults" = "Բարի գալուստ SwiftHub!";
 /* Events */
 "Events.Navigation.Title" = "Միջոցառումներ";
 "Events.ReceivedSegment.Title" = "Ստացված";
@@ -35,19 +38,20 @@
 /* Login */
 //"Login.Navigation.Title" = "Մուտք";
 "Login.BasicSegment.Title" = "Հիմնական";
-"Login.oAuthSegment.Title" = "oAuth";
+"Login.OAuthSegment.Title" = "OAuth";
 "Login.LoginTextField.Placeholder" = "մուտքանուն";
 "Login.PasswordTextField.Placeholder" = "գաղտնաբառ";
 "Login.BasicLoginButton.Title" = "Մուտք";
 "Login.TitleLabel.Text" = "Բարի գալուստ SwiftHub";
-"Login.DetailLabel.Text" = "Open source Github iOS client written in RxSwift and MVVM architecture.";
-"Login.oAuthloginButton.Title" = "Մուտք Github-ով";
+"Login.DetailLabel.Text" = "Հիմնական Authentication-ի կամ OAuth-ի օգտագործման շնորհիվ կարող եք կատարել ժամում մինչեւ 5000 հարցում: \n\nԱնանուն հարցումների համար սահմանվում է ժամում մինչեւ 60 հարցում:";
+"Login.OAuthloginButton.Title" = "Մուտք Github-ով";
 "Login.LoginFailed.Description" = "Խնդրում ենք ստուգել ձեր մուտքանունը կամ գաղտնաբառը";
 /* Notifications */
 "Notifications.Navigation.Title" = "Ծանուցումներ";
 "Notifications.UnreadSegment.Title" = "Չընթերցված";
 "Notifications.ParticipatingSegment.Title" = "Մասնակից";
 "Notifications.AllSegment.Title" = "Բոլորը";
+"Notifications.MarkAsRead.Success" = "Բոլոր ծանուցումները նշված են որպես ընթերցված";
 /* Repositories */
 "Repositories.RepositoriesNavigation.Title" = "Ռեպոզիտորիաներ";
 "Repositories.StarredNavigation.Title" = "Աստղանշված";
@@ -57,6 +61,7 @@
 "Repository.WatchersButton.Title" = "Դիտորդներ";
 "Repository.StarsButton.Title" = "Աստղեր";
 "Repository.ForksButton.Title" = "Ճյուղեր";
+"Repository.ParentCell.Title" = "Ճյուղավորված է";
 "Repository.LanguageCell.Title" = "Լեզուն";
 "Repository.SizeCell.Title" = "Չափը";
 "Repository.CreatedCell.Title" = "Ստեղծվել է";
@@ -65,10 +70,14 @@
 "Repository.IssuesCell.Title" = "Խնդիրներ";
 "Repository.CommitsCell.Title" = "Commits";
 "Repository.PullRequestsCell.Title" = "հարցումներ";
+"Repository.BranchesCell.Title" = "Ճյուղեր";
+"Repository.ReleasesCell.Title" = "Թողարկումներ";
 "Repository.EventsCell.Title" = "Իրադարձություններ";
+"Repository.NotificationsCell.Title" = "Իմ ծանուցումները";
 "Repository.ContributorsCell.Title" = "Ներդրողներ";
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";
+"Repository.StarsHistoryCell.Title" = "Աստղերի պատմություն";
 /* Issues */
 "Issues.Navigation.Title" = "Խնդիրներ";
 "Issues.OpenSegment.Title" = "Բաց";
@@ -81,16 +90,38 @@
 "Search.DailySegment.Title" = "Օրվա";
 "Search.WeeklySegment.Title" = "Շաբաթվա";
 "Search.MonthlySegment.Title" = "Ամսվա";
+"Search.TrendingSegment.Title" = "Թրենդինգ";
+"Search.SearchSegment.Title" = "Որոնում";
 "Search.TrendingSection.Title" = "Թրենդինգ";
 "Search.TrendingSectionWithLanguage.Title" = "Թրենդինգ արդյունքներ %@-ում";
 "Search.SearchSection.Title" = "Որոնում";
 "Search.SearchSectionWithLanguage.Title" = "Որոնման արդյունքներ %@-ում";
+"Search.RepositoriesTotalCount.Title" = "%@ ռեպոզիտորիաներ";
+"Search.UsersTotalCount.Title" = "%@ օգտագործողներ";
+"Search.SortRepositories.BestMatch.Title" = "Լավագույն համընկնում";
+"Search.SortRepositories.MostStars.Title" = "Շատ աստղեր";
+"Search.SortRepositories.FewestStars.Title" = "Քիչ աստղեր";
+"Search.SortRepositories.MostForks.Title" = "Շատ ճյուղեր";
+"Search.SortRepositories.FewestForks.Title" = "Քիչ ճյուղեր";
+"Search.SortRepositories.RecentlyUpdated.Title" = "Վերջերս է թարմացվել";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "Շուտ է թարմացվել";
+"Search.SortUsers.BestMatch.Title" = "Լավագույն համընկնում";
+"Search.SortUsers.MostFollowers.Title" = "Շատ հետեւորդներ";
+"Search.SortUsers.FewestFollowers.Title" = "Քիչ հետեւորդներ";
+"Search.SortUsers.MostRecentlyJoined.Title" = "Վերջերս է միացել";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "Շուտ է միացել";
+"Search.SortUsers.MostRepositories.Title" = "Շատ ռեպոզիտորիաներ";
+"Search.SortUsers.FewestRepositories.Title" = "Քիչ ռեպոզիտորիաներ";
 /* Settings */
 "Settings.Navigation.Title" = "Կարգավորումներ";
+"Settings.AccountSection.Title" = "Հաշիվ";
+"Settings.ProjectsSection.Title" = "Իմ Ծրագրերը";
 "Settings.PreferencesSection.Title" = "Պարամետրեր";
+"Settings.Banner.Title" = "Գովազդները միացված են";
 "Settings.NightMode.Title" = "Գիշերային ռեժիմ";
 "Settings.Theme.Title" = "Գունային թեման";
 "Settings.Language.Title" = "Լեզու";
+"Settings.Contacts.Title" = "Հրավիրել ընկերներին";
 "Settings.RemoveCache.Title" = "Հեռացնել Cache-ը";
 "Settings.RemoveCache.Alert.SuccessMessage" = "Cache-ը հաջողությամբ մաքրվել է";
 "Settings.SupportSection.Title" = "Աջակցություն";
@@ -103,15 +134,24 @@
 "Language.Navigation.Title" = "Լեզու";
 /* Theme */
 "Theme.Navigation.Title" = "Գունային թեման";
+/* Contacts */
+"Contacts.Navigation.Title" = "Հրավիրել ընկերներին";
+"Contacts.PermissionDenied.Title" = "Մեզ հարկավոր է ձեր թույլտվությունը:";
+"Contacts.PermissionDenied.Description" = "Մենք չենք կարող շարունակել \nարանց ձեր կոնտակտների \nմուտքի թույլտվության: \nՓորձեք կրկին?";
+"Contacts.PermissionDenied.Button" = "Կարգավորումներ";
 /* User Details */
 //"User.Navigation.Title" = "User";
 "User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";
 "User.FollowersButton.Title" = "Հետեւորդներ";
 "User.FollowingButton.Title" = "Համախոհներ";
 "User.StarsCell.Title" = "Աստղեր";
+"User.WatchingCell.Title" = "Դիտում է";
 "User.EventsCell.Title" = "Միջոցառումներ";
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";
+"User.ProfileSummaryCell.Title" = "Պրոֆիլի Ամփոփագիր";
+"User.PinnedSection.Title" = "Կապակցված";
+"User.OrganizationsSection.Title" = "Կազմակերպություններ";
 /* Users */
 //"Users.Navigation.Title" = "Users";
 "Users.FollowersNavigation.Title" = "Հետեւորդներ";
@@ -129,7 +169,7 @@
 "WhatsNew.Item3.Subtitle" = "SwiftHub-ը լիովին բաց կոդով է\nԱստղերը շատ ողջունելի են ★";
 "WhatsNew.Item4.Title" = "Ընթացիկ";
 "WhatsNew.Item4.Subtitle" = "Տեսեք, թե ինչով է այսօր GitHub համայնքը առավել հետաքրքրված";
-"WhatsNew.DetailButton.Title" = "Իմացեք Ավելին";
+"WhatsNew.DetailButton.Title" = "Դիտել GitHub- ում";
 "WhatsNew.CompletionButton.Title" = "Շարունակել";
 /* Languages */
 "Languages.Navigation.Title" = "Լեզուներ";

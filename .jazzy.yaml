@@ -1,9 +1,10 @@
 clean: true
 sdk: iphone
-#swift_version: 3.0.1
+#swift_version: 4.2.1
 author: Khoren Markosyan
+github_url: https://github.com/khoren93/SwiftHub
 module: SwiftHub
-module_version: 1.0.0
+module_version: 1.5.0
 copyright: "2017-present. See LICENSE for more details."
 xcodebuild_arguments: [clean,build,-project,SwiftHub.xcodeproj,-scheme,SwiftHub]
-min_acl: protected
+min_acl: internal

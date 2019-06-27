@@ -10,14 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class CommitCellViewModel {
-
-    let title: Driver<String>
-    let detail: Driver<String>
-    let secondDetail: Driver<String>
-    let imageUrl: Driver<URL?>
-    let badge: Driver<UIImage?>
-    let badgeColor: Driver<UIColor>
+class CommitCellViewModel: DefaultTableViewCellViewModel {
 
     let commit: Commit
 
@@ -25,11 +18,12 @@ class CommitCellViewModel {
 
     init(with commit: Commit) {
         self.commit = commit
-        title = Driver.just("\(commit.commit?.message ?? "")")
-        detail = Driver.just("\(commit.commit?.committer?.date?.toRelative() ?? "")")
-        secondDetail = Driver.just("\(commit.sha?.slicing(from: 0, length: 7) ?? "")")
-        imageUrl = Driver.just(commit.committer?.avatarUrl?.url)
-        badge = Driver.just(R.image.icon_cell_badge_commit()?.template)
-        badgeColor = Driver.just(UIColor.flatGreenDark)
+        super.init()
+        title.accept(commit.commit?.message)
+        detail.accept(commit.commit?.committer?.date?.toRelative())
+        secondDetail.accept(commit.sha?.slicing(from: 0, length: 7))
+        imageUrl.accept(commit.committer?.avatarUrl)
+        badge.accept(R.image.icon_cell_badge_commit()?.template)
+        badgeColor.accept(UIColor.Material.green)
     }
 }

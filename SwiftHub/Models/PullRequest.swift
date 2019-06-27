@@ -32,7 +32,7 @@ struct PullRequest: Mappable {
     var htmlUrl: String?
     var id: Int?
     var issueUrl: String?
-    var labels: [Label]?
+    var labels: [IssueLabel]?
     var locked: Bool?
     var maintainerCanModify: Bool?
     var mergeCommitSha: String?
@@ -59,6 +59,7 @@ struct PullRequest: Mappable {
     var user: User?
 
     init?(map: Map) {}
+    init() {}
 
     mutating func mapping(map: Map) {
         activeLockReason <- map["active_lock_reason"]

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
-gem 'fastlane'
+gem 'fastlane'  # https://github.com/fastlane/fastlane
 
-gem 'cocoapods'
+gem 'cocoapods'  # https://github.com/CocoaPods/CocoaPods
+
+gem 'jazzy'  # https://github.com/realm/jazzy
