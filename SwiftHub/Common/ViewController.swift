@@ -140,15 +140,15 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
                 self?.languageChanged.accept(())
             }.disposed(by: rx.disposeBag)
 
-        // Two finger swipe gesture for opening Flex
-        let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
-        twoSwipeGesture.numberOfTouchesRequired = 1
-        self.view.addGestureRecognizer(twoSwipeGesture)
+        // One finger swipe gesture for opening Flex
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleOneFingerSwipe(swipeRecognizer:)))
+        swipeGesture.numberOfTouchesRequired = 1
+//        self.view.addGestureRecognizer(swipeGesture)
 
-        // Three finger swipe gesture for opening Flex and Hero debug
-        let threeSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleThreeFingerSwipe(swipeRecognizer:)))
-        threeSwipeGesture.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(threeSwipeGesture)
+        // Two finger swipe gesture for opening Flex and Hero debug
+        let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
+        twoSwipeGesture.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(twoSwipeGesture)
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -263,13 +263,13 @@ extension ViewController {
         return view
     }
 
-    @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
+    @objc func handleOneFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized, canOpenFlex {
             LibsManager.shared.showFlex()
         }
     }
 
-    @objc func handleThreeFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
+    @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
             HeroDebugPlugin.isEnabled = !HeroDebugPlugin.isEnabled

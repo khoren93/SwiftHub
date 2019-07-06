@@ -19,8 +19,6 @@ private class ReachabilityManager: NSObject {
 
     static let shared = ReachabilityManager()
 
-    fileprivate let reachability = Reachability.init()
-
     let reachSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     var reach: Observable<Bool> {
         return reachSubject.asObservable()
@@ -28,24 +26,29 @@ private class ReachabilityManager: NSObject {
 
     override init() {
         super.init()
-
-        reachability?.whenReachable = { reachability in
-            DispatchQueue.main.async {
-                self.reachSubject.onNext(true)
-            }
-        }
-
-        reachability?.whenUnreachable = { reachability in
-            DispatchQueue.main.async {
-                self.reachSubject.onNext(false)
-            }
-        }
-
         do {
-            try reachability?.startNotifier()
-            reachSubject.onNext(reachability?.connection != Reachability.Connection.none)
+            let reachability = try Reachability()
+
+            reachability.whenReachable = { reachability in
+                DispatchQueue.main.async {
+                    self.reachSubject.onNext(true)
+                }
+            }
+
+            reachability.whenUnreachable = { reachability in
+                DispatchQueue.main.async {
+                    self.reachSubject.onNext(false)
+                }
+            }
+
+            do {
+                try reachability.startNotifier()
+                reachSubject.onNext(reachability.connection != Reachability.Connection.unavailable)
+            } catch {
+                print("Unable to start notifier")
+            }
         } catch {
-            print("Unable to start notifier")
+            logError(error.localizedDescription)
         }
     }
 }

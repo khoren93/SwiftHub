@@ -18,6 +18,8 @@ class NavigationController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        interactivePopGestureRecognizer?.delegate = nil // Enable default iOS back swipe gesture
+
         hero.isEnabled = true
         hero.modalAnimationType = .autoReverse(presenting: .fade)
         hero.navigationAnimationType = .autoReverse(presenting: .slide(direction: .left))
