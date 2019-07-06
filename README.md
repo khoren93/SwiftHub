@@ -10,6 +10,10 @@
   KotlinHub - Android version is coming soon!
 </p>
 
+<p align="center">  
+  SwiftUI and Combine coming soon!
+</p>
+
 <p align="center">
   <a href="https://itunes.apple.com/app/swifthub-git-client/id1448628710">
     <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">

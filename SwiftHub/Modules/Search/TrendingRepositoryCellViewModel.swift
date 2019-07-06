@@ -36,13 +36,14 @@ extension TrendingRepositoryCellViewModel {
 extension TrendingRepository {
     func attributetDetail(since: String) -> NSAttributedString {
         let starImage = R.image.icon_cell_badge_star()?.filled(withColor: .text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
-        let starsString = (stars ?? 0).kFormatted()
-        let currentPeriodStarsString = "\((currentPeriodStars ?? 0).kFormatted()) \(since.lowercased())"
+        let starsString = (stars ?? 0).kFormatted().styled( with: .color(UIColor.text()))
+        let currentPeriodStarsString = "\((currentPeriodStars ?? 0).kFormatted()) \(since.lowercased())".styled( with: .color(UIColor.text()))
         let languageColorShape = "●".styled(with: StringStyle([.color(UIColor(hexString: languageColor ?? "") ?? .clear)]))
+        let languageString = (language ?? "").styled( with: .color(UIColor.text()))
         return NSAttributedString.composed(of: [
             starImage, Special.space, starsString, Special.space, Special.tab,
             starImage, Special.space, currentPeriodStarsString, Special.space, Special.tab,
-            languageColorShape, Special.space, language ?? ""
+            languageColorShape, Special.space, languageString
         ])
     }
 }
