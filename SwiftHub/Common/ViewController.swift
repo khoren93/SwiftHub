@@ -143,7 +143,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
         // One finger swipe gesture for opening Flex
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleOneFingerSwipe(swipeRecognizer:)))
         swipeGesture.numberOfTouchesRequired = 1
-//        self.view.addGestureRecognizer(swipeGesture)
+        self.view.addGestureRecognizer(swipeGesture)
 
         // Two finger swipe gesture for opening Flex and Hero debug
         let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
