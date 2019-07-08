@@ -27,10 +27,10 @@ class LanguagesViewModel: ViewModel, ViewModelType {
     }
 
     let currentLanguage: BehaviorRelay<Language?>
-    let languages: BehaviorRelay<Languages?>
+    let languages: BehaviorRelay<[Language]>
     var selectedIndexPath: IndexPath?
 
-    init(currentLanguage: Language?, languages: Languages?, provider: SwiftHubAPI) {
+    init(currentLanguage: Language?, languages: [Language], provider: SwiftHubAPI) {
         self.currentLanguage = BehaviorRelay(value: currentLanguage)
         self.languages = BehaviorRelay(value: languages)
         super.init(provider: provider)
@@ -41,30 +41,21 @@ class LanguagesViewModel: ViewModel, ViewModelType {
 
         let selectedLanguage = BehaviorRelay<Language?>(value: nil)
 
-        Observable.combineLatest(languages.filterNil(), input.keywordTrigger.asObservable())
+        Observable.combineLatest(languages, input.keywordTrigger.asObservable())
             .map({ (languages, keyword) -> [LanguageSection] in
-            var elements: [LanguageSection] = []
-                if let popularLanguages = languages.popular?.filtered({ (language) -> Bool in
+                var elements: [LanguageSection] = []
+
+                let languages = languages.filtered({ (language) -> Bool in
                     if keyword.isEmpty { return true }
                     return language.displayName().contains(keyword, caseSensitive: false)
                 }, map: { (language) -> LanguageSectionItem in
                     let cellViewModel = RepoLanguageCellViewModel(with: language)
                     return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
-                }), popularLanguages.isNotEmpty {
-                    let title = R.string.localizable.languagesPopularSectionTitle.key.localized()
-                    elements.append(LanguageSection.languages(title: title, items: popularLanguages))
-            }
-                if let allLanguages = languages.all?.filtered({ (language) -> Bool in
-                    if keyword.isEmpty { return true }
-                    return language.displayName().contains(keyword, caseSensitive: false)
-                }, map: { (language) -> LanguageSectionItem in
-                    let cellViewModel = RepoLanguageCellViewModel(with: language)
-                    return LanguageSectionItem.languageItem(cellViewModel: cellViewModel)
-                }), allLanguages.isNotEmpty {
-                    let title = R.string.localizable.languagesAllSectionTitle.key.localized()
-                    elements.append(LanguageSection.languages(title: title, items: allLanguages))
-            }
-            return elements
+                })
+
+                let title = R.string.localizable.languagesAllSectionTitle.key.localized()
+                elements.append(LanguageSection.languages(title: title, items: languages))
+                return elements
         }).bind(to: elements).disposed(by: rx.disposeBag)
 
         let saved = input.saveTrigger.map { () -> Void in

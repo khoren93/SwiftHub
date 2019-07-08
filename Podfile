@@ -35,8 +35,8 @@ target 'SwiftHub' do
     pod 'SwiftDate', '~> 6.0'  # https://github.com/malcommac/SwiftDate
 
     # Tools
-    pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.33.0'  # https://github.com/realm/SwiftLint
+    pod 'R.swift', '5.1.0.alpha.1'  # https://github.com/mac-cain13/R.swift
+    pod 'SwiftLint', '0.33.1'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess

@@ -62,7 +62,7 @@ class SearchViewModel: ViewModel, ViewModelType {
         let elements = BehaviorRelay<[SearchSection]>(value: [])
         let trendingRepositoryElements = BehaviorRelay<[TrendingRepository]>(value: [])
         let trendingUserElements = BehaviorRelay<[TrendingUser]>(value: [])
-        let languageElements = BehaviorRelay<Languages?>(value: nil)
+        let languageElements = BehaviorRelay<[Language]>(value: [])
         let repositorySelected = PublishSubject<Repository>()
         let userSelected = PublishSubject<User>()
         let dismissKeyboard = input.selection.mapToVoid()
@@ -186,12 +186,14 @@ class SearchViewModel: ViewModel, ViewModelType {
             analytics.log(.search(keyword: keyword))
         }).disposed(by: rx.disposeBag)
 
-        Observable.just(()).flatMapLatest { () -> Observable<Languages> in
+        Observable.just(()).flatMapLatest { () -> Observable<[Language]> in
             return self.provider.languages()
                 .trackActivity(self.loading)
                 .trackError(self.error)
-            }.subscribe(onNext: { (item) in
-                languageElements.accept(item)
+            }.subscribe(onNext: { (items) in
+                languageElements.accept(items)
+            }, onError: { (error) in
+                logError(error.localizedDescription)
             }).disposed(by: rx.disposeBag)
 
         let trendingPeriodSegment = BehaviorRelay(value: TrendingPeriodSegments.daily)

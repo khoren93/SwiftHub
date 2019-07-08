@@ -11,20 +11,6 @@ import ObjectMapper
 
 private let languageKey = "CurrentLanguageKey"
 
-struct Languages: Mappable {
-
-    var popular: [Language]?
-    var all: [Language]?
-
-    init?(map: Map) {}
-    init() {}
-
-    mutating func mapping(map: Map) {
-        popular <- map["popular"]
-        all <- map["all"]
-    }
-}
-
 struct Language: Mappable {
 
     var urlParam: String?

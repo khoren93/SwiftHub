@@ -273,8 +273,8 @@ extension RestApi {
         return trendingRequestArray(.trendingDevelopers(language: language, since: since), type: TrendingUser.self)
     }
 
-    func languages() -> Single<Languages> {
-        return trendingRequestObject(.languages, type: Languages.self)
+    func languages() -> Single<[Language]> {
+        return trendingRequestArray(.languages, type: Language.self)
     }
 }
 

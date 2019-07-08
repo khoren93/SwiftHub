@@ -237,7 +237,7 @@ extension GraphApi {
         return restApi.trendingDevelopers(language: language, since: since)
     }
 
-    func languages() -> Single<Languages> {
+    func languages() -> Single<[Language]> {
         return restApi.languages()
     }
 }

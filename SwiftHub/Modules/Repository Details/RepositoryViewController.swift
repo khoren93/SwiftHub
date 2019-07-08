@@ -292,7 +292,8 @@ class RepositoryViewController: TableViewController {
             guard let self = self else { return }
             if let url = content?.htmlUrl?.url {
                 self.panelContent.load(url: url)
-                self.panel.addPanel(toParent: self, belowView: nil, animated: true)
+                self.panel.addPanel(toParent: self, belowView: nil, animated: false)
+                self.panel.move(to: .tip, animated: true)
             } else {
                 self.panel.removePanelFromParent(animated: false)
             }

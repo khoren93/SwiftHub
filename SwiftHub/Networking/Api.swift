@@ -66,5 +66,5 @@ protocol SwiftHubAPI {
     // MARK: - Trending
     func trendingRepositories(language: String, since: String) -> Single<[TrendingRepository]>
     func trendingDevelopers(language: String, since: String) -> Single<[TrendingUser]>
-    func languages() -> Single<Languages>
+    func languages() -> Single<[Language]>
 }
