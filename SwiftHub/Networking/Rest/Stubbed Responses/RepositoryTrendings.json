@@ -41,7 +41,7 @@
         "author": "khoren93",
         "name": "SwiftHub",
         "url": "https://github.com/khoren93/SwiftHub",
-        "description": "GitHub iOS client written in RxSwift and MVVM-C clean architecture",
+        "description": "GitHub iOS client in RxSwift and MVVM-C clean architecture",
         "language": "Swift",
         "languageColor": "#ffac45",
         "stars": 841,

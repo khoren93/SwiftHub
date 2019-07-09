@@ -30,11 +30,6 @@ class SwiftHubUITests: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     func testScreenshotSettings() {
         let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
         element.children(matching: .other).element(boundBy: 3).tap()
@@ -43,7 +38,7 @@ class SwiftHubUITests: XCTestCase {
         sleep(1)
         element.children(matching: .other).element(boundBy: 3).tap()
 
-        sleep(3)
+        sleep(5)
         snapshot("03_settings_screen")
     }
 
@@ -51,27 +46,14 @@ class SwiftHubUITests: XCTestCase {
         let app = XCUIApplication()
 
         let tablesQuery = app.tables
-        tablesQuery.staticTexts["Github iOS client written in RxSwift and MVVM clean architecture"].tap()
+        tablesQuery.staticTexts["GitHub iOS client in RxSwift and MVVM-C clean architecture"].tap()
 
-        sleep(3)
+        sleep(5)
         snapshot("02_repository_details_screen")
     }
 
     func testScreenshotSearch() {
-
-        /*
-        let app = XCUIApplication()
-
-        // Search Repository screen
-        app.searchFields["Global Search"].tap()
-        app/*@START_MENU_TOKEN@*/.keys["S"]/*[[".keyboards.keys[\"S\"]",".keys[\"S\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.keys["w"]/*[[".keyboards.keys[\"w\"]",".keys[\"w\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.keys["i"]/*[[".keyboards.keys[\"i\"]",".keys[\"i\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.keys["f"]/*[[".keyboards.keys[\"f\"]",".keys[\"f\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.keys["t"]/*[[".keyboards.keys[\"t\"]",".keys[\"t\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards.buttons[\"Search\"]",".buttons[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-         */
-        sleep(3)
+        sleep(5)
         snapshot("01_search_repository_screen")
     }
 }
