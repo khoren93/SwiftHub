@@ -9,7 +9,6 @@
 import UIKit
 
 // All keys are demonstrative and used for the test.
-//基本的配置都在这里了
 enum Keys {
     case github, mixpanel, adMob
 
