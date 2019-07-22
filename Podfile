@@ -10,7 +10,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '14.0.0-alpha.1'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.11.1'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.12.0'  # https://github.com/apollographql/apollo-ios
     pod 'ReachabilitySwift', '5.0.0-beta1'  # https://github.com/ashleymills/Reachability.swift
 
     # Rx Extensions
@@ -35,8 +35,8 @@ target 'SwiftHub' do
     pod 'SwiftDate', '~> 6.0'  # https://github.com/malcommac/SwiftDate
 
     # Tools
-    pod 'R.swift', '5.1.0.alpha.1'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.33.1'  # https://github.com/realm/SwiftLint
+    pod 'R.swift', '5.1.0.alpha.4'  # https://github.com/mac-cain13/R.swift
+    pod 'SwiftLint', '0.34.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
