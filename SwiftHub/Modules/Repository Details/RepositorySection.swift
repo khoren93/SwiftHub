@@ -16,6 +16,7 @@ enum RepositorySection {
 enum RepositorySectionItem {
     case parentItem(viewModel: RepositoryDetailCellViewModel)
     case languageItem(viewModel: RepositoryDetailCellViewModel)
+    case languagesItem(viewModel: LanguagesCellViewModel)
     case sizeItem(viewModel: RepositoryDetailCellViewModel)
     case createdItem(viewModel: RepositoryDetailCellViewModel)
     case updatedItem(viewModel: RepositoryDetailCellViewModel)

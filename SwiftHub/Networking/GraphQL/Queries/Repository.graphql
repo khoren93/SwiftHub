@@ -24,6 +24,17 @@ query Repository($owner: String!, $name: String!, $qualifiedName: String!) {
             name
             color
         }
+        languages(first: 20) {
+            totalCount
+            totalSize
+            edges {
+                size
+                node {
+                    name
+                    color
+                }
+            }
+        }
         licenseInfo {
             name
         }

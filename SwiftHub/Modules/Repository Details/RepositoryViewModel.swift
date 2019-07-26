@@ -169,8 +169,12 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 items.append(RepositorySectionItem.parentItem(viewModel: parentCellViewModel))
             }
 
-            // Language
-            if let language = repository.language {
+            if let languages = repository.languages {
+                // Languages available only for OAuth authentication
+                let languagesCellViewModel = LanguagesCellViewModel(languages: languages)
+                items.append(RepositorySectionItem.languagesItem(viewModel: languagesCellViewModel))
+            } else if let language = repository.language {
+                // Language
                 let languageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryLanguageCellTitle.key.localized(),
                                                                           detail: language,
                                                                           image: R.image.icon_cell_git_language()?.template,

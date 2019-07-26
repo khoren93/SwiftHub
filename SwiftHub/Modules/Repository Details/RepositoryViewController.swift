@@ -14,6 +14,7 @@ import BonMot
 import FloatingPanel
 
 private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
+private let languagesReuseIdentifier = R.reuseIdentifier.languagesCell.identifier
 
 class RepositoryViewController: TableViewController {
 
@@ -127,6 +128,7 @@ class RepositoryViewController: TableViewController {
         stackView.insertArrangedSubview(headerView, at: 0)
         tableView.footRefreshControl = nil
         tableView.register(R.nib.repositoryDetailCell)
+        tableView.register(R.nib.languagesCell)
         bannerView.isHidden = true
     }
 
@@ -167,6 +169,10 @@ class RepositoryViewController: TableViewController {
                  .sourceItem(let viewModel),
                  .starHistoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
+                cell.bind(to: viewModel)
+                return cell
+            case .languagesItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: languagesReuseIdentifier, for: indexPath) as? LanguagesCell)!
                 cell.bind(to: viewModel)
                 return cell
             }

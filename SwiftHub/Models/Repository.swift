@@ -30,6 +30,7 @@ struct Repository: Mappable {
     var htmlUrl: String?
     var language: String?  // The name of the current language.
     var languageColor: String?  // The color defined for the current language.
+    var languages: Languages?  // A list containing a breakdown of the language composition of the repository.
     var license: License?
     var name: String?  // The name of the repository.
     var networkCount: Int?
@@ -148,6 +149,10 @@ extension Repository {
         contributorsCount = graph?.mentionableUsers.totalCount
         owner?.login = graph?.owner.login
         owner?.type = graph?.owner.asOrganization != nil ? UserType.organization: UserType.user
+        languages = Languages(graph: graph?.languages)
+        if languages?.totalCount == 0 {
+            languages = nil
+        }
     }
 
     init(graph: SearchRepositoriesQuery.Data.Search.Node.AsRepository?) {
