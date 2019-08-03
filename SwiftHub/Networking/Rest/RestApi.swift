@@ -63,17 +63,17 @@ extension RestApi {
             params["code"] = code
             params["redirect_uri"] = redirectUri
             params["state"] = state
-            Alamofire.request("https://github.com/login/oauth/access_token",
-                              method: .post,
-                              parameters: params,
-                              encoding: URLEncoding.default,
-                              headers: ["Accept": "application/json"])
+            AF.request("https://github.com/login/oauth/access_token",
+                       method: .post,
+                       parameters: params,
+                       encoding: URLEncoding.default,
+                       headers: ["Accept": "application/json"])
                 .responseJSON(completionHandler: { (response) in
                     if let error = response.error {
                         single(.error(error))
                         return
                     }
-                    if let json = response.result.value as? [String: Any] {
+                    if let json = response.value as? [String: Any] {
                         if let token = Mapper<Token>().map(JSON: json) {
                             single(.success(token))
                             return
