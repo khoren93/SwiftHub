@@ -19,7 +19,6 @@ platform :ios do
 
   desc "Install all libraries"
   lane :setup do
-    sh("brew install node") # install node
     sh("npm install -g apollo") # install apollo
     cocoapods # install pods
   end
