@@ -14,17 +14,30 @@ import Apollo
 class GraphApi: SwiftHubAPI {
 
     let restApi: RestApi
+    let token: String
 
-    let client: ApolloClient
+    private lazy var networkTransport = HTTPNetworkTransport(
+        url: "https://api.github.com/graphql".url!,
+        delegate: self
+    )
+
+    private(set) lazy var client = ApolloClient(networkTransport: self.networkTransport)
 
     init(restApi: RestApi, token: String) {
         self.restApi = restApi
+        self.token = token
+    }
+}
 
-        let url = "https://api.github.com/graphql".url!
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = ["Authorization": "Bearer \(token)"]
-        let networkTransport = HTTPNetworkTransport(url: url, configuration: configuration)
-        client = ApolloClient(networkTransport: networkTransport)
+extension GraphApi: HTTPNetworkTransportPreflightDelegate {
+    func networkTransport(_ networkTransport: HTTPNetworkTransport, shouldSend request: URLRequest) -> Bool {
+        return true
+    }
+
+    func networkTransport(_ networkTransport: HTTPNetworkTransport, willSend request: inout URLRequest) {
+        var headers = request.allHTTPHeaderFields ?? [String: String]()
+        headers["Authorization"] = "Bearer \(token)"
+        request.allHTTPHeaderFields = headers
     }
 }
 
