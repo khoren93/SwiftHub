@@ -83,10 +83,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/readme?ref=master",
 									"host": [
@@ -114,10 +110,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contents/:path?",
 									"host": [
@@ -159,10 +151,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/commits?per_page={{per_page}}",
 									"host": [
@@ -189,10 +177,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/commits/:sha",
 									"host": [
@@ -227,10 +211,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/branches?per_page={{per_page}}",
 									"host": [
@@ -257,10 +237,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/branches/:branch",
 									"host": [
@@ -294,10 +270,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/releases?per_page={{per_page}}",
 									"host": [
@@ -325,10 +297,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/releases/:release_id",
 									"host": [
@@ -344,7 +312,7 @@
 									"variable": [
 										{
 											"key": "release_id",
-											"value": "16590874"
+											"value": "16165731"
 										}
 									]
 								}
@@ -362,10 +330,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/forks?per_page={{per_page}}",
 									"host": [
@@ -395,10 +359,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/user/repos?page=1&visibility=all&affiliation=owner,collaborator,organization_member&sort=full_name&direction=asc&per_page={{per_page}}",
 							"host": [
@@ -444,10 +404,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/users/{{username}}/repos?page=1&per_page={{per_page}}",
 							"host": [
@@ -478,10 +434,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/orgs/{{org}}/repos?type=all&page=1&per_page={{per_page}}",
 							"host": [
@@ -516,10 +468,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repositories?since=364&per_page={{per_page}}",
 							"host": [
@@ -548,10 +496,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}",
 							"host": [
@@ -571,10 +515,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contributors?page=1&per_page={{per_page}}",
 							"host": [
@@ -606,10 +546,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/languages",
 							"host": [
@@ -631,10 +567,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/teams",
 							"host": [
@@ -655,10 +587,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/tags?page=1&per_page={{per_page}}",
 							"host": [
@@ -694,10 +622,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/orgs/{{org}}",
 							"host": [
@@ -725,10 +649,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/followers?per_page={{per_page}}",
 									"host": [
@@ -758,10 +678,6 @@
 								},
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/following?per_page={{per_page}}",
 									"host": [
@@ -788,10 +704,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/following/{{owner}}",
 									"host": [
@@ -812,10 +724,6 @@
 							"request": {
 								"method": "PUT",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/following/{{owner}}",
 									"host": [
@@ -835,10 +743,6 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/following/{{owner}}",
 									"host": [
@@ -861,10 +765,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/user",
 							"host": [
@@ -882,10 +782,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/users/{{owner}}",
 							"host": [
@@ -910,10 +806,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/search/repositories?q=swift&sort=stars&order=desc&page=1&per_page={{per_page}}",
 							"host": [
@@ -958,10 +850,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/search/users?q=realm&sort&order&page=1&per_page={{per_page}}",
 							"host": [
@@ -1011,14 +899,39 @@
 					"name": "Events",
 					"item": [
 						{
+							"name": "List public events for an organization",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/orgs/{{org}}/events?page=1&per_page={{per_page}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"orgs",
+										"{{org}}",
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "List events that a user has received",
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/received_events?page=1&per_page={{per_page}}",
 									"host": [
@@ -1049,10 +962,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -1083,10 +992,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -1115,10 +1020,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -1149,10 +1050,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/events?page=1&per_page={{per_page}}",
 									"host": [
@@ -1191,10 +1088,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/stargazers?per_page={{per_page}}",
 									"host": [
@@ -1221,10 +1114,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/starred?per_page={{per_page}}",
 									"host": [
@@ -1251,10 +1140,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
 									"host": [
@@ -1276,10 +1161,6 @@
 							"request": {
 								"method": "PUT",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
 									"host": [
@@ -1301,10 +1182,6 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/user/starred/{{owner}}/{{repo}}",
 									"host": [
@@ -1333,10 +1210,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/subscribers?per_page={{per_page}}",
 									"host": [
@@ -1363,10 +1236,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/users/{{username}}/subscriptions?per_page={{per_page}}",
 									"host": [
@@ -1400,10 +1269,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
 									"host": [
@@ -1443,10 +1308,6 @@
 								},
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/notifications?page=1&per_page={{per_page}}&all=true&participating=false",
 									"host": [
@@ -1491,14 +1352,57 @@
 			"name": "Issues",
 			"item": [
 				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "List comments on an issue",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number/comments?",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"repos",
+										"{{owner}}",
+										"{{repo}}",
+										"issues",
+										":number",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "{{per_page}}",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "number",
+											"value": "7"
+										}
+									]
+								},
+								"description": "Issue Comments are ordered by ascending ID."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "List issues",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/issues?page=1&per_page={{per_page}}&state=all",
 							"host": [
@@ -1531,10 +1435,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/user/issues?page=1&per_page={{per_page}}&state=all",
 							"host": [
@@ -1568,10 +1468,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues?page=1&per_page={{per_page}}",
 							"host": [
@@ -1607,10 +1503,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number?",
 							"host": [
@@ -1655,10 +1547,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/pulls?state=all",
 							"host": [
@@ -1685,10 +1573,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/pulls/:number",
 							"host": [
@@ -1722,10 +1606,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{trending_base_url}}/repositories?language=swift&since",
 							"host": [
@@ -1756,10 +1636,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{trending_base_url}}/developers?language=swift&since",
 							"host": [
@@ -1790,10 +1666,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{trending_base_url}}/languages",
 							"host": [
