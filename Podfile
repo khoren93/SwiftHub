@@ -86,7 +86,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.48.0'
+    pod 'Google-Mobile-Ads-SDK', '7.49.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
