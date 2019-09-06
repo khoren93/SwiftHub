@@ -120,7 +120,7 @@ extension NetworkingType {
     static var plugins: [PluginType] {
         var plugins: [PluginType] = []
         if Configs.Network.loggingEnabled == true {
-            plugins.append(NetworkLoggerPlugin(verbose: true))
+            plugins.append(NetworkLoggerPlugin())
         }
         return plugins
     }

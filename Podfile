@@ -9,8 +9,8 @@ target 'SwiftHub' do
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift', '14.0.0-alpha.2'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.15.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Moya/RxSwift', '14.0.0-beta.1'  # https://github.com/Moya/Moya
+    pod 'Apollo', '0.15.1'  # https://github.com/apollographql/apollo-ios
     pod 'ReachabilitySwift', '5.0.0-beta1'  # https://github.com/ashleymills/Reachability.swift
 
     # Rx Extensions
@@ -36,7 +36,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '5.1.0.alpha.4'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.34.0'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.35.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 3.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -50,7 +50,7 @@ target 'SwiftHub' do
     pod 'ImageSlideshow/Kingfisher', '~> 1.8'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.4.0'  # https://github.com/lkzhao/Hero
-    pod 'Localize-Swift', '~> 2.0'  # https://github.com/marmelroy/Localize-Swift
+    pod 'Localize-Swift', '~> 3.0'  # https://github.com/marmelroy/Localize-Swift
     pod 'RAMAnimatedTabBarController', '~> 5.0'  # https://github.com/Ramotion/animated-tab-bar
     pod 'AcknowList', '~> 1.8'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
