@@ -10,7 +10,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '14.0.0-beta.2'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.15.1'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.15.3'  # https://github.com/apollographql/apollo-ios
     pod 'ReachabilitySwift', '5.0.0-beta1'  # https://github.com/ashleymills/Reachability.swift
 
     # Rx Extensions
@@ -70,7 +70,7 @@ target 'SwiftHub' do
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', :git => 'https://github.com/Flipboard/FLEX.git', :commit => '1ef608cf8aa268716363586e894e053a3bed32c4'  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', :git => 'https://github.com/khoren93/FLEX.git', :branch => 'remove_private_api'  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'BonMot', '~> 5.0'  # https://github.com/Rightpoint/BonMot
 
@@ -86,7 +86,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.49.0'
+    pod 'Google-Mobile-Ads-SDK', '7.50.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
