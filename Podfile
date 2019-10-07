@@ -10,7 +10,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '14.0.0-beta.2'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.15.3'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.16.1'  # https://github.com/apollographql/apollo-ios
     pod 'ReachabilitySwift', '5.0.0-beta1'  # https://github.com/ashleymills/Reachability.swift
 
     # Rx Extensions

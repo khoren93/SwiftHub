@@ -38,7 +38,7 @@ extension Reactive where Base: ImageCache {
                 do {
                     single(.success(Int(try result.get())))
                 } catch {
-                    single(.error(ContactsError.accessDenied))
+                    single(.error(error))
                 }
             }
             return Disposables.create { }
