@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import Reachability
+import Alamofire
 
 // An observable that completes when the app gets online (possibly completes immediately).
 func connectedToInternet() -> Observable<Bool> {
@@ -26,29 +26,16 @@ private class ReachabilityManager: NSObject {
 
     override init() {
         super.init()
-        do {
-            let reachability = try Reachability()
 
-            reachability.whenReachable = { reachability in
-                DispatchQueue.main.async {
-                    self.reachSubject.onNext(true)
-                }
+        NetworkReachabilityManager.default?.startListening(onUpdatePerforming: { (status) in
+            switch status {
+            case .notReachable:
+                self.reachSubject.onNext(false)
+            case .reachable:
+                self.reachSubject.onNext(true)
+            case .unknown:
+                self.reachSubject.onNext(false)
             }
-
-            reachability.whenUnreachable = { reachability in
-                DispatchQueue.main.async {
-                    self.reachSubject.onNext(false)
-                }
-            }
-
-            do {
-                try reachability.startNotifier()
-                reachSubject.onNext(reachability.connection != Reachability.Connection.unavailable)
-            } catch {
-                print("Unable to start notifier")
-            }
-        } catch {
-            logError(error.localizedDescription)
-        }
+        })
     }
 }

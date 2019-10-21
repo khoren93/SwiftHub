@@ -10,8 +10,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '14.0.0-beta.2'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.16.1'  # https://github.com/apollographql/apollo-ios
-    pod 'ReachabilitySwift', '5.0.0-beta1'  # https://github.com/ashleymills/Reachability.swift
+    pod 'Apollo', '0.17.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -86,7 +85,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.50.0'
+    pod 'Google-Mobile-Ads-SDK', '7.51.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
