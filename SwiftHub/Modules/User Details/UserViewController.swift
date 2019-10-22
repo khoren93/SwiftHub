@@ -254,22 +254,22 @@ class UserViewController: TableViewController {
 
         output.repositoriesCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.userRepositoriesButtonTitle.key.localized()
-            self?.repositoriesButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.repositoriesButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followersCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.userFollowersButtonTitle.key.localized()
-            self?.followersButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.followersButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followingCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.userFollowingButtonTitle.key.localized()
-            self?.followingButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.followingButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.imageSelected.drive(onNext: { [weak self] () in
             if let strongSelf = self {
-                strongSelf.ownerImageView.presentFullScreenController(from: strongSelf)
+                strongSelf.ownerImageView.present(from: strongSelf)
             }
         }).disposed(by: rx.disposeBag)
 
@@ -290,7 +290,7 @@ class UserViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
     }
 
-    func attributetText(title: String, value: Int) -> NSAttributedString {
+    func attributedText(title: String, value: Int) -> NSAttributedString {
         let titleText = title.styled(with: .color(.white),
                                      .font(.boldSystemFont(ofSize: 12)),
                                      .alignment(.center))

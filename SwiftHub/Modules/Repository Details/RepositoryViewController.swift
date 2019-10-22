@@ -265,17 +265,17 @@ class RepositoryViewController: TableViewController {
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.repositoryWatchersButtonTitle.key.localized()
-            self?.watchersButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.watchersButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.starsCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.repositoryStarsButtonTitle.key.localized()
-            self?.starsButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.starsButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.forksCount.drive(onNext: { [weak self] (count) in
             let text = R.string.localizable.repositoryForksButtonTitle.key.localized()
-            self?.forksButton.setAttributedTitle(self?.attributetText(title: text, value: count), for: .normal)
+            self?.forksButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.imageSelected.drive(onNext: { [weak self] (viewModel) in
@@ -310,7 +310,7 @@ class RepositoryViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
     }
 
-    func attributetText(title: String, value: Int) -> NSAttributedString {
+    func attributedText(title: String, value: Int) -> NSAttributedString {
         let titleText = title.styled(with: .color(.white),
                                      .font(.boldSystemFont(ofSize: 12)),
                                      .alignment(.center))
