@@ -77,7 +77,6 @@ enum HomeTabBarItem: Int {
             .bind({ $0.text }, to: item.rx.iconColor)
             .bind({ $0.text }, to: item.rx.textColor)
 
-        item.yOffSet = -1
         vc.tabBarItem = item
         return vc
     }
@@ -98,8 +97,6 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    let tabTapped = PublishSubject<UIGestureRecognizer>()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -113,12 +110,6 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         hero.isEnabled = true
         tabBar.hero.id = "TabBarID"
         tabBar.isTranslucent = false
-
-        // Fixed an issue when TabBar is switched quickly, the selected item is abnormal
-        tabTapped.throttle(DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] (gesture) in
-                self?.tabTapped(gesture)
-            }).disposed(by: rx.disposeBag)
 
         NotificationCenter.default
             .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
@@ -160,13 +151,5 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
                 self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
             }
         }).disposed(by: rx.disposeBag)
-    }
-
-    override func tapHandler(_ gesture: UIGestureRecognizer) {
-        tabTapped.onNext(gesture)
-    }
-
-    func tabTapped(_ gesture: UIGestureRecognizer) {
-        super.tapHandler(gesture)
     }
 }
