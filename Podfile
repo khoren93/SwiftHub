@@ -10,7 +10,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '14.0.0-beta.2'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.19.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.20.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources

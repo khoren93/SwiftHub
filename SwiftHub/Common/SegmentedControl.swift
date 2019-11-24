@@ -30,6 +30,11 @@ class SegmentedControl: HMSegmentedControl {
         makeUI()
     }
 
+    override init(sectionImages: [UIImage]!, sectionSelectedImages: [UIImage]!, titlesForSections sectionTitles: [String]!) {
+        super.init(sectionImages: sectionImages, sectionSelectedImages: sectionSelectedImages, titlesForSections: sectionTitles)
+        makeUI()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()
@@ -44,7 +49,7 @@ class SegmentedControl: HMSegmentedControl {
         themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
             self?.backgroundColor = theme.primary
             self?.selectionIndicatorColor = theme.secondary
-            let font = UIFont.systemFont(ofSize: 14)
+            let font = UIFont.systemFont(ofSize: 12)
             self?.titleTextAttributes = [NSAttributedString.Key.font: font,
                                          NSAttributedString.Key.foregroundColor: theme.text]
             self?.selectedTitleTextAttributes = [NSAttributedString.Key.font: font,
@@ -53,6 +58,7 @@ class SegmentedControl: HMSegmentedControl {
         }).disposed(by: rx.disposeBag)
 
         cornerRadius = Configs.BaseDimensions.cornerRadius
+        imagePosition = .aboveText
         selectionStyle = .box
         selectionIndicatorLocation = .down
         selectionIndicatorBoxOpacity = 0

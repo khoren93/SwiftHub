@@ -141,13 +141,13 @@ class SearchViewController: TableViewController {
     }()
 
     lazy var segmentedControl: SegmentedControl = {
-        let items = [SearchTypeSegments.repositories.title, SearchTypeSegments.users.title]
+        let titles = [SearchTypeSegments.repositories.title, SearchTypeSegments.users.title]
         let images = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
         let selectedImages = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
-        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages)
+        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages, titlesForSections: titles)
         view.selectedSegmentIndex = 0
         view.snp.makeConstraints({ (make) in
-            make.width.equalTo(200)
+            make.width.equalTo(220)
         })
         return view
     }()
@@ -162,8 +162,10 @@ class SearchViewController: TableViewController {
 
     let searchModeView = View()
     lazy var searchModeSegmentedControl: SegmentedControl = {
-        let items = [SearchModeSegments.trending.title, SearchModeSegments.search.title]
-        let view = SegmentedControl(sectionTitles: items)
+        let titles = [SearchModeSegments.trending.title, SearchModeSegments.search.title]
+        let images = [R.image.icon_cell_badge_trending()!, R.image.icon_cell_badge_search()!]
+        let selectedImages = [R.image.icon_cell_badge_trending()!, R.image.icon_cell_badge_search()!]
+        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages, titlesForSections: titles)
         view.selectedSegmentIndex = 0
         return view
     }()
@@ -211,6 +213,8 @@ class SearchViewController: TableViewController {
 
         languageChanged.subscribe(onNext: { [weak self] () in
             self?.searchBar.placeholder = R.string.localizable.searchSearchBarPlaceholder.key.localized()
+            self?.segmentedControl.sectionTitles = [SearchTypeSegments.repositories.title,
+                                                    SearchTypeSegments.users.title]
             self?.trendingPeriodSegmentedControl.sectionTitles = [TrendingPeriodSegments.daily.title,
                                                                   TrendingPeriodSegments.weekly.title,
                                                                   TrendingPeriodSegments.montly.title]
@@ -220,7 +224,8 @@ class SearchViewController: TableViewController {
 
         trendingPeriodView.addSubview(trendingPeriodSegmentedControl)
         trendingPeriodSegmentedControl.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(self.inset)
+            make.left.right.equalToSuperview().inset(self.inset)
+            make.top.bottom.equalToSuperview()
         }
 
         searchModeView.addSubview(searchModeSegmentedControl)
@@ -234,7 +239,7 @@ class SearchViewController: TableViewController {
         stackView.addArrangedSubview(searchModeView)
 
         labelsStackView.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
+            make.height.equalTo(30)
         }
 
         sortDropDown.selectionAction = { [weak self] (index: Int, item: String) in
@@ -264,12 +269,21 @@ class SearchViewController: TableViewController {
             self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
 
             self?.segmentedControl.sectionImages = [
-                R.image.icon_cell_badge_repository()!.tint(UIColor.Material.grey900, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_user()!.tint(UIColor.Material.grey900, blendMode: .normal).withRoundedCorners()!
+                R.image.icon_cell_badge_repository()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_user()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!
             ]
             self?.segmentedControl.sectionSelectedImages = [
                 R.image.icon_cell_badge_repository()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
                 R.image.icon_cell_badge_user()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!
+            ]
+
+            self?.searchModeSegmentedControl.sectionImages = [
+                R.image.icon_cell_badge_trending()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_search()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!
+            ]
+            self?.searchModeSegmentedControl.sectionSelectedImages = [
+                R.image.icon_cell_badge_trending()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_search()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!
             ]
         }).disposed(by: rx.disposeBag)
     }
