@@ -22,6 +22,9 @@
 "Common.Success" = "Հաջողություն";
 "Common.Error" = "Սխալ";
 "Common.NoResults" = "Ոչ մի արդյունք";
+/* Toast */
+"Toast.ConnectionBack.Message" = "Կապը վերականգնվեց";
+"Toast.ConnectionLost.Message" = "Կապ չկա";
 /* Home TabBar */
 "Home.TabBar.Events.Title" = "Միջոցառումներ";
 "Home.TabBar.Search.Title" = "Որոնում";

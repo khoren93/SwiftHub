@@ -22,6 +22,9 @@
 "Common.Success" = "Success";
 "Common.Error" = "Error";
 "Common.NoResults" = "No Results";
+/* Toast */
+"Toast.ConnectionBack.Message" = "Back online";
+"Toast.ConnectionLost.Message" = "No connection";
 /* Home TabBar */
 "Home.TabBar.Events.Title" = "Events";
 "Home.TabBar.Search.Title" = "Search";

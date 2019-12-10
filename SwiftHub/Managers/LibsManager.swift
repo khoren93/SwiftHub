@@ -90,7 +90,7 @@ class LibsManager: NSObject {
         var style = ToastStyle()
         style.backgroundColor = UIColor.Material.red
         style.messageColor = UIColor.Material.white
-        style.imageSize = CGSize(width: 30, height: 30)
+        style.imageSize = CGSize(width: 20, height: 20)
         ToastManager.shared.style = style
     }
 

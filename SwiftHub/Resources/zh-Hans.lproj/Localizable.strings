@@ -22,6 +22,9 @@
 "Common.Success" = "成功";
 "Common.Error" = "错误";
 "Common.NoResults" = "没有结果";
+/* Toast */
+"Toast.ConnectionBack.Message" = "连接已恢复";
+"Toast.ConnectionLost.Message" = "没联系";
 /* 主页TabBar */
 "Home.TabBar.Events.Title" = "事件";
 "Home.TabBar.Search.Title" = "搜索";

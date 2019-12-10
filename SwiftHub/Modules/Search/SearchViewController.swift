@@ -269,8 +269,8 @@ class SearchViewController: TableViewController {
             self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
 
             self?.segmentedControl.sectionImages = [
-                R.image.icon_cell_badge_repository()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_user()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!
+                R.image.icon_cell_badge_repository()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_user()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!
             ]
             self?.segmentedControl.sectionSelectedImages = [
                 R.image.icon_cell_badge_repository()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
@@ -278,8 +278,8 @@ class SearchViewController: TableViewController {
             ]
 
             self?.searchModeSegmentedControl.sectionImages = [
-                R.image.icon_cell_badge_trending()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_search()!.tint(theme.text, blendMode: .normal).withRoundedCorners()!
+                R.image.icon_cell_badge_trending()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!,
+                R.image.icon_cell_badge_search()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!
             ]
             self?.searchModeSegmentedControl.sectionSelectedImages = [
                 R.image.icon_cell_badge_trending()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,

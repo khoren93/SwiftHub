@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,6 +39,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // Disable banners
             libsManager.bannersEnabled.accept(false)
+        } else {
+            connectedToInternet().skip(1).subscribe(onNext: { [weak self] (connected) in
+                var style = ToastManager.shared.style
+                style.backgroundColor = connected ? UIColor.Material.green: UIColor.Material.red
+                let message = connected ? R.string.localizable.toastConnectionBackMessage.key.localized(): R.string.localizable.toastConnectionLostMessage.key.localized()
+                let image = connected ? R.image.icon_toast_success(): R.image.icon_toast_warning()
+                if let view = self?.window?.rootViewController?.view {
+                    view.makeToast(message, position: .bottom, image: image, style: style)
+                }
+            }).disposed(by: rx.disposeBag)
         }
 
         // Show initial screen

@@ -49,7 +49,7 @@ class SegmentedControl: HMSegmentedControl {
         themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
             self?.backgroundColor = theme.primary
             self?.selectionIndicatorColor = theme.secondary
-            let font = UIFont.systemFont(ofSize: 12)
+            let font = UIFont.systemFont(ofSize: 11)
             self?.titleTextAttributes = [NSAttributedString.Key.font: font,
                                          NSAttributedString.Key.foregroundColor: theme.text]
             self?.selectedTitleTextAttributes = [NSAttributedString.Key.font: font,

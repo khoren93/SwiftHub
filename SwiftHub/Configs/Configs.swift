@@ -56,7 +56,7 @@ struct Configs {
         static let buttonHeight: CGFloat = 40
         static let textFieldHeight: CGFloat = 40
         static let tableRowHeight: CGFloat = 40
-        static let segmentedControlHeight: CGFloat = 38
+        static let segmentedControlHeight: CGFloat = 40
     }
 
     struct Path {
