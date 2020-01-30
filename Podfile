@@ -5,11 +5,10 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'SwiftHub' do
-    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift', '14.0.0-beta.2'  # https://github.com/Moya/Moya
+    pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
     pod 'Apollo', '0.21.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
@@ -20,11 +19,9 @@ target 'SwiftHub' do
     pod 'RxGesture', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxGesture
     pod 'RxOptional', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxOptional
     pod 'RxTheme', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxTheme
-    #pod 'RxAnimated', '~> 0.4'  # https://github.com/RxSwiftCommunity/RxAnimated
-
+ 
     # JSON Mapping
-    #pod 'ObjectMapper', :git => 'https://github.com/kajensen/ObjectMapper.git'  # https://github.com/Hearst-DD/ObjectMapper
-    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/khoren93/Moya-ObjectMapper.git', :branch => 'moya14'  # https://github.com/ivanbruel/Moya-ObjectMapper
+    pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
     pod 'Kingfisher', '~> 5.0'  # https://github.com/onevcat/Kingfisher
@@ -35,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.38.0'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.38.2'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -85,14 +82,13 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.53.1'
+    pod 'Google-Mobile-Ads-SDK', '7.54.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
         pod 'Quick', '~> 2.0'  # https://github.com/Quick/Quick
         pod 'Nimble', '~> 8.0'  # https://github.com/Quick/Nimble
-        #pod 'RxNimble', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxNimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
         pod 'Firebase'
