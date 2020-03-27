@@ -134,7 +134,7 @@ class LibsManager: NSObject {
     }
 
     func setupFLEX() {
-        FLEXManager.shared().isNetworkDebuggingEnabled = true
+        FLEXManager.shared.isNetworkDebuggingEnabled = true
     }
 
     func setupAnalytics() {
@@ -154,7 +154,7 @@ class LibsManager: NSObject {
 extension LibsManager {
 
     func showFlex() {
-        FLEXManager.shared().showExplorer()
+        FLEXManager.shared.showExplorer()
         analytics.log(.flexOpened)
     }
 

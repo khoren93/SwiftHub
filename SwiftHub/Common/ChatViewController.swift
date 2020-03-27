@@ -180,7 +180,7 @@ extension ChatViewController: MessageLabelDelegate {
     }
 }
 
-extension ChatViewController: MessageInputBarDelegate {
+extension ChatViewController: InputBarAccessoryViewDelegate {
 
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         sendPressed.onNext(text)

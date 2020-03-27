@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.22.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.24.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -45,7 +45,7 @@ target 'SwiftHub' do
     pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
     pod 'ImageSlideshow/Kingfisher', '~> 1.8'  # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
-    pod 'Hero', '~> 1.5.0'  # https://github.com/lkzhao/Hero
+    pod 'Hero', :git => 'https://github.com/HeroTransitions/Hero.git', :branch => 'develop'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 3.0'  # https://github.com/marmelroy/Localize-Swift
     pod 'RAMAnimatedTabBarController', '5.0.1'  # https://github.com/Ramotion/animated-tab-bar
     pod 'AcknowList', '~> 1.8'  # https://github.com/vtourraine/AcknowList
@@ -66,7 +66,7 @@ target 'SwiftHub' do
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', :git => 'https://github.com/khoren93/FLEX.git', :branch => 'remove_private_api'  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', '~> 4.0'  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'BonMot', '~> 5.0'  # https://github.com/Rightpoint/BonMot
 
@@ -82,7 +82,7 @@ target 'SwiftHub' do
 
     # Ads
     pod 'Firebase/AdMob'
-    pod 'Google-Mobile-Ads-SDK', '7.55.1'
+    pod 'Google-Mobile-Ads-SDK', '7.57.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
