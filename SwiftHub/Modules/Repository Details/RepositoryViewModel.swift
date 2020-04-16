@@ -369,6 +369,10 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: ref, provider: provider)
             return viewModel
 
+        case .countLinesOfCodeItem:
+            let viewModel = LinesCountViewModel(repository: repository.value, provider: provider)
+            return viewModel
+
         default: return nil
         }
         return nil

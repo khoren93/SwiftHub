@@ -68,6 +68,8 @@
 		073A1F792233F2F000D6F487 /* Search.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 073A1F782233F2F000D6F487 /* Search.graphql */; };
 		074DBBEA24489E750062B35F /* CodetabsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBE924489E750062B35F /* CodetabsApi.swift */; };
 		074DBBEE2448A0480062B35F /* RepositoryNumberOfLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */; };
+		074DBBF12448AF0E0062B35F /* LinesCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBF02448AF0E0062B35F /* LinesCountViewModel.swift */; };
+		074DBBF32448AF220062B35F /* LinesCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBF22448AF220062B35F /* LinesCountViewController.swift */; };
 		0752F48821C8D9A800A30BF2 /* TrendingRepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */; };
 		0752F48921C8D9A800A30BF2 /* TrendingRepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */; };
 		0752F48C21C8D9BA00A30BF2 /* TrendingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */; };
@@ -364,6 +366,8 @@
 		073A1F782233F2F000D6F487 /* Search.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Search.graphql; sourceTree = "<group>"; };
 		074DBBE924489E750062B35F /* CodetabsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodetabsApi.swift; sourceTree = "<group>"; };
 		074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RepositoryNumberOfLines.json; sourceTree = "<group>"; };
+		074DBBF02448AF0E0062B35F /* LinesCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesCountViewModel.swift; sourceTree = "<group>"; };
+		074DBBF22448AF220062B35F /* LinesCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesCountViewController.swift; sourceTree = "<group>"; };
 		0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepositoryCell.swift; sourceTree = "<group>"; };
 		0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingRepositoryCell.xib; sourceTree = "<group>"; };
 		0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingUserCell.swift; sourceTree = "<group>"; };
@@ -756,6 +760,15 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		074DBBEF2448AEBF0062B35F /* Lines Count */ = {
+			isa = PBXGroup;
+			children = (
+				074DBBF22448AF220062B35F /* LinesCountViewController.swift */,
+				074DBBF02448AF0E0062B35F /* LinesCountViewModel.swift */,
+			);
+			path = "Lines Count";
+			sourceTree = "<group>";
+		};
 		0752F49221C8E61E00A30BF2 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,6 +973,7 @@
 				07AD154A227F3D4400FC8109 /* Issue Details */,
 				07E1B2FE21A44D1700F6EAE3 /* Issues */,
 				0752F49221C8E61E00A30BF2 /* Languages */,
+				074DBBEF2448AEBF0062B35F /* Lines Count */,
 				A0ED264620F76A45004E8137 /* Login */,
 				07FC33751FFFD47600D53888 /* Main */,
 				A034AF7121528087004C310B /* Notifications */,
@@ -2037,6 +2051,7 @@
 				07D46E5321920029008E5369 /* Content.swift in Sources */,
 				A088B12921008FDF0093D248 /* WebViewController.swift in Sources */,
 				A09DE8DD20E7C82E00F6F2BF /* SearchBar.swift in Sources */,
+				074DBBF32448AF220062B35F /* LinesCountViewController.swift in Sources */,
 				07E1B30621A44D9D00F6EAE3 /* IssueCellViewModel.swift in Sources */,
 				A0E2B08A210625D5000DA282 /* SettingSwitchCellViewModel.swift in Sources */,
 				A09DE8D020E7C05C00F6F2BF /* Kingfisher+Rx.swift in Sources */,
@@ -2053,6 +2068,7 @@
 				C762C6831E1D5A7300C09EBD /* UIFont+SwiftHub.swift in Sources */,
 				07B4AB642190C56E001E9337 /* RepositoryDetailCell.swift in Sources */,
 				075A55CB228843BC004DF9F7 /* PullRequestCommentsViewController.swift in Sources */,
+				074DBBF12448AF0E0062B35F /* LinesCountViewModel.swift in Sources */,
 				A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */,
 				07E1B2F321A4349500F6EAE3 /* Issue.swift in Sources */,
 				0752F49C21C8E68D00A30BF2 /* RepoLanguageCellViewModel.swift in Sources */,

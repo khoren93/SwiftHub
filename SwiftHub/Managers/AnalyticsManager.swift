@@ -35,6 +35,7 @@ enum SwifthubEvent {
     case issues(fullname: String)
     case source(fullname: String)
     case readme(fullname: String)
+    case linesCount(fullname: String)
 }
 
 extension SwifthubEvent: Umbrella.EventType {
@@ -61,6 +62,7 @@ extension SwifthubEvent: Umbrella.EventType {
         case .issues: return "Issues"
         case .source: return "Source"
         case .readme: return "Readme"
+        case .linesCount: return "Lines Count"
         }
     }
 
@@ -95,6 +97,8 @@ extension SwifthubEvent: Umbrella.EventType {
         case .source(let fullname):
             return ["Fullname": fullname]
         case .readme(let fullname):
+            return ["Fullname": fullname]
+        case .linesCount(let fullname):
             return ["Fullname": fullname]
         default:
             return nil

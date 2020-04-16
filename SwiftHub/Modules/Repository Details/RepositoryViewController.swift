@@ -239,6 +239,10 @@ class RepositoryViewController: TableViewController {
                 if let url = viewModel.starHistoryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
+            case .countLinesOfCodeItem:
+                if let viewModel = viewModel.viewModel(for: item) as? LinesCountViewModel {
+                    self?.navigator.show(segue: .linesCount(viewModel: viewModel), sender: self)
+                }
             default:
                 self?.deselectSelectedRow()
             }

@@ -90,11 +90,11 @@ struct RepoLanguage {
 struct LanguageLines: Mappable {
 
     var language: String?
-    var files: Int?
-    var lines: Int?
-    var blanks: Int?
-    var comments: Int?
-    var linesOfCode: Int?
+    var files: String?
+    var lines: String?
+    var blanks: String?
+    var comments: String?
+    var linesOfCode: String?
 
     init?(map: Map) {}
     init() {}
