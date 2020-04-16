@@ -254,6 +254,11 @@ extension GraphApi {
     func languages() -> Single<[Language]> {
         return restApi.languages()
     }
+
+    // MARK: - Codetabs
+    func numberOfLines(fullname: String) -> Single<[LanguageLines]> {
+        return restApi.numberOfLines(fullname: fullname)
+    }
 }
 
 extension GraphApi {

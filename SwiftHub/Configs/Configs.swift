@@ -41,6 +41,7 @@ struct Configs {
         static let loggingEnabled = false
         static let githubBaseUrl = "https://api.github.com"
         static let trendingGithubBaseUrl = "https://github-trending-api.now.sh"
+        static let codetabsBaseUrl = "https://api.codetabs.com/v1"
         static let githistoryBaseUrl = "https://github.githistory.xyz"
         static let starHistoryBaseUrl = "https://star-history.t9t.io"
         static let profileSummaryBaseUrl = "https://profile-summary-for-github.com"

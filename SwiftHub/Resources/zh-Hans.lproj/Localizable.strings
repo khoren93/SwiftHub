@@ -81,6 +81,7 @@
 "Repository.ReadmeCell.Title" = "自述";
 "Repository.SourceCell.Title" = "源代码";
 "Repository.StarsHistoryCell.Title" = "打星历史";
+"Repository.CountLinesOfCodeCell.Title" = "计算行数";
 /* 问题 */
 "Issues.Navigation.Title" = "问题";
 "Issues.OpenSegment.Title" = "还在讨论";

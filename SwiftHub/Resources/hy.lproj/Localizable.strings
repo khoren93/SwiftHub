@@ -81,6 +81,7 @@
 "Repository.ReadmeCell.Title" = "Կարդացեք ինձ";
 "Repository.SourceCell.Title" = "Աղբյուրի կոդը";
 "Repository.StarsHistoryCell.Title" = "Աստղերի պատմություն";
+"Repository.CountLinesOfCodeCell.Title" = "Կոդի տողերի քանակը";
 /* Issues */
 "Issues.Navigation.Title" = "Խնդիրներ";
 "Issues.OpenSegment.Title" = "Բաց";

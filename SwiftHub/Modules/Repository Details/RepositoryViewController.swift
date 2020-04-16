@@ -167,7 +167,8 @@ class RepositoryViewController: TableViewController {
                  .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
                  .sourceItem(let viewModel),
-                 .starHistoryItem(let viewModel):
+                 .starHistoryItem(let viewModel),
+                 .countLinesOfCodeItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
                 cell.bind(to: viewModel)
                 return cell

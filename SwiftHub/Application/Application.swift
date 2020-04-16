@@ -26,9 +26,10 @@ final class Application: NSObject {
 
     private func updateProvider() {
         let staging = Configs.Network.useStaging
-        let githubProvider = staging ? GithubNetworking.stubbingGithubNetworking(): GithubNetworking.githubNetworking()
-        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingTrendingGithubNetworking(): TrendingGithubNetworking.trendingGithubNetworking()
-        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
+        let githubProvider = staging ? GithubNetworking.stubbingNetworking(): GithubNetworking.defaultNetworking()
+        let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingNetworking(): TrendingGithubNetworking.defaultNetworking()
+        let codetabsProvider = staging ? CodetabsNetworking.stubbingNetworking(): CodetabsNetworking.defaultNetworking()
+        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider, codetabsProvider: codetabsProvider)
         provider = restApi
 
         if let token = authManager.token, Configs.Network.useStaging == false {

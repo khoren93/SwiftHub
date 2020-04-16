@@ -56,7 +56,7 @@ class ContentsViewModel: ViewModel, ViewModelType {
             return viewModel
         })
 
-        let openUrl = input.openInWebSelection.map { self.content.value?.htmlUrl?.url ?? self.repository.value.htmlUrl?.url }
+        let openUrl = input.openInWebSelection.map { self.content.value?.htmlUrl?.url }
             .filterNil().asDriver(onErrorJustReturn: nil)
 
         let openSource = input.selection.map { $0.content }.filter { $0.type != .dir }.map { (content) -> SourceViewModel in

@@ -290,6 +290,13 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                                                                          hidesDisclosure: false)
             items.append(RepositorySectionItem.starHistoryItem(viewModel: starHistoryCellViewModel))
 
+            // Count lines of code
+            let clocCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCountLinesOfCodeCellTitle.key.localized(),
+                                                                         detail: "",
+                                                                         image: R.image.icon_cell_cloc()?.template,
+                                                                         hidesDisclosure: false)
+            items.append(RepositorySectionItem.countLinesOfCodeItem(viewModel: clocCellViewModel))
+
             return [
                 RepositorySection.repository(title: "", items: items)
             ]

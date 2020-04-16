@@ -81,6 +81,7 @@
 "Repository.ReadmeCell.Title" = "Прочти меня";
 "Repository.SourceCell.Title" = "Исходный код";
 "Repository.StarsHistoryCell.Title" = "История звезд";
+"Repository.CountLinesOfCodeCell.Title" = "Подсчет строк кода";
 /* Issues */
 "Issues.Navigation.Title" = "Проблемы";
 "Issues.OpenSegment.Title" = "Открыто";

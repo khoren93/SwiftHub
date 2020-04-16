@@ -81,6 +81,7 @@
 "Repository.ReadmeCell.Title" = "Readme";
 "Repository.SourceCell.Title" = "Source Code";
 "Repository.StarsHistoryCell.Title" = "Stars History";
+"Repository.CountLinesOfCodeCell.Title" = "Count Lines of Code";
 /* Issues */
 "Issues.Navigation.Title" = "Issues";
 "Issues.OpenSegment.Title" = "Open";

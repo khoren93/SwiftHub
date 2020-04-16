@@ -58,7 +58,8 @@ target 'SwiftHub' do
     pod 'FloatingPanel', '~> 1.0'  # https://github.com/SCENEE/FloatingPanel
     pod 'MessageKit', '~> 3.0'  # https://github.com/MessageKit/MessageKit
     pod 'MultiProgressView', '~> 1.0'  # https://github.com/mac-gallagher/MultiProgressView
-
+    pod 'Charts', '~> 3.0'  # https://github.com/danielgindi/Charts
+    
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 

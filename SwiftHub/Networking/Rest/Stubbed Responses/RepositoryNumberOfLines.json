@@ -1,0 +1,34 @@
+[
+   {
+      "language": "JSON",
+      "files": "126",
+      "lines": "63741",
+      "blanks": "1",
+      "comments": "0",
+      "linesOfCode": "63740"
+   },
+   {
+      "language": "Swift",
+      "files": "185",
+      "lines": "15984",
+      "blanks": "2537",
+      "comments": "1564",
+      "linesOfCode": "11883"
+   },
+   {
+      "language": "Markdown",
+      "files": "4",
+      "lines": "457",
+      "blanks": "116",
+      "comments": "0",
+      "linesOfCode": "341"
+   },
+   {
+      "language": "Total",
+      "files": "315",
+      "lines": "80182",
+      "blanks": "2654",
+      "comments": "1564",
+      "linesOfCode": "75964"
+   }
+]

@@ -66,6 +66,8 @@
 		0732046721413B6400C1E39F /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046621413B6400C1E39F /* EventCellViewModel.swift */; };
 		0732046A21419DB200C1E39F /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0732046921419DB200C1E39F /* ISO8601DateTransform.swift */; };
 		073A1F792233F2F000D6F487 /* Search.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 073A1F782233F2F000D6F487 /* Search.graphql */; };
+		074DBBEA24489E750062B35F /* CodetabsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBE924489E750062B35F /* CodetabsApi.swift */; };
+		074DBBEE2448A0480062B35F /* RepositoryNumberOfLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */; };
 		0752F48821C8D9A800A30BF2 /* TrendingRepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */; };
 		0752F48921C8D9A800A30BF2 /* TrendingRepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */; };
 		0752F48C21C8D9BA00A30BF2 /* TrendingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */; };
@@ -360,6 +362,8 @@
 		0732046621413B6400C1E39F /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		0732046921419DB200C1E39F /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateTransform.swift; sourceTree = "<group>"; };
 		073A1F782233F2F000D6F487 /* Search.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Search.graphql; sourceTree = "<group>"; };
+		074DBBE924489E750062B35F /* CodetabsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodetabsApi.swift; sourceTree = "<group>"; };
+		074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RepositoryNumberOfLines.json; sourceTree = "<group>"; };
 		0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepositoryCell.swift; sourceTree = "<group>"; };
 		0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingRepositoryCell.xib; sourceTree = "<group>"; };
 		0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingUserCell.swift; sourceTree = "<group>"; };
@@ -887,12 +891,13 @@
 		07F9E465223404FF0012BA6D /* Rest */ = {
 			isa = PBXGroup;
 			children = (
-				A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */,
-				07F9E466223405410012BA6D /* RestApi.swift */,
-				C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */,
-				0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */,
-				C762C68C1E1D5D6E00C09EBD /* Networking.swift */,
+				074DBBE924489E750062B35F /* CodetabsApi.swift */,
 				079BF51621FF618500FFA334 /* ErrorResponse.swift */,
+				C762C68B1E1D5D6E00C09EBD /* GitHubAPI.swift */,
+				C762C68C1E1D5D6E00C09EBD /* Networking.swift */,
+				07F9E466223405410012BA6D /* RestApi.swift */,
+				A09DE8A820E7A98F00F6F2BF /* Stubbed Responses */,
+				0700EAED21C815E600F979A7 /* TrendingGithubAPI.swift */,
 			);
 			path = Rest;
 			sourceTree = "<group>";
@@ -1136,6 +1141,7 @@
 				075A55D0228850A5004DF9F7 /* RepositoryIssue.json */,
 				07AD1548227F3B0800FC8109 /* RepositoryIssueComments.json */,
 				07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */,
+				074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */,
 				07241D0E21B1745D00F800BD /* RepositoryPullRequest.json */,
 				075A55CE228845F8004DF9F7 /* RepositoryPullRequestComments.json */,
 				07241D0C21B1744900F800BD /* RepositoryPullRequests.json */,
@@ -1532,6 +1538,7 @@
 				07B4AB652190C56E001E9337 /* RepositoryDetailCell.xib in Resources */,
 				A0E2B0932108AFF0000DA282 /* RepositoryWatchers.json in Resources */,
 				072BD79A225FD50400E6C580 /* RepositoryRelease.json in Resources */,
+				074DBBEE2448A0480062B35F /* RepositoryNumberOfLines.json in Resources */,
 				A07DB584223FC02E000E3312 /* User.graphql in Resources */,
 				07241D1921B1768E00F800BD /* CommitCell.xib in Resources */,
 				073A1F792233F2F000D6F487 /* Search.graphql in Resources */,
@@ -1643,6 +1650,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/BonMot/BonMot.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
@@ -1695,6 +1703,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BonMot.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
@@ -1977,6 +1986,7 @@
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				A034AF7B21528108004C310B /* NotificationCellViewModel.swift in Sources */,
 				0716602121CFB1E000B5827C /* SourceViewModel.swift in Sources */,
+				074DBBEA24489E750062B35F /* CodetabsApi.swift in Sources */,
 				07F9E464223401F30012BA6D /* API.swift in Sources */,
 				07FC337D1FFFE4E300D53888 /* AnalyticsManager.swift in Sources */,
 				0752F48C21C8D9BA00A30BF2 /* TrendingUserCell.swift in Sources */,
