@@ -111,7 +111,6 @@ class SettingsViewController: TableViewController {
                 self?.deselectSelectedRow()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
-                analytics.log(.acknowledgements)
             case .whatsNewItem:
                 self?.navigator.show(segue: .whatsNew(block: viewModel.whatsNewBlock()), sender: self, transition: .modal)
                 analytics.log(.whatsNew)
