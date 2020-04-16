@@ -30,7 +30,7 @@ class WhatsNewManager: NSObject {
                               image: R.image.icon_whatsnew_trending()),
                 WhatsNew.Item(title: R.string.localizable.whatsNewItem1Title.key.localized(),
                               subtitle: R.string.localizable.whatsNewItem1Subtitle.key.localized(),
-                              image: R.image.icon_whatsnew_whats_new()),
+                              image: R.image.icon_whatsnew_cloc()),
                 WhatsNew.Item(title: R.string.localizable.whatsNewItem2Title.key.localized(),
                               subtitle: R.string.localizable.whatsNewItem2Subtitle.key.localized(),
                               image: R.image.icon_whatsnew_theme()),

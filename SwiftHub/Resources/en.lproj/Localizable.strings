@@ -165,12 +165,12 @@
 "Users.ContributorsNavigation.Title" = "Contributors";
 /* Whats New */
 "WhatsNew.Title" = "Whats New";
-"WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit enables you to easily showcase your awesome new app features";
+"WhatsNew.Item1.Title" = "Count Lines of Code";
+"WhatsNew.Item1.Subtitle" = "Tool for counting lines of code from repositories";
 "WhatsNew.Item2.Title" = "Themes";
 "WhatsNew.Item2.Subtitle" = "You can apply different themes with Light and Dark modes";
 "WhatsNew.Item3.Title" = "Open Source";
-"WhatsNew.Item3.Subtitle" = "SwiftHub is fully open source\nStars are very welcomed ★";
+"WhatsNew.Item3.Subtitle" = "SwiftHub is open source\nStars are welcome ★";
 "WhatsNew.Item4.Title" = "Trending";
 "WhatsNew.Item4.Subtitle" = "See what the GitHub community is most excited about today";
 "WhatsNew.DetailButton.Title" = "View on GitHub";

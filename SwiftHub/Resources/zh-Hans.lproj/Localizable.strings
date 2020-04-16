@@ -165,8 +165,8 @@
 "Users.ContributorsNavigation.Title" = "贡献者";
 /* 什么是新的 */
 "WhatsNew.Title" = "最近更新";
-"WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit让您轻松展示您真棒的新应用功能";
+"WhatsNew.Item1.Title" = "计算行数";
+"WhatsNew.Item1.Subtitle" = "用于计数来自github存储库中的代码行的工具";
 "WhatsNew.Item2.Title" = "主题";
 "WhatsNew.Item2.Subtitle" = "你可以用Light和Dark两种不同的主题";
 "WhatsNew.Item3.Title" = "开源";

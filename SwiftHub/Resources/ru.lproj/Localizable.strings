@@ -165,8 +165,8 @@
 "Users.ContributorsNavigation.Title" = "Вкладчики";
 /* Whats New */
 "WhatsNew.Title" = "Что Нового";
-"WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit позволяет вам легко продемонстрировать свои потрясающие новые функции приложения";
+"WhatsNew.Item1.Title" = "Подсчет строк кода";
+"WhatsNew.Item1.Subtitle" = "Инструмент для подсчета строк кода из репозиториев";
 "WhatsNew.Item2.Title" = "Темы";
 "WhatsNew.Item2.Subtitle" = "Вы можете применять различные темы с светлыми и темными режимами";
 "WhatsNew.Item3.Title" = "Открытый исходный код";

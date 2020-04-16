@@ -165,8 +165,8 @@
 "Users.ContributorsNavigation.Title" = "Ներդրողներ";
 /* Whats New */
 "WhatsNew.Title" = "Ինչ է Նոր";
-"WhatsNew.Item1.Title" = "WhatsNewKit";
-"WhatsNew.Item1.Subtitle" = "WhatsNewKit- ը Ձեզ հնարավորություն է տալիս հեշտությամբ ցուցադրել ձեր հիանալի հավելվածի նոր առանձնահատկությունները";
+"WhatsNew.Item1.Title" = "Կոդի տողերի քանակը";
+"WhatsNew.Item1.Subtitle" = "Կոդերի տողերը հաշվելու գործիք";
 "WhatsNew.Item2.Title" = "Գունային Թեմաներ";
 "WhatsNew.Item2.Subtitle" = "Դուք կարող եք կիրառել տարբեր Գունային թեմաներ բաց եւ մուգ եղանակներով";
 "WhatsNew.Item3.Title" = "Բաց կոդով";
