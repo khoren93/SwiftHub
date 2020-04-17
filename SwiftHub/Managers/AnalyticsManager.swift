@@ -107,23 +107,23 @@ extension Umbrella.Analytics {
     func updateUser(name: String, email: String) {
         Mixpanel.sharedInstance()?.people.set("$name", to: name)
         Mixpanel.sharedInstance()?.people.set("$email", to: email)
-        FirebaseAnalytics.Analytics.setUserProperty(name, forName: "$name")
-        FirebaseAnalytics.Analytics.setUserProperty(email, forName: "$email")
+        FirebaseAnalytics.Analytics.setUserProperty(name, forName: "name")
+        FirebaseAnalytics.Analytics.setUserProperty(email, forName: "email")
     }
 
     func updateUser(ads enabled: Bool) {
         Mixpanel.sharedInstance()?.people.set("$ads_enabled", to: enabled)
-        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$ads_enabled")
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "ads_enabled")
     }
 
     func updateUser(nightMode enabled: Bool) {
         Mixpanel.sharedInstance()?.people.set("$night_mode_enabled", to: enabled)
-        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "$night_mode_enabled")
+        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "night_mode_enabled")
     }
 
     func updateUser(colorTheme theme: String) {
         Mixpanel.sharedInstance()?.people.set("$color_theme", to: theme)
-        FirebaseAnalytics.Analytics.setUserProperty(theme, forName: "$color_theme")
+        FirebaseAnalytics.Analytics.setUserProperty(theme, forName: "color_theme")
     }
 
     func reset() {

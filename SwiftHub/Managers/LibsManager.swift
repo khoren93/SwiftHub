@@ -13,7 +13,9 @@ import SnapKit
 import IQKeyboardManagerSwift
 import CocoaLumberjack
 import Kingfisher
+#if DEBUG
 import FLEX
+#endif
 import Fabric
 import Crashlytics
 import NVActivityIndicatorView
@@ -110,7 +112,7 @@ class LibsManager: NSObject {
     }
 
     func setupKeyboardManager() {
-        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enable = true
     }
 
     func setupKingfisher() {
@@ -126,7 +128,6 @@ class LibsManager: NSObject {
 
     func setupCocoaLumberjack() {
         DDLog.add(DDOSLogger.sharedInstance)
-
         let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
@@ -134,7 +135,9 @@ class LibsManager: NSObject {
     }
 
     func setupFLEX() {
+        #if DEBUG
         FLEXManager.shared.isNetworkDebuggingEnabled = true
+        #endif
     }
 
     func setupAnalytics() {
@@ -154,8 +157,10 @@ class LibsManager: NSObject {
 extension LibsManager {
 
     func showFlex() {
+        #if DEBUG
         FLEXManager.shared.showExplorer()
         analytics.log(.flexOpened)
+        #endif
     }
 
     func removeKingfisherCache() -> Observable<Void> {
