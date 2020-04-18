@@ -52,7 +52,8 @@ final class Application: NSObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let user = User.currentUser(), let login = user.login {
                 analytics.identify(userId: login)
-                analytics.updateUser(name: user.name ?? "", email: user.email ?? "")
+                analytics.set(.name(value: user.name ?? ""))
+                analytics.set(.email(value: user.email ?? ""))
             }
 
             let viewModel = HomeTabBarViewModel(provider: provider)

@@ -7,13 +7,45 @@
 //
 
 import Foundation
-import Umbrella
 import Mixpanel
 import FirebaseAnalytics
 
-let analytics = Umbrella.Analytics<SwifthubEvent>()
+let analytics = Analytics()
 
-enum SwifthubEvent {
+enum AnalyticsUserEventType {
+    case name(value: String)
+    case email(value: String)
+    case colorTheme(value: String)
+    case adsEnabled(value: Bool)
+    case nightMode(value: Bool)
+}
+
+extension AnalyticsUserEventType {
+
+    func name() -> String {
+        switch self {
+        case .name: return "name"
+        case .email: return "email"
+        case .adsEnabled: return "ads_enabled"
+        case .nightMode: return "night_mode_enabled"
+        case .colorTheme: return "color_theme"
+        }
+    }
+
+    func value() -> Any {
+        switch self {
+        case .name(let value),
+             .email(let value),
+             .colorTheme(let value):
+            return value
+        case .adsEnabled(let value),
+             .nightMode(let value):
+            return value
+        }
+    }
+}
+
+enum AnalyticsEventType {
     case appAds(enabled: Bool)
     case appNightMode(enabled: Bool)
     case appTheme(color: String)
@@ -37,9 +69,9 @@ enum SwifthubEvent {
     case linesCount(fullname: String)
 }
 
-extension SwifthubEvent: Umbrella.EventType {
+extension AnalyticsEventType {
 
-    func name(for provider: ProviderType) -> String? {
+    func name() -> String {
         switch self {
         case .appAds: return "ads_changed"
         case .appNightMode: return "night_mode_changed"
@@ -64,7 +96,7 @@ extension SwifthubEvent: Umbrella.EventType {
         }
     }
 
-    func parameters(for provider: ProviderType) -> [String: Any]? {
+    func parameters() -> [String: Any]? {
         switch self {
         case .appAds(let enabled),
              .appNightMode(let enabled):
@@ -97,37 +129,33 @@ extension SwifthubEvent: Umbrella.EventType {
     }
 }
 
-extension Umbrella.Analytics {
+class Analytics {
+    func log(_ event: AnalyticsEventType) {
+        let name = event.name()
+        let parameters = event.parameters()
+        Mixpanel.mainInstance().track(event: name, properties: parameters as? Properties)
+        FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters)
+    }
+
+    func set(_ userProperty: AnalyticsUserEventType) {
+        let name = userProperty.name()
+        let value = userProperty.value()
+        if let value = value as? MixpanelType {
+            Mixpanel.mainInstance().people.set(property: "$\(name)", to: value)
+        }
+        FirebaseAnalytics.Analytics.setUserProperty("\(value)", forName: name)
+    }
+}
+
+extension Analytics {
 
     func identify(userId: String) {
-        Mixpanel.sharedInstance()?.identify(userId)
+        Mixpanel.mainInstance().identify(distinctId: userId)
         FirebaseAnalytics.Analytics.setUserID(userId)
     }
 
-    func updateUser(name: String, email: String) {
-        Mixpanel.sharedInstance()?.people.set("$name", to: name)
-        Mixpanel.sharedInstance()?.people.set("$email", to: email)
-        FirebaseAnalytics.Analytics.setUserProperty(name, forName: "name")
-        FirebaseAnalytics.Analytics.setUserProperty(email, forName: "email")
-    }
-
-    func updateUser(ads enabled: Bool) {
-        Mixpanel.sharedInstance()?.people.set("$ads_enabled", to: enabled)
-        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "ads_enabled")
-    }
-
-    func updateUser(nightMode enabled: Bool) {
-        Mixpanel.sharedInstance()?.people.set("$night_mode_enabled", to: enabled)
-        FirebaseAnalytics.Analytics.setUserProperty("\(enabled)", forName: "night_mode_enabled")
-    }
-
-    func updateUser(colorTheme theme: String) {
-        Mixpanel.sharedInstance()?.people.set("$color_theme", to: theme)
-        FirebaseAnalytics.Analytics.setUserProperty(theme, forName: "color_theme")
-    }
-
     func reset() {
-        Mixpanel.sharedInstance()?.reset()
+        Mixpanel.mainInstance().reset()
         FirebaseAnalytics.Analytics.resetAnalyticsData()
     }
 }

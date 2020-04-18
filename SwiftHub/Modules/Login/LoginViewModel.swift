@@ -102,7 +102,7 @@ class LoginViewModel: ViewModel, ViewModelType {
                     user.save()
                     AuthManager.tokenValidated()
                     if let login = user.login, let type = AuthManager.shared.token?.type().description {
-                        analytics.log(SwifthubEvent.login(login: login, type: type))
+                        analytics.log(.login(login: login, type: type))
                     }
                     Application.shared.presentInitialScreen(in: Application.shared.window)
                 case .error(let error):

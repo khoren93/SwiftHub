@@ -76,7 +76,7 @@ class LinesCountViewController: ViewController {
 
             let languages = items.filter { $0.language != "Total" }
             let languageEntries = languages.map { PieChartDataEntry(value: Double($0.linesOfCode?.int ?? 0), label: $0.language, data: $0) }
-            let colors = languages.map { $0.language ?? "" }.map { viewModel.color(for: $0) ?? "" }.map { UIColor(hexString: $0) ?? UIColor.random }
+            let colors = languages.map { $0.language ?? "" }.map { viewModel.color(for: $0) ?? "" }.map { UIColor(hexString: $0) ?? UIColor.random.withAlphaComponent(0.2) }
             let languagesDataSet = PieChartDataSet(entries: languageEntries, label: "Type of Files")
             languagesDataSet.colors = colors
             let data = PieChartData(dataSet: languagesDataSet)
