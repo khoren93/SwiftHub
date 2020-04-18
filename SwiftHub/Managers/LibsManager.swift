@@ -27,7 +27,6 @@ import SwifterSwift
 import SwiftDate
 import Hero
 import KafkaRefresh
-import Umbrella
 import Mixpanel
 import Firebase
 import DropDown
@@ -50,9 +49,9 @@ class LibsManager: NSObject {
             bannersEnabled.accept(true)
         }
 
-        bannersEnabled.subscribe(onNext: { (enabled) in
+        bannersEnabled.skip(1).subscribe(onNext: { (enabled) in
             UserDefaults.standard.set(enabled, forKey: Configs.UserDefaultsKeys.bannersEnabled)
-            analytics.updateUser(ads: enabled)
+            analytics.set(.adsEnabled(value: enabled))
         }).disposed(by: rx.disposeBag)
     }
 
@@ -142,11 +141,9 @@ class LibsManager: NSObject {
 
     func setupAnalytics() {
         FirebaseApp.configure()
-        Mixpanel.sharedInstance(withToken: Keys.mixpanel.apiKey)
+        Mixpanel.initialize(token: Keys.mixpanel.apiKey)
         Fabric.with([Crashlytics.self])
         Fabric.sharedSDK().debug = false
-        analytics.register(provider: MixpanelProvider())
-        analytics.register(provider: FirebaseProvider())
     }
 
     func setupAds() {
