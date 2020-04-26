@@ -144,6 +144,7 @@ class LibsManager: NSObject {
         Mixpanel.initialize(token: Keys.mixpanel.apiKey)
         Fabric.with([Crashlytics.self])
         Fabric.sharedSDK().debug = false
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
     }
 
     func setupAds() {
