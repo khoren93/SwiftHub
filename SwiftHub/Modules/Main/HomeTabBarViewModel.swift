@@ -39,10 +39,11 @@ class HomeTabBarViewModel: ViewModel, ViewModelType {
             }
         }.asDriver(onErrorJustReturn: [])
 
-        let whatsNewItems = Driver.just(whatsNewManager.whatsNew())
+        let whatsNew = whatsNewManager.whatsNew()
+        let whatsNewItems = input.whatsNewTrigger.take(1).map { _ in whatsNew }
 
         return Output(tabBarItems: tabBarItems,
-                      openWhatsNew: whatsNewItems)
+                      openWhatsNew: whatsNewItems.asDriverOnErrorJustComplete())
     }
 
     func viewModel(for tabBarItem: HomeTabBarItem) -> ViewModel {
