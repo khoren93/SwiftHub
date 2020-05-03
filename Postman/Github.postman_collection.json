@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4b779957-9f7a-4208-52c0-ba4438a7e8bc",
+		"_postman_id": "85e4199c-818e-4cbc-8aca-3777c173cfa7",
 		"name": "Github",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -70,7 +70,8 @@
 					"response": []
 				}
 			],
-			"description": "You can use this API to manage the access OAuth applications have to your account. You can only access this API via Basic Authentication using your username and password, not tokens.\n\nMake sure you understand how to work with two-factor authentication if you or your users have two-factor authentication enabled."
+			"description": "You can use this API to manage the access OAuth applications have to your account. You can only access this API via Basic Authentication using your username and password, not tokens.\n\nMake sure you understand how to work with two-factor authentication if you or your users have two-factor authentication enabled.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Repositories",
@@ -111,7 +112,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contents/:path?",
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/contents/:path",
 									"host": [
 										"{{base_url}}"
 									],
@@ -141,6 +142,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -201,6 +203,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -260,6 +263,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -320,6 +324,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -352,6 +357,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -612,7 +618,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Organizations",
@@ -636,7 +643,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Users",
@@ -758,6 +766,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -796,7 +805,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Search",
@@ -890,7 +900,8 @@
 					"response": []
 				}
 			],
-			"description": "The Search API is optimized to help you find the specific item you're looking for (e.g., a specific user, a specific file in a repository, etc.). Think of it the way you think of performing a search on Google. It's designed to help you find the one result you're looking for (or maybe the few results you're looking for). Just like searching on Google, you sometimes want to see a few pages of search results so that you can find the item that best meets your needs. To satisfy that need, the GitHub Search API provides up to 1,000 results for each search."
+			"description": "The Search API is optimized to help you find the specific item you're looking for (e.g., a specific user, a specific file in a repository, etc.). Think of it the way you think of performing a search on Google. It's designed to help you find the one result you're looking for (or maybe the few results you're looking for). Just like searching on Google, you sometimes want to see a few pages of search results so that you can find the item that best meets your needs. To satisfy that need, the GitHub Search API provides up to 1,000 results for each search.",
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Activity",
@@ -1078,6 +1089,7 @@
 						}
 					],
 					"description": "This is a read-only API to the GitHub events. These events power the various activity streams on the site.",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -1200,6 +1212,7 @@
 						}
 					],
 					"description": "Repository Starring is a feature that lets users bookmark repositories. Stars are shown next to repositories to show an approximate level of interest. Stars have no effect on notifications or the activity feed. For that, see Repository Watching.",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -1259,6 +1272,7 @@
 						}
 					],
 					"description": "Watching a Repository registers the user to receive notifications on new discussions, as well as events in the user's activity feed. See Repository Starring for simple repository bookmarks.",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -1344,9 +1358,11 @@
 						}
 					],
 					"description": "Users receive notifications for conversations in repositories they watch",
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Issues",
@@ -1360,7 +1376,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number/comments?",
+									"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number/comments",
 									"host": [
 										"{{base_url}}"
 									],
@@ -1396,6 +1412,7 @@
 							"response": []
 						}
 					],
+					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
@@ -1504,7 +1521,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number?",
+							"raw": "{{base_url}}/repos/{{owner}}/{{repo}}/issues/:number",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1537,7 +1554,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Pull Requests",
@@ -1596,7 +1614,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Trending",
@@ -1607,7 +1626,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{trending_base_url}}/repositories?language=swift&since",
+							"raw": "{{trending_base_url}}/repositories?language=swift&since=",
 							"host": [
 								"{{trending_base_url}}"
 							],
@@ -1679,14 +1698,165 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Codetabs",
+			"item": [
+				{
+					"name": "Number of lines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{codetabs_base_url}}/loc?github={{owner}}/{{repo}}",
+							"host": [
+								"{{codetabs_base_url}}"
+							],
+							"path": [
+								"loc"
+							],
+							"query": [
+								{
+									"key": "github",
+									"value": "{{owner}}/{{repo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GraphQL",
+			"item": [
+				{
+					"name": "Search Repositories",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query SearchRepositories($query: String!, $before: String) {\n    search(first: 20, query: $query, type: REPOSITORY, before: $before) {\n        repositoryCount\n        pageInfo {\n            endCursor\n            hasNextPage\n        }\n        nodes {\n            ... on Repository {\n                name\n                nameWithOwner\n                description\n                owner {\n                    avatarUrl\n                    ... on Organization {\n                        description\n                    }\n                }\n                updatedAt\n                viewerHasStarred\n                primaryLanguage {\n                    name\n                    color\n                }\n                stargazers {\n                    totalCount\n                }\n            }\n        }\n    }\n}",
+								"variables": "{\n  \"query\": \"{{repo}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_base_url}}",
+							"host": [
+								"{{graphql_base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query SearchUsers($query: String!, $before: String) {\n    search(first: 20, query: $query, type: USER, before: $before) {\n        nodes {\n            ... on User {\n                name\n                login\n                avatarUrl\n                viewerCanFollow\n                viewerIsFollowing\n                followers {\n                    totalCount\n                }\n                repositories {\n                    totalCount\n                }\n            }\n        }\n        pageInfo {\n            endCursor\n            hasNextPage\n        }\n        userCount\n    }\n}\n",
+								"variables": "{\n  \"query\": \"{{owner}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_base_url}}",
+							"host": [
+								"{{graphql_base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Repository",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Repository($owner: String!, $name: String!, $qualifiedName: String!) {\n    repository(owner: $owner, name: $name) {\n        name\n        nameWithOwner\n        description\n        url\n        homepageUrl\n        createdAt\n        updatedAt\n        viewerHasStarred\n        diskUsage\n        isFork\n        parent {\n            nameWithOwner\n        }\n        owner {\n            login\n            avatarUrl\n            ... on Organization {\n                description\n            }\n        }\n        primaryLanguage {\n            name\n            color\n        }\n        languages(first: 20) {\n            totalCount\n            totalSize\n            edges {\n                size\n                node {\n                    name\n                    color\n                }\n            }\n        }\n        licenseInfo {\n            name\n        }\n        defaultBranchRef {\n            name\n        }\n        stargazers {\n            totalCount\n        }\n        forks {\n            totalCount\n        }\n        watchers {\n            totalCount\n        }\n        mentionableUsers {\n            totalCount\n        }\n        issues(states: [OPEN]) {\n            totalCount\n        }\n        pullRequests(states: [OPEN]) {\n            totalCount\n        }\n        releases {\n            totalCount\n        }\n        ref(qualifiedName: $qualifiedName) {\n            target {\n                ... on Commit {\n                    history {\n                        totalCount\n                    }\n                }\n            }\n        }\n    }\n}\n",
+								"variables": "{\n  \"owner\": \"{{owner}}\",\n  \"name\": \"{{repo}}\",\n  \"qualifiedName\": \"master\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_base_url}}",
+							"host": [
+								"{{graphql_base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Viewer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Viewer {\n    viewer {\n        id\n        name\n        login\n        avatarUrl\n        url\n        websiteUrl\n        bio\n        company\n        email\n        location\n        createdAt\n        updatedAt\n        viewerCanFollow\n        viewerIsFollowing\n        isViewer\n        followers {\n            totalCount\n        }\n        following {\n            totalCount\n        }\n        starredRepositories {\n            totalCount\n        }\n        issues {\n            totalCount\n        }\n        repositories {\n            totalCount\n        }\n        watching {\n            totalCount\n        }\n        contributionsCollection {\n            totalRepositoryContributions\n        }\n        pinnedItems(first: 6) {\n            nodes {\n              ... on Repository {\n                name\n                nameWithOwner\n                description\n                owner {\n                  avatarUrl\n                }\n                updatedAt\n                viewerHasStarred\n                primaryLanguage {\n                  name\n                  color\n                }\n                stargazers {\n                  totalCount\n                }\n              }\n            }\n        }\n        organizations(first: 10) {\n            nodes {\n                name\n                login\n                avatarUrl\n                ... on Organization {\n                    description\n                }\n            }\n        }\n    }\n}\n\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_base_url}}",
+							"host": [
+								"{{graphql_base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query User($login: String!) {\n    user(login: $login) {\n        name\n        login\n        avatarUrl\n        url\n        websiteUrl\n        bio\n        company\n        email\n        location\n        createdAt\n        updatedAt\n        viewerCanFollow\n        viewerIsFollowing\n        isViewer\n        followers {\n            totalCount\n        }\n        following {\n            totalCount\n        }\n        starredRepositories {\n            totalCount\n        }\n        issues {\n            totalCount\n        }\n        repositories {\n            totalCount\n        }\n        watching {\n            totalCount\n        }\n        pinnedItems(first: 6) {\n            nodes {\n              ... on Repository {\n                name\n                nameWithOwner\n                description\n                owner {\n                  avatarUrl\n                }\n                updatedAt\n                viewerHasStarred\n                primaryLanguage {\n                  name\n                  color\n                }\n                stargazers {\n                  totalCount\n                }\n              }\n            }\n        }\n        organizations(first: 10) {\n            nodes {\n                name\n                login\n                avatarUrl\n                ... on Organization {\n                    description\n                }\n            }\n        }\n    }\n}",
+								"variables": "{\n  \"login\": \"{{owner}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_base_url}}",
+							"host": [
+								"{{graphql_base_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e1c241a4-4aa3-478f-9508-0c5f189bdff1",
+				"id": "39d69d76-ab50-4bd6-bfad-067254935903",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1696,12 +1866,13 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "50ef6200-95d5-493d-8e9a-ad8177831dfd",
+				"id": "9e1e097e-0de6-4c27-9d31-bc9ad4c7d884",
 				"type": "text/javascript",
 				"exec": [
 					""
 				]
 			}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
