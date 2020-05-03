@@ -117,7 +117,7 @@ extension User {
         repositoriesCount = graph?.repositories.totalCount
         issuesCount = graph?.issues.totalCount
         watchingCount = graph?.watching.totalCount
-        pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+        pinnedRepositories = graph?.pinnedItems.nodes?.map { Repository(graph: $0?.asRepository) }
         organizations = graph?.organizations.nodes?.map { User(graph: $0) }
     }
 
@@ -138,7 +138,7 @@ extension User {
         repositoriesCount = graph?.repositories.totalCount
         issuesCount = graph?.issues.totalCount
         watchingCount = graph?.watching.totalCount
-        pinnedRepositories = graph?.pinnedRepositories.nodes?.map { Repository(graph: $0) }
+        pinnedRepositories = graph?.pinnedItems.nodes?.map { Repository(graph: $0?.asRepository) }
         organizations = graph?.organizations.nodes?.map { User(graph: $0) }
     }
 

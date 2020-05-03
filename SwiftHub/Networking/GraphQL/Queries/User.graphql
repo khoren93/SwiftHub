@@ -36,23 +36,25 @@ query Viewer {
         contributionsCollection {
             totalRepositoryContributions
         }
-        pinnedRepositories(first: 6) {
+        pinnedItems(first: 6) {
             nodes {
+              ... on Repository {
                 name
                 nameWithOwner
                 description
                 owner {
-                    avatarUrl
+                  avatarUrl
                 }
                 updatedAt
                 viewerHasStarred
                 primaryLanguage {
-                    name
-                    color
+                  name
+                  color
                 }
                 stargazers {
-                    totalCount
+                  totalCount
                 }
+              }
             }
         }
         organizations(first: 10) {
@@ -102,23 +104,25 @@ query User($login: String!) {
         watching {
             totalCount
         }
-        pinnedRepositories(first: 6) {
+        pinnedItems(first: 6) {
             nodes {
+              ... on Repository {
                 name
                 nameWithOwner
                 description
                 owner {
-                    avatarUrl
+                  avatarUrl
                 }
                 updatedAt
                 viewerHasStarred
                 primaryLanguage {
-                    name
-                    color
+                  name
+                  color
                 }
                 stargazers {
-                    totalCount
+                  totalCount
                 }
+              }
             }
         }
         organizations(first: 10) {

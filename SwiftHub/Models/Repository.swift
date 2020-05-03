@@ -161,13 +161,13 @@ extension Repository {
                   stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
     }
 
-    init(graph: UserQuery.Data.User.PinnedRepository.Node?) {
+    init(graph: UserQuery.Data.User.PinnedItem.Node.AsRepository?) {
         self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
                   language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
                   stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
     }
 
-    init(graph: ViewerQuery.Data.Viewer.PinnedRepository.Node?) {
+    init(graph: ViewerQuery.Data.Viewer.PinnedItem.Node.AsRepository?) {
         self.init(name: graph?.name, fullname: graph?.nameWithOwner, description: graph?.description,
                   language: graph?.primaryLanguage?.name, languageColor: graph?.primaryLanguage?.color,
                   stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
