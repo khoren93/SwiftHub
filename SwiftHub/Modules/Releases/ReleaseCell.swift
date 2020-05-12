@@ -12,7 +12,6 @@ class ReleaseCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.cornerRadius = 25
         secondDetailLabel.numberOfLines = 0
     }
 

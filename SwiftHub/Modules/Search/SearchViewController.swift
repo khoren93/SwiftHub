@@ -379,7 +379,7 @@ class SearchViewController: TableViewController {
 
         viewModel.searchMode.asDriver().drive(onNext: { [weak self] (searchMode) in
             guard let self = self else { return }
-            self.searchModeSegmentedControl.selectedSegmentIndex = searchMode.rawValue
+            self.searchModeSegmentedControl.selectedSegmentIndex = UInt(searchMode.rawValue)
 
             switch searchMode {
             case .trending:

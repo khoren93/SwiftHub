@@ -13,6 +13,7 @@ class DefaultTableViewCell: TableViewCell {
     lazy var leftImageView: ImageView = {
         let view = ImageView(frame: CGRect())
         view.contentMode = .scaleAspectFit
+        view.cornerRadius = 25
         view.snp.makeConstraints({ (make) in
             make.size.equalTo(50)
         })

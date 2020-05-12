@@ -14,7 +14,6 @@ class IssueCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         titleLabel.numberOfLines = 2
-        leftImageView.cornerRadius = 25
     }
 
     override func bind(to viewModel: DefaultTableViewCellViewModel) {

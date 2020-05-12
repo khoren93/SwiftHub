@@ -13,7 +13,6 @@ class PullRequestCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.cornerRadius = 25
     }
 
     override func bind(to viewModel: DefaultTableViewCellViewModel) {

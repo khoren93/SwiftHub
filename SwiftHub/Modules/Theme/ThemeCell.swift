@@ -13,10 +13,6 @@ class ThemeCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         rightImageView.isHidden = true
-        leftImageView.cornerRadius = 20
-        leftImageView.snp.remakeConstraints { (make) in
-            make.size.equalTo(40)
-        }
     }
 
     override func bind(to viewModel: DefaultTableViewCellViewModel) {

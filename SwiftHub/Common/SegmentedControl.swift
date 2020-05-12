@@ -25,12 +25,12 @@ class SegmentedControl: HMSegmentedControl {
         makeUI()
     }
 
-    override init(sectionImages: [UIImage]!, sectionSelectedImages: [UIImage]!) {
+    override init(sectionImages: [UIImage], sectionSelectedImages: [UIImage]) {
         super.init(sectionImages: sectionImages, sectionSelectedImages: sectionSelectedImages)
         makeUI()
     }
 
-    override init(sectionImages: [UIImage]!, sectionSelectedImages: [UIImage]!, titlesForSections sectionTitles: [String]!) {
+    override init(sectionImages: [UIImage], sectionSelectedImages: [UIImage], titlesForSections sectionTitles: [String]) {
         super.init(sectionImages: sectionImages, sectionSelectedImages: sectionSelectedImages, titlesForSections: sectionTitles)
         makeUI()
     }
@@ -60,12 +60,12 @@ class SegmentedControl: HMSegmentedControl {
         cornerRadius = Configs.BaseDimensions.cornerRadius
         imagePosition = .aboveText
         selectionStyle = .box
-        selectionIndicatorLocation = .down
+        selectionIndicatorLocation = .bottom
         selectionIndicatorBoxOpacity = 0
         selectionIndicatorHeight = 2.0
         segmentEdgeInset = UIEdgeInsets(inset: self.inset)
         indexChangeBlock = { [weak self] index in
-            self?.segmentSelection.accept(index)
+            self?.segmentSelection.accept(Int(index))
         }
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.segmentedControlHeight)

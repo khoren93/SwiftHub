@@ -18,8 +18,9 @@ class SettingSwitchCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         leftImageView.contentMode = .center
-        leftImageView.snp.remakeConstraints { (make) in
-            make.size.equalTo(40)
+        leftImageView.cornerRadius = 0
+        leftImageView.snp.updateConstraints { (make) in
+            make.size.equalTo(30)
         }
         stackView.insertArrangedSubview(switchView, at: 2)
         themeService.rx

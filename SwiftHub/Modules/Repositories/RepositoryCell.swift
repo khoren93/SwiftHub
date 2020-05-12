@@ -24,7 +24,6 @@ class RepositoryCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.cornerRadius = 25
         stackView.insertArrangedSubview(starButton, at: 2)
     }
 

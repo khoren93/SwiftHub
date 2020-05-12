@@ -24,7 +24,6 @@ class UserCell: DefaultTableViewCell {
 
     override func makeUI() {
         super.makeUI()
-        leftImageView.cornerRadius = 25
         stackView.insertArrangedSubview(followButton, at: 2)
     }
 

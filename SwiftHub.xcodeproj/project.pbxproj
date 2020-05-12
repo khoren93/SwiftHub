@@ -157,7 +157,6 @@
 		07E1B30621A44D9D00F6EAE3 /* IssueCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B30521A44D9D00F6EAE3 /* IssueCellViewModel.swift */; };
 		07E1B30821A44DB300F6EAE3 /* IssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1B30721A44DB300F6EAE3 /* IssuesViewController.swift */; };
 		07E1B30A21A4538B00F6EAE3 /* RepositoryIssues.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E1B30921A4538B00F6EAE3 /* RepositoryIssues.json */; };
-		07F9E4622234010C0012BA6D /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 07F9E4612234010C0012BA6D /* schema.json */; };
 		07F9E464223401F30012BA6D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9E463223401F30012BA6D /* API.swift */; };
 		07F9E467223405410012BA6D /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9E466223405410012BA6D /* RestApi.swift */; };
 		07F9E469223406270012BA6D /* GraphApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9E468223406270012BA6D /* GraphApi.swift */; };
@@ -1577,7 +1576,6 @@
 				072BD7A3225FD6FD00E6C580 /* ReleaseCell.xib in Resources */,
 				A0E2B0952108B00D000DA282 /* RepositoryStargazers.json in Resources */,
 				07241D0921B1742700F800BD /* RepositoryBranches.json in Resources */,
-				07F9E4622234010C0012BA6D /* schema.json in Resources */,
 				A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */,
 				A0E2B07C2101FCF4000DA282 /* UserFollowing.json in Resources */,
 				A07DC85021EDF6E100AA7951 /* ContactCell.xib in Resources */,
@@ -1828,7 +1826,7 @@
 			);
 			name = R.swift;
 			outputPaths = (
-				"$SRCROOT/SwiftHub/Resources/R.generated.swift",
+				$SRCROOT/SwiftHub/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
