@@ -71,6 +71,10 @@ class TableViewCell: UITableViewCell {
     func updateUI() {
         setNeedsDisplay()
     }
+
+    func bind(to viewModel: TableViewCellViewModel) {
+
+    }
 }
 
 extension Reactive where Base: TableViewCell {

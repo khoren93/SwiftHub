@@ -159,6 +159,12 @@ class UserViewModel: ViewModel, ViewModelType {
             var items: [UserSectionItem] = []
 
             // Created
+            if let contributionCalendar = user.contributionCalendar {
+                let contributionsCellViewModel = ContributionsCellViewModel(with: contributionCalendar)
+                items.append(UserSectionItem.contributionsItem(viewModel: contributionsCellViewModel))
+            }
+
+            // Created
             if let created = user.createdAt {
                 let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
                                                                    detail: created.toRelative(),
@@ -273,6 +279,7 @@ class UserViewModel: ViewModel, ViewModelType {
     func viewModel(for item: UserSectionItem) -> ViewModel? {
         let user = self.user.value
         switch item {
+        case .contributionsItem: return nil
         case .createdItem: return nil
         case .updatedItem: return nil
         case .starsItem:

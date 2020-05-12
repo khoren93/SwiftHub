@@ -70,6 +70,11 @@
 		074DBBEE2448A0480062B35F /* RepositoryNumberOfLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */; };
 		074DBBF12448AF0E0062B35F /* LinesCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBF02448AF0E0062B35F /* LinesCountViewModel.swift */; };
 		074DBBF32448AF220062B35F /* LinesCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DBBF22448AF220062B35F /* LinesCountViewController.swift */; };
+		0751F7A2246B025700E42751 /* ContributionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751F7A1246B025700E42751 /* ContributionsView.swift */; };
+		0751F7A5246B03C400E42751 /* ContributionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751F7A3246B03C400E42751 /* ContributionsCell.swift */; };
+		0751F7A6246B03C400E42751 /* ContributionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0751F7A4246B03C400E42751 /* ContributionsCell.xib */; };
+		0751F7A8246B03DE00E42751 /* ContributionsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751F7A7246B03DE00E42751 /* ContributionsCellViewModel.swift */; };
+		0751F7AA246B044800E42751 /* TableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0751F7A9246B044800E42751 /* TableViewCellViewModel.swift */; };
 		0752F48821C8D9A800A30BF2 /* TrendingRepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */; };
 		0752F48921C8D9A800A30BF2 /* TrendingRepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */; };
 		0752F48C21C8D9BA00A30BF2 /* TrendingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */; };
@@ -367,6 +372,11 @@
 		074DBBED2448A0480062B35F /* RepositoryNumberOfLines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RepositoryNumberOfLines.json; sourceTree = "<group>"; };
 		074DBBF02448AF0E0062B35F /* LinesCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesCountViewModel.swift; sourceTree = "<group>"; };
 		074DBBF22448AF220062B35F /* LinesCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesCountViewController.swift; sourceTree = "<group>"; };
+		0751F7A1246B025700E42751 /* ContributionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsView.swift; sourceTree = "<group>"; };
+		0751F7A3246B03C400E42751 /* ContributionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsCell.swift; sourceTree = "<group>"; };
+		0751F7A4246B03C400E42751 /* ContributionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContributionsCell.xib; sourceTree = "<group>"; };
+		0751F7A7246B03DE00E42751 /* ContributionsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsCellViewModel.swift; sourceTree = "<group>"; };
+		0751F7A9246B044800E42751 /* TableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModel.swift; sourceTree = "<group>"; };
 		0752F48621C8D9A800A30BF2 /* TrendingRepositoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepositoryCell.swift; sourceTree = "<group>"; };
 		0752F48721C8D9A800A30BF2 /* TrendingRepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingRepositoryCell.xib; sourceTree = "<group>"; };
 		0752F48A21C8D9BA00A30BF2 /* TrendingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingUserCell.swift; sourceTree = "<group>"; };
@@ -681,6 +691,10 @@
 		070FF83A20F2204A0070F5E8 /* User Details */ = {
 			isa = PBXGroup;
 			children = (
+				0751F7A3246B03C400E42751 /* ContributionsCell.swift */,
+				0751F7A4246B03C400E42751 /* ContributionsCell.xib */,
+				0751F7A7246B03DE00E42751 /* ContributionsCellViewModel.swift */,
+				0751F7A1246B025700E42751 /* ContributionsView.swift */,
 				07B183812172268C007CC23B /* UserDetailCell.swift */,
 				07B183822172268C007CC23B /* UserDetailCell.xib */,
 				07B183852172269C007CC23B /* UserDetailCellViewModel.swift */,
@@ -1223,6 +1237,7 @@
 				A09DE8CB20E7BEBD00F6F2BF /* DefaultTableViewCell.swift */,
 				0722DB1B22BF779F00C32A01 /* DefaultTableViewCellViewModel.swift */,
 				C762C65A1E1D559000C09EBD /* TableViewCell.swift */,
+				0751F7A9246B044800E42751 /* TableViewCellViewModel.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -1567,6 +1582,7 @@
 				A09DE8C720E7B84D00F6F2BF /* UserCell.xib in Resources */,
 				07E1B30421A44D8D00F6EAE3 /* IssueCell.xib in Resources */,
 				0757B53421669DAC00C04163 /* LanguageCell.xib in Resources */,
+				0751F7A6246B03C400E42751 /* ContributionsCell.xib in Resources */,
 				0791946D214D4F0700A7067E /* ThemeCell.xib in Resources */,
 				0795E5CF225920E2008EFD50 /* BranchCell.xib in Resources */,
 				0732045B214137B800C1E39F /* EventsUserPerformed.json in Resources */,
@@ -1937,6 +1953,7 @@
 				0700EAF021C823CD00F979A7 /* Language.swift in Sources */,
 				C762C6841E1D5A7300C09EBD /* UIImage+SwiftHub.swift in Sources */,
 				C762C66C1E1D559000C09EBD /* View.swift in Sources */,
+				0751F7AA246B044800E42751 /* TableViewCellViewModel.swift in Sources */,
 				0700EAEE21C815E600F979A7 /* TrendingGithubAPI.swift in Sources */,
 				C762C6621E1D559000C09EBD /* CollectionViewCell.swift in Sources */,
 				07919469214D4EEC00A7067E /* ThemeCellViewModel.swift in Sources */,
@@ -1977,9 +1994,11 @@
 				072BD7A2225FD6FD00E6C580 /* ReleaseCell.swift in Sources */,
 				0795E5D1225920FA008EFD50 /* BranchCellViewModel.swift in Sources */,
 				A09499561E1D1CB600EFDE29 /* AppDelegate.swift in Sources */,
+				0751F7A2246B025700E42751 /* ContributionsView.swift in Sources */,
 				C762C6681E1D559000C09EBD /* TableView.swift in Sources */,
 				07B8BC7322EB526B008AA2DF /* LanguageView.swift in Sources */,
 				07CE0F8021027DEC00E1F6BD /* ThemeManager.swift in Sources */,
+				0751F7A8246B03DE00E42751 /* ContributionsCellViewModel.swift in Sources */,
 				070FF84520F284D40070F5E8 /* SettingsViewController.swift in Sources */,
 				07FC336E1FFFCB8B00D53888 /* Application.swift in Sources */,
 				070E177A21AC7C85004B6FB2 /* Release.swift in Sources */,
@@ -1993,6 +2012,7 @@
 				07DA1C0522EB14B200327AF2 /* LanguagesCellViewModel.swift in Sources */,
 				0732045E2141398400C1E39F /* EventsViewController.swift in Sources */,
 				A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */,
+				0751F7A5246B03C400E42751 /* ContributionsCell.swift in Sources */,
 				C762C6941E1D5D6E00C09EBD /* Reachability.swift in Sources */,
 				A034AF7B21528108004C310B /* NotificationCellViewModel.swift in Sources */,
 				0716602121CFB1E000B5827C /* SourceViewModel.swift in Sources */,

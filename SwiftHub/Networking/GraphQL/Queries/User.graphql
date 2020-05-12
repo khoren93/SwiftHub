@@ -67,6 +67,20 @@ query Viewer {
                 }
             }
         }
+        contributionsCollection {
+            contributionCalendar {
+                totalContributions
+                months {
+                    name
+                }
+                weeks {
+                    contributionDays {
+                        color
+                        contributionCount
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -132,6 +146,20 @@ query User($login: String!) {
                 avatarUrl
                 ... on Organization {
                     description
+                }
+            }
+        }
+        contributionsCollection {
+            contributionCalendar {
+                totalContributions
+                months {
+                    name
+                }
+                weeks {
+                    contributionDays {
+                        color
+                        contributionCount
+                    }
                 }
             }
         }

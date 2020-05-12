@@ -15,7 +15,7 @@ class ThemeCell: DefaultTableViewCell {
         rightImageView.isHidden = true
     }
 
-    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+    override func bind(to viewModel: TableViewCellViewModel) {
         super.bind(to: viewModel)
         guard let viewModel = viewModel as? ThemeCellViewModel else { return }
 

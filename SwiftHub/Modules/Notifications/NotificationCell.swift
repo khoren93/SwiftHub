@@ -16,7 +16,7 @@ class NotificationCell: DefaultTableViewCell {
         titleLabel.numberOfLines = 2
     }
 
-    override func bind(to viewModel: DefaultTableViewCellViewModel) {
+    override func bind(to viewModel: TableViewCellViewModel) {
         super.bind(to: viewModel)
         guard let viewModel = viewModel as? NotificationCellViewModel else { return }
         cellDisposeBag = DisposeBag()

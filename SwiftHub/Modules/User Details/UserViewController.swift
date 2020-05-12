@@ -15,6 +15,7 @@ import BonMot
 private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
 private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
 private let organizationReuseIdentifier = R.reuseIdentifier.userCell.identifier
+private let contributionsReuseIdentifier = R.reuseIdentifier.contributionsCell.identifier
 
 class UserViewController: TableViewController {
 
@@ -143,6 +144,7 @@ class UserViewController: TableViewController {
         tableView.register(R.nib.userDetailCell)
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
+        tableView.register(R.nib.contributionsCell)
     }
 
     override func bindViewModel() {
@@ -165,6 +167,10 @@ class UserViewController: TableViewController {
 
         let dataSource = RxTableViewSectionedReloadDataSource<UserSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
+            case .contributionsItem(let viewModel):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: contributionsReuseIdentifier, for: indexPath) as? ContributionsCell)!
+                cell.bind(to: viewModel)
+                return cell
             case .createdItem(let viewModel),
                  .updatedItem(let viewModel),
                  .starsItem(let viewModel),

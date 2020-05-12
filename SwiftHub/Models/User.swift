@@ -20,6 +20,35 @@ enum UserType: String {
     case organization = "Organization"
 }
 
+struct ContributionCalendar {
+    var totalContributions: Int?
+    var months: [Month]?
+    var weeks: [[ContributionDay]]?
+
+    init(graph: ViewerQuery.Data.Viewer.ContributionsCollection?) {
+        let calendar = graph?.contributionCalendar
+        totalContributions = calendar?.totalContributions
+        months = calendar?.months.map { Month(name: $0.name) }
+        weeks = calendar?.weeks.map { $0.contributionDays.map { ContributionDay(color: $0.color, contributionCount: $0.contributionCount) } }
+    }
+
+    init(graph: UserQuery.Data.User.ContributionsCollection?) {
+        let calendar = graph?.contributionCalendar
+        totalContributions = calendar?.totalContributions
+        months = calendar?.months.map { Month(name: $0.name) }
+        weeks = calendar?.weeks.map { $0.contributionDays.map { ContributionDay(color: $0.color, contributionCount: $0.contributionCount) } }
+    }
+
+    struct Month {
+        var name: String?
+    }
+
+    struct ContributionDay {
+        var color: String?
+        var contributionCount: Int?
+    }
+}
+
 /// User model
 struct User: Mappable, SenderType {
 
@@ -46,6 +75,7 @@ struct User: Mappable, SenderType {
     var isViewer: Bool?  // Whether or not this user is the viewing user.
     var pinnedRepositories: [Repository]?  // A list of repositories this user has pinned to their profile
     var organizations: [User]?  // A list of organizations the user belongs to.
+    var contributionCalendar: ContributionCalendar? // A calendar of this user's contributions on GitHub.
 
     // Only for Organization type
     var descriptionField: String?
@@ -119,6 +149,7 @@ extension User {
         watchingCount = graph?.watching.totalCount
         pinnedRepositories = graph?.pinnedItems.nodes?.map { Repository(graph: $0?.asRepository) }
         organizations = graph?.organizations.nodes?.map { User(graph: $0) }
+        contributionCalendar = ContributionCalendar(graph: graph?.contributionsCollection)
     }
 
     init(graph: UserQuery.Data.User?) {
@@ -140,6 +171,7 @@ extension User {
         watchingCount = graph?.watching.totalCount
         pinnedRepositories = graph?.pinnedItems.nodes?.map { Repository(graph: $0?.asRepository) }
         organizations = graph?.organizations.nodes?.map { User(graph: $0) }
+        contributionCalendar = ContributionCalendar(graph: graph?.contributionsCollection)
     }
 
     init(graph: SearchUsersQuery.Data.Search.Node.AsUser?) {

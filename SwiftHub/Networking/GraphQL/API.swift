@@ -2417,6 +2417,25 @@ public final class ViewerQuery: GraphQLQuery {
             }
           }
         }
+        contributionsCollection {
+          __typename
+          contributionCalendar {
+            __typename
+            totalContributions
+            months {
+              __typename
+              name
+            }
+            weeks {
+              __typename
+              contributionDays {
+                __typename
+                color
+                contributionCount
+              }
+            }
+          }
+        }
       }
     }
     """
@@ -2482,6 +2501,7 @@ public final class ViewerQuery: GraphQLQuery {
         GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
         GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
         GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
+        GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -2976,6 +2996,8 @@ public final class ViewerQuery: GraphQLQuery {
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("totalRepositoryContributions", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
         ]
 
         public private(set) var resultMap: ResultMap
@@ -2984,8 +3006,8 @@ public final class ViewerQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(totalRepositoryContributions: Int) {
-          self.init(unsafeResultMap: ["__typename": "ContributionsCollection", "totalRepositoryContributions": totalRepositoryContributions])
+        public init(totalRepositoryContributions: Int, contributionCalendar: ContributionCalendar) {
+          self.init(unsafeResultMap: ["__typename": "ContributionsCollection", "totalRepositoryContributions": totalRepositoryContributions, "contributionCalendar": contributionCalendar.resultMap])
         }
 
         public var __typename: String {
@@ -3004,6 +3026,201 @@ public final class ViewerQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "totalRepositoryContributions")
+          }
+        }
+
+        /// A calendar of this user's contributions on GitHub.
+        public var contributionCalendar: ContributionCalendar {
+          get {
+            return ContributionCalendar(unsafeResultMap: resultMap["contributionCalendar"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "contributionCalendar")
+          }
+        }
+
+        public struct ContributionCalendar: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["ContributionCalendar"]
+
+          public static let selections: [GraphQLSelection] = [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
+            GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
+          ]
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(totalContributions: Int, months: [Month], weeks: [Week]) {
+            self.init(unsafeResultMap: ["__typename": "ContributionCalendar", "totalContributions": totalContributions, "months": months.map { (value: Month) -> ResultMap in value.resultMap }, "weeks": weeks.map { (value: Week) -> ResultMap in value.resultMap }])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          /// The count of total contributions in the calendar.
+          public var totalContributions: Int {
+            get {
+              return resultMap["totalContributions"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "totalContributions")
+            }
+          }
+
+          /// A list of the months of contributions in this calendar.
+          public var months: [Month] {
+            get {
+              return (resultMap["months"] as! [ResultMap]).map { (value: ResultMap) -> Month in Month(unsafeResultMap: value) }
+            }
+            set {
+              resultMap.updateValue(newValue.map { (value: Month) -> ResultMap in value.resultMap }, forKey: "months")
+            }
+          }
+
+          /// A list of the weeks of contributions in this calendar.
+          public var weeks: [Week] {
+            get {
+              return (resultMap["weeks"] as! [ResultMap]).map { (value: ResultMap) -> Week in Week(unsafeResultMap: value) }
+            }
+            set {
+              resultMap.updateValue(newValue.map { (value: Week) -> ResultMap in value.resultMap }, forKey: "weeks")
+            }
+          }
+
+          public struct Month: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["ContributionCalendarMonth"]
+
+            public static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(name: String) {
+              self.init(unsafeResultMap: ["__typename": "ContributionCalendarMonth", "name": name])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// The name of the month.
+            public var name: String {
+              get {
+                return resultMap["name"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "name")
+              }
+            }
+          }
+
+          public struct Week: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["ContributionCalendarWeek"]
+
+            public static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
+            ]
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(contributionDays: [ContributionDay]) {
+              self.init(unsafeResultMap: ["__typename": "ContributionCalendarWeek", "contributionDays": contributionDays.map { (value: ContributionDay) -> ResultMap in value.resultMap }])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// The days of contributions in this week.
+            public var contributionDays: [ContributionDay] {
+              get {
+                return (resultMap["contributionDays"] as! [ResultMap]).map { (value: ResultMap) -> ContributionDay in ContributionDay(unsafeResultMap: value) }
+              }
+              set {
+                resultMap.updateValue(newValue.map { (value: ContributionDay) -> ResultMap in value.resultMap }, forKey: "contributionDays")
+              }
+            }
+
+            public struct ContributionDay: GraphQLSelectionSet {
+              public static let possibleTypes: [String] = ["ContributionCalendarDay"]
+
+              public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("color", type: .nonNull(.scalar(String.self))),
+                GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
+              ]
+
+              public private(set) var resultMap: ResultMap
+
+              public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+              }
+
+              public init(color: String, contributionCount: Int) {
+                self.init(unsafeResultMap: ["__typename": "ContributionCalendarDay", "color": color, "contributionCount": contributionCount])
+              }
+
+              public var __typename: String {
+                get {
+                  return resultMap["__typename"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "__typename")
+                }
+              }
+
+              /// The hex color code that represents how many contributions were made on this day compared to others in the calendar.
+              public var color: String {
+                get {
+                  return resultMap["color"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "color")
+                }
+              }
+
+              /// How many contributions were made by the user on this day.
+              public var contributionCount: Int {
+                get {
+                  return resultMap["contributionCount"]! as! Int
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "contributionCount")
+                }
+              }
+            }
           }
         }
       }
@@ -3532,6 +3749,25 @@ public final class UserQuery: GraphQLQuery {
             }
           }
         }
+        contributionsCollection {
+          __typename
+          contributionCalendar {
+            __typename
+            totalContributions
+            months {
+              __typename
+              name
+            }
+            weeks {
+              __typename
+              contributionDays {
+                __typename
+                color
+                contributionCount
+              }
+            }
+          }
+        }
       }
     }
     """
@@ -3602,6 +3838,7 @@ public final class UserQuery: GraphQLQuery {
         GraphQLField("watching", type: .nonNull(.object(Watching.selections))),
         GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
         GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
+        GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -3610,8 +3847,8 @@ public final class UserQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String? = nil, login: String, avatarUrl: String, url: String, websiteUrl: String? = nil, bio: String? = nil, company: String? = nil, email: String, location: String? = nil, createdAt: String, updatedAt: String, viewerCanFollow: Bool, viewerIsFollowing: Bool, isViewer: Bool, followers: Follower, following: Following, starredRepositories: StarredRepository, issues: Issue, repositories: Repository, watching: Watching, pinnedItems: PinnedItem, organizations: Organization) {
-        self.init(unsafeResultMap: ["__typename": "User", "name": name, "login": login, "avatarUrl": avatarUrl, "url": url, "websiteUrl": websiteUrl, "bio": bio, "company": company, "email": email, "location": location, "createdAt": createdAt, "updatedAt": updatedAt, "viewerCanFollow": viewerCanFollow, "viewerIsFollowing": viewerIsFollowing, "isViewer": isViewer, "followers": followers.resultMap, "following": following.resultMap, "starredRepositories": starredRepositories.resultMap, "issues": issues.resultMap, "repositories": repositories.resultMap, "watching": watching.resultMap, "pinnedItems": pinnedItems.resultMap, "organizations": organizations.resultMap])
+      public init(name: String? = nil, login: String, avatarUrl: String, url: String, websiteUrl: String? = nil, bio: String? = nil, company: String? = nil, email: String, location: String? = nil, createdAt: String, updatedAt: String, viewerCanFollow: Bool, viewerIsFollowing: Bool, isViewer: Bool, followers: Follower, following: Following, starredRepositories: StarredRepository, issues: Issue, repositories: Repository, watching: Watching, pinnedItems: PinnedItem, organizations: Organization, contributionsCollection: ContributionsCollection) {
+        self.init(unsafeResultMap: ["__typename": "User", "name": name, "login": login, "avatarUrl": avatarUrl, "url": url, "websiteUrl": websiteUrl, "bio": bio, "company": company, "email": email, "location": location, "createdAt": createdAt, "updatedAt": updatedAt, "viewerCanFollow": viewerCanFollow, "viewerIsFollowing": viewerIsFollowing, "isViewer": isViewer, "followers": followers.resultMap, "following": following.resultMap, "starredRepositories": starredRepositories.resultMap, "issues": issues.resultMap, "repositories": repositories.resultMap, "watching": watching.resultMap, "pinnedItems": pinnedItems.resultMap, "organizations": organizations.resultMap, "contributionsCollection": contributionsCollection.resultMap])
       }
 
       public var __typename: String {
@@ -3840,6 +4077,16 @@ public final class UserQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue.resultMap, forKey: "organizations")
+        }
+      }
+
+      /// The collection of contributions this user has made to different repositories.
+      public var contributionsCollection: ContributionsCollection {
+        get {
+          return ContributionsCollection(unsafeResultMap: resultMap["contributionsCollection"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "contributionsCollection")
         }
       }
 
@@ -4504,6 +4751,229 @@ public final class UserQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "description")
+            }
+          }
+        }
+      }
+
+      public struct ContributionsCollection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ContributionsCollection"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(contributionCalendar: ContributionCalendar) {
+          self.init(unsafeResultMap: ["__typename": "ContributionsCollection", "contributionCalendar": contributionCalendar.resultMap])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// A calendar of this user's contributions on GitHub.
+        public var contributionCalendar: ContributionCalendar {
+          get {
+            return ContributionCalendar(unsafeResultMap: resultMap["contributionCalendar"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "contributionCalendar")
+          }
+        }
+
+        public struct ContributionCalendar: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["ContributionCalendar"]
+
+          public static let selections: [GraphQLSelection] = [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
+            GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
+          ]
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(totalContributions: Int, months: [Month], weeks: [Week]) {
+            self.init(unsafeResultMap: ["__typename": "ContributionCalendar", "totalContributions": totalContributions, "months": months.map { (value: Month) -> ResultMap in value.resultMap }, "weeks": weeks.map { (value: Week) -> ResultMap in value.resultMap }])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          /// The count of total contributions in the calendar.
+          public var totalContributions: Int {
+            get {
+              return resultMap["totalContributions"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "totalContributions")
+            }
+          }
+
+          /// A list of the months of contributions in this calendar.
+          public var months: [Month] {
+            get {
+              return (resultMap["months"] as! [ResultMap]).map { (value: ResultMap) -> Month in Month(unsafeResultMap: value) }
+            }
+            set {
+              resultMap.updateValue(newValue.map { (value: Month) -> ResultMap in value.resultMap }, forKey: "months")
+            }
+          }
+
+          /// A list of the weeks of contributions in this calendar.
+          public var weeks: [Week] {
+            get {
+              return (resultMap["weeks"] as! [ResultMap]).map { (value: ResultMap) -> Week in Week(unsafeResultMap: value) }
+            }
+            set {
+              resultMap.updateValue(newValue.map { (value: Week) -> ResultMap in value.resultMap }, forKey: "weeks")
+            }
+          }
+
+          public struct Month: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["ContributionCalendarMonth"]
+
+            public static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(name: String) {
+              self.init(unsafeResultMap: ["__typename": "ContributionCalendarMonth", "name": name])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// The name of the month.
+            public var name: String {
+              get {
+                return resultMap["name"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "name")
+              }
+            }
+          }
+
+          public struct Week: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["ContributionCalendarWeek"]
+
+            public static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
+            ]
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(contributionDays: [ContributionDay]) {
+              self.init(unsafeResultMap: ["__typename": "ContributionCalendarWeek", "contributionDays": contributionDays.map { (value: ContributionDay) -> ResultMap in value.resultMap }])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// The days of contributions in this week.
+            public var contributionDays: [ContributionDay] {
+              get {
+                return (resultMap["contributionDays"] as! [ResultMap]).map { (value: ResultMap) -> ContributionDay in ContributionDay(unsafeResultMap: value) }
+              }
+              set {
+                resultMap.updateValue(newValue.map { (value: ContributionDay) -> ResultMap in value.resultMap }, forKey: "contributionDays")
+              }
+            }
+
+            public struct ContributionDay: GraphQLSelectionSet {
+              public static let possibleTypes: [String] = ["ContributionCalendarDay"]
+
+              public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("color", type: .nonNull(.scalar(String.self))),
+                GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
+              ]
+
+              public private(set) var resultMap: ResultMap
+
+              public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+              }
+
+              public init(color: String, contributionCount: Int) {
+                self.init(unsafeResultMap: ["__typename": "ContributionCalendarDay", "color": color, "contributionCount": contributionCount])
+              }
+
+              public var __typename: String {
+                get {
+                  return resultMap["__typename"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "__typename")
+                }
+              }
+
+              /// The hex color code that represents how many contributions were made on this day compared to others in the calendar.
+              public var color: String {
+                get {
+                  return resultMap["color"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "color")
+                }
+              }
+
+              /// How many contributions were made by the user on this day.
+              public var contributionCount: Int {
+                get {
+                  return resultMap["contributionCount"]! as! Int
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "contributionCount")
+                }
+              }
             }
           }
         }
