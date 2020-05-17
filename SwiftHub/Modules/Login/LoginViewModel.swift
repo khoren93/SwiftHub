@@ -9,9 +9,10 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxSwiftExt
 import SafariServices
 
-private let loginURL = URL(string: "http://github.com/login/oauth/authorize?client_id=\(Keys.github.appId)&scope=user+repo+notifications+read:org")!
+private let loginURL = URL(string: "http://github.com/login/oauth/authorize?client_id=\(Keys.github.appId)&scope=\(Configs.App.githubScope)")!
 private let callbackURLScheme = "swifthub"
 
 class LoginViewModel: ViewModel, ViewModelType {
@@ -19,19 +20,22 @@ class LoginViewModel: ViewModel, ViewModelType {
     struct Input {
         let segmentSelection: Driver<LoginSegments>
         let basicLoginTrigger: Driver<Void>
+        let personalLoginTrigger: Driver<Void>
         let oAuthLoginTrigger: Driver<Void>
     }
 
     struct Output {
-        let basicLoginTriggered: Driver<Void>
-        let oAuthLoginTriggered: Driver<Void>
         let basicLoginButtonEnabled: Driver<Bool>
+        let personalLoginButtonEnabled: Driver<Bool>
         let hidesBasicLoginView: Driver<Bool>
+        let hidesPersonalLoginView: Driver<Bool>
         let hidesOAuthLoginView: Driver<Bool>
     }
 
     let login = BehaviorRelay(value: "")
     let password = BehaviorRelay(value: "")
+
+    let personalToken = BehaviorRelay(value: "")
 
     let code = PublishSubject<String>()
 
@@ -49,10 +53,8 @@ class LoginViewModel: ViewModel, ViewModelType {
     }
 
     func transform(input: Input) -> Output {
-        let basicLoginTriggered = input.basicLoginTrigger
-        let oAuthLoginTriggered = input.oAuthLoginTrigger
 
-        basicLoginTriggered.drive(onNext: { [weak self] () in
+        input.basicLoginTrigger.drive(onNext: { [weak self] () in
             if let login = self?.login.value,
                 let password = self?.password.value,
                 let authHash = "\(login):\(password)".base64Encoded {
@@ -61,7 +63,14 @@ class LoginViewModel: ViewModel, ViewModelType {
             }
         }).disposed(by: rx.disposeBag)
 
-        oAuthLoginTriggered.drive(onNext: { [weak self] () in
+        input.personalLoginTrigger.drive(onNext: { [weak self] () in
+            if let personalToken = self?.personalToken.value {
+                AuthManager.setToken(token: Token(personalToken: personalToken))
+                self?.tokenSaved.onNext(())
+            }
+        }).disposed(by: rx.disposeBag)
+
+        input.oAuthLoginTrigger.drive(onNext: { [weak self] () in
             self?.authSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: callbackURLScheme, completionHandler: { (callbackUrl, error) in
                 if let error = error {
                     logError(error.localizedDescription)
@@ -91,38 +100,43 @@ class LoginViewModel: ViewModel, ViewModelType {
                 }
             }).disposed(by: rx.disposeBag)
 
-        tokenSaved.flatMapLatest { () -> Observable<RxSwift.Event<User>> in
+        let request = tokenSaved.flatMapLatest { () -> Observable<RxSwift.Event<User>> in
             return self.provider.profile()
                 .trackActivity(self.loading)
                 .trackError(self.error)
                 .materialize()
-            }.subscribe(onNext: { (event) in
-                switch event {
-                case .next(let user):
-                    user.save()
-                    AuthManager.tokenValidated()
-                    if let login = user.login, let type = AuthManager.shared.token?.type().description {
-                        analytics.log(.login(login: login, type: type))
-                    }
-                    Application.shared.presentInitialScreen(in: Application.shared.window)
-                case .error(let error):
-                    logError(error.localizedDescription)
-                    AuthManager.removeToken()
-                default: break
-                }
-            }).disposed(by: rx.disposeBag)
+        }.share()
+
+        request.elements().subscribe(onNext: { (user) in
+            user.save()
+            AuthManager.tokenValidated()
+            if let login = user.login, let type = AuthManager.shared.token?.type().description {
+                analytics.log(.login(login: login, type: type))
+            }
+            Application.shared.presentInitialScreen(in: Application.shared.window)
+        }).disposed(by: rx.disposeBag)
+
+        request.errors().subscribe(onNext: { (error) in
+            logError(error.localizedDescription)
+            AuthManager.removeToken()
+        }).disposed(by: rx.disposeBag)
 
         let basicLoginButtonEnabled = BehaviorRelay.combineLatest(login, password, self.loading.asObservable()) {
             return $0.isNotEmpty && $1.isNotEmpty && !$2
         }.asDriver(onErrorJustReturn: false)
 
+        let personalLoginButtonEnabled = BehaviorRelay.combineLatest(personalToken, self.loading.asObservable()) {
+            return $0.isNotEmpty && !$1
+        }.asDriver(onErrorJustReturn: false)
+
         let hidesBasicLoginView = input.segmentSelection.map { $0 != LoginSegments.basic }
+        let hidesPersonalLoginView = input.segmentSelection.map { $0 != LoginSegments.personal }
         let hidesOAuthLoginView = input.segmentSelection.map { $0 != LoginSegments.oAuth }
 
-        return Output(basicLoginTriggered: basicLoginTriggered,
-                      oAuthLoginTriggered: oAuthLoginTriggered,
-                      basicLoginButtonEnabled: basicLoginButtonEnabled,
+        return Output(basicLoginButtonEnabled: basicLoginButtonEnabled,
+                      personalLoginButtonEnabled: personalLoginButtonEnabled,
                       hidesBasicLoginView: hidesBasicLoginView,
+                      hidesPersonalLoginView: hidesPersonalLoginView,
                       hidesOAuthLoginView: hidesOAuthLoginView)
     }
 }

@@ -34,7 +34,7 @@ final class Application: NSObject {
 
         if let token = authManager.token, Configs.Network.useStaging == false {
             switch token.type() {
-            case .oAuth(let token):
+            case .oAuth(let token), .personal(let token):
                 provider = GraphApi(restApi: restApi, token: token)
             default: break
             }

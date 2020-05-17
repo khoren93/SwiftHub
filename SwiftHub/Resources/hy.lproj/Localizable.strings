@@ -41,10 +41,15 @@
 /* Login */
 //"Login.Navigation.Title" = "Մուտք";
 "Login.BasicSegment.Title" = "Հիմնական";
+"Login.PersonalSegment.Title" = "Անձնական";
 "Login.OAuthSegment.Title" = "OAuth";
 "Login.LoginTextField.Placeholder" = "մուտքանուն";
 "Login.PasswordTextField.Placeholder" = "գաղտնաբառ";
 "Login.BasicLoginButton.Title" = "Մուտք";
+"Login.PersonalTitleLabel.Text" = "Անհատական Մուտքի Թոքեն";
+"Login.PersonalDetailLabel.Text" = "Այս թույլտվությունները պահանջվում են\n%@";
+"Login.PersonalTokenTextField.Placeholder" = "անհատական մուտքի թոքեն";
+"Login.PersonalLoginButton.Title" = "Մուտք";
 "Login.TitleLabel.Text" = "Բարի գալուստ SwiftHub";
 "Login.DetailLabel.Text" = "Հիմնական Authentication-ի կամ OAuth-ի օգտագործման շնորհիվ կարող եք կատարել ժամում մինչեւ 5000 հարցում: \n\nԱնանուն հարցումների համար սահմանվում է ժամում մինչեւ 60 հարցում:";
 "Login.OAuthloginButton.Title" = "Մուտք Github-ով";

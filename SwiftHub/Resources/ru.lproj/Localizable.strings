@@ -41,10 +41,15 @@
 /* Login */
 //"Login.Navigation.Title" = "Вход";
 "Login.BasicSegment.Title" = "Базовое";
+"Login.PersonalSegment.Title" = "Персональный";
 "Login.OAuthSegment.Title" = "OAuth";
 "Login.LoginTextField.Placeholder" = "логин";
 "Login.PasswordTextField.Placeholder" = "пароль";
 "Login.BasicLoginButton.Title" = "Вход";
+"Login.PersonalTitleLabel.Text" = "Персональный токен доступа";
+"Login.PersonalDetailLabel.Text" = "Эти разрешения необходимы\n%@";
+"Login.PersonalTokenTextField.Placeholder" = "персональный токен доступа";
+"Login.PersonalLoginButton.Title" = "Вход";
 "Login.TitleLabel.Text" = "Добро пожаловать в SwiftHub";
 "Login.DetailLabel.Text" = "Для запросов API, использующих обычную аутентификацию или OAuth, вы можете делать до 5000 запросов в час. \n\nДля неаутентифицированных запросов ограничение скорости допускает до 60 запросов в час.";
 "Login.OAuthloginButton.Title" = "Войти с Github";

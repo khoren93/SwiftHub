@@ -157,6 +157,8 @@ extension GithubAPI: TargetType, ProductAPIType {
             switch token.type() {
             case .basic(let token):
                 return ["Authorization": "Basic \(token)"]
+            case .personal(let token):
+                return ["Authorization": "token \(token)"]
             case .oAuth(let token):
                 return ["Authorization": "token \(token)"]
             case .unauthorized: break
