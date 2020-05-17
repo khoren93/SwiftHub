@@ -200,6 +200,12 @@ class UserViewController: TableViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
+        Observable.of(output.items.mapToVoid(), orientationEvent.asObservable()).merge()
+            .asDriver(onErrorJustReturn: ()).delay(.milliseconds(100)).drive(onNext: { [weak self] (_) in
+                self?.tableView.beginUpdates()
+                self?.tableView.endUpdates()
+            }).disposed(by: rx.disposeBag)
+
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
             case .starsItem:

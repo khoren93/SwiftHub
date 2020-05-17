@@ -52,6 +52,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
     let languageChanged = BehaviorRelay<Void>(value: ())
 
+    let orientationEvent = PublishSubject<Void>()
     let motionShakeEvent = PublishSubject<Void>()
 
     lazy var searchBar: SearchBar = {
@@ -115,10 +116,12 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
         // Observe device orientation change
         NotificationCenter.default
-            .rx.notification(UIDevice.orientationDidChangeNotification)
-            .subscribe { [weak self] (event) in
-                self?.orientationChanged()
-            }.disposed(by: rx.disposeBag)
+            .rx.notification(UIDevice.orientationDidChangeNotification).mapToVoid()
+            .bind(to: orientationEvent).disposed(by: rx.disposeBag)
+
+        orientationEvent.subscribe { [weak self] (event) in
+            self?.orientationChanged()
+        }.disposed(by: rx.disposeBag)
 
         // Observe application did become active notification
         NotificationCenter.default

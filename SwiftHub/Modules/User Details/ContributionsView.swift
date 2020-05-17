@@ -14,12 +14,16 @@ class ContributionsView: View {
 
     let calendar = BehaviorRelay<ContributionCalendar?>(value: nil)
 
+    let imageView = ImageView()
+
     override func makeUI() {
         super.makeUI()
-        snp.makeConstraints({ (make) in
-            make.height.equalTo(10)
+        addSubview(imageView)
+        imageView.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+            make.height.equalTo(0)
         })
-        calendar.subscribe(onNext: { [weak self] (calendar) in
+        calendar.asDriver().drive(onNext: { [weak self] (calendar) in
             self?.updateUI()
         }).disposed(by: self.rx.disposeBag)
     }
@@ -27,37 +31,36 @@ class ContributionsView: View {
     override func updateUI() {
         super.updateUI()
         guard let calendar = calendar.value else { return }
-
-        let itemSize = frame.width / CGFloat(calendar.weeks?.count ?? 0)
-        let calculatedHeight = itemSize * 7
-        snp.updateConstraints({ (make) in
+        let daySize = frame.width / CGFloat(calendar.weeks?.count ?? 0)
+        let calculatedHeight = daySize * 7
+        self.imageView.image = contributionsImage(with: calendar, daySize: daySize)
+        self.imageView.snp.updateConstraints({ (make) in
             make.height.equalTo(calculatedHeight)
         })
-        UIView.animate(withDuration: 0.5) {
-            self.layoutIfNeeded()
-        }
     }
 
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        guard let ctx = UIGraphicsGetCurrentContext() else { return }
-        guard let calendar = calendar.value else { return }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateUI()
+    }
 
-        // Draw contributions chart
-        let itemSize = bounds.width / CGFloat(calendar.weeks?.count ?? 0)
-        calendar.weeks?.enumerated().forEach({ (weekIndex, week) in
-            week.enumerated().forEach { (dayIndex, day) in
-                let color = (UIColor(hexString: day.color ?? "") ?? .clear).cgColor
-                ctx.setFillColor(color)
-                ctx.setStrokeColor(UIColor.primary().cgColor)
-                ctx.setLineWidth(1)
-
-                let size = itemSize
-                let rectangle = CGRect(x: CGFloat(weekIndex)*size, y: CGFloat(dayIndex)*size, width: size, height: size)
-                ctx.addRect(rectangle)
-                ctx.drawPath(using: .fillStroke)
-            }
-        })
+    func contributionsImage(with calendar: ContributionCalendar, daySize: CGFloat) -> UIImage {
+        let calculatedWidth = daySize * CGFloat(calendar.weeks?.count ?? 0)
+        let calculatedHeight = daySize * 7
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: calculatedWidth, height: calculatedHeight))
+        let img = renderer.image { ctx in
+            // Draw contributions chart
+            calendar.weeks?.enumerated().forEach({ (weekIndex, week) in
+                week.enumerated().forEach { (dayIndex, day) in
+                    let color = (UIColor(hexString: day.color ?? "") ?? .clear).cgColor
+                    ctx.cgContext.setFillColor(color)
+                    ctx.cgContext.setStrokeColor(UIColor.primary().cgColor)
+                    ctx.cgContext.setLineWidth(1)
+                    ctx.cgContext.addRect(CGRect(x: CGFloat(weekIndex)*daySize, y: CGFloat(dayIndex)*daySize, width: daySize, height: daySize))
+                    ctx.cgContext.drawPath(using: .fillStroke)
+                }
+            })
+        }
+        return img
     }
 }
