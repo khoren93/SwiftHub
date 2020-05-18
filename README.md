@@ -54,7 +54,7 @@
 </p>
 
 ## App Features
-- [x] Basic and OAuth2 authentication
+- [x] Basic, Personal Access Token and OAuth2 authentication
 - [x] View trending repositories and users ([github-trending-api](https://github.com/huchenme/github-trending-api))
 - [x] Advanced searching and sorting repositories and users, filter by language
 - [x] View repository and user details, events, issues, commits, pull requests, contributors, etc...
