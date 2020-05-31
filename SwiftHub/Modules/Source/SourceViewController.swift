@@ -78,8 +78,6 @@ class SourceViewController: ViewController {
                                           languageSelected: languagesPicker.rx.modelSelected(String.self).map { $0.first }.filterNil())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-
         isLoading.subscribe(onNext: { [weak self] (loading) in
             loading ? self?.startAnimating(): self?.stopAnimating()
         }).disposed(by: rx.disposeBag)

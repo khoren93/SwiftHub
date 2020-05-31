@@ -64,8 +64,6 @@ class LinesCountViewController: ViewController {
         let input = LinesCountViewModel.Input(refresh: refresh)
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-
         isLoading.subscribe(onNext: { [weak self] (loading) in
             loading ? self?.startAnimating(): self?.stopAnimating()
         }).disposed(by: rx.disposeBag)

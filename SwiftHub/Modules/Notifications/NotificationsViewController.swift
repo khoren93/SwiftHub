@@ -79,10 +79,6 @@ class NotificationsViewController: TableViewController {
                                                  selection: tableView.rx.modelSelected(NotificationCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        viewModel.footerLoading.asObservable().bind(to: isFooterLoading).disposed(by: rx.disposeBag)
-        viewModel.parsedError.bind(to: error).disposed(by: rx.disposeBag)
-
         output.navigationTitle.drive(onNext: { [weak self] (title) in
             self?.navigationTitle = title
         }).disposed(by: rx.disposeBag)

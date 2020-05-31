@@ -47,7 +47,7 @@
 "Login.PasswordTextField.Placeholder" = "password";
 "Login.BasicLoginButton.Title" = "Login";
 "Login.PersonalTitleLabel.Text" = "Personal Access Token";
-"Login.PersonalDetailLabel.Text" = "These permissions is required\n%@";
+"Login.PersonalDetailLabel.Text" = "These permissions are required\n%@";
 "Login.PersonalTokenTextField.Placeholder" = "personal access token";
 "Login.PersonalLoginButton.Title" = "Login";
 "Login.TitleLabel.Text" = "Welcome to SwiftHub";

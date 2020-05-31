@@ -147,9 +147,6 @@ class RepositoryViewController: TableViewController {
                                               starSelection: starButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        viewModel.headerLoading.asObservable().bind(to: isHeaderLoading).disposed(by: rx.disposeBag)
-
         let dataSource = RxTableViewSectionedReloadDataSource<RepositorySection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
             case .parentItem(let viewModel),
@@ -308,10 +305,6 @@ class RepositoryViewController: TableViewController {
             } else {
                 self.panel.removePanelFromParent(animated: false)
             }
-        }).disposed(by: rx.disposeBag)
-
-        viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
     }
 

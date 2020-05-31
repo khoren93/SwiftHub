@@ -41,7 +41,10 @@ class OnlineProvider<Target> where Target: Moya.TargetType {
                             case .statusCode(let response):
                                 if response.statusCode == 401 {
                                     // Unauthorized
-//                                    AuthManager.removeToken()
+                                    if AuthManager.shared.hasValidToken {
+                                        AuthManager.removeToken()
+                                        Application.shared.presentInitialScreen(in: Application.shared.window)
+                                    }
                                 }
                             default: break
                             }

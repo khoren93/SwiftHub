@@ -49,15 +49,15 @@ final class Application: NSObject {
 //        presentTestScreen(in: window)
 //        return
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             if let user = User.currentUser(), let login = user.login {
                 analytics.identify(userId: login)
                 analytics.set(.name(value: user.name ?? ""))
                 analytics.set(.email(value: user.email ?? ""))
             }
-
-            let viewModel = HomeTabBarViewModel(provider: provider)
-            self.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
+            let authorized = self?.authManager.token?.isValid ?? false
+            let viewModel = HomeTabBarViewModel(authorized: authorized, provider: provider)
+            self?.navigator.show(segue: .tabs(viewModel: viewModel), sender: nil, transition: .root(in: window))
         }
     }
 

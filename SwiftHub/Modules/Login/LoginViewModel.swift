@@ -82,32 +82,28 @@ class LoginViewModel: ViewModel, ViewModelType {
             self?.authSession?.start()
         }).disposed(by: rx.disposeBag)
 
-        code.flatMapLatest { (code) -> Observable<RxSwift.Event<Token>> in
+        let tokenRequest = code.flatMapLatest { (code) -> Observable<RxSwift.Event<Token>> in
             let clientId = Keys.github.appId
             let clientSecret = Keys.github.apiKey
             return self.provider.createAccessToken(clientId: clientId, clientSecret: clientSecret, code: code, redirectUri: nil, state: nil)
                 .trackActivity(self.loading)
-                .trackError(self.error)
-                .materialize()
-            }.subscribe(onNext: { [weak self] (event) in
-                switch event {
-                case .next(let token):
-                    AuthManager.setToken(token: token)
-                    self?.tokenSaved.onNext(())
-                case .error(let error):
-                    logError(error.localizedDescription)
-                default: break
-                }
-            }).disposed(by: rx.disposeBag)
-
-        let request = tokenSaved.flatMapLatest { () -> Observable<RxSwift.Event<User>> in
-            return self.provider.profile()
-                .trackActivity(self.loading)
-                .trackError(self.error)
                 .materialize()
         }.share()
 
-        request.elements().subscribe(onNext: { (user) in
+        tokenRequest.elements().subscribe(onNext: { [weak self] (token) in
+            AuthManager.setToken(token: token)
+            self?.tokenSaved.onNext(())
+        }).disposed(by: rx.disposeBag)
+
+        tokenRequest.errors().bind(to: serverError).disposed(by: rx.disposeBag)
+
+        let profileRequest = tokenSaved.flatMapLatest {
+            return self.provider.profile()
+                .trackActivity(self.loading)
+                .materialize()
+        }.share()
+
+        profileRequest.elements().subscribe(onNext: { (user) in
             user.save()
             AuthManager.tokenValidated()
             if let login = user.login, let type = AuthManager.shared.token?.type().description {
@@ -116,8 +112,8 @@ class LoginViewModel: ViewModel, ViewModelType {
             Application.shared.presentInitialScreen(in: Application.shared.window)
         }).disposed(by: rx.disposeBag)
 
-        request.errors().subscribe(onNext: { (error) in
-            logError(error.localizedDescription)
+        profileRequest.errors().bind(to: serverError).disposed(by: rx.disposeBag)
+        serverError.subscribe(onNext: { (error) in
             AuthManager.removeToken()
         }).disposed(by: rx.disposeBag)
 

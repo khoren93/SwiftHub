@@ -219,9 +219,6 @@ class LoginViewController: ViewController {
                                          oAuthLoginTrigger: oAuthLoginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-        viewModel.parsedError.asObservable().bind(to: error).disposed(by: rx.disposeBag)
-
         isLoading.asDriver().drive(onNext: { [weak self] (isLoading) in
             isLoading ? self?.startAnimating() : self?.stopAnimating()
         }).disposed(by: rx.disposeBag)
@@ -238,15 +235,7 @@ class LoginViewController: ViewController {
         output.hidesOAuthLoginView.drive(oAuthLoginStackView.rx.isHidden).disposed(by: rx.disposeBag)
 
         error.subscribe(onNext: { [weak self] (error) in
-            var title = ""
-            var description = ""
-            let image = R.image.icon_toast_warning()
-            switch error {
-            case .serverError(let response):
-                title = response.message ?? ""
-                description = response.detail()
-            }
-            self?.view.makeToast(description, title: title, image: image)
+            self?.view.makeToast(error.description, title: error.title, image: R.image.icon_toast_warning())
         }).disposed(by: rx.disposeBag)
     }
 }

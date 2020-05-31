@@ -48,8 +48,6 @@ class ContactsViewController: TableViewController {
                                             selection: tableView.rx.modelSelected(ContactCellViewModel.self).asDriver())
         let output = viewModel.transform(input: input)
 
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: rx.disposeBag)
-
         output.items
             .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: ContactCell.self)) { tableView, viewModel, cell in
                 cell.bind(to: viewModel)
