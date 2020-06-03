@@ -16,8 +16,7 @@ import Kingfisher
 #if DEBUG
 import FLEX
 #endif
-import Fabric
-import Crashlytics
+import FirebaseCrashlytics
 import NVActivityIndicatorView
 import NSObject_Rx
 import RxViewController
@@ -142,8 +141,6 @@ class LibsManager: NSObject {
     func setupAnalytics() {
         FirebaseApp.configure()
         Mixpanel.initialize(token: Keys.mixpanel.apiKey)
-        Fabric.with([Crashlytics.self])
-        Fabric.sharedSDK().debug = false
         FirebaseConfiguration.shared.setLoggerLevel(.min)
     }
 

@@ -37,10 +37,6 @@ target 'SwiftHub' do
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
 
-    # Fabric
-    pod 'Fabric'
-    pod 'Crashlytics'
-
     # UI
     pod 'NVActivityIndicatorView', '~> 4.0'  # https://github.com/ninjaprox/NVActivityIndicatorView
     pod 'ImageSlideshow/Kingfisher', '~> 1.8'  # https://github.com/zvonicek/ImageSlideshow
@@ -77,6 +73,7 @@ target 'SwiftHub' do
     # Analytics
     pod 'Mixpanel-swift', '~> 2.0'  # https://github.com/mixpanel/mixpanel-iphone
     pod 'Firebase/Analytics'
+    pod 'Firebase/Crashlytics'
 
     # Ads
     pod 'Firebase/AdMob'
