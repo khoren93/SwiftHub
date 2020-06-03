@@ -27,7 +27,7 @@ enum ApiError: Error {
 
     var description: String {
         switch self {
-        case .serverError(let response): return response.detail() ?? ""
+        case .serverError(let response): return response.detail()
         }
     }
 }

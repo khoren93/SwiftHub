@@ -60,6 +60,7 @@ enum AnalyticsEventType {
     case search(keyword: String)
     case repoLanguage(language: String)
     case repository(fullname: String)
+    case repositoryStar(fullname: String)
     case user(login: String)
     case userEvents(login: String)
     case repositoryEvents(fullname: String)
@@ -86,6 +87,7 @@ extension AnalyticsEventType {
         case .search: return "search"
         case .repoLanguage: return "repo_language"
         case .repository: return "repository"
+        case .repositoryStar: return "repository_starred"
         case .user: return "user"
         case .userEvents: return "user_events"
         case .repositoryEvents: return "repository_events"
@@ -117,6 +119,7 @@ extension AnalyticsEventType {
              .userEvents(let login):
             return ["login": login]
         case .repository(let fullname),
+             .repositoryStar(let fullname),
              .repositoryEvents(let fullname),
              .issues(let fullname),
              .source(let fullname),

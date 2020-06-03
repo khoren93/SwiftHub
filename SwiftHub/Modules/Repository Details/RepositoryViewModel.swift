@@ -88,9 +88,12 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 .share()
             }
 
-        starred.subscribe(onNext: { (event) in
+        starred.subscribe(onNext: { [weak self] (event) in
             switch event {
-            case .next: logDebug("Starred success")
+            case .next:
+                let fullname = self?.repository.value.fullname ?? ""
+                analytics.log(.repositoryStar(fullname: fullname))
+                logDebug("Starred success")
             case .error(let error): logError("\(error.localizedDescription)")
             case .completed: break
             }
@@ -292,9 +295,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Count lines of code
             let clocCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCountLinesOfCodeCellTitle.key.localized(),
-                                                                         detail: "",
-                                                                         image: R.image.icon_cell_cloc()?.template,
-                                                                         hidesDisclosure: false)
+                                                                  detail: "",
+                                                                  image: R.image.icon_cell_cloc()?.template,
+                                                                  hidesDisclosure: false)
             items.append(RepositorySectionItem.countLinesOfCodeItem(viewModel: clocCellViewModel))
 
             return [
