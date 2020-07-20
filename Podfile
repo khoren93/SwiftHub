@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.28.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.30.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -82,7 +82,7 @@ target 'SwiftHub' do
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
-        pod 'Quick', '~> 2.0'  # https://github.com/Quick/Quick
+        pod 'Quick', '~> 3.0'  # https://github.com/Quick/Quick
         pod 'Nimble', '~> 8.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift

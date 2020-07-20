@@ -26,6 +26,7 @@ enum EventType: String {
     case fork = "ForkEvent"
     case commitComment = "CommitCommentEvent"
     case create = "CreateEvent"
+    case delete = "DeleteEvent"
     case issueComment = "IssueCommentEvent"
     case issues = "IssuesEvent"
     case member = "MemberEvent"
@@ -95,6 +96,7 @@ class Payload: StaticMappable {
         switch type {
         case .fork: return ForkPayload()
         case .create: return CreatePayload()
+        case .delete: return DeletePayload()
         case .issueComment: return IssueCommentPayload()
         case .issues: return IssuesPayload()
         case .member: return MemberPayload()
@@ -140,6 +142,27 @@ class CreatePayload: Payload {
         refType <- map["payload.ref_type"]
         masterBranch <- map["payload.master_branch"]
         description <- map["payload.description"]
+        pusherType <- map["payload.pusher_type"]
+    }
+}
+
+enum DeleteEventType: String {
+    case repository
+    case branch
+    case tag
+}
+
+class DeletePayload: Payload {
+
+    var ref: String?
+    var refType: DeleteEventType = .repository
+    var pusherType: String?
+
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+
+        ref <- map["payload.ref"]
+        refType <- map["payload.ref_type"]
         pusherType <- map["payload.pusher_type"]
     }
 }

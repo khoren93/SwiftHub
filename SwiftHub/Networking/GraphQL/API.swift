@@ -123,9 +123,11 @@ public final class RepositoryQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("repository", arguments: ["owner": GraphQLVariable("owner"), "name": GraphQLVariable("name")], type: .object(Repository.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("repository", arguments: ["owner": GraphQLVariable("owner"), "name": GraphQLVariable("name")], type: .object(Repository.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -150,33 +152,35 @@ public final class RepositoryQuery: GraphQLQuery {
     public struct Repository: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Repository"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
-        GraphQLField("description", type: .scalar(String.self)),
-        GraphQLField("url", type: .nonNull(.scalar(String.self))),
-        GraphQLField("homepageUrl", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("diskUsage", type: .scalar(Int.self)),
-        GraphQLField("isFork", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("parent", type: .object(Parent.selections)),
-        GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
-        GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
-        GraphQLField("languages", arguments: ["first": 20], type: .object(Language.selections)),
-        GraphQLField("licenseInfo", type: .object(LicenseInfo.selections)),
-        GraphQLField("defaultBranchRef", type: .object(DefaultBranchRef.selections)),
-        GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
-        GraphQLField("forks", type: .nonNull(.object(Fork.selections))),
-        GraphQLField("watchers", type: .nonNull(.object(Watcher.selections))),
-        GraphQLField("mentionableUsers", type: .nonNull(.object(MentionableUser.selections))),
-        GraphQLField("issues", arguments: ["states": ["OPEN"]], type: .nonNull(.object(Issue.selections))),
-        GraphQLField("pullRequests", arguments: ["states": ["OPEN"]], type: .nonNull(.object(PullRequest.selections))),
-        GraphQLField("releases", type: .nonNull(.object(Release.selections))),
-        GraphQLField("ref", arguments: ["qualifiedName": GraphQLVariable("qualifiedName")], type: .object(Ref.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
+          GraphQLField("description", type: .scalar(String.self)),
+          GraphQLField("url", type: .nonNull(.scalar(String.self))),
+          GraphQLField("homepageUrl", type: .scalar(String.self)),
+          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("diskUsage", type: .scalar(Int.self)),
+          GraphQLField("isFork", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("parent", type: .object(Parent.selections)),
+          GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
+          GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
+          GraphQLField("languages", arguments: ["first": 20], type: .object(Language.selections)),
+          GraphQLField("licenseInfo", type: .object(LicenseInfo.selections)),
+          GraphQLField("defaultBranchRef", type: .object(DefaultBranchRef.selections)),
+          GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
+          GraphQLField("forks", type: .nonNull(.object(Fork.selections))),
+          GraphQLField("watchers", type: .nonNull(.object(Watcher.selections))),
+          GraphQLField("mentionableUsers", type: .nonNull(.object(MentionableUser.selections))),
+          GraphQLField("issues", arguments: ["states": ["OPEN"]], type: .nonNull(.object(Issue.selections))),
+          GraphQLField("pullRequests", arguments: ["states": ["OPEN"]], type: .nonNull(.object(PullRequest.selections))),
+          GraphQLField("releases", type: .nonNull(.object(Release.selections))),
+          GraphQLField("ref", arguments: ["qualifiedName": GraphQLVariable("qualifiedName")], type: .object(Ref.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -440,10 +444,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Parent: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Repository"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -478,16 +484,18 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Owner: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Organization", "User"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLTypeCase(
-            variants: ["Organization": AsOrganization.selections],
-            default: [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("login", type: .nonNull(.scalar(String.self))),
-              GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-            ]
-          )
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLTypeCase(
+              variants: ["Organization": AsOrganization.selections],
+              default: [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("login", type: .nonNull(.scalar(String.self))),
+                GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              ]
+            )
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -546,12 +554,14 @@ public final class RepositoryQuery: GraphQLQuery {
         public struct AsOrganization: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Organization"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("login", type: .nonNull(.scalar(String.self))),
-            GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-            GraphQLField("description", type: .scalar(String.self)),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("login", type: .nonNull(.scalar(String.self))),
+              GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("description", type: .scalar(String.self)),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -607,11 +617,13 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct PrimaryLanguage: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Language"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("color", type: .scalar(String.self)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("color", type: .scalar(String.self)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -656,12 +668,14 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Language: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["LanguageConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("totalSize", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("edges", type: .list(.object(Edge.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("totalSize", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("edges", type: .list(.object(Edge.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -715,11 +729,13 @@ public final class RepositoryQuery: GraphQLQuery {
         public struct Edge: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["LanguageEdge"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("size", type: .nonNull(.scalar(Int.self))),
-            GraphQLField("node", type: .nonNull(.object(Node.selections))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("size", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("node", type: .nonNull(.object(Node.selections))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -762,11 +778,13 @@ public final class RepositoryQuery: GraphQLQuery {
           public struct Node: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Language"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("color", type: .scalar(String.self)),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                GraphQLField("color", type: .scalar(String.self)),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -813,10 +831,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct LicenseInfo: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["License"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -851,10 +871,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct DefaultBranchRef: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Ref"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -889,10 +911,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Stargazer: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["StargazerConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -927,10 +951,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Fork: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -965,10 +991,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Watcher: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["UserConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1003,10 +1031,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct MentionableUser: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["UserConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1041,10 +1071,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Issue: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["IssueConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1079,10 +1111,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct PullRequest: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["PullRequestConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1117,10 +1151,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Release: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["ReleaseConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1155,10 +1191,12 @@ public final class RepositoryQuery: GraphQLQuery {
       public struct Ref: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Ref"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("target", type: .nonNull(.object(Target.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("target", type: .nonNull(.object(Target.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1190,25 +1228,23 @@ public final class RepositoryQuery: GraphQLQuery {
         }
 
         public struct Target: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["Commit", "Tree", "Blob", "Tag"]
+          public static let possibleTypes: [String] = ["Blob", "Commit", "Tag", "Tree"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLTypeCase(
-              variants: ["Commit": AsCommit.selections],
-              default: [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              ]
-            )
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLTypeCase(
+                variants: ["Commit": AsCommit.selections],
+                default: [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                ]
+              )
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
           public init(unsafeResultMap: ResultMap) {
             self.resultMap = unsafeResultMap
-          }
-
-          public static func makeTree() -> Target {
-            return Target(unsafeResultMap: ["__typename": "Tree"])
           }
 
           public static func makeBlob() -> Target {
@@ -1217,6 +1253,10 @@ public final class RepositoryQuery: GraphQLQuery {
 
           public static func makeTag() -> Target {
             return Target(unsafeResultMap: ["__typename": "Tag"])
+          }
+
+          public static func makeTree() -> Target {
+            return Target(unsafeResultMap: ["__typename": "Tree"])
           }
 
           public static func makeCommit(history: AsCommit.History) -> Target {
@@ -1246,10 +1286,12 @@ public final class RepositoryQuery: GraphQLQuery {
           public struct AsCommit: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Commit"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("history", type: .nonNull(.object(History.selections))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("history", type: .nonNull(.object(History.selections))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -1283,10 +1325,12 @@ public final class RepositoryQuery: GraphQLQuery {
             public struct History: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["CommitHistoryConnection"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -1384,9 +1428,11 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("search", arguments: ["first": 20, "query": GraphQLVariable("query"), "type": "REPOSITORY", "before": GraphQLVariable("before")], type: .nonNull(.object(Search.selections))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("search", arguments: ["first": 20, "query": GraphQLVariable("query"), "type": "REPOSITORY", "before": GraphQLVariable("before")], type: .nonNull(.object(Search.selections))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1411,12 +1457,14 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
     public struct Search: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["SearchResultItemConnection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("repositoryCount", type: .nonNull(.scalar(Int.self))),
-        GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
-        GraphQLField("nodes", type: .list(.object(Node.selections))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("repositoryCount", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
+          GraphQLField("nodes", type: .list(.object(Node.selections))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1470,11 +1518,13 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
       public struct PageInfo: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["PageInfo"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("endCursor", type: .scalar(String.self)),
-          GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("endCursor", type: .scalar(String.self)),
+            GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1519,14 +1569,16 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
       public struct Node: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["App", "Issue", "MarketplaceListing", "Organization", "PullRequest", "Repository", "User"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLTypeCase(
-            variants: ["Repository": AsRepository.selections],
-            default: [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            ]
-          )
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLTypeCase(
+              variants: ["Repository": AsRepository.selections],
+              default: [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              ]
+            )
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1585,17 +1637,19 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
         public struct AsRepository: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Repository"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
-            GraphQLField("description", type: .scalar(String.self)),
-            GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
-            GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+              GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
+              GraphQLField("description", type: .scalar(String.self)),
+              GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
+              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
+              GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -1699,15 +1753,17 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
           public struct Owner: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Organization", "User"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLTypeCase(
-                variants: ["Organization": AsOrganization.selections],
-                default: [
-                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-                ]
-              )
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLTypeCase(
+                  variants: ["Organization": AsOrganization.selections],
+                  default: [
+                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                  ]
+                )
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -1756,11 +1812,13 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
             public struct AsOrganization: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["Organization"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-                GraphQLField("description", type: .scalar(String.self)),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("description", type: .scalar(String.self)),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -1806,11 +1864,13 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
           public struct PrimaryLanguage: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Language"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("color", type: .scalar(String.self)),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                GraphQLField("color", type: .scalar(String.self)),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -1855,10 +1915,12 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
           public struct Stargazer: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["StargazerConnection"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -1947,9 +2009,11 @@ public final class SearchUsersQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("search", arguments: ["first": 20, "query": GraphQLVariable("query"), "type": "USER", "before": GraphQLVariable("before")], type: .nonNull(.object(Search.selections))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("search", arguments: ["first": 20, "query": GraphQLVariable("query"), "type": "USER", "before": GraphQLVariable("before")], type: .nonNull(.object(Search.selections))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1974,12 +2038,14 @@ public final class SearchUsersQuery: GraphQLQuery {
     public struct Search: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["SearchResultItemConnection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("nodes", type: .list(.object(Node.selections))),
-        GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
-        GraphQLField("userCount", type: .nonNull(.scalar(Int.self))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("nodes", type: .list(.object(Node.selections))),
+          GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
+          GraphQLField("userCount", type: .nonNull(.scalar(Int.self))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -2033,14 +2099,16 @@ public final class SearchUsersQuery: GraphQLQuery {
       public struct Node: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["App", "Issue", "MarketplaceListing", "Organization", "PullRequest", "Repository", "User"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLTypeCase(
-            variants: ["User": AsUser.selections],
-            default: [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            ]
-          )
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLTypeCase(
+              variants: ["User": AsUser.selections],
+              default: [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              ]
+            )
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2099,16 +2167,18 @@ public final class SearchUsersQuery: GraphQLQuery {
         public struct AsUser: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["User"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("login", type: .nonNull(.scalar(String.self))),
-            GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-            GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
-            GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .scalar(String.self)),
+              GraphQLField("login", type: .nonNull(.scalar(String.self))),
+              GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
+              GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -2202,10 +2272,12 @@ public final class SearchUsersQuery: GraphQLQuery {
           public struct Follower: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["FollowerConnection"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -2240,10 +2312,12 @@ public final class SearchUsersQuery: GraphQLQuery {
           public struct Repository: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -2280,11 +2354,13 @@ public final class SearchUsersQuery: GraphQLQuery {
       public struct PageInfo: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["PageInfo"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("endCursor", type: .scalar(String.self)),
-          GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("endCursor", type: .scalar(String.self)),
+            GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2448,9 +2524,11 @@ public final class ViewerQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("viewer", type: .nonNull(.object(Viewer.selections))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("viewer", type: .nonNull(.object(Viewer.selections))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -2475,34 +2553,36 @@ public final class ViewerQuery: GraphQLQuery {
     public struct Viewer: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["User"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("name", type: .scalar(String.self)),
-        GraphQLField("login", type: .nonNull(.scalar(String.self))),
-        GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-        GraphQLField("url", type: .nonNull(.scalar(String.self))),
-        GraphQLField("websiteUrl", type: .scalar(String.self)),
-        GraphQLField("bio", type: .scalar(String.self)),
-        GraphQLField("company", type: .scalar(String.self)),
-        GraphQLField("email", type: .nonNull(.scalar(String.self))),
-        GraphQLField("location", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("isViewer", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
-        GraphQLField("following", type: .nonNull(.object(Following.selections))),
-        GraphQLField("starredRepositories", type: .nonNull(.object(StarredRepository.selections))),
-        GraphQLField("issues", type: .nonNull(.object(Issue.selections))),
-        GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
-        GraphQLField("watching", type: .nonNull(.object(Watching.selections))),
-        GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
-        GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
-        GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
-        GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("login", type: .nonNull(.scalar(String.self))),
+          GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+          GraphQLField("url", type: .nonNull(.scalar(String.self))),
+          GraphQLField("websiteUrl", type: .scalar(String.self)),
+          GraphQLField("bio", type: .scalar(String.self)),
+          GraphQLField("company", type: .scalar(String.self)),
+          GraphQLField("email", type: .nonNull(.scalar(String.self))),
+          GraphQLField("location", type: .scalar(String.self)),
+          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("isViewer", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
+          GraphQLField("following", type: .nonNull(.object(Following.selections))),
+          GraphQLField("starredRepositories", type: .nonNull(.object(StarredRepository.selections))),
+          GraphQLField("issues", type: .nonNull(.object(Issue.selections))),
+          GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
+          GraphQLField("watching", type: .nonNull(.object(Watching.selections))),
+          GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
+          GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
+          GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
+          GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -2765,10 +2845,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Follower: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["FollowerConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2803,10 +2885,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Following: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["FollowingConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2841,10 +2925,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct StarredRepository: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["StarredRepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2879,10 +2965,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Issue: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["IssueConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2917,10 +3005,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Repository: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2955,10 +3045,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Watching: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -2993,12 +3085,14 @@ public final class ViewerQuery: GraphQLQuery {
       public struct ContributionsCollection: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["ContributionsCollection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalRepositoryContributions", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalRepositoryContributions", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -3042,12 +3136,14 @@ public final class ViewerQuery: GraphQLQuery {
         public struct ContributionCalendar: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["ContributionCalendar"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
-            GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
-            GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
+              GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -3101,10 +3197,12 @@ public final class ViewerQuery: GraphQLQuery {
           public struct Month: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["ContributionCalendarMonth"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -3139,10 +3237,12 @@ public final class ViewerQuery: GraphQLQuery {
           public struct Week: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["ContributionCalendarWeek"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -3176,11 +3276,13 @@ public final class ViewerQuery: GraphQLQuery {
             public struct ContributionDay: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["ContributionCalendarDay"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("color", type: .nonNull(.scalar(String.self))),
-                GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("color", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -3228,10 +3330,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct PinnedItem: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["PinnableItemConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("nodes", type: .list(.object(Node.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("nodes", type: .list(.object(Node.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -3265,14 +3369,16 @@ public final class ViewerQuery: GraphQLQuery {
         public struct Node: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Gist", "Repository"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLTypeCase(
-              variants: ["Repository": AsRepository.selections],
-              default: [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              ]
-            )
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLTypeCase(
+                variants: ["Repository": AsRepository.selections],
+                default: [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                ]
+              )
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -3311,17 +3417,19 @@ public final class ViewerQuery: GraphQLQuery {
           public struct AsRepository: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Repository"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
-              GraphQLField("description", type: .scalar(String.self)),
-              GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
-              GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
+                GraphQLField("description", type: .scalar(String.self)),
+                GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
+                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
+                GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -3425,10 +3533,12 @@ public final class ViewerQuery: GraphQLQuery {
             public struct Owner: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["Organization", "User"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -3467,11 +3577,13 @@ public final class ViewerQuery: GraphQLQuery {
             public struct PrimaryLanguage: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["Language"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                GraphQLField("color", type: .scalar(String.self)),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("color", type: .scalar(String.self)),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -3516,10 +3628,12 @@ public final class ViewerQuery: GraphQLQuery {
             public struct Stargazer: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["StargazerConnection"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -3557,10 +3671,12 @@ public final class ViewerQuery: GraphQLQuery {
       public struct Organization: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["OrganizationConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("nodes", type: .list(.object(Node.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("nodes", type: .list(.object(Node.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -3594,13 +3710,15 @@ public final class ViewerQuery: GraphQLQuery {
         public struct Node: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Organization"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("login", type: .nonNull(.scalar(String.self))),
-            GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-            GraphQLField("description", type: .scalar(String.self)),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .scalar(String.self)),
+              GraphQLField("login", type: .nonNull(.scalar(String.self))),
+              GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("description", type: .scalar(String.self)),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -3787,9 +3905,11 @@ public final class UserQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("user", arguments: ["login": GraphQLVariable("login")], type: .object(User.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("user", arguments: ["login": GraphQLVariable("login")], type: .object(User.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -3814,32 +3934,34 @@ public final class UserQuery: GraphQLQuery {
     public struct User: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["User"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .scalar(String.self)),
-        GraphQLField("login", type: .nonNull(.scalar(String.self))),
-        GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-        GraphQLField("url", type: .nonNull(.scalar(String.self))),
-        GraphQLField("websiteUrl", type: .scalar(String.self)),
-        GraphQLField("bio", type: .scalar(String.self)),
-        GraphQLField("company", type: .scalar(String.self)),
-        GraphQLField("email", type: .nonNull(.scalar(String.self))),
-        GraphQLField("location", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("isViewer", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
-        GraphQLField("following", type: .nonNull(.object(Following.selections))),
-        GraphQLField("starredRepositories", type: .nonNull(.object(StarredRepository.selections))),
-        GraphQLField("issues", type: .nonNull(.object(Issue.selections))),
-        GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
-        GraphQLField("watching", type: .nonNull(.object(Watching.selections))),
-        GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
-        GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
-        GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("login", type: .nonNull(.scalar(String.self))),
+          GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+          GraphQLField("url", type: .nonNull(.scalar(String.self))),
+          GraphQLField("websiteUrl", type: .scalar(String.self)),
+          GraphQLField("bio", type: .scalar(String.self)),
+          GraphQLField("company", type: .scalar(String.self)),
+          GraphQLField("email", type: .nonNull(.scalar(String.self))),
+          GraphQLField("location", type: .scalar(String.self)),
+          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("viewerCanFollow", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("viewerIsFollowing", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("isViewer", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("followers", type: .nonNull(.object(Follower.selections))),
+          GraphQLField("following", type: .nonNull(.object(Following.selections))),
+          GraphQLField("starredRepositories", type: .nonNull(.object(StarredRepository.selections))),
+          GraphQLField("issues", type: .nonNull(.object(Issue.selections))),
+          GraphQLField("repositories", type: .nonNull(.object(Repository.selections))),
+          GraphQLField("watching", type: .nonNull(.object(Watching.selections))),
+          GraphQLField("pinnedItems", arguments: ["first": 6], type: .nonNull(.object(PinnedItem.selections))),
+          GraphQLField("organizations", arguments: ["first": 10], type: .nonNull(.object(Organization.selections))),
+          GraphQLField("contributionsCollection", type: .nonNull(.object(ContributionsCollection.selections))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -4093,10 +4215,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Follower: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["FollowerConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4131,10 +4255,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Following: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["FollowingConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4169,10 +4295,12 @@ public final class UserQuery: GraphQLQuery {
       public struct StarredRepository: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["StarredRepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4207,10 +4335,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Issue: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["IssueConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4245,10 +4375,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Repository: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4283,10 +4415,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Watching: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["RepositoryConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4321,10 +4455,12 @@ public final class UserQuery: GraphQLQuery {
       public struct PinnedItem: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["PinnableItemConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("nodes", type: .list(.object(Node.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("nodes", type: .list(.object(Node.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4358,14 +4494,16 @@ public final class UserQuery: GraphQLQuery {
         public struct Node: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Gist", "Repository"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLTypeCase(
-              variants: ["Repository": AsRepository.selections],
-              default: [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              ]
-            )
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLTypeCase(
+                variants: ["Repository": AsRepository.selections],
+                default: [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                ]
+              )
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -4404,17 +4542,19 @@ public final class UserQuery: GraphQLQuery {
           public struct AsRepository: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["Repository"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
-              GraphQLField("description", type: .scalar(String.self)),
-              GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
-              GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
+                GraphQLField("description", type: .scalar(String.self)),
+                GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
+                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("viewerHasStarred", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("primaryLanguage", type: .object(PrimaryLanguage.selections)),
+                GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -4518,10 +4658,12 @@ public final class UserQuery: GraphQLQuery {
             public struct Owner: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["Organization", "User"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -4560,11 +4702,13 @@ public final class UserQuery: GraphQLQuery {
             public struct PrimaryLanguage: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["Language"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                GraphQLField("color", type: .scalar(String.self)),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("color", type: .scalar(String.self)),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -4609,10 +4753,12 @@ public final class UserQuery: GraphQLQuery {
             public struct Stargazer: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["StargazerConnection"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
@@ -4650,10 +4796,12 @@ public final class UserQuery: GraphQLQuery {
       public struct Organization: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["OrganizationConnection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("nodes", type: .list(.object(Node.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("nodes", type: .list(.object(Node.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4687,13 +4835,15 @@ public final class UserQuery: GraphQLQuery {
         public struct Node: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Organization"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("login", type: .nonNull(.scalar(String.self))),
-            GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
-            GraphQLField("description", type: .scalar(String.self)),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("name", type: .scalar(String.self)),
+              GraphQLField("login", type: .nonNull(.scalar(String.self))),
+              GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("description", type: .scalar(String.self)),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -4759,10 +4909,12 @@ public final class UserQuery: GraphQLQuery {
       public struct ContributionsCollection: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["ContributionsCollection"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("contributionCalendar", type: .nonNull(.object(ContributionCalendar.selections))),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -4796,12 +4948,14 @@ public final class UserQuery: GraphQLQuery {
         public struct ContributionCalendar: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["ContributionCalendar"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
-            GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
-            GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("totalContributions", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("months", type: .nonNull(.list(.nonNull(.object(Month.selections))))),
+              GraphQLField("weeks", type: .nonNull(.list(.nonNull(.object(Week.selections))))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -4855,10 +5009,12 @@ public final class UserQuery: GraphQLQuery {
           public struct Month: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["ContributionCalendarMonth"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -4893,10 +5049,12 @@ public final class UserQuery: GraphQLQuery {
           public struct Week: GraphQLSelectionSet {
             public static let possibleTypes: [String] = ["ContributionCalendarWeek"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("contributionDays", type: .nonNull(.list(.nonNull(.object(ContributionDay.selections))))),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -4930,11 +5088,13 @@ public final class UserQuery: GraphQLQuery {
             public struct ContributionDay: GraphQLSelectionSet {
               public static let possibleTypes: [String] = ["ContributionCalendarDay"]
 
-              public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("color", type: .nonNull(.scalar(String.self))),
-                GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
-              ]
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("color", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("contributionCount", type: .nonNull(.scalar(Int.self))),
+                ]
+              }
 
               public private(set) var resultMap: ResultMap
 
