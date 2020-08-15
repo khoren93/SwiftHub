@@ -1,3 +1,4 @@
+Xoren93
 <p align="center">
   <img src="https://github.com/khoren93/SwiftHub/blob/master/Sketch/app_logo.svg" alt="SwiftHub logo" height="80" >
 </p>
