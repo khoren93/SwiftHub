@@ -115,10 +115,14 @@ Install [`Bundler`](https://bundler.io) for managing Ruby gem dependencies
 ```
 
 Install [Brew](https://github.com/Homebrew/brew) package manager for macOS
+For MacOS Catalina, macOS Mojave, and MacOS Big Sur:
 ```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+For macOS High Sierra, Sierra, El Capitan, and earlier:
 Install [`Node`](https://nodejs.org/en/) (required to install [Apollo](https://github.com/apollographql/apollo-ios))
 ```sh
 brew install node
