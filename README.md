@@ -114,11 +114,14 @@ Install [`Bundler`](https://bundler.io) for managing Ruby gem dependencies
 [sudo] gem install bundler
 ```
 
-Install [Brew](https://github.com/Homebrew/brew) package manager for macOS
+Install [Brew](https://github.com/Homebrew/brew) package manager for macOS:
+
 For MacOS Catalina, macOS Mojave, and MacOS Big Sur:
 ```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
+For macOS High Sierra, Sierra, El Capitan, and earlier:
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
