@@ -41,7 +41,7 @@ class LibsManager: NSObject {
 
     let bannersEnabled = BehaviorRelay(value: UserDefaults.standard.bool(forKey: Configs.UserDefaultsKeys.bannersEnabled))
 
-    override init() {
+    private override init() {
         super.init()
 
         if UserDefaults.standard.object(forKey: Configs.UserDefaultsKeys.bannersEnabled) == nil {

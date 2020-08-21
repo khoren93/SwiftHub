@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.30.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.31.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.39.2'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.40.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
