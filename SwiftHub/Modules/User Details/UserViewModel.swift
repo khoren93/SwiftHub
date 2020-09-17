@@ -159,7 +159,7 @@ class UserViewModel: ViewModel, ViewModelType {
             var items: [UserSectionItem] = []
 
             // Created
-            if let contributionCalendar = user.contributionCalendar {
+            if let contributionCalendar = user.contributionCalendar, contributionCalendar.totalContributions != nil {
                 let contributionsCellViewModel = ContributionsCellViewModel(with: contributionCalendar)
                 items.append(UserSectionItem.contributionsItem(viewModel: contributionsCellViewModel))
             }
