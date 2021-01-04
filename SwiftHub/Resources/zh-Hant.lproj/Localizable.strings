@@ -1,0 +1,187 @@
+/* Localizable.strings
+  SwiftHub
+
+  Created by Sygnoos9 on 10/4/18.
+  Copyright © 2018 Khoren Markosyan. All rights reserved. */
+
+/* Common */
+"Common.Yes" = "是";
+"Common.No" = "否";
+"Common.OK" = "Ok";
+"Common.Cancel" = "取消";
+"Common.Done" = "完成";
+"Common.Back" = "返回";
+"Common.Close" = "關閉";
+"Common.Edit" = "編輯";
+"Common.Next" = "下一步";
+"Common.Skip" = "略過";
+"Common.Reset" = "重設";
+"Common.Save" = "儲存";
+"Common.Delete" = "刪除";
+"Common.Search" = "搜尋";
+"Common.Success" = "成功";
+"Common.Error" = "錯誤";
+"Common.NoResults" = "無結果";
+/* Toast */
+"Toast.ConnectionBack.Message" = "連線已恢復";
+"Toast.ConnectionLost.Message" = "無連線";
+/* Home TabBar */
+"Home.TabBar.Events.Title" = "事件";
+"Home.TabBar.Search.Title" = "搜尋";
+"Home.TabBar.Profile.Title" = "個人資料";
+"Home.TabBar.Login.Title" = "登入";
+"Home.TabBar.Notifications.Title" = "活動";
+"Home.TabBar.Settings.Title" = "設定";
+/* Initial */
+"Initial.NoResults" = "歡迎來到 SwiftHub！";
+/* Events */
+"Events.Navigation.Title" = "事件";
+"Events.ReceivedSegment.Title" = "收到";
+"Events.PerformedSegment.Title" = "已執行";
+/* Login */
+//"Login.Navigation.Title" = "Login";
+"Login.BasicSegment.Title" = "基本";
+"Login.PersonalSegment.Title" = "個人";
+"Login.OAuthSegment.Title" = "OAuth";
+"Login.LoginTextField.Placeholder" = "登入";
+"Login.PasswordTextField.Placeholder" = "密碼";
+"Login.BasicLoginButton.Title" = "登入";
+"Login.PersonalTitleLabel.Text" = "個人存取權杖";
+"Login.PersonalDetailLabel.Text" = "這些權限是必需的：\n%@";
+"Login.PersonalTokenTextField.Placeholder" = "個人存取權杖";
+"Login.PersonalLoginButton.Title" = "登入";
+"Login.TitleLabel.Text" = "歡迎來到 SwiftHub ";
+"Login.DetailLabel.Text" = "使用基本驗證或是OAuth的API請求，您每小時最多可以發出5000次的請求。 \n\n對於未授權的請求，限制您每小時最多可以達到60次。";
+"Login.OAuthloginButton.Title" = "使用 Github 登入";
+"Login.LoginFailed.Description" = "請檢查您的登入或密碼";
+/* Notifications */
+"Notifications.Navigation.Title" = "通知";
+"Notifications.UnreadSegment.Title" = "未讀";
+"Notifications.ParticipatingSegment.Title" = "參與";
+"Notifications.AllSegment.Title" = "全部";
+"Notifications.MarkAsRead.Success" = "所有通知都已標示為已讀";
+/* Repositories */
+"Repositories.RepositoriesNavigation.Title" = "儲存庫";
+"Repositories.StarredNavigation.Title" = "已評分";
+"Repositories.ForksNavigation.Title" = "複製儲存庫";
+/* Repository Details */
+//"Repository.Navigation.Title" = "Repository";
+"Repository.WatchersButton.Title" = "關注者";
+"Repository.StarsButton.Title" = "評分星星";
+"Repository.ForksButton.Title" = "複製儲存庫";
+"Repository.ParentCell.Title" = "複製儲存庫從";
+"Repository.LanguageCell.Title" = "語言";
+"Repository.SizeCell.Title" = "大小";
+"Repository.CreatedCell.Title" = "已建立";
+"Repository.UpdatedCell.Title" = "已更新";
+"Repository.HomepageCell.Title" = "首頁";
+"Repository.IssuesCell.Title" = "問題";
+"Repository.CommitsCell.Title" = "提交";
+"Repository.PullRequestsCell.Title" = "拉取请求";
+"Repository.BranchesCell.Title" = "分支";
+"Repository.ReleasesCell.Title" = "發布";
+"Repository.EventsCell.Title" = "事件";
+"Repository.NotificationsCell.Title" = "我的通知";
+"Repository.ContributorsCell.Title" = "貢獻者";
+"Repository.ReadmeCell.Title" = "Readme";
+"Repository.SourceCell.Title" = "原始碼";
+"Repository.StarsHistoryCell.Title" = "評分星星歷史";
+"Repository.CountLinesOfCodeCell.Title" = "計算程式碼行數";
+/* Issues */
+"Issues.Navigation.Title" = "問題";
+"Issues.OpenSegment.Title" = "開啟";
+"Issues.ClosedSegment.Title" = "已關閉";
+/* Search */
+//"Search.Navigation.Title" = "Search";
+"Search.SearchBar.Placeholder" = "全球搜尋";
+"Search.RepositoriesSegment.Title" = "儲存庫";
+"Search.UsersSegment.Title" = "使用者";
+"Search.DailySegment.Title" = "每天";
+"Search.WeeklySegment.Title" = "每週";
+"Search.MonthlySegment.Title" = "每月";
+"Search.TrendingSegment.Title" = "趨勢";
+"Search.SearchSegment.Title" = "搜尋";
+"Search.TrendingSection.Title" = "趨勢";
+"Search.TrendingSectionWithLanguage.Title" = "%@的趨勢結果";
+"Search.SearchSection.Title" = "搜尋";
+"Search.SearchSectionWithLanguage.Title" = "搜尋結果%@";
+"Search.RepositoriesTotalCount.Title" = "%@個儲存庫";
+"Search.UsersTotalCount.Title" = "%@個使用者";
+"Search.SortRepositories.BestMatch.Title" = "最符合";
+"Search.SortRepositories.MostStars.Title" = "最多評分星星";
+"Search.SortRepositories.FewestStars.Title" = "最少評分星星";
+"Search.SortRepositories.MostForks.Title" = "最多複製儲存庫";
+"Search.SortRepositories.FewestForks.Title" = "最少複製儲存庫";
+"Search.SortRepositories.RecentlyUpdated.Title" = "最近更新";
+"Search.SortRepositories.LastRecentlyUpdated.Title" = "最近最後一次更新";
+"Search.SortUsers.BestMatch.Title" = "最符合";
+"Search.SortUsers.MostFollowers.Title" = "最多跟隨者";
+"Search.SortUsers.FewestFollowers.Title" = "最少跟隨者";
+"Search.SortUsers.MostRecentlyJoined.Title" = "最近建立";
+"Search.SortUsers.LeastRecentlyJoined.Title" = "最久建立";
+"Search.SortUsers.MostRepositories.Title" = "最多儲存庫";
+"Search.SortUsers.FewestRepositories.Title" = "最少儲存庫";
+/* Settings */
+"Settings.Navigation.Title" = "設定";
+"Settings.AccountSection.Title" = "帳號";
+"Settings.ProjectsSection.Title" = "我的專案";
+"Settings.PreferencesSection.Title" = "參數設定";
+"Settings.Banner.Title" = "啟用廣告";
+"Settings.NightMode.Title" = "夜間模式";
+"Settings.Theme.Title" = "顏色佈景主題";
+"Settings.Language.Title" = "語言";
+"Settings.Contacts.Title" = "邀請朋友";
+"Settings.RemoveCache.Title" = "移除快取";
+"Settings.RemoveCache.Alert.SuccessMessage" = "成功清除快取";
+"Settings.SupportSection.Title" = "支援";
+"Settings.Acknowledgements.Title" = "致謝";
+"Settings.WhatsNew.Title" = "最新消息";
+"Settings.LogOut.Title" = "登出";
+"Settings.Logout.Alert.Message" = "您確定要從SwiftHub登出嗎？";
+"Settings.Logout.Alert.ConfirmButton.Title" = "登出";
+/* Language */
+"Language.Navigation.Title" = "語言";
+/* Theme */
+"Theme.Navigation.Title" = "顏色佈景主題";
+/* Contacts */
+"Contacts.Navigation.Title" = "邀請朋友";
+"Contacts.PermissionDenied.Title" = "我們需要您的允許！";
+"Contacts.PermissionDenied.Description" = "未經您的允許，\n我們無法繼續訪問您的聯絡人。 \n再試一次？";
+"Contacts.PermissionDenied.Button" = "設定";
+/* User Details */
+//"User.Navigation.Title" = "User";
+"User.RepositoriesButton.Title" = "儲存庫";
+"User.FollowersButton.Title" = "跟隨者";
+"User.FollowingButton.Title" = "跟隨";
+"User.StarsCell.Title" = "評分星星";
+"User.WatchingCell.Title" = "正在看";
+"User.EventsCell.Title" = "事件";
+"User.CompanyCell.Title" = "公司";
+"User.BlogCell.Title" = "部落格";
+"User.ProfileSummaryCell.Title" = "個資摘要";
+"User.PinnedSection.Title" = "釘選";
+"User.OrganizationsSection.Title" = "組織";
+/* Users */
+//"Users.Navigation.Title" = "Users";
+"Users.FollowersNavigation.Title" = "跟隨者";
+"Users.FollowingNavigation.Title" = "跟隨";
+"Users.WatchersNavigation.Title" = "關注者";
+"Users.StargazersNavigation.Title" = "評分者";
+"Users.ContributorsNavigation.Title" = "貢獻者";
+/* Whats New */
+"WhatsNew.Title" = "最新消息";
+"WhatsNew.Item1.Title" = "計算程式碼行數";
+"WhatsNew.Item1.Subtitle" = "用來計算從儲存庫來的程式碼行數的工具";
+"WhatsNew.Item2.Title" = "佈景主題";
+"WhatsNew.Item2.Subtitle" = "您可以使用Light和Dark兩個不同模式的佈景主題";
+"WhatsNew.Item3.Title" = "開放原始碼";
+"WhatsNew.Item3.Subtitle" = "SwiftHub是開放原始碼\n 歡迎給我們評分星星 ★";
+"WhatsNew.Item4.Title" = "趨勢";
+"WhatsNew.Item4.Subtitle" = "看看今天在 GitHub 社群什麼是最令人興奮的";
+"WhatsNew.DetailButton.Title" = "在GitHub上查看";
+"WhatsNew.CompletionButton.Title" = "繼續";
+/* Languages */
+"Languages.Navigation.Title" = "語言";
+"Languages.allButton.Title" = "所有語言";
+"Languages.PopularSection.Title" = "熱門";
+"Languages.AllSection.Title" = "全部";
