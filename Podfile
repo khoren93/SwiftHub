@@ -24,7 +24,7 @@ target 'SwiftHub' do
     pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
-    pod 'Kingfisher', '~> 5.0'  # https://github.com/onevcat/Kingfisher
+    pod 'Kingfisher', '~> 6.0'  # https://github.com/onevcat/Kingfisher
 
     # Date
     pod 'DateToolsSwift', '~> 5.0'  # https://github.com/MatthewYork/DateTools
@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.40.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.42.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -72,21 +72,17 @@ target 'SwiftHub' do
 
     # Analytics
     pod 'Mixpanel-swift', '~> 2.0'  # https://github.com/mixpanel/mixpanel-iphone
-    pod 'Firebase/Analytics'
-    pod 'Firebase/Crashlytics'
 
     # Ads
-    pod 'Firebase/AdMob'
     pod 'Google-Mobile-Ads-SDK', '~> 7.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
         pod 'Quick', '~> 3.0'  # https://github.com/Quick/Quick
-        pod 'Nimble', '~> 8.0'  # https://github.com/Quick/Nimble
+        pod 'Nimble', '~> 9.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
-        pod 'Firebase'
     end
 end
 

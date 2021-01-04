@@ -96,10 +96,10 @@ extension TableViewController {
 extension TableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let view = view as? UITableViewHeaderFooterView {
-            view.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        if let view = view as? UITableViewHeaderFooterView, let textLabel = view.textLabel {
+            textLabel.font = UIFont.systemFont(ofSize: 15)
             themeService.rx
-                .bind({ $0.text }, to: view.textLabel!.rx.textColor)
+                .bind({ $0.text }, to: textLabel.rx.textColor)
                 .bind({ $0.primaryDark }, to: view.contentView.rx.backgroundColor)
                 .disposed(by: rx.disposeBag)
         }
