@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.33.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.42.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -74,7 +74,7 @@ target 'SwiftHub' do
     pod 'Mixpanel-swift', '~> 2.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Ads
-    pod 'Google-Mobile-Ads-SDK', '~> 7.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 8.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths

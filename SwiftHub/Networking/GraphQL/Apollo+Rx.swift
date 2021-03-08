@@ -23,7 +23,7 @@ extension Reactive where Base: ApolloClient {
                                     cachePolicy: CachePolicy = .returnCacheDataElseFetch,
                                     queue: DispatchQueue = DispatchQueue.main) -> Single<Query.Data> {
         return Single.create { [weak base] single in
-            let cancellableToken = base?.fetch(query: query, cachePolicy: cachePolicy, context: nil, queue: queue, resultHandler: { (result) in
+            let cancellableToken = base?.fetch(query: query, cachePolicy: cachePolicy, contextIdentifier: nil, queue: queue, resultHandler: { (result) in
                 switch result {
                 case .success(let graphQLResult):
                     if let data = graphQLResult.data {
@@ -44,10 +44,9 @@ extension Reactive where Base: ApolloClient {
     }
 
     func watch<Query: GraphQLQuery>(query: Query,
-                                    cachePolicy: CachePolicy = .returnCacheDataElseFetch,
-                                    queue: DispatchQueue = DispatchQueue.main) -> Single<Query.Data> {
+                                    cachePolicy: CachePolicy = .returnCacheDataElseFetch) -> Single<Query.Data> {
         return Single.create { [weak base] single in
-            let cancellableToken = base?.watch(query: query, cachePolicy: cachePolicy, queue: queue, resultHandler: { (result) in
+            let cancellableToken = base?.watch(query: query, cachePolicy: cachePolicy, resultHandler: { (result) in
                 switch result {
                 case .success(let graphQLResult):
                     if let data = graphQLResult.data {
