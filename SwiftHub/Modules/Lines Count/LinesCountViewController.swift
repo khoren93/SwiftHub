@@ -73,7 +73,7 @@ class LinesCountViewController: ViewController {
             self?.chartView.centerAttributedText = self?.totalLines?.attributetDetail()
 
             let languages = items.filter { $0.language != "Total" }
-            let languageEntries = languages.map { PieChartDataEntry(value: Double($0.linesOfCode?.int ?? 0), label: $0.language, data: $0) }
+            let languageEntries = languages.map { PieChartDataEntry(value: Double($0.linesOfCode ?? 0), label: $0.language, data: $0) }
             let colors = languages.map { $0.language ?? "" }.map { viewModel.color(for: $0) ?? "" }.map { UIColor(hexString: $0) ?? UIColor.random.withAlphaComponent(0.2) }
             let languagesDataSet = PieChartDataSet(entries: languageEntries, label: "Type of Files")
             languagesDataSet.colors = colors
@@ -105,11 +105,11 @@ extension LanguageLines {
         let valueStyle = StringStyle(.font(UIFont.systemFont(ofSize: 14)), .color(.text()))
 
         let language = (self.language ?? "").styled(with: titleStyle).styled(with: .underline(.single, .text()))
-        let files = (self.files ?? "").styled(with: valueStyle)
-        let lines = (self.lines ?? "").styled(with: valueStyle)
-        let blanks = (self.blanks ?? "").styled(with: valueStyle)
-        let comments = (self.comments ?? "").styled(with: valueStyle)
-        let linesOfCode = (self.linesOfCode ?? "").styled(with: valueStyle)
+        let files = (self.files?.string ?? "").styled(with: valueStyle)
+        let lines = (self.lines?.string ?? "").styled(with: valueStyle)
+        let blanks = (self.blanks?.string ?? "").styled(with: valueStyle)
+        let comments = (self.comments?.string ?? "").styled(with: valueStyle)
+        let linesOfCode = (self.linesOfCode?.string ?? "").styled(with: valueStyle)
 
         texts.append(NSAttributedString.composed(of: [
             language, Special.nextLine,
