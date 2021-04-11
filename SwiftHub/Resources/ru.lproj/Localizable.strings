@@ -153,12 +153,15 @@
 "User.RepositoriesButton.Title" = "Репозитории";
 "User.FollowersButton.Title" = "Подписчики";
 "User.FollowingButton.Title" = "Подписки";
+"User.CreatedCell.Title" = "Создана";
+"User.UpdatedCell.Title" = "Обновлено";
 "User.StarsCell.Title" = "Звезды";
 "User.WatchingCell.Title" = "Наблюдает";
 "User.EventsCell.Title" = "События";
 "User.CompanyCell.Title" = "Компания";
 "User.BlogCell.Title" = "Блог";
 "User.ProfileSummaryCell.Title" = "Резюме Профиля";
+"User.ContributionsCell.Title" = "Взносы";
 "User.PinnedSection.Title" = "Закрепленные";
 "User.OrganizationsSection.Title" = "Организации";
 /* Users */

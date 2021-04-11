@@ -153,12 +153,15 @@
 "User.RepositoriesButton.Title" = "儲存庫";
 "User.FollowersButton.Title" = "跟隨者";
 "User.FollowingButton.Title" = "跟隨";
+"User.CreatedCell.Title" = "已建立";
+"User.UpdatedCell.Title" = "更新";
 "User.StarsCell.Title" = "評分星星";
 "User.WatchingCell.Title" = "正在看";
 "User.EventsCell.Title" = "事件";
 "User.CompanyCell.Title" = "公司";
 "User.BlogCell.Title" = "部落格";
 "User.ProfileSummaryCell.Title" = "個資摘要";
+"User.ContributionsCell.Title" = "會費"; 
 "User.PinnedSection.Title" = "釘選";
 "User.OrganizationsSection.Title" = "組織";
 /* Users */

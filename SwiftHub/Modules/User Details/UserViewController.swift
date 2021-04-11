@@ -205,6 +205,11 @@ class UserViewController: TableViewController {
 
         output.selectedEvent.drive(onNext: { [weak self] (item) in
             switch item {
+            case .contributionsItem:
+                if let url = viewModel.skylineUrl() {
+                    self?.deselectSelectedRow()
+                    self?.navigator.show(segue: .safari(url), sender: self)
+                }
             case .starsItem:
                 if let viewModel = viewModel.viewModel(for: item) as? RepositoriesViewModel {
                     self?.navigator.show(segue: .repositories(viewModel: viewModel), sender: self)

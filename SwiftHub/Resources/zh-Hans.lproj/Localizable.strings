@@ -153,12 +153,15 @@
 "User.RepositoriesButton.Title" = "存储库";
 "User.FollowersButton.Title" = "追随者";
 "User.FollowingButton.Title" = "关注";
+"User.CreatedCell.Title" = "创建的内容";
+"User.UpdatedCell.Title" = "更新的内容";
 "User.StarsCell.Title" = "星星";
 "User.WatchingCell.Title" = "正在看";
 "User.EventsCell.Title" = "事件";
 "User.CompanyCell.Title" = "公司";
 "User.BlogCell.Title" = "博客";
 "User.ProfileSummaryCell.Title" = "资料概要";
+"User.ContributionsCell.Title" = "会费";
 "User.PinnedSection.Title" = "置顶";
 "User.OrganizationsSection.Title" = "组织";
 /* 用户 */

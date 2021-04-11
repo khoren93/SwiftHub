@@ -46,6 +46,7 @@ struct Configs {
         static let githistoryBaseUrl = "https://github.githistory.xyz"
         static let starHistoryBaseUrl = "https://star-history.t9t.io"
         static let profileSummaryBaseUrl = "https://profile-summary-for-github.com"
+        static let githubSkylineBaseUrl = "https://skyline.github.com"
     }
 
     struct BaseDimensions {

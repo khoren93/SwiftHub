@@ -153,12 +153,15 @@
 "User.RepositoriesButton.Title" = "Ռեպոզիտորիաներ";
 "User.FollowersButton.Title" = "Հետեւորդներ";
 "User.FollowingButton.Title" = "Համախոհներ";
+"User.CreatedCell.Title" = "Ստեղծվել է";
+"User.UpdatedCell.Title" = "Թարմացվել է";
 "User.StarsCell.Title" = "Աստղեր";
 "User.WatchingCell.Title" = "Դիտում է";
 "User.EventsCell.Title" = "Միջոցառումներ";
 "User.CompanyCell.Title" = "Ընկերություն";
 "User.BlogCell.Title" = "Կայք";
 "User.ProfileSummaryCell.Title" = "Պրոֆիլի Ամփոփագիր";
+"User.ContributionsCell.Title" = "Ներդրումներ";
 "User.PinnedSection.Title" = "Կապակցված";
 "User.OrganizationsSection.Title" = "Կազմակերպություններ";
 /* Users */

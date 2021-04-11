@@ -153,12 +153,15 @@
 "User.RepositoriesButton.Title" = "Repositories";
 "User.FollowersButton.Title" = "Followers";
 "User.FollowingButton.Title" = "Following";
+"User.CreatedCell.Title" = "Created";
+"User.UpdatedCell.Title" = "Updated";
 "User.StarsCell.Title" = "Stars";
 "User.WatchingCell.Title" = "Watching";
 "User.EventsCell.Title" = "Events";
 "User.CompanyCell.Title" = "Company";
 "User.BlogCell.Title" = "Blog";
 "User.ProfileSummaryCell.Title" = "Profile Summary";
+"User.ContributionsCell.Title" = "Contributions";
 "User.PinnedSection.Title" = "Pinned";
 "User.OrganizationsSection.Title" = "Organizations";
 /* Users */

@@ -158,15 +158,16 @@ class UserViewModel: ViewModel, ViewModelType {
         let items = user.map { (user) -> [UserSection] in
             var items: [UserSectionItem] = []
 
-            // Created
-            if let contributionCalendar = user.contributionCalendar, contributionCalendar.totalContributions != nil {
-                let contributionsCellViewModel = ContributionsCellViewModel(with: contributionCalendar)
-                items.append(UserSectionItem.contributionsItem(viewModel: contributionsCellViewModel))
-            }
+            // Contributions
+            let contributionsCellViewModel = ContributionsCellViewModel(with: R.string.localizable.userContributionsCellTitle.key.localized(),
+                                                                        detail: "\(Configs.Network.githubSkylineBaseUrl)",
+                                                                        image: R.image.icon_button_github()?.template,
+                                                                        contributionCalendar: user.contributionCalendar)
+            items.append(UserSectionItem.contributionsItem(viewModel: contributionsCellViewModel))
 
             // Created
             if let created = user.createdAt {
-                let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
+                let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCreatedCellTitle.key.localized(),
                                                                    detail: created.toRelative(),
                                                                    image: R.image.icon_cell_created()?.template,
                                                                    hidesDisclosure: true)
@@ -175,7 +176,7 @@ class UserViewModel: ViewModel, ViewModelType {
 
             // Updated
             if let updated = user.updatedAt {
-                let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
+                let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userUpdatedCellTitle.key.localized(),
                                                                    detail: updated.toRelative(),
                                                                    image: R.image.icon_cell_updated()?.template,
                                                                    hidesDisclosure: true)
@@ -316,5 +317,10 @@ class UserViewModel: ViewModel, ViewModelType {
 
     func profileSummaryUrl() -> URL? {
         return "\(Configs.Network.profileSummaryBaseUrl)/user/\(self.user.value.login ?? "")".url
+    }
+
+    func skylineUrl() -> URL? {
+        let year = "2020"
+        return "\(Configs.Network.githubSkylineBaseUrl)/\(self.user.value.login ?? "")/\(year)".url
     }
 }

@@ -10,12 +10,15 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ContributionsCellViewModel: TableViewCellViewModel {
+class ContributionsCellViewModel: DefaultTableViewCellViewModel {
 
     let contributionCalendar = BehaviorRelay<ContributionCalendar?>(value: nil)
 
-    init(with contributionCalendar: ContributionCalendar) {
+    init(with title: String, detail: String, image: UIImage?, contributionCalendar: ContributionCalendar?) {
         super.init()
+        self.title.accept(title)
+        self.secondDetail.accept(detail)
+        self.image.accept(image)
         self.contributionCalendar.accept(contributionCalendar)
     }
 }

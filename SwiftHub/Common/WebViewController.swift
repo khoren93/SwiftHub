@@ -61,6 +61,7 @@ class WebViewController: ViewController {
         stackView.insertArrangedSubview(webView, at: 0)
         stackView.addArrangedSubview(toolbar)
         canOpenFlex = false
+        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
