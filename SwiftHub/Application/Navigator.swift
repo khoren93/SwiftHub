@@ -155,7 +155,7 @@ class Navigator {
         }
 
         if let nav = sender as? UINavigationController {
-            //push root controller on navigation stack
+            // push root controller on navigation stack
             nav.pushViewController(target, animated: false)
             return
         }

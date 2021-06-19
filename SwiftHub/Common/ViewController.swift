@@ -10,12 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 import DZNEmptyDataSet
-import NVActivityIndicatorView
 import Hero
 import Localize_Swift
 import GoogleMobileAds
+import SVProgressHUD
 
-class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable {
+class ViewController: UIViewController, Navigatable {
 
     var viewModel: ViewModel?
     var navigator: Navigator!
@@ -75,7 +75,7 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
     }()
 
     lazy var bannerView: GADBannerView = {
-        let view = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        let view = GADBannerView(adSize: GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(view.width))
         view.rootViewController = self
         view.adUnitID = Keys.adMob.apiKey
         view.hero.id = "BannerView"
@@ -224,6 +224,14 @@ class ViewController: UIViewController, Navigatable, NVActivityIndicatorViewable
 
     func updateUI() {
 
+    }
+
+    func startAnimating() {
+        SVProgressHUD.show()
+    }
+
+    func stopAnimating() {
+        SVProgressHUD.dismiss()
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {

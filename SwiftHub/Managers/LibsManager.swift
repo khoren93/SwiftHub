@@ -17,7 +17,6 @@ import Kingfisher
 import FLEX
 #endif
 import FirebaseCrashlytics
-import NVActivityIndicatorView
 import NSObject_Rx
 import RxViewController
 import RxOptional
@@ -63,7 +62,6 @@ class LibsManager: NSObject {
         libsManager.setupKafkaRefresh()
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
-        libsManager.setupActivityView()
         libsManager.setupDropDown()
         libsManager.setupToast()
     }
@@ -102,11 +100,6 @@ class LibsManager: NSObject {
                 .bind({ $0.secondary }, to: defaults.rx.themeColor)
                 .disposed(by: rx.disposeBag)
         }
-    }
-
-    func setupActivityView() {
-        NVActivityIndicatorView.DEFAULT_TYPE = .ballRotateChase
-        NVActivityIndicatorView.DEFAULT_COLOR = .secondary()
     }
 
     func setupKeyboardManager() {

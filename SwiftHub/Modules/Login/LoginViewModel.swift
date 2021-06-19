@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxSwiftExt
 import SafariServices
+import AuthenticationServices
 
 private let loginURL = URL(string: "http://github.com/login/oauth/authorize?client_id=\(Keys.github.appId)&scope=\(Configs.App.githubScope)")!
 private let callbackURLScheme = "swifthub"
@@ -41,16 +42,7 @@ class LoginViewModel: ViewModel, ViewModelType {
 
     var tokenSaved = PublishSubject<Void>()
 
-    private var _authSession: Any?
-
-    private var authSession: SFAuthenticationSession? {
-        get {
-            return _authSession as? SFAuthenticationSession
-        }
-        set {
-            _authSession = newValue
-        }
-    }
+    private var authSession: ASWebAuthenticationSession?
 
     func transform(input: Input) -> Output {
 
@@ -71,7 +63,7 @@ class LoginViewModel: ViewModel, ViewModelType {
         }).disposed(by: rx.disposeBag)
 
         input.oAuthLoginTrigger.drive(onNext: { [weak self] () in
-            self?.authSession = SFAuthenticationSession(url: loginURL, callbackURLScheme: callbackURLScheme, completionHandler: { (callbackUrl, error) in
+            self?.authSession = ASWebAuthenticationSession(url: loginURL, callbackURLScheme: callbackURLScheme, completionHandler: { callbackUrl, error in
                 if let error = error {
                     logError(error.localizedDescription)
                 }
@@ -79,6 +71,9 @@ class LoginViewModel: ViewModel, ViewModelType {
                     self?.code.onNext(codeValue)
                 }
             })
+            if #available(iOS 13.0, *) {
+                self?.authSession?.presentationContextProvider = self
+            }
             self?.authSession?.start()
         }).disposed(by: rx.disposeBag)
 
@@ -134,5 +129,12 @@ class LoginViewModel: ViewModel, ViewModelType {
                       hidesBasicLoginView: hidesBasicLoginView,
                       hidesPersonalLoginView: hidesPersonalLoginView,
                       hidesOAuthLoginView: hidesOAuthLoginView)
+    }
+}
+
+extension LoginViewModel: ASWebAuthenticationPresentationContextProviding {
+    @available(iOS 13.0, *)
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return UIApplication.shared.keyWindow!
     }
 }

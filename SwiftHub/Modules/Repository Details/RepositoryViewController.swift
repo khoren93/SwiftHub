@@ -100,7 +100,7 @@ class RepositoryViewController: TableViewController {
     }()
 
     var panelContent: WebViewController!
-    let panel = FloatingPanelController()
+    var panel: FloatingPanelController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,10 +118,12 @@ class RepositoryViewController: TableViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
 
+        panel = FloatingPanelController()
+        panel.delegate = self
         panelContent = WebViewController(viewModel: nil, navigator: navigator)
         panel.set(contentViewController: panelContent)
         panel.track(scrollView: panelContent.webView.scrollView)
-        panel.delegate = self
+        panel.contentMode = .fitToBounds
 
         emptyDataSetTitle = ""
         emptyDataSetImage = nil
@@ -129,6 +131,7 @@ class RepositoryViewController: TableViewController {
         tableView.footRefreshControl = nil
         tableView.register(R.nib.repositoryDetailCell)
         tableView.register(R.nib.languagesCell)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
         bannerView.isHidden = true
     }
 
@@ -300,7 +303,7 @@ class RepositoryViewController: TableViewController {
             guard let self = self else { return }
             if let url = content?.htmlUrl?.url {
                 self.panelContent.load(url: url)
-                self.panel.addPanel(toParent: self, belowView: nil, animated: false)
+                self.panel.addPanel(toParent: self, animated: false)
                 self.panel.move(to: .tip, animated: true)
             } else {
                 self.panel.removePanelFromParent(animated: false)
@@ -323,9 +326,8 @@ class RepositoryViewController: TableViewController {
 }
 
 extension RepositoryViewController: FloatingPanelControllerDelegate {
-    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
-        if let inset = vc.layout.insetFor(position: vc.position) {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0)
-        }
+    func floatingPanelDidEndAttracting(_ fpc: FloatingPanelController) {
+        let inset = fpc.surfaceView.height
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0)
     }
 }
