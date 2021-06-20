@@ -38,13 +38,13 @@
 
 ## Screenshots
 
-<img alt="04_trending_repository_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/04_trending_repository_screen.png?raw=true" width="260">&nbsp;
-<img alt="01_search_repository_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen.png?raw=true" width="260">&nbsp;
-<img alt="02_repository_details_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen.png?raw=true" width="260">&nbsp;
+<img alt="04_trending_repository_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/04_trending_repository_screen.png?raw=true" width="250">&nbsp;
+<img alt="01_search_repository_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/01_search_repository_screen.png?raw=true" width="250">&nbsp;
+<img alt="02_repository_details_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/02_repository_details_screen.png?raw=true" width="250">&nbsp;
 
-<img alt="05_search_user_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/05_search_user_screen.png?raw=true" width="260">&nbsp;
-<img alt="06_user_details_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/06_user_details_screen.png?raw=true" width="260">&nbsp;
-<img alt="03_settings_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen.png?raw=true" width="260">&nbsp;
+<img alt="05_search_user_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/05_search_user_screen.png?raw=true" width="250">&nbsp;
+<img alt="06_user_details_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/06_user_details_screen.png?raw=true" width="250">&nbsp;
+<img alt="03_settings_screen" src="https://github.com/khoren93/SwiftHub/blob/master/screenshots/03_settings_screen.png?raw=true" width="250">&nbsp;
 
 ## Mind Mapping ([full version](https://github.com/khoren93/SwiftHub/blob/master/iThoughtsX/SwiftHub_full.pdf))
 <p align="center">
