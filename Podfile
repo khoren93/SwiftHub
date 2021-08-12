@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.44.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.46.0'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -65,7 +65,7 @@ target 'SwiftHub' do
     # Code Quality
     pod 'FLEX', '~> 4.0', :configurations => ['Debug']  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
-    pod 'BonMot', '~> 5.0'  # https://github.com/Rightpoint/BonMot
+    pod 'BonMot', '~> 6.0'  # https://github.com/Rightpoint/BonMot
 
     # Logging
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack

@@ -33,7 +33,7 @@ class GraphApi: SwiftHubAPI {
     }
 }
 
-class NetworkInterceptorProvider: LegacyInterceptorProvider {
+class NetworkInterceptorProvider: DefaultInterceptorProvider {
     let token: String
     init(client: URLSessionClient = URLSessionClient(), store: ApolloStore, token: String) {
         self.token = token
