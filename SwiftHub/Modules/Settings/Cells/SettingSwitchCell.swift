@@ -23,9 +23,7 @@ class SettingSwitchCell: DefaultTableViewCell {
             make.size.equalTo(30)
         }
         stackView.insertArrangedSubview(switchView, at: 2)
-        themeService.rx
-            .bind({ $0.secondary }, to: leftImageView.rx.tintColor)
-            .disposed(by: rx.disposeBag)
+        leftImageView.theme.tintColor = themeService.attribute { $0.secondary }
     }
 
     override func bind(to viewModel: TableViewCellViewModel) {

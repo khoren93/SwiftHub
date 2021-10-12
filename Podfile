@@ -8,20 +8,20 @@ target 'SwiftHub' do
     # Pods for SwiftHub
 
     # Networking
-    pod 'Moya/RxSwift'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.46.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Moya/RxSwift', '~> 15.0'  # https://github.com/Moya/Moya
+    pod 'Apollo', '0.49.1'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
-    pod 'RxDataSources', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxDataSources
-    pod 'RxSwiftExt', '~> 5.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
+    pod 'RxDataSources', '~> 5.0'  # https://github.com/RxSwiftCommunity/RxDataSources
+    pod 'RxSwiftExt', '~> 6.0'  # https://github.com/RxSwiftCommunity/RxSwiftExt
     pod 'NSObject+Rx', '~> 5.0'  # https://github.com/RxSwiftCommunity/NSObject-Rx
-    pod 'RxViewController', '~> 1.0'  # https://github.com/devxoul/RxViewController
-    pod 'RxGesture', '~> 3.0'  # https://github.com/RxSwiftCommunity/RxGesture
-    pod 'RxOptional', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxOptional
-    pod 'RxTheme', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxTheme
+    pod 'RxViewController', '~> 2.0'  # https://github.com/devxoul/RxViewController
+    pod 'RxGesture', '~> 4.0'  # https://github.com/RxSwiftCommunity/RxGesture
+    pod 'RxOptional', '~> 5.0'  # https://github.com/RxSwiftCommunity/RxOptional
+    pod 'RxTheme', '~> 6.0'  # https://github.com/RxSwiftCommunity/RxTheme
  
     # JSON Mapping
-    pod 'Moya-ObjectMapper/RxSwift', '~> 2.0'  # https://github.com/ivanbruel/Moya-ObjectMapper
+    pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/p-rob/Moya-ObjectMapper.git', :branch => 'master'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
     pod 'Kingfisher', '~> 6.0'  # https://github.com/onevcat/Kingfisher
@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.43.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.44.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess

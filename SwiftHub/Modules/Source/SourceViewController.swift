@@ -90,9 +90,7 @@ class SourceViewController: ViewController {
             let view = Label()
             view.text = item
             view.textAlignment = .center
-            themeService.rx
-                .bind({ $0.text }, to: view.rx.textColor)
-                .disposed(by: self.rx.disposeBag)
+            view.theme.textColor = themeService.attribute { $0.text }
             return view
         }.disposed(by: rx.disposeBag)
 
@@ -100,11 +98,9 @@ class SourceViewController: ViewController {
             let view = Label()
             view.text = item
             view.textAlignment = .center
-            themeService.rx
-                .bind({ $0.text }, to: view.rx.textColor)
-                .disposed(by: self.rx.disposeBag)
+            view.theme.textColor = themeService.attribute { $0.text }
             return view
-            }.disposed(by: rx.disposeBag)
+        }.disposed(by: rx.disposeBag)
 
         output.highlightedCode.subscribe(onNext: { [weak self] (text) in
             self?.textView.attributedText = text

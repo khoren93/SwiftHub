@@ -196,11 +196,13 @@ class LoginViewController: ViewController {
             make.centerX.equalToSuperview()
         })
 
-        themeService.rx
-            .bind({ $0.text }, to: [titleLabel.rx.textColor, personalTitleLabel.rx.textColor])
-            .bind({ $0.textGray }, to: [detailLabel.rx.textColor, personalDetailLabel.rx.textColor])
-            .bind({ $0.text }, to: [basicLogoImageView.rx.tintColor, personalLogoImageView.rx.tintColor, oAuthLogoImageView.rx.tintColor])
-            .disposed(by: rx.disposeBag)
+        titleLabel.theme.textColor = themeService.attribute { $0.text }
+        personalTitleLabel.theme.textColor = themeService.attribute { $0.text }
+        detailLabel.theme.textColor = themeService.attribute { $0.textGray }
+        personalDetailLabel.theme.textColor = themeService.attribute { $0.textGray }
+        basicLogoImageView.theme.tintColor = themeService.attribute { $0.text }
+        personalLogoImageView.theme.tintColor = themeService.attribute { $0.text }
+        oAuthLogoImageView.theme.tintColor = themeService.attribute { $0.text }
 
         stackView.addArrangedSubview(basicLoginStackView)
         stackView.addArrangedSubview(personalLoginStackView)

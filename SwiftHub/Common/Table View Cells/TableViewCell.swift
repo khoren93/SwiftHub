@@ -60,10 +60,8 @@ class TableViewCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = .clear
 
-        themeService.rx
-            .bind({ $0.primary }, to: rx.selectionColor)
-            .bind({ $0.primary }, to: containerView.rx.backgroundColor)
-            .disposed(by: rx.disposeBag)
+        theme.selectionColor = themeService.attribute { $0.primary }
+        containerView.theme.backgroundColor = themeService.attribute { $0.primary }
 
         updateUI()
     }
@@ -74,14 +72,5 @@ class TableViewCell: UITableViewCell {
 
     func bind(to viewModel: TableViewCellViewModel) {
 
-    }
-}
-
-extension Reactive where Base: TableViewCell {
-
-    var selectionColor: Binder<UIColor?> {
-        return Binder(self.base) { view, attr in
-            view.selectionColor = attr
-        }
     }
 }

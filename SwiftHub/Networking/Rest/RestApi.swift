@@ -53,12 +53,12 @@ extension RestApi {
                 do {
                     single(.success(try String.init(contentsOf: url)))
                 } catch {
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
             return Disposables.create { }
             }
-            .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
     }
 
     func downloadFile(url: URL, fileName: String?) -> Single<Void> {
@@ -84,7 +84,7 @@ extension RestApi {
                        headers: ["Accept": "application/json"])
                 .responseJSON(completionHandler: { (response) in
                     if let error = response.error {
-                        single(.error(error))
+                        single(.failure(error))
                         return
                     }
                     if let json = response.value as? [String: Any] {
@@ -93,11 +93,11 @@ extension RestApi {
                             return
                         }
                     }
-                    single(.error(RxError.unknown))
+                    single(.failure(RxError.unknown))
                 })
             return Disposables.create { }
             }
-            .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
     }
 
     func searchRepositories(query: String, sort: String, order: String, page: Int, endCursor: String?) -> Single<RepositorySearch> {
@@ -301,27 +301,27 @@ extension RestApi {
     private func request(_ target: GithubAPI) -> Single<Any> {
         return githubProvider.request(target)
             .mapJSON()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
     private func requestWithoutMapping(_ target: GithubAPI) -> Single<Moya.Response> {
         return githubProvider.request(target)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
     private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
         return githubProvider.request(target)
             .mapObject(T.self)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
     private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
         return githubProvider.request(target)
             .mapArray(T.self)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 }
@@ -330,14 +330,14 @@ extension RestApi {
     private func trendingRequestObject<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<T> {
         return trendingGithubProvider.request(target)
             .mapObject(T.self)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
     private func trendingRequestArray<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<[T]> {
         return trendingGithubProvider.request(target)
             .mapArray(T.self)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 }
@@ -346,7 +346,7 @@ extension RestApi {
     private func codetabsRequestArray<T: BaseMappable>(_ target: CodetabsApi, type: T.Type) -> Single<[T]> {
         return codetabsProvider.request(target)
             .mapArray(T.self)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .asSingle()
     }
 }

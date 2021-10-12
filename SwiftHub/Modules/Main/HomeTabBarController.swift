@@ -63,9 +63,8 @@ enum HomeTabBarItem: Int {
         case .settings: animation = RAMRightRotationAnimation()
         case .login: animation = RAMBounceAnimation()
         }
-        _ = themeService.rx
-            .bind({ $0.secondary }, to: animation.rx.iconSelectedColor)
-            .bind({ $0.secondary }, to: animation.rx.textSelectedColor)
+        animation.theme.iconSelectedColor = themeService.attribute { $0.secondary }
+        animation.theme.textSelectedColor = themeService.attribute { $0.secondary }
         return animation
     }
 
@@ -73,9 +72,8 @@ enum HomeTabBarItem: Int {
         let vc = controller(with: viewModel, navigator: navigator)
         let item = RAMAnimatedTabBarItem(title: title, image: image, tag: rawValue)
         item.animation = animation
-        _ = themeService.rx
-            .bind({ $0.text }, to: item.rx.iconColor)
-            .bind({ $0.text }, to: item.rx.textColor)
+        item.theme.iconColor = themeService.attribute { $0.text }
+        item.theme.textColor = themeService.attribute { $0.text }
         vc.tabBarItem = item
         return vc
     }
@@ -115,9 +113,7 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
                 self?.setSelectIndex(from: 0, to: self?.selectedIndex ?? 0)
             }.disposed(by: rx.disposeBag)
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: tabBar.rx.barTintColor)
-            .disposed(by: rx.disposeBag)
+        tabBar.theme.barTintColor = themeService.attribute { $0.primaryDark }
 
         themeService.typeStream.delay(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
             .subscribe(onNext: { (theme) in

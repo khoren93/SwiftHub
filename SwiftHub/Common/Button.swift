@@ -21,11 +21,9 @@ public class Button: UIButton {
     }
 
     func makeUI() {
-        themeService.rx
-            .bind({ UIImage(color: $0.secondary, size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .normal))
-            .bind({ UIImage(color: $0.secondary.withAlphaComponent(0.9), size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .selected))
-            .bind({ UIImage(color: $0.secondary.withAlphaComponent(0.6), size: CGSize(width: 1, height: 1)) }, to: rx.backgroundImage(for: .disabled))
-            .disposed(by: rx.disposeBag)
+        theme.backgroundImage(from: themeService.attribute { $0.secondary }, for: .normal)
+        theme.backgroundImage(from: themeService.attribute { $0.secondary.withAlphaComponent(0.9) }, for: .selected)
+        theme.backgroundImage(from: themeService.attribute { $0.secondary.withAlphaComponent(0.6) }, for: .disabled)
 
         layer.masksToBounds = true
         titleLabel?.lineBreakMode = .byWordWrapping

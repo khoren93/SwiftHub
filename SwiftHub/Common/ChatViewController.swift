@@ -70,9 +70,7 @@ class ChatViewController: MessagesViewController {
 
         autocompleteManager.defaultTextAttributes = [.font: UIFont.preferredFont(forTextStyle: .callout), .foregroundColor: UIColor.text()]
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: autocompleteManager.tableView.rx.backgroundColor)
-            .disposed(by: rx.disposeBag)
+        autocompleteManager.tableView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
     }
 
     func configureMessageCollectionView() {
@@ -84,9 +82,8 @@ class ChatViewController: MessagesViewController {
         scrollsToLastItemOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: [view.rx.backgroundColor, messagesCollectionView.rx.backgroundColor])
-            .disposed(by: rx.disposeBag)
+        view.theme.backgroundColor = themeService.attribute { $0.primaryDark }
+        messagesCollectionView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
     }
 
     func configureMessageInputBar() {
@@ -94,14 +91,13 @@ class ChatViewController: MessagesViewController {
         messageInputBar.inputTextView.keyboardType = .twitter
         messageInputBar.inputTextView.cornerRadius = Configs.BaseDimensions.cornerRadius
 
-        themeService.rx
-            .bind({ $0.primary }, to: messageInputBar.backgroundView.rx.backgroundColor)
-            .bind({ $0.primaryDark }, to: messageInputBar.inputTextView.rx.backgroundColor)
-            .bind({ $0.secondary }, to: [messageInputBar.rx.tintColor, messageInputBar.sendButton.rx.titleColor(for: .normal)])
-            .bind({ $0.secondaryDark }, to: messageInputBar.sendButton.rx.titleColor(for: .highlighted))
-            .bind({ $0.separator }, to: messageInputBar.separatorLine.rx.backgroundColor)
-            .bind({ $0.keyboardAppearance }, to: messageInputBar.inputTextView.rx.keyboardAppearance)
-            .disposed(by: rx.disposeBag)
+        messageInputBar.backgroundView.theme.backgroundColor = themeService.attribute { $0.primary }
+        messageInputBar.inputTextView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
+        messageInputBar.theme.tintColor = themeService.attribute { $0.secondary }
+        messageInputBar.sendButton.theme.titleColor(from: themeService.attribute { $0.secondary }, for: .normal)
+        messageInputBar.sendButton.theme.titleColor(from: themeService.attribute { $0.secondaryDark }, for: .highlighted)
+        messageInputBar.separatorLine.theme.backgroundColor = themeService.attribute { $0.separator }
+        messageInputBar.inputTextView.theme.keyboardAppearance = themeService.attribute { $0.keyboardAppearance }
     }
 
     // MARK: - Helpers

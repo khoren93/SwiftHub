@@ -24,7 +24,7 @@ class PullRequestCommentsViewController: ChatViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(Observable.just(()), themeService.attrsStream.mapToVoid()).merge()
+        let refresh = Observable.of(Observable.just(()), themeService.typeStream.mapToVoid()).merge()
         let input = PullRequestCommentsViewModel.Input(headerRefresh: refresh,
                                                  sendSelected: sendPressed)
         let output = viewModel.transform(input: input)

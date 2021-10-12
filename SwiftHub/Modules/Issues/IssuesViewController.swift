@@ -78,9 +78,7 @@ class IssuesViewController: TableViewController {
                                                     IssueSegments.closed.title]
         }).disposed(by: rx.disposeBag)
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
-            .disposed(by: rx.disposeBag)
+        headerView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
 
         stackView.insertArrangedSubview(headerView, at: 0)
 

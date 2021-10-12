@@ -94,13 +94,6 @@ extension SharedSequenceConvertibleType {
 }
 
 extension ObservableType {
-
-    func catchErrorJustComplete() -> Observable<Element> {
-        return catchError { _ in
-            return Observable.empty()
-        }
-    }
-
     func asDriverOnErrorJustComplete() -> Driver<Element> {
         return asDriver { error in
             assertionFailure("Error \(error)")

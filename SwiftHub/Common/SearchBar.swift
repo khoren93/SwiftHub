@@ -25,16 +25,12 @@ class SearchBar: UISearchBar {
         isTranslucent = false
         searchBarStyle = .minimal
 
-        themeService.rx
-            .bind({ $0.secondary }, to: rx.tintColor)
-            .bind({ $0.primaryDark }, to: rx.barTintColor)
-            .disposed(by: rx.disposeBag)
+        theme.tintColor = themeService.attribute { $0.secondary }
+        theme.barTintColor = themeService.attribute { $0.primaryDark }
 
         if let textField = textField {
-            themeService.rx
-                .bind({ $0.text }, to: textField.rx.textColor)
-                .bind({ $0.keyboardAppearance }, to: textField.rx.keyboardAppearance)
-                .disposed(by: rx.disposeBag)
+            textField.theme.textColor = themeService.attribute { $0.text }
+            textField.theme.keyboardAppearance = themeService.attribute { $0.keyboardAppearance }
         }
 
         rx.textDidBeginEditing.asObservable().subscribe(onNext: { [weak self] () in

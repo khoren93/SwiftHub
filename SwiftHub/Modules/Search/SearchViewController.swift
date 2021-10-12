@@ -261,11 +261,11 @@ class SearchViewController: TableViewController {
         tableView.register(R.nib.repositoryCell)
         tableView.register(R.nib.userCell)
 
-        themeService.rx
-            .bind({ $0.text }, to: [totalCountLabel.rx.textColor, sortLabel.rx.textColor])
-            .disposed(by: rx.disposeBag)
+        totalCountLabel.theme.textColor = themeService.attribute { $0.text }
+        sortLabel.theme.textColor = themeService.attribute { $0.text }
 
-        themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
+        themeService.typeStream.subscribe(onNext: { [weak self] (themeType) in
+            let theme = themeType.associatedObject
             self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
 
             self?.segmentedControl.sectionImages = [
@@ -295,7 +295,7 @@ class SearchViewController: TableViewController {
         let searchTypeSegmentSelected = segmentedControl.segmentSelection.map { SearchTypeSegments(rawValue: $0)! }
         let trendingPerionSegmentSelected = trendingPeriodSegmentedControl.segmentSelection.map { TrendingPeriodSegments(rawValue: $0)! }
         let searchModeSegmentSelected = searchModeSegmentedControl.segmentSelection.map { SearchModeSegments(rawValue: $0)! }
-        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, themeService.attrsStream.mapToVoid()).merge()
+        let refresh = Observable.of(Observable.just(()), headerRefreshTrigger, themeService.typeStream.mapToVoid()).merge()
         let input = SearchViewModel.Input(headerRefresh: refresh,
                                           footerRefresh: footerRefreshTrigger,
                                           languageTrigger: languageChanged.asObservable(),

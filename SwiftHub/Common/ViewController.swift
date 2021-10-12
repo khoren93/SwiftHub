@@ -200,11 +200,10 @@ class ViewController: UIViewController, Navigatable {
             themeService.switch(theme)
         }).disposed(by: rx.disposeBag)
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: view.rx.backgroundColor)
-            .bind({ $0.secondary }, to: [backBarButton.rx.tintColor, closeBarButton.rx.tintColor])
-            .bind({ $0.text }, to: self.rx.emptyDataSetImageTintColorBinder)
-            .disposed(by: rx.disposeBag)
+        view.theme.backgroundColor = themeService.attribute { $0.primaryDark }
+        backBarButton.theme.tintColor = themeService.attribute { $0.secondary }
+        closeBarButton.theme.tintColor = themeService.attribute { $0.secondary }
+        theme.emptyDataSetImageTintColorBinder = themeService.attribute { $0.text }
 
         updateUI()
     }
@@ -289,16 +288,6 @@ extension ViewController {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
             HeroDebugPlugin.isEnabled = !HeroDebugPlugin.isEnabled
-        }
-    }
-}
-
-extension Reactive where Base: ViewController {
-
-    /// Bindable sink for `backgroundColor` property
-    var emptyDataSetImageTintColorBinder: Binder<UIColor?> {
-        return Binder(self.base) { view, attr in
-            view.emptyDataSetImageTintColor.accept(attr)
         }
     }
 }

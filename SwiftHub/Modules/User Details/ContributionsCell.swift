@@ -41,9 +41,7 @@ class ContributionsCell: DefaultTableViewCell {
             make.edges.equalToSuperview().inset(inset)
         })
 
-        themeService.rx
-            .bind({ $0.secondary }, to: [rightImageView.rx.tintColor])
-            .disposed(by: rx.disposeBag)
+        rightImageView.theme.tintColor = themeService.attribute { $0.secondary }
     }
 
     override func bind(to viewModel: TableViewCellViewModel) {

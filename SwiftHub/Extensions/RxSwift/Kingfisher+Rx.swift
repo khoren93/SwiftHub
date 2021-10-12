@@ -38,7 +38,7 @@ extension Reactive where Base: ImageCache {
                 do {
                     single(.success(Int(try result.get())))
                 } catch {
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
             return Disposables.create { }

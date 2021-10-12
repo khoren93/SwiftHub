@@ -29,6 +29,7 @@ import Mixpanel
 import Firebase
 import DropDown
 import Toast_Swift
+import GoogleMobileAds
 
 typealias DropDownView = DropDown
 
@@ -67,13 +68,12 @@ class LibsManager: NSObject {
     }
 
     func setupTheme() {
-        themeService.rx
-            .bind({ $0.statusBarStyle }, to: UIApplication.shared.rx.statusBarStyle)
-            .disposed(by: rx.disposeBag)
+        UIApplication.shared.theme.statusBarStyle = themeService.attribute { $0.statusBarStyle }
     }
 
     func setupDropDown() {
-        themeService.attrsStream.subscribe(onNext: { (theme) in
+        themeService.typeStream.subscribe(onNext: { (themeType) in
+            let theme = themeType.associatedObject
             DropDown.appearance().backgroundColor = theme.primary
             DropDown.appearance().selectionBackgroundColor = theme.primaryDark
             DropDown.appearance().textColor = theme.text
@@ -96,9 +96,7 @@ class LibsManager: NSObject {
         if let defaults = KafkaRefreshDefaults.standard() {
             defaults.headDefaultStyle = .replicatorAllen
             defaults.footDefaultStyle = .replicatorDot
-            themeService.rx
-                .bind({ $0.secondary }, to: defaults.rx.themeColor)
-                .disposed(by: rx.disposeBag)
+            defaults.theme.themeColor = themeService.attribute { $0.secondary }
         }
     }
 

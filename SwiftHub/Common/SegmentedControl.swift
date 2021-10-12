@@ -46,7 +46,8 @@ class SegmentedControl: HMSegmentedControl {
     }
 
     func makeUI() {
-        themeService.attrsStream.subscribe(onNext: { [weak self] (theme) in
+        themeService.typeStream.subscribe(onNext: { [weak self] (themeType) in
+            let theme = themeType.associatedObject
             self?.backgroundColor = theme.primary
             self?.selectionIndicatorColor = theme.secondary
             let font = UIFont.systemFont(ofSize: 11)

@@ -24,7 +24,7 @@ class IssueCommentsViewController: ChatViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        let refresh = Observable.of(Observable.just(()), themeService.attrsStream.mapToVoid()).merge()
+        let refresh = Observable.of(Observable.just(()), themeService.typeStream.mapToVoid()).merge()
         let input = IssueCommentsViewModel.Input(headerRefresh: refresh,
                                                  sendSelected: sendPressed)
         let output = viewModel.transform(input: input)

@@ -78,12 +78,11 @@ class DefaultTableViewCell: TableViewCell {
     override func makeUI() {
         super.makeUI()
 
-        themeService.rx
-            .bind({ $0.text }, to: titleLabel.rx.textColor)
-            .bind({ $0.textGray }, to: detailLabel.rx.textColor)
-            .bind({ $0.text }, to: secondDetailLabel.rx.textColor)
-            .bind({ $0.secondary }, to: [leftImageView.rx.tintColor, rightImageView.rx.tintColor])
-            .disposed(by: rx.disposeBag)
+        titleLabel.theme.textColor = themeService.attribute { $0.text }
+        detailLabel.theme.textColor = themeService.attribute { $0.textGray }
+        secondDetailLabel.theme.textColor = themeService.attribute { $0.text }
+        leftImageView.theme.tintColor = themeService.attribute { $0.secondary }
+        rightImageView.theme.tintColor = themeService.attribute { $0.secondary }
 
         stackView.addArrangedSubview(leftImageView)
         stackView.addArrangedSubview(textsStackView)

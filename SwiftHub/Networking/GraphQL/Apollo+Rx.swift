@@ -30,11 +30,11 @@ extension Reactive where Base: ApolloClient {
                         single(.success(data))
                     } else if let errors = graphQLResult.errors {
                         // GraphQL errors
-                        single(.error(RxApolloError.graphQLErrors(errors)))
+                        single(.failure(RxApolloError.graphQLErrors(errors)))
                     }
                 case .failure(let error):
                     // Network or response format errors
-                    single(.error(error))
+                    single(.failure(error))
                 }
             })
             return Disposables.create {
@@ -53,11 +53,11 @@ extension Reactive where Base: ApolloClient {
                         single(.success(data))
                     } else if let errors = graphQLResult.errors {
                         // GraphQL errors
-                        single(.error(RxApolloError.graphQLErrors(errors)))
+                        single(.failure(RxApolloError.graphQLErrors(errors)))
                     }
                 case .failure(let error):
                     // Network or response format errors
-                    single(.error(error))
+                    single(.failure(error))
                 }
             })
             return Disposables.create {
@@ -76,11 +76,11 @@ extension Reactive where Base: ApolloClient {
                         single(.success(data))
                     } else if let errors = graphQLResult.errors {
                         // GraphQL errors
-                        single(.error(RxApolloError.graphQLErrors(errors)))
+                        single(.failure(RxApolloError.graphQLErrors(errors)))
                     }
                 case .failure(let error):
                     // Network or response format errors
-                    single(.error(error))
+                    single(.failure(error))
                 }
             })
             return Disposables.create {

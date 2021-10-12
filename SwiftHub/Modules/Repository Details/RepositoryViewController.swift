@@ -111,10 +111,8 @@ class RepositoryViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
-            .bind({ $0.text }, to: detailLabel.rx.textColor)
-            .disposed(by: rx.disposeBag)
+        headerView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
+        detailLabel.theme.textColor = themeService.attribute { $0.text }
 
         navigationItem.rightBarButtonItem = rightBarButton
 

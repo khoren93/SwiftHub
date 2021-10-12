@@ -21,8 +21,7 @@ class Switch: UISwitch {
     }
 
     func makeUI() {
-        themeService.rx
-            .bind({ $0.secondary }, to: [rx.tintColor, rx.onTintColor])
-            .disposed(by: rx.disposeBag)
+        self.theme.tintColor = themeService.attribute { $0.secondary }
+        self.theme.onTintColor = themeService.attribute { $0.secondary }
     }
 }

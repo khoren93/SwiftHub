@@ -128,11 +128,10 @@ class UserViewController: TableViewController {
     override func makeUI() {
         super.makeUI()
 
-        themeService.rx
-            .bind({ $0.primaryDark }, to: headerView.rx.backgroundColor)
-            .bind({ $0.text }, to: [usernameLabel.rx.textColor, detailLabel.rx.textColor])
-            .bind({ $0.textGray }, to: fullnameLabel.rx.textColor)
-            .disposed(by: rx.disposeBag)
+        headerView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
+        usernameLabel.theme.textColor = themeService.attribute { $0.text }
+        detailLabel.theme.textColor = themeService.attribute { $0.text }
+        fullnameLabel.theme.textColor = themeService.attribute { $0.textGray }
 
         navigationItem.titleView = navigationHeaderView
         navigationItem.rightBarButtonItem = rightBarButton
