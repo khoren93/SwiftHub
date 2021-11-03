@@ -24,7 +24,7 @@ target 'SwiftHub' do
     pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/p-rob/Moya-ObjectMapper.git', :branch => 'master'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
-    pod 'Kingfisher', '~> 6.0'  # https://github.com/onevcat/Kingfisher
+    pod 'Kingfisher', '~> 7.0'  # https://github.com/onevcat/Kingfisher
 
     # Date
     pod 'DateToolsSwift', '~> 5.0'  # https://github.com/MatthewYork/DateTools
@@ -39,7 +39,7 @@ target 'SwiftHub' do
 
     # UI
     pod 'SVProgressHUD', '~> 2.0'  # https://github.com/SVProgressHUD/SVProgressHUD
-    pod 'ImageSlideshow/Kingfisher', '~> 1.8'  # https://github.com/zvonicek/ImageSlideshow
+    pod 'ImageSlideshow/Kingfisher', :git => 'https://github.com/khoren93/ImageSlideshow.git', :branch => 'master'   # https://github.com/zvonicek/ImageSlideshow
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 3.0'  # https://github.com/marmelroy/Localize-Swift
