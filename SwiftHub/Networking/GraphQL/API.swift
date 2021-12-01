@@ -30,6 +30,7 @@ public final class RepositoryQuery: GraphQLQuery {
           login
           avatarUrl
           ... on Organization {
+            __typename
             description
           }
         }
@@ -93,6 +94,7 @@ public final class RepositoryQuery: GraphQLQuery {
           target {
             __typename
             ... on Commit {
+              __typename
               history {
                 __typename
                 totalCount
@@ -559,6 +561,7 @@ public final class RepositoryQuery: GraphQLQuery {
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("login", type: .nonNull(.scalar(String.self))),
               GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
             ]
           }
@@ -1289,6 +1292,7 @@ public final class RepositoryQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("history", type: .nonNull(.object(History.selections))),
               ]
             }
@@ -1384,6 +1388,7 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
         nodes {
           __typename
           ... on Repository {
+            __typename
             name
             nameWithOwner
             description
@@ -1391,6 +1396,7 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
               __typename
               avatarUrl
               ... on Organization {
+                __typename
                 description
               }
             }
@@ -1640,6 +1646,7 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("name", type: .nonNull(.scalar(String.self))),
               GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
@@ -1816,6 +1823,7 @@ public final class SearchRepositoriesQuery: GraphQLQuery {
                 return [
                   GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                   GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                   GraphQLField("description", type: .scalar(String.self)),
                 ]
               }
@@ -1967,6 +1975,7 @@ public final class SearchUsersQuery: GraphQLQuery {
         nodes {
           __typename
           ... on User {
+            __typename
             name
             login
             avatarUrl
@@ -2169,6 +2178,7 @@ public final class SearchUsersQuery: GraphQLQuery {
 
           public static var selections: [GraphQLSelection] {
             return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("name", type: .scalar(String.self)),
               GraphQLField("login", type: .nonNull(.scalar(String.self))),
@@ -2460,6 +2470,7 @@ public final class ViewerQuery: GraphQLQuery {
           nodes {
             __typename
             ... on Repository {
+              __typename
               name
               nameWithOwner
               description
@@ -2489,6 +2500,7 @@ public final class ViewerQuery: GraphQLQuery {
             login
             avatarUrl
             ... on Organization {
+              __typename
               description
             }
           }
@@ -3420,6 +3432,7 @@ public final class ViewerQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("name", type: .nonNull(.scalar(String.self))),
                 GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
                 GraphQLField("description", type: .scalar(String.self)),
@@ -3716,6 +3729,7 @@ public final class ViewerQuery: GraphQLQuery {
               GraphQLField("name", type: .scalar(String.self)),
               GraphQLField("login", type: .nonNull(.scalar(String.self))),
               GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
             ]
           }
@@ -3834,6 +3848,7 @@ public final class UserQuery: GraphQLQuery {
           nodes {
             __typename
             ... on Repository {
+              __typename
               name
               nameWithOwner
               description
@@ -3863,6 +3878,7 @@ public final class UserQuery: GraphQLQuery {
             login
             avatarUrl
             ... on Organization {
+              __typename
               description
             }
           }
@@ -4545,6 +4561,7 @@ public final class UserQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("name", type: .nonNull(.scalar(String.self))),
                 GraphQLField("nameWithOwner", type: .nonNull(.scalar(String.self))),
                 GraphQLField("description", type: .scalar(String.self)),
@@ -4841,6 +4858,7 @@ public final class UserQuery: GraphQLQuery {
               GraphQLField("name", type: .scalar(String.self)),
               GraphQLField("login", type: .nonNull(.scalar(String.self))),
               GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
             ]
           }
