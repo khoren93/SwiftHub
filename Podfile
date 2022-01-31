@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 6.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.45.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.46.2'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -71,7 +71,7 @@ target 'SwiftHub' do
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
 
     # Analytics
-    pod 'Mixpanel-swift', '~> 2.0'  # https://github.com/mixpanel/mixpanel-iphone
+    pod 'Mixpanel-swift', '~> 3.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Ads
     pod 'Google-Mobile-Ads-SDK', '~> 8.0'
