@@ -6,12 +6,14 @@
   GitHub iOS client in RxSwift and MVVM-C clean architecture.
 </p>
 
-<p align="center">
-  KotlinHub - Android version is coming soon!
+<p align="center">  
+  <a href="https://github.com/khoren93/FlutterHub">
+    FlutterHub - Flutter version available at an early stage
+  </a>
 </p>
 
-<p align="center">  
-  SwiftUI and Combine coming soon!
+<p align="center">
+  KotlinHub - Android version is coming soon!
 </p>
 
 <p align="center">
