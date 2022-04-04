@@ -42,16 +42,3 @@ extension UIFont {
         return fontsNames
     }
 }
-
-// MARK: Randomizing Fonts
-
-extension UIFont {
-
-    static func randomFont(ofSize size: CGFloat) -> UIFont {
-        let allFontsNames = UIFont.allSystemFontsNames()
-        let fontsCount = UInt32(allFontsNames.count)
-        let randomFontIndex = Int(arc4random_uniform(fontsCount))
-        let randomFontName = allFontsNames[randomFontIndex]
-        return UIFont(name: randomFontName, size: size)!
-    }
-}

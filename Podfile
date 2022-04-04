@@ -9,7 +9,7 @@ target 'SwiftHub' do
 
     # Networking
     pod 'Moya/RxSwift', '~> 15.0'  # https://github.com/Moya/Moya
-    pod 'Apollo', '0.50.0'  # https://github.com/apollographql/apollo-ios
+    pod 'Apollo', '0.51.2'  # https://github.com/apollographql/apollo-ios
 
     # Rx Extensions
     pod 'RxDataSources', '~> 5.0'  # https://github.com/RxSwiftCommunity/RxDataSources
@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 6.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.46.2'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.47.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -54,7 +54,7 @@ target 'SwiftHub' do
     pod 'FloatingPanel', '~> 2.0'  # https://github.com/SCENEE/FloatingPanel
     pod 'MessageKit', '~> 3.0'  # https://github.com/MessageKit/MessageKit
     pod 'MultiProgressView', '~> 1.0'  # https://github.com/mac-gallagher/MultiProgressView
-    pod 'Charts', '~> 3.0'  # https://github.com/danielgindi/Charts
+    pod 'Charts', '~> 4.0'  # https://github.com/danielgindi/Charts
     
     # Keyboard
     pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
@@ -74,7 +74,7 @@ target 'SwiftHub' do
     pod 'Mixpanel-swift', '~> 3.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Ads
-    pod 'Google-Mobile-Ads-SDK', '~> 8.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 9.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths

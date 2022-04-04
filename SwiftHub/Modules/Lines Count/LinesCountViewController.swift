@@ -23,7 +23,7 @@ class LinesCountViewController: ViewController {
         view.drawSlicesUnderHoleEnabled = true
         view.holeRadiusPercent = 0.58
         view.transparentCircleRadiusPercent = 0.610
-        view.chartDescription?.enabled = true
+        view.chartDescription.enabled = true
         view.setExtraOffsets(left: self.inset, top: self.inset, right: self.inset, bottom: self.inset)
 
         view.drawCenterTextEnabled = true
