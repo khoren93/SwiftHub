@@ -5,4 +5,4 @@ gem 'fastlane'  # https://github.com/fastlane/fastlane
 
 gem 'cocoapods'  # https://github.com/CocoaPods/CocoaPods
 
-gem 'jazzy'  # https://github.com/realm/jazzy
+#gem 'jazzy'  # https://github.com/realm/jazzy
