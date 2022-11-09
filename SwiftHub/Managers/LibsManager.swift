@@ -54,7 +54,7 @@ class LibsManager: NSObject {
         }).disposed(by: rx.disposeBag)
     }
 
-    func setupLibs(with window: UIWindow? = nil) {
+    func setupLibs() {
         let libsManager = LibsManager.shared
         libsManager.setupCocoaLumberjack()
         libsManager.setupAnalytics()
@@ -131,7 +131,7 @@ class LibsManager: NSObject {
 
     func setupAnalytics() {
         FirebaseApp.configure()
-        Mixpanel.initialize(token: Keys.mixpanel.apiKey)
+        Mixpanel.initialize(token: Keys.mixpanel.apiKey, trackAutomaticEvents: true)
         FirebaseConfiguration.shared.setLoggerLevel(.min)
     }
 

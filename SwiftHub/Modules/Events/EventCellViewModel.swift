@@ -79,7 +79,7 @@ class EventCellViewModel: DefaultTableViewCellViewModel {
         let repoName = event.repository?.fullname ?? ""
 
         title.accept([actorName, actionText, repoName].joined(separator: " "))
-        detail.accept(event.createdAt?.toRelative())
+        detail.accept(event.createdAt?.toRelative(since: nil))
         secondDetail.accept(body)
         imageUrl.accept(event.actor?.avatarUrl)
         badge.accept(badgeImage?.template)

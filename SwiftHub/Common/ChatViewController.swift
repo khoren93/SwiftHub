@@ -135,7 +135,7 @@ extension ChatViewController: MessagesDataSource {
     }
 
     func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        let dateString = message.sentDate.toRelative()
+        let dateString = message.sentDate.toRelative(since: nil)
         return NSAttributedString(string: dateString, attributes: [
             NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2),
             NSAttributedString.Key.foregroundColor: UIColor.text()

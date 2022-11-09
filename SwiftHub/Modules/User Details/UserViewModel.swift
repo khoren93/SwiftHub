@@ -168,7 +168,7 @@ class UserViewModel: ViewModel, ViewModelType {
             // Created
             if let created = user.createdAt {
                 let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCreatedCellTitle.key.localized(),
-                                                                   detail: created.toRelative(),
+                                                                   detail: created.toRelative(since: nil),
                                                                    image: R.image.icon_cell_created()?.template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.createdItem(viewModel: createdCellViewModel))
@@ -177,7 +177,7 @@ class UserViewModel: ViewModel, ViewModelType {
             // Updated
             if let updated = user.updatedAt {
                 let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userUpdatedCellTitle.key.localized(),
-                                                                   detail: updated.toRelative(),
+                                                                   detail: updated.toRelative(since: nil),
                                                                    image: R.image.icon_cell_updated()?.template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.updatedItem(viewModel: updatedCellViewModel))

@@ -8,13 +8,14 @@
 
 import UIKit
 import Toast_Swift
+// import Intercom
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    static var shared: AppDelegate? {
-        return UIApplication.shared.delegate as? AppDelegate
-    }
+//    static var shared: AppDelegate? {
+//        return UIApplication.shared.delegate as? AppDelegate
+//    }
 
     var window: UIWindow?
 
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         let libsManager = LibsManager.shared
-        libsManager.setupLibs(with: window)
+        libsManager.setupLibs()
 
         if Configs.Network.useStaging == true {
             // Logout
@@ -54,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 
+//        Intercom.setApiKey("", forAppId: "")
+//        Intercom.presentMessenger()
         return true
     }
 

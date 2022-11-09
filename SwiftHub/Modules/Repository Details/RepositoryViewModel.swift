@@ -197,7 +197,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             // Created
             if let created = repository.createdAt {
                 let createdCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
-                                                                         detail: created.toRelative(),
+                                                                         detail: created.toRelative(since: nil),
                                                                          image: R.image.icon_cell_created()?.template,
                                                                          hidesDisclosure: true)
                 items.append(RepositorySectionItem.createdItem(viewModel: createdCellViewModel))
@@ -206,7 +206,7 @@ class RepositoryViewModel: ViewModel, ViewModelType {
             // Updated
             if let updated = repository.updatedAt {
                 let updatedCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
-                                                                         detail: updated.toRelative(),
+                                                                         detail: updated.toRelative(since: nil),
                                                                          image: R.image.icon_cell_updated()?.template,
                                                                          hidesDisclosure: true)
                 items.append(RepositorySectionItem.updatedItem(viewModel: updatedCellViewModel))

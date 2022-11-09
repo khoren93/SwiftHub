@@ -156,7 +156,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             }.subscribe(onNext: { [weak self] (repository) in
                 self?.flutterHubRepository.accept(repository)
             }).disposed(by: rx.disposeBag)
-        
+
         let selectedEvent = input.selection
 
         selectedEvent.asObservable().subscribe(onNext: { (item) in

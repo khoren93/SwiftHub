@@ -1,11 +1,13 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 use_frameworks!
 inhibit_all_warnings!
 
 target 'SwiftHub' do
     # Pods for SwiftHub
+    
+    pod 'Intercom', '~> 14.0'
 
     # Networking
     pod 'Moya/RxSwift', '~> 15.0'  # https://github.com/Moya/Moya
@@ -28,11 +30,11 @@ target 'SwiftHub' do
 
     # Date
     pod 'DateToolsSwift', '~> 5.0'  # https://github.com/MatthewYork/DateTools
-    pod 'SwiftDate', '~> 6.0'  # https://github.com/malcommac/SwiftDate
+    pod 'SwiftDate', '~> 7.0'  # https://github.com/malcommac/SwiftDate
 
     # Tools
     pod 'R.swift', '~> 6.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.47.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.49.1'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -44,7 +46,7 @@ target 'SwiftHub' do
     pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 3.0'  # https://github.com/marmelroy/Localize-Swift
     pod 'RAMAnimatedTabBarController', '~> 5.0'  # https://github.com/Ramotion/animated-tab-bar
-    pod 'AcknowList', '~> 2.0'  # https://github.com/vtourraine/AcknowList
+    pod 'AcknowList', '~> 3.0'  # https://github.com/vtourraine/AcknowList
     pod 'KafkaRefresh', '~> 1.0'  # https://github.com/OpenFeyn/KafkaRefresh
     pod 'WhatsNewKit', '~> 1.0'  # https://github.com/SvenTiigi/WhatsNewKit
     pod 'Highlightr', '~> 2.0'  # https://github.com/raspu/Highlightr
@@ -63,7 +65,7 @@ target 'SwiftHub' do
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
-    pod 'FLEX', '~> 4.0', :configurations => ['Debug']  # https://github.com/Flipboard/FLEX
+    pod 'FLEX', '~> 5.0', :configurations => ['Debug']  # https://github.com/Flipboard/FLEX
     pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'BonMot', '~> 6.0'  # https://github.com/Rightpoint/BonMot
 
@@ -71,7 +73,7 @@ target 'SwiftHub' do
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
 
     # Analytics
-    pod 'Mixpanel-swift', '~> 3.0'  # https://github.com/mixpanel/mixpanel-iphone
+    pod 'Mixpanel-swift', '~> 4.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Ads
     pod 'Google-Mobile-Ads-SDK', '~> 9.0'
@@ -79,8 +81,8 @@ target 'SwiftHub' do
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
-        pod 'Quick', '~> 5.0'  # https://github.com/Quick/Quick
-        pod 'Nimble', '~> 9.0'  # https://github.com/Quick/Nimble
+        pod 'Quick', '~> 6.0'  # https://github.com/Quick/Quick
+        pod 'Nimble', '~> 11.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
     end

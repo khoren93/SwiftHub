@@ -32,8 +32,8 @@ class IssueCellViewModel: DefaultTableViewCellViewModel {
 extension Issue {
     func detail() -> String {
         switch state {
-        case .open: return "#\(number ?? 0) opened \(createdAt?.toRelative() ?? "") by \(user?.login ?? "")"
-        case .closed: return "#\(number ?? 0) closed \(closedAt?.toRelative() ?? "") by \(user?.login ?? "")"
+        case .open: return "#\(number ?? 0) opened \(createdAt?.toRelative(since: nil) ?? "") by \(user?.login ?? "")"
+        case .closed: return "#\(number ?? 0) closed \(closedAt?.toRelative(since: nil) ?? "") by \(user?.login ?? "")"
         case .all: return ""
         }
     }

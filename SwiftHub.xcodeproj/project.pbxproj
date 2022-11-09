@@ -226,10 +226,10 @@
 		A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */; };
 		A09DE8E320EBB75700F6F2BF /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */; };
 		A0AEB3A7220D8FC300A4B2AA /* UsersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AEB3A6220D8FC300A4B2AA /* UsersViewModelTests.swift */; };
+		A0C683A4291BADC1009F9205 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0C683A3291BADC1009F9205 /* FirebaseAnalytics */; };
+		A0C683A6291BADC1009F9205 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */; };
 		A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B521C28D9200C4C0E5 /* EmptyArray.json */; };
 		A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B721C28DA700C4C0E5 /* EmptyObject.json */; };
-		A0E17EAD287EFF6700EEBCAA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0E17EAC287EFF6700EEBCAA /* FirebaseAnalyticsSwift */; };
-		A0E17EAF287EFF6700EEBCAA /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0E17EAE287EFF6700EEBCAA /* FirebaseCrashlytics */; };
 		A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0752101F77C000DA282 /* UsersViewController.swift */; };
 		A0E2B0782101F789000DA282 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0772101F789000DA282 /* UsersViewModel.swift */; };
 		A0E2B07A2101FCE4000DA282 /* UserFollowers.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E2B0792101FCE4000DA282 /* UserFollowers.json */; };
@@ -610,8 +610,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0E17EAF287EFF6700EEBCAA /* FirebaseCrashlytics in Frameworks */,
-				A0E17EAD287EFF6700EEBCAA /* FirebaseAnalyticsSwift in Frameworks */,
+				A0C683A6291BADC1009F9205 /* FirebaseCrashlytics in Frameworks */,
+				A0C683A4291BADC1009F9205 /* FirebaseAnalytics in Frameworks */,
 				10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1459,8 +1459,8 @@
 			);
 			name = SwiftHub;
 			packageProductDependencies = (
-				A0E17EAC287EFF6700EEBCAA /* FirebaseAnalyticsSwift */,
-				A0E17EAE287EFF6700EEBCAA /* FirebaseCrashlytics */,
+				A0C683A3291BADC1009F9205 /* FirebaseAnalytics */,
+				A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */,
 			);
 			productName = SwiftHub;
 			productReference = A09499521E1D1CB600EFDE29 /* SwiftHub.app */;
@@ -1550,7 +1550,7 @@
 			);
 			mainGroup = A09499491E1D1CB500EFDE29;
 			packageReferences = (
-				A0E17EAB287EFF6700EEBCAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A09499531E1D1CB600EFDE29 /* Products */;
 			projectDirPath = "";
@@ -1737,6 +1737,7 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNewKit/WhatsNewKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Intercom/Intercom.framework/Intercom",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1790,6 +1791,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNewKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Intercom.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2318,7 +2320,7 @@
 				DEVELOPMENT_TEAM = RE853S4FBU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2339,7 +2341,7 @@
 				DEVELOPMENT_TEAM = RE853S4FBU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2463,25 +2465,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A0E17EAB287EFF6700EEBCAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A0E17EAC287EFF6700EEBCAA /* FirebaseAnalyticsSwift */ = {
+		A0C683A3291BADC1009F9205 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0E17EAB287EFF6700EEBCAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
+			package = A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
-		A0E17EAE287EFF6700EEBCAA /* FirebaseCrashlytics */ = {
+		A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0E17EAB287EFF6700EEBCAA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */

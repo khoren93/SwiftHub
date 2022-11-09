@@ -20,7 +20,7 @@ class CommitCellViewModel: DefaultTableViewCellViewModel {
         self.commit = commit
         super.init()
         title.accept(commit.commit?.message)
-        detail.accept(commit.commit?.committer?.date?.toRelative())
+        detail.accept(commit.commit?.committer?.date?.toRelative(since: nil))
         secondDetail.accept(commit.sha?.slicing(from: 0, length: 7))
         imageUrl.accept(commit.committer?.avatarUrl)
         badge.accept(R.image.icon_cell_badge_commit()?.template)
