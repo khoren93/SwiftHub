@@ -8,7 +8,6 @@
 
 import UIKit
 import Toast_Swift
-// import Intercom
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,8 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Show initial screen
         Application.shared.presentInitialScreen(in: window!)
 
-//        Intercom.setApiKey("", forAppId: "")
-//        Intercom.presentMessenger()
         return true
     }
 

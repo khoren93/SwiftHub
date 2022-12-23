@@ -1737,7 +1737,6 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNewKit/WhatsNewKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Intercom/Intercom.framework/Intercom",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1791,7 +1790,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNewKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Intercom.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1853,7 +1851,7 @@
 			);
 			name = R.swift;
 			outputPaths = (
-				$SRCROOT/SwiftHub/Resources/R.generated.swift,
+				"$SRCROOT/SwiftHub/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

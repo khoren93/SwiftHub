@@ -7,8 +7,6 @@ inhibit_all_warnings!
 target 'SwiftHub' do
     # Pods for SwiftHub
     
-    pod 'Intercom', '~> 14.0'
-
     # Networking
     pod 'Moya/RxSwift', '~> 15.0'  # https://github.com/Moya/Moya
     pod 'Apollo', '0.51.2'  # https://github.com/apollographql/apollo-ios
