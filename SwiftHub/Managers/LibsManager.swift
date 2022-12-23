@@ -26,7 +26,7 @@ import SwiftDate
 import Hero
 import KafkaRefresh
 import Mixpanel
-import Firebase
+import FirebaseCore
 import DropDown
 import Toast_Swift
 import GoogleMobileAds

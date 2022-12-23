@@ -226,8 +226,6 @@
 		A09DE8E120EB9B2500F6F2BF /* SlideImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E020EB9B2500F6F2BF /* SlideImageView.swift */; };
 		A09DE8E320EBB75700F6F2BF /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09DE8E220EBB75700F6F2BF /* SnapshotHelper.swift */; };
 		A0AEB3A7220D8FC300A4B2AA /* UsersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AEB3A6220D8FC300A4B2AA /* UsersViewModelTests.swift */; };
-		A0C683A4291BADC1009F9205 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0C683A3291BADC1009F9205 /* FirebaseAnalytics */; };
-		A0C683A6291BADC1009F9205 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */; };
 		A0CE88B621C28D9200C4C0E5 /* EmptyArray.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B521C28D9200C4C0E5 /* EmptyArray.json */; };
 		A0CE88B821C28DA700C4C0E5 /* EmptyObject.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CE88B721C28DA700C4C0E5 /* EmptyObject.json */; };
 		A0E2B0762101F77C000DA282 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E2B0752101F77C000DA282 /* UsersViewController.swift */; };
@@ -610,8 +608,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0C683A6291BADC1009F9205 /* FirebaseCrashlytics in Frameworks */,
-				A0C683A4291BADC1009F9205 /* FirebaseAnalytics in Frameworks */,
 				10FF001614268611DEEC3698 /* Pods_SwiftHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1458,10 +1454,6 @@
 			dependencies = (
 			);
 			name = SwiftHub;
-			packageProductDependencies = (
-				A0C683A3291BADC1009F9205 /* FirebaseAnalytics */,
-				A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */,
-			);
 			productName = SwiftHub;
 			productReference = A09499521E1D1CB600EFDE29 /* SwiftHub.app */;
 			productType = "com.apple.product-type.application";
@@ -1549,9 +1541,6 @@
 				"zh-Hant",
 			);
 			mainGroup = A09499491E1D1CB500EFDE29;
-			packageReferences = (
-				A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			productRefGroup = A09499531E1D1CB600EFDE29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1698,7 +1687,12 @@
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
@@ -1751,7 +1745,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
@@ -2461,30 +2460,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A0C683A3291BADC1009F9205 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		A0C683A5291BADC1009F9205 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0C683A2291BADC1009F9205 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A094994A1E1D1CB600EFDE29 /* Project object */;
 }

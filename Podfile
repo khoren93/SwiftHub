@@ -73,6 +73,10 @@ target 'SwiftHub' do
     # Analytics
     pod 'Mixpanel-swift', '~> 4.0'  # https://github.com/mixpanel/mixpanel-iphone
 
+    # Firebase https://github.com/firebase/firebase-ios-sdk
+    pod 'FirebaseAnalytics', '~> 10.0'
+    pod 'FirebaseCrashlytics', '~> 10.0'
+
     # Ads
     pod 'Google-Mobile-Ads-SDK', '~> 9.0'
     
@@ -111,6 +115,13 @@ post_install do |installer|
             config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
           end
         end
+      end
+    end
+    
+    # To hide deployment target warnings
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
       end
     end
 end
