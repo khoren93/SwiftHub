@@ -30,8 +30,8 @@ force_try:
 line_length: 300
 
 function_body_length:
-  - 300 # warning
-  - 400 # error
+  - 400 # warning
+  - 500 # error
 
 function_parameter_count:
   - 10 # warning
@@ -43,8 +43,8 @@ large_tuple:
 
 # they can set both implicitly with an array
 type_body_length:
-  - 300 # warning
-  - 400 # error
+  - 400 # warning
+  - 500 # error
 
 # or they can set both explicitly
 file_length:

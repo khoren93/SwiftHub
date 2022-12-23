@@ -30,3 +30,14 @@ extension Int {
         return "\(sign)\(roundedNum)\(units[exp-1])"
     }
 }
+
+extension StaticString {
+
+    func localized() -> String {
+        return description.localized()
+    }
+
+    func localizedFormat(_ arguments: CVarArg...) -> String {
+        return description.localizedFormat(arguments)
+    }
+}
