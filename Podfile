@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 7.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.50.3'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.53.0'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -78,7 +78,7 @@ target 'SwiftHub' do
     pod 'FirebaseCrashlytics', '~> 10.0'
 
     # Ads
-    pod 'Google-Mobile-Ads-SDK', '~> 9.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 10.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
