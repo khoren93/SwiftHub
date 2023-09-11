@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 7.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.51.0'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.52.4'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -83,8 +83,8 @@ target 'SwiftHub' do
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
-        pod 'Quick', '~> 6.0'  # https://github.com/Quick/Quick
-        pod 'Nimble', '~> 11.0'  # https://github.com/Quick/Nimble
+        pod 'Quick', '~> 7.0'  # https://github.com/Quick/Quick
+        pod 'Nimble', '~> 12.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
     end

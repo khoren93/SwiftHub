@@ -41,7 +41,7 @@ struct Configs {
         static let useStaging = false  // set true for tests and generating screenshots with fastlane
         static let loggingEnabled = false
         static let githubBaseUrl = "https://api.github.com"
-        static let trendingGithubBaseUrl = "https://gtrend.yapie.me"
+        static let trendingGithubBaseUrl = "https://api.gitterapp.com"
         static let codetabsBaseUrl = "https://api.codetabs.com/v1"
         static let githistoryBaseUrl = "https://github.githistory.xyz"
         static let starHistoryBaseUrl = "https://star-history.t9t.io"
