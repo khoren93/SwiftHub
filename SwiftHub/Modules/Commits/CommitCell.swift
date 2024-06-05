@@ -11,10 +11,6 @@ import RxSwift
 
 class CommitCell: DefaultTableViewCell {
 
-    override func makeUI() {
-        super.makeUI()
-    }
-
     override func bind(to viewModel: TableViewCellViewModel) {
         super.bind(to: viewModel)
         guard let viewModel = viewModel as? CommitCellViewModel else { return }

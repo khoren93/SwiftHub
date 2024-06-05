@@ -27,7 +27,7 @@ public class Button: UIButton {
 
         layer.masksToBounds = true
         titleLabel?.lineBreakMode = .byWordWrapping
-        cornerRadius = Configs.BaseDimensions.cornerRadius
+        layerCornerRadius = Configs.BaseDimensions.cornerRadius
 //        font = font?.withSize(14)
 
         snp.makeConstraints { (make) in

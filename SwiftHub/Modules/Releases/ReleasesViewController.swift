@@ -15,12 +15,6 @@ private let reuseIdentifier = R.reuseIdentifier.releaseCell.identifier
 
 class ReleasesViewController: TableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     override func makeUI() {
         super.makeUI()
 

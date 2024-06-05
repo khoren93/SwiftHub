@@ -89,7 +89,7 @@ class ChatViewController: MessagesViewController {
     func configureMessageInputBar() {
         messageInputBar.delegate = self
         messageInputBar.inputTextView.keyboardType = .twitter
-        messageInputBar.inputTextView.cornerRadius = Configs.BaseDimensions.cornerRadius
+        messageInputBar.inputTextView.layerCornerRadius = Configs.BaseDimensions.cornerRadius
 
         messageInputBar.backgroundView.theme.backgroundColor = themeService.attribute { $0.primary }
         messageInputBar.inputTextView.theme.backgroundColor = themeService.attribute { $0.primaryDark }
@@ -210,8 +210,8 @@ extension ChatViewController: MessagesDisplayDelegate {
         if let user = message.sender as? User {
             avatarView.isHidden = isNextMessageSameSender(at: indexPath)
             avatarView.kf.setImage(with: user.avatarUrl?.url)
-            avatarView.borderColor = .secondary()
-            avatarView.borderWidth = Configs.BaseDimensions.borderWidth
+            avatarView.layerBorderColor = .secondary()
+            avatarView.layerBorderWidth = Configs.BaseDimensions.borderWidth
         }
     }
 }
@@ -252,9 +252,9 @@ extension ChatViewController: AutocompleteManagerDataSource {
         let image = session.completion?.context?["avatar"] as? String
         cell.imageView?.kf.setImage(with: image?.url)
         cell.imageViewEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        cell.imageView?.cornerRadius = 20
-        cell.imageView?.borderColor = .secondary()
-        cell.imageView?.borderWidth = Configs.BaseDimensions.borderWidth
+        cell.imageView?.layerCornerRadius = 20
+        cell.imageView?.layerBorderColor = .secondary()
+        cell.imageView?.layerBorderWidth = Configs.BaseDimensions.borderWidth
         cell.imageView?.clipsToBounds = true
         let attributedText = manager.attributedText(matching: session, fontSize: 15)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.text(), range: NSRange(location: 0, length: attributedText.length))

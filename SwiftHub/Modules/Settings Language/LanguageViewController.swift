@@ -21,12 +21,6 @@ class LanguageViewController: TableViewController {
         return view
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     override func makeUI() {
         super.makeUI()
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Toast_Swift
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let libsManager = LibsManager.shared
         libsManager.setupLibs()
+
+        IQKeyboardManager.shared.enable = true
 
         if Configs.Network.useStaging == true {
             // Logout

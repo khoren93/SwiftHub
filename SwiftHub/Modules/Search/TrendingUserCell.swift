@@ -10,7 +10,4 @@ import UIKit
 
 class TrendingUserCell: DefaultTableViewCell {
 
-    override func makeUI() {
-        super.makeUI()
-    }
 }

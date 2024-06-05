@@ -34,8 +34,8 @@ class TextField: UITextField {
         theme.keyboardAppearance = themeService.attribute { $0.keyboardAppearance }
 
         layer.masksToBounds = true
-        borderWidth = Configs.BaseDimensions.borderWidth
-        cornerRadius = Configs.BaseDimensions.cornerRadius
+        layerBorderWidth = Configs.BaseDimensions.borderWidth
+        layerCornerRadius = Configs.BaseDimensions.cornerRadius
 
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.textFieldHeight)

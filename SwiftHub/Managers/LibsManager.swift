@@ -54,7 +54,7 @@ class LibsManager: NSObject {
         }).disposed(by: rx.disposeBag)
     }
 
-    func setupLibs() {
+    @MainActor func setupLibs() {
         let libsManager = LibsManager.shared
         libsManager.setupCocoaLumberjack()
         libsManager.setupAnalytics()
@@ -100,7 +100,7 @@ class LibsManager: NSObject {
         }
     }
 
-    func setupKeyboardManager() {
+    @MainActor func setupKeyboardManager() {
         IQKeyboardManager.shared.enable = true
     }
 

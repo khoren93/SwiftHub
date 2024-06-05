@@ -45,16 +45,16 @@ class UserViewController: TableViewController {
 
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
-        view.cornerRadius = 50
+        view.layerCornerRadius = 50
         return view
     }()
 
     lazy var followButton: Button = {
         let view = Button()
-        view.borderColor = .white
-        view.borderWidth = Configs.BaseDimensions.borderWidth
+        view.layerBorderColor = .white
+        view.layerBorderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
-        view.cornerRadius = 20
+        view.layerCornerRadius = 20
         view.hero.id = "ActionButtonId"
         return view
     }()
@@ -118,12 +118,6 @@ class UserViewController: TableViewController {
         view.distribution = .fillEqually
         return view
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
 
     override func makeUI() {
         super.makeUI()

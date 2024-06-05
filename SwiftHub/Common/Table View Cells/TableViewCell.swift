@@ -24,7 +24,7 @@ class TableViewCell: UITableViewCell {
     lazy var containerView: View = {
         let view = View()
         view.backgroundColor = .clear
-        view.cornerRadius = Configs.BaseDimensions.cornerRadius
+        view.layerCornerRadius = Configs.BaseDimensions.cornerRadius
         self.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets(horizontal: self.inset, vertical: self.inset/2))

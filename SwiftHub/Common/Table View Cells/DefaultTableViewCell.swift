@@ -13,7 +13,7 @@ class DefaultTableViewCell: TableViewCell {
     lazy var leftImageView: ImageView = {
         let view = ImageView(frame: CGRect())
         view.contentMode = .scaleAspectFit
-        view.cornerRadius = 25
+        view.layerCornerRadius = 25
         view.snp.makeConstraints({ (make) in
             make.size.equalTo(50)
         })
@@ -23,9 +23,9 @@ class DefaultTableViewCell: TableViewCell {
     lazy var badgeImageView: ImageView = {
         let view = ImageView(frame: CGRect())
         view.backgroundColor = .white
-        view.cornerRadius = 10
-        view.borderColor = .white
-        view.borderWidth = 1
+        view.layerCornerRadius = 10
+        view.layerBorderColor = .white
+        view.layerBorderWidth = 1
         containerView.addSubview(view)
         view.snp.makeConstraints({ (make) in
             make.bottom.left.equalTo(self.leftImageView)

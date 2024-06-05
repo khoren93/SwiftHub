@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 7.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.52.4'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.55.1'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -54,17 +54,17 @@ target 'SwiftHub' do
     pod 'FloatingPanel', '~> 2.0'  # https://github.com/SCENEE/FloatingPanel
     pod 'MessageKit', '~> 3.0'  # https://github.com/MessageKit/MessageKit
     pod 'MultiProgressView', '~> 1.0'  # https://github.com/mac-gallagher/MultiProgressView
-    pod 'Charts', '~> 4.0'  # https://github.com/danielgindi/Charts
+    pod 'DGCharts', '~> 5.0'  # https://github.com/danielgindi/Charts
     
     # Keyboard
-    pod 'IQKeyboardManagerSwift', '~> 6.0'  # https://github.com/hackiftekhar/IQKeyboardManager
+    pod 'IQKeyboardManagerSwift', '~> 7.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 
     # Auto Layout
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
     pod 'FLEX', '~> 5.0', :configurations => ['Debug']  # https://github.com/Flipboard/FLEX
-    pod 'SwifterSwift', '~> 5.0'  # https://github.com/SwifterSwift/SwifterSwift
+    pod 'SwifterSwift', '~> 6.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'BonMot', '~> 6.0'  # https://github.com/Rightpoint/BonMot
 
     # Logging
@@ -78,13 +78,13 @@ target 'SwiftHub' do
     pod 'FirebaseCrashlytics', '~> 10.0'
 
     # Ads
-    pod 'Google-Mobile-Ads-SDK', '~> 10.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 11.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths
         # Pods for testing
         pod 'Quick', '~> 7.0'  # https://github.com/Quick/Quick
-        pod 'Nimble', '~> 12.0'  # https://github.com/Quick/Nimble
+        pod 'Nimble', '~> 13.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
     end

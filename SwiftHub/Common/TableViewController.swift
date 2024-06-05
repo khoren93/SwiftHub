@@ -29,10 +29,6 @@ class TableViewController: ViewController, UIScrollViewDelegate {
 
     var clearsSelectionOnViewWillAppear = true
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -63,10 +59,6 @@ class TableViewController: ViewController, UIScrollViewDelegate {
         error.subscribe(onNext: { [weak self] (error) in
             self?.tableView.makeToast(error.description, title: error.title, image: R.image.icon_toast_warning())
         }).disposed(by: rx.disposeBag)
-    }
-
-    override func updateUI() {
-        super.updateUI()
     }
 
     override func bindViewModel() {

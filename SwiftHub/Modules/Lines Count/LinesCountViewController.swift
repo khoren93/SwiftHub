@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Charts
+import DGCharts
 import BonMot
 
 class LinesCountViewController: ViewController {
@@ -43,12 +43,6 @@ class LinesCountViewController: ViewController {
 //        l.yOffset = 0
         return view
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
 
     override func makeUI() {
         super.makeUI()

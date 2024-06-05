@@ -17,11 +17,6 @@ private let reuseIdentifier = R.reuseIdentifier.contactCell.identifier
 
 class ContactsViewController: TableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
     override func makeUI() {
         super.makeUI()
 

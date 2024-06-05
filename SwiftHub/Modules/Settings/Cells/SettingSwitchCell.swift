@@ -18,7 +18,7 @@ class SettingSwitchCell: DefaultTableViewCell {
     override func makeUI() {
         super.makeUI()
         leftImageView.contentMode = .center
-        leftImageView.cornerRadius = 0
+        leftImageView.layerCornerRadius = 0
         leftImageView.snp.updateConstraints { (make) in
             make.size.equalTo(30)
         }

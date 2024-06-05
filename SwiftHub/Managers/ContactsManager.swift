@@ -34,7 +34,7 @@ class ContactsManager: NSObject {
 
             case CNAuthorizationStatus.notDetermined:
                 // This case means the user is prompted for the first time for allowing contacts
-                self.contactsStore.requestAccess(for: CNEntityType.contacts, completionHandler: { (granted, error) -> Void in
+                self.contactsStore.requestAccess(for: CNEntityType.contacts, completionHandler: { (granted, error) in
                     // At this point an alert is provided to the user to provide access to contacts. This will get invoked if a user responds to the alert
                     if granted {
                         self.getContacts().subscribe(onNext: { (newContacts) in
@@ -51,7 +51,7 @@ class ContactsManager: NSObject {
                 let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
                 contactFetchRequest.sortOrder = .givenName
                 do {
-                    try self.contactsStore.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) -> Void in
+                    try self.contactsStore.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) in
                         contactsArray.append(contact)
                     })
 

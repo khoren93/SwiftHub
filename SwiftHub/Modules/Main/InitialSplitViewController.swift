@@ -10,12 +10,6 @@ import UIKit
 
 class InitialSplitViewController: TableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     override func makeUI() {
         super.makeUI()
 

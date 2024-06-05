@@ -58,7 +58,7 @@ class LanguagesViewModel: ViewModel, ViewModelType {
                 return elements
         }).bind(to: elements).disposed(by: rx.disposeBag)
 
-        let saved = input.saveTrigger.map { () -> Void in
+        let saved = input.saveTrigger.map { () in
             let language = selectedLanguage.value
             self.currentLanguage.accept(language)
             language?.save()

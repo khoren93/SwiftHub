@@ -58,7 +58,7 @@ class SegmentedControl: HMSegmentedControl {
             self?.setNeedsDisplay()
         }).disposed(by: rx.disposeBag)
 
-        cornerRadius = Configs.BaseDimensions.cornerRadius
+        layerCornerRadius = Configs.BaseDimensions.cornerRadius
         imagePosition = .aboveText
         selectionStyle = .box
         selectionIndicatorLocation = .bottom

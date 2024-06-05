@@ -25,11 +25,6 @@ class SwiftHubUITests: XCTestCase {
         app.launch()
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testScreenshotSettings() {
         let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element
         element.children(matching: .other).element(boundBy: 3).tap()

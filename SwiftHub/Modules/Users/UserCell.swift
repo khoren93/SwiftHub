@@ -12,10 +12,10 @@ class UserCell: DefaultTableViewCell {
 
     lazy var followButton: Button = {
         let view = Button()
-        view.borderColor = .white
-        view.borderWidth = Configs.BaseDimensions.borderWidth
+        view.layerBorderColor = .white
+        view.layerBorderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
-        view.cornerRadius = 17
+        view.layerCornerRadius = 17
         view.snp.remakeConstraints({ (make) in
             make.size.equalTo(34)
         })

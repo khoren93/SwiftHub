@@ -231,7 +231,7 @@ extension Reactive where Base: UIButton {
 extension Reactive where Base: UITextField {
     var borderColor: Binder<UIColor?> {
         return Binder(self.base) { view, attr in
-            view.borderColor = attr
+            view.layerBorderColor = attr
         }
     }
 

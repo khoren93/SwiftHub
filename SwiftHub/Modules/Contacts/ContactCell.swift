@@ -10,7 +10,4 @@ import UIKit
 
 class ContactCell: DefaultTableViewCell {
 
-    override func makeUI() {
-        super.makeUI()
-    }
 }

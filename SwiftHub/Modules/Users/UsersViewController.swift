@@ -17,7 +17,7 @@ class UsersViewController: TableViewController {
 
     lazy var ownerImageView: SlideImageView = {
         let view = SlideImageView()
-        view.cornerRadius = 40
+        view.layerCornerRadius = 40
         return view
     }()
 
@@ -32,12 +32,6 @@ class UsersViewController: TableViewController {
         })
         return view
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
 
     override func makeUI() {
         super.makeUI()

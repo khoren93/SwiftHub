@@ -116,7 +116,7 @@ class UserViewModel: ViewModel, ViewModelType {
                     user.viewerIsFollowing = false
                     self.user.accept(user)
                 case .completed: break
-            }
+                }
         }).disposed(by: rx.disposeBag)
 
         let username = user.map { $0.login ?? "" }.asDriverOnErrorJustComplete()

@@ -18,12 +18,6 @@ private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identif
 
 class SettingsViewController: TableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     override func makeUI() {
         super.makeUI()
 
