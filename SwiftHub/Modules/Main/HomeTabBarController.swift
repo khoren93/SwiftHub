@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RAMAnimatedTabBarController
 import Localize_Swift
 import RxSwift
 
@@ -54,32 +53,15 @@ enum HomeTabBarItem: Int {
         }
     }
 
-    var animation: RAMItemAnimation {
-        var animation: RAMItemAnimation
-        switch self {
-        case .search: animation = RAMFlipLeftTransitionItemAnimations()
-        case .news: animation = RAMBounceAnimation()
-        case .notifications: animation = RAMBounceAnimation()
-        case .settings: animation = RAMRightRotationAnimation()
-        case .login: animation = RAMBounceAnimation()
-        }
-        animation.theme.iconSelectedColor = themeService.attribute { $0.secondary }
-        animation.theme.textSelectedColor = themeService.attribute { $0.secondary }
-        return animation
-    }
-
     func getController(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
         let vc = controller(with: viewModel, navigator: navigator)
-        let item = RAMAnimatedTabBarItem(title: title, image: image, tag: rawValue)
-        item.animation = animation
-        item.theme.iconColor = themeService.attribute { $0.text }
-        item.theme.textColor = themeService.attribute { $0.text }
+        let item = UITabBarItem(title: title, image: image, tag: rawValue)
         vc.tabBarItem = item
         return vc
     }
 }
 
-class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
+class HomeTabBarController: UITabBarController, Navigatable {
 
     var viewModel: HomeTabBarViewModel?
     var navigator: Navigator!
@@ -106,22 +88,42 @@ class HomeTabBarController: RAMAnimatedTabBarController, Navigatable {
         NotificationCenter.default
             .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
             .subscribe { [weak self] (event) in
-                self?.animatedItems.forEach({ (item) in
+                self?.tabBar.items?.forEach({ (item) in
                     item.title = HomeTabBarItem(rawValue: item.tag)?.title
                 })
                 self?.setViewControllers(self?.viewControllers, animated: false)
-                self?.setSelectIndex(from: 0, to: self?.selectedIndex ?? 0)
             }.disposed(by: rx.disposeBag)
 
-        tabBar.theme.barTintColor = themeService.attribute { $0.primaryDark }
-
-        themeService.typeStream.delay(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { (theme) in
-                switch theme {
-                case .light(let color), .dark(let color):
-                    self.changeSelectedColor(color.color, iconSelectedColor: color.color)
-                }
+        themeService.typeStream.observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (theme) in
+                self?.updateTabBarAppearance(with: theme.associatedObject)
             }).disposed(by: rx.disposeBag)
+    }
+
+    private func updateTabBarAppearance(with theme: Theme) {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+
+        appearance.backgroundColor = theme.primaryDark
+
+        let itemAppearance = UITabBarItemAppearance()
+        itemAppearance.normal.iconColor = theme.text
+        itemAppearance.normal.titleTextAttributes = [.foregroundColor: theme.text]
+        itemAppearance.selected.iconColor = theme.secondary
+        itemAppearance.selected.titleTextAttributes = [.foregroundColor: theme.secondary]
+
+        appearance.stackedLayoutAppearance = itemAppearance
+        appearance.inlineLayoutAppearance = itemAppearance
+        appearance.compactInlineLayoutAppearance = itemAppearance
+
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+        tabBar.tintColor = theme.secondary
+        tabBar.unselectedItemTintColor = theme.text
+
+        // Force immediate update
+        tabBar.setNeedsLayout()
+        tabBar.layoutIfNeeded()
     }
 
     func bindViewModel() {
