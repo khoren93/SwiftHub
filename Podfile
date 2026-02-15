@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '13.0'
+platform :ios, '15.0'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -57,14 +57,14 @@ target 'SwiftHub' do
     pod 'DGCharts', '~> 5.0'  # https://github.com/danielgindi/Charts
     
     # Keyboard
-    pod 'IQKeyboardManagerSwift', '~> 7.0'  # https://github.com/hackiftekhar/IQKeyboardManager
+    pod 'IQKeyboardManagerSwift', '~> 8.0'  # https://github.com/hackiftekhar/IQKeyboardManager
 
     # Auto Layout
     pod 'SnapKit', '~> 5.0'  # https://github.com/SnapKit/SnapKit
 
     # Code Quality
     pod 'FLEX', '~> 5.0', :configurations => ['Debug']  # https://github.com/Flipboard/FLEX
-    pod 'SwifterSwift', '~> 6.0'  # https://github.com/SwifterSwift/SwifterSwift
+    pod 'SwifterSwift', '~> 8.0'  # https://github.com/SwifterSwift/SwifterSwift
     pod 'BonMot', '~> 6.0'  # https://github.com/Rightpoint/BonMot
 
     # Logging
@@ -74,8 +74,8 @@ target 'SwiftHub' do
     pod 'Mixpanel-swift', '~> 5.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Firebase https://github.com/firebase/firebase-ios-sdk
-    pod 'FirebaseAnalytics', '~> 10.0'
-    pod 'FirebaseCrashlytics', '~> 10.0'
+    pod 'FirebaseAnalytics', '~> 12.0'
+    pod 'FirebaseCrashlytics', '~> 12.0'
 
     # Ads
     pod 'Google-Mobile-Ads-SDK', '~> 13.0'
@@ -84,7 +84,7 @@ target 'SwiftHub' do
         inherit! :search_paths
         # Pods for testing
         pod 'Quick', '~> 7.0'  # https://github.com/Quick/Quick
-        pod 'Nimble', '~> 13.0'  # https://github.com/Quick/Nimble
+        pod 'Nimble', '~> 14.0'  # https://github.com/Quick/Nimble
         pod 'RxAtomic', :modular_headers => true
         pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
     end

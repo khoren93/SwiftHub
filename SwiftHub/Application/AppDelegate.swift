@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let libsManager = LibsManager.shared
         libsManager.setupLibs()
 
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.isEnabled = true
 
         if Configs.Network.useStaging == true {
             // Logout

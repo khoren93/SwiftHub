@@ -101,7 +101,7 @@ class LibsManager: NSObject {
     }
 
     @MainActor func setupKeyboardManager() {
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.isEnabled = true
     }
 
     func setupKingfisher() {
