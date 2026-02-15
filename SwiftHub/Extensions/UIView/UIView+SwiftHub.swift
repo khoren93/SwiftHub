@@ -48,9 +48,7 @@ extension UIView {
     }
 
     func unBlur() {
-        subviews.filter { (view) -> Bool in
-            view as? UIVisualEffectView != nil
-        }.forEach { (view) in
+        subviews.filter { $0 is UIVisualEffectView }.forEach { (view) in
             view.removeFromSuperview()
         }
     }

@@ -136,7 +136,7 @@ class LibsManager: NSObject {
     }
 
     func setupAds() {
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        MobileAds.shared.start(completionHandler: nil)
     }
 }
 

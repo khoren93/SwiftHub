@@ -32,7 +32,7 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 7.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.55.1'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.63.2'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
@@ -51,7 +51,7 @@ target 'SwiftHub' do
     pod 'DropDown', '~> 2.0'  # https://github.com/AssistoLab/DropDown
     pod 'Toast-Swift', '~> 5.0'  # https://github.com/scalessec/Toast-Swift
     pod 'HMSegmentedControl', '~> 1.0'  # https://github.com/HeshamMegid/HMSegmentedControl
-    pod 'FloatingPanel', '~> 2.0'  # https://github.com/SCENEE/FloatingPanel
+    pod 'FloatingPanel', '~> 3.0'  # https://github.com/SCENEE/FloatingPanel
     pod 'MessageKit', '~> 3.0'  # https://github.com/MessageKit/MessageKit
     pod 'MultiProgressView', '~> 1.0'  # https://github.com/mac-gallagher/MultiProgressView
     pod 'DGCharts', '~> 5.0'  # https://github.com/danielgindi/Charts
@@ -71,14 +71,14 @@ target 'SwiftHub' do
     pod 'CocoaLumberjack/Swift', '~> 3.0'  # https://github.com/CocoaLumberjack/CocoaLumberjack
 
     # Analytics
-    pod 'Mixpanel-swift', '~> 4.0'  # https://github.com/mixpanel/mixpanel-iphone
+    pod 'Mixpanel-swift', '~> 5.0'  # https://github.com/mixpanel/mixpanel-iphone
 
     # Firebase https://github.com/firebase/firebase-ios-sdk
     pod 'FirebaseAnalytics', '~> 10.0'
     pod 'FirebaseCrashlytics', '~> 10.0'
 
     # Ads
-    pod 'Google-Mobile-Ads-SDK', '~> 11.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 13.0'
     
     target 'SwiftHubTests' do
         inherit! :search_paths

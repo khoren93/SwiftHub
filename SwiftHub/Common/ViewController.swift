@@ -74,8 +74,8 @@ class ViewController: UIViewController, Navigatable {
         return view
     }()
 
-    lazy var bannerView: GADBannerView = {
-        let view = GADBannerView(adSize: GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(view.width))
+    lazy var bannerView: BannerView = {
+        let view = BannerView(adSize: currentOrientationAnchoredAdaptiveBanner(width: view.width))
         view.rootViewController = self
         view.adUnitID = Keys.adMob.apiKey
         view.hero.id = "BannerView"
@@ -185,7 +185,7 @@ class ViewController: UIViewController, Navigatable {
         hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
 
-        bannerView.load(GADRequest())
+        bannerView.load(Request())
         LibsManager.shared.bannersEnabled.asDriver().drive(onNext: { [weak self] (enabled) in
             guard let self = self else { return }
             self.bannerView.removeFromSuperview()
