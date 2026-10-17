@@ -135,6 +135,6 @@ class LoginViewModel: ViewModel, ViewModelType {
 extension LoginViewModel: ASWebAuthenticationPresentationContextProviding {
     @available(iOS 13.0, *)
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return UIApplication.shared.keyWindow!
+        return Application.shared.window ?? ASPresentationAnchor()
     }
 }
