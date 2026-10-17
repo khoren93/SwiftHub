@@ -9,9 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import ObjectMapper
 import Moya
-import Moya_ObjectMapper
 import Alamofire
 
 typealias MoyaError = Moya.MoyaError
@@ -36,12 +34,10 @@ class RestApi: SwiftHubAPI {
 
     let githubProvider: GithubNetworking
     let trendingGithubProvider: TrendingGithubNetworking
-    let codetabsProvider: CodetabsNetworking
 
-    init(githubProvider: GithubNetworking, trendingGithubProvider: TrendingGithubNetworking, codetabsProvider: CodetabsNetworking) {
+    init(githubProvider: GithubNetworking, trendingGithubProvider: TrendingGithubNetworking) {
         self.githubProvider = githubProvider
         self.trendingGithubProvider = trendingGithubProvider
-        self.codetabsProvider = codetabsProvider
     }
 }
 
@@ -82,19 +78,12 @@ extension RestApi {
                        parameters: params,
                        encoding: URLEncoding.default,
                        headers: ["Accept": "application/json"])
-                .responseJSON(completionHandler: { (response) in
-                    if let error = response.error {
-                        single(.failure(error))
-                        return
+                .responseDecodable(of: Token.self, decoder: JSONDecoder.swiftHub) { (response) in
+                    switch response.result {
+                    case .success(let token): single(.success(token))
+                    case .failure(let error): single(.failure(error))
                     }
-                    if let json = response.value as? [String: Any] {
-                        if let token = Mapper<Token>().map(JSON: json) {
-                            single(.success(token))
-                            return
-                        }
-                    }
-                    single(.failure(RxError.unknown))
-                })
+                }
             return Disposables.create { }
             }
         .observe(on: MainScheduler.instance)
@@ -290,62 +279,41 @@ extension RestApi {
     func languages() -> Single<[Language]> {
         return trendingRequestArray(.languages, type: Language.self)
     }
-
-    // MARK: Codetabs
-    func numberOfLines(fullname: String) -> Single<[LanguageLines]> {
-        return codetabsRequestArray(.numberOfLines(fullname: fullname), type: LanguageLines.self)
-    }
 }
 
 extension RestApi {
-    private func request(_ target: GithubAPI) -> Single<Any> {
-        return githubProvider.request(target)
-            .mapJSON()
-            .observe(on: MainScheduler.instance)
-            .asSingle()
-    }
-
     private func requestWithoutMapping(_ target: GithubAPI) -> Single<Moya.Response> {
         return githubProvider.request(target)
             .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
-    private func requestObject<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
+    private func requestObject<T: Decodable>(_ target: GithubAPI, type: T.Type) -> Single<T> {
         return githubProvider.request(target)
-            .mapObject(T.self)
+            .map(T.self, using: JSONDecoder.swiftHub)
             .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
-    private func requestArray<T: BaseMappable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
+    private func requestArray<T: Decodable>(_ target: GithubAPI, type: T.Type) -> Single<[T]> {
         return githubProvider.request(target)
-            .mapArray(T.self)
+            .map([T].self, using: JSONDecoder.swiftHub)
             .observe(on: MainScheduler.instance)
             .asSingle()
     }
 }
 
 extension RestApi {
-    private func trendingRequestObject<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<T> {
+    private func trendingRequestObject<T: Decodable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<T> {
         return trendingGithubProvider.request(target)
-            .mapObject(T.self)
+            .map(T.self, using: JSONDecoder.swiftHub)
             .observe(on: MainScheduler.instance)
             .asSingle()
     }
 
-    private func trendingRequestArray<T: BaseMappable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<[T]> {
+    private func trendingRequestArray<T: Decodable>(_ target: TrendingGithubAPI, type: T.Type) -> Single<[T]> {
         return trendingGithubProvider.request(target)
-            .mapArray(T.self)
-            .observe(on: MainScheduler.instance)
-            .asSingle()
-    }
-}
-
-extension RestApi {
-    private func codetabsRequestArray<T: BaseMappable>(_ target: CodetabsApi, type: T.Type) -> Single<[T]> {
-        return codetabsProvider.request(target)
-            .mapArray(T.self)
+            .map([T].self, using: JSONDecoder.swiftHub)
             .observe(on: MainScheduler.instance)
             .asSingle()
     }

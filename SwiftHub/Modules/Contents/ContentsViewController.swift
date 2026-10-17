@@ -11,12 +11,12 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.contentCell.identifier
+private let reuseIdentifier = ContentCell.reuseID
 
 class ContentsViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationGithub), style: .done, target: nil, action: nil)
         return view
     }()
 
@@ -25,8 +25,8 @@ class ContentsViewController: TableViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
 
-        tableView.register(R.nib.contentCell)
-        tableView.footRefreshControl = nil
+        tableView.registerNib(ContentCell.self)
+        isFooterRefreshEnabled = false
     }
 
     override func bindViewModel() {

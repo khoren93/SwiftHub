@@ -159,75 +159,75 @@ class UserViewModel: ViewModel, ViewModelType {
             var items: [UserSectionItem] = []
 
             // Contributions
-            let contributionsCellViewModel = ContributionsCellViewModel(with: R.string.localizable.userContributionsCellTitle.key.localized(),
+            let contributionsCellViewModel = ContributionsCellViewModel(with: String(localized: .userContributionsCellTitle),
                                                                         detail: "\(Configs.Network.githubSkylineBaseUrl)",
-                                                                        image: R.image.icon_button_github()?.template,
+                                                                        image: UIImage(resource: .iconButtonGithub).template,
                                                                         contributionCalendar: user.contributionCalendar)
             items.append(UserSectionItem.contributionsItem(viewModel: contributionsCellViewModel))
 
             // Created
             if let created = user.createdAt {
-                let createdCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCreatedCellTitle.key.localized(),
-                                                                   detail: created.toRelative(since: nil),
-                                                                   image: R.image.icon_cell_created()?.template,
+                let createdCellViewModel = UserDetailCellViewModel(with: String(localized: .userCreatedCellTitle),
+                                                                   detail: created.toRelative(),
+                                                                   image: UIImage(resource: .iconCellCreated).template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.createdItem(viewModel: createdCellViewModel))
             }
 
             // Updated
             if let updated = user.updatedAt {
-                let updatedCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userUpdatedCellTitle.key.localized(),
-                                                                   detail: updated.toRelative(since: nil),
-                                                                   image: R.image.icon_cell_updated()?.template,
+                let updatedCellViewModel = UserDetailCellViewModel(with: String(localized: .userUpdatedCellTitle),
+                                                                   detail: updated.toRelative(),
+                                                                   image: UIImage(resource: .iconCellUpdated).template,
                                                                    hidesDisclosure: true)
                 items.append(UserSectionItem.updatedItem(viewModel: updatedCellViewModel))
             }
 
             if user.type == .user {
                 // Stars
-                let starsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userStarsCellTitle.key.localized(),
+                let starsCellViewModel = UserDetailCellViewModel(with: String(localized: .userStarsCellTitle),
                                                                  detail: user.starredRepositoriesCount?.string ?? "",
-                                                                 image: R.image.icon_cell_star()?.template,
+                                                                 image: UIImage(resource: .iconCellStar).template,
                                                                  hidesDisclosure: false)
                 items.append(UserSectionItem.starsItem(viewModel: starsCellViewModel))
 
                 // Watching
-                let watchingCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userWatchingCellTitle.key.localized(),
+                let watchingCellViewModel = UserDetailCellViewModel(with: String(localized: .userWatchingCellTitle),
                                                                     detail: user.watchingCount?.string ?? "",
-                                                                    image: R.image.icon_cell_theme()?.template,
+                                                                    image: UIImage(resource: .iconCellTheme).template,
                                                                     hidesDisclosure: false)
                 items.append(UserSectionItem.watchingItem(viewModel: watchingCellViewModel))
             }
 
             // Events
-            let eventsCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userEventsCellTitle.key.localized(),
+            let eventsCellViewModel = UserDetailCellViewModel(with: String(localized: .userEventsCellTitle),
                                                               detail: "",
-                                                              image: R.image.icon_cell_events()?.template,
+                                                              image: UIImage(resource: .iconCellEvents).template,
                                                               hidesDisclosure: false)
             items.append(UserSectionItem.eventsItem(viewModel: eventsCellViewModel))
 
             // Company
             if let company = user.company, company.isNotEmpty {
-                let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userCompanyCellTitle.key.localized(),
+                let companyCellViewModel = UserDetailCellViewModel(with: String(localized: .userCompanyCellTitle),
                                                                    detail: company,
-                                                                   image: R.image.icon_cell_company()?.template,
+                                                                   image: UIImage(resource: .iconCellCompany).template,
                                                                    hidesDisclosure: false)
                 items.append(UserSectionItem.companyItem(viewModel: companyCellViewModel))
             }
 
             // Blog
             if let blog = user.blog, blog.isNotEmpty {
-                let companyCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userBlogCellTitle.key.localized(),
+                let companyCellViewModel = UserDetailCellViewModel(with: String(localized: .userBlogCellTitle),
                                                                    detail: blog,
-                                                                   image: R.image.icon_cell_link()?.template,
+                                                                   image: UIImage(resource: .iconCellLink).template,
                                                                    hidesDisclosure: false)
                 items.append(UserSectionItem.blogItem(viewModel: companyCellViewModel))
             }
 
             // Profile Summary
-            let profileSummaryCellViewModel = UserDetailCellViewModel(with: R.string.localizable.userProfileSummaryCellTitle.key.localized(),
+            let profileSummaryCellViewModel = UserDetailCellViewModel(with: String(localized: .userProfileSummaryCellTitle),
                                                                       detail: "\(Configs.Network.profileSummaryBaseUrl)",
-                                                                      image: R.image.icon_cell_profile_summary()?.template,
+                                                                      image: UIImage(resource: .iconCellProfileSummary).template,
                                                                       hidesDisclosure: false)
             items.append(UserSectionItem.profileSummaryItem(viewModel: profileSummaryCellViewModel))
 
@@ -250,10 +250,10 @@ class UserViewModel: ViewModel, ViewModelType {
             var userSections: [UserSection] = []
             userSections.append(UserSection.user(title: "", items: items))
             if pinnedItems.isNotEmpty {
-                userSections.append(UserSection.user(title: R.string.localizable.userPinnedSectionTitle.key.localized(), items: pinnedItems))
+                userSections.append(UserSection.user(title: String(localized: .userPinnedSectionTitle), items: pinnedItems))
             }
             if organizationItems.isNotEmpty {
-                userSections.append(UserSection.user(title: R.string.localizable.userOrganizationsSectionTitle.key.localized(), items: organizationItems))
+                userSections.append(UserSection.user(title: String(localized: .userOrganizationsSectionTitle), items: organizationItems))
             }
             return userSections
         }

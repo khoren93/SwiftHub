@@ -165,9 +165,9 @@ class RepositoryViewModel: ViewModel, ViewModelType {
 
             // Parent
             if let parentName = repository.parentFullname {
-                let parentCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryParentCellTitle.key.localized(),
+                let parentCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryParentCellTitle),
                                                                         detail: parentName,
-                                                                        image: R.image.icon_cell_git_fork()?.template,
+                                                                        image: UIImage(resource: .iconCellGitFork).template,
                                                                         hidesDisclosure: false)
                 items.append(RepositorySectionItem.parentItem(viewModel: parentCellViewModel))
             }
@@ -178,127 +178,120 @@ class RepositoryViewModel: ViewModel, ViewModelType {
                 items.append(RepositorySectionItem.languagesItem(viewModel: languagesCellViewModel))
             } else if let language = repository.language {
                 // Language
-                let languageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryLanguageCellTitle.key.localized(),
+                let languageCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryLanguageCellTitle),
                                                                           detail: language,
-                                                                          image: R.image.icon_cell_git_language()?.template,
+                                                                          image: UIImage(resource: .iconCellGitLanguage).template,
                                                                           hidesDisclosure: true)
                 items.append(RepositorySectionItem.languageItem(viewModel: languageCellViewModel))
             }
 
             // Size
             if let size = repository.size {
-                let sizeCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySizeCellTitle.key.localized(),
+                let sizeCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositorySizeCellTitle),
                                                                       detail: size.sizeFromKB(),
-                                                                      image: R.image.icon_cell_size()?.template,
+                                                                      image: UIImage(resource: .iconCellSize).template,
                                                                       hidesDisclosure: true)
                 items.append(RepositorySectionItem.sizeItem(viewModel: sizeCellViewModel))
             }
 
             // Created
             if let created = repository.createdAt {
-                let createdCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCreatedCellTitle.key.localized(),
-                                                                         detail: created.toRelative(since: nil),
-                                                                         image: R.image.icon_cell_created()?.template,
+                let createdCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryCreatedCellTitle),
+                                                                         detail: created.toRelative(),
+                                                                         image: UIImage(resource: .iconCellCreated).template,
                                                                          hidesDisclosure: true)
                 items.append(RepositorySectionItem.createdItem(viewModel: createdCellViewModel))
             }
 
             // Updated
             if let updated = repository.updatedAt {
-                let updatedCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryUpdatedCellTitle.key.localized(),
-                                                                         detail: updated.toRelative(since: nil),
-                                                                         image: R.image.icon_cell_updated()?.template,
+                let updatedCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryUpdatedCellTitle),
+                                                                         detail: updated.toRelative(),
+                                                                         image: UIImage(resource: .iconCellUpdated).template,
                                                                          hidesDisclosure: true)
                 items.append(RepositorySectionItem.updatedItem(viewModel: updatedCellViewModel))
             }
 
             // Homepage
             if let homepage = repository.homepage, homepage.isNotEmpty {
-                let homepageCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryHomepageCellTitle.key.localized(),
+                let homepageCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryHomepageCellTitle),
                                                                          detail: homepage,
-                                                                         image: R.image.icon_cell_link()?.template,
+                                                                         image: UIImage(resource: .iconCellLink).template,
                                                                          hidesDisclosure: false)
                 items.append(RepositorySectionItem.homepageItem(viewModel: homepageCellViewModel))
             }
 
             // Issues
-            let issuesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryIssuesCellTitle.key.localized(),
+            let issuesCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryIssuesCellTitle),
                                                                     detail: repository.openIssuesCount?.string ?? "",
-                                                                    image: R.image.icon_cell_issues()?.template,
+                                                                    image: UIImage(resource: .iconCellIssues).template,
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.issuesItem(viewModel: issuesCellViewModel))
 
             // Pull Requests
-            let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryPullRequestsCellTitle.key.localized(),
+            let pullRequestsCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryPullRequestsCellTitle),
                                                                           detail: repository.pullRequestsCount?.string ?? "",
-                                                                          image: R.image.icon_cell_git_pull_request()?.template,
+                                                                          image: UIImage(resource: .iconCellGitPullRequest).template,
                                                                           hidesDisclosure: false)
             items.append(RepositorySectionItem.pullRequestsItem(viewModel: pullRequestsCellViewModel))
 
             // Commits
-            let commitsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCommitsCellTitle.key.localized(),
+            let commitsCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryCommitsCellTitle),
                                                                      detail: repository.commitsCount?.string ?? "",
-                                                                     image: R.image.icon_cell_git_commit()?.template,
+                                                                     image: UIImage(resource: .iconCellGitCommit).template,
                                                                      hidesDisclosure: false)
             items.append(RepositorySectionItem.commitsItem(viewModel: commitsCellViewModel))
 
             // Branches
-            let branchesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryBranchesCellTitle.key.localized(),
+            let branchesCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryBranchesCellTitle),
                                                                       detail: self.selectedBranch.value ?? repository.defaultBranch,
-                                                                      image: R.image.icon_cell_git_branch()?.template,
+                                                                      image: UIImage(resource: .iconCellGitBranch).template,
                                                                       hidesDisclosure: false)
             items.append(RepositorySectionItem.branchesItem(viewModel: branchesCellViewModel))
 
             // Releases
-            let releasesCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryReleasesCellTitle.key.localized(),
+            let releasesCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryReleasesCellTitle),
                                                                       detail: repository.releasesCount?.string ?? "",
-                                                                      image: R.image.icon_cell_releases()?.template,
+                                                                      image: UIImage(resource: .iconCellReleases).template,
                                                                       hidesDisclosure: false)
             items.append(RepositorySectionItem.releasesItem(viewModel: releasesCellViewModel))
 
             // Contributors
-            let contributorsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryContributorsCellTitle.key.localized(),
+            let contributorsCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryContributorsCellTitle),
                                                                           detail: repository.contributorsCount?.string ?? "",
-                                                                          image: R.image.icon_cell_company()?.template,
+                                                                          image: UIImage(resource: .iconCellCompany).template,
                                                                           hidesDisclosure: false)
             items.append(RepositorySectionItem.contributorsItem(viewModel: contributorsCellViewModel))
 
             // Events
-            let eventsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryEventsCellTitle.key.localized(),
+            let eventsCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryEventsCellTitle),
                                                                     detail: "",
-                                                                    image: R.image.icon_cell_events()?.template,
+                                                                    image: UIImage(resource: .iconCellEvents).template,
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.eventsItem(viewModel: eventsCellViewModel))
 
             if loggedIn.value {
                 // Notifications
-                let notificationsCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryNotificationsCellTitle.key.localized(),
+                let notificationsCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryNotificationsCellTitle),
                                                                                detail: "",
-                                                                               image: R.image.icon_tabbar_activity()?.template,
+                                                                               image: UIImage(resource: .iconTabbarActivity).template,
                                                                                hidesDisclosure: false)
                 items.append(RepositorySectionItem.notificationsItem(viewModel: notificationsCellViewModel))
             }
 
             // Source
-            let sourceCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositorySourceCellTitle.key.localized(),
+            let sourceCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositorySourceCellTitle),
                                                                     detail: "",
-                                                                    image: R.image.icon_cell_source()?.template,
+                                                                    image: UIImage(resource: .iconCellSource).template,
                                                                     hidesDisclosure: false)
             items.append(RepositorySectionItem.sourceItem(viewModel: sourceCellViewModel))
 
             // Stars history
-            let starHistoryCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryStarsHistoryCellTitle.key.localized(),
+            let starHistoryCellViewModel = RepositoryDetailCellViewModel(with: String(localized: .repositoryStarsHistoryCellTitle),
                                                                          detail: Configs.Network.starHistoryBaseUrl,
-                                                                         image: R.image.icon_cell_stars_history()?.template,
+                                                                         image: UIImage(resource: .iconCellStarsHistory).template,
                                                                          hidesDisclosure: false)
             items.append(RepositorySectionItem.starHistoryItem(viewModel: starHistoryCellViewModel))
-
-            // Count lines of code
-            let clocCellViewModel = RepositoryDetailCellViewModel(with: R.string.localizable.repositoryCountLinesOfCodeCellTitle.key.localized(),
-                                                                  detail: "",
-                                                                  image: R.image.icon_cell_cloc()?.template,
-                                                                  hidesDisclosure: false)
-            items.append(RepositorySectionItem.countLinesOfCodeItem(viewModel: clocCellViewModel))
 
             return [
                 RepositorySection.repository(title: "", items: items)
@@ -370,10 +363,6 @@ class RepositoryViewModel: ViewModel, ViewModelType {
         case .sourceItem:
             let ref = repository.value.defaultBranch
             let viewModel = ContentsViewModel(repository: repository.value, content: nil, ref: ref, provider: provider)
-            return viewModel
-
-        case .countLinesOfCodeItem:
-            let viewModel = LinesCountViewModel(repository: repository.value, provider: provider)
             return viewModel
 
         default: return nil

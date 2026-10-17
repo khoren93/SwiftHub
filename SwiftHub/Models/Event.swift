@@ -8,7 +8,6 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
 /// Event Types
 ///
@@ -22,7 +21,7 @@ import ObjectMapper
 /// - `public`: Triggered when a private repository is open sourced. Without a doubt: the best GitHub event.
 /// - release: Triggered when a release is published.
 /// - star: The WatchEvent is related to starring a repository, not watching.
-enum EventType: String {
+enum EventType: String, Codable {
     case fork = "ForkEvent"
     case commitComment = "CommitCommentEvent"
     case create = "CreateEvent"
@@ -41,7 +40,7 @@ enum EventType: String {
 }
 
 /// Each event has a similar JSON schema, but a unique payload object that is determined by its event type.
-struct Event: Mappable {
+struct Event: Decodable {
 
     var actor: User?
     var createdAt: Date?
@@ -53,19 +52,19 @@ struct Event: Mappable {
 
     var payload: Payload?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        actor <- map["actor"]
-        createdAt <- (map["created_at"], ISO8601DateTransform())
-        id <- map["id"]
-        organization <- map["org"]
-        isPublic <- map["public"]
-        repository <- map["repo"]
-        type <- map["type"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        actor = map["actor"]
+        createdAt = map["created_at"]
+        id = map["id"]
+        organization = map["org"]
+        isPublic = map["public"]
+        repository = map["repo"]
+        type = map["type"] ?? type
 
-        payload = Mapper<Payload>().map(JSON: map.JSON)
+        payload = Payload.decode(type: type, from: decoder)
 
         if let fullname = repository?.name {
             let parts = fullname.components(separatedBy: "/")
@@ -83,28 +82,26 @@ extension Event: Equatable {
     }
 }
 
-class Payload: StaticMappable {
+class Payload: Decodable {
 
-    required init?(map: Map) {}
     init() {}
 
-    func mapping(map: Map) {}
+    required init(from decoder: Decoder) throws {}
 
-    static func objectForMapping(map: Map) -> BaseMappable? {
-        var type: EventType = .unknown
-        type <- map["type"]
+    /// Payload subclass for the event type; payload fields are read from the event's "payload" object
+    static func decode(type: EventType, from decoder: Decoder) -> Payload? {
         switch type {
-        case .fork: return ForkPayload()
-        case .create: return CreatePayload()
-        case .delete: return DeletePayload()
-        case .issueComment: return IssueCommentPayload()
-        case .issues: return IssuesPayload()
-        case .member: return MemberPayload()
-        case .pullRequest: return PullRequestPayload()
-        case .pullRequestReviewComment: return PullRequestReviewCommentPayload()
-        case .push: return PushPayload()
-        case .release: return ReleasePayload()
-        case .star: return StarPayload()
+        case .fork: return try? ForkPayload(from: decoder)
+        case .create: return try? CreatePayload(from: decoder)
+        case .delete: return try? DeletePayload(from: decoder)
+        case .issueComment: return try? IssueCommentPayload(from: decoder)
+        case .issues: return try? IssuesPayload(from: decoder)
+        case .member: return try? MemberPayload(from: decoder)
+        case .pullRequest: return try? PullRequestPayload(from: decoder)
+        case .pullRequestReviewComment: return try? PullRequestReviewCommentPayload(from: decoder)
+        case .push: return try? PushPayload(from: decoder)
+        case .release: return try? ReleasePayload(from: decoder)
+        case .star: return try? StarPayload(from: decoder)
         default: return Payload()
         }
     }
@@ -114,14 +111,14 @@ class ForkPayload: Payload {
 
     var repository: Repository?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        repository <- map["payload.forkee"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        repository = map["payload.forkee"]
+        try super.init(from: decoder)
     }
 }
 
-enum CreateEventType: String {
+enum CreateEventType: String, Codable {
     case repository
     case branch
     case tag
@@ -135,18 +132,18 @@ class CreatePayload: Payload {
     var description: String?
     var pusherType: String?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        ref <- map["payload.ref"]
-        refType <- map["payload.ref_type"]
-        masterBranch <- map["payload.master_branch"]
-        description <- map["payload.description"]
-        pusherType <- map["payload.pusher_type"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        ref = map["payload.ref"]
+        refType = map["payload.ref_type"] ?? refType
+        masterBranch = map["payload.master_branch"]
+        description = map["payload.description"]
+        pusherType = map["payload.pusher_type"]
+        try super.init(from: decoder)
     }
 }
 
-enum DeleteEventType: String {
+enum DeleteEventType: String, Codable {
     case repository
     case branch
     case tag
@@ -158,12 +155,12 @@ class DeletePayload: Payload {
     var refType: DeleteEventType = .repository
     var pusherType: String?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        ref <- map["payload.ref"]
-        refType <- map["payload.ref_type"]
-        pusherType <- map["payload.pusher_type"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        ref = map["payload.ref"]
+        refType = map["payload.ref_type"] ?? refType
+        pusherType = map["payload.pusher_type"]
+        try super.init(from: decoder)
     }
 }
 
@@ -173,12 +170,12 @@ class IssueCommentPayload: Payload {
     var issue: Issue?
     var comment: Comment?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        issue <- map["payload.issue"]
-        comment <- map["payload.comment"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        issue = map["payload.issue"]
+        comment = map["payload.comment"]
+        try super.init(from: decoder)
     }
 }
 
@@ -188,12 +185,12 @@ class IssuesPayload: Payload {
     var issue: Issue?
     var repository: Repository?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        issue <- map["payload.issue"]
-        repository <- map["payload.forkee"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        issue = map["payload.issue"]
+        repository = map["payload.forkee"]
+        try super.init(from: decoder)
     }
 }
 
@@ -202,11 +199,11 @@ class MemberPayload: Payload {
     var action: String?
     var member: User?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        member <- map["payload.member"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        member = map["payload.member"]
+        try super.init(from: decoder)
     }
 }
 
@@ -216,12 +213,12 @@ class PullRequestPayload: Payload {
     var number: Int?
     var pullRequest: PullRequest?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        number <- map["payload.number"]
-        pullRequest <- map["payload.pull_request"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        number = map["payload.number"]
+        pullRequest = map["payload.pull_request"]
+        try super.init(from: decoder)
     }
 }
 
@@ -231,12 +228,12 @@ class PullRequestReviewCommentPayload: Payload {
     var comment: Comment?
     var pullRequest: PullRequest?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        comment <- map["payload.comment"]
-        pullRequest <- map["payload.pull_request"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        comment = map["payload.comment"]
+        pullRequest = map["payload.pull_request"]
+        try super.init(from: decoder)
     }
 }
 
@@ -246,12 +243,12 @@ class PushPayload: Payload {
     var size: Int?
     var commits: [Commit] = []
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        ref <- map["payload.ref"]
-        size <- map["payload.size"]
-        commits <- map["payload.commits"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        ref = map["payload.ref"]
+        size = map["payload.size"]
+        commits = map["payload.commits"] ?? commits
+        try super.init(from: decoder)
     }
 }
 
@@ -260,11 +257,11 @@ class ReleasePayload: Payload {
     var action: String?
     var release: Release?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
-        release <- map["payload.release"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        release = map["payload.release"]
+        try super.init(from: decoder)
     }
 }
 
@@ -272,9 +269,9 @@ class StarPayload: Payload {
 
     var action: String?
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-
-        action <- map["payload.action"]
+    required init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        action = map["payload.action"]
+        try super.init(from: decoder)
     }
 }

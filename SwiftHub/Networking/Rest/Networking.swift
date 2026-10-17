@@ -98,24 +98,6 @@ struct TrendingGithubNetworking: NetworkingType {
     }
 }
 
-struct CodetabsNetworking: NetworkingType {
-    typealias T = CodetabsApi
-    let provider: OnlineProvider<T>
-
-    static func defaultNetworking() -> Self {
-        return CodetabsNetworking(provider: newProvider(plugins))
-    }
-
-    static func stubbingNetworking() -> Self {
-        return CodetabsNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: CodetabsNetworking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
-    }
-
-    func request(_ token: T) -> Observable<Moya.Response> {
-        let actualRequest = self.provider.request(token)
-        return actualRequest
-    }
-}
-
 extension NetworkingType {
     static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint where T: TargetType, T: ProductAPIType {
         return { target in

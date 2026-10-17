@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import ObjectMapper
 
 protocol ViewModelType {
     associatedtype Input
@@ -37,16 +36,9 @@ class ViewModel: NSObject {
         super.init()
 
         serverError.asObservable().map { (error) -> ApiError? in
-            do {
-                let errorResponse = error as? MoyaError
-                if let body = try errorResponse?.response?.mapJSON() as? [String: Any],
-                    let errorResponse = Mapper<ErrorResponse>().map(JSON: body) {
-                    return ApiError.serverError(response: errorResponse)
-                }
-            } catch {
-                print(error)
-            }
-            return nil
+            guard let response = (error as? MoyaError)?.response,
+                  let errorResponse = try? response.map(ErrorResponse.self, using: JSONDecoder.swiftHub) else { return nil }
+            return ApiError.serverError(response: errorResponse)
         }.filterNil().bind(to: parsedError).disposed(by: rx.disposeBag)
 
         parsedError.subscribe(onNext: { (error) in

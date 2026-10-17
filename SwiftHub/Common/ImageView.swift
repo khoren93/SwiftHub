@@ -35,8 +35,6 @@ class ImageView: UIImageView {
         layer.masksToBounds = true
         contentMode = .center
 
-        hero.modifiers = [.arc]
-
         updateUI()
     }
 

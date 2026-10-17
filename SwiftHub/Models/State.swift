@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum State: String {
+enum State: String, Codable {
     case open
     case closed
     case all

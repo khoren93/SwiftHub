@@ -254,11 +254,11 @@ class SearchViewModel: ViewModel, ViewModelType {
                 var title = ""
                 switch searchMode {
                 case .trending: title = language != nil ?
-                    R.string.localizable.searchTrendingSectionWithLanguageTitle.key.localizedFormat("\(language ?? "")") :
-                    R.string.localizable.searchTrendingSectionTitle.key.localized()
+                    String(localized: .searchTrendingSectionWithLanguageTitle("\(language ?? "")")) :
+                    String(localized: .searchTrendingSectionTitle)
                 case .search: title = language != nil ?
-                    R.string.localizable.searchSearchSectionWithLanguageTitle.key.localizedFormat("\(language ?? "")") :
-                    R.string.localizable.searchSearchSectionTitle.key.localized()
+                    String(localized: .searchSearchSectionWithLanguageTitle("\(language ?? "")")) :
+                    String(localized: .searchSearchSectionTitle)
                 }
 
                 switch searchType {
@@ -348,8 +348,8 @@ class SearchViewModel: ViewModel, ViewModelType {
         let totalCountText = Observable.combineLatest(searchType, repositorySearchElements, userSearchElements, input.languageTrigger)
             .map { (searchType, repositorySearchElements, userSearchElements, _) -> String in
                 switch searchType {
-                case .repositories: return R.string.localizable.searchRepositoriesTotalCountTitle.key.localizedFormat("\(repositorySearchElements.totalCount.kFormatted())")
-                case .users: return R.string.localizable.searchUsersTotalCountTitle.key.localizedFormat("\(userSearchElements.totalCount.kFormatted())")
+                case .repositories: return String(localized: .searchRepositoriesTotalCountTitle("\(repositorySearchElements.totalCount.kFormatted())"))
+                case .users: return String(localized: .searchUsersTotalCountTitle("\(userSearchElements.totalCount.kFormatted())"))
                 }
         }.asDriver(onErrorJustReturn: "")
 

@@ -8,9 +8,8 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-enum ContentType: String {
+enum ContentType: String, Codable {
     case file = "file"
     case dir = "dir"
     case symlink = "symlink"
@@ -34,7 +33,7 @@ extension ContentType: Comparable {
     }
 }
 
-struct Content: Mappable {
+struct Content: Decodable {
 
     var content: String?
     var downloadUrl: String?
@@ -50,22 +49,22 @@ struct Content: Mappable {
     var target: String?
     var submoduleGitUrl: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        content <- map["content"]
-        downloadUrl <- map["download_url"]
-        encoding <- map["encoding"]
-        gitUrl <- map["git_url"]
-        htmlUrl <- map["html_url"]
-        name <- map["name"]
-        path <- map["path"]
-        sha <- map["sha"]
-        size <- map["size"]
-        type <- map["type"]
-        url <- map["url"]
-        target <- map["target"]
-        submoduleGitUrl <- map["submodule_git_url"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        content = map["content"]
+        downloadUrl = map["download_url"]
+        encoding = map["encoding"]
+        gitUrl = map["git_url"]
+        htmlUrl = map["html_url"]
+        name = map["name"]
+        path = map["path"]
+        sha = map["sha"]
+        size = map["size"]
+        type = map["type"] ?? type
+        url = map["url"]
+        target = map["target"]
+        submoduleGitUrl = map["submodule_git_url"]
     }
 }

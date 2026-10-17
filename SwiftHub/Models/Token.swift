@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 
 enum TokenType {
     case basic(token: String)
@@ -25,7 +24,7 @@ enum TokenType {
     }
 }
 
-struct Token: Mappable {
+struct Token: Codable {
 
     var isValid = false
 
@@ -40,7 +39,6 @@ struct Token: Mappable {
     var tokenType: String?
     var scope: String?
 
-    init?(map: Map) {}
     init() {}
 
     init(basicToken: String) {
@@ -51,13 +49,24 @@ struct Token: Mappable {
         self.personalToken = personalToken
     }
 
-    mutating func mapping(map: Map) {
-        isValid <- map["valid"]
-        basicToken <- map["basic_token"]
-        personalToken <- map["personal_token"]
-        accessToken <- map["access_token"]
-        tokenType <- map["token_type"]
-        scope <- map["scope"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        isValid = map["valid"] ?? isValid
+        basicToken = map["basic_token"]
+        personalToken = map["personal_token"]
+        accessToken = map["access_token"]
+        tokenType = map["token_type"]
+        scope = map["scope"]
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var map = encoder.container(keyedBy: JSONKey.self)
+        try map.encode(isValid, forKey: "valid")
+        try map.encode(basicToken, forKey: "basic_token")
+        try map.encode(personalToken, forKey: "personal_token")
+        try map.encode(accessToken, forKey: "access_token")
+        try map.encode(tokenType, forKey: "token_type")
+        try map.encode(scope, forKey: "scope")
     }
 
     func type() -> TokenType {

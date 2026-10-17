@@ -8,9 +8,8 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-struct PullRequest: Mappable {
+struct PullRequest: Decodable {
 
     var activeLockReason: String?
     var additions: Int?
@@ -58,54 +57,54 @@ struct PullRequest: Mappable {
     var url: String?
     var user: User?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        activeLockReason <- map["active_lock_reason"]
-        additions <- map["additions"]
-        assignee <- map["assignee"]
-        assignees <- map["assignees"]
-        authorAssociation <- map["author_association"]
-//        base <- map["base"]
-        body <- map["body"]
-        changedFiles <- map["changed_files"]
-        closedAt <- (map["closed_at"], ISO8601DateTransform())
-        comments <- map["comments"]
-        commentsUrl <- map["comments_url"]
-        commits <- map["commits"]
-        commitsUrl <- map["commits_url"]
-        createdAt <- (map["created_at"], ISO8601DateTransform())
-        deletions <- map["deletions"]
-        diffUrl <- map["diff_url"]
-//        head <- map["head"]
-        htmlUrl <- map["html_url"]
-        id <- map["id"]
-        issueUrl <- map["issue_url"]
-        labels <- map["labels"]
-        locked <- map["locked"]
-        maintainerCanModify <- map["maintainer_can_modify"]
-        mergeCommitSha <- map["merge_commit_sha"]
-        mergeable <- map["mergeable"]
-        mergeableState <- map["mergeable_state"]
-        merged <- map["merged"]
-        mergedAt <- (map["merged_at"], ISO8601DateTransform())
-        mergedBy <- map["merged_by"]
-        milestone <- map["milestone"]
-        nodeId <- map["node_id"]
-        number <- map["number"]
-        patchUrl <- map["patch_url"]
-        rebaseable <- map["rebaseable"]
-        requestedReviewers <- map["requested_reviewers"]
-//        requestedTeams <- map["requested_teams"]
-        reviewCommentUrl <- map["review_comment_url"]
-        reviewComments <- map["review_comments"]
-        reviewCommentsUrl <- map["review_comments_url"]
-        state <- map["state"]
-        statusesUrl <- map["statuses_url"]
-        title <- map["title"]
-        updatedAt <- (map["updated_at"], ISO8601DateTransform())
-        url <- map["url"]
-        user <- map["user"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        activeLockReason = map["active_lock_reason"]
+        additions = map["additions"]
+        assignee = map["assignee"]
+        assignees = map["assignees"]
+        authorAssociation = map["author_association"]
+//        base = map["base"]
+        body = map["body"]
+        changedFiles = map["changed_files"]
+        closedAt = map["closed_at"]
+        comments = map["comments"]
+        commentsUrl = map["comments_url"]
+        commits = map["commits"]
+        commitsUrl = map["commits_url"]
+        createdAt = map["created_at"]
+        deletions = map["deletions"]
+        diffUrl = map["diff_url"]
+//        head = map["head"]
+        htmlUrl = map["html_url"]
+        id = map["id"]
+        issueUrl = map["issue_url"]
+        labels = map["labels"]
+        locked = map["locked"]
+        maintainerCanModify = map["maintainer_can_modify"]
+        mergeCommitSha = map["merge_commit_sha"]
+        mergeable = map["mergeable"]
+        mergeableState = map["mergeable_state"]
+        merged = map["merged"]
+        mergedAt = map["merged_at"]
+        mergedBy = map["merged_by"]
+        milestone = map["milestone"]
+        nodeId = map["node_id"]
+        number = map["number"]
+        patchUrl = map["patch_url"]
+        rebaseable = map["rebaseable"]
+        requestedReviewers = map["requested_reviewers"]
+//        requestedTeams = map["requested_teams"]
+        reviewCommentUrl = map["review_comment_url"]
+        reviewComments = map["review_comments"]
+        reviewCommentsUrl = map["review_comments_url"]
+        state = map["state"] ?? state
+        statusesUrl = map["statuses_url"]
+        title = map["title"]
+        updatedAt = map["updated_at"]
+        url = map["url"]
+        user = map["user"]
     }
 }

@@ -11,15 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.eventCell.identifier
+private let reuseIdentifier = EventCell.reuseID
 
 enum EventSegments: Int {
     case received, performed
 
     var title: String {
         switch self {
-        case .received: return R.string.localizable.eventsReceivedSegmentTitle.key.localized()
-        case .performed: return R.string.localizable.eventsPerformedSegmentTitle.key.localized()
+        case .received: return String(localized: .eventsReceivedSegmentTitle)
+        case .performed: return String(localized: .eventsPerformedSegmentTitle)
         }
     }
 }
@@ -45,7 +45,6 @@ class EventsViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         view.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.equalToSuperview().inset(self.inset)
@@ -69,7 +68,7 @@ class EventsViewController: TableViewController {
 
         stackView.insertArrangedSubview(headerView, at: 0)
 
-        tableView.register(R.nib.eventCell)
+        tableView.registerNib(EventCell.self)
     }
 
     override func bindViewModel() {
@@ -95,7 +94,6 @@ class EventsViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 

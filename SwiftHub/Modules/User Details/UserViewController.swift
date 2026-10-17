@@ -10,17 +10,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import BonMot
 
-private let reuseIdentifier = R.reuseIdentifier.userDetailCell.identifier
-private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
-private let organizationReuseIdentifier = R.reuseIdentifier.userCell.identifier
-private let contributionsReuseIdentifier = R.reuseIdentifier.contributionsCell.identifier
+private let reuseIdentifier = UserDetailCell.reuseID
+private let repositoryReuseIdentifier = RepositoryCell.reuseID
+private let organizationReuseIdentifier = UserCell.reuseID
+private let contributionsReuseIdentifier = ContributionsCell.reuseID
 
 class UserViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationGithub), style: .done, target: nil, action: nil)
         return view
     }()
 
@@ -55,7 +54,6 @@ class UserViewController: TableViewController {
         view.layerBorderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
         view.layerCornerRadius = 20
-        view.hero.id = "ActionButtonId"
         return view
     }()
 
@@ -86,7 +84,6 @@ class UserViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
         view.addSubview(stackView)
@@ -133,11 +130,11 @@ class UserViewController: TableViewController {
         emptyDataSetTitle = ""
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
-        tableView.footRefreshControl = nil
-        tableView.register(R.nib.userDetailCell)
-        tableView.register(R.nib.repositoryCell)
-        tableView.register(R.nib.userCell)
-        tableView.register(R.nib.contributionsCell)
+        isFooterRefreshEnabled = false
+        tableView.registerNib(UserDetailCell.self)
+        tableView.registerNib(RepositoryCell.self)
+        tableView.registerNib(UserCell.self)
+        tableView.registerNib(ContributionsCell.self)
     }
 
     override func bindViewModel() {
@@ -248,29 +245,28 @@ class UserViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 
         output.hidesFollowButton.drive(followButton.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.following.map { (followed) -> UIImage? in
-            let image = followed ? R.image.icon_button_user_x() : R.image.icon_button_user_plus()
-            return image?.template
+            let image = followed ? UIImage(resource: .iconButtonUserX) : UIImage(resource: .iconButtonUserPlus)
+            return image.template
         }.drive(followButton.rx.image()).disposed(by: rx.disposeBag)
 
         output.repositoriesCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.userRepositoriesButtonTitle.key.localized()
+            let text = String(localized: .userRepositoriesButtonTitle)
             self?.repositoriesButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followersCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.userFollowersButtonTitle.key.localized()
+            let text = String(localized: .userFollowersButtonTitle)
             self?.followersButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.followingCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.userFollowingButtonTitle.key.localized()
+            let text = String(localized: .userFollowingButtonTitle)
             self?.followingButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
@@ -294,14 +290,16 @@ class UserViewController: TableViewController {
     }
 
     func attributedText(title: String, value: Int) -> NSAttributedString {
-        let titleText = title.styled(with: .color(.white),
-                                     .font(.boldSystemFont(ofSize: 12)),
-                                     .alignment(.center))
-        let valueText = value.string.styled(with: .color(.white),
-                                            .font(.boldSystemFont(ofSize: 18)),
-                                            .alignment(.center))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let titleText = title.styled([.foregroundColor: UIColor.white,
+                                      .font: UIFont.boldSystemFont(ofSize: 12),
+                                      .paragraphStyle: paragraphStyle])
+        let valueText = value.string.styled([.foregroundColor: UIColor.white,
+                                             .font: UIFont.boldSystemFont(ofSize: 18),
+                                             .paragraphStyle: paragraphStyle])
         return NSAttributedString.composed(of: [
-            titleText, Special.nextLine,
+            titleText, .lineSeparator,
             valueText
         ])
     }

@@ -19,6 +19,6 @@ class RepoLanguageCell: DefaultTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        rightImageView.image = selected ? R.image.icon_cell_check()?.template : nil
+        rightImageView.image = selected ? UIImage(resource: .iconCellCheck).template : nil
     }
 }

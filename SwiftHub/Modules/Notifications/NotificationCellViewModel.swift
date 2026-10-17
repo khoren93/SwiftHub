@@ -22,7 +22,7 @@ class NotificationCellViewModel: DefaultTableViewCellViewModel {
         let actionText = notification.subject?.title ?? ""
         let repoName = notification.repository?.fullname ?? ""
         title.accept([repoName, actionText].joined(separator: "\n"))
-        detail.accept(notification.updatedAt?.toRelative(since: nil))
+        detail.accept(notification.updatedAt?.toRelative())
         imageUrl.accept(notification.repository?.owner?.avatarUrl)
     }
 }

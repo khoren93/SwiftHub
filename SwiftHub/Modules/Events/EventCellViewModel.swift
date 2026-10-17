@@ -28,7 +28,7 @@ class EventCellViewModel: DefaultTableViewCellViewModel {
         switch event.type {
         case .fork:
             actionText = "forked"
-            badgeImage = R.image.icon_cell_badge_fork()
+            badgeImage = UIImage(resource: .iconCellBadgeFork)
         case .create:
             let payload = event.payload as? CreatePayload
             actionText = ["created", (payload?.refType.rawValue ?? ""), (payload?.ref ?? ""), "in"].joined(separator: " ")
@@ -41,45 +41,45 @@ class EventCellViewModel: DefaultTableViewCellViewModel {
             let payload = event.payload as? IssueCommentPayload
             actionText = ["commented on issue", "#\(payload?.issue?.number ?? 0)", "at"].joined(separator: " ")
             body = payload?.comment?.body ?? ""
-            badgeImage = R.image.icon_cell_badge_comment()
+            badgeImage = UIImage(resource: .iconCellBadgeComment)
         case .issues:
             let payload = event.payload as? IssuesPayload
             actionText = [(payload?.action ?? ""), "issue", "in"].joined(separator: " ")
             body = payload?.issue?.title ?? ""
-            badgeImage = R.image.icon_cell_badge_issue()
+            badgeImage = UIImage(resource: .iconCellBadgeIssue)
         case .member:
             let payload = event.payload as? MemberPayload
             actionText = [(payload?.action ?? ""), "\(payload?.member?.login ?? "")", "as a collaborator to"].joined(separator: " ")
-            badgeImage = R.image.icon_cell_badge_collaborator()
+            badgeImage = UIImage(resource: .iconCellBadgeCollaborator)
         case .pullRequest:
             let payload = event.payload as? PullRequestPayload
             actionText = [(payload?.action ?? ""), "pull request", "#\(payload?.number ?? 0)", "in"].joined(separator: " ")
             body = payload?.pullRequest?.title ?? ""
-            badgeImage = R.image.icon_cell_badge_pull_request()
+            badgeImage = UIImage(resource: .iconCellBadgePullRequest)
         case .pullRequestReviewComment:
             let payload = event.payload as? PullRequestReviewCommentPayload
             actionText = ["commented on pull request", "#\(payload?.pullRequest?.number ?? 0)", "in"].joined(separator: " ")
             body = payload?.comment?.body ?? ""
-            badgeImage = R.image.icon_cell_badge_comment()
+            badgeImage = UIImage(resource: .iconCellBadgeComment)
         case .push:
             let payload = event.payload as? PushPayload
             actionText = ["pushed to", payload?.ref ?? "", "at"].joined(separator: " ")
-            badgeImage = R.image.icon_cell_badge_push()
+            badgeImage = UIImage(resource: .iconCellBadgePush)
         case .release:
             let payload = event.payload as? ReleasePayload
             actionText = [payload?.action ?? "", "release", payload?.release?.name ?? "", "in"].joined(separator: " ")
             body = payload?.release?.body ?? ""
-            badgeImage = R.image.icon_cell_badge_tag()
+            badgeImage = UIImage(resource: .iconCellBadgeTag)
         case .star:
             actionText = "starred"
-            badgeImage = R.image.icon_cell_badge_star()
+            badgeImage = UIImage(resource: .iconCellBadgeStar)
         default: break
         }
 
         let repoName = event.repository?.fullname ?? ""
 
         title.accept([actorName, actionText, repoName].joined(separator: " "))
-        detail.accept(event.createdAt?.toRelative(since: nil))
+        detail.accept(event.createdAt?.toRelative())
         secondDetail.accept(body)
         imageUrl.accept(event.actor?.avatarUrl)
         badge.accept(badgeImage?.template)
@@ -96,9 +96,9 @@ extension EventCellViewModel {
 extension CreateEventType {
     func image() -> UIImage? {
         switch self {
-        case .repository: return R.image.icon_cell_badge_repository()
-        case .branch: return R.image.icon_cell_badge_branch()
-        case .tag: return R.image.icon_cell_badge_tag()
+        case .repository: return UIImage(resource: .iconCellBadgeRepository)
+        case .branch: return UIImage(resource: .iconCellBadgeBranch)
+        case .tag: return UIImage(resource: .iconCellBadgeTag)
         }
     }
 }
@@ -106,9 +106,9 @@ extension CreateEventType {
 extension DeleteEventType {
     func image() -> UIImage? {
         switch self {
-        case .repository: return R.image.icon_cell_badge_repository()
-        case .branch: return R.image.icon_cell_badge_branch()
-        case .tag: return R.image.icon_cell_badge_tag()
+        case .repository: return UIImage(resource: .iconCellBadgeRepository)
+        case .branch: return UIImage(resource: .iconCellBadgeBranch)
+        case .tag: return UIImage(resource: .iconCellBadgeTag)
         }
     }
 }

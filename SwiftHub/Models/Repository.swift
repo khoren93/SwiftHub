@@ -8,9 +8,8 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-struct Repository: Mappable {
+struct Repository: Decodable {
 
     var archived: Bool?
     var cloneUrl: String?
@@ -59,7 +58,6 @@ struct Repository: Mappable {
 
     var viewerHasStarred: Bool?  // Returns a boolean indicating whether the viewing user has starred this starrable.
 
-    init?(map: Map) {}
     init() {}
 
     init(name: String?, fullname: String?, description: String?, language: String?, languageColor: String?, stargazers: Int?, viewerHasStarred: Bool?, ownerAvatarUrl: String?) {
@@ -80,43 +78,44 @@ struct Repository: Mappable {
                   viewerHasStarred: nil, ownerAvatarUrl: repo.builtBy?.first?.avatar)
     }
 
-    mutating func mapping(map: Map) {
-        archived <- map["archived"]
-        cloneUrl <- map["clone_url"]
-        createdAt <- (map["created_at"], ISO8601DateTransform())
-        defaultBranch <- map["default_branch"]
-        descriptionField <- map["description"]
-        fork <- map["fork"]
-        forks <- map["forks"]
-        forksCount <- map["forks_count"]
-        fullname <- map["full_name"]
-        hasDownloads <- map["has_downloads"]
-        hasIssues <- map["has_issues"]
-        hasPages <- map["has_pages"]
-        hasProjects <- map["has_projects"]
-        hasWiki <- map["has_wiki"]
-        homepage <- map["homepage"]
-        htmlUrl <- map["html_url"]
-        language <- map["language"]
-        license <- map["license"]
-        name <- map["name"]
-        networkCount <- map["network_count"]
-        nodeId <- map["node_id"]
-        openIssues <- map["open_issues"]
-        openIssuesCount <- map["open_issues_count"]
-        organization <- map["organization"]
-        owner <- map["owner"]
-        privateField <- map["private"]
-        pushedAt <- map["pushed_at"]
-        size <- map["size"]
-        sshUrl <- map["ssh_url"]
-        stargazersCount <- map["stargazers_count"]
-        subscribersCount <- map["subscribers_count"]
-        updatedAt <- (map["updated_at"], ISO8601DateTransform())
-        url <- map["url"]
-        watchers <- map["watchers"]
-        watchersCount <- map["watchers_count"]
-        parentFullname <- map["parent.full_name"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        archived = map["archived"]
+        cloneUrl = map["clone_url"]
+        createdAt = map["created_at"]
+        defaultBranch = map["default_branch"] ?? defaultBranch
+        descriptionField = map["description"]
+        fork = map["fork"]
+        forks = map["forks"]
+        forksCount = map["forks_count"]
+        fullname = map["full_name"]
+        hasDownloads = map["has_downloads"]
+        hasIssues = map["has_issues"]
+        hasPages = map["has_pages"]
+        hasProjects = map["has_projects"]
+        hasWiki = map["has_wiki"]
+        homepage = map["homepage"]
+        htmlUrl = map["html_url"]
+        language = map["language"]
+        license = map["license"]
+        name = map["name"]
+        networkCount = map["network_count"]
+        nodeId = map["node_id"]
+        openIssues = map["open_issues"]
+        openIssuesCount = map["open_issues_count"]
+        organization = map["organization"]
+        owner = map["owner"]
+        privateField = map["private"]
+        pushedAt = map["pushed_at"]
+        size = map["size"]
+        sshUrl = map["ssh_url"]
+        stargazersCount = map["stargazers_count"]
+        subscribersCount = map["subscribers_count"]
+        updatedAt = map["updated_at"]
+        url = map["url"]
+        watchers = map["watchers"]
+        watchersCount = map["watchers_count"]
+        parentFullname = map["parent.full_name"]
     }
 
     func parentRepository() -> Repository? {
@@ -134,8 +133,8 @@ extension Repository {
                   stargazers: graph?.stargazers.totalCount, viewerHasStarred: graph?.viewerHasStarred, ownerAvatarUrl: graph?.owner.avatarUrl)
         htmlUrl = graph?.url
         homepage = graph?.homepageUrl
-        createdAt =  graph?.createdAt.toISODate()?.date
-        updatedAt = graph?.updatedAt.toISODate()?.date
+        createdAt =  graph?.createdAt.toISODate()
+        updatedAt = graph?.updatedAt.toISODate()
         size = graph?.diskUsage
         fork = graph?.isFork
         parentFullname = graph?.parent?.nameWithOwner
@@ -180,7 +179,7 @@ extension Repository: Equatable {
     }
 }
 
-struct RepositorySearch: Mappable {
+struct RepositorySearch: Decodable {
 
     var items: [Repository] = []
     var totalCount: Int = 0
@@ -188,7 +187,6 @@ struct RepositorySearch: Mappable {
     var hasNextPage: Bool = false
     var endCursor: String?
 
-    init?(map: Map) {}
     init() {}
 
     init(graph: SearchRepositoriesQuery.Data.Search) {
@@ -200,15 +198,16 @@ struct RepositorySearch: Mappable {
         endCursor = graph.pageInfo.endCursor
     }
 
-    mutating func mapping(map: Map) {
-        items <- map["items"]
-        totalCount <- map["total_count"]
-        incompleteResults <- map["incomplete_results"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        items = map["items"] ?? items
+        totalCount = map["total_count"] ?? totalCount
+        incompleteResults = map["incomplete_results"] ?? incompleteResults
         hasNextPage = items.isNotEmpty
     }
 }
 
-struct TrendingRepository: Mappable {
+struct TrendingRepository: Decodable {
 
     var author: String?
     var name: String?
@@ -229,20 +228,20 @@ struct TrendingRepository: Mappable {
         return builtBy?.first?.avatar
     }
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        author <- map["author"]
-        name <- map["name"]
-        url <- map["url"]
-        descriptionField <- map["description"]
-        language <- map["language"]
-        languageColor <- map["languageColor"]
-        stars <- map["stars"]
-        forks <- map["forks"]
-        currentPeriodStars <- map["currentPeriodStars"]
-        builtBy <- map["builtBy"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        author = map["author"]
+        name = map["name"]
+        url = map["url"]
+        descriptionField = map["description"]
+        language = map["language"]
+        languageColor = map["languageColor"]
+        stars = map["stars"]
+        forks = map["forks"]
+        currentPeriodStars = map["currentPeriodStars"]
+        builtBy = map["builtBy"]
     }
 }
 

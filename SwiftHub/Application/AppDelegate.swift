@@ -37,9 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             theme = theme.withColor(color: .green)
             themeService.switch(theme)
-
-            // Disable banners
-            libsManager.bannersEnabled.accept(false)
         }
 
         return true

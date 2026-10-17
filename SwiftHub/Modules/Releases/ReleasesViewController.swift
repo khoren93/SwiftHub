@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.releaseCell.identifier
+private let reuseIdentifier = ReleaseCell.reuseID
 
 class ReleasesViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
 
-        tableView.register(R.nib.releaseCell)
+        tableView.registerNib(ReleaseCell.self)
     }
 
     override func bindViewModel() {

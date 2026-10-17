@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import BonMot
 
 class PullRequestCellViewModel: DefaultTableViewCellViewModel {
 
@@ -24,7 +23,7 @@ class PullRequestCellViewModel: DefaultTableViewCellViewModel {
         detail.accept(pullRequest.detail())
         attributedDetail.accept(pullRequest.attributedDetail())
         imageUrl.accept(pullRequest.user?.avatarUrl)
-        badge.accept(R.image.icon_cell_badge_pull_request()?.template)
+        badge.accept(UIImage(resource: .iconCellBadgePullRequest).template)
         badgeColor.accept(pullRequest.state == .open ? UIColor.Material.green : UIColor.Material.purple)
     }
 }
@@ -32,8 +31,8 @@ class PullRequestCellViewModel: DefaultTableViewCellViewModel {
 extension PullRequest {
     func detail() -> String {
         switch state {
-        case .open: return "#\(number ?? 0) opened \(createdAt?.toRelative(since: nil) ?? "") by \(user?.login ?? "")"
-        case .closed: return "#\(number ?? 0) closed \(closedAt?.toRelative(since: nil) ?? "") by \(user?.login ?? "")"
+        case .open: return "#\(number ?? 0) opened \(createdAt?.toRelative() ?? "") by \(user?.login ?? "")"
+        case .closed: return "#\(number ?? 0) closed \(closedAt?.toRelative() ?? "") by \(user?.login ?? "")"
         case .all: return ""
         }
     }
@@ -42,12 +41,14 @@ extension PullRequest {
         var texts: [NSAttributedString] = []
         labels?.forEach({ (label) in
             if let name = label.name, let color = UIColor(hexString: label.color ?? "") {
-                let labelString = " \(name) ".styled(with: .color(color.darken(by: 0.35).brightnessAdjustedColor),
-                                                     .backgroundColor(color),
-                                                     .lineHeightMultiple(1.2),
-                                                     .baselineOffset(1))
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineHeightMultiple = 1.2
+                let labelString = " \(name) ".styled([.foregroundColor: color.darken(by: 0.35).brightnessAdjustedColor,
+                                                      .backgroundColor: color,
+                                                      .paragraphStyle: paragraphStyle,
+                                                      .baselineOffset: 1])
                 texts.append(NSAttributedString.composed(of: [
-                    labelString, Special.space
+                    labelString, .space
                 ]))
             }
         })

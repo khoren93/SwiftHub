@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.repoLanguageCell
+private let reuseIdentifier = RepoLanguageCell.reuseID
 
 class LanguagesViewController: TableViewController {
 
@@ -30,9 +30,9 @@ class LanguagesViewController: TableViewController {
         super.makeUI()
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.navigationTitle = R.string.localizable.languagesNavigationTitle.key.localized()
-            self?.saveButtonItem.title = R.string.localizable.commonSave.key.localized()
-            self?.allButton.titleForNormal = R.string.localizable.languagesAllButtonTitle.key.localized()
+            self?.navigationTitle = String(localized: .languagesNavigationTitle)
+            self?.saveButtonItem.title = String(localized: .commonSave)
+            self?.allButton.titleForNormal = String(localized: .languagesAllButtonTitle)
         }).disposed(by: rx.disposeBag)
 
         navigationItem.rightBarButtonItem = saveButtonItem
@@ -45,9 +45,9 @@ class LanguagesViewController: TableViewController {
         stackView.addArrangedSubview(allButtonView)
         stackView.insertArrangedSubview(searchBar, at: 0)
 
-        tableView.register(R.nib.repoLanguageCell)
-        tableView.headRefreshControl = nil
-        tableView.footRefreshControl = nil
+        tableView.registerNib(RepoLanguageCell.self)
+        isHeaderRefreshEnabled = false
+        isFooterRefreshEnabled = false
     }
 
     override func bindViewModel() {
@@ -66,7 +66,7 @@ class LanguagesViewController: TableViewController {
         let dataSource = RxTableViewSectionedReloadDataSource<LanguageSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
             case .languageItem(let cellViewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)!
+                let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepoLanguageCell)!
                 cell.bind(to: cellViewModel)
                 return cell
             }

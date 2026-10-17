@@ -33,8 +33,8 @@ class RepositoryCell: DefaultTableViewCell {
 
         viewModel.hidesStarButton.asDriver().drive(starButton.rx.isHidden).disposed(by: rx.disposeBag)
         viewModel.starring.asDriver().map { (starred) -> UIImage? in
-            let image = starred ? R.image.icon_button_unstar() : R.image.icon_button_star()
-            return image?.template
+            let image = starred ? UIImage(resource: .iconButtonUnstar) : UIImage(resource: .iconButtonStar)
+            return image.template
             }.drive(starButton.rx.image()).disposed(by: rx.disposeBag)
         viewModel.starring.map { $0 ? 1.0: 0.6 }.asDriver(onErrorJustReturn: 0).drive(starButton.rx.alpha).disposed(by: rx.disposeBag)
     }

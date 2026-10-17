@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
+private let reuseIdentifier = RepositoryCell.reuseID
 
 class RepositoriesViewController: TableViewController {
 
@@ -23,7 +23,6 @@ class RepositoriesViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         view.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.equalToSuperview().inset(self.inset)
@@ -41,7 +40,7 @@ class RepositoriesViewController: TableViewController {
 //        stackView.insertArrangedSubview(searchBar, at: 0)
         stackView.insertArrangedSubview(headerView, at: 0)
 
-        tableView.register(R.nib.repositoryCell)
+        tableView.registerNib(RepositoryCell.self)
     }
 
     override func bindViewModel() {
@@ -63,7 +62,6 @@ class RepositoriesViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 
@@ -73,7 +71,7 @@ class RepositoriesViewController: TableViewController {
             }.disposed(by: rx.disposeBag)
 
         output.repositorySelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .navigation)
         }).disposed(by: rx.disposeBag)
 
         output.dismissKeyboard.drive(onNext: { [weak self] () in

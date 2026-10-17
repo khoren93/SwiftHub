@@ -11,15 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.issueCell.identifier
+private let reuseIdentifier = IssueCell.reuseID
 
 enum IssueSegments: Int {
     case open, closed
 
     var title: String {
         switch self {
-        case .open: return R.string.localizable.issuesOpenSegmentTitle.key.localized()
-        case .closed: return R.string.localizable.issuesClosedSegmentTitle.key.localized()
+        case .open: return String(localized: .issuesOpenSegmentTitle)
+        case .closed: return String(localized: .issuesClosedSegmentTitle)
         }
     }
 
@@ -52,7 +52,6 @@ class IssuesViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         view.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.equalToSuperview().inset(self.inset)
@@ -76,7 +75,7 @@ class IssuesViewController: TableViewController {
 
         stackView.insertArrangedSubview(headerView, at: 0)
 
-        tableView.register(R.nib.issueCell)
+        tableView.registerNib(IssueCell.self)
     }
 
     override func bindViewModel() {
@@ -98,7 +97,6 @@ class IssuesViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 

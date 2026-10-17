@@ -29,8 +29,6 @@ class IssueViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        bannerView.isHidden = true
-
         /// Add the `ConversationViewController` as a child view controller
         guard let viewModel = viewModel as? IssueViewModel else { return }
         conversationVC.viewModel = viewModel.issueCommentsViewModel()
@@ -38,12 +36,6 @@ class IssueViewController: ViewController {
         addChild(conversationVC)
         stackView.addArrangedSubview(conversationVC.view)
         conversationVC.didMove(toParent: self)
-    }
-
-    override func makeUI() {
-        super.makeUI()
-
-        navigationController?.hero.isEnabled = false
     }
 
     override func bindViewModel() {

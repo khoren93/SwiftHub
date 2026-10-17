@@ -31,7 +31,6 @@ enum RepositorySectionItem {
     case notificationsItem(viewModel: RepositoryDetailCellViewModel)
     case sourceItem(viewModel: RepositoryDetailCellViewModel)
     case starHistoryItem(viewModel: RepositoryDetailCellViewModel)
-    case countLinesOfCodeItem(viewModel: RepositoryDetailCellViewModel)
 }
 
 extension RepositorySection: SectionModelType {

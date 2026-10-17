@@ -22,16 +22,8 @@ import RxViewController
 import RxOptional
 import RxGesture
 import SwifterSwift
-import SwiftDate
-import Hero
-import KafkaRefresh
-import Mixpanel
 import FirebaseCore
-import DropDown
 import Toast_Swift
-import GoogleMobileAds
-
-typealias DropDownView = DropDown
 
 /// The manager class for configuring all libraries used in app.
 class LibsManager: NSObject {
@@ -39,47 +31,22 @@ class LibsManager: NSObject {
     /// The default singleton instance.
     static let shared = LibsManager()
 
-    let bannersEnabled = BehaviorRelay(value: UserDefaults.standard.bool(forKey: Configs.UserDefaultsKeys.bannersEnabled))
-
     private override init() {
         super.init()
-
-        if UserDefaults.standard.object(forKey: Configs.UserDefaultsKeys.bannersEnabled) == nil {
-            bannersEnabled.accept(true)
-        }
-
-        bannersEnabled.skip(1).subscribe(onNext: { (enabled) in
-            UserDefaults.standard.set(enabled, forKey: Configs.UserDefaultsKeys.bannersEnabled)
-            analytics.set(.adsEnabled(value: enabled))
-        }).disposed(by: rx.disposeBag)
     }
 
     @MainActor func setupLibs() {
         let libsManager = LibsManager.shared
         libsManager.setupCocoaLumberjack()
         libsManager.setupAnalytics()
-        libsManager.setupAds()
         libsManager.setupTheme()
-        libsManager.setupKafkaRefresh()
         libsManager.setupFLEX()
         libsManager.setupKeyboardManager()
-        libsManager.setupDropDown()
         libsManager.setupToast()
     }
 
     func setupTheme() {
         UIApplication.shared.theme.statusBarStyle = themeService.attribute { $0.statusBarStyle }
-    }
-
-    func setupDropDown() {
-        themeService.typeStream.subscribe(onNext: { (themeType) in
-            let theme = themeType.associatedObject
-            DropDown.appearance().backgroundColor = theme.primary
-            DropDown.appearance().selectionBackgroundColor = theme.primaryDark
-            DropDown.appearance().textColor = theme.text
-            DropDown.appearance().selectedTextColor = theme.text
-            DropDown.appearance().separatorColor = theme.separator
-        }).disposed(by: rx.disposeBag)
     }
 
     func setupToast() {
@@ -90,14 +57,6 @@ class LibsManager: NSObject {
         style.messageColor = UIColor.Material.white
         style.imageSize = CGSize(width: 20, height: 20)
         ToastManager.shared.style = style
-    }
-
-    func setupKafkaRefresh() {
-        if let defaults = KafkaRefreshDefaults.standard() {
-            defaults.headDefaultStyle = .replicatorAllen
-            defaults.footDefaultStyle = .replicatorDot
-            defaults.theme.themeColor = themeService.attribute { $0.secondary }
-        }
     }
 
     @MainActor func setupKeyboardManager() {
@@ -131,12 +90,7 @@ class LibsManager: NSObject {
 
     func setupAnalytics() {
         FirebaseApp.configure()
-        Mixpanel.initialize(token: Keys.mixpanel.apiKey, trackAutomaticEvents: true)
         FirebaseConfiguration.shared.setLoggerLevel(.min)
-    }
-
-    func setupAds() {
-        MobileAds.shared.start(completionHandler: nil)
     }
 }
 

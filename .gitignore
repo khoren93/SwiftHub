@@ -68,9 +68,6 @@ fastlane/test_output
 # AppCode
 .idea/
 
-# R.swift
-*.generated.swift
-
 # Jazzy docs
 docs/
 

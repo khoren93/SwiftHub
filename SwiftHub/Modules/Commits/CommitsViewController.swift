@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.commitCell.identifier
+private let reuseIdentifier = CommitCell.reuseID
 
 class CommitsViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
 
-        tableView.register(R.nib.commitCell)
+        tableView.registerNib(CommitCell.self)
     }
 
     override func bindViewModel() {

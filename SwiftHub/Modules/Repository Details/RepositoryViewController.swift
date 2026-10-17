@@ -10,16 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import BonMot
 import FloatingPanel
 
-private let reuseIdentifier = R.reuseIdentifier.repositoryDetailCell.identifier
-private let languagesReuseIdentifier = R.reuseIdentifier.languagesCell.identifier
+private let reuseIdentifier = RepositoryDetailCell.reuseID
+private let languagesReuseIdentifier = LanguagesCell.reuseID
 
 class RepositoryViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_github(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationGithub), style: .done, target: nil, action: nil)
         return view
     }()
 
@@ -35,7 +34,6 @@ class RepositoryViewController: TableViewController {
         view.layerBorderWidth = Configs.BaseDimensions.borderWidth
         view.tintColor = .white
         view.layerCornerRadius = 20
-        view.hero.id = "ActionButtonId"
         return view
     }()
 
@@ -66,7 +64,6 @@ class RepositoryViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         let subviews: [UIView] = [self.headerStackView, self.actionButtonsStackView]
         let stackView = StackView(arrangedSubviews: subviews)
         view.addSubview(stackView)
@@ -120,11 +117,10 @@ class RepositoryViewController: TableViewController {
         emptyDataSetTitle = ""
         emptyDataSetImage = nil
         stackView.insertArrangedSubview(headerView, at: 0)
-        tableView.footRefreshControl = nil
-        tableView.register(R.nib.repositoryDetailCell)
-        tableView.register(R.nib.languagesCell)
+        isFooterRefreshEnabled = false
+        tableView.registerNib(RepositoryDetailCell.self)
+        tableView.registerNib(LanguagesCell.self)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
-        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
@@ -159,8 +155,7 @@ class RepositoryViewController: TableViewController {
                  .notificationsItem(let viewModel),
                  .contributorsItem(let viewModel),
                  .sourceItem(let viewModel),
-                 .starHistoryItem(let viewModel),
-                 .countLinesOfCodeItem(let viewModel):
+                 .starHistoryItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RepositoryDetailCell)!
                 cell.bind(to: viewModel)
                 return cell
@@ -231,10 +226,6 @@ class RepositoryViewController: TableViewController {
                 if let url = viewModel.starHistoryUrl() {
                     self?.navigator.show(segue: .webController(url), sender: self)
                 }
-            case .countLinesOfCodeItem:
-                if let viewModel = viewModel.viewModel(for: item) as? LinesCountViewModel {
-                    self?.navigator.show(segue: .linesCount(viewModel: viewModel), sender: self)
-                }
             default:
                 self?.deselectSelectedRow()
             }
@@ -249,29 +240,28 @@ class RepositoryViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 
         output.hidesStarButton.drive(starButton.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.starring.map { (starred) -> UIImage? in
-            let image = starred ? R.image.icon_button_unstar() : R.image.icon_button_star()
-            return image?.template
+            let image = starred ? UIImage(resource: .iconButtonUnstar) : UIImage(resource: .iconButtonStar)
+            return image.template
         }.drive(starButton.rx.image()).disposed(by: rx.disposeBag)
 
         output.watchersCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.repositoryWatchersButtonTitle.key.localized()
+            let text = String(localized: .repositoryWatchersButtonTitle)
             self?.watchersButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.starsCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.repositoryStarsButtonTitle.key.localized()
+            let text = String(localized: .repositoryStarsButtonTitle)
             self?.starsButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
         output.forksCount.drive(onNext: { [weak self] (count) in
-            let text = R.string.localizable.repositoryForksButtonTitle.key.localized()
+            let text = String(localized: .repositoryForksButtonTitle)
             self?.forksButton.setAttributedTitle(self?.attributedText(title: text, value: count), for: .normal)
         }).disposed(by: rx.disposeBag)
 
@@ -304,14 +294,16 @@ class RepositoryViewController: TableViewController {
     }
 
     func attributedText(title: String, value: Int) -> NSAttributedString {
-        let titleText = title.styled(with: .color(.white),
-                                     .font(.boldSystemFont(ofSize: 12)),
-                                     .alignment(.center))
-        let valueText = value.string.styled(with: .color(.white),
-                                            .font(.boldSystemFont(ofSize: 18)),
-                                            .alignment(.center))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let titleText = title.styled([.foregroundColor: UIColor.white,
+                                      .font: UIFont.boldSystemFont(ofSize: 12),
+                                      .paragraphStyle: paragraphStyle])
+        let valueText = value.string.styled([.foregroundColor: UIColor.white,
+                                             .font: UIFont.boldSystemFont(ofSize: 18),
+                                             .paragraphStyle: paragraphStyle])
         return NSAttributedString.composed(of: [
-            titleText, Special.nextLine,
+            titleText, .lineSeparator,
             valueText
         ])
     }

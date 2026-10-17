@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import BonMot
 
 class UserCellViewModel: DefaultTableViewCellViewModel {
 
@@ -25,7 +24,7 @@ class UserCellViewModel: DefaultTableViewCellViewModel {
         detail.accept("\((user.contributions != nil) ? "\(user.contributions ?? 0) commits": (user.name ?? ""))")
         attributedDetail.accept(user.attributetDetail())
         imageUrl.accept(user.avatarUrl)
-        badge.accept(R.image.icon_cell_badge_user()?.template)
+        badge.accept(UIImage(resource: .iconCellBadgeUser).template)
         badgeColor.accept(UIColor.Material.green900)
 
         following.accept(user.viewerIsFollowing ?? false)
@@ -46,16 +45,16 @@ extension UserCellViewModel {
 extension User {
     func attributetDetail() -> NSAttributedString? {
         var texts: [NSAttributedString] = []
-        if let repositoriesString = repositoriesCount?.string.styled( with: .color(UIColor.text())) {
-            let repositoriesImage = R.image.icon_cell_badge_repository()?.filled(withColor: UIColor.text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
+        if let repositoriesString = repositoriesCount?.string.styled([.foregroundColor: UIColor.text()]) {
+            let repositoriesImage = UIImage(resource: .iconCellBadgeRepository).filled(withColor: UIColor.text()).scaled(toHeight: 15)?.styled([.baselineOffset: -3]) ?? NSAttributedString()
             texts.append(NSAttributedString.composed(of: [
-                repositoriesImage, Special.space, repositoriesString, Special.space, Special.tab
+                repositoriesImage, .space, repositoriesString, .space, .tab
             ]))
         }
-        if let followersString = followers?.kFormatted().styled( with: .color(UIColor.text())) {
-            let followersImage = R.image.icon_cell_badge_collaborator()?.filled(withColor: UIColor.text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
+        if let followersString = followers?.kFormatted().styled([.foregroundColor: UIColor.text()]) {
+            let followersImage = UIImage(resource: .iconCellBadgeCollaborator).filled(withColor: UIColor.text()).scaled(toHeight: 15)?.styled([.baselineOffset: -3]) ?? NSAttributedString()
             texts.append(NSAttributedString.composed(of: [
-                followersImage, Special.space, followersString
+                followersImage, .space, followersString
             ]))
         }
         return NSAttributedString.composed(of: texts)

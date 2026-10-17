@@ -9,10 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import DZNEmptyDataSet
-import Hero
-import Localize_Swift
-import GoogleMobileAds
 import SVProgressHUD
 
 class ViewController: UIViewController, Navigatable {
@@ -44,11 +40,11 @@ class ViewController: UIViewController, Navigatable {
 
     let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
 
-    let emptyDataSetButtonTap = PublishSubject<Void>()
-    var emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
-    var emptyDataSetDescription = ""
-    var emptyDataSetImage = R.image.image_no_result()
+    var emptyDataSetTitle = String(localized: .commonNoResults)
+    var emptyDataSetImage: UIImage? = UIImage(resource: .imageNoResult)
     var emptyDataSetImageTintColor = BehaviorRelay<UIColor?>(value: nil)
+
+    lazy var emptyDataSetView = EmptyDataSetView()
 
     let languageChanged = BehaviorRelay<Void>(value: ())
 
@@ -67,24 +63,15 @@ class ViewController: UIViewController, Navigatable {
     }()
 
     lazy var closeBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_close(),
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationClose),
                                  style: .plain,
                                  target: self,
                                  action: nil)
         return view
     }()
 
-    lazy var bannerView: BannerView = {
-        let view = BannerView(adSize: currentOrientationAnchoredAdaptiveBanner(width: view.width))
-        view.rootViewController = self
-        view.adUnitID = Keys.adMob.apiKey
-        view.hero.id = "BannerView"
-        return view
-    }()
-
     lazy var contentView: View = {
         let view = View()
-        //        view.hero.id = "CententView"
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view.safeAreaLayoutGuide)
@@ -136,19 +123,12 @@ class ViewController: UIViewController, Navigatable {
                 logDebug("Motion Status changed")
             }).disposed(by: rx.disposeBag)
 
-        // Observe application did change language notification
-        NotificationCenter.default
-            .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
-            .subscribe { [weak self] (event) in
-                self?.languageChanged.accept(())
-            }.disposed(by: rx.disposeBag)
-
         // One finger swipe gesture for opening Flex
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleOneFingerSwipe(swipeRecognizer:)))
         swipeGesture.numberOfTouchesRequired = 1
         self.view.addGestureRecognizer(swipeGesture)
 
-        // Two finger swipe gesture for opening Flex and Hero debug
+        // Two finger swipe gesture for opening Flex
         let twoSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleTwoFingerSwipe(swipeRecognizer:)))
         twoSwipeGesture.numberOfTouchesRequired = 2
         self.view.addGestureRecognizer(twoSwipeGesture)
@@ -182,18 +162,7 @@ class ViewController: UIViewController, Navigatable {
     }
 
     func makeUI() {
-        hero.isEnabled = true
         navigationItem.backBarButtonItem = backBarButton
-
-        bannerView.load(Request())
-        LibsManager.shared.bannersEnabled.asDriver().drive(onNext: { [weak self] (enabled) in
-            guard let self = self else { return }
-            self.bannerView.removeFromSuperview()
-            self.stackView.removeArrangedSubview(self.bannerView)
-            if enabled {
-                self.stackView.addArrangedSubview(self.bannerView)
-            }
-        }).disposed(by: rx.disposeBag)
 
         motionShakeEvent.subscribe(onNext: { () in
             let theme = themeService.type.toggled()
@@ -213,7 +182,7 @@ class ViewController: UIViewController, Navigatable {
         viewModel?.parsedError.asObservable().bind(to: error).disposed(by: rx.disposeBag)
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.emptyDataSetTitle = R.string.localizable.commonNoResults.key.localized()
+            self?.emptyDataSetTitle = String(localized: .commonNoResults)
         }).disposed(by: rx.disposeBag)
 
         isLoading.subscribe(onNext: { isLoading in
@@ -262,6 +231,12 @@ class ViewController: UIViewController, Navigatable {
     @objc func closeAction(sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
+
+    /// Shows the empty state for a list that has no rows, unless it's still loading
+    func reloadEmptyDataSet(isEmpty: Bool) {
+        emptyDataSetView.configure(title: emptyDataSetTitle, image: emptyDataSetImage, imageTintColor: emptyDataSetImageTintColor.value)
+        emptyDataSetView.isHidden = !isEmpty || isLoading.value
+    }
 }
 
 extension ViewController {
@@ -287,49 +262,6 @@ extension ViewController {
     @objc func handleTwoFingerSwipe(swipeRecognizer: UISwipeGestureRecognizer) {
         if swipeRecognizer.state == .recognized {
             LibsManager.shared.showFlex()
-            HeroDebugPlugin.isEnabled = !HeroDebugPlugin.isEnabled
         }
-    }
-}
-
-extension ViewController: DZNEmptyDataSetSource {
-
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: emptyDataSetTitle)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: emptyDataSetDescription)
-    }
-
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return emptyDataSetImage
-    }
-
-    func imageTintColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return emptyDataSetImageTintColor.value
-    }
-
-    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return .clear
-    }
-
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return -60
-    }
-}
-
-extension ViewController: DZNEmptyDataSetDelegate {
-
-    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
-        return !isLoading.value
-    }
-
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return true
-    }
-
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        emptyDataSetButtonTap.onNext(())
     }
 }

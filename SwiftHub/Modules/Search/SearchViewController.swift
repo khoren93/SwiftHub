@@ -11,18 +11,18 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let trendingRepositoryReuseIdentifier = R.reuseIdentifier.trendingRepositoryCell
-private let trendingUserReuseIdentifier = R.reuseIdentifier.trendingUserCell
-private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell
-private let userReuseIdentifier = R.reuseIdentifier.userCell
+private let trendingRepositoryReuseIdentifier = TrendingRepositoryCell.reuseID
+private let trendingUserReuseIdentifier = TrendingUserCell.reuseID
+private let repositoryReuseIdentifier = RepositoryCell.reuseID
+private let userReuseIdentifier = UserCell.reuseID
 
 enum SearchTypeSegments: Int {
     case repositories, users
 
     var title: String {
         switch self {
-        case .repositories: return R.string.localizable.searchRepositoriesSegmentTitle.key.localized()
-        case .users: return R.string.localizable.searchUsersSegmentTitle.key.localized()
+        case .repositories: return String(localized: .searchRepositoriesSegmentTitle)
+        case .users: return String(localized: .searchUsersSegmentTitle)
         }
     }
 }
@@ -32,9 +32,9 @@ enum TrendingPeriodSegments: Int {
 
     var title: String {
         switch self {
-        case .daily: return R.string.localizable.searchDailySegmentTitle.key.localized()
-        case .weekly: return R.string.localizable.searchWeeklySegmentTitle.key.localized()
-        case .montly: return R.string.localizable.searchMonthlySegmentTitle.key.localized()
+        case .daily: return String(localized: .searchDailySegmentTitle)
+        case .weekly: return String(localized: .searchWeeklySegmentTitle)
+        case .montly: return String(localized: .searchMonthlySegmentTitle)
         }
     }
 
@@ -52,8 +52,8 @@ enum SearchModeSegments: Int {
 
     var title: String {
         switch self {
-        case .trending: return R.string.localizable.searchTrendingSegmentTitle.key.localized()
-        case .search: return R.string.localizable.searchSearchSegmentTitle.key.localized()
+        case .trending: return String(localized: .searchTrendingSegmentTitle)
+        case .search: return String(localized: .searchSearchSegmentTitle)
         }
     }
 }
@@ -63,13 +63,13 @@ enum SortRepositoryItems: Int {
 
     var title: String {
         switch self {
-        case .bestMatch: return R.string.localizable.searchSortRepositoriesBestMatchTitle.key.localized()
-        case .mostStars: return R.string.localizable.searchSortRepositoriesMostStarsTitle.key.localized()
-        case .fewestStars: return R.string.localizable.searchSortRepositoriesFewestStarsTitle.key.localized()
-        case .mostForks: return R.string.localizable.searchSortRepositoriesMostForksTitle.key.localized()
-        case .fewestForks: return R.string.localizable.searchSortRepositoriesFewestForksTitle.key.localized()
-        case .recentlyUpdated: return R.string.localizable.searchSortRepositoriesRecentlyUpdatedTitle.key.localized()
-        case .lastRecentlyUpdated: return R.string.localizable.searchSortRepositoriesLastRecentlyUpdatedTitle.key.localized()
+        case .bestMatch: return String(localized: .searchSortRepositoriesBestMatchTitle)
+        case .mostStars: return String(localized: .searchSortRepositoriesMostStarsTitle)
+        case .fewestStars: return String(localized: .searchSortRepositoriesFewestStarsTitle)
+        case .mostForks: return String(localized: .searchSortRepositoriesMostForksTitle)
+        case .fewestForks: return String(localized: .searchSortRepositoriesFewestForksTitle)
+        case .recentlyUpdated: return String(localized: .searchSortRepositoriesRecentlyUpdatedTitle)
+        case .lastRecentlyUpdated: return String(localized: .searchSortRepositoriesLastRecentlyUpdatedTitle)
         }
     }
 
@@ -101,13 +101,13 @@ enum SortUserItems: Int {
 
     var title: String {
         switch self {
-        case .bestMatch: return R.string.localizable.searchSortUsersBestMatchTitle.key.localized()
-        case .mostFollowers: return R.string.localizable.searchSortUsersMostFollowersTitle.key.localized()
-        case .fewestFollowers: return R.string.localizable.searchSortUsersFewestFollowersTitle.key.localized()
-        case .mostRecentlyJoined: return R.string.localizable.searchSortUsersMostRecentlyJoinedTitle.key.localized()
-        case .leastRecentlyJoined: return R.string.localizable.searchSortUsersLeastRecentlyJoinedTitle.key.localized()
-        case .mostRepositories: return R.string.localizable.searchSortUsersMostRepositoriesTitle.key.localized()
-        case .fewestRepositories: return R.string.localizable.searchSortUsersFewestRepositoriesTitle.key.localized()
+        case .bestMatch: return String(localized: .searchSortUsersBestMatchTitle)
+        case .mostFollowers: return String(localized: .searchSortUsersMostFollowersTitle)
+        case .fewestFollowers: return String(localized: .searchSortUsersFewestFollowersTitle)
+        case .mostRecentlyJoined: return String(localized: .searchSortUsersMostRecentlyJoinedTitle)
+        case .leastRecentlyJoined: return String(localized: .searchSortUsersLeastRecentlyJoinedTitle)
+        case .mostRepositories: return String(localized: .searchSortUsersMostRepositoriesTitle)
+        case .fewestRepositories: return String(localized: .searchSortUsersFewestRepositoriesTitle)
         }
     }
 
@@ -136,15 +136,13 @@ enum SortUserItems: Int {
 class SearchViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_language(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationLanguage), style: .done, target: nil, action: nil)
         return view
     }()
 
     lazy var segmentedControl: SegmentedControl = {
         let titles = [SearchTypeSegments.repositories.title, SearchTypeSegments.users.title]
-        let images = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
-        let selectedImages = [R.image.icon_cell_badge_repository()!, R.image.icon_cell_badge_user()!]
-        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages, titlesForSections: titles)
+        let view = SegmentedControl(sectionTitles: titles)
         view.selectedSegmentIndex = 0
         view.snp.makeConstraints({ (make) in
             make.width.equalTo(220)
@@ -163,9 +161,7 @@ class SearchViewController: TableViewController {
     let searchModeView = View()
     lazy var searchModeSegmentedControl: SegmentedControl = {
         let titles = [SearchModeSegments.trending.title, SearchModeSegments.search.title]
-        let images = [R.image.icon_cell_badge_trending()!, R.image.icon_cell_badge_search()!]
-        let selectedImages = [R.image.icon_cell_badge_trending()!, R.image.icon_cell_badge_search()!]
-        let view = SegmentedControl(sectionImages: images, sectionSelectedImages: selectedImages, titlesForSections: titles)
+        let view = SegmentedControl(sectionTitles: titles)
         view.selectedSegmentIndex = 0
         return view
     }()
@@ -177,25 +173,26 @@ class SearchViewController: TableViewController {
         return view
     }()
 
-    lazy var sortLabel: Label = {
-        let view = Label()
-        view.font = view.font.withSize(14)
-        view.textAlignment = .right
-        view.rightTextInset = self.inset
+    lazy var sortButton: UIButton = {
+        let view = UIButton(type: .system)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        view.contentHorizontalAlignment = .trailing
+        view.showsMenuAsPrimaryAction = true
+        view.menu = UIMenu(children: [UIDeferredMenuElement.uncached { [weak self] completion in
+            completion(self?.sortActions() ?? [])
+        }])
         return view
     }()
 
     lazy var labelsStackView: StackView = {
-        let view = StackView(arrangedSubviews: [self.totalCountLabel, self.sortLabel])
+        let view = StackView(arrangedSubviews: [self.totalCountLabel, self.sortButton])
         view.axis = .horizontal
+        view.isLayoutMarginsRelativeArrangement = true
+        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: self.inset)
         return view
     }()
 
-    lazy var sortDropDown: DropDownView = {
-        let view = DropDownView(anchorView: self.tableView)
-        return view
-    }()
-
+    var sortItems: [String] = []
     let sortRepositoryItem = BehaviorRelay(value: SortRepositoryItems.bestMatch)
     let sortUserItem = BehaviorRelay(value: SortUserItems.bestMatch)
 
@@ -206,7 +203,7 @@ class SearchViewController: TableViewController {
         navigationItem.rightBarButtonItem = rightBarButton
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.searchBar.placeholder = R.string.localizable.searchSearchBarPlaceholder.key.localized()
+            self?.searchBar.placeholder = String(localized: .searchSearchBarPlaceholder)
             self?.segmentedControl.sectionTitles = [SearchTypeSegments.repositories.title,
                                                     SearchTypeSegments.users.title]
             self?.trendingPeriodSegmentedControl.sectionTitles = [TrendingPeriodSegments.daily.title,
@@ -236,50 +233,13 @@ class SearchViewController: TableViewController {
             make.height.equalTo(30)
         }
 
-        sortDropDown.selectionAction = { [weak self] (index: Int, item: String) in
-            if self?.segmentedControl.selectedSegmentIndex == 0 {
-                if let item = SortRepositoryItems(rawValue: index) {
-                    self?.sortRepositoryItem.accept(item)
-                }
-            } else {
-                if let item = SortUserItems(rawValue: index) {
-                    self?.sortUserItem.accept(item)
-                }
-            }
-        }
-
-        bannerView.isHidden = true
-
-        tableView.register(R.nib.trendingRepositoryCell)
-        tableView.register(R.nib.trendingUserCell)
-        tableView.register(R.nib.repositoryCell)
-        tableView.register(R.nib.userCell)
+        tableView.registerNib(TrendingRepositoryCell.self)
+        tableView.registerNib(TrendingUserCell.self)
+        tableView.registerNib(RepositoryCell.self)
+        tableView.registerNib(UserCell.self)
 
         totalCountLabel.theme.textColor = themeService.attribute { $0.text }
-        sortLabel.theme.textColor = themeService.attribute { $0.text }
-
-        themeService.typeStream.subscribe(onNext: { [weak self] (themeType) in
-            let theme = themeType.associatedObject
-            self?.sortDropDown.dimmedBackgroundColor = theme.primaryDark.withAlphaComponent(0.5)
-
-            self?.segmentedControl.sectionImages = [
-                R.image.icon_cell_badge_repository()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_user()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!
-            ]
-            self?.segmentedControl.sectionSelectedImages = [
-                R.image.icon_cell_badge_repository()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_user()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!
-            ]
-
-            self?.searchModeSegmentedControl.sectionImages = [
-                R.image.icon_cell_badge_trending()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_search()!.tint(theme.textGray, blendMode: .normal).withRoundedCorners()!
-            ]
-            self?.searchModeSegmentedControl.sectionSelectedImages = [
-                R.image.icon_cell_badge_trending()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!,
-                R.image.icon_cell_badge_search()!.tint(theme.secondary, blendMode: .normal).withRoundedCorners()!
-            ]
-        }).disposed(by: rx.disposeBag)
+        sortButton.theme.tintColor = themeService.attribute { $0.text }
     }
 
     override func bindViewModel() {
@@ -307,19 +267,19 @@ class SearchViewController: TableViewController {
         let dataSource = RxTableViewSectionedReloadDataSource<SearchSection>(configureCell: { dataSource, tableView, indexPath, item in
             switch item {
             case .trendingRepositoriesItem(let cellViewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: trendingRepositoryReuseIdentifier, for: indexPath)!
+                let cell = (tableView.dequeueReusableCell(withIdentifier: trendingRepositoryReuseIdentifier, for: indexPath) as? TrendingRepositoryCell)!
                 cell.bind(to: cellViewModel)
                 return cell
             case .trendingUsersItem(let cellViewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: trendingUserReuseIdentifier, for: indexPath)!
+                let cell = (tableView.dequeueReusableCell(withIdentifier: trendingUserReuseIdentifier, for: indexPath) as? TrendingUserCell)!
                 cell.bind(to: cellViewModel)
                 return cell
             case .repositoriesItem(let cellViewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath)!
+                let cell = (tableView.dequeueReusableCell(withIdentifier: repositoryReuseIdentifier, for: indexPath) as? RepositoryCell)!
                 cell.bind(to: cellViewModel)
                 return cell
             case .usersItem(let cellViewModel):
-                let cell = tableView.dequeueReusableCell(withIdentifier: userReuseIdentifier, for: indexPath)!
+                let cell = (tableView.dequeueReusableCell(withIdentifier: userReuseIdentifier, for: indexPath) as? UserCell)!
                 cell.bind(to: cellViewModel)
                 return cell
             }
@@ -352,34 +312,38 @@ class SearchViewController: TableViewController {
         output.hidesSearchModeSegment.drive(searchModeView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(labelsStackView.rx.isHidden).disposed(by: rx.disposeBag)
         output.hidesSortLabel.drive(totalCountLabel.rx.isHidden).disposed(by: rx.disposeBag)
-        output.hidesSortLabel.drive(sortLabel.rx.isHidden).disposed(by: rx.disposeBag)
-
-        sortLabel.rx.tap().subscribe(onNext: { [weak self] () in
-            self?.sortDropDown.show()
-        }).disposed(by: rx.disposeBag)
+        output.hidesSortLabel.drive(sortButton.rx.isHidden).disposed(by: rx.disposeBag)
 
         output.sortItems.drive(onNext: { [weak self] (items) in
-            self?.sortDropDown.dataSource = items
-            self?.sortDropDown.reloadAllComponents()
+            self?.sortItems = items
         }).disposed(by: rx.disposeBag)
 
         output.totalCountText.drive(totalCountLabel.rx.text).disposed(by: rx.disposeBag)
-        output.sortText.drive(sortLabel.rx.text).disposed(by: rx.disposeBag)
+        output.sortText.drive(sortButton.rx.title(for: .normal)).disposed(by: rx.disposeBag)
 
         viewModel.searchMode.asDriver().drive(onNext: { [weak self] (searchMode) in
             guard let self = self else { return }
-            self.searchModeSegmentedControl.selectedSegmentIndex = UInt(searchMode.rawValue)
+            self.searchModeSegmentedControl.selectedSegmentIndex = searchMode.rawValue
 
-            switch searchMode {
-            case .trending:
-                self.tableView.footRefreshControl = nil
-            case .search:
-                self.tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in
-                    self?.footerRefreshTrigger.onNext(())
-                })
-                self.tableView.footRefreshControl.autoRefreshOnFoot = true
-                self.isFooterLoading.bind(to: self.tableView.footRefreshControl.rx.isAnimating).disposed(by: self.rx.disposeBag)
-            }
+            self.isFooterRefreshEnabled = searchMode == .search
         }).disposed(by: rx.disposeBag)
+    }
+
+    func sortActions() -> [UIMenuElement] {
+        let isRepositories = segmentedControl.selectedSegmentIndex == SearchTypeSegments.repositories.rawValue
+        let selectedIndex = isRepositories ? sortRepositoryItem.value.rawValue : sortUserItem.value.rawValue
+        return sortItems.enumerated().map { (index, title) in
+            UIAction(title: title, state: index == selectedIndex ? .on : .off) { [weak self] _ in
+                if isRepositories {
+                    if let item = SortRepositoryItems(rawValue: index) {
+                        self?.sortRepositoryItem.accept(item)
+                    }
+                } else {
+                    if let item = SortUserItems(rawValue: index) {
+                        self?.sortUserItem.accept(item)
+                    }
+                }
+            }
+        }
     }
 }

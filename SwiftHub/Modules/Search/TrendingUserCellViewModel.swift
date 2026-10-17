@@ -20,7 +20,7 @@ class TrendingUserCellViewModel: DefaultTableViewCellViewModel {
         title.accept("\(user.username ?? "") (\(user.name ?? ""))")
         detail.accept(user.repo?.fullname)
         imageUrl.accept(user.avatar)
-        badge.accept(R.image.icon_cell_badge_user()?.template)
+        badge.accept(UIImage(resource: .iconCellBadgeUser).template)
         badgeColor.accept(UIColor.Material.green900)
     }
 }

@@ -7,21 +7,26 @@
 //
 
 import Foundation
-import ObjectMapper
 
 private let languageKey = "CurrentLanguageKey"
 
-struct Language: Mappable {
+struct Language: Codable {
 
     var urlParam: String?
     var name: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        urlParam <- map["urlParam"]
-        name <- map["name"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        urlParam = map["urlParam"]
+        name = map["name"]
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var map = encoder.container(keyedBy: JSONKey.self)
+        try map.encode(urlParam, forKey: "urlParam")
+        try map.encode(name, forKey: "name")
     }
 
     func displayName() -> String {
@@ -32,7 +37,7 @@ struct Language: Mappable {
 extension Language {
 
     func save() {
-        if let json = self.toJSONString() {
+        if let json = jsonString() {
             UserDefaults.standard.set(json, forKey: languageKey)
         } else {
             logError("Language can't be saved")
@@ -41,7 +46,7 @@ extension Language {
 
     static func currentLanguage() -> Language? {
         if let json = UserDefaults.standard.string(forKey: languageKey),
-            let language = Language(JSONString: json) {
+            let language = Language(jsonString: json) {
             return language
         }
         return nil
@@ -84,27 +89,5 @@ struct RepoLanguage {
         size = graph?.size ?? 0
         name = graph?.node.name
         color = graph?.node.color
-    }
-}
-
-struct LanguageLines: Mappable {
-
-    var language: String?
-    var files: Int?
-    var lines: Int?
-    var blanks: Int?
-    var comments: Int?
-    var linesOfCode: Int?
-
-    init?(map: Map) {}
-    init() {}
-
-    mutating func mapping(map: Map) {
-        language <- map["language"]
-        files <- map["files"]
-        lines <- map["lines"]
-        blanks <- map["blanks"]
-        comments <- map["comments"]
-        linesOfCode <- map["linesOfCode"]
     }
 }

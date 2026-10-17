@@ -8,24 +8,23 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-struct License: Mappable {
+struct License: Decodable {
 
     var key: String?
     var name: String?
     var nodeId: String?
-    var spdxId: AnyObject?
-    var url: AnyObject?
+    var spdxId: String?
+    var url: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        key <- map["key"]
-        name <- map["name"]
-        nodeId <- map["node_id"]
-        spdxId <- map["spdx_id"]
-        url <- map["url"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        key = map["key"]
+        name = map["name"]
+        nodeId = map["node_id"]
+        spdxId = map["spdx_id"]
+        url = map["url"]
     }
 }

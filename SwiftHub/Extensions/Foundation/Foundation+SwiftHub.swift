@@ -31,13 +31,32 @@ extension Int {
     }
 }
 
-extension StaticString {
+extension String {
 
-    func localized() -> String {
-        return description.localized()
+    /// Parses an ISO 8601 date, e.g. "2011-01-26T19:01:12Z"
+    func toISODate() -> Date? {
+        return Date.iso8601Formatter.date(from: self) ?? Date.iso8601FractionalFormatter.date(from: self)
+    }
+}
+
+extension Date {
+
+    fileprivate static let iso8601Formatter = ISO8601DateFormatter()
+
+    fileprivate static let iso8601FractionalFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
+
+    private static let relativeFormatter = RelativeDateTimeFormatter()
+
+    func toISO() -> String {
+        return Date.iso8601Formatter.string(from: self)
     }
 
-    func localizedFormat(_ arguments: CVarArg...) -> String {
-        return description.localizedFormat(arguments)
+    /// Time relative to now, e.g. "2 hours ago"
+    func toRelative() -> String {
+        return Date.relativeFormatter.localizedString(for: self, relativeTo: Date())
     }
 }

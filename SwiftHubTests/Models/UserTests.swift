@@ -10,9 +10,14 @@ import Quick
 import Nimble
 @testable import SwiftHub
 
+private func decode<T: Decodable>(_ type: T.Type, from json: [String: Any]) -> T? {
+    guard let data = try? JSONSerialization.data(withJSONObject: json) else { return nil }
+    return try? JSONDecoder.swiftHub.decode(type, from: data)
+}
+
 class UserTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         let login = "khoren93"
         let name = "Khoren Markosyan"
@@ -24,19 +29,19 @@ class UserTests: QuickSpec {
         describe("converts from JSON") {
             it("User") {
                 let data: [String: Any] = ["login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
-                let user = User(JSON: data)
+                let user = decode(User.self, from: data)
 
                 expect(user?.login) == login
                 expect(user?.name) == name
                 expect(user?.type) == UserType(rawValue: type)
-                expect(user?.createdAt) == createdAt.toISODate()?.date
+                expect(user?.createdAt) == createdAt.toISODate()
                 expect(user?.htmlUrl) == htmlUrl
                 expect(user?.avatarUrl) == avatarUrl
             }
 
             it("TrendingUser") {
                 let data: [String: Any] = ["username": login, "name": name, "url": htmlUrl, "avatar": avatarUrl]
-                let user = TrendingUser(JSON: data)
+                let user = decode(TrendingUser.self, from: data)
 
                 expect(user?.username) == login
                 expect(user?.name) == name
@@ -48,7 +53,7 @@ class UserTests: QuickSpec {
         describe("user lifecycle") {
             it("save and remove user") {
                 let data: [String: Any] = ["login": login, "name": name, "type": type, "created_at": createdAt, "html_url": htmlUrl, "avatar_url": avatarUrl]
-                let user = User(JSON: data)
+                let user = decode(User.self, from: data)
 
                 User.removeCurrentUser()
                 expect(user?.isMine()) == false

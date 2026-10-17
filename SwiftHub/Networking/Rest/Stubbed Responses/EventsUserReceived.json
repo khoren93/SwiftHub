@@ -1,1 +1,659 @@
-[]
+[
+  {
+    "id": "17497310593",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 3036816,
+      "login": "fxfactorial",
+      "display_login": "fxfactorial",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fxfactorial",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3036816?"
+    },
+    "repo": {
+      "id": 772764009,
+      "name": "maeek/ha-aux-cloud",
+      "url": "https://api.github.com/repos/maeek/ha-aux-cloud"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2026-10-17T20:17:15Z"
+  },
+  {
+    "id": "24348722905",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 66577,
+      "login": "JakeWharton",
+      "display_login": "JakeWharton",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/JakeWharton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66577?"
+    },
+    "repo": {
+      "id": 975859210,
+      "name": "JakeWharton/prerelease-testing",
+      "url": "https://api.github.com/repos/JakeWharton/prerelease-testing"
+    },
+    "payload": {
+      "ref": "renovate/patch-agp",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/renovate/patch-agp",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-10-17T03:14:23Z"
+  },
+  {
+    "id": "24346500866",
+    "type": "PushEvent",
+    "actor": {
+      "id": 58962,
+      "login": "mxcl",
+      "display_login": "mxcl",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mxcl",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58962?"
+    },
+    "repo": {
+      "id": 1311102827,
+      "name": "automic-vault/stripe-cli",
+      "url": "https://api.github.com/repos/automic-vault/stripe-cli"
+    },
+    "payload": {
+      "repository_id": 1311102827,
+      "push_id": 46753495716,
+      "ref": "refs/heads/master",
+      "head": "0b4a257c1ce85c6bd624b96b1c0241d855676b71",
+      "before": "0df1db7236e6b903dda1ca3cbd25a09179212665"
+    },
+    "public": true,
+    "created_at": "2026-10-16T19:15:56Z",
+    "org": {
+      "id": 274916301,
+      "login": "automic-vault",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/automic-vault",
+      "avatar_url": "https://avatars.githubusercontent.com/u/274916301?"
+    }
+  },
+  {
+    "id": "17494162303",
+    "type": "ReleaseEvent",
+    "actor": {
+      "id": 58962,
+      "login": "mxcl",
+      "display_login": "mxcl",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mxcl",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58962?"
+    },
+    "repo": {
+      "id": 1347333761,
+      "name": "automic-vault/wakatime-cli",
+      "url": "https://api.github.com/repos/automic-vault/wakatime-cli"
+    },
+    "payload": {
+      "action": "published",
+      "release": {
+        "url": "https://api.github.com/repos/automic-vault/wakatime-cli/releases/416002030",
+        "assets_url": "https://api.github.com/repos/automic-vault/wakatime-cli/releases/416002030/assets",
+        "upload_url": "https://uploads.github.com/repos/automic-vault/wakatime-cli/releases/416002030/assets{?name,label}",
+        "html_url": "https://github.com/automic-vault/wakatime-cli/releases/tag/v2.27.13",
+        "id": 416002030,
+        "author": {
+          "login": "mxcl",
+          "id": 58962,
+          "node_id": "MDQ6VXNlcjU4OTYy",
+          "avatar_url": "https://avatars.githubusercontent.com/u/58962?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mxcl",
+          "html_url": "https://github.com/mxcl",
+          "followers_url": "https://api.github.com/users/mxcl/followers",
+          "following_url": "https://api.github.com/users/mxcl/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mxcl/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mxcl/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mxcl/subscriptions",
+          "organizations_url": "https://api.github.com/users/mxcl/orgs",
+          "repos_url": "https://api.github.com/users/mxcl/repos",
+          "events_url": "https://api.github.com/users/mxcl/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mxcl/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "node_id": "RE_kwDOUE6ugc4Yy6_u",
+        "tag_name": "v2.27.13",
+        "target_commitish": "develop",
+        "name": "v2.27.13",
+        "draft": false,
+        "immutable": false,
+        "prerelease": false,
+        "created_at": "2026-10-17T18:58:13Z",
+        "updated_at": "2026-10-17T18:59:23Z",
+        "published_at": "2026-10-17T18:59:23Z",
+        "assets": [
+          {
+            "url": "https://api.github.com/repos/automic-vault/wakatime-cli/releases/assets/651313744",
+            "id": 651313744,
+            "node_id": "RA_kwDOUE6ugc4m0kJQ",
+            "name": "cli-2.27.13.tgz",
+            "label": "",
+            "uploader": {
+              "login": "mxcl",
+              "id": 58962,
+              "node_id": "MDQ6VXNlcjU4OTYy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/58962?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/mxcl",
+              "html_url": "https://github.com/mxcl",
+              "followers_url": "https://api.github.com/users/mxcl/followers",
+              "following_url": "https://api.github.com/users/mxcl/following{/other_user}",
+              "gists_url": "https://api.github.com/users/mxcl/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/mxcl/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/mxcl/subscriptions",
+              "organizations_url": "https://api.github.com/users/mxcl/orgs",
+              "repos_url": "https://api.github.com/users/mxcl/repos",
+              "events_url": "https://api.github.com/users/mxcl/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/mxcl/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "content_type": "application/x-gtar",
+            "state": "uploaded",
+            "size": 7934746,
+            "digest": "sha256:059652023c6de204107f7ec5e9785012060319a3fcf5421a37a4b0c4a74bd920",
+            "download_count": 1,
+            "created_at": "2026-10-17T18:59:04Z",
+            "updated_at": "2026-10-17T18:59:21Z",
+            "browser_download_url": "https://github.com/automic-vault/wakatime-cli/releases/download/v2.27.13/cli-2.27.13.tgz"
+          }
+        ],
+        "tarball_url": "https://api.github.com/repos/automic-vault/wakatime-cli/tarball/v2.27.13",
+        "zipball_url": "https://api.github.com/repos/automic-vault/wakatime-cli/zipball/v2.27.13",
+        "body": "Built from wakatime/wakatime-cli v2.27.13: https://github.com/wakatime/wakatime-cli/releases/tag/v2.27.13",
+        "short_description_html": "<p>Built from wakatime/wakatime-cli v2.27.13: <a href=\"https://github.com/wakatime/wakatime-cli/releases/tag/v2.27.13\">https://github.com/wakatime/wakatime-cli/releases/tag/v2.27.13</a></p>",
+        "is_short_description_html_truncated": false
+      }
+    },
+    "public": true,
+    "created_at": "2026-10-17T18:59:23Z",
+    "org": {
+      "id": 274916301,
+      "login": "automic-vault",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/automic-vault",
+      "avatar_url": "https://avatars.githubusercontent.com/u/274916301?"
+    }
+  },
+  {
+    "id": "24343632910",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 58962,
+      "login": "mxcl",
+      "display_login": "mxcl",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mxcl",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58962?"
+    },
+    "repo": {
+      "id": 1228916972,
+      "name": "automic-vault/automic-vault",
+      "url": "https://api.github.com/repos/automic-vault/automic-vault"
+    },
+    "payload": {
+      "ref": "codex/launcher-signing-prefilter",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/codex/launcher-signing-prefilter",
+      "master_branch": "main",
+      "description": "CLI security is broken. The packaging layer is where we fix it.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-10-16T11:48:13Z",
+    "org": {
+      "id": 274916301,
+      "login": "automic-vault",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/automic-vault",
+      "avatar_url": "https://avatars.githubusercontent.com/u/274916301?"
+    }
+  },
+  {
+    "id": "17481392094",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 909674,
+      "login": "ikesyo",
+      "display_login": "ikesyo",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ikesyo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/909674?"
+    },
+    "repo": {
+      "id": 1355945354,
+      "name": "ikesyo/build_runner_accelerator",
+      "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111",
+        "repository_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator",
+        "labels_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111/comments",
+        "events_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111/events",
+        "html_url": "https://github.com/ikesyo/build_runner_accelerator/pull/111",
+        "id": 5897697060,
+        "node_id": "PR_kwDOUNIVis8AAAABJAkVgA",
+        "number": 111,
+        "title": "feat: support native build_runner output policies",
+        "user": {
+          "login": "ikesyo",
+          "id": 909674,
+          "node_id": "MDQ6VXNlcjkwOTY3NA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/909674?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ikesyo",
+          "html_url": "https://github.com/ikesyo",
+          "followers_url": "https://api.github.com/users/ikesyo/followers",
+          "following_url": "https://api.github.com/users/ikesyo/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ikesyo/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ikesyo/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ikesyo/subscriptions",
+          "organizations_url": "https://api.github.com/users/ikesyo/orgs",
+          "repos_url": "https://api.github.com/users/ikesyo/repos",
+          "events_url": "https://api.github.com/users/ikesyo/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ikesyo/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "open",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 5,
+        "created_at": "2026-10-17T11:06:03Z",
+        "updated_at": "2026-10-17T14:14:22Z",
+        "closed_at": null,
+        "assignee": null,
+        "active_lock_reason": null,
+        "draft": true,
+        "pull_request": {
+          "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/pulls/111",
+          "html_url": "https://github.com/ikesyo/build_runner_accelerator/pull/111",
+          "diff_url": "https://github.com/ikesyo/build_runner_accelerator/pull/111.diff",
+          "patch_url": "https://github.com/ikesyo/build_runner_accelerator/pull/111.patch",
+          "merged_at": null
+        },
+        "body": "Native builds rejected `--only-check` and `--keep-modified-outputs`. This implements both for one-shot builds in the existing normal-builder demand subset, following stock build_runner 2.16.2.\n\n- `--only-check` compares final package-path writes/deletions, reports sorted `I`/`M`/`U` diagnostics, and exits 1 on differences. It publishes no generated files, intermediate artifacts, or incremental graph, including on successful verification.\n- `--keep-modified-outputs` retains existing manual bytes with their previous logical digest. Missing outputs regenerate; rerunning a producer can overwrite or delete modified siblings. Private graph format 3 preserves the demand-reuse history needed when switching back to ordinary builds; obsolete formats 1/2 automatically reset to a native cold rebuild, without stock fallback. Verification and failed actions leave the old graph and generated files unchanged; a successful build publishes the current format.\n- Both support multiple outputs, dependency chains, source/cache intermediates, and supported build filters. Flags are non-negatable and mutually exclusive; repeated positive flags are accepted. Retired `-d` / `--delete-conflicting-outputs` remains a no-op.\n\nUnsupported combinations route the entire original invocation to stock in auto and error in rust. These include native watch, optional/post-process/trigger-only/zero-output builders, unsupported state/configuration transitions, and digest/resolver API use while modified outputs are retained. The worker latches unsupported API use even if a builder catches the exception, and the transaction is discarded before fallback. Dart always runs stock. Early, manifest, and runtime fallback preserve stock arguments and compile modes; prewarm keeps its existing contract.\n\nPublishing stock transitions from retained history record stock ownership so later commands cannot reuse an older native graph. Ownership claims persist until explicit recovery, including after usage errors, so overlapping stock calls cannot remove another invocation's protection. Read-only verification/help does not claim ownership. Watch/history preflight runs before native acquisition and accepts retained state only from fully validated current-format/current-schema graphs. Obsolete or malformed graphs remain native cold-build state. Native selection, transition checks, execution, and late fallback reuse one graph load per build attempt. Stock uses its own graph, including its normal cold-build behavior when none exists; returning to native requires resetting both disposable build states.\n\nAdds an input-controlled differential fixture suite comparing output bytes/existence, diagnostics, status, retention/deletion, subsequent builds, verification immutability, filters, mode/AOT/JIT routing, failure, and cancellation before commit. Six CI groups cover routing, modes, source, cache, failure, and API boundaries. They run as three parallel steps within each of two jobs, sharing setup and limiting job concurrency; the suite is also included in full verification. Updates CLI help, user/development documentation, protocol notes, and ADR 0034.\n\nThe existing all-success publication boundary is preserved. It remains non-crash-atomic once filesystem publication starts; this change does not add a rollback journal.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added `--only-check` to compare generated outputs without changing files or build state; differences are reported and return an error.\n  * Added `--keep-modified-outputs` to preserve manually edited outputs when their producer does not rerun. Missing outputs are still regenerated, and producer reruns can overwrite edits.\n  * Both options are mutually exclusive and supported for compatible one-shot builds; unsupported cases fall back to the standard builder in auto mode or report an error in Rust mode.\n\n* **Documentation**\n  * Documented output-policy behavior, compatibility limits, fallback conditions, and verification workflows.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+        "reactions": {
+          "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111/timeline",
+        "performed_via_github_app": {
+          "id": 1144995,
+          "client_id": "Iv23liVemv8A9if9v0F2",
+          "slug": "chatgpt-codex-connector",
+          "node_id": "A_kwHOAOQ6Gs4AEXij",
+          "owner": {
+            "login": "openai",
+            "id": 14957082,
+            "node_id": "MDEyOk9yZ2FuaXphdGlvbjE0OTU3MDgy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/14957082?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/openai",
+            "html_url": "https://github.com/openai",
+            "followers_url": "https://api.github.com/users/openai/followers",
+            "following_url": "https://api.github.com/users/openai/following{/other_user}",
+            "gists_url": "https://api.github.com/users/openai/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/openai/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/openai/subscriptions",
+            "organizations_url": "https://api.github.com/users/openai/orgs",
+            "repos_url": "https://api.github.com/users/openai/repos",
+            "events_url": "https://api.github.com/users/openai/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/openai/received_events",
+            "type": "Organization",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "name": "ChatGPT Codex Connector",
+          "description": "Bring ChatGPT and Codex to your GitHub repositories.",
+          "external_url": "https://www.chatgpt.com",
+          "html_url": "https://github.com/apps/chatgpt-codex-connector",
+          "created_at": "2025-02-14T01:37:05Z",
+          "updated_at": "2026-09-23T18:52:59Z",
+          "permissions": {
+            "actions": "write",
+            "checks": "read",
+            "contents": "write",
+            "emails": "read",
+            "issues": "write",
+            "metadata": "read",
+            "pull_requests": "write",
+            "statuses": "read",
+            "workflows": "write"
+          },
+          "events": [
+            "check_run",
+            "check_suite",
+            "commit_comment",
+            "issues",
+            "issue_comment",
+            "pull_request",
+            "pull_request_review",
+            "pull_request_review_comment",
+            "pull_request_review_thread",
+            "repository",
+            "status",
+            "sub_issues"
+          ]
+        },
+        "state_reason": null
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/comments/6234690716",
+        "html_url": "https://github.com/ikesyo/build_runner_accelerator/pull/111#issuecomment-6234690716",
+        "issue_url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/111",
+        "id": 6234690716,
+        "node_id": "IC_kwDOUNIVis8AAAABc53UnA",
+        "user": {
+          "login": "ikesyo",
+          "id": 909674,
+          "node_id": "MDQ6VXNlcjkwOTY3NA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/909674?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ikesyo",
+          "html_url": "https://github.com/ikesyo",
+          "followers_url": "https://api.github.com/users/ikesyo/followers",
+          "following_url": "https://api.github.com/users/ikesyo/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ikesyo/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ikesyo/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ikesyo/subscriptions",
+          "organizations_url": "https://api.github.com/users/ikesyo/orgs",
+          "repos_url": "https://api.github.com/users/ikesyo/repos",
+          "events_url": "https://api.github.com/users/ikesyo/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ikesyo/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "created_at": "2026-10-17T13:52:19Z",
+        "updated_at": "2026-10-17T13:52:19Z",
+        "body": "@coderabbitai review",
+        "reactions": {
+          "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/issues/comments/6234690716/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "performed_via_github_app": null,
+        "minimized": null
+      }
+    },
+    "public": true,
+    "created_at": "2026-10-17T13:52:19Z"
+  },
+  {
+    "id": "17475254922",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 909674,
+      "login": "ikesyo",
+      "display_login": "ikesyo",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ikesyo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/909674?"
+    },
+    "repo": {
+      "id": 1355945354,
+      "name": "ikesyo/build_runner_accelerator",
+      "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 111,
+      "pull_request": {
+        "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator/pulls/111",
+        "id": 4899542400,
+        "number": 111,
+        "head": {
+          "ref": "feat/native-output-policies",
+          "sha": "bf2881baf600dc7ef70b300c262433fc567d64e1",
+          "repo": {
+            "id": 1355945354,
+            "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator",
+            "name": "build_runner_accelerator"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7d36389fe428118bb79b297c7299f9952700dadd",
+          "repo": {
+            "id": 1355945354,
+            "url": "https://api.github.com/repos/ikesyo/build_runner_accelerator",
+            "name": "build_runner_accelerator"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2026-10-17T11:06:03Z"
+  },
+  {
+    "id": "17457158632",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 66577,
+      "login": "JakeWharton",
+      "display_login": "JakeWharton",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/JakeWharton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66577?"
+    },
+    "repo": {
+      "id": 5152285,
+      "name": "lysine-dev/okhttp",
+      "url": "https://api.github.com/repos/lysine-dev/okhttp"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788",
+        "repository_url": "https://api.github.com/repos/lysine-dev/okhttp",
+        "labels_url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788/labels{/name}",
+        "comments_url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788/comments",
+        "events_url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788/events",
+        "html_url": "https://github.com/lysine-dev/okhttp/issues/9788",
+        "id": 5833178217,
+        "node_id": "I_kwDOAE6eHc8AAAABW688aQ",
+        "number": 9788,
+        "title": "CONTRIBUTING.md is in the wrong location",
+        "user": {
+          "login": "jtnord",
+          "id": 494726,
+          "node_id": "MDQ6VXNlcjQ5NDcyNg==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/494726?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/jtnord",
+          "html_url": "https://github.com/jtnord",
+          "followers_url": "https://api.github.com/users/jtnord/followers",
+          "following_url": "https://api.github.com/users/jtnord/following{/other_user}",
+          "gists_url": "https://api.github.com/users/jtnord/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/jtnord/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/jtnord/subscriptions",
+          "organizations_url": "https://api.github.com/users/jtnord/orgs",
+          "repos_url": "https://api.github.com/users/jtnord/repos",
+          "events_url": "https://api.github.com/users/jtnord/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/jtnord/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "closed",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 1,
+        "created_at": "2026-10-13T15:34:40Z",
+        "updated_at": "2026-10-17T02:36:09Z",
+        "closed_at": "2026-10-17T02:36:09Z",
+        "assignee": null,
+        "issue_field_values": [],
+        "type": null,
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "there are 2 `CONTRIBUTING.md` files.\n* [`/.github/CONTRIBUTING.md`](https://github.com/lysine-dev/okhttp/blob/5a4b597d11b719128dd8f87e3ef8657286734c64/.github/CONTRIBUTING.md)\n* [`/CONTRIBUTING.md`](https://github.com/lysine-dev/okhttp/blob/5a4b597d11b719128dd8f87e3ef8657286734c64/CONTRIBUTING.md)\n\nThe .github one takes precedence in the root ([ref](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors#:~:text=If%20a%20repository%20contains%20more%20than%20one%20CONTRIBUTING%20file%2C%20then%20the%20file%20shown%20in%20links%20is%20chosen%20from%20locations%20in%20the%20following%20order%3A%20the%20.github%20directory%2C%20then%20the%20repository%27s%20root%20directory%2C%20and%20finally%20the%20docs%20directory.)).  However it appears as though the intention is to use the one in the root.\n\nThe one in `.github/` should be removed and the one from the root should be moved to the `.github/` directory.\n\nyou can see the effective contributing guidelines in the main project page byt clicing in the \"Contributing\" tab, or following the contributing link in the project metadata -> https://github.com/lysine-dev/okhttp/?tab=contributing-ov-file\n\n<img width=\"725\" height=\"476\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/08afd2ad-f8a9-4d08-8b3d-51ab0083e27a\" />\n\n\n",
+        "reactions": {
+          "url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/lysine-dev/okhttp/issues/9788/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "completed",
+        "pinned_comment": null
+      }
+    },
+    "public": true,
+    "created_at": "2026-10-17T02:36:09Z",
+    "org": {
+      "id": 265085928,
+      "login": "lysine-dev",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/lysine-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/265085928?"
+    }
+  },
+  {
+    "id": "17443114137",
+    "type": "PullRequestReviewEvent",
+    "actor": {
+      "id": 66577,
+      "login": "JakeWharton",
+      "display_login": "JakeWharton",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/JakeWharton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66577?"
+    },
+    "repo": {
+      "id": 238369219,
+      "name": "sqldelight/Grammar-Kit-Composer",
+      "url": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer"
+    },
+    "payload": {
+      "review": {
+        "id": 5554556465,
+        "node_id": "PRR_kwDODjU5w88AAAABSxPOMQ",
+        "user": {
+          "login": "JakeWharton",
+          "id": 66577,
+          "node_id": "MDQ6VXNlcjY2NTc3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/66577?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/JakeWharton",
+          "html_url": "https://github.com/JakeWharton",
+          "followers_url": "https://api.github.com/users/JakeWharton/followers",
+          "following_url": "https://api.github.com/users/JakeWharton/following{/other_user}",
+          "gists_url": "https://api.github.com/users/JakeWharton/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/JakeWharton/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/JakeWharton/subscriptions",
+          "organizations_url": "https://api.github.com/users/JakeWharton/orgs",
+          "repos_url": "https://api.github.com/users/JakeWharton/repos",
+          "events_url": "https://api.github.com/users/JakeWharton/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/JakeWharton/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "body": "",
+        "commit_id": "7b59504e1dd34b5ef7ac9f76262d0d607b1aa240",
+        "state": "approved",
+        "html_url": "https://github.com/sqldelight/Grammar-Kit-Composer/pull/272#pullrequestreview-5554556465",
+        "pull_request_url": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer/pulls/272",
+        "_links": {
+          "html": {
+            "href": "https://github.com/sqldelight/Grammar-Kit-Composer/pull/272#pullrequestreview-5554556465"
+          },
+          "pull_request": {
+            "href": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer/pulls/272"
+          }
+        },
+        "submitted_at": "2026-10-16T23:03:29Z",
+        "updated_at": "2026-10-16T23:03:29Z"
+      },
+      "pull_request": {
+        "url": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer/pulls/272",
+        "id": 4895106131,
+        "number": 272,
+        "head": {
+          "ref": "renovate/org.jetbrains.kotlin.jvm-2.x",
+          "sha": "99f62741e80c658bfd08da18d123fe989762aa46",
+          "repo": {
+            "id": 238369219,
+            "url": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer",
+            "name": "Grammar-Kit-Composer"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "5144b014895320708613a6e6e4fbc98d9ea68b1f",
+          "repo": {
+            "id": 238369219,
+            "url": "https://api.github.com/repos/sqldelight/Grammar-Kit-Composer",
+            "name": "Grammar-Kit-Composer"
+          }
+        }
+      },
+      "action": "created"
+    },
+    "public": true,
+    "created_at": "2026-10-16T23:03:31Z",
+    "org": {
+      "id": 181407906,
+      "login": "sqldelight",
+      "gravatar_id": "",
+      "url": "https://api.github.com/orgs/sqldelight",
+      "avatar_url": "https://avatars.githubusercontent.com/u/181407906?"
+    }
+  }
+]

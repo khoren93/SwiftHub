@@ -7,25 +7,10 @@
 //
 
 import UIKit
-import MultiProgressView
 
 class LanguagesCell: TableViewCell {
 
-    var totalCount = 0
-    var totalSize = 0
-    var languages: [RepoLanguage] = []
-
-    lazy var progressView: MultiProgressView = {
-        let view = MultiProgressView()
-        view.dataSource = self
-        view.lineCap = .round
-        view.trackBorderWidth = 1
-        view.trackBorderColor = UIColor.primaryDark()
-        view.snp.makeConstraints({ (make) in
-            make.height.equalTo(20)
-        })
-        return view
-    }()
+    lazy var barView = LanguagesBarView()
 
     lazy var languagesScrollView: ScrollView = {
         let view = ScrollView()
@@ -51,71 +36,62 @@ class LanguagesCell: TableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.addArrangedSubview(progressView)
+        stackView.addArrangedSubview(barView)
         stackView.addArrangedSubview(languagesScrollView)
     }
 
     func bind(to viewModel: LanguagesCellViewModel) {
-        totalCount = viewModel.languages?.totalCount ?? 0
-        totalSize = viewModel.languages?.totalSize ?? 0
-        languages = viewModel.languages?.languages ?? []
-        progressView.reloadData()
+        let languages = viewModel.languages?.languages ?? []
+        barView.setLanguages(languages, totalSize: viewModel.languages?.totalSize ?? 0)
 
-        clearLanguagesStackView()
-        createLanguagesStackView()
-        createProgressView()
-    }
-
-    func clearLanguagesStackView() {
-        languagesStackView.arrangedSubviews.forEach { (view) in
-            view.removeFromSuperview()
-        }
-        languagesStackView.removeArrangedSubviews()
-    }
-
-    func createLanguagesStackView() {
+        languagesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         languages.forEach { (repoLanguage) in
             languagesStackView.addArrangedSubview(LanguageView(language: repoLanguage))
         }
     }
-
-    func createProgressView() {
-        for (section, repoLanguage) in languages.enumerated() {
-            let progress = percentage(for: repoLanguage) / 100
-            progressView.setProgress(section: section, to: progress)
-        }
-    }
-
-    func percentage(for language: RepoLanguage) -> Float {
-        return Float(language.size) / Float(totalSize) * 100
-    }
 }
 
-extension LanguagesCell: MultiProgressViewDataSource {
-    func numberOfSections(in progressView: MultiProgressView) -> Int {
-        return languages.count
-    }
+/// Horizontal bar split into segments proportional to each language's size
+class LanguagesBarView: View {
 
-    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
-        let view = ProgressViewSection()
-        let repoLanguage = languages[section]
-        let percent = percentage(for: repoLanguage)
-        let color = UIColor(hexString: repoLanguage.color ?? "") ?? .lightGray
-        if percent > 10 {
-            view.setAttributedTitle(attributedDetail(for: percent, color: color))
+    private var segments: [(view: UIView, fraction: CGFloat)] = []
+
+    override func makeUI() {
+        super.makeUI()
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.primaryDark().cgColor
+        snp.makeConstraints { (make) in
+            make.height.equalTo(20)
         }
-        view.backgroundColor = color
-        return view
     }
 
-    func attributedDetail(for percent: Float, color: UIColor) -> NSAttributedString {
-        var texts: [NSAttributedString] = []
-        let percentString = String(format: "%.2f%%", percent).styled(with: .color(color.darken(by: 0.40).brightnessAdjustedColor),
-                                             .backgroundColor(color),
-                                             .font(UIFont.systemFont(ofSize: 12)),
-                                             .lineHeightMultiple(1.2),
-                                             .baselineOffset(1))
-        texts.append(NSAttributedString.composed(of: [percentString]))
-        return NSAttributedString.composed(of: texts)
+    func setLanguages(_ languages: [RepoLanguage], totalSize: Int) {
+        segments.forEach { $0.view.removeFromSuperview() }
+        segments = languages.map { (language) in
+            let fraction = totalSize > 0 ? CGFloat(language.size) / CGFloat(totalSize) : 0
+            let color = UIColor(hexString: language.color ?? "") ?? .lightGray
+            let label = Label()
+            label.backgroundColor = color
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.textColor = color.darken(by: 0.40).brightnessAdjustedColor
+            if fraction > 0.1 {
+                label.text = String(format: "%.2f%%", fraction * 100)
+            }
+            addSubview(label)
+            return (label, fraction)
+        }
+        setNeedsLayout()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.height / 2
+        var x: CGFloat = 0
+        segments.forEach { (segment) in
+            let width = bounds.width * segment.fraction
+            segment.view.frame = CGRect(x: x, y: 0, width: width, height: bounds.height)
+            x += width
+        }
     }
 }

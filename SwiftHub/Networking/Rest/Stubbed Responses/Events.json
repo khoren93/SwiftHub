@@ -1,1 +1,468 @@
-[]
+[
+  {
+    "id": "24349088049",
+    "type": "PushEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 1132867811,
+      "name": "khoren93/debatr",
+      "url": "https://api.github.com/repos/khoren93/debatr"
+    },
+    "payload": {
+      "repository_id": 1132867811,
+      "push_id": 46700229018,
+      "ref": "refs/heads/main",
+      "head": "7dda1a6b3a8a868024c1e74276e08b2af37838bc",
+      "before": "15f9542f2b0423a0cb95737a000bb60a9938190c"
+    },
+    "public": true,
+    "created_at": "2026-10-16T09:42:14Z"
+  },
+  {
+    "id": "17415031259",
+    "type": "ReleaseEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 1132867811,
+      "name": "khoren93/debatr",
+      "url": "https://api.github.com/repos/khoren93/debatr"
+    },
+    "payload": {
+      "action": "published",
+      "release": {
+        "url": "https://api.github.com/repos/khoren93/debatr/releases/415227430",
+        "assets_url": "https://api.github.com/repos/khoren93/debatr/releases/415227430/assets",
+        "upload_url": "https://uploads.github.com/repos/khoren93/debatr/releases/415227430/assets{?name,label}",
+        "html_url": "https://github.com/khoren93/debatr/releases/tag/v1.1.0",
+        "id": 415227430,
+        "author": {
+          "login": "khoren93",
+          "id": 11523360,
+          "node_id": "MDQ6VXNlcjExNTIzMzYw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/khoren93",
+          "html_url": "https://github.com/khoren93",
+          "followers_url": "https://api.github.com/users/khoren93/followers",
+          "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+          "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+          "organizations_url": "https://api.github.com/users/khoren93/orgs",
+          "repos_url": "https://api.github.com/users/khoren93/repos",
+          "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/khoren93/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "node_id": "RE_kwDOQ4Yw484Yv94m",
+        "tag_name": "v1.1.0",
+        "target_commitish": "main",
+        "name": "v1.1.0 - Debatr: debates to videos 🎬",
+        "draft": false,
+        "immutable": false,
+        "prerelease": false,
+        "created_at": "2026-10-16T17:12:59Z",
+        "updated_at": "2026-10-16T17:51:51Z",
+        "published_at": "2026-10-16T17:51:51Z",
+        "assets": [],
+        "tarball_url": "https://api.github.com/repos/khoren93/debatr/tarball/v1.1.0",
+        "zipball_url": "https://api.github.com/repos/khoren93/debatr/zipball/v1.1.0",
+        "body": "### 🎬 AI Debates is now **Debatr**: from a live debate to a finished video\n\nA full redesign of the studio and a big step from \"watch models argue\" to \"turn the argument into content you can share\".\n\n**✨ Highlights**\n\n* **New studio UI**: dark Debatr theme, a four-step wizard (topic, speakers, voices & format, review) with the exact cost and length before you start, drafts and remixes.\n* **Smarter model picking**: searchable OpenRouter catalogue with provider logos, prices, leaderboard rank and a \"Latest\" filter; free models via `openrouter/free` out of the box.\n* **🧑‍⚖️ AI judge**: a structured verdict with the winner (or a draw), a headline and feedback for every debater.\n* **🔊 Voices**: premium ElevenLabs voices (v3, emotion tags, word timestamps) or free Edge voices, a karaoke-style transcript player and an MP3 of the whole debate.\n* **📹 Video in the browser**: a 16:9 episode plus a 9:16 Short cut around the strongest moments, rendered with Remotion right in your browser. No server-side encoding.\n* **👤 Accounts & credits**: sign up, keep a library of your debates, top up a prepaid balance with Stripe, or bring your own OpenRouter / ElevenLabs keys and run at your own cost.\n* **🖼️ Public gallery**: finished debates go public with a share link after an automatic content check (or stay private). Trending, New and Top for the week, month or year.\n* **🗳️ Engagement**: likes, a **blind audience vote** (you pick a winner before seeing the judge's call) and a **model leaderboard** with Bradley–Terry / Elo-style ratings built from those votes.\n* **🛡️ Admin panel**: moderation queue with approve / reject, users, ledger and debate management.\n\n**🐳 Self-hosting**\n\n* One `make up` (`docker compose up -d --build`) starts Postgres, Redis, API, debate and media workers and the Caddy-served frontend; migrations run automatically.\n* New `Makefile` shortcuts for dev, checks and deployment; `make check` runs everything CI does.\n* Backend moved to Python 3.12 + uv, async SQLAlchemy 2 + Alembic; frontend to React 19, Vite 8 and Tailwind 4.\n\n**⚠️ Upgrading from 1.0.0**\n\n* Copy the new variables from `.env.example` (`SECRET_KEY`, `ADMIN_*`, credits & payments, ElevenLabs, media settings) into your `.env`, and drop `DATABASE_URL` / `REDIS_URL`: Docker Compose now injects them.\n* Migrations apply on API start. Debates created before accounts stay readable via their link and are manageable from the admin panel.\n\n👉 See the [README](https://github.com/khoren93/debatr#readme) for setup instructions.\n\n**Full Changelog**: https://github.com/khoren93/debatr/compare/v1.0.0...v1.1.0\n",
+        "short_description_html": "<h3>🎬 AI Debates is now <strong>Debatr</strong>: from a live debate to a finished video</h3>\n<p>A full redesign of the studio and a big step from \"watch models argue\" to \"turn the argument into content you can share\".</p>\n<p><strong>✨ Highli…</strong></p>",
+        "is_short_description_html_truncated": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-10-16T17:51:51Z"
+  },
+  {
+    "id": "16983539390",
+    "type": "WatchEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 1414230455,
+      "name": "khoren93/homebody",
+      "url": "https://api.github.com/repos/khoren93/homebody"
+    },
+    "payload": {
+      "action": "started"
+    },
+    "public": true,
+    "created_at": "2026-10-12T06:09:58Z"
+  },
+  {
+    "id": "16953618897",
+    "type": "PublicEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 1414230455,
+      "name": "khoren93/homebody",
+      "url": "https://api.github.com/repos/khoren93/homebody"
+    },
+    "payload": {},
+    "public": true,
+    "created_at": "2026-10-11T10:50:27Z"
+  },
+  {
+    "id": "22181674875",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 472074535,
+      "name": "khoren93/flutter_zxing",
+      "url": "https://api.github.com/repos/khoren93/flutter_zxing"
+    },
+    "payload": {
+      "ref": "fix/overlay-and-single-scan",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/fix/overlay-and-single-scan",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-09-25T14:05:51Z"
+  },
+  {
+    "id": "15776367657",
+    "type": "IssuesEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 472074535,
+      "name": "khoren93/flutter_zxing",
+      "url": "https://api.github.com/repos/khoren93/flutter_zxing"
+    },
+    "payload": {
+      "action": "closed",
+      "issue": {
+        "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223",
+        "repository_url": "https://api.github.com/repos/khoren93/flutter_zxing",
+        "labels_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/labels{/name}",
+        "comments_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/comments",
+        "events_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/events",
+        "html_url": "https://github.com/khoren93/flutter_zxing/issues/223",
+        "id": 3964797848,
+        "node_id": "I_kwDOHCNJJ87sUgOY",
+        "number": 223,
+        "title": "Fail to scan QR codes with circular finder patterns (instead of squares)",
+        "user": {
+          "login": "ethicnology",
+          "id": 25751709,
+          "node_id": "MDQ6VXNlcjI1NzUxNzA5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/25751709?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ethicnology",
+          "html_url": "https://github.com/ethicnology",
+          "followers_url": "https://api.github.com/users/ethicnology/followers",
+          "following_url": "https://api.github.com/users/ethicnology/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ethicnology/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ethicnology/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ethicnology/subscriptions",
+          "organizations_url": "https://api.github.com/users/ethicnology/orgs",
+          "repos_url": "https://api.github.com/users/ethicnology/repos",
+          "events_url": "https://api.github.com/users/ethicnology/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ethicnology/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "closed",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 4,
+        "created_at": "2026-02-19T19:55:19Z",
+        "updated_at": "2026-10-05T12:02:38Z",
+        "closed_at": "2026-09-25T18:56:06Z",
+        "assignee": null,
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "Hello @khoren93 👋  thanks for maintaining this project.\n\nI'm running into an issue scanning QR codes that use a non-standard design specifically ones with circles at the finder pattern corners instead of the usual squares.\n\nIs there a known workaround or configuration to improve detection of these stylized QR codes?\n\nHere an example of the QR\n\n<img width=\"507\" height=\"486\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/be3b187e-29ff-4544-ac53-56c7001bcfbb\" />",
+        "reactions": {
+          "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "not_planned",
+        "pinned_comment": null
+      }
+    },
+    "public": true,
+    "created_at": "2026-09-25T18:56:07Z"
+  },
+  {
+    "id": "15776367263",
+    "type": "IssueCommentEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 472074535,
+      "name": "khoren93/flutter_zxing",
+      "url": "https://api.github.com/repos/khoren93/flutter_zxing"
+    },
+    "payload": {
+      "action": "created",
+      "issue": {
+        "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223",
+        "repository_url": "https://api.github.com/repos/khoren93/flutter_zxing",
+        "labels_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/labels{/name}",
+        "comments_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/comments",
+        "events_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/events",
+        "html_url": "https://github.com/khoren93/flutter_zxing/issues/223",
+        "id": 3964797848,
+        "node_id": "I_kwDOHCNJJ87sUgOY",
+        "number": 223,
+        "title": "Fail to scan QR codes with circular finder patterns (instead of squares)",
+        "user": {
+          "login": "ethicnology",
+          "id": 25751709,
+          "node_id": "MDQ6VXNlcjI1NzUxNzA5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/25751709?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ethicnology",
+          "html_url": "https://github.com/ethicnology",
+          "followers_url": "https://api.github.com/users/ethicnology/followers",
+          "following_url": "https://api.github.com/users/ethicnology/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ethicnology/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ethicnology/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ethicnology/subscriptions",
+          "organizations_url": "https://api.github.com/users/ethicnology/orgs",
+          "repos_url": "https://api.github.com/users/ethicnology/repos",
+          "events_url": "https://api.github.com/users/ethicnology/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ethicnology/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "closed",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 4,
+        "created_at": "2026-02-19T19:55:19Z",
+        "updated_at": "2026-10-05T12:02:38Z",
+        "closed_at": "2026-09-25T18:56:06Z",
+        "assignee": null,
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "Hello @khoren93 👋  thanks for maintaining this project.\n\nI'm running into an issue scanning QR codes that use a non-standard design specifically ones with circles at the finder pattern corners instead of the usual squares.\n\nIs there a known workaround or configuration to improve detection of these stylized QR codes?\n\nHere an example of the QR\n\n<img width=\"507\" height=\"486\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/be3b187e-29ff-4544-ac53-56c7001bcfbb\" />",
+        "reactions": {
+          "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223/timeline",
+        "performed_via_github_app": null,
+        "state_reason": "not_planned",
+        "pinned_comment": null
+      },
+      "comment": {
+        "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/comments/5837931352",
+        "html_url": "https://github.com/khoren93/flutter_zxing/issues/223#issuecomment-5837931352",
+        "issue_url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/223",
+        "id": 5837931352,
+        "node_id": "IC_kwDOHCNJJ88AAAABW_fDWA",
+        "user": {
+          "login": "khoren93",
+          "id": 11523360,
+          "node_id": "MDQ6VXNlcjExNTIzMzYw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/khoren93",
+          "html_url": "https://github.com/khoren93",
+          "followers_url": "https://api.github.com/users/khoren93/followers",
+          "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+          "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+          "organizations_url": "https://api.github.com/users/khoren93/orgs",
+          "repos_url": "https://api.github.com/users/khoren93/repos",
+          "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/khoren93/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "created_at": "2026-09-25T18:56:05Z",
+        "updated_at": "2026-09-25T18:56:05Z",
+        "body": "An update for anyone following this: zxing-cpp tracks this in zxing-cpp/zxing-cpp#1120 (QR codes with non-compliant finder patterns) and zxing-cpp/zxing-cpp#1149 (dotted finder patterns). Your image still fails with zxing-cpp 3.1.1, which flutter_zxing 3.1.0 ships: the symbol is found but fails error correction. The fix belongs in zxing-cpp's detector, so I'm closing this in favour of those issues. flutter_zxing will pick up detector improvements when it moves to a newer zxing-cpp.",
+        "pin": null,
+        "reactions": {
+          "url": "https://api.github.com/repos/khoren93/flutter_zxing/issues/comments/5837931352/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "performed_via_github_app": null,
+        "minimized": null
+      }
+    },
+    "public": true,
+    "created_at": "2026-09-25T18:56:05Z"
+  },
+  {
+    "id": "22146916081",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 472074535,
+      "name": "khoren93/flutter_zxing",
+      "url": "https://api.github.com/repos/khoren93/flutter_zxing"
+    },
+    "payload": {
+      "ref": "fix/overlay-and-single-scan",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/fix/overlay-and-single-scan",
+      "master_branch": "main",
+      "description": "Flutter plugin for scanning and generating QR codes using the ZXing library, supporting Android, iOS, and desktop platforms",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-09-25T13:44:35Z"
+  },
+  {
+    "id": "15446675438",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 11523360,
+      "login": "khoren93",
+      "display_login": "khoren93",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?"
+    },
+    "repo": {
+      "id": 472074535,
+      "name": "khoren93/flutter_zxing",
+      "url": "https://api.github.com/repos/khoren93/flutter_zxing"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 250,
+      "pull_request": {
+        "url": "https://api.github.com/repos/khoren93/flutter_zxing/pulls/250",
+        "id": 4547993094,
+        "number": 250,
+        "head": {
+          "ref": "feat/desktop-support",
+          "sha": "2cb1bd79d1f8da19d87a3c7b0349188ee928d6a0",
+          "repo": {
+            "id": 1373055133,
+            "url": "https://api.github.com/repos/bart-iconica/flutter_zxing",
+            "name": "flutter_zxing"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "b0b116492ff122e943436cbe95751b0fea56e16a",
+          "repo": {
+            "id": 472074535,
+            "url": "https://api.github.com/repos/khoren93/flutter_zxing",
+            "name": "flutter_zxing"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2026-09-21T16:55:02Z"
+  }
+]

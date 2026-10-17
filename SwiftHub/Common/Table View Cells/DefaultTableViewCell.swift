@@ -68,7 +68,7 @@ class DefaultTableViewCell: TableViewCell {
 
     lazy var rightImageView: ImageView = {
         let view = ImageView(frame: CGRect())
-        view.image = R.image.icon_cell_disclosure()?.template
+        view.image = UIImage(resource: .iconCellDisclosure).template
         view.snp.makeConstraints({ (make) in
             make.width.equalTo(20)
         })
@@ -122,10 +122,5 @@ class DefaultTableViewCell: TableViewCell {
 
         viewModel.imageUrl.map { $0?.url }.asDriver(onErrorJustReturn: nil).filterNil()
             .drive(leftImageView.rx.imageURL).disposed(by: rx.disposeBag)
-
-        viewModel.imageUrl.asDriver().filterNil()
-            .drive(onNext: { [weak self] (url) in
-                self?.leftImageView.hero.id = url
-            }).disposed(by: rx.disposeBag)
     }
 }

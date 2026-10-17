@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.branchCell.identifier
+private let reuseIdentifier = BranchCell.reuseID
 
 class BranchesViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
 
-        tableView.register(R.nib.branchCell)
+        tableView.registerNib(BranchCell.self)
     }
 
     override func bindViewModel() {

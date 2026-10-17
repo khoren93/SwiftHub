@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import BonMot
 
 class TrendingRepositoryCellViewModel: DefaultTableViewCellViewModel {
 
@@ -22,7 +21,7 @@ class TrendingRepositoryCellViewModel: DefaultTableViewCellViewModel {
         detail.accept(repository.descriptionField)
         attributedDetail.accept(repository.attributetDetail(since: since.title))
         imageUrl.accept(repository.avatarUrl)
-        badge.accept(R.image.icon_cell_badge_repository()?.template)
+        badge.accept(UIImage(resource: .iconCellBadgeRepository).template)
         badgeColor.accept(UIColor.Material.green900)
     }
 }
@@ -35,15 +34,15 @@ extension TrendingRepositoryCellViewModel {
 
 extension TrendingRepository {
     func attributetDetail(since: String) -> NSAttributedString {
-        let starImage = R.image.icon_cell_badge_star()?.filled(withColor: .text()).scaled(toHeight: 15)?.styled(with: .baselineOffset(-3)) ?? NSAttributedString()
-        let starsString = (stars ?? 0).kFormatted().styled( with: .color(UIColor.text()))
-        let currentPeriodStarsString = "\((currentPeriodStars ?? 0).kFormatted()) \(since.lowercased())".styled( with: .color(UIColor.text()))
-        let languageColorShape = "●".styled(with: StringStyle([.color(UIColor(hexString: languageColor ?? "") ?? .clear)]))
-        let languageString = (language ?? "").styled( with: .color(UIColor.text()))
+        let starImage = UIImage(resource: .iconCellBadgeStar).filled(withColor: .text()).scaled(toHeight: 15)?.styled([.baselineOffset: -3]) ?? NSAttributedString()
+        let starsString = (stars ?? 0).kFormatted().styled([.foregroundColor: UIColor.text()])
+        let currentPeriodStarsString = "\((currentPeriodStars ?? 0).kFormatted()) \(since.lowercased())".styled([.foregroundColor: UIColor.text()])
+        let languageColorShape = "●".styled([.foregroundColor: UIColor(hexString: languageColor ?? "") ?? .clear])
+        let languageString = (language ?? "").styled([.foregroundColor: UIColor.text()])
         return NSAttributedString.composed(of: [
-            starImage, Special.space, starsString, Special.space, Special.tab,
-            starImage, Special.space, currentPeriodStarsString, Special.space, Special.tab,
-            languageColorShape, Special.space, languageString
+            starImage, .space, starsString, .space, .tab,
+            starImage, .space, currentPeriodStarsString, .space, .tab,
+            languageColorShape, .space, languageString
         ])
     }
 }

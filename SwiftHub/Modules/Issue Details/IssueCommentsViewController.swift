@@ -28,7 +28,7 @@ class IssueCommentsViewController: ChatViewController {
         }).disposed(by: rx.disposeBag)
 
         viewModel.error.asDriver().drive(onNext: { [weak self] (error) in
-            self?.showAlert(title: R.string.localizable.commonError.key.localized(), message: error.localizedDescription)
+            self?.showAlert(title: String(localized: .commonError), message: error.localizedDescription)
         }).disposed(by: rx.disposeBag)
     }
 }

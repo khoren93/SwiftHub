@@ -9,29 +9,26 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import HMSegmentedControl
 
-class SegmentedControl: HMSegmentedControl {
+class SegmentedControl: UISegmentedControl {
 
     let segmentSelection = BehaviorRelay<Int>(value: 0)
 
-    init() {
-        super.init(sectionTitles: [])
-        makeUI()
+    /// Replaces all segments, keeping the current selection
+    var sectionTitles: [String] {
+        get { (0..<numberOfSegments).map { titleForSegment(at: $0) ?? "" } }
+        set {
+            let selected = selectedSegmentIndex >= 0 ? selectedSegmentIndex : segmentSelection.value
+            removeAllSegments()
+            newValue.enumerated().forEach { insertSegment(withTitle: $1, at: $0, animated: false) }
+            if selected < numberOfSegments {
+                selectedSegmentIndex = selected
+            }
+        }
     }
 
-    override init(sectionTitles sectiontitles: [String]) {
-        super.init(sectionTitles: sectiontitles)
-        makeUI()
-    }
-
-    override init(sectionImages: [UIImage], sectionSelectedImages: [UIImage]) {
-        super.init(sectionImages: sectionImages, sectionSelectedImages: sectionSelectedImages)
-        makeUI()
-    }
-
-    override init(sectionImages: [UIImage], sectionSelectedImages: [UIImage], titlesForSections sectionTitles: [String]) {
-        super.init(sectionImages: sectionImages, sectionSelectedImages: sectionSelectedImages, titlesForSections: sectionTitles)
+    init(sectionTitles: [String]) {
+        super.init(items: sectionTitles)
         makeUI()
     }
 
@@ -48,33 +45,19 @@ class SegmentedControl: HMSegmentedControl {
     func makeUI() {
         themeService.typeStream.subscribe(onNext: { [weak self] (themeType) in
             let theme = themeType.associatedObject
+            let font = UIFont.systemFont(ofSize: 13)
             self?.backgroundColor = theme.primary
-            self?.selectionIndicatorColor = theme.secondary
-            let font = UIFont.systemFont(ofSize: 11)
-            self?.titleTextAttributes = [NSAttributedString.Key.font: font,
-                                         NSAttributedString.Key.foregroundColor: theme.text]
-            self?.selectedTitleTextAttributes = [NSAttributedString.Key.font: font,
-                                                 NSAttributedString.Key.foregroundColor: theme.secondary]
-            self?.setNeedsDisplay()
+            self?.selectedSegmentTintColor = theme.primaryDark
+            self?.setTitleTextAttributes([.font: font, .foregroundColor: theme.text], for: .normal)
+            self?.setTitleTextAttributes([.font: font, .foregroundColor: theme.secondary], for: .selected)
         }).disposed(by: rx.disposeBag)
 
-        layerCornerRadius = Configs.BaseDimensions.cornerRadius
-        imagePosition = .aboveText
-        selectionStyle = .box
-        selectionIndicatorLocation = .bottom
-        selectionIndicatorBoxOpacity = 0
-        selectionIndicatorHeight = 2.0
-        segmentEdgeInset = UIEdgeInsets(inset: self.inset)
-        indexChangeBlock = { [weak self] index in
-            self?.segmentSelection.accept(Int(index))
-        }
+        rx.selectedSegmentIndex.changed
+            .bind(to: segmentSelection)
+            .disposed(by: rx.disposeBag)
+
         snp.makeConstraints { (make) in
             make.height.equalTo(Configs.BaseDimensions.segmentedControlHeight)
         }
-        updateUI()
-    }
-
-    func updateUI() {
-        setNeedsDisplay()
     }
 }

@@ -28,8 +28,7 @@ final class Application: NSObject {
         let staging = Configs.Network.useStaging
         let githubProvider = staging ? GithubNetworking.stubbingNetworking(): GithubNetworking.defaultNetworking()
         let trendingGithubProvider = staging ? TrendingGithubNetworking.stubbingNetworking(): TrendingGithubNetworking.defaultNetworking()
-        let codetabsProvider = staging ? CodetabsNetworking.stubbingNetworking(): CodetabsNetworking.defaultNetworking()
-        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider, codetabsProvider: codetabsProvider)
+        let restApi = RestApi(githubProvider: githubProvider, trendingGithubProvider: trendingGithubProvider)
         provider = restApi
 
         if let token = authManager.token, Configs.Network.useStaging == false {
@@ -52,8 +51,6 @@ final class Application: NSObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             if let user = User.currentUser(), let login = user.login {
                 analytics.identify(userId: login)
-                analytics.set(.name(value: user.name ?? ""))
-                analytics.set(.email(value: user.email ?? ""))
             }
             let authorized = self?.authManager.token?.isValid ?? false
             let viewModel = HomeTabBarViewModel(authorized: authorized, provider: provider)

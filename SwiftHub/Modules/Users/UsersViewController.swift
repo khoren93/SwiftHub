@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.userCell.identifier
+private let reuseIdentifier = UserCell.reuseID
 
 class UsersViewController: TableViewController {
 
@@ -23,7 +23,6 @@ class UsersViewController: TableViewController {
 
     lazy var headerView: View = {
         let view = View()
-        view.hero.id = "TopHeaderId"
         view.addSubview(self.ownerImageView)
         self.ownerImageView.snp.makeConstraints({ (make) in
             make.top.equalToSuperview().inset(self.inset)
@@ -40,7 +39,7 @@ class UsersViewController: TableViewController {
 
         stackView.insertArrangedSubview(headerView, at: 0)
 
-        tableView.register(R.nib.userCell)
+        tableView.registerNib(UserCell.self)
     }
 
     override func bindViewModel() {
@@ -62,7 +61,6 @@ class UsersViewController: TableViewController {
         output.imageUrl.drive(onNext: { [weak self] (url) in
             if let url = url {
                 self?.ownerImageView.setSources(sources: [url])
-                self?.ownerImageView.hero.id = url.absoluteString
             }
         }).disposed(by: rx.disposeBag)
 
@@ -72,7 +70,7 @@ class UsersViewController: TableViewController {
             }.disposed(by: rx.disposeBag)
 
         output.userSelected.drive(onNext: { [weak self] (viewModel) in
-            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .navigation(type: .fade))
+            self?.navigator.show(segue: .userDetails(viewModel: viewModel), sender: self, transition: .navigation)
         }).disposed(by: rx.disposeBag)
 
         output.dismissKeyboard.drive(onNext: { [weak self] () in

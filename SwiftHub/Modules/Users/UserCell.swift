@@ -33,8 +33,8 @@ class UserCell: DefaultTableViewCell {
 
         viewModel.hidesFollowButton.asDriver().drive(followButton.rx.isHidden).disposed(by: rx.disposeBag)
         viewModel.following.asDriver().map { (followed) -> UIImage? in
-            let image = followed ? R.image.icon_button_user_x() : R.image.icon_button_user_plus()
-            return image?.template
+            let image = followed ? UIImage(resource: .iconButtonUserX) : UIImage(resource: .iconButtonUserPlus)
+            return image.template
             }.drive(followButton.rx.image()).disposed(by: rx.disposeBag)
         viewModel.following.map { $0 ? 1.0: 0.6 }.asDriver(onErrorJustReturn: 0).drive(followButton.rx.alpha).disposed(by: rx.disposeBag)
     }

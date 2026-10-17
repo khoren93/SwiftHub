@@ -1,1 +1,211 @@
-[]
+[
+  {
+    "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3929935986",
+    "pull_request_review_id": 5108144079,
+    "id": 3929935986,
+    "node_id": "PRRC_kwDOAgA5b87qPhBy",
+    "diff_hunk": "@@ -93,29 +93,27 @@ extension PrimitiveSequenceConcurrencyTests {\n     /// If you are debugging this issue you might want to increase the iterations and/or run this test repeatedly.\n     func testSingleContinuationIsNotResumedTwice() {\n         let expectation = XCTestExpectation()\n-        let iterations = 10000\n-        for i in 0 ..< iterations {\n-            DispatchQueue.global(qos: .userInitiated).async {\n-                let single = Single<Int>.create { observer in\n-                    DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.005) {\n-                        observer(.success(42))\n-                    }\n-                    return Disposables.create()\n+        let iterations = 1000",
+    "path": "Tests/RxSwiftTests/PrimitiveSequence+ConcurrencyTests.swift",
+    "commit_id": "a8046832f3d3a21fc72ba584cd6a410d86bcc7e5",
+    "original_commit_id": "a8046832f3d3a21fc72ba584cd6a410d86bcc7e5",
+    "user": {
+      "login": "heoblitz",
+      "id": 25315898,
+      "node_id": "MDQ6VXNlcjI1MzE1ODk4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25315898?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/heoblitz",
+      "html_url": "https://github.com/heoblitz",
+      "followers_url": "https://api.github.com/users/heoblitz/followers",
+      "following_url": "https://api.github.com/users/heoblitz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/heoblitz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/heoblitz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/heoblitz/subscriptions",
+      "organizations_url": "https://api.github.com/users/heoblitz/orgs",
+      "repos_url": "https://api.github.com/users/heoblitz/repos",
+      "events_url": "https://api.github.com/users/heoblitz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/heoblitz/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "The previous 10,000 iterations made the test unstable under CI load, causing repeated failures and interfering with other running tests. \n\nThis restructures the test so the double-resume regression is reliably reproduced with fewer iterations.",
+    "created_at": "2026-09-04T00:48:11Z",
+    "updated_at": "2026-09-04T00:48:22Z",
+    "html_url": "https://github.com/ReactiveX/RxSwift/pull/2731#discussion_r3929935986",
+    "pull_request_url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2731",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3929935986"
+      },
+      "html": {
+        "href": "https://github.com/ReactiveX/RxSwift/pull/2731#discussion_r3929935986"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2731"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3929935986/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": null,
+    "original_line": 96,
+    "side": "RIGHT",
+    "author_association": "CONTRIBUTOR",
+    "original_position": 12,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815908111",
+    "pull_request_review_id": 4975764070,
+    "id": 3815908111,
+    "node_id": "PRRC_kwDOAgA5b87jciMP",
+    "diff_hunk": "@@ -88,13 +88,14 @@ extension PrimitiveSequenceConcurrencyTests {\n         )\n     }\n \n-    /// A previous implementation of the `Single` to swift concurrency bridge had a bug where it would sometimes call the continuation twice.\n+    /// A previous implementation of the `Single` to swift concurrency bridge could call the continuation twice or deadlock when completion raced cancellation.\n     /// The current number of iterations is a sweet spot to not make the tests too slow while still catching the bug in most runs.",
+    "path": "Tests/RxSwiftTests/PrimitiveSequence+ConcurrencyTests.swift",
+    "commit_id": "6b96ffbdff9e9b998fa40260f6e7a50a52e00313",
+    "original_commit_id": "abbd27bc3992c6969e23f93c41fc33ca1c309c4f",
+    "user": {
+      "login": "freak4pc",
+      "id": 605076,
+      "node_id": "MDQ6VXNlcjYwNTA3Ng==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/605076?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/freak4pc",
+      "html_url": "https://github.com/freak4pc",
+      "followers_url": "https://api.github.com/users/freak4pc/followers",
+      "following_url": "https://api.github.com/users/freak4pc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/freak4pc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/freak4pc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/freak4pc/subscriptions",
+      "organizations_url": "https://api.github.com/users/freak4pc/orgs",
+      "repos_url": "https://api.github.com/users/freak4pc/repos",
+      "events_url": "https://api.github.com/users/freak4pc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/freak4pc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "uhm i missed the fact it's already at 10k, let's leave it like this. youll probably need over 100,000 runs to make it a meaningful card which probably isn't worth it. ",
+    "created_at": "2026-08-19T19:01:14Z",
+    "updated_at": "2026-08-19T19:01:15Z",
+    "html_url": "https://github.com/ReactiveX/RxSwift/pull/2727#discussion_r3815908111",
+    "pull_request_url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2727",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815908111"
+      },
+      "html": {
+        "href": "https://github.com/ReactiveX/RxSwift/pull/2727#discussion_r3815908111"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2727"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815908111/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 92,
+    "original_line": 92,
+    "side": "RIGHT",
+    "in_reply_to_id": 3815528319,
+    "author_association": "MEMBER",
+    "original_position": 6,
+    "position": 6,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815605971",
+    "pull_request_review_id": 4975386515,
+    "id": 3815605971,
+    "node_id": "PRRC_kwDOAgA5b87jbYbT",
+    "diff_hunk": "@@ -88,13 +88,14 @@ extension PrimitiveSequenceConcurrencyTests {\n         )\n     }\n \n-    /// A previous implementation of the `Single` to swift concurrency bridge had a bug where it would sometimes call the continuation twice.\n+    /// A previous implementation of the `Single` to swift concurrency bridge could call the continuation twice or deadlock when completion raced cancellation.\n     /// The current number of iterations is a sweet spot to not make the tests too slow while still catching the bug in most runs.",
+    "path": "Tests/RxSwiftTests/PrimitiveSequence+ConcurrencyTests.swift",
+    "commit_id": "6b96ffbdff9e9b998fa40260f6e7a50a52e00313",
+    "original_commit_id": "abbd27bc3992c6969e23f93c41fc33ca1c309c4f",
+    "user": {
+      "login": "victorpimentel",
+      "id": 408830,
+      "node_id": "MDQ6VXNlcjQwODgzMA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/408830?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/victorpimentel",
+      "html_url": "https://github.com/victorpimentel",
+      "followers_url": "https://api.github.com/users/victorpimentel/followers",
+      "following_url": "https://api.github.com/users/victorpimentel/following{/other_user}",
+      "gists_url": "https://api.github.com/users/victorpimentel/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/victorpimentel/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/victorpimentel/subscriptions",
+      "organizations_url": "https://api.github.com/users/victorpimentel/orgs",
+      "repos_url": "https://api.github.com/users/victorpimentel/repos",
+      "events_url": "https://api.github.com/users/victorpimentel/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/victorpimentel/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "Yeah, I think 10k iterations were a compromise to avoid having very long test times. The changes in the tests right now do not guarantee failure in those cases but are much more stronger since now we wait for all blocks to finish exactly once.\r\n\r\nHowever now the tests run a bit faster than before since we avoid sleeping too much, we can bump the number of iterations if you think it makes sense. What would be your accepted running time in an “average” machine?",
+    "created_at": "2026-08-19T18:16:56Z",
+    "updated_at": "2026-08-19T18:16:57Z",
+    "html_url": "https://github.com/ReactiveX/RxSwift/pull/2727#discussion_r3815605971",
+    "pull_request_url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2727",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815605971"
+      },
+      "html": {
+        "href": "https://github.com/ReactiveX/RxSwift/pull/2727#discussion_r3815605971"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/2727"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/ReactiveX/RxSwift/pulls/comments/3815605971/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 92,
+    "original_line": 92,
+    "side": "RIGHT",
+    "in_reply_to_id": 3815528319,
+    "author_association": "CONTRIBUTOR",
+    "original_position": 6,
+    "position": 6,
+    "subject_type": "line"
+  }
+]

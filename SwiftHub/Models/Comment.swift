@@ -8,10 +8,9 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 import MessageKit
 
-struct Comment: Mappable, MessageType {
+struct Comment: Decodable, MessageType {
 
     var authorAssociation: String?
     var body: String?
@@ -30,19 +29,19 @@ struct Comment: Mappable, MessageType {
     var sentDate: Date { return createdAt ?? Date() }
     var kind: MessageKind { return .text(body ?? "") }
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        authorAssociation <- map["author_association"]
-        body <- map["body"]
-        createdAt <- (map["created_at"], ISO8601DateTransform())
-        htmlUrl <- map["html_url"]
-        id <- map["id"]
-        issueUrl <- map["issue_url"]
-        nodeId <- map["node_id"]
-        updatedAt <- (map["updated_at"], ISO8601DateTransform())
-        url <- map["url"]
-        user <- map["user"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        authorAssociation = map["author_association"]
+        body = map["body"]
+        createdAt = map["created_at"]
+        htmlUrl = map["html_url"]
+        id = map["id"]
+        issueUrl = map["issue_url"]
+        nodeId = map["node_id"]
+        updatedAt = map["updated_at"]
+        url = map["url"]
+        user = map["user"]
     }
 }

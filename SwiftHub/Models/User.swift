@@ -8,14 +8,13 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 import KeychainAccess
 import MessageKit
 
 private let userKey = "CurrentUserKey"
 private let keychain = Keychain(service: Configs.App.bundleIdentifier)
 
-enum UserType: String {
+enum UserType: String, Codable {
     case user = "User"
     case organization = "Organization"
 }
@@ -50,7 +49,7 @@ struct ContributionCalendar {
 }
 
 /// User model
-struct User: Mappable, SenderType {
+struct User: Codable, SenderType {
 
     var avatarUrl: String?  // A URL pointing to the user's public avatar.
     var blog: String?  // A URL pointing to the user's public website/blog.
@@ -87,7 +86,6 @@ struct User: Mappable, SenderType {
     var senderId: String { return login ?? "" }
     var displayName: String { return login ?? "" }
 
-    init?(map: Map) {}
     init() {}
 
     init(login: String?, name: String?, avatarUrl: String?, followers: Int?, viewerCanFollow: Bool?, viewerIsFollowing: Bool?) {
@@ -107,24 +105,46 @@ struct User: Mappable, SenderType {
         }
     }
 
-    mutating func mapping(map: Map) {
-        avatarUrl <- map["avatar_url"]
-        blog <- map["blog"]
-        company <- map["company"]
-        contributions <- map["contributions"]
-        createdAt <- (map["created_at"], ISO8601DateTransform())
-        descriptionField <- map["description"]
-        email <- map["email"]
-        followers <- map["followers"]
-        following <- map["following"]
-        htmlUrl <- map["html_url"]
-        location <- map["location"]
-        login <- map["login"]
-        name <- map["name"]
-        repositoriesCount <- map["public_repos"]
-        type <- map["type"]
-        updatedAt <- (map["updated_at"], ISO8601DateTransform())
-        bio <- map["bio"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        avatarUrl = map["avatar_url"]
+        blog = map["blog"]
+        company = map["company"]
+        contributions = map["contributions"]
+        createdAt = map["created_at"]
+        descriptionField = map["description"]
+        email = map["email"]
+        followers = map["followers"]
+        following = map["following"]
+        htmlUrl = map["html_url"]
+        location = map["location"]
+        login = map["login"]
+        name = map["name"]
+        repositoriesCount = map["public_repos"]
+        type = map["type"] ?? type
+        updatedAt = map["updated_at"]
+        bio = map["bio"]
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var map = encoder.container(keyedBy: JSONKey.self)
+        try map.encode(avatarUrl, forKey: "avatar_url")
+        try map.encode(blog, forKey: "blog")
+        try map.encode(company, forKey: "company")
+        try map.encode(contributions, forKey: "contributions")
+        try map.encode(createdAt, forKey: "created_at")
+        try map.encode(descriptionField, forKey: "description")
+        try map.encode(email, forKey: "email")
+        try map.encode(followers, forKey: "followers")
+        try map.encode(following, forKey: "following")
+        try map.encode(htmlUrl, forKey: "html_url")
+        try map.encode(location, forKey: "location")
+        try map.encode(login, forKey: "login")
+        try map.encode(name, forKey: "name")
+        try map.encode(repositoriesCount, forKey: "public_repos")
+        try map.encode(type, forKey: "type")
+        try map.encode(updatedAt, forKey: "updated_at")
+        try map.encode(bio, forKey: "bio")
     }
 }
 
@@ -139,8 +159,8 @@ extension User {
         company = graph?.company
         email = graph?.email
         location = graph?.location
-        createdAt = graph?.createdAt.toISODate()?.date
-        updatedAt = graph?.updatedAt.toISODate()?.date
+        createdAt = graph?.createdAt.toISODate()
+        updatedAt = graph?.updatedAt.toISODate()
         isViewer = graph?.isViewer
         following = graph?.following.totalCount
         starredRepositoriesCount = graph?.starredRepositories.totalCount
@@ -161,8 +181,8 @@ extension User {
         company = graph?.company
         email = graph?.email
         location = graph?.location
-        createdAt = graph?.createdAt.toISODate()?.date
-        updatedAt = graph?.updatedAt.toISODate()?.date
+        createdAt = graph?.createdAt.toISODate()
+        updatedAt = graph?.updatedAt.toISODate()
         isViewer = graph?.isViewer
         following = graph?.following.totalCount
         starredRepositoriesCount = graph?.starredRepositories.totalCount
@@ -204,7 +224,7 @@ extension User {
     }
 
     func save() {
-        if let json = self.toJSONString() {
+        if let json = jsonString() {
             keychain[userKey] = json
         } else {
             logError("User can't be saved")
@@ -212,7 +232,7 @@ extension User {
     }
 
     static func currentUser() -> User? {
-        if let json = keychain[userKey], let user = User(JSONString: json) {
+        if let json = keychain[userKey], let user = User(jsonString: json) {
             return user
         }
         return nil
@@ -230,7 +250,7 @@ extension User: Equatable {
 }
 
 /// UserSearch model
-struct UserSearch: Mappable {
+struct UserSearch: Decodable {
 
     var items: [User] = []
     var totalCount: Int = 0
@@ -238,13 +258,13 @@ struct UserSearch: Mappable {
     var hasNextPage: Bool = false
     var endCursor: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        items <- map["items"]
-        totalCount <- map["total_count"]
-        incompleteResults <- map["incomplete_results"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        items = map["items"] ?? items
+        totalCount = map["total_count"] ?? totalCount
+        incompleteResults = map["incomplete_results"] ?? incompleteResults
         hasNextPage = items.isNotEmpty
     }
 }
@@ -261,13 +281,13 @@ extension UserSearch {
     }
 }
 
-enum TrendingUserType: String {
+enum TrendingUserType: String, Codable {
     case user
     case organization
 }
 
 /// TrendingUser model
-struct TrendingUser: Mappable {
+struct TrendingUser: Decodable {
 
     var username: String?
     var name: String?
@@ -276,16 +296,16 @@ struct TrendingUser: Mappable {
     var repo: TrendingRepository?
     var type: TrendingUserType = .user
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        username <- map["username"]
-        name <- map["name"]
-        url <- map["url"]
-        avatar <- map["avatar"]
-        repo <- map["repo"]
-        type <- map["type"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        username = map["username"]
+        name = map["name"]
+        url = map["url"]
+        avatar = map["avatar"]
+        repo = map["repo"]
+        type = map["type"] ?? type
         repo?.author = username
     }
 }

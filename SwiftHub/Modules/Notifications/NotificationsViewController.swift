@@ -11,16 +11,16 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.notificationCell.identifier
+private let reuseIdentifier = NotificationCell.reuseID
 
 enum NotificationSegments: Int {
     case unread, participating, all
 
     var title: String {
         switch self {
-        case .unread: return R.string.localizable.notificationsUnreadSegmentTitle.key.localized()
-        case .participating: return R.string.localizable.notificationsParticipatingSegmentTitle.key.localized()
-        case .all: return R.string.localizable.notificationsAllSegmentTitle.key.localized()
+        case .unread: return String(localized: .notificationsUnreadSegmentTitle)
+        case .participating: return String(localized: .notificationsParticipatingSegmentTitle)
+        case .all: return String(localized: .notificationsAllSegmentTitle)
         }
     }
 }
@@ -28,7 +28,7 @@ enum NotificationSegments: Int {
 class NotificationsViewController: TableViewController {
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_cell_check(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconCellCheck), style: .done, target: nil, action: nil)
         return view
     }()
 
@@ -56,8 +56,8 @@ class NotificationsViewController: TableViewController {
                                                     NotificationSegments.all.title]
         }).disposed(by: rx.disposeBag)
 
-        tableView.register(R.nib.notificationCell)
-        tableView.headRefreshControl = nil
+        tableView.registerNib(NotificationCell.self)
+        isHeaderRefreshEnabled = false
     }
 
     override func bindViewModel() {
@@ -91,9 +91,9 @@ class NotificationsViewController: TableViewController {
         }).disposed(by: rx.disposeBag)
 
         output.markAsReadSelected.drive(onNext: { [weak self] () in
-            let title = R.string.localizable.commonSuccess.key.localized()
-            let description = R.string.localizable.notificationsMarkAsReadSuccess.key.localized()
-            let image = R.image.icon_toast_success()
+            let title = String(localized: .commonSuccess)
+            let description = String(localized: .notificationsMarkAsReadSuccess)
+            let image = UIImage(resource: .iconToastSuccess)
             self?.tableView.makeToast(description, title: title, image: image)
         }).disposed(by: rx.disposeBag)
     }

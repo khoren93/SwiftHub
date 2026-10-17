@@ -25,10 +25,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     let currentUser: User?
 
-    let bannerEnabled: BehaviorRelay<Bool>
     let nightModeEnabled: BehaviorRelay<Bool>
-
-    let whatsNewManager: WhatsNewManager
 
     let swiftHubRepository = BehaviorRelay<Repository?>(value: nil)
     let flutterHubRepository = BehaviorRelay<Repository?>(value: nil)
@@ -38,11 +35,8 @@ class SettingsViewModel: ViewModel, ViewModelType {
 
     override init(provider: SwiftHubAPI) {
         currentUser = User.currentUser()
-        whatsNewManager = WhatsNewManager.shared
-        bannerEnabled = BehaviorRelay(value: LibsManager.shared.bannersEnabled.value)
         nightModeEnabled = BehaviorRelay(value: ThemeType.currentTheme().isDark)
         super.init(provider: provider)
-        bannerEnabled.bind(to: LibsManager.shared.bannersEnabled).disposed(by: rx.disposeBag)
     }
 
     func transform(input: Input) -> Output {
@@ -54,7 +48,7 @@ class SettingsViewModel: ViewModel, ViewModelType {
             return LibsManager.shared.removeKingfisherCache()
         }
 
-        let refresh = Observable.of(input.trigger, cacheRemoved, swiftHubRepository.mapToVoid(), flutterHubRepository.mapToVoid(), flutterHubRepository.mapToVoid(), bannerEnabled.mapToVoid(), nightModeEnabled.mapToVoid()).merge()
+        let refresh = Observable.of(input.trigger, cacheRemoved, swiftHubRepository.mapToVoid(), flutterHubRepository.mapToVoid(), flutterHubRepository.mapToVoid(), nightModeEnabled.mapToVoid()).merge()
 
         let cacheSize = refresh.flatMapLatest { () -> Observable<Int> in
             return LibsManager.shared.kingfisherCacheSize()
@@ -72,11 +66,11 @@ class SettingsViewModel: ViewModel, ViewModelType {
                     accountItems.append(SettingsSectionItem.profileItem(viewModel: profileCellViewModel))
                 }
 
-                let logoutCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsLogOutTitle.key.localized(), detail: nil,
-                                                               image: R.image.icon_cell_logout()?.template, hidesDisclosure: true)
+                let logoutCellViewModel = SettingCellViewModel(with: String(localized: .settingsLogOutTitle), detail: nil,
+                                                               image: UIImage(resource: .iconCellLogout).template, hidesDisclosure: true)
                 accountItems.append(SettingsSectionItem.logoutItem(viewModel: logoutCellViewModel))
 
-                items.append(SettingsSection.setting(title: R.string.localizable.settingsAccountSectionTitle.key.localized(), items: accountItems))
+                items.append(SettingsSection.setting(title: String(localized: .settingsAccountSectionTitle), items: accountItems))
             }
 
             if let swiftHubRepository = self.swiftHubRepository.value,
@@ -85,54 +79,39 @@ class SettingsViewModel: ViewModel, ViewModelType {
                 let swiftHubCellViewModel = RepositoryCellViewModel(with: swiftHubRepository)
                 let flutterHubCellViewModel = RepositoryCellViewModel(with: flutterHubRepository)
                 let flutterZxingCellViewModel = RepositoryCellViewModel(with: flutterZxingRepository)
-                items.append(SettingsSection.setting(title: R.string.localizable.settingsProjectsSectionTitle.key.localized(), items: [
+                items.append(SettingsSection.setting(title: String(localized: .settingsProjectsSectionTitle), items: [
                     SettingsSectionItem.repositoryItem(viewModel: swiftHubCellViewModel),
                     SettingsSectionItem.repositoryItem(viewModel: flutterHubCellViewModel),
                     SettingsSectionItem.repositoryItem(viewModel: flutterZxingCellViewModel)
                 ]))
             }
 
-            let bannerEnabled = self.bannerEnabled.value
-            let bannerImage = bannerEnabled ? R.image.icon_cell_smile()?.template : R.image.icon_cell_frown()?.template
-            let bannerCellViewModel = SettingSwitchCellViewModel(with: R.string.localizable.settingsBannerTitle.key.localized(), detail: nil,
-                                                                 image: bannerImage, hidesDisclosure: true, isEnabled: bannerEnabled)
-            bannerCellViewModel.switchChanged.skip(1).bind(to: self.bannerEnabled).disposed(by: self.cellDisposeBag)
-
             let nightModeEnabled = self.nightModeEnabled.value
-            let nightModeCellViewModel = SettingSwitchCellViewModel(with: R.string.localizable.settingsNightModeTitle.key.localized(), detail: nil,
-                                                                    image: R.image.icon_cell_night_mode()?.template, hidesDisclosure: true, isEnabled: nightModeEnabled)
+            let nightModeCellViewModel = SettingSwitchCellViewModel(with: String(localized: .settingsNightModeTitle), detail: nil,
+                                                                    image: UIImage(resource: .iconCellNightMode).template, hidesDisclosure: true, isEnabled: nightModeEnabled)
             nightModeCellViewModel.switchChanged.skip(1).bind(to: self.nightModeEnabled).disposed(by: self.cellDisposeBag)
 
-            let themeCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsThemeTitle.key.localized(), detail: nil,
-                                                          image: R.image.icon_cell_theme()?.template, hidesDisclosure: false)
+            let themeCellViewModel = SettingCellViewModel(with: String(localized: .settingsThemeTitle), detail: nil,
+                                                          image: UIImage(resource: .iconCellTheme).template, hidesDisclosure: false)
 
-            let languageCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsLanguageTitle.key.localized(), detail: nil,
-                                                             image: R.image.icon_cell_language()?.template, hidesDisclosure: false)
+            let languageCellViewModel = SettingCellViewModel(with: String(localized: .settingsLanguageTitle), detail: self.appLanguageName(),
+                                                             image: UIImage(resource: .iconCellLanguage).template, hidesDisclosure: false)
 
-            let contactsCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsContactsTitle.key.localized(), detail: nil,
-                                                             image: R.image.icon_cell_company()?.template, hidesDisclosure: false)
+            let removeCacheCellViewModel = SettingCellViewModel(with: String(localized: .settingsRemoveCacheTitle), detail: size.sizeFromByte(),
+                                                                image: UIImage(resource: .iconCellRemove).template, hidesDisclosure: true)
 
-            let removeCacheCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsRemoveCacheTitle.key.localized(), detail: size.sizeFromByte(),
-                                                                image: R.image.icon_cell_remove()?.template, hidesDisclosure: true)
-
-            let acknowledgementsCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsAcknowledgementsTitle.key.localized(), detail: nil,
-                                                                     image: R.image.icon_cell_acknowledgements()?.template, hidesDisclosure: false)
-
-            let whatsNewCellViewModel = SettingCellViewModel(with: R.string.localizable.settingsWhatsNewTitle.key.localized(), detail: nil,
-                                                             image: R.image.icon_cell_whats_new()?.template, hidesDisclosure: false)
+            let acknowledgementsCellViewModel = SettingCellViewModel(with: String(localized: .settingsAcknowledgementsTitle), detail: nil,
+                                                                     image: UIImage(resource: .iconCellAcknowledgements).template, hidesDisclosure: false)
 
             items += [
-                SettingsSection.setting(title: R.string.localizable.settingsPreferencesSectionTitle.key.localized(), items: [
-                    SettingsSectionItem.bannerItem(viewModel: bannerCellViewModel),
+                SettingsSection.setting(title: String(localized: .settingsPreferencesSectionTitle), items: [
                     SettingsSectionItem.nightModeItem(viewModel: nightModeCellViewModel),
                     SettingsSectionItem.themeItem(viewModel: themeCellViewModel),
                     SettingsSectionItem.languageItem(viewModel: languageCellViewModel),
-                    SettingsSectionItem.contactsItem(viewModel: contactsCellViewModel),
                     SettingsSectionItem.removeCacheItem(viewModel: removeCacheCellViewModel)
                 ]),
-                SettingsSection.setting(title: R.string.localizable.settingsSupportSectionTitle.key.localized(), items: [
-                    SettingsSectionItem.acknowledgementsItem(viewModel: acknowledgementsCellViewModel),
-                    SettingsSectionItem.whatsNewItem(viewModel: whatsNewCellViewModel)
+                SettingsSection.setting(title: String(localized: .settingsSupportSectionTitle), items: [
+                    SettingsSectionItem.acknowledgementsItem(viewModel: acknowledgementsCellViewModel)
                 ])
             ]
 
@@ -194,10 +173,6 @@ class SettingsViewModel: ViewModel, ViewModelType {
             analytics.set(.nightMode(value: isEnabled))
         }).disposed(by: rx.disposeBag)
 
-        bannerEnabled.skip(1).subscribe(onNext: { (isEnabled) in
-            analytics.log(.appAds(enabled: isEnabled))
-        }).disposed(by: rx.disposeBag)
-
         cacheRemoved.subscribe(onNext: { () in
             analytics.log(.appCacheRemoved)
         }).disposed(by: rx.disposeBag)
@@ -214,12 +189,6 @@ class SettingsViewModel: ViewModel, ViewModelType {
         case .themeItem:
             let viewModel = ThemeViewModel(provider: self.provider)
             return viewModel
-        case .languageItem:
-            let viewModel = LanguageViewModel(provider: self.provider)
-            return viewModel
-        case .contactsItem:
-            let viewModel = ContactsViewModel(provider: self.provider)
-            return viewModel
         case .repositoryItem(let viewModel):
             let viewModel = RepositoryViewModel(repository: viewModel.repository, provider: self.provider)
             return viewModel
@@ -228,7 +197,9 @@ class SettingsViewModel: ViewModel, ViewModelType {
         }
     }
 
-    func whatsNewBlock() -> WhatsNewBlock {
-        return whatsNewManager.whatsNew(trackVersion: false)
+    /// The language the app runs in; it's changed in the system Settings
+    func appLanguageName() -> String? {
+        guard let code = Bundle.main.preferredLocalizations.first else { return nil }
+        return Locale.current.localizedString(forIdentifier: code)?.localizedCapitalized
     }
 }

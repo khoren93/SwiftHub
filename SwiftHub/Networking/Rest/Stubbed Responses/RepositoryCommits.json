@@ -1,1 +1,248 @@
-[]
+[
+  {
+    "sha": "58d85c58f0d43e406cb78ddbca37e953e6ee0df8",
+    "node_id": "C_kwDOBKZeW9oAKDU4ZDg1YzU4ZjBkNDNlNDA2Y2I3OGRkYmNhMzdlOTUzZTZlZTBkZjg",
+    "commit": {
+      "author": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T16:15:49Z"
+      },
+      "committer": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T16:15:49Z"
+      },
+      "message": "Remove RAMAnimatedTabBarController and related animations; update HomeTabBarController to use UITabBarController with new appearance configuration",
+      "tree": {
+        "sha": "0db40fc28a5f0783677c20c38acb15db12a4cd21",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/git/trees/0db40fc28a5f0783677c20c38acb15db12a4cd21"
+      },
+      "url": "https://api.github.com/repos/khoren93/SwiftHub/git/commits/58d85c58f0d43e406cb78ddbca37e953e6ee0df8",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/58d85c58f0d43e406cb78ddbca37e953e6ee0df8",
+    "html_url": "https://github.com/khoren93/SwiftHub/commit/58d85c58f0d43e406cb78ddbca37e953e6ee0df8",
+    "comments_url": "https://api.github.com/repos/khoren93/SwiftHub/commits/58d85c58f0d43e406cb78ddbca37e953e6ee0df8/comments",
+    "author": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+        "html_url": "https://github.com/khoren93/SwiftHub/commit/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e"
+      }
+    ]
+  },
+  {
+    "sha": "416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+    "node_id": "C_kwDOBKZeW9oAKDQxNmU2MTZhY2U0YjJiOWEwMGEzNTY2ZWMwNTRkZjJlOGFlMGNiNGU",
+    "commit": {
+      "author": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T15:32:12Z"
+      },
+      "committer": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T15:32:12Z"
+      },
+      "message": "Update Podfile and project settings for iOS 15 compatibility; upgrade dependencies and fix IQKeyboardManager usage",
+      "tree": {
+        "sha": "994d4a634f157d139096963ffa0d6e7585502271",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/git/trees/994d4a634f157d139096963ffa0d6e7585502271"
+      },
+      "url": "https://api.github.com/repos/khoren93/SwiftHub/git/commits/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+    "html_url": "https://github.com/khoren93/SwiftHub/commit/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e",
+    "comments_url": "https://api.github.com/repos/khoren93/SwiftHub/commits/416e616ace4b2b9a00a3566ec054df2e8ae0cb4e/comments",
+    "author": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+        "html_url": "https://github.com/khoren93/SwiftHub/commit/d7c43dae9b58873c108fb09a73958cf5faa1b47f"
+      }
+    ]
+  },
+  {
+    "sha": "d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+    "node_id": "C_kwDOBKZeW9oAKGQ3YzQzZGFlOWI1ODg3M2MxMDhmYjA5YTczOTU4Y2Y1ZmFhMWI0N2Y",
+    "commit": {
+      "author": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T15:15:39Z"
+      },
+      "committer": {
+        "name": "Khoren Markosyan",
+        "email": "khoren.markosyan@gmail.com",
+        "date": "2026-02-15T15:15:39Z"
+      },
+      "message": "Update dependencies and refactor ad loading methods",
+      "tree": {
+        "sha": "5b6a532dec9fd7237aff2f05f71538f7dcaec1b2",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/git/trees/5b6a532dec9fd7237aff2f05f71538f7dcaec1b2"
+      },
+      "url": "https://api.github.com/repos/khoren93/SwiftHub/git/commits/d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+    "html_url": "https://github.com/khoren93/SwiftHub/commit/d7c43dae9b58873c108fb09a73958cf5faa1b47f",
+    "comments_url": "https://api.github.com/repos/khoren93/SwiftHub/commits/d7c43dae9b58873c108fb09a73958cf5faa1b47f/comments",
+    "author": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "khoren93",
+      "id": 11523360,
+      "node_id": "MDQ6VXNlcjExNTIzMzYw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11523360?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/khoren93",
+      "html_url": "https://github.com/khoren93",
+      "followers_url": "https://api.github.com/users/khoren93/followers",
+      "following_url": "https://api.github.com/users/khoren93/following{/other_user}",
+      "gists_url": "https://api.github.com/users/khoren93/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/khoren93/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/khoren93/subscriptions",
+      "organizations_url": "https://api.github.com/users/khoren93/orgs",
+      "repos_url": "https://api.github.com/users/khoren93/repos",
+      "events_url": "https://api.github.com/users/khoren93/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/khoren93/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "90ea7ea375e5f6c2f8ff7a3e10554dd2db4d7450",
+        "url": "https://api.github.com/repos/khoren93/SwiftHub/commits/90ea7ea375e5f6c2f8ff7a3e10554dd2db4d7450",
+        "html_url": "https://github.com/khoren93/SwiftHub/commit/90ea7ea375e5f6c2f8ff7a3e10554dd2db4d7450"
+      }
+    ]
+  }
+]

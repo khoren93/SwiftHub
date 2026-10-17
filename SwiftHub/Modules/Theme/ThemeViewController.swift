@@ -10,17 +10,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-private let reuseIdentifier = R.reuseIdentifier.themeCell.identifier
+private let reuseIdentifier = ThemeCell.reuseID
 
 class ThemeViewController: TableViewController {
 
     override func makeUI() {
         super.makeUI()
 
-        navigationTitle = R.string.localizable.themeNavigationTitle.key.localized()
-        tableView.register(R.nib.themeCell)
-        tableView.headRefreshControl = nil
-        tableView.footRefreshControl = nil
+        navigationTitle = String(localized: .themeNavigationTitle)
+        tableView.registerNib(ThemeCell.self)
+        isHeaderRefreshEnabled = false
+        isFooterRefreshEnabled = false
     }
 
     override func bindViewModel() {

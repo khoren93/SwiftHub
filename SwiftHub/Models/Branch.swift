@@ -8,9 +8,8 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-struct Branch: Mappable {
+struct Branch: Decodable {
 
 //    var links: Link?
     var commit: Commit?
@@ -18,14 +17,14 @@ struct Branch: Mappable {
     var protectedField: Bool?
     var protectionUrl: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-//        links <- map["_links"]
-        commit <- map["commit"]
-        name <- map["name"]
-        protectedField <- map["protected"]
-        protectionUrl <- map["protection_url"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+//        links = map["_links"]
+        commit = map["commit"]
+        name = map["name"]
+        protectedField = map["protected"]
+        protectionUrl = map["protection_url"]
     }
 }

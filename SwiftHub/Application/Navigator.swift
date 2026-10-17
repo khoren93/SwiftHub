@@ -11,10 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SafariServices
-import Hero
 import AcknowList
-import WhatsNewKit
-import MessageUI
 
 protocol Navigatable {
     var navigator: Navigator! { get set }
@@ -43,12 +40,8 @@ class Navigator {
         case notifications(viewModel: NotificationsViewModel)
         case issues(viewModel: IssuesViewModel)
         case issueDetails(viewModel: IssueViewModel)
-        case linesCount(viewModel: LinesCountViewModel)
         case theme(viewModel: ThemeViewModel)
-        case language(viewModel: LanguageViewModel)
         case acknowledgements
-        case contacts(viewModel: ContactsViewModel)
-        case whatsNew(block: WhatsNewBlock)
         case safari(URL)
         case safariController(URL)
         case webController(URL)
@@ -56,8 +49,7 @@ class Navigator {
 
     enum Transition {
         case root(in: UIWindow)
-        case navigation(type: HeroDefaultAnimationType)
-        case customModal(type: HeroDefaultAnimationType)
+        case navigation
         case modal
         case detail
         case alert
@@ -92,18 +84,8 @@ class Navigator {
         case .notifications(let viewModel): return NotificationsViewController(viewModel: viewModel, navigator: self)
         case .issues(let viewModel): return IssuesViewController(viewModel: viewModel, navigator: self)
         case .issueDetails(let viewModel): return IssueViewController(viewModel: viewModel, navigator: self)
-        case .linesCount(let viewModel): return LinesCountViewController(viewModel: viewModel, navigator: self)
         case .theme(let viewModel): return ThemeViewController(viewModel: viewModel, navigator: self)
-        case .language(let viewModel): return LanguageViewController(viewModel: viewModel, navigator: self)
         case .acknowledgements: return AcknowListViewController()
-        case .contacts(let viewModel): return ContactsViewController(viewModel: viewModel, navigator: self)
-
-        case .whatsNew(let block):
-            if let versionStore = block.2 {
-                return WhatsNewViewController(whatsNew: block.0, configuration: block.1, versionStore: versionStore)
-            } else {
-                return WhatsNewViewController(whatsNew: block.0, configuration: block.1)
-            }
 
         case .safari(let url):
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -133,7 +115,7 @@ class Navigator {
     }
 
     // MARK: - invoke a single segue
-    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation(type: .cover(direction: .left))) {
+    func show(segue: Scene, sender: UIViewController?, transition: Transition = .navigation) {
         if let target = get(segue: segue) {
             show(target: target, sender: sender, transition: transition)
         }
@@ -161,18 +143,10 @@ class Navigator {
         }
 
         switch transition {
-        case .navigation(let type):
+        case .navigation:
             if let nav = sender.navigationController {
                 // push controller to navigation stack
-                nav.hero.navigationAnimationType = .autoReverse(presenting: type)
                 nav.pushViewController(target, animated: true)
-            }
-        case .customModal(let type):
-            // present modally with custom animation
-            DispatchQueue.main.async {
-                let nav = NavigationController(rootViewController: target)
-                nav.hero.modalAnimationType = .autoReverse(presenting: type)
-                sender.present(nav, animated: true, completion: nil)
             }
         case .modal:
             // present modally
@@ -191,12 +165,5 @@ class Navigator {
             }
         default: break
         }
-    }
-
-    func toInviteContact(withPhone phone: String) -> MFMessageComposeViewController {
-        let vc = MFMessageComposeViewController()
-        vc.body = "Hey! Come join SwiftHub at \(Configs.App.githubUrl)"
-        vc.recipients = [phone]
-        return vc
     }
 }

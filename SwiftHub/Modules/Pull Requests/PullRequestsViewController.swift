@@ -11,15 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let reuseIdentifier = R.reuseIdentifier.pullRequestCell.identifier
+private let reuseIdentifier = PullRequestCell.reuseID
 
 enum PullRequestSegments: Int {
     case open, closed
 
     var title: String {
         switch self {
-        case .open: return R.string.localizable.issuesOpenSegmentTitle.key.localized()
-        case .closed: return R.string.localizable.issuesClosedSegmentTitle.key.localized()
+        case .open: return String(localized: .issuesOpenSegmentTitle)
+        case .closed: return String(localized: .issuesClosedSegmentTitle)
         }
     }
 
@@ -49,7 +49,7 @@ class PullRequestsViewController: TableViewController {
 
         navigationItem.titleView = segmentedControl
 
-        tableView.register(R.nib.pullRequestCell)
+        tableView.registerNib(PullRequestCell.self)
     }
 
     override func bindViewModel() {

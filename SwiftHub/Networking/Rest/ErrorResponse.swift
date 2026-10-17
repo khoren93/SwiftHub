@@ -7,20 +7,19 @@
 //
 
 import Foundation
-import ObjectMapper
 
-struct ErrorResponse: Mappable {
+struct ErrorResponse: Decodable {
     var message: String?
     var errors: [ErrorModel] = []
     var documentationUrl: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        message <- map["message"]
-        errors <- map["errors"]
-        documentationUrl <- map["documentation_url"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        message = map["message"]
+        errors = map["errors"] ?? errors
+        documentationUrl = map["documentation_url"]
     }
 
     func detail() -> String {
@@ -29,19 +28,19 @@ struct ErrorResponse: Mappable {
     }
 }
 
-struct ErrorModel: Mappable {
+struct ErrorModel: Decodable {
     var code: String?
     var message: String?
     var field: String?
     var resource: String?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        code <- map["code"]
-        message <- map["message"]
-        field <- map["field"]
-        resource <- map["resource"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        code = map["code"]
+        message = map["message"]
+        field = map["field"]
+        resource = map["resource"]
     }
 }

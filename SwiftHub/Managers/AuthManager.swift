@@ -8,7 +8,6 @@
 
 import Foundation
 import KeychainAccess
-import ObjectMapper
 import RxSwift
 import RxCocoa
 
@@ -32,10 +31,10 @@ class AuthManager {
     var token: Token? {
         get {
             guard let jsonString = keychain[tokenKey] else { return nil }
-            return Mapper<Token>().map(JSONString: jsonString)
+            return Token(jsonString: jsonString)
         }
         set {
-            if let token = newValue, let jsonString = token.toJSONString() {
+            if let token = newValue, let jsonString = token.jsonString() {
                 keychain[tokenKey] = jsonString
             } else {
                 keychain[tokenKey] = nil

@@ -8,9 +8,8 @@
 //  Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import ObjectMapper
 
-struct Commit: Mappable {
+struct Commit: Decodable {
 
     var url: String?
     var commentsUrl: String?
@@ -24,25 +23,25 @@ struct Commit: Mappable {
     var author: User?
     var committer: User?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        url <- map["url"]
-        commentsUrl <- map["comments_url"]
-        commit <- map["commit"]
-        files <- map["files"]
-        htmlUrl <- map["html_url"]
-        nodeId <- map["node_id"]
-//        parents <- map["parents"]
-        sha <- map["sha"]
-        stats <- map["stats"]
-        author <- map["author"]
-        committer <- map["committer"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        url = map["url"]
+        commentsUrl = map["comments_url"]
+        commit = map["commit"]
+        files = map["files"]
+        htmlUrl = map["html_url"]
+        nodeId = map["node_id"]
+//        parents = map["parents"]
+        sha = map["sha"]
+        stats = map["stats"]
+        author = map["author"]
+        committer = map["committer"]
     }
 }
 
-struct CommitInfo: Mappable {
+struct CommitInfo: Decodable {
 
     var author: Committer?
     var commentCount: Int?
@@ -51,34 +50,32 @@ struct CommitInfo: Mappable {
     var url: String?
     var verification: Verification?
 
-    init?(map: Map) {}
-
-    mutating func mapping(map: Map) {
-        author <- map["author"]
-        commentCount <- map["comment_count"]
-        committer <- map["committer"]
-        message <- map["message"]
-        url <- map["url"]
-        verification <- map["verification"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        author = map["author"]
+        commentCount = map["comment_count"]
+        committer = map["committer"]
+        message = map["message"]
+        url = map["url"]
+        verification = map["verification"]
     }
 }
 
-struct Stat: Mappable {
+struct Stat: Decodable {
 
     var additions: Int?
     var deletions: Int?
     var total: Int?
 
-    init?(map: Map) {}
-
-    mutating func mapping(map: Map) {
-        additions <- map["additions"]
-        deletions <- map["deletions"]
-        total <- map["total"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        additions = map["additions"]
+        deletions = map["deletions"]
+        total = map["total"]
     }
 }
 
-struct File: Mappable {
+struct File: Decodable {
 
     var additions: Int?
     var blobUrl: String?
@@ -89,33 +86,31 @@ struct File: Mappable {
     var rawUrl: String?
     var status: String?
 
-    init?(map: Map) {}
-
-    mutating func mapping(map: Map) {
-        additions <- map["additions"]
-        blobUrl <- map["blob_url"]
-        changes <- map["changes"]
-        deletions <- map["deletions"]
-        filename <- map["filename"]
-        patch <- map["patch"]
-        rawUrl <- map["raw_url"]
-        status <- map["status"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        additions = map["additions"]
+        blobUrl = map["blob_url"]
+        changes = map["changes"]
+        deletions = map["deletions"]
+        filename = map["filename"]
+        patch = map["patch"]
+        rawUrl = map["raw_url"]
+        status = map["status"]
     }
 }
 
-struct Verification: Mappable {
+struct Verification: Decodable {
 
-    var payload: AnyObject?
+    var payload: String?
     var reason: String?
-    var signature: AnyObject?
+    var signature: String?
     var verified: Bool?
 
-    init?(map: Map) {}
-
-    mutating func mapping(map: Map) {
-        payload <- map["payload"]
-        reason <- map["reason"]
-        signature <- map["signature"]
-        verified <- map["verified"]
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        payload = map["payload"]
+        reason = map["reason"]
+        signature = map["signature"]
+        verified = map["verified"]
     }
 }

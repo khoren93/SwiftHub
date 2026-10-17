@@ -11,10 +11,10 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-private let switchReuseIdentifier = R.reuseIdentifier.settingSwitchCell.identifier
-private let reuseIdentifier = R.reuseIdentifier.settingCell.identifier
-private let profileReuseIdentifier = R.reuseIdentifier.userCell.identifier
-private let repositoryReuseIdentifier = R.reuseIdentifier.repositoryCell.identifier
+private let switchReuseIdentifier = SettingSwitchCell.reuseID
+private let reuseIdentifier = SettingCell.reuseID
+private let profileReuseIdentifier = UserCell.reuseID
+private let repositoryReuseIdentifier = RepositoryCell.reuseID
 
 class SettingsViewController: TableViewController {
 
@@ -22,15 +22,15 @@ class SettingsViewController: TableViewController {
         super.makeUI()
 
         languageChanged.subscribe(onNext: { [weak self] () in
-            self?.navigationTitle = R.string.localizable.settingsNavigationTitle.key.localized()
+            self?.navigationTitle = String(localized: .settingsNavigationTitle)
         }).disposed(by: rx.disposeBag)
 
-        tableView.register(R.nib.settingCell)
-        tableView.register(R.nib.settingSwitchCell)
-        tableView.register(R.nib.userCell)
-        tableView.register(R.nib.repositoryCell)
-        tableView.headRefreshControl = nil
-        tableView.footRefreshControl = nil
+        tableView.registerNib(SettingCell.self)
+        tableView.registerNib(SettingSwitchCell.self)
+        tableView.registerNib(UserCell.self)
+        tableView.registerNib(RepositoryCell.self)
+        isHeaderRefreshEnabled = false
+        isFooterRefreshEnabled = false
     }
 
     override func bindViewModel() {
@@ -48,17 +48,14 @@ class SettingsViewController: TableViewController {
                 let cell = (tableView.dequeueReusableCell(withIdentifier: profileReuseIdentifier, for: indexPath) as? UserCell)!
                 cell.bind(to: viewModel)
                 return cell
-            case .bannerItem(let viewModel),
-                 .nightModeItem(let viewModel):
+            case .nightModeItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: switchReuseIdentifier, for: indexPath) as? SettingSwitchCell)!
                 cell.bind(to: viewModel)
                 return cell
             case .themeItem(let viewModel),
                  .languageItem(let viewModel),
-                 .contactsItem(let viewModel),
                  .removeCacheItem(let viewModel),
                  .acknowledgementsItem(let viewModel),
-                 .whatsNewItem(let viewModel),
                  .logoutItem(let viewModel):
                 let cell = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? SettingCell)!
                 cell.bind(to: viewModel)
@@ -86,28 +83,22 @@ class SettingsViewController: TableViewController {
             case .logoutItem:
                 self?.deselectSelectedRow()
                 self?.logoutAction()
-            case .bannerItem,
-                 .nightModeItem:
+            case .nightModeItem:
                 self?.deselectSelectedRow()
             case .themeItem:
                 if let viewModel = viewModel.viewModel(for: item) as? ThemeViewModel {
                     self?.navigator.show(segue: .theme(viewModel: viewModel), sender: self, transition: .detail)
                 }
             case .languageItem:
-                if let viewModel = viewModel.viewModel(for: item) as? LanguageViewModel {
-                    self?.navigator.show(segue: .language(viewModel: viewModel), sender: self, transition: .detail)
-                }
-            case .contactsItem:
-                if let viewModel = viewModel.viewModel(for: item) as? ContactsViewModel {
-                    self?.navigator.show(segue: .contacts(viewModel: viewModel), sender: self, transition: .detail)
+                self?.deselectSelectedRow()
+                // Per-app language is chosen in the system Settings
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    self?.navigator.show(segue: .safari(url), sender: self)
                 }
             case .removeCacheItem:
                 self?.deselectSelectedRow()
             case .acknowledgementsItem:
                 self?.navigator.show(segue: .acknowledgements, sender: self, transition: .detail)
-            case .whatsNewItem:
-                self?.navigator.show(segue: .whatsNew(block: viewModel.whatsNewBlock()), sender: self, transition: .modal)
-                analytics.log(.whatsNew)
             case .repositoryItem:
                 if let viewModel = viewModel.viewModel(for: item) as? RepositoryViewModel {
                     self?.navigator.show(segue: .repositoryDetails(viewModel: viewModel), sender: self, transition: .detail)
@@ -123,14 +114,14 @@ class SettingsViewController: TableViewController {
         }
 
         let alertController = UIAlertController(title: name,
-                                                message: R.string.localizable.settingsLogoutAlertMessage.key.localized(),
+                                                message: String(localized: .settingsLogoutAlertMessage),
                                                 preferredStyle: UIAlertController.Style.alert)
-        let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertConfirmButtonTitle.key.localized(),
+        let logoutAction = UIAlertAction(title: String(localized: .settingsLogoutAlertConfirmButtonTitle),
                                          style: .destructive) { [weak self] (result: UIAlertAction) in
             self?.logout()
         }
 
-        let cancelAction = UIAlertAction(title: R.string.localizable.commonCancel.key.localized(),
+        let cancelAction = UIAlertAction(title: String(localized: .commonCancel),
                                          style: .default) { (result: UIAlertAction) in
         }
 

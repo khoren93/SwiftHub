@@ -7,20 +7,19 @@
 //
 
 import Foundation
-import ObjectMapper
 
-struct Committer: Mappable {
+struct Committer: Decodable {
 
     var name: String?
     var email: String?
     var date: Date?
 
-    init?(map: Map) {}
     init() {}
 
-    mutating func mapping(map: Map) {
-        name <- map["name"]
-        email <- map["email"]
-        date <- (map["date"], ISO8601DateTransform())
+    init(from decoder: Decoder) throws {
+        let map = try decoder.container(keyedBy: JSONKey.self)
+        name = map["name"]
+        email = map["email"]
+        date = map["date"]
     }
 }

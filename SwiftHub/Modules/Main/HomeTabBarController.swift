@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Localize_Swift
 import RxSwift
 
 enum HomeTabBarItem: Int {
@@ -35,21 +34,21 @@ enum HomeTabBarItem: Int {
 
     var image: UIImage? {
         switch self {
-        case .search: return R.image.icon_tabbar_search()
-        case .news: return R.image.icon_tabbar_news()
-        case .notifications: return R.image.icon_tabbar_activity()
-        case .settings: return R.image.icon_tabbar_settings()
-        case .login: return R.image.icon_tabbar_login()
+        case .search: return UIImage(resource: .iconTabbarSearch)
+        case .news: return UIImage(resource: .iconTabbarNews)
+        case .notifications: return UIImage(resource: .iconTabbarActivity)
+        case .settings: return UIImage(resource: .iconTabbarSettings)
+        case .login: return UIImage(resource: .iconTabbarLogin)
         }
     }
 
     var title: String {
         switch self {
-        case .search: return R.string.localizable.homeTabBarSearchTitle.key.localized()
-        case .news: return R.string.localizable.homeTabBarEventsTitle.key.localized()
-        case .notifications: return R.string.localizable.homeTabBarNotificationsTitle.key.localized()
-        case .settings: return R.string.localizable.homeTabBarSettingsTitle.key.localized()
-        case .login: return R.string.localizable.homeTabBarLoginTitle.key.localized()
+        case .search: return String(localized: .homeTabBarSearchTitle)
+        case .news: return String(localized: .homeTabBarEventsTitle)
+        case .notifications: return String(localized: .homeTabBarNotificationsTitle)
+        case .settings: return String(localized: .homeTabBarSettingsTitle)
+        case .login: return String(localized: .homeTabBarLoginTitle)
         }
     }
 
@@ -85,15 +84,6 @@ class HomeTabBarController: UITabBarController, Navigatable {
     }
 
     func makeUI() {
-        NotificationCenter.default
-            .rx.notification(NSNotification.Name(LCLLanguageChangeNotification))
-            .subscribe { [weak self] (event) in
-                self?.tabBar.items?.forEach({ (item) in
-                    item.title = HomeTabBarItem(rawValue: item.tag)?.title
-                })
-                self?.setViewControllers(self?.viewControllers, animated: false)
-            }.disposed(by: rx.disposeBag)
-
         themeService.typeStream.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (theme) in
                 self?.updateTabBarAppearance(with: theme.associatedObject)
@@ -129,19 +119,13 @@ class HomeTabBarController: UITabBarController, Navigatable {
     func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
-        let input = HomeTabBarViewModel.Input(whatsNewTrigger: rx.viewDidAppear.mapToVoid())
+        let input = HomeTabBarViewModel.Input()
         let output = viewModel.transform(input: input)
 
         output.tabBarItems.delay(.milliseconds(50)).drive(onNext: { [weak self] (tabBarItems) in
             if let strongSelf = self {
                 let controllers = tabBarItems.map { $0.getController(with: viewModel.viewModel(for: $0), navigator: strongSelf.navigator) }
                 strongSelf.setViewControllers(controllers, animated: false)
-            }
-        }).disposed(by: rx.disposeBag)
-
-        output.openWhatsNew.drive(onNext: { [weak self] (block) in
-            if Configs.Network.useStaging == false {
-                self?.navigator.show(segue: .whatsNew(block: block), sender: self, transition: .modal)
             }
         }).disposed(by: rx.disposeBag)
     }

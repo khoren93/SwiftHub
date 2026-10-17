@@ -16,22 +16,22 @@ class WebViewController: ViewController {
     let url = BehaviorRelay<URL?>(value: nil)
 
     lazy var rightBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_web(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationWeb), style: .done, target: nil, action: nil)
         return view
     }()
 
     lazy var goBackBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_back(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationBack), style: .done, target: nil, action: nil)
         return view
     }()
 
     lazy var goForwardBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_forward(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationForward), style: .done, target: nil, action: nil)
         return view
     }()
 
     lazy var stopReloadBarButton: BarButtonItem = {
-        let view = BarButtonItem(image: R.image.icon_navigation_refresh(), style: .done, target: nil, action: nil)
+        let view = BarButtonItem(image: UIImage(resource: .iconNavigationRefresh), style: .done, target: nil, action: nil)
         return view
     }()
 
@@ -55,7 +55,6 @@ class WebViewController: ViewController {
         stackView.insertArrangedSubview(webView, at: 0)
         stackView.addArrangedSubview(toolbar)
         canOpenFlex = false
-        bannerView.isHidden = true
     }
 
     override func bindViewModel() {
@@ -92,7 +91,7 @@ class WebViewController: ViewController {
         super.updateUI()
         goBackBarButton.isEnabled = webView.canGoBack
         goForwardBarButton.isEnabled = webView.canGoForward
-        stopReloadBarButton.image = webView.isLoading ? R.image.icon_navigation_stop(): R.image.icon_navigation_refresh()
+        stopReloadBarButton.image = webView.isLoading ? UIImage(resource: .iconNavigationStop): UIImage(resource: .iconNavigationRefresh)
     }
 
     func load(url: URL) {
