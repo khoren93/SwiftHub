@@ -19,11 +19,14 @@ extension Reactive where Base: UIImageView {
 
     public func imageURL(withPlaceholder placeholderImage: UIImage?, options: KingfisherOptionsInfo? = []) -> Binder<URL?> {
         return Binder(self.base, binding: { (imageView, url) in
-            imageView.kf.setImage(with: url,
-                                  placeholder: placeholderImage,
-                                  options: options,
-                                  progressBlock: nil,
-                                  completionHandler: { (result) in })
+            // Binder runs on MainScheduler
+            MainActor.assumeIsolated {
+                _ = imageView.kf.setImage(with: url,
+                                          placeholder: placeholderImage,
+                                          options: options,
+                                          progressBlock: nil,
+                                          completionHandler: { (result) in })
+            }
         })
     }
 }

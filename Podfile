@@ -24,7 +24,7 @@ target 'SwiftHub' do
     pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/p-rob/Moya-ObjectMapper.git', :branch => 'master'  # https://github.com/ivanbruel/Moya-ObjectMapper
 
     # Image
-    pod 'Kingfisher', '~> 7.0'  # https://github.com/onevcat/Kingfisher
+    pod 'Kingfisher', '~> 8.0'  # https://github.com/onevcat/Kingfisher
 
     # Date
     pod 'DateToolsSwift', '~> 5.0'  # https://github.com/MatthewYork/DateTools
@@ -32,14 +32,14 @@ target 'SwiftHub' do
 
     # Tools
     pod 'R.swift', '~> 7.0'  # https://github.com/mac-cain13/R.swift
-    pod 'SwiftLint', '0.63.2'  # https://github.com/realm/SwiftLint
+    pod 'SwiftLint', '0.65.1'  # https://github.com/realm/SwiftLint
 
     # Keychain
     pod 'KeychainAccess', '~> 4.0'  # https://github.com/kishikawakatsumi/KeychainAccess
 
     # UI
     pod 'SVProgressHUD', '~> 2.0'  # https://github.com/SVProgressHUD/SVProgressHUD
-    pod 'ImageSlideshow/Kingfisher', :git => 'https://github.com/khoren93/ImageSlideshow.git', :branch => 'master'   # https://github.com/zvonicek/ImageSlideshow
+    pod 'ImageSlideshow', :git => 'https://github.com/khoren93/ImageSlideshow.git', :branch => 'master'   # https://github.com/zvonicek/ImageSlideshow (KingfisherSource lives in SlideImageView.swift)
     pod 'DZNEmptyDataSet', '~> 1.0'  # https://github.com/dzenbot/DZNEmptyDataSet
     pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
     pod 'Localize-Swift', '~> 3.0'  # https://github.com/marmelroy/Localize-Swift
@@ -96,16 +96,6 @@ end
 
 
 post_install do |installer|
-    # Cocoapods optimization, always clean project after pod updating
-    Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
-        flag_name = File.basename(script, ".sh") + "-Installation-Flag"
-        folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-        file = File.join(folder, flag_name)
-        content = File.read(script)
-        content.gsub!(/set -e/, "set -e\nKG_FILE=\"#{file}\"\nif [ -f \"$KG_FILE\" ]; then exit 0; fi\nmkdir -p \"#{folder}\"\ntouch \"$KG_FILE\"")
-        File.write(script, content)
-    end
-    
     # Enable tracing resources
     installer.pods_project.targets.each do |target|
       if target.name == 'RxSwift'

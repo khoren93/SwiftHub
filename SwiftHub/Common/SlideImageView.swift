@@ -8,6 +8,7 @@
 
 import Foundation
 import ImageSlideshow
+import Kingfisher
 
 class SlideImageView: ImageSlideshow {
 
@@ -63,5 +64,29 @@ extension ImageSlideshow {
         controller.present(fullscreen, animated: true, completion: nil)
 
         return fullscreen
+    }
+}
+
+/// Kingfisher 8 input source. ImageSlideshow/Kingfisher calls Kingfisher's @MainActor API from nonisolated code and doesn't compile.
+class KingfisherSource: NSObject, InputSource {
+    let url: URL
+
+    init(url: URL) {
+        self.url = url
+        super.init()
+    }
+
+    func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
+        MainActor.assumeIsolated {
+            _ = imageView.kf.setImage(with: url) { result in
+                callback(try? result.get().image)
+            }
+        }
+    }
+
+    func cancelLoad(on imageView: UIImageView) {
+        MainActor.assumeIsolated {
+            imageView.kf.cancelDownloadTask()
+        }
     }
 }

@@ -1,0 +1,574 @@
+PODS:
+  - AcknowList (3.4.2)
+  - Alamofire (5.12.2)
+  - Apollo (0.53.0):
+    - Apollo/Core (= 0.53.0)
+  - Apollo/Core (0.53.0)
+  - BonMot (6.1.3)
+  - CocoaLumberjack/Core (3.10.0)
+  - CocoaLumberjack/Swift (3.10.0):
+    - CocoaLumberjack/Core
+  - CwlCatchException (2.2.1):
+    - CwlCatchExceptionSupport (~> 2.2.1)
+  - CwlCatchExceptionSupport (2.2.1)
+  - CwlMachBadInstructionHandler (2.2.2)
+  - CwlPosixPreconditionTesting (2.2.2)
+  - CwlPreconditionTesting (2.2.2):
+    - CwlCatchException (~> 2.2.1)
+    - CwlMachBadInstructionHandler (~> 2.2.2)
+    - CwlPosixPreconditionTesting (~> 2.2.2)
+  - DateToolsSwift (5.0.0)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
+  - Differentiator (5.0.0)
+  - DropDown (2.3.13)
+  - DZNEmptyDataSet (1.8.1)
+  - FirebaseAnalytics (12.19.0):
+    - FirebaseAnalytics/Default (= 12.19.0)
+    - FirebaseCore (~> 12.19.0)
+    - FirebaseInstallations (~> 12.19.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/MethodSwizzler (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+    - nanopb (~> 3.30910.0)
+  - FirebaseAnalytics/Default (12.19.0):
+    - FirebaseCore (~> 12.19.0)
+    - FirebaseInstallations (~> 12.19.0)
+    - GoogleAppMeasurement/Default (= 12.19.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/MethodSwizzler (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+    - nanopb (~> 3.30910.0)
+  - FirebaseCore (12.19.0):
+    - FirebaseCoreInternal (~> 12.19.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Logger (~> 8.1)
+  - FirebaseCoreExtension (12.19.0):
+    - FirebaseCore (~> 12.19.0)
+  - FirebaseCoreInternal (12.19.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+  - FirebaseCrashlytics (12.19.0):
+    - FirebaseCore (~> 12.19.0)
+    - FirebaseInstallations (~> 12.19.0)
+    - FirebaseRemoteConfigInterop (~> 12.19.0)
+    - FirebaseSessions (~> 12.19.0)
+    - GoogleDataTransport (~> 10.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - FirebaseInstallations (12.19.0):
+    - FirebaseCore (~> 12.19.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - PromisesObjC (~> 2.4)
+  - FirebaseRemoteConfigInterop (12.19.0)
+  - FirebaseSessions (12.19.0):
+    - FirebaseCore (~> 12.19.0)
+    - FirebaseCoreExtension (~> 12.19.0)
+    - FirebaseInstallations (~> 12.19.0)
+    - GoogleDataTransport (~> 10.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - nanopb (~> 3.30910.0)
+    - PromisesSwift (~> 2.1)
+  - FLEX (5.22.10)
+  - FloatingPanel (3.2.3)
+  - Google-Mobile-Ads-SDK (13.11.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleAdsOnDeviceConversion (3.7.0):
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Logger (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - nanopb (~> 3.30910.0)
+  - GoogleAppMeasurement/Core (12.19.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/MethodSwizzler (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+    - nanopb (~> 3.30910.0)
+  - GoogleAppMeasurement/Default (12.19.0):
+    - GoogleAdsOnDeviceConversion (~> 3.7.0)
+    - GoogleAppMeasurement/Core (= 12.19.0)
+    - GoogleAppMeasurement/IdentitySupport (= 12.19.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/MethodSwizzler (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+    - nanopb (~> 3.30910.0)
+  - GoogleAppMeasurement/IdentitySupport (12.19.0):
+    - GoogleAppMeasurement/Core (= 12.19.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/MethodSwizzler (~> 8.1)
+    - GoogleUtilities/Network (~> 8.1)
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+    - nanopb (~> 3.30910.0)
+  - GoogleDataTransport (10.1.1):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - GoogleUserMessagingPlatform (3.1.0)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.5):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.1.5):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.5):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/MethodSwizzler (8.1.5):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.5):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.1.5)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.5)
+  - GoogleUtilities/Reachability (8.1.5):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (8.1.5):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - Hero (1.6.4)
+  - Highlightr (2.1.0)
+  - HMSegmentedControl (1.5.6)
+  - ImageSlideshow (1.9.2):
+    - ImageSlideshow/Core (= 1.9.2)
+  - ImageSlideshow/Core (1.9.2)
+  - InputBarAccessoryView (5.5.0):
+    - InputBarAccessoryView/Core (= 5.5.0)
+  - InputBarAccessoryView/Core (5.5.0)
+  - IQKeyboardCore (1.0.9)
+  - IQKeyboardManagerSwift (8.0.3):
+    - IQKeyboardManagerSwift/Appearance (= 8.0.3)
+    - IQKeyboardManagerSwift/Core (= 8.0.3)
+    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.3)
+    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.3)
+    - IQKeyboardManagerSwift/IQTextView (= 8.0.3)
+    - IQKeyboardManagerSwift/Resign (= 8.0.3)
+  - IQKeyboardManagerSwift/Appearance (8.0.3):
+    - IQKeyboardManagerSwift/Core
+    - IQTextInputViewNotification
+  - IQKeyboardManagerSwift/Core (8.0.3):
+    - IQKeyboardNotification
+    - IQTextInputViewNotification
+  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.3):
+    - IQKeyboardReturnManager
+  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.3):
+    - IQKeyboardManagerSwift/Core
+    - IQKeyboardToolbarManager
+  - IQKeyboardManagerSwift/IQTextView (8.0.3):
+    - IQTextView
+  - IQKeyboardManagerSwift/Resign (8.0.3):
+    - IQKeyboardManagerSwift/Core
+    - IQTextInputViewNotification
+  - IQKeyboardNotification (1.0.7)
+  - IQKeyboardReturnManager (1.0.6):
+    - IQKeyboardCore
+  - IQKeyboardToolbar (1.1.5):
+    - IQKeyboardToolbar/Core (= 1.1.5)
+  - IQKeyboardToolbar/Core (1.1.5):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Placeholderable
+  - IQKeyboardToolbar/Placeholderable (1.1.5)
+  - IQKeyboardToolbarManager (1.1.6):
+    - IQKeyboardToolbar
+    - IQTextInputViewNotification
+  - IQTextInputViewNotification (1.0.9):
+    - IQKeyboardCore
+  - IQTextView (1.0.5):
+    - IQKeyboardToolbar/Placeholderable
+  - KafkaRefresh (1.7.0):
+    - KafkaRefresh/Category (= 1.7.0)
+    - KafkaRefresh/Configuration (= 1.7.0)
+    - KafkaRefresh/Core (= 1.7.0)
+    - KafkaRefresh/Default (= 1.7.0)
+    - KafkaRefresh/Style (= 1.7.0)
+    - KafkaRefresh/UIKit (= 1.7.0)
+  - KafkaRefresh/Category (1.7.0)
+  - KafkaRefresh/Configuration (1.7.0):
+    - KafkaRefresh/UIKit/FootKit
+    - KafkaRefresh/UIKit/HeadKit
+  - KafkaRefresh/Core (1.7.0):
+    - KafkaRefresh/Category
+  - KafkaRefresh/Default (1.7.0):
+    - KafkaRefresh/Style
+  - KafkaRefresh/Style (1.7.0)
+  - KafkaRefresh/UIKit (1.7.0):
+    - KafkaRefresh/UIKit/FootKit (= 1.7.0)
+    - KafkaRefresh/UIKit/HeadKit (= 1.7.0)
+    - KafkaRefresh/UIKit/LayerKit (= 1.7.0)
+  - KafkaRefresh/UIKit/FootKit (1.7.0):
+    - KafkaRefresh/Category
+    - KafkaRefresh/Core
+    - KafkaRefresh/Default
+    - KafkaRefresh/Style
+    - KafkaRefresh/UIKit/LayerKit
+  - KafkaRefresh/UIKit/HeadKit (1.7.0):
+    - KafkaRefresh/Category
+    - KafkaRefresh/Core
+    - KafkaRefresh/Default
+    - KafkaRefresh/Style
+    - KafkaRefresh/UIKit/LayerKit
+  - KafkaRefresh/UIKit/LayerKit (1.7.0):
+    - KafkaRefresh/Category
+    - KafkaRefresh/Default
+  - KeychainAccess (4.2.2)
+  - Kingfisher (8.14.0)
+  - Localize-Swift (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore (= 3.2.0)
+    - Localize-Swift/UIKit (= 3.2.0)
+  - Localize-Swift/LocalizeSwiftCore (3.2.0)
+  - Localize-Swift/UIKit (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore
+  - MessageKit (3.8.0):
+    - InputBarAccessoryView (~> 5.5.0)
+  - Mixpanel-swift (5.2.0):
+    - Mixpanel-swift/Complete (= 5.2.0)
+  - Mixpanel-swift/Complete (5.2.0)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya-ObjectMapper/Core (2.9):
+    - Moya (~> 15.0.0)
+    - ObjectMapper
+  - Moya-ObjectMapper/RxSwift (2.9):
+    - Moya-ObjectMapper/Core
+    - Moya/RxSwift
+    - RxSwift
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
+  - MultiProgressView (1.3.0)
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
+  - Nimble (14.0.0):
+    - CwlPreconditionTesting (~> 2.2.0)
+  - "NSObject+Rx (5.2.2)":
+    - RxSwift (~> 6.2)
+  - ObjectMapper (4.4.2)
+  - PromisesObjC (2.4.1)
+  - PromisesSwift (2.4.1):
+    - PromisesObjC (= 2.4.1)
+  - Quick (7.6.2)
+  - R.swift (7.8.0)
+  - RxAtomic (4.4.2)
+  - RxBlocking (6.9.0):
+    - RxSwift (= 6.9.0)
+  - RxCocoa (6.9.0):
+    - RxRelay (= 6.9.0)
+    - RxSwift (= 6.9.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxGesture (4.0.4):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxOptional (5.0.6):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.9.0):
+    - RxSwift (= 6.9.0)
+  - RxSwift (6.9.0)
+  - RxSwiftExt (6.2.1):
+    - RxSwiftExt/Core (= 6.2.1)
+    - RxSwiftExt/RxCocoa (= 6.2.1)
+  - RxSwiftExt/Core (6.2.1):
+    - RxSwift (~> 6.0)
+  - RxSwiftExt/RxCocoa (6.2.1):
+    - RxCocoa (~> 6.0)
+    - RxSwiftExt/Core
+  - RxTheme (6.0.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxViewController (2.0.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - SnapKit (5.7.1)
+  - SVProgressHUD (2.3.1):
+    - SVProgressHUD/Core (= 2.3.1)
+  - SVProgressHUD/Core (2.3.1)
+  - SwiftDate (7.0.0)
+  - SwifterSwift (8.0.0):
+    - SwifterSwift/AppKit (= 8.0.0)
+    - SwifterSwift/AppKitNoIBInspectable (= 8.0.0)
+    - SwifterSwift/CoreAnimation (= 8.0.0)
+    - SwifterSwift/CoreGraphics (= 8.0.0)
+    - SwifterSwift/CoreLocation (= 8.0.0)
+    - SwifterSwift/CryptoKit (= 8.0.0)
+    - SwifterSwift/Dispatch (= 8.0.0)
+    - SwifterSwift/Foundation (= 8.0.0)
+    - SwifterSwift/HealthKit (= 8.0.0)
+    - SwifterSwift/MapKit (= 8.0.0)
+    - SwifterSwift/NoIBInspectable (= 8.0.0)
+    - SwifterSwift/SceneKit (= 8.0.0)
+    - SwifterSwift/SpriteKit (= 8.0.0)
+    - SwifterSwift/StoreKit (= 8.0.0)
+    - SwifterSwift/SwiftStdlib (= 8.0.0)
+    - SwifterSwift/UIKit (= 8.0.0)
+    - SwifterSwift/UIKitNoIBInspectable (= 8.0.0)
+    - SwifterSwift/WebKit (= 8.0.0)
+  - SwifterSwift/AppKit (8.0.0)
+  - SwifterSwift/AppKitNoIBInspectable (8.0.0):
+    - SwifterSwift/AppKit
+  - SwifterSwift/CoreAnimation (8.0.0)
+  - SwifterSwift/CoreGraphics (8.0.0)
+  - SwifterSwift/CoreLocation (8.0.0)
+  - SwifterSwift/CryptoKit (8.0.0)
+  - SwifterSwift/Dispatch (8.0.0)
+  - SwifterSwift/Foundation (8.0.0)
+  - SwifterSwift/HealthKit (8.0.0)
+  - SwifterSwift/MapKit (8.0.0)
+  - SwifterSwift/NoIBInspectable (8.0.0)
+  - SwifterSwift/SceneKit (8.0.0)
+  - SwifterSwift/SpriteKit (8.0.0)
+  - SwifterSwift/StoreKit (8.0.0)
+  - SwifterSwift/SwiftStdlib (8.0.0)
+  - SwifterSwift/UIKit (8.0.0)
+  - SwifterSwift/UIKitNoIBInspectable (8.0.0):
+    - SwifterSwift/UIKit
+  - SwifterSwift/WebKit (8.0.0)
+  - SwiftLint (0.65.1)
+  - Toast-Swift (5.1.1)
+  - WhatsNewKit (1.3.7)
+
+DEPENDENCIES:
+  - AcknowList (~> 3.0)
+  - Apollo (= 0.53.0)
+  - BonMot (~> 6.0)
+  - CocoaLumberjack/Swift (~> 3.0)
+  - DateToolsSwift (~> 5.0)
+  - DGCharts (~> 5.0)
+  - DropDown (~> 2.0)
+  - DZNEmptyDataSet (~> 1.0)
+  - FirebaseAnalytics (~> 12.0)
+  - FirebaseCrashlytics (~> 12.0)
+  - FLEX (~> 5.0)
+  - FloatingPanel (~> 3.0)
+  - Google-Mobile-Ads-SDK (~> 13.0)
+  - Hero (~> 1.6)
+  - Highlightr (~> 2.0)
+  - HMSegmentedControl (~> 1.0)
+  - ImageSlideshow (from `https://github.com/khoren93/ImageSlideshow.git`, branch `master`)
+  - IQKeyboardManagerSwift (~> 8.0)
+  - KafkaRefresh (~> 1.0)
+  - KeychainAccess (~> 4.0)
+  - Kingfisher (~> 8.0)
+  - Localize-Swift (~> 3.0)
+  - MessageKit (~> 3.0)
+  - Mixpanel-swift (~> 5.0)
+  - Moya-ObjectMapper/RxSwift (from `https://github.com/p-rob/Moya-ObjectMapper.git`, branch `master`)
+  - Moya/RxSwift (~> 15.0)
+  - MultiProgressView (~> 1.0)
+  - Nimble (~> 14.0)
+  - "NSObject+Rx (~> 5.0)"
+  - Quick (~> 7.0)
+  - R.swift (~> 7.0)
+  - RxAtomic
+  - RxBlocking
+  - RxDataSources (~> 5.0)
+  - RxGesture (~> 4.0)
+  - RxOptional (~> 5.0)
+  - RxSwiftExt (~> 6.0)
+  - RxTheme (~> 6.0)
+  - RxViewController (~> 2.0)
+  - SnapKit (~> 5.0)
+  - SVProgressHUD (~> 2.0)
+  - SwiftDate (~> 7.0)
+  - SwifterSwift (~> 8.0)
+  - SwiftLint (= 0.65.1)
+  - Toast-Swift (~> 5.0)
+  - WhatsNewKit (~> 1.0)
+
+SPEC REPOS:
+  trunk:
+    - AcknowList
+    - Alamofire
+    - Apollo
+    - BonMot
+    - CocoaLumberjack
+    - CwlCatchException
+    - CwlCatchExceptionSupport
+    - CwlMachBadInstructionHandler
+    - CwlPosixPreconditionTesting
+    - CwlPreconditionTesting
+    - DateToolsSwift
+    - DGCharts
+    - Differentiator
+    - DropDown
+    - DZNEmptyDataSet
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - FirebaseCrashlytics
+    - FirebaseInstallations
+    - FirebaseRemoteConfigInterop
+    - FirebaseSessions
+    - FLEX
+    - FloatingPanel
+    - Google-Mobile-Ads-SDK
+    - GoogleAdsOnDeviceConversion
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - Hero
+    - Highlightr
+    - HMSegmentedControl
+    - InputBarAccessoryView
+    - IQKeyboardCore
+    - IQKeyboardManagerSwift
+    - IQKeyboardNotification
+    - IQKeyboardReturnManager
+    - IQKeyboardToolbar
+    - IQKeyboardToolbarManager
+    - IQTextInputViewNotification
+    - IQTextView
+    - KafkaRefresh
+    - KeychainAccess
+    - Kingfisher
+    - Localize-Swift
+    - MessageKit
+    - Mixpanel-swift
+    - Moya
+    - MultiProgressView
+    - nanopb
+    - Nimble
+    - "NSObject+Rx"
+    - ObjectMapper
+    - PromisesObjC
+    - PromisesSwift
+    - Quick
+    - R.swift
+    - RxAtomic
+    - RxBlocking
+    - RxCocoa
+    - RxDataSources
+    - RxGesture
+    - RxOptional
+    - RxRelay
+    - RxSwift
+    - RxSwiftExt
+    - RxTheme
+    - RxViewController
+    - SnapKit
+    - SVProgressHUD
+    - SwiftDate
+    - SwifterSwift
+    - SwiftLint
+    - Toast-Swift
+    - WhatsNewKit
+
+EXTERNAL SOURCES:
+  ImageSlideshow:
+    :branch: master
+    :git: https://github.com/khoren93/ImageSlideshow.git
+  Moya-ObjectMapper:
+    :branch: master
+    :git: https://github.com/p-rob/Moya-ObjectMapper.git
+
+CHECKOUT OPTIONS:
+  ImageSlideshow:
+    :commit: 2535bc691a7c7c8eee12c44f97380de4b6c6a828
+    :git: https://github.com/khoren93/ImageSlideshow.git
+  Moya-ObjectMapper:
+    :commit: 4e4ba94bc8af9303471e637ba88a4768563642c9
+    :git: https://github.com/p-rob/Moya-ObjectMapper.git
+
+SPEC CHECKSUMS:
+  AcknowList: 464b8ffc5267422ecc98413e4aea0aa32b2b8b0c
+  Alamofire: c5f37d8f438dc1d7fd3ff767f2f80fd01ca381d7
+  Apollo: 204819ea82022fbc59ad05056820df867f19bd02
+  BonMot: 1534503509ef48d3c4d0fbec2d0ea35f2887b4ea
+  CocoaLumberjack: 12545b2899dcaeec69b82c27b174042259c1ec27
+  CwlCatchException: 7acc161b299a6de7f0a46a6ed741eae2c8b4d75a
+  CwlCatchExceptionSupport: 54ccab8d8c78907b57f99717fb19d4cc3bce02dc
+  CwlMachBadInstructionHandler: dae4fdd124d45c9910ac240287cc7b898f4502a1
+  CwlPosixPreconditionTesting: ecd095aa2129e740b44301c34571e8d85906fb88
+  CwlPreconditionTesting: 67a0047dd4de4382b93442c0e3f25207f984f35a
+  DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FirebaseAnalytics: e9f8c369447e453da23f0455a06e4910bad10de0
+  FirebaseCore: c990214798d7c568ad436a15ba7da25c7a278c9a
+  FirebaseCoreExtension: 201c78d7491a273d61d8afbf491214276a951e6d
+  FirebaseCoreInternal: 656b1c2fd5a1c5976183dc54b73deda78fb26ee3
+  FirebaseCrashlytics: 5c8e09beebcd41913b35250cd0e533b58e4961a0
+  FirebaseInstallations: f70a49eed611f5602f373e40974b3b01556ac217
+  FirebaseRemoteConfigInterop: 90659b3cac8f6de884f2d930fbdbeb711533e142
+  FirebaseSessions: 39bcaa7c16b5d8b91d58f495f29ce2988d2f915c
+  FLEX: f21ee4f498eed3f8a1eded66b21939fd3b7a22ce
+  FloatingPanel: cca8a93346620215a0e1382fae3d420171686160
+  Google-Mobile-Ads-SDK: 09d0868abe43b9f851b7b340a245679f0eafc96c
+  GoogleAdsOnDeviceConversion: 41f168313b305040f4af27093d3c0af5ba46a9a3
+  GoogleAppMeasurement: f2f676480e4c97936df934aa181bc29caea46975
+  GoogleDataTransport: a24e58982ab3ba2f64d79613e027fe7f57e88539
+  GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
+  GoogleUtilities: 7dc09b3fa9ecb5c2298b952313d14628b61b9da3
+  Hero: 473a0143017e1371d050fcbedb67d317925097f2
+  Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
+  HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
+  ImageSlideshow: 9d008df08ca18840a5eda06d9d51c38e2e1c04cb
+  InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
+  IQKeyboardCore: 250a88dfc713b2ecbe1dce250811d054fc016959
+  IQKeyboardManagerSwift: 7f6a9a1e2285732d3ff5f485ff921215253ea77e
+  IQKeyboardNotification: 3b9bc812a5af2cf97df08a363d9daa9fc0dc1848
+  IQKeyboardReturnManager: fcbf51fc68d7536fc1fbcca5231c4e82576b12ac
+  IQKeyboardToolbar: b0f26e43b9e806e961fde2344fe379ae193236b9
+  IQKeyboardToolbarManager: 242e858cc74e06e00aa989bea1355b24d4397854
+  IQTextInputViewNotification: 3b9fb27a16e7ee8958cc9092cfb07a1a9e1fd559
+  IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
+  KafkaRefresh: ee64c70eb7c9426a99e68ffdae59dba9bd0b5d51
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Kingfisher: 0bc3e46cbca95dcfb48dedfe8607bdd76ae216d9
+  Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
+  MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
+  Mixpanel-swift: de454db5987bf6f601106520a44663fc556e8cfa
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Moya-ObjectMapper: 48b1f253837440afaeebdf637d3bad45e3855296
+  MultiProgressView: 65e5bb8181687099ade56d16d85d245a92fafa96
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
+  Nimble: fcfcaab1cca78e301543f78669d70c166b4fadc3
+  "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
+  ObjectMapper: e6e4d91ff7f2861df7aecc536c92d8363f4c9677
+  PromisesObjC: 752c3227f599e3467650e47ea36f433eeb10c273
+  PromisesSwift: 217dea0fd5d2ad65222a109c48698add13cc1c5b
+  Quick: b8bec97cd4b9f21da0472d45580f763b801fc353
+  R.swift: f573269ca45b2ab066c082e363dd4c2b297b0d71
+  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxBlocking: 5d2b26d019b6ba9eb3f58638611f124609c44822
+  RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
+  RxOptional: 337ba615992ffdeffea02d6a5a242358757bbfcd
+  RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
+  RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
+  RxSwiftExt: 43aaacb6a4d3c69c55e9d1cf4f79920043d13583
+  RxTheme: be60cb14e0544b3cbd574cc37fed35ba9d61aa1f
+  RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
+  SwiftDate: bbc26e26fc8c0c33fbee8c140c5e8a68293a148a
+  SwifterSwift: 517fa61daf5b4c5e3ed13b9f35f4c26b310cfb97
+  SwiftLint: 7d51ad56923e88694cee5ca806dbbab30f85eaaa
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
+  WhatsNewKit: c87028c4059dccd113495422801914cc53f6aab0
+
+PODFILE CHECKSUM: 7dff960c720a7e43d929d6dbb74d02e49d9bab45
+
+COCOAPODS: 1.16.2
